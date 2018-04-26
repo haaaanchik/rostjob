@@ -1,0 +1,186 @@
+/* Autocomplete
+----------------------------------*/
+.ui-autocomplete {
+    position: fixed;
+    cursor: pointer;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    z-index: 3997;
+    background-color: white;
+    border: 1px solid #999;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    outline: none;
+    -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+    max-height: 400px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+}
+
+.ui-front {
+    z-index: 4050 !important;
+}
+
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
+.ui-autocomplete li {
+    margin: 2px;
+    padding: 3px;
+}
+
+.ui-autocomplete li a:hover {
+    background-color: #08C;
+}
+
+.ui-autocomplete-loading {
+    background: white url('ui-anim_basic_16x16.gif') right center no-repeat;
+}
+
+/* workarounds */
+* html .ui-autocomplete {
+    width: 1px;
+}
+
+/* without this, the menu expands to 100% in IE6 */
+
+/* Menu
+----------------------------------*/
+.ui-menu {
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+    display: block;
+}
+
+.ui-menu .ui-menu {
+    margin-top: -3px;
+}
+
+.ui-menu .ui-menu-item {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.ui-menu .ui-menu-item a {
+    text-decoration: none;
+    display: block;
+    padding: .2em .4em;
+    line-height: 1.5;
+    zoom: 1;
+    color: #000000;
+}
+
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+    margin: -1px;
+}
+
+/*########################  search_patients  ##############################*/
+#search_patients .ui-autocomplete {
+    width: 650px;
+    font-size: 12pt;
+}
+
+#search_patients span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#search_patients li span:nth-child(1) {
+    width: 50px;
+    font-size: 10pt;
+}
+
+#search_patients li span:nth-child(2) {
+    width: 350px;
+}
+
+#search_patients li span:nth-child(3) {
+    width: 100px;
+    font-size: 10pt;
+}
+
+#search_patients li span:nth-child(4) {
+    width: 120px;
+}
+
+#search_service_autocomplite  .ui-autocomplete {
+    font-size: 12pt;
+}
+
+#search_service_autocomplite span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 2px;
+}
+
+#search_service_autocomplite .ui-autocomplete li a:hover {
+    background-color: inherit;
+}
+
+#search_service_autocomplite .ui-autocomplete li a div.serv_list_autocomp_header {
+    border-bottom: 1px solid;
+}
+
+#search_service_autocomplite .ui-autocomplete li a div.serv_list_autocomp_data:hover {
+    background-color: #08C;
+}
+
+#search_service_autocomplite li span:nth-child(1) {
+    width: 90px;
+}
+
+#search_service_autocomplite li span:nth-child(2) {
+    width: 570px;
+}
+
+#search_service_autocomplite li span:nth-child(2) em {
+    color: #008000;
+    font-size: 10pt;
+}
+
+#search_service_autocomplite li span:nth-child(3) {
+    width: 90px;
+    text-align: right;
+    font-weight: bold;
+}
+
+/*########################  mkb_autocomplite  ##############################*/
+#mkb_search .ui-autocomplete {
+    width: 650px;
+    font-size: 12pt;
+}
+
+#mkb_search span {
+    display: inline-block;
+}
+
+#mkb_search li span:nth-child(1) {
+    width: 60px;
+    font-weight: bold;
+}
+
+#search_diags_show .ui-autocomplete {
+    position: absolute;
+    width: 500px;
+}
+
+#search_diags_show li span:nth-child(1) {
+    width: 50px;
+    font-size: 12pt;
+    font-weight: bold;
+    display: inline-block;
+}
+
+#search_diags_show li span:nth-child(2) {
+    width: 350px;
+}
