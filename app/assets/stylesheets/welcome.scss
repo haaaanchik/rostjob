@@ -1,16 +1,17 @@
+
 html,
 body,
 header,
-.view {
-  height: 100vh;
+.jarallax {
+  height: 700px;
 }
 
 @media (max-width: 740px) {
   html,
   body,
   header,
-  .view {
-    height: 815px;
+  .jarallax {
+    height: 100vh;
   }
 }
 
@@ -18,14 +19,18 @@ header,
   html,
   body,
   header,
-  .view {
-    height: 650px;
+  .jarallax {
+    height: 100vh;
   }
 }
 
-.intro-2 {
-  background: url("http://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img%20(11).jpg") no-repeat center center;
-  background-size: cover;
+@media (min-width: 560px) and (max-width: 650px) {
+  header .jarallax h1 {
+    margin-bottom: 1.5rem !important;
+  }
+  header .jarallax h5 {
+    margin-bottom: 1.5rem !important;
+  }
 }
 
 .top-nav-collapse {
@@ -48,35 +53,7 @@ header,
   }
 }
 
-.card {
-  background-color: rgba(229, 228, 255, 0.2);
+h5 {
+  letter-spacing: 3px;
 }
 
-.md-form label {
-  color: #ffffff;
-}
-
-h6 {
-  line-height: 1.7;
-}
-
-.card {
-  margin-top: 30px;
-  /*margin-bottom: -45px;*/
-
-}
-
-.md-form input[type=text]:focus:not([readonly]),
-.md-form input[type=password]:focus:not([readonly]) {
-  border-bottom: 1px solid #8EDEF8;
-  box-shadow: 0 1px 0 0 #8EDEF8;
-}
-
-.md-form input[type=text]:focus:not([readonly]) + label,
-.md-form input[type=password]:focus:not([readonly]) + label {
-  color: #8EDEF8;
-}
-
-.md-form .form-control {
-  color: #fff;
-}
