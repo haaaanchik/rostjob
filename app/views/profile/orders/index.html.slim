@@ -9,9 +9,9 @@ ul.nav.md-pills.nav-justified.pills-indigo
   li.nav-item
     = link_to 'Черновики', profile_orders_path(state: :draft), class: 'nav-link'
 table.table.mt-3
-  tr
-    th Наименование
-    th Город
-    th Дата создания
-    th Статус
+  tr.d-flex
+    th.col-6 Наименование
+    th.col-3.text-center Город
+    th.col-2.text-center Дата создания
+    th.col-1.text-center Статус
   = render @orders
