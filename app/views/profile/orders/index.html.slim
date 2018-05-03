@@ -1,0 +1,23 @@
+h1 Мои Заявки
+= link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-indigo'
+
+ul.nav.md-pills.nav-justified.pills-indigo
+  li.nav-item
+    = link_to 'В работе', profile_orders_path(state: :active), class: 'nav-link'
+  li.nav-item
+    = link_to 'Завершённые', profile_orders_path(state: :completed), class: 'nav-link'
+  li.nav-item
+    = link_to 'Черновики', profile_orders_path(state: :draft), class: 'nav-link'
+table.table
+  tr
+    th Наименование
+    th Город
+    th Дата создания
+    th Статус
+  - @orders.each do |order|
+    tr
+      td
+        = link_to order.title, profile_order_path(order)
+      td #{order.sity}
+      td #{order.created_at}
+      td #{order.state}

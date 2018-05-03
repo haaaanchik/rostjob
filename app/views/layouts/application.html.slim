@@ -8,7 +8,40 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
 
   body
-    = yield
+    header
+      nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top.scrolling-navbar
+        .container.smooth-scroll
+          = link_to root_path, class: 'navbar-brand' do
+            strong
+              | Best-HR
+          button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
+            span.navbar-toggler-icon
+          #navbarSupportedContent-7.collapse.navbar-collapse
+            - unless user_signed_in?
+              ul.navbar-nav.mr-auto
+                li.nav-item
+                  = link_to 'Как это работает', '#', class: 'nav-link', data: { offset: '60' }
+                li.nav-item
+                  = link_to 'Сколько стоит', '#', class: 'nav-link', data: { offset: '60' }
+              ul.navbar-nav
+                li.nav-item
+                  = link_to 'Вход', new_user_session_path, class: 'nav-link'
+                li.nav-item
+                  = link_to 'Регистрация', new_user_registration_path, class: 'nav-link'
+            - else
+              ul.navbar-nav.mr-auto
+                li.nav-item
+                  = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: { offset: '60' }
+                li.nav-item
+                  = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: { offset: '60' }
+              ul.navbar-nav
+                li.nav-item
+                = link_to "(#{current_user.profile.contact_person}) Выход", destroy_user_session_path, class: 'nav-link', method: :delete
+    main
+    .container
+      .row.mt-5.pt-5
+        = yield
+
     = javascript_include_tag 'application', media: 'all',
             data: {'turbolinks-eval' => false,
                     'turbolinks-suppress-warning' => true,

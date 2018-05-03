@@ -1,282 +1,283 @@
-header
-  nav.navbar.navbar-expand-lg.navbar-dark.fixed-top.scrolling-navbar
-    .container.smooth-scroll
-      a.navbar-brand[href="#"]
-        strong
-          | MDB
-      button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
-        span.navbar-toggler-icon
-      #navbarSupportedContent-7.collapse.navbar-collapse
-        ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link[href="#home"]
-              | Home
-              span.sr-only
-                | (current)
-          li.nav-item
-            a.nav-link[href="#team" data-offset="60"]
-              | Team
-          li.nav-item
-            a.nav-link[href="#products" data-offset="60"]
-              | Products
-          li.nav-item
-            a.nav-link[href="#gallery" data-offset="60"]
-              | Gallery
-          li.nav-item
-            a.nav-link[href="#contact" data-offset="60"]
-              | Contact
-        form.form-inline
-          .md-form.mt-0
-            input.form-control.mr-sm-2[type="text" placeholder="Search" aria-label="Search"]
-  #home.view.jarallax[data-jarallax="{\"speed\": 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
-    .mask.rgba-stylish-light
-      .container.h-100.d-flex.justify-content-center.align-items-center
-        .row.pt-5.mt-3
-          .col-md-12.mb-3
-            .intro-info-content.text-center
-              h1.display-3.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
-                | ABOUT
-                a.white-text.font-weight-bold
-                  | US
-              h5.text-uppercase.white-text.mb-5.mt-1.font-weight-bold.wow.fadeInDown[data-wow-delay="0.3s"]
-                | Lorem ipsum dolor sit amet consectetur.
-              a.btn.btn-light-blue.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | portfolio
-              a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | About
-main
-  .container
-    section#team.section.team-section.pb-4.wow.fadeIn[data-wow-delay="0.3s"]
-      h2.section-heading.h1.pt-5
-        | Our amazing team
-      p.section-description
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
-      .row.mb-lg-4.text-center.text-md-left
-        .col-lg-6.col-md-12.mb-4
-          .col-md-6.float-left
-            .avatar.mx-auto
-              img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="First sample avatar image"]
-          .col-md-6.float-right
-            h4
-              strong
-                | John Doe
-            h6.font-weight-bold.grey-text.mb-4
-              | Web Designer
-            p.grey-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
-            a.p-2.m-2.fa-lg.fb-ic
-              i.fa.fa-facebook
+= current_user.profile.try(:type) if current_user
+/ header
+/   nav.navbar.navbar-expand-lg.navbar-dark.fixed-top.scrolling-navbar
+/     .container.smooth-scroll
+/       a.navbar-brand[href="#"]
+/         strong
+/           | MDB
+/       button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
+/         span.navbar-toggler-icon
+/       #navbarSupportedContent-7.collapse.navbar-collapse
+/         ul.navbar-nav.mr-auto
+/           li.nav-item.active
+/             a.nav-link[href="#home"]
+/               | Home
+/               span.sr-only
+/                 | (current)
+/           li.nav-item
+/             a.nav-link[href="#team" data-offset="60"]
+/               | Team
+/           li.nav-item
+/             a.nav-link[href="#products" data-offset="60"]
+/               | Products
+/           li.nav-item
+/             a.nav-link[href="#gallery" data-offset="60"]
+/               | Gallery
+/           li.nav-item
+/             a.nav-link[href="#contact" data-offset="60"]
+/               | Contact
+/         form.form-inline
+/           .md-form.mt-0
+/             input.form-control.mr-sm-2[type="text" placeholder="Search" aria-label="Search"]
+/   #home.view.jarallax[data-jarallax="{\"speed\": 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
+/     .mask.rgba-stylish-light
+/       .container.h-100.d-flex.justify-content-center.align-items-center
+/         .row.pt-5.mt-3
+/           .col-md-12.mb-3
+/             .intro-info-content.text-center
+/               h1.display-3.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+/                 | ABOUT
+/                 a.white-text.font-weight-bold
+/                   | US
+/               h5.text-uppercase.white-text.mb-5.mt-1.font-weight-bold.wow.fadeInDown[data-wow-delay="0.3s"]
+/                 | Lorem ipsum dolor sit amet consectetur.
+/               a.btn.btn-light-blue.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+/                 | portfolio
+/               a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+/                 | About
+/ main
+/   .container
+/     section#team.section.team-section.pb-4.wow.fadeIn[data-wow-delay="0.3s"]
+/       h2.section-heading.h1.pt-5
+/         | Our amazing team
+/       p.section-description
+/         | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+/       .row.mb-lg-4.text-center.text-md-left
+/         .col-lg-6.col-md-12.mb-4
+/           .col-md-6.float-left
+/             .avatar.mx-auto
+/               img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(27).jpg" alt="First sample avatar image"]
+/           .col-md-6.float-right
+/             h4
+/               strong
+/                 | John Doe
+/             h6.font-weight-bold.grey-text.mb-4
+/               | Web Designer
+/             p.grey-text
+/               | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
+/             a.p-2.m-2.fa-lg.fb-ic
+/               i.fa.fa-facebook
 
-            a.p-2.m-2.fa-lg.tw-ic
-              i.fa.fa-twitter
+/             a.p-2.m-2.fa-lg.tw-ic
+/               i.fa.fa-twitter
 
-            a.p-2.m-2.fa-lg.dribbble-ic
-              i.fa.fa-dribbble
+/             a.p-2.m-2.fa-lg.dribbble-ic
+/               i.fa.fa-dribbble
 
-        .col-lg-6.col-md-12.mb-4
-          .col-md-6.float-left
-            .avatar.mx-auto
-              img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Second sample avatar image"]
-          .col-md-6.float-right
-            h4
-              strong
-                | Maria Kate
-            h6.font-weight-bold.grey-text.mb-4
-              | Photographer
-            p.grey-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
-            a.p-2.m-2.fa-lg.fb-ic
-              i.fa.fa-facebook
+/         .col-lg-6.col-md-12.mb-4
+/           .col-md-6.float-left
+/             .avatar.mx-auto
+/               img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(31).jpg" alt="Second sample avatar image"]
+/           .col-md-6.float-right
+/             h4
+/               strong
+/                 | Maria Kate
+/             h6.font-weight-bold.grey-text.mb-4
+/               | Photographer
+/             p.grey-text
+/               | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
+/             a.p-2.m-2.fa-lg.fb-ic
+/               i.fa.fa-facebook
 
-            a.p-2.m-2.fa-lg.yt-ic
-              i.fa.fa-youtube
+/             a.p-2.m-2.fa-lg.yt-ic
+/               i.fa.fa-youtube
 
-            a.p-2.m-2.fa-lg.ins-ic
-              i.fa.fa-instagram
+/             a.p-2.m-2.fa-lg.ins-ic
+/               i.fa.fa-instagram
 
-      .row.text-center.text-md-left
-        .col-lg-6.col-md-12.mb-4
-          .col-md-6.float-left
-            .avatar.mx-auto
-              img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" alt="Fourth sample avatar image"]
-          .col-md-6.float-right
-            h4
-              strong
-                | Anna Deynah
-            h6.font-weight-bold.grey-text.mb-4
-              | Web Developer
-            p.grey-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
-            a.p-2.m-2.fa-lg.fb-ic
-              i.fa.fa-facebook
+/       .row.text-center.text-md-left
+/         .col-lg-6.col-md-12.mb-4
+/           .col-md-6.float-left
+/             .avatar.mx-auto
+/               img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(26).jpg" alt="Fourth sample avatar image"]
+/           .col-md-6.float-right
+/             h4
+/               strong
+/                 | Anna Deynah
+/             h6.font-weight-bold.grey-text.mb-4
+/               | Web Developer
+/             p.grey-text
+/               | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
+/             a.p-2.m-2.fa-lg.fb-ic
+/               i.fa.fa-facebook
 
-            a.p-2.m-2.fa-lg.tw-ic
-              i.fa.fa-twitter
+/             a.p-2.m-2.fa-lg.tw-ic
+/               i.fa.fa-twitter
 
-            a.p-2.m-2.fa-lg.git-ic
-              i.fa.fa-github
+/             a.p-2.m-2.fa-lg.git-ic
+/               i.fa.fa-github
 
-        .col-lg-6.col-md-12.mb-4
-          .col-md-6.float-left
-            .avatar.mx-auto
-              img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(29).jpg" alt="Fifth sample avatar image"]
-          .col-md-6.float-right
-            h4
-              strong
-                | Sarah Melyah
-            h6.font-weight-bold.grey-text.mb-4
-              | Front-end Developer
-            p.grey-text
-              | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
-            a.p-2.m-2.fa-lg.gplus-ic
-              i.fa.fa-google-plus
+/         .col-lg-6.col-md-12.mb-4
+/           .col-md-6.float-left
+/             .avatar.mx-auto
+/               img.z-depth-1[src="https://mdbootstrap.com/img/Photos/Avatars/img%20(29).jpg" alt="Fifth sample avatar image"]
+/           .col-md-6.float-right
+/             h4
+/               strong
+/                 | Sarah Melyah
+/             h6.font-weight-bold.grey-text.mb-4
+/               | Front-end Developer
+/             p.grey-text
+/               | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id officiis hic tenetur.
+/             a.p-2.m-2.fa-lg.gplus-ic
+/               i.fa.fa-google-plus
 
-            a.p-2.m-2.fa-lg.li-ic
-              i.fa.fa-linkedin
+/             a.p-2.m-2.fa-lg.li-ic
+/               i.fa.fa-linkedin
 
-            a.p-2.m-2.fa-lg.email-ic
-              i.fa.fa-envelope
+/             a.p-2.m-2.fa-lg.email-ic
+/               i.fa.fa-envelope
 
-    hr.my-5
-    section#products.text-center.wow.fadeIn[data-wow-delay="0.3s"]
-      h1.section-heading.h1.py-5
-        | We create awesome products
-      p.section-description.lead.grey-text
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-      .row
-        .col-md-4.mb-4
-          i.fa.fa-4x.fa-area-chart.pink-text
-          h4.font-weight-bold.my-4
-            | Analytics
-          p.grey-text
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
-        .col-md-4.mb-4
-          i.fa.fa-4x.fa-pencil.cyan-text
-          h4.font-weight-bold.my-4
-            | Design
-          p.grey-text
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
-        .col-md-4.mb-4
-          i.fa.fa-4x.fa-laptop.indigo-text
-          h4.font-weight-bold.my-4
-            | Development
-          p.grey-text
-            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
-    hr.my-5
-    section#gallery.section.wow.fadeIn[data-wow-delay="0.3s"]
-      h1.section-heading.h1.pt-4
-        | Our work
-      p.section-description
-        | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-      .row.pb-4
-        .col-md-12
-          #mdb-lightbox-ui
-          .mdb-lightbox
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(43).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(43).jpg"]
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(41).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(41).jpg"]
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(40).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(40).jpg"]
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(14).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(14).jpg"]
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(42).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(42).jpg"]
-            figure.col-md-4
-              a[href="https://mdbootstrap.com/img/Photos/Horizontal/People/12-col/img%20(132).jpg" data-size="1600x1067"]
-                img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/People/12-col/img%20(132).jpg"]
-    hr.my-5
-    section#contact.section.pb-5.wow.fadeIn[data-wow-delay="0.3s"]
-      h2.section-heading.h1.pt-4
-        | Contact us
-      p.section-description
-        | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
-      .row
-        .col-md-8.col-xl-9
-          form
-            .row
-              .col-md-6
-                .md-form
-                  .md-form
-                    input#contact-name.form-control[type="text"]
-                    label[for="contact-name"]
-                      | Your name
-              .col-md-6
-                .md-form
-                  .md-form
-                    input#contact-email.form-control[type="text"]
-                    label[for="contact-email"]
-                      | Your email
-            .row
-              .col-md-12
-                .md-form
-                  input#contact-Subject.form-control[type="text"]
-                  label[for="contact-Subject"]
-                    | Subject
-            .row.mb-4
-              .col-md-12
-                .md-form
-                  textarea#contact-message.md-textarea.form-control[type="text" rows="3"]
-                  label[for="contact-message"]
-                    | Your message
-          .text-center.text-md-left.mb-4
-            a.btn.btn-light-blue
-              | Send
-        .col-md-4.col-xl-3
-          ul.contact-icons
-            li
-              i.fa.fa-map-marker.fa-2x
-              p
-                | San Francisco, CA 94126, USA
-            li
-              i.fa.fa-phone.fa-2x
-              p
-                | + 01 234 567 89
-            li
-              i.fa.fa-envelope.fa-2x
-              p
-                | contact@mdbootstrap.com
-footer.page-footer.pt-4.mt-4.indigo.text-center.text-md-left
-  .container
-    .row
-      .col-md-6
-        h6.text-uppercase.font-weight-bold
-          | Footer Content
-        p
-          | Here you can use rows and columns here to organize your footer content.
-      .col-md-3
-        h6.text-uppercase.font-weight-bold
-          | Links
-        ul.list-unstyled
-          li
-            a[href="#!"]
-              | Link 1
-          li
-            a[href="#!"]
-              | Link 2
-          li
-            a[href="#!"]
-              | Link 3
-      .col-md-3
-        h6.text-uppercase.font-weight-bold
-          | Links
-        ul.list-unstyled
-          li
-            a[href="#!"]
-              | Link 1
-          li
-            a[href="#!"]
-              | Link 2
-          li
-            a[href="#!"]
-              | Link 3
-  .footer-copyright.py-3.text-center
-    .container-fluid
-      |  © 2018 Copyright:
-      a[href="https://mdbootstrap.com/material-design-for-bootstrap/"]
-        |  MDBootstrap.com
+/     hr.my-5
+/     section#products.text-center.wow.fadeIn[data-wow-delay="0.3s"]
+/       h1.section-heading.h1.py-5
+/         | We create awesome products
+/       p.section-description.lead.grey-text
+/         | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+/       .row
+/         .col-md-4.mb-4
+/           i.fa.fa-4x.fa-area-chart.pink-text
+/           h4.font-weight-bold.my-4
+/             | Analytics
+/           p.grey-text
+/             | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
+/         .col-md-4.mb-4
+/           i.fa.fa-4x.fa-pencil.cyan-text
+/           h4.font-weight-bold.my-4
+/             | Design
+/           p.grey-text
+/             | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
+/         .col-md-4.mb-4
+/           i.fa.fa-4x.fa-laptop.indigo-text
+/           h4.font-weight-bold.my-4
+/             | Development
+/           p.grey-text
+/             | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam, aperiam minima assumenda deleniti hic.
+/     hr.my-5
+/     section#gallery.section.wow.fadeIn[data-wow-delay="0.3s"]
+/       h1.section-heading.h1.pt-4
+/         | Our work
+/       p.section-description
+/         | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+/       .row.pb-4
+/         .col-md-12
+/           #mdb-lightbox-ui
+/           .mdb-lightbox
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(43).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(43).jpg"]
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(41).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(41).jpg"]
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(40).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(40).jpg"]
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(14).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(14).jpg"]
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/Work/12-col/img%20(42).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/Work/6-col/img%20(42).jpg"]
+/             figure.col-md-4
+/               a[href="https://mdbootstrap.com/img/Photos/Horizontal/People/12-col/img%20(132).jpg" data-size="1600x1067"]
+/                 img.img-fluid.z-depth-1[src="https://mdbootstrap.com/img/Photos/Horizontal/People/12-col/img%20(132).jpg"]
+/     hr.my-5
+/     section#contact.section.pb-5.wow.fadeIn[data-wow-delay="0.3s"]
+/       h2.section-heading.h1.pt-4
+/         | Contact us
+/       p.section-description
+/         | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
+/       .row
+/         .col-md-8.col-xl-9
+/           form
+/             .row
+/               .col-md-6
+/                 .md-form
+/                   .md-form
+/                     input#contact-name.form-control[type="text"]
+/                     label[for="contact-name"]
+/                       | Your name
+/               .col-md-6
+/                 .md-form
+/                   .md-form
+/                     input#contact-email.form-control[type="text"]
+/                     label[for="contact-email"]
+/                       | Your email
+/             .row
+/               .col-md-12
+/                 .md-form
+/                   input#contact-Subject.form-control[type="text"]
+/                   label[for="contact-Subject"]
+/                     | Subject
+/             .row.mb-4
+/               .col-md-12
+/                 .md-form
+/                   textarea#contact-message.md-textarea.form-control[type="text" rows="3"]
+/                   label[for="contact-message"]
+/                     | Your message
+/           .text-center.text-md-left.mb-4
+/             a.btn.btn-light-blue
+/               | Send
+/         .col-md-4.col-xl-3
+/           ul.contact-icons
+/             li
+/               i.fa.fa-map-marker.fa-2x
+/               p
+/                 | San Francisco, CA 94126, USA
+/             li
+/               i.fa.fa-phone.fa-2x
+/               p
+/                 | + 01 234 567 89
+/             li
+/               i.fa.fa-envelope.fa-2x
+/               p
+/                 | contact@mdbootstrap.com
+/ footer.page-footer.pt-4.mt-4.indigo.text-center.text-md-left
+/   .container
+/     .row
+/       .col-md-6
+/         h6.text-uppercase.font-weight-bold
+/           | Footer Content
+/         p
+/           | Here you can use rows and columns here to organize your footer content.
+/       .col-md-3
+/         h6.text-uppercase.font-weight-bold
+/           | Links
+/         ul.list-unstyled
+/           li
+/             a[href="#!"]
+/               | Link 1
+/           li
+/             a[href="#!"]
+/               | Link 2
+/           li
+/             a[href="#!"]
+/               | Link 3
+/       .col-md-3
+/         h6.text-uppercase.font-weight-bold
+/           | Links
+/         ul.list-unstyled
+/           li
+/             a[href="#!"]
+/               | Link 1
+/           li
+/             a[href="#!"]
+/               | Link 2
+/           li
+/             a[href="#!"]
+/               | Link 3
+/   .footer-copyright.py-3.text-center
+/     .container-fluid
+/       |  © 2018 Copyright:
+/       a[href="https://mdbootstrap.com/material-design-for-bootstrap/"]
+/         |  MDBootstrap.com
