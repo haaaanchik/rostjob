@@ -26,6 +26,17 @@ class Profile::OrdersController < ApplicationController
 
   def destroy
     order.destroy
+    redirect_to profile_orders_path
+  end
+
+  def publish
+    order.activate!
+    redirect_to profile_orders_path
+  end
+
+  def complete
+    order.complete!
+    redirect_to profile_orders_path
   end
 
   private
@@ -35,7 +46,7 @@ class Profile::OrdersController < ApplicationController
                                   :salary_to, :description, :commission, :payment_type,
                                   :number_of_recruiters, :enterpreneurs_only,
                                   :requirements_for_recruiters, :stop_list, :accepted,
-                                  :visibility, :state)
+                                  :visibility, :state, :warranty_period)
   end
 
   def order

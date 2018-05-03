@@ -1,0 +1,74 @@
+= form_with model: [:profile, order], local: true do |f|
+  .md-form
+    = f.text_field :title, class: 'form-control'
+    = f.label :title, 'Название', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_field :specialization, class: 'form-control'
+    = f.label :specialization, 'Специализации', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_field :sity, class: 'form-control'
+    = f.label :sity, 'Город', class: ('active' if order.persisted?)
+  .form-inline
+    .md-form
+      = f.text_field :salary_from, class: 'form-control'
+      = f.label :salary_from, 'Зарплата от:', class: ('active' if order.persisted?)
+    .md-form
+      = f.text_field :salary_to, class: 'form-control'
+      = f.label :salary_to, 'Зарплата до:', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_area :description, rows: 5, class: 'md-textarea form-control'
+    = f.label :description, 'Описание вакансии', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_field :commission, class: 'form-control'
+    = f.label :commission, 'Вознаграждение', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_field :warranty_period, class: 'form-control'
+    = f.label :warranty_period, 'Гарантийный период', class: ('active' if order.persisted?)
+  .md-form
+    span Варианты выплаты вознаграждения
+    .form-inline
+      .form-check
+        = f.radio_button :payment_type, 0, class: 'form-check-input'
+        = f.label :payment_type, '100% за выход сотрудника', for: 'order_payment_type_0'
+      .form-check
+        = f.radio_button :payment_type, 1, class: 'form-check-input'
+        = f.label :payment_type, '100% по окончании гарантийного периода', for: 'order_payment_type_1'
+      .form-check
+        = f.radio_button :payment_type, 2, class: 'form-check-input'
+        = f.label :payment_type, '30% за выход + 70% по окончании гарантийного периода', for: 'order_payment_type_2'
+  hr.mt-4
+  .md-form
+    span Количество реекрутеров
+    .form-inline
+      .form-check
+        = f.radio_button :number_of_recruiters, 1, class: 'form-check-input'
+        = f.label :number_of_recruiters, '1', for: 'order_number_of_recruiters_1'
+      .form-check
+        = f.radio_button :number_of_recruiters, 2, class: 'form-check-input'
+        = f.label :number_of_recruiters, '2', for: 'order_number_of_recruiters_2'
+      .form-check
+        = f.radio_button :number_of_recruiters, 3, class: 'form-check-input'
+        = f.label :number_of_recruiters, '3', for: 'order_number_of_recruiters_3'
+      .form-check
+        = f.radio_button :number_of_recruiters, 4, class: 'form-check-input'
+        = f.label :number_of_recruiters, '4', for: 'order_number_of_recruiters_4'
+      .form-check
+        = f.radio_button :number_of_recruiters, 5, class: 'form-check-input'
+        = f.label :number_of_recruiters, '5', for: 'order_number_of_recruiters_5'
+  hr.mt-4
+  .md-form
+    = f.check_box :enterpreneurs_only, class: 'form-control'
+    = f.label :enterpreneurs_only, 'Только для юридических лиц и ИП'
+  .md-form
+    = f.text_area :requirements_for_recruiters, rows: 5, class: 'md-textarea form-control'
+    = f.label :requirements_for_recruiters, 'Требования к рекрутерам', class: ('active' if order.persisted?)
+  .md-form
+    = f.text_area :stop_list, rows: 5, class: 'md-textarea form-control'
+    = f.label :stop_list, 'Стоп-лист кандидатов', class: ('active' if order.persisted?)
+  .md-form
+    .form-check
+      = f.check_box :accepted, class: 'form-control'
+      = f.label :accepted do
+        'Я принимаю условия
+        = link_to 'Оферты', '/offerta.pdf'
+  = f.submit order.new_record? ? 'Создать заявку' : 'Сохранить', class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}"

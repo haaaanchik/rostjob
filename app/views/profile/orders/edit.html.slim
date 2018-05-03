@@ -1,2 +1,7 @@
-h1 Profile::Orders#edit
-p Find me in app/views/profile/orders/edit.html.slim
+.col-md-2
+.col-md-8
+  .card
+    .card-header
+      h5 Редактирование заявки №#{@order.id}
+    .card-body
+      = render partial: 'form', locals: { order: @order }

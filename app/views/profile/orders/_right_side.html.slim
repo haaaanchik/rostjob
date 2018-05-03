@@ -1,0 +1,33 @@
+.col
+  .card.border-light
+    .card-header
+      .row
+        .col
+          span.h4 Заявка №: #{order.id}
+          h4 #{order.title}
+        .col-3.align-self-center
+          = link_to edit_profile_order_path(order) do
+            i.fa.fa-edit.fa-2x.mr-1.indigo-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
+          = link_to publish_profile_order_path(order), method: :put do
+            i.fa.fa-newspaper.fa-2x.mr-1.indigo-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
+          = link_to complete_profile_order_path(order), method: :put do
+            i.fa.fa-handshake.fa-2x.mr-1.indigo-text data-toggle='tooltip' data-placement='top' title='Завершить заявку'
+          = link_to profile_order_path(order), method: :delete, data: { confirm: 'Вы уверены?' } do
+            i.fa.fa-trash.fa-2x.indigo-text data-toggle='tooltip' data-placement='top' title='Удалить заявку'
+
+    .card-body
+      table.table
+        tr
+          th Уровень зарплаты
+          th Город
+          th Гарантийный период
+        tr
+          td #{order.salary_from} - #{order.salary_to}
+          td #{order.sity}
+          td #{order.warranty_period}
+      hr
+
+      h5 Специализация:
+      span #{order.specialization}
+      h5 Описание вакансии:
+      span #{order.description}

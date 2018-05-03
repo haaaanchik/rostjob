@@ -1,59 +1,8 @@
 .col-md-2
 .col-md-8
   .card
+    .card-header
+      h5 Новая заявка
     .card-body
-      h1 Новая заявка
-      = form_with model: @order, url: profile_orders_path, local: true do |f|
-        .md-form
-          = f.text_field :title, class: 'form-control'
-          = f.label :title, 'Название'
-        .md-form
-          = f.text_field :specialization, class: 'form-control'
-          = f.label :specialization, 'Специализации'
-        .md-form
-          = f.text_field :sity, class: 'form-control'
-          = f.label :sity, 'Город'
-        .form-inline
-          .md-form
-            = f.text_field :salary_from, class: 'form-control'
-            = f.label :salary_from, 'Зарплата от:'
-          .md-form
-            = f.text_field :salary_to, class: 'form-control'
-            = f.label :salary_to, 'Зарплата до:'
-        .md-form
-          = f.text_area :description, rows: 5, class: 'md-textarea form-control'
-          = f.label :description, 'Описание вакансии'
-        .md-form
-          = f.text_field :commission, class: 'form-control'
-          = f.label :commission, 'Вознаграждение'
-        .md-form
-          = label nil, 'Варианты выплаты вознаграждения'
-          .form-inline
-            .form-check
-              = f.radio_button :payment_type, 0, class: 'form-check-input'
-              = f.label :payment_type, '100% за выход сотрудника', for: 'order_payment_type_0'
-            .form-check
-              = f.radio_button :payment_type, 1, class: 'form-check-input'
-              = f.label :payment_type, '100% по окончании гарантийного периода', for: 'order_payment_type_1'
-            .form-check
-              = f.radio_button :payment_type, 2, class: 'form-check-input'
-              = f.label :payment_type, '30% за выход + 70% по окончании гарантийного периода', for: 'order_payment_type_2'
-        .md-form
-          .range-form
-            = f.range_field :number_of_recruiters, min: 1, max: 5, class: 'form-control'
-            = f.label :number_of_recruirers, 'Количество рекрутеров'
-        .md-form
-          = f.check_box :enterpreneurs_only, class: 'form-control'
-          = f.label :enterpreneurs_only, 'Только для юридических лиц и ИП'
-        .md-form
-          = f.text_area :requiremens_for_recruiters, rows: 5, class: 'md-textarea form-control'
-          = f.label :requirements_for_recruiters, 'Требования к рекрутерам'
-        .md-form
-          = f.text_area :stop_list, rows: 5, class: 'md-textarea form-control'
-          = f.label :stop_list, 'Стоп-лист кандидатов'
-        .md-form
-          = f.check_box :accepted, class: 'form-control'
-          = f.label :accepted do
-            'Я принимаю условия
-            = link_to 'Оферты', '/offerta.pdf'
-        = f.submit class: 'btn btn-indigo mt-4'
+
+      = render partial: 'form', locals: { order: @order }

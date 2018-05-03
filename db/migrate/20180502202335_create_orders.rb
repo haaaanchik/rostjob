@@ -9,6 +9,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.text :description
       t.string :commission
       t.string :payment_type
+      t.integer :warranty_period
       t.integer :number_of_recruiters
       t.boolean :enterpreneurs_only
       t.text :requirements_for_recruiters
