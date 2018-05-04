@@ -13,3 +13,7 @@
 
 $(document).ready ->
   new WOW().init();
+  new WOW().init();
+  $ ->
+    $('#mdb-lightbox-ui').load '../mdb-addons/mdb-lightbox-ui.html'
+    return

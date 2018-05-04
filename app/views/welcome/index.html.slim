@@ -8,46 +8,59 @@ header
         span.navbar-toggler-icon
       #navbarSupportedContent-7.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item.active
-            a.nav-link[href="#home"]
-              | Home
-              span.sr-only
-                | (current)
           li.nav-item
             a.nav-link[href="#team" data-offset="60"]
-              | Team
+              | О проекте
           li.nav-item
             a.nav-link[href="#products" data-offset="60"]
-              | Products
+              | Работодателю
           li.nav-item
             a.nav-link[href="#gallery" data-offset="60"]
-              | Gallery
+              | Рекрутеру
           li.nav-item
             a.nav-link[href="#contact" data-offset="60"]
-              | Contact
+              | Контакты
+          li.nav-item
+            a.nav-link[href="#contact" data-offset="60"]
+              | Помощь
         form.form-inline
           .md-form.mt-0
             input.form-control.mr-sm-2[type="text" placeholder="Search" aria-label="Search"]
-  #home.view.jarallax[data-jarallax="{\"speed\": 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
+  #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
     .mask.rgba-stylish-light
       .container.h-100.d-flex.justify-content-center.align-items-center
         .row.pt-5.mt-3
           .col-md-12.mb-3
             .intro-info-content.text-center
-              h1.display-3.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
-                | ABOUT
-                a.white-text.font-weight-bold
-                  | US
-              h5.text-uppercase.white-text.mb-5.mt-1.font-weight-bold.wow.fadeInDown[data-wow-delay="0.3s"]
-                | Lorem ipsum dolor sit amet consectetur.
-              a.btn.btn-light-blue.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | portfolio
+              h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+                | BEST-HR
+              h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
+                | Сервис для размещения заявок на подбор специалистов любого уровня
               a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | About
+                | Разместить заявку
+              a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+                | Найти заявку
 main
   .container
     section#team.section.team-section.pb-4.wow.fadeIn[data-wow-delay="0.3s"]
-      h2.section-heading.h1.pt-5
+      h1.section-heading.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+        | Как это работает
+      .steps-form-2
+        .steps-row-2.setup-panel-2.d-flex.justify-content-between
+          .steps-step-2
+            a.btn.btn-circle-2.waves-effect.ml-0.btn-blue-grey.btn-amber[href="#step-1" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Basic Information"]
+              i.fa.fa-folder-open-o[aria-hidden="true"]
+          .steps-step-2
+            a.btn.btn-blue-grey.btn-circle-2.waves-effect[href="#step-2" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Personal Data"]
+              i.fa.fa-pencil[aria-hidden="true"]
+          .steps-step-2
+            a.btn.btn-blue-grey.btn-circle-2.waves-effect[href="#step-3" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Terms and Conditions"]
+              i.fa.fa-photo[aria-hidden="true"]
+          .steps-step-2
+            a.btn.btn-blue-grey.btn-circle-2.waves-effect.mr-0[href="#step-4" type="button" data-toggle="tooltip" data-placement="top" title="" data-original-title="Finish"]
+              i.fa.fa-check[aria-hidden="true"]
+    section#team2.section.team-section.pb-4.wow.fadeIn[data-wow-delay="0.3s"]
+      h1.section-heading.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
         | Our amazing team
       p.section-description
         | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum quisquam eum porro a pariatur accusamus veniam.
@@ -136,7 +149,6 @@ main
 
             a.p-2.m-2.fa-lg.email-ic
               i.fa.fa-envelope
-
     hr.my-5
     section#products.text-center.wow.fadeIn[data-wow-delay="0.3s"]
       h1.section-heading.h1.py-5
