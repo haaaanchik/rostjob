@@ -1,6 +1,7 @@
 tr.d-flex
   td.col-6
-    = link_to order.title, profile_order_path(order)
+    = link_to profile_order_path(order) do
+      div #{order.title}
   td.col-3.text-center #{order.sity}
   td.col-2.text-center #{l(order.created_at, format: :long)}
   td.col-1.text-center #{t("order.state.#{order.state}")}
