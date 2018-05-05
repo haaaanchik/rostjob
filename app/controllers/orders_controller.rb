@@ -4,7 +4,15 @@ class OrdersController < ApplicationController
     @orders = @order_search_form.submit
   end
 
+  def show
+    render locals: { order: order }
+  end
+
   private
+
+  def order
+    @order = Order.find(params[:id])
+  end
 
   def order_search_form_params
     params.permit(order_search_form: [:query, :sort_by, :filter_by])[:order_search_form]

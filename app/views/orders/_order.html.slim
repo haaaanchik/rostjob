@@ -1,15 +1,23 @@
 tr.clickable-row data-href=order_path(order)
   td
     p.h6 #{order.title}
-    p
-      span.mr-1 #{order.salary_from} - #{order.salary_to}
-      i.fa.fa-ruble-sign.mr-3
-      span.mr-3 г. #{order.sity}
-      i.fa.fa-user.mr-1
-      span.mr-3 0 из #{order.number_of_recruiters}
-      span #{'Только для ИП и юридических лиц' if order.enterpreneurs_only}
+    ul.list-unstyled.list-inline
+      li.list-inline-item.pr-2
+        span.font-weight-bold #{order.salary_from} - #{order.salary_to}
+        i.fa.fa-ruble-sign.ml-1
+      li.list-inline-item.pr-2
+        |г. #{order.sity}
+      li.list-inline-item.pr-2
+        i.far.fa-clock.pr-1
+        |#{l(order.created_at, format: :short)}
+      li.list-inline-item.pr-2
+        i.fas.fa-users.pr-1
+        |0 из #{order.number_of_recruiters}
+      - if order.enterpreneurs_only
+        li.list-inline-item.pr-2
+          |Только для ИП и юридических лиц
 
-    p #{order.description}
+    |#{order.description}
   td.text-center.pl-1
-    b.text-bold.mr-1 #{order.commission}
+    span.font-weight-bold.mr-1 #{order.commission}
     i.fa.fa-ruble-sign

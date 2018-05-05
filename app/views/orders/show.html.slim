@@ -1,0 +1,44 @@
+.col
+  .card.border-light
+    .card-header
+      span.h4 Заявка №: #{order.id}
+      p #{order.title}
+      ul.list-unstyled.list-inline
+        li.list-inline-item.pr-2
+          span.font-weight-bold #{order.salary_from} - #{order.salary_to}
+          i.fa.fa-ruble-sign.ml-1
+        li.list-inline-item.pr-2
+          |г. #{order.sity}
+        li.list-inline-item.pr-2
+          i.far.fa-clock.pr-1
+          |#{l(order.created_at, format: :short)}
+        li.list-inline-item.pr-2
+          i.fas.fa-users.pr-1
+          |0 из #{order.number_of_recruiters}
+        - if order.enterpreneurs_only
+          li.list-inline-item.pr-2
+            |Только для ИП и юридических лиц
+    .card-body
+      dl.row
+        dt.col-sm-3 Специализация
+        dd.col-sm-9 #{order.specialization}
+        dt.col-sm-3 Описание вакансии:
+        dd.col-sm-9 #{order.description}
+        dt.col-sm-3 Условия сотрудничиства
+        dd.col-sm-9
+          dl.row
+            dt.col-sm-4 Вознаграждение
+            dd.col-sm-8
+              span.mr-1 #{order.commission}
+              i.fa.fa-ruble-sign
+            dt.col-sm-4 Гарантийный период
+            dd.col-sm-8 #{order.warranty_period}, мес
+            dt.col-sm-4 Выплата вознаграждения
+            dd.col-sm-8 #{order.payment_type}
+            dt.col-sm-4 Требования к рекрутерам
+            dd.col-sm-8 #{order.requirements_for_recruiters}
+            dt.col-sm-4 Стоп-лист кандидатов
+            dd.col-sm-8 #{order.stop_list}
+      hr
+      .text-center
+        = link_to 'Ответить на заявку', '#', class: 'btn btn-indigo'
