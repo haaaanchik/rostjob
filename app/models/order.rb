@@ -16,6 +16,16 @@ class Order < ApplicationRecord
   validates :number_of_recruiters, presence: true
   validates :accepted, presence: true
 
+  scope :filter_by_day, -> { where 'created_at >= ?', Date.today - 1.day }
+  scope :filter_by_3day, -> { where 'created_at >= ?', Date.today - 3.days }
+  scope :filter_by_week, -> { where 'created_at >= ?', Date.today - 1.week }
+  scope :filter_by_all_time, -> { all }
+  scope :sort_by_reward_asc, -> { order commission: :asc }
+  scope :sort_by_reward_desc, -> { order commission: :desc }
+  scope :sort_by_date_asc, -> { order created_at: :asc }
+  scope :sort_by_date_desc, -> { order created_at: :desc }
+  scope :by_query, -> (term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
+
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
     state :draft, initial: true
     state :active

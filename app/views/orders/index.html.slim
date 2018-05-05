@@ -1,0 +1,11 @@
+.col
+  .card.border-light
+    .card-header
+      h3 Поиск заявок
+      = render partial: 'form'
+    .card-body
+      table.table.table-hover
+        tr
+          th.col.text-center Заявка
+          th.col-1.text-center Вознаграждение
+        = render @orders

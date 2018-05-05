@@ -12,4 +12,5 @@
 #= require_tree .
 
 $(document).ready ->
-  new WOW().init();
+  new WOW().init()
+  $('.mdb-select').material_select()

@@ -28,8 +28,18 @@ module BestHr
     # the framework and any gems in your application.
 
     # Don't generate system test files.
-    config.generators.system_tests = nil
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.i18n.default_locale = :ru
+    config.generators do |g|
+      g.test_framework :rspec, fixture: false
+      g.system_tests = nil
+      g.view_specs        false
+      g.helper_specs      false
+      g.controller_specs  true
+      g.integration_specs false
+      g.stylesheets  true
+      g.javascripts  true
+      g.helper       false
+    end
   end
 end

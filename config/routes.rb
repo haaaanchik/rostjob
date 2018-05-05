@@ -15,5 +15,7 @@ Rails.application.routes.draw do
     resources :proposals
   end
 
+  resources :orders, only: %i[index show]
+
   root to: 'welcome#index'
 end

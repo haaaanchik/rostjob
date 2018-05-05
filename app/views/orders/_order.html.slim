@@ -1,0 +1,15 @@
+tr.clickable-row data-href=order_path(order)
+  td
+    p.h6 #{order.title}
+    p
+      span.mr-1 #{order.salary_from} - #{order.salary_to}
+      i.fa.fa-ruble-sign.mr-3
+      span.mr-3 г. #{order.sity}
+      i.fa.fa-user.mr-1
+      span.mr-3 0 из #{order.number_of_recruiters}
+      span #{'Только для ИП и юридических лиц' if order.enterpreneurs_only}
+
+    p #{order.description}
+  td.text-center.pl-1
+    b.text-bold.mr-1 #{order.commission}
+    i.fa.fa-ruble-sign

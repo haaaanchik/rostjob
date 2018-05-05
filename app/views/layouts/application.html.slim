@@ -31,6 +31,10 @@ html
             - else
               ul.navbar-nav.mr-auto
                 li.nav-item
+                  = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: { offset: '60' }
+                li.nav-item
+                  = link_to 'Каталог исполнителей', orders_path, class: 'nav-link', data: { offset: '60' }
+                li.nav-item
                   = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: { offset: '60' }
                 li.nav-item
                   = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: { offset: '60' }
