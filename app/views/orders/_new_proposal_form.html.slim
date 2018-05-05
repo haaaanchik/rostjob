@@ -1,0 +1,7 @@
+= form_with  scope: :proposal, url: profile_proposals_path, local: true, data: { confirm: 'Вы уверены?' } do |f|
+  = f.hidden_field :order_id, value: order.id
+  .md-form
+    = f.text_area :description, class: 'form-control', rows: 3
+    = f.label :description, ' Кратко опишите суть вашего предложения'
+  .text-center.pt-3
+    = f.submit 'Отправить ответ', class: 'btn btn-indigo'

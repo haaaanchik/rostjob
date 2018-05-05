@@ -40,5 +40,9 @@
             dt.col-sm-4 Стоп-лист кандидатов
             dd.col-sm-8 #{order.stop_list}
       hr
-      .text-center
-        = link_to 'Ответить на заявку', '#', class: 'btn btn-indigo'
+      .row.pt-2
+        .col-2
+        .col
+          h5 Ответить на заявку
+          = render partial: 'new_proposal_form', locals: { order: order }
+        .col-2
