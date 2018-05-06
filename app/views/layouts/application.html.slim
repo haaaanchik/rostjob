@@ -20,9 +20,24 @@ html
             - unless user_signed_in?
               ul.navbar-nav.mr-auto
                 li.nav-item
-                  = link_to 'Как это работает', '#', class: 'nav-link', data: { offset: '60' }
+                  a.nav-link[href="#team" data-offset="60"]
+                    | О проекте
                 li.nav-item
-                  = link_to 'Сколько стоит', '#', class: 'nav-link', data: { offset: '60' }
+                  a.nav-link[href="#products" data-offset="60"]
+                    | Работодателю
+                li.nav-item
+                  a.nav-link[href="#gallery" data-offset="60"]
+                    | Рекрутеру
+                li.nav-item
+                  a.nav-link[href="#contact" data-offset="60"]
+                    | Контакты
+                li.nav-item
+                  a.nav-link[href="#contact" data-offset="60"]
+                    | Помощь
+                li.nav-item
+                  = link_to 'Как это работает', '#', class: 'nav-link', data: {offset: '60'}
+                li.nav-item
+                  = link_to 'Сколько стоит', '#', class: 'nav-link', data: {offset: '60'}
               ul.navbar-nav
                 li.nav-item
                   = link_to 'Вход', new_user_session_path, class: 'nav-link'
@@ -31,20 +46,72 @@ html
             - else
               ul.navbar-nav.mr-auto
                 li.nav-item
-                  = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: { offset: '60' }
+                  = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
-                  = link_to 'Каталог исполнителей', orders_path, class: 'nav-link', data: { offset: '60' }
+                  = link_to 'Каталог исполнителей', orders_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
-                  = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: { offset: '60' }
+                  = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
-                  = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: { offset: '60' }
+                  = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
               ul.navbar-nav
                 li.nav-item
                 = link_to "(#{current_user.profile.contact_person}) Выход", destroy_user_session_path, class: 'nav-link', method: :delete
+      #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
+        .mask.rgba-stylish-light
+          .container.h-100.d-flex.justify-content-center.align-items-center
+            .row.pt-5.mt-3
+              .col-md-12.mb-3
+                .intro-info-content.text-center
+                  h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | BEST-HR
+                  h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Сервис для размещения заявок на подбор специалистов любого уровня
+                  a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Разместить заявку
+                  a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Найти заявку
     main
     .container
-      .row.mt-5.pt-5
-        = yield
+      = yield
+    footer.page-footer.pt-4.mt-4.indigo.text-center.text-md-left
+      .container
+        .row
+          .col-md-6
+            h6.text-uppercase.font-weight-bold
+              | Footer Content
+            p
+              | Here you can use rows and columns here to organize your footer content.
+          .col-md-3
+            h6.text-uppercase.font-weight-bold
+              | Links
+            ul.list-unstyled
+              li
+                a[href="#!"]
+                  | Link 1
+              li
+                a[href="#!"]
+                  | Link 2
+              li
+                a[href="#!"]
+                  | Link 3
+          .col-md-3
+            h6.text-uppercase.font-weight-bold
+              | Links
+            ul.list-unstyled
+              li
+                a[href="#!"]
+                  | Link 1
+              li
+                a[href="#!"]
+                  | Link 2
+              li
+                a[href="#!"]
+                  | Link 3
+      .footer-copyright.py-3.text-center
+        .container-fluid
+          |  © 2018 Copyright:
+          a[href="https://mdbootstrap.com/material-design-for-bootstrap/"]
+            |  MDBootstrap.com
 
     = javascript_include_tag 'application', media: 'all',
             data: {'turbolinks-eval' => false,
