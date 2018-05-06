@@ -22,6 +22,7 @@ class Profile::OrdersController < ApplicationController
 
   def update
     order.update(order_params)
+    redirect_to profile_orders_path
   end
 
   def destroy

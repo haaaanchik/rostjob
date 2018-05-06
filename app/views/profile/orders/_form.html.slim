@@ -28,14 +28,14 @@
     span Варианты выплаты вознаграждения
     .form-inline
       .form-check
-        = f.radio_button :payment_type, 0, class: 'form-check-input'
-        = f.label :payment_type, '100% за выход сотрудника', for: 'order_payment_type_0'
+        = f.radio_button :payment_type, 'zero', class: 'form-check-input'
+        = f.label :payment_type, t('order.payment_type.zero'), for: 'order_payment_type_zero'
       .form-check
-        = f.radio_button :payment_type, 1, class: 'form-check-input'
-        = f.label :payment_type, '100% по окончании гарантийного периода', for: 'order_payment_type_1'
+        = f.radio_button :payment_type, 'one' , class: 'form-check-input'
+        = f.label :payment_type, t('order.payment_type.one'), for: 'order_payment_type_one'
       .form-check
-        = f.radio_button :payment_type, 2, class: 'form-check-input'
-        = f.label :payment_type, '30% за выход + 70% по окончании гарантийного периода', for: 'order_payment_type_2'
+        = f.radio_button :payment_type, 'two', class: 'form-check-input'
+        = f.label :payment_type, t('order.payment_type.two'), for: 'order_payment_type_two'
   hr.mt-4
   .md-form
     span Количество реекрутеров

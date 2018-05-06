@@ -1,0 +1,5 @@
+tr.d-flex.clickable-row data-href=profile_proposal_path(proposal)
+  td.col-4 #{proposal.order.profile.company_name}
+  td.col-5 #{proposal.order.title}
+  td.col-2.text-center #{l(proposal.created_at, format: :long)}
+  td.col-1.text-center #{t("proposal.state.#{proposal.state}")}
