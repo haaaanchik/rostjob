@@ -3,7 +3,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
     create_table :orders do |t|
       t.string :title
       t.text :specialization
-      t.string :sity
+      t.string :city
       t.integer :salary_from
       t.integer :salary_to
       t.text :description

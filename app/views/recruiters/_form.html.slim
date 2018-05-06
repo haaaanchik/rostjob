@@ -1,0 +1,17 @@
+= form_with  model: @recruiter_search_form, url: recruiters_path, method: :get, skip_enforcing_utf8: true, local: true do |f|
+  .input-group.md-form
+    = f.text_field :query, class: "form-control", placeholder:"Пример: подбор кассиров", aria_label: "Query"
+    .input-group-append
+      = f.submit 'Найти', name: nil,  class: 'btn btn-indigo'
+  div.mt-3
+    a.text-indigo data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" Расширенный поиск
+  .collapse id="collapseExample"
+    .mt-3
+      'Hello world!
+  / .row.mt-4
+  /   .col
+  /     = f.collection_select :sort_by, @order_search_form.sort_by_list, :key, :label, {}, class: 'mdb-select', onchange: 'this.form.submit()'
+  /     = f.label :sort_by, 'Сортировать по:'
+  /   .col
+  /     = f.collection_select :filter_by, @order_search_form.filter_by_list, :key, :label, {}, class: 'mdb-select', onchange: 'this.form.submit()'
+  /     = f.label :filter_by, 'Фильтровать за:'

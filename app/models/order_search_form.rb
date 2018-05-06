@@ -25,12 +25,12 @@ class OrderSearchForm
       sort_by_sym = "sort_by_#{sort_by}".to_sym
       filter_by_sym = "filter_by_#{filter_by}".to_sym
       unless query.empty?
-        Order.send(:by_query, query).send(sort_by_sym).send(filter_by_sym)
+        Order.published.send(:by_query, query).send(sort_by_sym).send(filter_by_sym)
       else
-        Order.send(sort_by_sym).send(filter_by_sym)
+        Order.published.send(sort_by_sym).send(filter_by_sym)
       end
     else
-      Order.all
+      Order.published
     end
   end
 

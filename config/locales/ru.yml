@@ -32,8 +32,8 @@
 ru:
   order:
     state:
-      draft: 'черновик'
-      active: 'в работе'
+      published: 'опубликована'
+      hidden: 'скрыта'
       completed: 'завершена'
     payment_type:
       zero: '100% за выход сотрудника'
@@ -41,5 +41,6 @@ ru:
       two: '30% за выход + 70% по окончании гарантийного периода'
   proposal:
     state:
-      active: 'в работе'
-      completed: 'завершена'
+      sent: 'на рассмотрении'
+      accepted: 'одобрен'
+      rejected: 'отклонён'

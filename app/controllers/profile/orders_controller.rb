@@ -31,7 +31,12 @@ class Profile::OrdersController < ApplicationController
   end
 
   def publish
-    order.activate!
+    order.publish!
+    redirect_to profile_orders_path
+  end
+
+  def hide
+    order.hide!
     redirect_to profile_orders_path
   end
 
@@ -43,7 +48,7 @@ class Profile::OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:title, :specialization, :sity, :salary_from,
+    params.require(:order).permit(:title, :specialization, :city, :salary_from,
                                   :salary_to, :description, :commission, :payment_type,
                                   :number_of_recruiters, :enterpreneurs_only,
                                   :requirements_for_recruiters, :stop_list, :accepted,

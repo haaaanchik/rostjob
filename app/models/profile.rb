@@ -1,5 +1,4 @@
 class Profile < ApplicationRecord
-  # extend Enumerize
   include AASM
 
   has_many :users
@@ -12,9 +11,14 @@ class Profile < ApplicationRecord
   validates :contact_person, presence: true
   validates :phone, presence: true, on: :default_registration
   validates :email, presence: true, on: :default_registration
-  validates :contact_person, presence: true, on: :default_registration
   validates :company_name, presence: true, if: Proc.new { |p| COMPANIES.include? p.profile_type }, on: :default_registration
   validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }, on: :default_registration
+
+  has_attached_file :photo, path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename", default_url: "/img/default.jpg"
+  validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
+
+  scope :executors, -> { where profile_type: %w[agency recruiter] }
+  scope :by_query, -> (term) { where('contact_person LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
 
   aasm column: :state do
     state :created, initial: true
@@ -29,5 +33,4 @@ class Profile < ApplicationRecord
       transitions from: %i[created filled], to: :deleted
     end
   end
-  # enumerize :profile_type , in: %i[employer agency recruter employee]
 end

@@ -1,5 +1,6 @@
 tr.d-flex.clickable-row data-href=profile_order_path(order)
-  td.col-6 #{order.title}
-  td.col-3.text-center #{order.sity}
+  td.col-5 #{order.title}
+  td.col-3.text-center #{order.city}
   td.col-2.text-center #{l(order.created_at, format: :long)}
+  td.col-1.text-center #{order.proposals.count}
   td.col-1.text-center #{t("order.state.#{order.state}")}

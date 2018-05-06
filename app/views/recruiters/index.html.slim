@@ -1,0 +1,8 @@
+.col
+  .card.border-light
+    .card-header
+      h3 Поиск исполнителей
+      = render partial: 'form'
+    .card-body
+      .card-deck
+        = render @recruiters
