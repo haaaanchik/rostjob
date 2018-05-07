@@ -6,27 +6,28 @@ html
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"]
 
-  body
+    body
     header
       nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top.scrolling-navbar
         .container.smooth-scroll
           = link_to root_path, class: 'navbar-brand' do
             strong
-              | Best-HR
+              | BEST-HR
           button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
             span.navbar-toggler-icon
           #navbarSupportedContent-7.collapse.navbar-collapse
             - unless user_signed_in?
               ul.navbar-nav.mr-auto
                 li.nav-item
-                  a.nav-link[href="#team" data-offset="60"]
+                  a.nav-link[href="#about" data-offset="60"]
                     | О проекте
                 li.nav-item
-                  a.nav-link[href="#products" data-offset="60"]
+                  a.nav-link[href="#employer" data-offset="60"]
                     | Работодателю
                 li.nav-item
-                  a.nav-link[href="#gallery" data-offset="60"]
+                  a.nav-link[href="#recruiter" data-offset="60"]
                     | Рекрутеру
                 li.nav-item
                   a.nav-link[href="#contact" data-offset="60"]
