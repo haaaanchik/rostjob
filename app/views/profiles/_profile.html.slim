@@ -1,0 +1,11 @@
+.card
+  .view.overlay
+    = image_tag(profile.photo.url, class: 'card-img-top')
+    = link_to recruiter_path(profile) do
+      .mask.rgba-white-slight
+  .card-body.text-center
+    h4.card-title
+      strong #{profile.contact_person}
+    h6.font-weight-bold.indigo-text.py-2
+    |#{profile.description}
+

@@ -17,7 +17,7 @@ class Profile::ProposalsController < ApplicationController
 
   def create
     proposals.create(proposal_params)
-    redirect_to profile_proposals_path
+    redirect_to orders_path
   end
 
   def update

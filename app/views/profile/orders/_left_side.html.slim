@@ -1,7 +1,34 @@
 .col-3
-  ul.list-group
-    li.list-group-item.d-flex.justify-content-between.align-items-center
-      |Описание заявки
-    li.list-group-item.d-flex.justify-content-between.align-items-center
+  .card.border-light
+    .card-header
       |Предложения рекрутеров
-      span.badge.badge-primary.badge-pill 14
+    .card-body
+      ul.list-group.list-group-flush
+        - if order.proposals.any?
+          - order.proposals.each do |proposal|
+            li.list-group-item
+              = link_to profile_order_proposal_path(order, proposal) do
+                span.dark-grey-text #{proposal.profile.contact_person}
+              .text-center
+                ul.list-unstyled.list-inline
+                  li.list-inline-item.pr-2
+                    i.far.fa-user data-toggle='modal' data-profile_id=proposal.profile.id data-target='#executorModal' title='Анкета исполнителя'
+                  li.list-inline-item.pr-2
+                    i.far.fa-thumbs-up data-toggle='tooltip' title='Выбрать исполнителем'
+                  li.list-inline-item.pr-2
+                    i.fas.fa-ban data-toggle='tooltip' title='Отклонить исполнителя'
+
+          .modal.fade.left#executorModal tabindex="-1" role="dialog" aria-labelledby="executorModalLabel" aria-hidden="true"
+            .modal-dialog.modal-lg role="document"
+              .modal-content
+                .modal-header
+                  h4.modal-title#executorModalLabel Анкета исполнителя
+                  button.close type="button" data-dismiss="modal" aria-label="Close"
+                    span aria-hidden="true" &times;
+                .modal-body
+                  |Hello world
+                .modal-footer
+                  button.btn.btn-indigo type="button" data-dismiss="modal" Закрыть
+
+        - else
+          span Пока предложений нет

@@ -39,7 +39,7 @@ module BestHr
       g.integration_specs false
       g.stylesheets  true
       g.javascripts  true
-      g.helper       false
+      g.helper       true
     end
   end
 end

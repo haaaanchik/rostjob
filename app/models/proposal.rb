@@ -6,12 +6,20 @@ class Proposal < ApplicationRecord
   has_many :messages
   has_many :employee_cvs
 
-  aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
-    state :active, initial: true
-    state :completed
+  validates :description, presence: true
+  validates :profile_id, uniqueness: { scope: :order_id, message: 'Proposal already exists' }
 
-    event :complete do
-      transitions from: :active, to: :completed
+  aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
+    state :sent, initial: true
+    state :accepted
+    state :rejected
+
+    event :accept do
+      transitions from: :sent, to: :accepted
+    end
+
+    event :reject do
+      transitions from: :sent, to: :rejected
     end
   end
 end

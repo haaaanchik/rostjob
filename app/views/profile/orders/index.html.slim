@@ -12,8 +12,10 @@ ul.nav.md-pills
     = link_to 'Все', profile_orders_path, class: 'nav-link'
 table.table-hover.table.mt-3
   tr.d-flex
-    th.col-6 Наименование
+    th.col-5 Наименование
     th.col-3.text-center Город
     th.col-2.text-center Дата создания
+    th.col-1.text-center
+      i.far.fa-bell
     th.col-1.text-center Статус
   = render @orders

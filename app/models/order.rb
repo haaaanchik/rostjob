@@ -3,10 +3,11 @@ class Order < ApplicationRecord
 
   belongs_to :profile
   has_many :invites
+  has_many :proposals
 
   validates :title, presence: true
   validates :specialization, presence: true
-  validates :sity, presence: true
+  validates :city, presence: true
   validates :salary_from, presence: true
   validates :salary_to, presence: true
   validates :description, presence: true
@@ -26,17 +27,27 @@ class Order < ApplicationRecord
   scope :sort_by_date_desc, -> { order created_at: :desc }
   scope :by_query, -> (term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
 
+<<<<<<< HEAD
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
     state :draft, initial: true
     state :active
+=======
+  aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
+    state :hidden, initial: true
+    state :published
+>>>>>>> proposals
     state :completed
 
-    event :activate do
-      transitions from: :draft, to: :active
+    event :publish do
+      transitions from: :hidden, to: :published
+    end
+
+    event :hide do
+      transitions from: :published, to: :hidden
     end
 
     event :complete do
-      transitions from: :active, to: :completed
+      transitions from: %i[hidden published], to: :completed
     end
   end
 end
