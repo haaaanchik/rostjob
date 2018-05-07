@@ -41,6 +41,9 @@ html
                   = link_to 'Сколько стоит', '#', class: 'nav-link', data: {offset: '60'}
               ul.navbar-nav
                 li.nav-item
+                  button.btn.btn-primary.btn-sm[type="button" data-toggle="modal" data-target="#modalPoll"]
+                    | test
+                li.nav-item
                   = link_to 'Вход', new_user_session_path, class: 'nav-link'
                 li.nav-item
                   = link_to 'Регистрация', new_user_registration_path, class: 'nav-link'
@@ -49,7 +52,7 @@ html
                 li.nav-item
                   = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
-                  = link_to 'Каталог исполнителей', recruiters_path, class: 'nav-link', data: { offset: '60' }
+                  = link_to 'Каталог исполнителей', recruiters_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
                   = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: {offset: '60'}
                 li.nav-item
@@ -59,7 +62,7 @@ html
                 = link_to "(#{current_user.profile.contact_person}) Выход", destroy_user_session_path, class: 'nav-link', method: :delete
       #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
         .mask.rgba-stylish-light
-          .container.h-100.d-flex.justify-content-center.align-items-center
+          .container.h-100.d-flex.justify-content-center.align-items-center#top-section
             .row.pt-5.mt-3
               .col-md-12.mb-3
                 .intro-info-content.text-center
@@ -74,6 +77,45 @@ html
     main
     .container
       = yield
+    .fixed-action-btn.smooth-scroll[style="bottom: 25px; right: 24px;"]
+      a.btn-floating.light-blue[href="#top-section" style="display: none;"]
+        i.fa.fa-arrow-up
+    #modalPoll.modal.fade.right[tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="false"]
+      .modal-dialog.modal-full-height.modal-right.modal-notify.modal-info[role="document"]
+        .modal-content
+          .modal-header
+            p.heading.lead
+              | Feedback request
+            button.close[type="button" data-dismiss="modal" aria-label="Close"]
+              span.white-text[aria-hidden="true"]
+                | ×
+          .modal-body
+            .text-center
+              i.fa.fa-file-text-o.fa-4x.mb-3.animated.rotateIn
+              p
+                strong
+                  | Your opinion matters
+              p
+                | Have some ideas how to improve our product?
+                strong
+                | Give us your feedback.
+            hr
+            p.text-center
+              strong
+                | Your rating
+            p.text-center
+              strong
+                | What could we improve?
+            .md-form
+              textarea#form79textarea.md-textarea.form-control[type="text" rows="3"]
+              label[for="form79textarea"]
+                | Your message
+          .modal-footer.justify-content-center
+            a.btn.btn-primary.waves-effect.waves-light[type="button"]
+              | Send
+              i.fa.fa-paper-plane.ml-1
+            a.btn.btn-outline-primary.waves-effect[type="button" data-dismiss="modal"]
+              | Cancel
     footer.page-footer.pt-4.mt-4.indigo.text-center.text-md-left
       .container
         .row

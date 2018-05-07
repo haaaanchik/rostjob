@@ -14,3 +14,10 @@
 $(document).ready ->
   new WOW().init()
   $('.mdb-select').material_select()
+  $(window).scroll ->
+    if $(this).scrollTop() > 50
+      $('[href="#top-section"]').fadeIn()
+    else
+      $('[href="#top-section"]').fadeOut()
+    return
+  return
