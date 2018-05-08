@@ -14,6 +14,7 @@ module UserProfile
       end
       if profile.persisted?
         profile.photo = photo
+        profile.save
         context.profile = profile
       else
         context.fail!(message: "#{profile.errors}")
