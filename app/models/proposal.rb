@@ -13,6 +13,7 @@ class Proposal < ApplicationRecord
     state :sent, initial: true
     state :accepted
     state :rejected
+    state :completed
 
     event :accept do
       transitions from: :sent, to: :accepted
@@ -20,6 +21,10 @@ class Proposal < ApplicationRecord
 
     event :reject do
       transitions from: :sent, to: :rejected
+    end
+
+    event :complete do
+      transitions from: :accepted, to: :completed
     end
   end
 end

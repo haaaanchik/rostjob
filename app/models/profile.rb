@@ -14,7 +14,9 @@ class Profile < ApplicationRecord
   validates :company_name, presence: true, if: Proc.new { |p| COMPANIES.include? p.profile_type }, on: :default_registration
   validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }, on: :default_registration
 
-  has_attached_file :photo, path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename", default_url: "/img/default.jpg"
+  has_attached_file :photo, styles: { medium: "300x300>", thumb: "50x50" }, default_url: "/img/default.jpg"
+    # path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename",
+    # url: "storage/:class/:attachment/:id_partition/:style/:filename",
   validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
 
   scope :executors, -> { where profile_type: %w[agency recruiter] }

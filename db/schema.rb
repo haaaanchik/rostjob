@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(version: 2018_05_03_075022) do
     t.string "company_name"
     t.string "profile_type"
     t.text "description"
+    t.string "city"
+    t.string "rating"
+    t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
     t.string "photo_content_type"
@@ -110,10 +113,10 @@ ActiveRecord::Schema.define(version: 2018_05_03_075022) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "full_name"
     t.string "provider"
-    t.string "url"
     t.string "uid"
+    t.string "full_name"
+    t.string "photo_url"
     t.bigint "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"

@@ -4,5 +4,12 @@
       h3 Поиск исполнителей
       = render partial: 'form'
     .card-body
-      .card-deck
-        = render @recruiters
+      table.table.table-hover.table-bordered.table-responsive-md.table-fixed
+        tr
+          th.text-center Исполнитель
+          th.text-center Город
+          th.text-center Рейтинг
+          th.text-center Закрытых заявок
+          th.text-center На проекте
+          th.text-center Был на сайте
+        = render partial: 'recruiter', collection: @recruiters

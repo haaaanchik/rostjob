@@ -59,7 +59,12 @@ html
                   = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
               ul.navbar-nav
                 li.nav-item
-                = link_to "(#{current_user.profile.contact_person}) Выход", destroy_user_session_path, class: 'nav-link', method: :delete
+                  .dropdown
+                    = link_to '#', class: 'dropdown-toggle nav-link', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
+                      = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
+                      |#{current_user.profile.contact_person}
+                    .dropdown-menu aria-labelledby="dropdownMenuLink"
+                      = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item', method: :delete
       #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
         .mask.rgba-stylish-light
           .container.h-100.d-flex.justify-content-center.align-items-center#top-section
