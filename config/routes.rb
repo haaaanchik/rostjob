@@ -12,7 +12,9 @@ Rails.application.routes.draw do
         put :hide
         put :complete
       end
-      resources :proposals, only: %i[index show update]
+      scope module: :orders do
+        resources :proposals, only: %i[index show update]
+      end
     end
     resources :proposals
   end

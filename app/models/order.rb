@@ -27,15 +27,9 @@ class Order < ApplicationRecord
   scope :sort_by_date_desc, -> { order created_at: :desc }
   scope :by_query, -> (term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
 
-<<<<<<< HEAD
-  aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
-    state :draft, initial: true
-    state :active
-=======
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :hidden, initial: true
     state :published
->>>>>>> proposals
     state :completed
 
     event :publish do

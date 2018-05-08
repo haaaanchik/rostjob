@@ -5,26 +5,29 @@ class User < ApplicationRecord
     :trackable, :validatable, :omniauthable
 
   def self.find_or_register_facebook_oauth access_token
-    if user = User.where(:url => access_token.info.urls.Facebook).first
+    if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
       user
     else
-      result = ::UserProfile::Create.call(profile_params: { contact_person: access_token.info.name })
+      info = access_token.info
+      result = ::UserProfile::Create.call(profile_params: { contact_person: info.name, photo_url: info.image, email: info.email })
       if result.success?
-        User.create!(provider: access_token.provider, url: access_token.info.urls.Facebook, full_rname: access_token.info.name,
-                     email: access_token.extra.raw_info.email, password:  Devise.friendly_token[0,20])
+        User.create!(provider: access_token.provider, uid: access_token.uid,  full_name: info.name, photo_url: info.image,
+                     email: info.email, password:  Devise.friendly_token[0,20],
+                     profile_id: result.profile.id)
       else
       end
     end
   end
 
   def self.find_or_register_vkontakte_oauth access_token
-    if user = User.where(:url => access_token.info.urls.Vkontakte).first
+    if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
       user
     else
-      result = ::UserProfile::Create.call(profile_params: { contact_person: access_token.info.name })
+      info = access_token.info
+      result = ::UserProfile::Create.call(profile_params: { contact_person: info.name, photo_url: info.image })
       if result.success?
-        User.create!(provider: access_token.provider, url: access_token.info.urls.Vkontakte, full_name: access_token.info.name,
-                     email: "#{access_token.extra.raw_info.screen_name}@vk.com", password: Devise.friendly_token[0,20],
+        User.create!(provider: access_token.provider, uid: access_token.uid, full_name: info.name, photo_url: info.image,
+                     email: "#{access_token.uid}@vk.com", password: Devise.friendly_token[0,20],
                      profile_id: result.profile.id)
       else
       end

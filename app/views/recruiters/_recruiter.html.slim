@@ -1,11 +1,9 @@
-.card.card-cascade
-  .view.overlay
-    = image_tag(recruiter.photo.url, class: 'card-img-top'
-    = link_to recruiter_path(recruiter) do
-      .mask.rgba-white-slight
-  .card-body.text-center
-    h4.card-title
-      strong recruiter.contact_person
-    h6.font-weight-bold.indigo-text.py-2
-    |#{recruiter.description}
-
+tr
+  td.text-center
+    = image_tag(recruiter.photo.url(:thumb), class: 'rounded-circle float-left img-thumbnail')
+    |#{recruiter.contact_person}
+  td.text-center #{recruiter.city}
+  td.text-center #{recruiter.rating}
+  td.text-center #{recruiter.proposals.completed.count}
+  td.text-center #{l(recruiter.created_at, format: :short)}
+  td.text-center #{l(Time.now, format: :short)}

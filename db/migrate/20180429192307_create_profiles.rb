@@ -7,6 +7,9 @@ class CreateProfiles < ActiveRecord::Migration[5.2]
       t.string :company_name
       t.string :profile_type
       t.text :description
+      t.string :city
+      t.string :rating
+      t.timestamp :last_seen
       t.string :state
       t.attachment :photo
 

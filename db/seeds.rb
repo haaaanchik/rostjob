@@ -16,10 +16,13 @@ COMPANIES = %w[employer agency].freeze
     phone: Faker::PhoneNumber.phone_number,
     email: email,
     profile_type: profile_type,
-    company_name: Faker::Company.name
+    company_name: Faker::Company.name,
+    city: Faker::Address.city
   }
 
   profile = Profile.create! profile_hash
+  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.save
 
   User.create! email: email, password: "test_user#{t}12345678", profile: profile
 end
@@ -32,11 +35,14 @@ end
     phone: Faker::PhoneNumber.phone_number,
     email: email,
     profile_type: profile_type,
-    company_name: Faker::Company.name
+    company_name: Faker::Company.name,
+    city: Faker::Address.city
   }
   profile_hash[:company_name] = Faker::Company.name
 
   profile = Profile.create! profile_hash
+  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.save
 
   User.create! email: email, password: "test_user#{t}12345678", profile: profile
 end
@@ -82,4 +88,8 @@ Order.published.each do |o|
   proposal = current_profile.proposals.create! proposal_hash
   message = %i[accept! reject!].sample
   proposal.send message
+end
+
+3.times do
+  Proposal.accepted.sample.complete!
 end

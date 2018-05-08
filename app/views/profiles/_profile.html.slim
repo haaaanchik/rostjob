@@ -1,8 +1,7 @@
-.card
-  .view.overlay
-    = image_tag(profile.photo.url, class: 'card-img-top')
-    = link_to recruiter_path(profile) do
-      .mask.rgba-white-slight
+.card.testimonial-card
+  .card-up.indigo.lighten-1
+  .avatar.mx-auto
+    = image_tag(profile.photo.url, class: 'rounded-circle')
   .card-body.text-center
     h4.card-title
       strong #{profile.contact_person}
