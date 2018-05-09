@@ -24,7 +24,8 @@ COMPANIES = %w[employer agency].freeze
   profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
-  User.create! email: email, password: "test_user#{t}12345678", profile: profile
+  created_at = Time.now - (0..30).to_a.sample.days
+  User.create! email: email, password: "test_user#{t}12345678", profile: profile, created_at: created_at, last_sign_in_at: created_at + 2.hours
 end
 
 10.upto 20 do |t|
@@ -36,6 +37,7 @@ end
     email: email,
     profile_type: profile_type,
     company_name: Faker::Company.name,
+    description: Faker::Lorem.paragraph(2),
     city: Faker::Address.city
   }
   profile_hash[:company_name] = Faker::Company.name
@@ -44,7 +46,8 @@ end
   profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
-  User.create! email: email, password: "test_user#{t}12345678", profile: profile
+  created_at = Time.now - (0..30).to_a.sample.days
+  User.create! email: email, password: "test_user#{t}12345678", profile: profile, created_at: created_at, last_sign_in_at: created_at + 2.hours
 end
 
 PROFESSIONS = ['Водитель погрузчика', 'Крановщик', 'Бухгалтер', 'Кассир',

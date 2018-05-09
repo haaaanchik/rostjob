@@ -12,6 +12,16 @@
 #= require jquery.raty
 #= require_tree .
 
+@ajax_client = (url, data, success_func, error_func, method = 'get', data_type = 'html') ->
+  $.ajax
+    method: method
+    url: url
+    data: data
+    dataType: data_type
+    success: success_func
+    error: error_func
+  return
+
 $(document).ready ->
   new WOW().init()
   $('.mdb-select').material_select()

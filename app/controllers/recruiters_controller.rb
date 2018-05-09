@@ -5,7 +5,7 @@ class RecruitersController < ApplicationController
   end
 
   def show
-    render locals: { recruiter: recruiter }
+    render locals: { recruiter: recruiter }, layout: false
   end
 
   private

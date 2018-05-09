@@ -1,4 +1,4 @@
-tr
+tr data-url=recruiter_path(recruiter) data-recruiter_id=recruiter.id data-toggle='modal' data-target='#generalRecruiterModal'
   td.text-center
     = image_tag(recruiter.photo.url(:thumb), class: 'rounded-circle float-left img-thumbnail')
     |#{recruiter.contact_person}
@@ -6,4 +6,4 @@ tr
   td.text-center.star-rating #{recruiter.rating}
   td.text-center #{recruiter.proposals.completed.count}
   td.text-center #{l(recruiter.created_at, format: :short)}
-  td.text-center #{l(Time.now, format: :short)}
+  td.text-center #{l(recruiter.users.first.last_sign_in_at, format: :short)}
