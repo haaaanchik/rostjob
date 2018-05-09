@@ -21,7 +21,7 @@ COMPANIES = %w[employer agency].freeze
   }
 
   profile = Profile.create! profile_hash
-  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
   User.create! email: email, password: "test_user#{t}12345678", profile: profile
@@ -41,7 +41,7 @@ end
   profile_hash[:company_name] = Faker::Company.name
 
   profile = Profile.create! profile_hash
-  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
   User.create! email: email, password: "test_user#{t}12345678", profile: profile

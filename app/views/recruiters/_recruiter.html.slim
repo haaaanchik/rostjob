@@ -3,7 +3,7 @@ tr
     = image_tag(recruiter.photo.url(:thumb), class: 'rounded-circle float-left img-thumbnail')
     |#{recruiter.contact_person}
   td.text-center #{recruiter.city}
-  td.text-center #{recruiter.rating}
+  td.text-center.star-rating #{recruiter.rating}
   td.text-center #{recruiter.proposals.completed.count}
   td.text-center #{l(recruiter.created_at, format: :short)}
   td.text-center #{l(Time.now, format: :short)}
