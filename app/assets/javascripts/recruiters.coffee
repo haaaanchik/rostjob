@@ -12,3 +12,8 @@ $ ->
     recruiter = ajax_client(url,null,success)
     modal.find('.modal-title').text('Анкета рекрутера № ' + recruiter_id)
   )
+  $('#generalRecruiterModal').on('hide.bs.modal', (event) ->
+    modal = $(this)
+    modal.find('.modal-body').empty()
+    modal.find('.modal-title').empty()
+  )
