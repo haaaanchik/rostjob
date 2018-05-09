@@ -19,10 +19,6 @@ html
           #navbarSupportedContent-7.collapse.navbar-collapse
             - unless user_signed_in?
               ul.navbar-nav.mr-auto
-                li.nav-item
-                  = link_to 'Как это работает', '#', class: 'nav-link', data: { offset: '60' }
-                li.nav-item
-                  = link_to 'Сколько стоит', '#', class: 'nav-link', data: { offset: '60' }
               ul.navbar-nav
                 li.nav-item
                   = link_to 'Вход', new_user_session_path, class: 'nav-link'

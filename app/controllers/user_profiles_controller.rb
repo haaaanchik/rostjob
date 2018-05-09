@@ -24,6 +24,6 @@ class UserProfilesController < ApplicationController
   private
 
   def profile
-    @profile ||= current_user.profile
+    # @profile ||= current_user.profile
   end
 end

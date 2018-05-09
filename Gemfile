@@ -30,6 +30,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
+gem 'conditional_validation'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant
