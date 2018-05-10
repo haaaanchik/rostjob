@@ -22,6 +22,26 @@
     error: error_func
   return
 
+@add_autocomplete = (operand) ->
+  if !operand.data('auto-active')
+    operand.autocomplete(
+      source: operand.data('auto-url')
+      minLength: 1
+      select: (event, ui) ->
+        if operand.data('auto-select')
+          window[operand.data('auto-select')].call null, ui.item
+        operand[0].value = null
+        if !operand.data('auto-add-text')
+          false
+    ).data('ui-autocomplete')._renderItem = (ul, item) ->
+      $('<li></li>').data('item.autocomplete', item)
+        .append($('<a></a>').html(item.label)).appendTo(ul)
+
+  operand.data 'auto-active', true
+  return
+
 $(document).ready ->
   new WOW().init()
   $('.mdb-select').material_select()
+  $(document).on 'focusin', '*[data-autocomplete-on]', ->
+    add_autocomplete $(this)
