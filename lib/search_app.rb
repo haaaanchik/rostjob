@@ -10,8 +10,6 @@ class SearchApp
     auto_list = case env['PATH_INFO']
                 when '/search_city'
                   CityReference.autocomplete_search(params['term'])
-                when '/search_profession'
-                  ProfessionReference.autocomplete_search(params['term'])
                 when '/search_specialization'
                   SpecializationReference.autocomplete_search(params['term'])
                 else

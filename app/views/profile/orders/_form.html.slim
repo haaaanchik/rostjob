@@ -1,7 +1,7 @@
 = form_with model: [:profile, order], local: true do |f|
   .md-form
-    = f.text_field :title, class: 'form-control', data: { 'auto-url' => '/search_profession', 'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
-    = f.label :title, 'Профессия', class: ('active' if order.persisted?)
+    = f.text_field :title, class: 'form-control'
+    = f.label :title, 'Название', class: ('active' if order.persisted?)
   .md-form
     = f.text_field :specialization, class: 'form-control', data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
     = f.label :specialization, 'Специализации', class: ('active' if order.persisted?)
@@ -23,7 +23,7 @@
     = f.label :commission, 'Вознаграждение', class: ('active' if order.persisted?)
   .md-form
     = f.text_field :warranty_period, class: 'form-control'
-    = f.label :warranty_period, 'Гарантийный период', class: ('active' if order.persisted?)
+    = f.label :warranty_period, 'Гарантийный период, дней', class: ('active' if order.persisted?)
   .md-form
     span Варианты выплаты вознаграждения
     .form-inline
