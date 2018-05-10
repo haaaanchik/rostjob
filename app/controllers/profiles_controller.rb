@@ -4,13 +4,14 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    profile
   end
 
   def update
     profile.assign_attributes(profile_params)
     result = profile.save
     if result
-      profile.fill!
+      profile.fill! unless profile.filled?
       redirect_to root_path
     else
       render 'show'

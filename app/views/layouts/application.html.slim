@@ -35,13 +35,14 @@ html
                 li.nav-item
                   = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: { offset: '60' }
               ul.navbar-nav
-                li.nav-item
-                  .dropdown
-                    = link_to '#', class: 'dropdown-toggle nav-link', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
+                li.nav-item.dropdown
+                    = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
                       = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
                       |#{current_user.profile.contact_person}
-                    .dropdown-menu aria-labelledby="dropdownMenuLink"
-                      = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item', method: :delete
+                    .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
+                      = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
+                      = link_to 'Пополнить счёт', '#', class: 'dorpdown-item d-block'
+                      = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item d-block', method: :delete
     main
     .container
       .row.mt-5.pt-5

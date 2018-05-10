@@ -44,3 +44,9 @@ ru:
       sent: 'на рассмотрении'
       accepted: 'одобрен'
       rejected: 'отклонён'
+  profile:
+    profile_type:
+      employer: 'Работодатель'
+      agency: 'Агентство'
+      recruiter: 'Частный рекрутер'
+      employee: 'Соискатель'

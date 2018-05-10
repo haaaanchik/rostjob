@@ -5,7 +5,7 @@
       = form_with model: @profile, local: true do |f|
         - errors = @profile.errors
         - messages = errors.messages
-        p.h3.text-center.mb-4 Редактировать профиль
+        p.h3.text-center.mb-4 Настроить профиль
         .btn-group.mb-2 data-toggle='buttons'
           label.btn.btn-indigo.active.form-check-label.clients
             = f.radio_button :profile_type, :employer, class: 'form-check-input', checked: true
