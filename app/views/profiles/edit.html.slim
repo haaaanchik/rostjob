@@ -24,5 +24,13 @@
           i.fa.fa-envelope.prefix.grey-text
           = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', class: "form-control #{'invalid' unless messages[:email].empty?}"
           = f.label :email, 'Ваш e-mail', data: { error: messages[:email].first }
+        .md-form
+          .file-field
+            .btn.btn-indigo.btn-sm.float-left
+              span Выбрать
+              = f.file_field :photo
+            .file-path-wrapper
+              input.file-path.validate type="text" placeholder="Сменить фото"
         .text-center.mt-4
           = f.submit "Сохранить", class: 'btn btn-indigo'
+          = link_to 'Отмена', root_path, class: 'btn btn-indigo'
