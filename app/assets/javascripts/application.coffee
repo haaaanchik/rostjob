@@ -45,9 +45,9 @@ $(document).ready ->
   $('.mdb-select').material_select()
   $(window).scroll ->
     if $(this).scrollTop() > 50
-      $('[href="#top-section"]').fadeIn()
+      $('[href="#top-section"]').fadeIn('slow')
     else
-      $('[href="#top-section"]').fadeOut()
+      $('[href="#top-section"]').fadeOut('slow')
     return
   return
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
