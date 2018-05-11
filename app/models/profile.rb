@@ -1,22 +1,25 @@
 class Profile < ApplicationRecord
   include AASM
+  extend ConditionalValidation::ValidationFlag
 
   has_many :users
   has_many :orders
   has_many :proposals
 
+  validation_flag :sm_registration
+
   PROFILE_TYPES = %w[employer agency recruiter employee].freeze
   COMPANIES = %w[employer agency].freeze
 
   validates :contact_person, presence: true
-  validates :phone, presence: true, on: :default_registration
-  validates :email, presence: true, on: :default_registration
-  validates :company_name, presence: true, if: Proc.new { |p| COMPANIES.include? p.profile_type }, on: :default_registration
-  validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }, on: :default_registration
+  with_options unless: :validate_on_sm_registration? do |o|
+    o.validates :phone, presence: true
+    o.validates :email, presence: true
+    o.validates :company_name, presence: true, if: Proc.new { |p| COMPANIES.include? p.profile_type }
+    o.validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }
+  end
 
-  has_attached_file :photo, styles: { medium: "300x300>", thumb: "50x50" }, default_url: "/img/default.jpg"
-    # path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename",
-    # url: "storage/:class/:attachment/:id_partition/:style/:filename",
+  has_attached_file :photo, styles: { medium: "100x100>", thumb: "50x50" }, default_url: "/img/default.png"
   validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
 
   scope :executors, -> { where profile_type: %w[agency recruiter] }

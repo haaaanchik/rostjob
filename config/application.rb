@@ -27,6 +27,9 @@ module BestHr
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    require 'search_app'
+    config.middleware.use SearchApp
+
     # Don't generate system test files.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.i18n.default_locale = :ru

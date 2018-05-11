@@ -8,7 +8,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"]
 
-    body
+  body
     header
       nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top.scrolling-navbar
         .container.smooth-scroll
@@ -58,11 +58,14 @@ html
                 li.nav-item
                   = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
               ul.navbar-nav
-                li.nav-item
-                  .dropdown
-                    = link_to '#', class: 'dropdown-toggle nav-link', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
+                li.nav-item.dropdown
+                    = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
                       = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
                       |#{current_user.profile.contact_person}
+                    .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
+                      = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
+                      = link_to 'Пополнить счёт', '#', class: 'dorpdown-item d-block'
+                      = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item d-block', method: :delete
                     .dropdown-menu aria-labelledby="dropdownMenuLink"
                       = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item', method: :delete
       #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]

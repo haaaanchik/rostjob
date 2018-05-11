@@ -9,7 +9,7 @@ class User < ApplicationRecord
       user
     else
       info = access_token.info
-      result = ::UserProfile::Create.call(profile_params: { contact_person: info.name, photo_url: info.image, email: info.email })
+      result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image, email: info.email })
       if result.success?
         User.create!(provider: access_token.provider, uid: access_token.uid,  full_name: info.name, photo_url: info.image,
                      email: info.email, password:  Devise.friendly_token[0,20],
@@ -24,7 +24,7 @@ class User < ApplicationRecord
       user
     else
       info = access_token.info
-      result = ::UserProfile::Create.call(profile_params: { contact_person: info.name, photo_url: info.image })
+      result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image })
       if result.success?
         User.create!(provider: access_token.provider, uid: access_token.uid, full_name: info.name, photo_url: info.image,
                      email: "#{access_token.uid}@vk.com", password: Devise.friendly_token[0,20],

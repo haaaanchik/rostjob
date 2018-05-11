@@ -3,10 +3,12 @@
   .card
     .card-body
       = form_with model: @profile, local: true do |f|
-        p.h3.text-center.mb-4 Редактировать профиль
+        - errors = @profile.errors
+        - messages = errors.messages
+        p.h3.text-center.mb-4 Настроить профиль
         .btn-group.mb-2 data-toggle='buttons'
           label.btn.btn-indigo.active.form-check-label.clients
-            = f.radio_button :profile_type, :employer, class: 'form-check-input'
+            = f.radio_button :profile_type, :employer, class: 'form-check-input', checked: true
             |Работодатель
           label.btn.btn-indigo.form-check-label.clients
             = f.radio_button :profile_type, :agency, class: 'form-check-input'
@@ -19,19 +21,19 @@
             |Соискатель
         .md-form
           i.fa.fa-user.prefix.grey-text
-          = f.text_field :contact_person, autofocus: true, autocomplete: "contact_person", class: 'form-control'
-          = f.label :contact_person, 'Ваше имя'
+          = f.text_field :contact_person, autofocus: true, autocomplete: "contact_person", class: "form-control #{'invalid' unless messages[:contact_person].empty?}"
+          = f.label :contact_person, 'Ваше имя', data: { error: messages[:contact_person].first }
         .md-form
           i.fa.fa-phone.prefix.grey-text
-          = f.text_field :phone, autofocus: true, autocomplete: "phone", class: 'form-control'
-          = f.label :phone, 'Телефон'
+          = f.phone_field :phone, autofocus: true, autocomplete: "phone", class: "form-control #{'invalid' unless messages[:phone].empty?}"
+          = f.label :phone, 'Телефон', data: { error: messages[:phone].first }
         .md-form
           i.fa.fa-building.prefix.grey-text
-          = f.text_field :company_name, autofocus: true, autocomplete: "company_name", class: 'form-control'
-          = f.label :company_name, 'Название организации'
+          = f.text_field :company_name, autofocus: true, autocomplete: "company_name", class: "form-control #{'invalid' unless messages[:company_name].empty?}"
+          = f.label :company_name, 'Название организации', data: { error: messages[:company_name].first }
         .md-form
           i.fa.fa-envelope.prefix.grey-text
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-          = f.label :email, 'Ваш e-mail'
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', class: "form-control #{'invalid' unless messages[:email].empty?}"
+          = f.label :email, 'Ваш e-mail', data: { error: messages[:email].first }
         .text-center.mt-4
           = f.submit "Сохранить", class: 'btn btn-indigo'

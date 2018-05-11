@@ -21,10 +21,11 @@ COMPANIES = %w[employer agency].freeze
   }
 
   profile = Profile.create! profile_hash
-  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
-  User.create! email: email, password: "test_user#{t}12345678", profile: profile
+  created_at = Time.now - (0..30).to_a.sample.days
+  User.create! email: email, password: "test_user#{t}12345678", profile: profile, created_at: created_at, last_sign_in_at: created_at + 2.hours
 end
 
 10.upto 20 do |t|
@@ -36,15 +37,17 @@ end
     email: email,
     profile_type: profile_type,
     company_name: Faker::Company.name,
+    description: Faker::Lorem.paragraph(2),
     city: Faker::Address.city
   }
   profile_hash[:company_name] = Faker::Company.name
 
   profile = Profile.create! profile_hash
-  profile.photo = File.new "#{Rails.root}/public/img/default.jpg"
+  profile.photo = File.new "#{Rails.root}/public/img/default.png"
   profile.save
 
-  User.create! email: email, password: "test_user#{t}12345678", profile: profile
+  created_at = Time.now - (0..30).to_a.sample.days
+  User.create! email: email, password: "test_user#{t}12345678", profile: profile, created_at: created_at, last_sign_in_at: created_at + 2.hours
 end
 
 PROFESSIONS = ['Водитель погрузчика', 'Крановщик', 'Бухгалтер', 'Кассир',
@@ -93,3 +96,34 @@ end
 3.times do
   Proposal.accepted.sample.complete!
 end
+
+p 'Заполняем справочник городов'
+%w[Абакан Альметьевск Ангарск Арзамас Армавир Артем Архангельск Астрахань Ачинск Балаково Балашиха
+Барнаул Батайск Белгород Бердск Березники Бийск Благовещенск Братск Брянск  Владивосток
+Владикавказ Владимир Волгоград Волгодонск Волжский Вологда Воронеж Грозный Дербент Дзержинск Димитровград
+Долгопрудный Домодедово Евпатория Екатеринбург Елец Ессентуки Железногорск Жуковский Златоуст
+Иваново Ижевск Иркутск Йошкар-Ола Казань Калининград Калуга Каменск-Уральский Камышин Каспийск
+Кемерово Керчь Киров Кисловодск Ковров Коломна Комсомольск-на-Амуре Копейск Королёв Кострома
+Красногорск Краснодар Красноярск Курган Курск Кызыл Липецк Люберцы Магнитогорск Майкоп Махачкала
+Миасс Москва Мурманск Муром Мытищи  Назрань Нальчик Находка Невинномысск Нефтекамск
+Нефтеюганск Нижневартовск Нижнекамск   Новокузнецк Новокуйбышевск
+Новомосковск Новороссийск Новосибирск Новочебоксарск Новочеркасск Новошахтинск Новый Уренгой
+Ногинск Норильск Ноябрьск Обнинск Одинцово Октябрьский Омск Орёл Оренбург Орехово-Зуево Орск
+Пенза Первоуральск Пермь Петрозаводск Петропавловск-Камчатски Подольск Прокопьевск Псков
+Пушкино Пятигорск Раменское Ростов-на-Дону Рубцовск Рыбинск Рязань Салават Самара Санкт-Петербург
+Саранск Саратов Севастополь Северодвинск Северск  Серпухов Симферополь Смоленск
+Сочи Ставрополь  Стерлитамак Сургут Сызрань Сыктывкар Таганрог Тамбов Тверь
+Тольятти Томск Тула Тюмень Улан-Удэ Ульяновск Уссурийск Уфа Хабаровск Хасавюрт Химки Чебоксары
+Челябинск Череповец Черкесск Чита Шахты Щёлково Электросталь Элиста Энгельс Южно-Сахалинск
+Якутск Ярославль]. each do |city|
+  CityReference.create term: city
+end
+['Великий Новгород', 'Набережные Челны', 'Нижний Новгород', 'Нижний Тагил', 'Сергиев Посад', 'Старый Оскол'].each do |city|
+  CityReference.create term: city
+end
+
+p 'Заполняем справочник специализаций'
+%w[продавец токарь водитель врач директор программист учитель кладовщик грузчик].each do |specialization|
+  SpecializationReference.create term: specialization
+end
+

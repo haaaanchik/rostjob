@@ -3,10 +3,10 @@
     = f.text_field :title, class: 'form-control'
     = f.label :title, 'Название', class: ('active' if order.persisted?)
   .md-form
-    = f.text_field :specialization, class: 'form-control'
+    = f.text_field :specialization, class: 'form-control', data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
     = f.label :specialization, 'Специализации', class: ('active' if order.persisted?)
   .md-form
-    = f.text_field :city, class: 'form-control'
+    = f.text_field :city, class: 'form-control', data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
     = f.label :city, 'Город', class: ('active' if order.persisted?)
   .form-inline
     .md-form
@@ -23,7 +23,7 @@
     = f.label :commission, 'Вознаграждение', class: ('active' if order.persisted?)
   .md-form
     = f.text_field :warranty_period, class: 'form-control'
-    = f.label :warranty_period, 'Гарантийный период', class: ('active' if order.persisted?)
+    = f.label :warranty_period, 'Гарантийный период, дней', class: ('active' if order.persisted?)
   .md-form
     span Варианты выплаты вознаграждения
     .form-inline
