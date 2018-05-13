@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :orders, except: %i[create update] do
       member do
         put :hide
+        get :pre_publish
         put :publish
         put :complete
       end

@@ -32,7 +32,10 @@
 ru:
   order:
     state:
+      draft: 'черновик'
+      moderation: 'на модерации'
       published: 'опубликована'
+      rejected: 'отклонена'
       hidden: 'скрыта'
       completed: 'завершена'
     payment_type:
@@ -50,3 +53,9 @@ ru:
       agency: 'Агентство'
       recruiter: 'Частный рекрутер'
       employee: 'Соискатель'
+    orders:
+      commit:
+        save_as_draft: 'Сохранить как черновик'
+        save: 'Сохранить'
+        save_and_publish: 'Сохранить и опубликовать'
+        publish: 'Опубликовать'
