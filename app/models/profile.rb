@@ -5,6 +5,7 @@ class Profile < ApplicationRecord
   has_many :users
   has_many :orders
   has_many :proposals
+  has_one :balance
 
   validation_flag :sm_registration
 

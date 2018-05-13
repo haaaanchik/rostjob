@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_10_142611) do
+ActiveRecord::Schema.define(version: 2018_05_13_084550) do
+
+  create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "amount", default: 0
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_balances_on_profile_id"
+  end
+
+  create_table "bill_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "amount", default: 0
+    t.text "description"
+    t.string "transaction_type"
+    t.bigint "balance_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["balance_id"], name: "index_bill_transactions_on_balance_id"
+  end
 
   create_table "city_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "term"
@@ -61,7 +79,7 @@ ActiveRecord::Schema.define(version: 2018_05_10_142611) do
     t.integer "salary_from"
     t.integer "salary_to"
     t.text "description"
-    t.string "commission"
+    t.integer "commission"
     t.string "payment_type"
     t.integer "warranty_period"
     t.integer "number_of_recruiters"
@@ -137,6 +155,8 @@ ActiveRecord::Schema.define(version: 2018_05_10_142611) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "balances", "profiles"
+  add_foreign_key "bill_transactions", "balances"
   add_foreign_key "employee_cvs", "proposals"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"

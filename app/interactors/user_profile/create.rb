@@ -9,7 +9,10 @@ module UserProfile
       profile.enable_sm_registration_validation if context.sm_registration
       profile.fill unless context.sm_registration
       profile.save
-      context.profile = profile if profile.persisted?
+      if profile.persisted?
+        profile.create_balance
+        context.profile = profile
+      end
       context.fail!(messages: profile.errors.messages) unless profile.persisted?
     end
   end

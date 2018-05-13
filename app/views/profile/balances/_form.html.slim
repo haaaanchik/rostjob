@@ -1,0 +1,6 @@
+= form_with scope: :balance, url: profile_balance_path, local: true, method: :put, class: 'form-inline' do |f|
+  - messages = @balance.errors.messages
+  .md-form
+    = f.text_field :value, class: "from-control #{'invalid' unless messages[:amount].empty?}"
+    = f.label :value, 'Сумма пополнения', data: { error: messages[:amount].first }
+  = f.submit 'Пополнить', class: 'btn btn-sm btn-indigo mb-0'

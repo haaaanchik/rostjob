@@ -41,7 +41,7 @@ html
                       |#{current_user.profile.contact_person}
                     .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
                       = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
-                      = link_to 'Пополнить счёт', '#', class: 'dorpdown-item d-block'
+                      = link_to 'Пополнить баланс', profile_balance_path, class: 'dorpdown-item d-block'
                       = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item d-block', method: :delete
     main
     .container
