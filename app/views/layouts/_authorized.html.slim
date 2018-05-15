@@ -8,14 +8,16 @@ header
         span.navbar-toggler-icon
       #navbarSupportedContent-7.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
-          li.nav-item
-            = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: {offset: '60'}
-          li.nav-item
-            = link_to 'Каталог исполнителей', recruiters_path, class: 'nav-link', data: {offset: '60'}
-          li.nav-item
-            = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: {offset: '60'}
-          li.nav-item
-            = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
+          - if customer?
+            li.nav-item
+              = link_to 'Каталог исполнителей', recruiters_path, class: 'nav-link', data: {offset: '60'}
+            li.nav-item
+              = link_to 'Мои заявки', profile_orders_path, class: 'nav-link', data: {offset: '60'}
+          - if executor?
+            li.nav-item
+              = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: {offset: '60'}
+            li.nav-item
+              = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
         ul.navbar-nav
           li.nav-item.dropdown
             = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: {toggle: 'dropdown'}, aria: {haspopup: 'true', expanded: 'false'} do
@@ -31,7 +33,8 @@ header
 main
   #modal_container
   .container
-    = yield
+    .row.mt-5.pt-5
+      = yield
   .fixed-action-btn.smooth-scroll[style="bottom: 25px; right: 24px;"]
     a.btn-floating.light-blue[href="#top-section" style="display: none;"]
       i.fa.fa-arrow-up
