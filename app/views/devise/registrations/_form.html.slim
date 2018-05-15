@@ -1,0 +1,54 @@
+#SignIn.modal.fade.right[tabindex="-1" role="dialog" aria-labelledby="SignIn" aria-hidden="true" data-backdrop="false"]
+  .modal-dialog.modal-full-height.modal-right.modal-notify.modal-info[role="document"]
+    .modal-content
+      .modal-header
+        p.heading.lead
+          | Вход
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span.white-text[aria-hidden="true"]
+            | ×
+      .modal-body
+        = form_for(@user, as: @user, url: registration_path(@user)) do |f|
+          = devise_error_messages!
+          p.h3.text-center.mb-4 Регистрация
+          .btn-group.mb-2 data-toggle='buttons'
+            label.btn.btn-indigo.active.form-check-label.clients
+              = radio_button 'user[profile]', :profile_type, :employer, checked: true, class: 'form-check-input'
+              |Работодатель
+            label.btn.btn-indigo.form-check-label.clients
+              = radio_button 'user[profile]', :profile_type, :agency, class: 'form-check-input'
+              |Агентство
+            label.btn.btn-indigo.form-check-label.clients
+              = radio_button 'user[profile]', :profile_type, :recruiter, class: 'form-check-input'
+              |Частный рекрутер
+            label.btn.btn-indigo.form-check-label.clients
+              = radio_button 'user[profile]', :profile_type, :employee, class: 'form-check-input'
+              |Соискатель
+          = f.fields_for :profile do |pf|
+            .md-form
+              i.fa.fa-user.prefix.grey-text
+              = pf.text_field :contact_person, autofocus: true, autocomplete: "contact_person", class: 'form-control'
+              = pf.label :contact_person, 'Ваше имя'
+            .md-form
+              i.fa.fa-phone.prefix.grey-text
+              = pf.text_field :phone, autofocus: true, autocomplete: "phone", class: 'form-control'
+              = pf.label :phone, 'Телефон'
+            .md-form
+              i.fa.fa-building.prefix.grey-text
+              = pf.text_field :company_name, autofocus: true, autocomplete: "company_name", class: 'form-control'
+              = pf.label :company_name, 'Название организации'
+            .md-form
+              i.fa.fa-envelope.prefix.grey-text
+              = pf.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+              = pf.label :email, 'Ваш e-mail'
+          .md-form
+            i.fa.fa-lock.prefix.grey-text
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+            - password_label = if @minimum_password_length
+            - "Ваш пароль (минимум #{@minimum_password_length} символов)"
+            - else
+              - "Ваш пароль"
+            = f.label :password, password_label
+          .text-center.mt-4
+            = f.submit "Зарегистрироваться", class: 'btn btn-indigo'
+      / .modal-footer.justify-content-center = render "devise/shared/links"

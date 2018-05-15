@@ -16,6 +16,7 @@ default: &default
   username: root
   password: wbnfvtufkjdbhec
   host: localhost
+  port: <%= Gem.win_platform? ? '3307' : '3306' %>
 
 development:
   <<: *default
@@ -50,5 +51,6 @@ test:
 production:
   <<: *default
   database: best-hr_production
-  username: best-hr
-  password: <%= ENV['BEST-HR_DATABASE_PASSWORD'] %>
+  reconnect: true
+  reaping_frequency: 5
+  dead_connection_timeout: 15

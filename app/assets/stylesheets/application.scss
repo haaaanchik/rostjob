@@ -4,7 +4,6 @@
 @import "mdb/mdb";
 @import "recruiters";
 @import "profiles";
-@import "welcome";
 @import "jquery.raty.css";
 
 @media (max-width: 1025px) {
@@ -14,6 +13,13 @@
     -ms-flex-align: end;
     align-items: flex-end;
   }
+}
+
+html,
+body,
+header,
+.jarallax {
+  height: 100px;
 }
 
 .stepper.colorful-timeline li a {

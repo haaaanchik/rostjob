@@ -1,4 +1,8 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  def new
+    @user = User.new
+  end
+
   def create
     result = ::UserProfile::Create.call(profile_params: profile_params)
     if result.success?

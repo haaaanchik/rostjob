@@ -29,10 +29,16 @@ module BestHr
 
     require 'search_app'
     config.middleware.use SearchApp
+    config.time_zone = 'Moscow'
+
+    config.i18n.default_locale = :ru
+    config.i18n.locale = :ru
+    config.i18n.load_path += Dir[Rails.root.join('config',
+                                                 'locales', '**', '*.{rb,yml}')]
+    config.encoding = 'utf-8'
 
     # Don't generate system test files.
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    config.i18n.default_locale = :ru
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.system_tests = nil

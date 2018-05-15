@@ -1,0 +1,27 @@
+#LogIn.modal.fade.right[tabindex="-1" role="dialog" aria-labelledby="LogIn" aria-hidden="true" data-backdrop="false"]
+  .modal-dialog.modal-full-height.modal-right.modal-notify.modal-info[role="document"]
+    .modal-content
+      .modal-header
+        p.heading.lead
+          | Вход
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span.white-text[aria-hidden="true"]
+            | ×
+      .modal-body
+        = form_for(@user, as: @user, url: session_path(@user), remote: true) do |f|
+          p.h4.text-center.mb-4 Вход
+          .md-form
+            i.fa.fa-envelope.prefix.grey-text
+            = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+            = f.label :email, 'Ваш e-mail'
+          .md-form
+            i.fa.fa-lock.prefix.grey-text
+            = f.password_field :password, autocomplete: "off", class: 'form-control'
+            = f.label :password, 'Ваш пароль'
+          - if devise_mapping.rememberable?
+            .md-form
+              = f.check_box :remember_me
+              = f.label :remember_me, 'Запомнить меня'
+          .text-center.mt-4
+            = f.submit "Войти", class: 'btn btn-indigo'
+      .modal-footer.justify-content-center = render "devise/shared/links"
