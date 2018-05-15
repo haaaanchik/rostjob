@@ -25,11 +25,8 @@ header
               | Помощь
         ul.navbar-nav
           li.nav-item
-            button.btn.btn-primary.btn-sm[type="button" data-toggle="modal" data-target="#modalPoll"]
-              | test
-          li.nav-item
-            = link_to 'Вход', new_user_session_path, remote: true,
-                    class: 'nav-link'
+            = link_to 'Вход', new_user_session_path,
+                    remote: true, class: 'nav-link'
           li.nav-item
             = link_to 'Регистрация', new_user_registration_path,
                     remote: true, class: 'nav-link'
