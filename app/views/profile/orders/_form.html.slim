@@ -71,4 +71,5 @@
       = f.label :accepted do
         'Я принимаю условия
         = link_to 'Оферты', '/offerta.pdf'
-  = f.submit order.new_record? ? 'Создать заявку' : 'Сохранить', class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}"
+  = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :create
+  = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :pre_publish

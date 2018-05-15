@@ -16,13 +16,13 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create
-    orders.create(order_params)
+    orders.create!(order_params)
     redirect_to profile_orders_path
   end
 
   def update
     order.update(order_params)
-    redirect_to profile_orders_path
+    redirect_to profile_order_path(order)
   end
 
   def destroy
@@ -30,9 +30,27 @@ class Profile::OrdersController < ApplicationController
     redirect_to profile_orders_path
   end
 
+  def pre_publish
+    render 'pre_publish', locals: { order: order }
+  end
+
+  def create_pre_publish
+    new_order = orders.create!(order_params)
+    render 'pre_publish', locals: { order: new_order }
+  end
+
+  def update_pre_publish
+    order.update(order_params)
+    render 'pre_publish', locals: { order: order }
+  end
+
   def publish
-    order.publish!
-    redirect_to profile_orders_path
+    if balance.withdrawal(order.commission, "Публизация заявки #{order.id}")
+      order.to_moderation!
+      redirect_to profile_orders_path
+    else
+      redirect_to profile_balance_path
+    end
   end
 
   def hide
@@ -53,6 +71,10 @@ class Profile::OrdersController < ApplicationController
                                   :number_of_recruiters, :enterpreneurs_only,
                                   :requirements_for_recruiters, :stop_list, :accepted,
                                   :visibility, :state, :warranty_period)
+  end
+
+  def balance
+    order.profile.balance
   end
 
   def order

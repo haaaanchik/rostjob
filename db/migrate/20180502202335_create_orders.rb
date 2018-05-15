@@ -7,7 +7,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
       t.integer :salary_from
       t.integer :salary_to
       t.text :description
-      t.string :commission
+      t.integer :commission
       t.string :payment_type
       t.integer :warranty_period
       t.integer :number_of_recruiters

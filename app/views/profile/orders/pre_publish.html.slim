@@ -1,0 +1,14 @@
+.col-md-2
+.col-md-8
+  .card
+    .card-header
+      h5 Публикация заявки №#{order.id}
+    .card-body
+      - balance = order.profile.balance.amount
+      p Баланс: #{balance}
+      p К оплате: #{order.commission}
+      - if balance < order.commission
+        p Не достаточно средств для публикации заявки
+        = link_to 'Пополнить баланс', profile_balance_path
+      - else
+        = link_to 'Опубликовать заявку', publish_profile_order_path(order), method: :put

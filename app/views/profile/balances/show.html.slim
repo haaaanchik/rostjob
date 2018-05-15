@@ -1,0 +1,8 @@
+.col
+  .card.border-light
+    .card-header
+      'Доступно средств:
+      strong #{@balance.amount}
+      i.fa.fa-ruble-sign.ml-1
+    .card-body
+      = render 'form'

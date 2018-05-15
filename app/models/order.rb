@@ -28,12 +28,23 @@ class Order < ApplicationRecord
   scope :by_query, -> (term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
-    state :hidden, initial: true
+    state :draft, initial: true
+    state :moderation
     state :published
+    state :rejected
+    state :hidden
     state :completed
 
+    event :to_moderation do
+      transitions from: %i[draft rejected hidden], to: :moderation
+    end
+
     event :publish do
-      transitions from: :hidden, to: :published
+      transitions from: :moderation, to: :published
+    end
+
+    event :reject do
+      transitions from: :moderation, to: :rejected
     end
 
     event :hide do
