@@ -6,7 +6,7 @@ class EmployeeCv < ApplicationRecord
   validates :birthdate, presence: true
   validates :file, presence: true
 
-  has_attached_file :file, path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename"
+  has_attached_file :file
 
   validates_attachment_content_type :file, content_type: [%r{\Aapplication/pdf\z}, %r{\Aimage/.*}, %r{text/.*}]
 end
