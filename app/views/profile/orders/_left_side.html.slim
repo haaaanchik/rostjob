@@ -7,7 +7,7 @@
         - if order.proposals.any?
           - order.proposals.each do |proposal|
             li.list-group-item
-              = link_to proposal.profile.contact_person, profile_order_proposal_path(proposal)
+              = link_to proposal.profile.contact_person, profile_order_proposal_path(order, proposal)
               / span.clickable.dark-grey-text data-toggle='modal' data-order_id=order.id data-proposal_id=proposal.id data-recruiter_id=proposal.profile.id data-target="#executorModal#{proposal.id}" #{proposal.profile.contact_person}
             / = render partial: 'proposal', locals: { proposal: proposal }
         - else
