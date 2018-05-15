@@ -11,8 +11,8 @@ Rails.application.routes.draw do
     sessions: 'admins/sessions'
   }
   devise_for :users, controllers: {
-    omniauth_callbacks: "users/omniauth_callbacks",
-    registrations: "users/registrations",
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
   resources :user_profiles

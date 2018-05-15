@@ -3,7 +3,7 @@
     .modal-content
       .modal-header
         p.heading.lead
-          | Вход
+          | BEST-HR
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span.white-text[aria-hidden="true"]
             | ×
@@ -47,8 +47,8 @@
             - password_label = if @minimum_password_length
             - "Ваш пароль (минимум #{@minimum_password_length} символов)"
             - else
-              - "Ваш пароль"
+            - "Ваш пароль"
             = f.label :password, password_label
           .text-center.mt-4
             = f.submit "Зарегистрироваться", class: 'btn btn-indigo'
-      / .modal-footer.justify-content-center = render "devise/shared/links"
+            / .modal-footer.justify-content-center = render "devise/shared/links"
