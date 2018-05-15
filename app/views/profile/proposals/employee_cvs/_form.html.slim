@@ -3,11 +3,11 @@
     = f.text_field :name, class: 'form-control'
     = f.label :name, 'Полное имя'
   .md-form
-    = f.text_field :gender, class: 'form-control'
-    = f.label :gender, 'Пол'
+    = f.collection_select(:gender, [OpenStruct.new(id: 0, gender: 'М'), OpenStruct.new(id: 1, gender: 'Ж')], :gender, :gender, {}, class: 'mdb-select')
+    / = f.label :gender, 'Пол', class: 'active'
   .md-form
-    = f.text_field :birthdate, class: 'form-control'
-    = f.label :birthdate, 'Дата рождения'
+    = f.date_field :birthdate, class: 'form-control'
+    = f.label :birthdate, 'Дата рождения', class: 'active'
   .md-form
     .file-field
       .btn.btn-indigo.btn-sm.float-left

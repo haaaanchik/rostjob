@@ -1,0 +1,10 @@
+tr
+  td #{employee_cv.name}
+  td #{employee_cv.gender}
+  td #{employee_cv.birthdate}
+  td
+    = link_to employee_cv.file.url do
+      i.far.fa-file-alt.fa-2x
+  td
+    = link_to '#', data: { confirm: 'Вы уверены?' } do
+      i.far.fa-thumbs-up.fa-2x
