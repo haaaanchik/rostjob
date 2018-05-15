@@ -9,7 +9,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-    @user = User.new
+    @resource = User.new
   end
 
   # POST /resource/sign_in

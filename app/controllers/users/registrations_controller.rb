@@ -1,7 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def new
-    Rails.logger.warn("log--3-->>>>>>>#{params.inspect}")
-    @user = User.new
+    @resource = User.new
   end
 
   def create
