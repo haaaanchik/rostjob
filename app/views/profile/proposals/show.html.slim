@@ -1,2 +1,12 @@
-h1 Profile::Proposals#show
-p Find me in app/views/profile/proposals/show.html.slim
+h1 Предложение по заявке № #{proposal.order.id}
+p #{proposal.order.title}
+p #{proposal.order.profile.company_name}
+= link_to 'Добавить кандидата', new_profile_proposal_employee_cv_path(proposal), class: 'btn btn-indigo'
+
+table.table
+  tr
+    th ФИО кандидата
+    th Пол
+    th Дата рождения
+    th Резюме
+  = render partial: 'profile/proposals/employee_cvs/employee_cv', collection: proposal.employee_cvs

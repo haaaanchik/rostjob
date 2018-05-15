@@ -7,28 +7,8 @@
         - if order.proposals.any?
           - order.proposals.each do |proposal|
             li.list-group-item
-              = link_to profile_order_proposal_path(order, proposal) do
-                span.dark-grey-text #{proposal.profile.contact_person}
-              .text-center
-                ul.list-unstyled.list-inline
-                  li.list-inline-item.pr-2
-                    i.far.fa-user data-toggle='modal' data-profile_id=proposal.profile.id data-target='#executorModal' title='Анкета исполнителя'
-                  li.list-inline-item.pr-2
-                    i.far.fa-thumbs-up data-toggle='tooltip' title='Выбрать исполнителем'
-                  li.list-inline-item.pr-2
-                    i.fas.fa-ban data-toggle='tooltip' title='Отклонить исполнителя'
-
-          .modal.fade.left#executorModal tabindex="-1" role="dialog" aria-labelledby="executorModalLabel" aria-hidden="true"
-            .modal-dialog.modal-lg role="document"
-              .modal-content
-                .modal-header
-                  h4.modal-title#executorModalLabel Анкета исполнителя
-                  button.close type="button" data-dismiss="modal" aria-label="Close"
-                    span aria-hidden="true" &times;
-                .modal-body
-                  |Hello world
-                .modal-footer
-                  button.btn.btn-indigo type="button" data-dismiss="modal" Закрыть
-
+              = link_to proposal.profile.contact_person, profile_order_proposal_path(proposal)
+              / span.clickable.dark-grey-text data-toggle='modal' data-order_id=order.id data-proposal_id=proposal.id data-recruiter_id=proposal.profile.id data-target="#executorModal#{proposal.id}" #{proposal.profile.contact_person}
+            / = render partial: 'proposal', locals: { proposal: proposal }
         - else
           span Пока предложений нет

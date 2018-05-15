@@ -1,0 +1,19 @@
+= form_with model: model, url: profile_proposal_employee_cvs_path(proposal), local: true do |f|
+  .md-form
+    = f.text_field :name, class: 'form-control'
+    = f.label :name, 'Полное имя'
+  .md-form
+    = f.text_field :gender, class: 'form-control'
+    = f.label :gender, 'Пол'
+  .md-form
+    = f.text_field :birthdate, class: 'form-control'
+    = f.label :birthdate, 'Дата рождения'
+  .md-form
+    .file-field
+      .btn.btn-indigo.btn-sm.float-left
+        span Выберите файл
+        = f.file_field :file
+      .file-path-wrapper
+        = text_field :wrap, :path, class: 'file-path', placeholder: 'Резюме кандидата'
+  = f.submit 'Добавить кандидата', class: 'btn btn-indigo mt-3'
+  = link_to 'Отмена', profile_proposal_path(proposal), class: 'btn btn-indigo mt-3'
