@@ -4,7 +4,7 @@ class Profile::ProposalsController < ApplicationController
   end
 
   def show
-    proposal
+    render locals: { proposal: proposal }
   end
 
   def new

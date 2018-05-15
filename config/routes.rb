@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  # namespace :profile do
+  #   namespace :proposals do
+  #     get 'employee_cvs/index'
+  #     get 'employee_cvs/show'
+  #     get 'employee_cvs/create'
+  #     get 'employee_cvs/update'
+  #   end
+  # end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions'
   }
@@ -18,14 +26,23 @@ Rails.application.routes.draw do
         put :complete
       end
       scope module: :orders do
-        resources :proposals, only: %i[index show update]
+        resources :proposals, only: %i[index show update] do
+          member do
+            put :accept
+            put :reject
+          end
+        end
       end
     end
     post :orders, constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'
     post :orders, constraints: -> (req) { req.params.key?(:create) }, to: 'orders#create'
     patch 'orders/:id', constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: -> (req) { req.params.key?(:create) }, to: 'orders#update'
-    resources :proposals
+    resources :proposals do
+      scope module: :proposals do
+        resources :employee_cvs
+      end
+    end
     resource :balance, only: :show
     put :balance, to: 'balances#deposit'
   end

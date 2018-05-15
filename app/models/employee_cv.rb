@@ -1,7 +1,12 @@
 class EmployeeCv < ApplicationRecord
   belongs_to :proposal
 
-  has_attached_file :file, path: ":rails_root/storage/:class/:attachment/:id_partition/:style/:filename"
+  validates :name, presence: true
+  validates :gender, presence: true
+  validates :birthdate, presence: true
+  validates :file, presence: true
 
-  validates_attachment_content_type :file, content_type: [%r{\Aapplication/pdf\z}, %r{\Aimage/.*}]
+  has_attached_file :file
+
+  validates_attachment_content_type :file, content_type: [%r{\Aapplication/pdf\z}, %r{\Aimage/.*}, %r{text/.*}]
 end

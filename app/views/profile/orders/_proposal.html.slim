@@ -1,0 +1,15 @@
+.modal.fade.left id="executorModal#{proposal.id}" tabindex="-1" role="dialog" aria-labelledby="executorModal#{proposal.id}Label" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title id="#executorModal#{proposal.id}Label" Предложение исполнителя
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        |#{proposal.description}
+        p
+          = link_to 'Анкета исполнителя', recruiter_path(proposal.profile)
+      .modal-footer
+        = link_to 'Начать сотрудничество', accept_profile_order_proposal_path(proposal), local: true, method: :put, class: 'btn btn-indigo'
+        = link_to 'Отклонить предложение', reject_profile_order_proposal_path(proposal), local: true, method: :put, class: 'btn btn-indigo'
+        button.btn.btn-indigo type="button" data-dismiss="modal" Закрыть

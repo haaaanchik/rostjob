@@ -5,3 +5,7 @@ $ ->
   $("table").on('mouseenter', '.clickable-row', (event) ->
     $(this).css('cursor', 'pointer')
   )
+
+  $("ul").on('mouseenter', '.clickable', (event) ->
+    $(this).css('cursor', 'pointer')
+  )

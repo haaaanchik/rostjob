@@ -1,0 +1,8 @@
+.col
+.col-8
+  .card
+    .card-header
+      h5 Новый кандидат
+    .card-body
+      = render partial: 'form', locals: { proposal: @proposal, model: @employee_cv }
+.col

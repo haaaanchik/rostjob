@@ -1,2 +1,12 @@
-h1 Profile::Orders::Proposals#show
-p Find me in app/views/profile/orders/proposals/show.html.slim
+h1 Предложения по заявке № #{proposal.order.id}
+p
+  = link_to "Рекрутер: #{proposal.profile.contact_person}", recruiter_path(proposal.profile)
+
+table.table
+  tr
+    th ФИО кандидата
+    th Пол
+    th Дата рождения
+    th Резюме
+    th Нанять
+  = render partial: 'profile/orders/proposals/employee_cv', collection: proposal.employee_cvs
