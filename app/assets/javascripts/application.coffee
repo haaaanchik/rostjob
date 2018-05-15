@@ -49,6 +49,6 @@ $(document).ready ->
     else
       $('[href="#top-section"]').fadeOut('slow')
     return
-  return
+
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
     add_autocomplete $(this)
