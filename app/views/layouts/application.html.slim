@@ -73,6 +73,27 @@ html
           .container.h-100.d-flex.justify-content-center.align-items-center#top-section
             .row.pt-5.mt-3
               .col-md-12.mb-3
+                .intro-iKnfo-content.text-center
+                  h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | BEST-HR
+                  h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Сервис для размещения заявок на подбор специалистов любого уровня
+                  a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Разместить заявку
+                  a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
+                    | Найти заявку
+                  = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: {toggle: 'dropdown'}, aria: {haspopup: 'true', expanded: 'false'} do
+                    = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
+                    |#{current_user.profile.contact_person}
+                  .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
+                    = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
+                    = link_to 'Пополнить счёт', '#', class: 'dorpdown-item d-block'
+                    = link_to 'Выход', destroy_user_session_path, class: 'dorpdown-item d-block', method: :delete
+      #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
+        .mask.rgba-stylish-light
+          .container.h-100.d-flex.justify-content-center.align-items-center#top-section
+            .row.pt-5.mt-3
+              .col-md-12.mb-3
                 .intro-info-content.text-center
                   h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
                     | BEST-HR
