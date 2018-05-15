@@ -92,11 +92,11 @@ ActiveRecord::Schema.define(version: 2018_05_14_074133) do
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "specialization"
-    t.string "sity"
+    t.string "city"
     t.integer "salary_from"
     t.integer "salary_to"
     t.text "description"
-    t.string "commission"
+    t.integer "commission"
     t.string "payment_type"
     t.integer "warranty_period"
     t.integer "number_of_recruiters"
@@ -118,7 +118,15 @@ ActiveRecord::Schema.define(version: 2018_05_14_074133) do
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
+    t.text "description"
+    t.string "city"
+    t.string "rating"
+    t.timestamp "last_seen"
     t.string "state"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.integer "photo_file_size"
+    t.datetime "photo_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -154,10 +162,10 @@ ActiveRecord::Schema.define(version: 2018_05_14_074133) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "full_name"
     t.string "provider"
-    t.string "url"
     t.string "uid"
+    t.string "full_name"
+    t.string "photo_url"
     t.bigint "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
