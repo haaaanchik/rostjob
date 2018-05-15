@@ -4,21 +4,19 @@
       = link_to omniauth_authorize_path(resource_name, provider), class: 'p-2 m-2 tw-ic' do
         - case provider
         - when :vkontakte
-            i.fab.fa-vk.fa-2x.indigo-text
+          i.fab.fa-vk.fa-2x.indigo-text
         - when :facebook
-            i.fab.fa-facebook.fa-2x.indigo-text
+          i.fab.fa-facebook.fa-2x.indigo-text
 - if controller_name != 'sessions'
-  p.font-small.grey-text.d-flex.justify-content-center.mt-4
+  p.font-small.d-flex.justify-content-center.mt-4.dark-grey-text
     | Уже есть учётная запись?
-    = link_to "Войти", new_session_path(resource_name), class: 'dark-grey-text font-weight-bold ml-1'
+      = link_to "Войти", new_session_path(resource_name), class: 'indigo-text font-weight-bold ml-1'
   br
 - if devise_mapping.registerable? && controller_name != 'registrations'
-  p.font-small.grey-text.d-flex.justify-content-center.mt-4
+  hr
+  p.font-small.d-flex.mt-4.text-black-50.justify-content-end
     | Нет учётной записи?
-    = link_to "Зарегистрируйтесь", new_registration_path(resource_name), class: 'dark-grey-text font-weight-bold ml-1'
-- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-  p.font-small.grey-text.d-flex.justify-content-center.mt-4
-    = link_to "Забыли пароль?", new_password_path(resource_name), class: 'grey-text'
+    = link_to "Зарегистрируйтесь", new_registration_path(resource_name), class: 'indigo-text ml-1 font-weight-bold'
 - if devise_mapping.confirmable? && controller_name != 'confirmations'
   = link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name)
   br
