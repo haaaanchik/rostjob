@@ -40,9 +40,9 @@
   operand.data 'auto-active', true
   return
 
-$(document).ready ->
+@init_mdb = () ->
   new WOW().init()
-  $('.mdb-select').material_select()
+  $('select.mdb-select:not(.initialized)').material_select()
   $(window).scroll ->
     if $(this).scrollTop() > 50
       $('[href="#top-section"]').fadeIn('slow')
@@ -50,7 +50,11 @@ $(document).ready ->
       $('[href="#top-section"]').fadeOut('slow')
     return
 
+$(document).ready ->
+  init_mdb()
+
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
     add_autocomplete $(this)
+    return
 
   $('[data-redirect_modal="open"]').modal();
