@@ -5,7 +5,9 @@ class OrdersController < ApplicationController
   end
 
   def show
-    render locals: { order: order }
+    new_proposal = Proposal.new
+    new_proposal.employee_cvs.build
+    render locals: { order: order, new_proposal: new_proposal }
   end
 
   private

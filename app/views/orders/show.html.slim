@@ -24,7 +24,7 @@
           - proposal = order.proposals.find_by(profile_id: current_user.profile.id)
           - if proposal
             span.badge class=class_by_state(proposal)
-              |Ваш отклик: #{t("proposal.state.#{proposal.state}")}
+              |#{t("proposal.state.#{proposal.state}")}
     .card-body
       dl.row
         dt.col-sm-3 Специализация
@@ -49,8 +49,7 @@
       - unless proposal
         hr
         .row.pt-2
-          .col-2
+          .col-1
           .col
-            h5 Ответить на заявку
-            = render partial: 'new_proposal_form', locals: { order: order }
-          .col-2
+            = render partial: 'new_proposal_form', locals: { order: order, proposal: new_proposal }
+          .col-1

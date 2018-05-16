@@ -19,7 +19,7 @@ tr.clickable-row data-href=order_path(order)
       - proposal = order.proposals.find_by(profile_id: current_user.profile.id)
       - if proposal
         span.badge class=class_by_state(proposal)
-          |Ваш отклик #{t("proposal.state.#{proposal.state}")}
+          |#{t("proposal.state.#{proposal.state}")}
 
     |#{order.description}
   td.text-center.pl-1

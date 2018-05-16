@@ -16,8 +16,12 @@ class Profile::ProposalsController < ApplicationController
   end
 
   def create
-    proposals.create(proposal_params)
-    redirect_to orders_path
+    result = proposals.create(proposal_params)
+    if result.valid?
+      redirect_to orders_path
+    else
+      render json: result.errors.messages
+    end
   end
 
   def update
@@ -42,7 +46,8 @@ class Profile::ProposalsController < ApplicationController
   private
 
   def proposal_params
-    params.require(:proposal).permit(:description, :order_id, :profile_id)
+    params.require(:proposal).permit(:description, :order_id, :profile_id,
+                                     employee_cvs_attributes: [:name, :gender, :birthdate, :file])
   end
 
   def proposal
@@ -51,9 +56,9 @@ class Profile::ProposalsController < ApplicationController
 
   def proposals
     @proposals ||= if params[:state] && !params[:state].empty?
-                  current_profile.proposals.where state: params[:state]
-                else
-                  current_profile.proposals
-                end
+                     current_profile.proposals.where state: params[:state]
+                   else
+                     current_profile.proposals
+                   end
   end
 end

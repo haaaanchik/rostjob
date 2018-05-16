@@ -6,7 +6,8 @@ class Proposal < ApplicationRecord
   has_many :messages
   has_many :employee_cvs
 
-  validates :description, presence: true
+  accepts_nested_attributes_for :employee_cvs
+
   validates :profile_id, uniqueness: { scope: :order_id, message: 'Proposal already exists' }
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
