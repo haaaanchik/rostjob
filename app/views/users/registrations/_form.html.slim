@@ -1,18 +1,22 @@
 = form_for(@resource, as: @resource, url: registration_path(@resource)) do |f|
   p.h3.text-center.mb-4 Регистрация
-  .btn-group.mb-1 data-toggle='buttons'
-    label.btn.btn-indigo.active.form-check-label.clients
+  .form-inline
+    .form-check
       = radio_button 'user[profile]', :profile_type, :employer, checked: true, class: 'form-check-input'
-      |Работодатель
-    label.btn.btn-indigo.form-check-label.clients
+      label.form-check-label[for="user[profile]"]
+        | Работодатель
+    .form-check
       = radio_button 'user[profile]', :profile_type, :agency, class: 'form-check-input'
-      |Агентство
-    label.btn.btn-indigo.form-check-label.clients
+      label.form-check-label[for="radio121"]
+        | Агентство
+    .form-check
       = radio_button 'user[profile]', :profile_type, :recruiter, class: 'form-check-input'
-      |Частный рекрутер
-    label.btn.btn-indigo.form-check-label.clients
+      label.form-check-label[for="radio122"]
+        | Частный рекрутер
+    .form-check
       = radio_button 'user[profile]', :profile_type, :employee, class: 'form-check-input'
-      |Соискатель
+      label.form-check-label[for="radio122"]
+        | Соискатель
   = f.fields_for :profile do |pf|
     .md-form
       i.fa.fa-user.prefix.grey-text
@@ -30,6 +34,7 @@
       i.fa.fa-envelope.prefix.grey-text
       = pf.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
       = pf.label :email, 'Ваш e-mail'
+
   .md-form
     i.fa.fa-lock.prefix.grey-text
     = f.password_field :password, autocomplete: "off", class: 'form-control'
@@ -38,9 +43,10 @@
     - else
     - "Ваш пароль"
     = f.label :password, password_label
+
   .text-center.mt-4
 
     = f.submit "Зарегистрироваться", class: 'btn btn-indigo'
     / .row
-    /   .col-md-12
-    /     .justify-content-center = render "devise/shared/links"
+      /   .col-md-12
+      /     .justify-content-center = render "devise/shared/links"
