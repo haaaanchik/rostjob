@@ -52,3 +52,5 @@ $(document).ready ->
 
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
     add_autocomplete $(this)
+
+  $('[data-redirect_modal="open"]').modal();

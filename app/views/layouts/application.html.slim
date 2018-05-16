@@ -7,7 +7,6 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'not_authorized', media: 'all', 'data-turbolinks-track': 'reload' unless user_signed_in?
-    link[rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"]
   body
     = render partial: user_signed_in? ? 'layouts/authorized' : 'layouts/not_authorized'
     = javascript_include_tag 'application', media: 'all',

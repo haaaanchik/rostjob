@@ -10,16 +10,20 @@
 - if controller_name != 'sessions'
   p.font-small.d-flex.justify-content-center.mt-4.dark-grey-text
     | Уже есть учётная запись?
-    = link_to "Войти", new_session_path(@resource), class: 'indigo-text font-weight-bold ml-1'
+    = link_to "Войти", new_user_session_path(@resource),
+            class: 'indigo-text font-weight-bold ml-1'
   br
 - if devise_mapping.registerable? && controller_name != 'registrations'
   hr
   p.font-small.d-flex.mt-4.text-black-50.justify-content-end
     | Нет учётной записи?
-    = link_to "Зарегистрируйтесь", new_registration_path(@resource), class: 'indigo-text ml-1 font-weight-bold'
+    = link_to "Зарегистрируйтесь", new_user_registration_path(@resource),
+            class: 'indigo-text ml-1 font-weight-bold'
 - if devise_mapping.confirmable? && controller_name != 'confirmations'
-  = link_to "Didn't receive confirmation instructions?", new_confirmation_path(@resource)
+  = link_to "Didn't receive confirmation instructions?",
+          new_confirmation_path(@resource)
   br
 - if devise_mapping.lockable? && @resource.class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks'
-  = link_to "Didn't receive unlock instructions?", new_unlock_path(@resource)
+  = link_to "Didn't receive unlock instructions?",
+          new_unlock_path(@resource)
   br

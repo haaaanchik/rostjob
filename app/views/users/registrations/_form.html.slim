@@ -3,19 +3,19 @@
   .form-inline
     .form-check
       = radio_button 'user[profile]', :profile_type, :employer, checked: true, class: 'form-check-input'
-      label.form-check-label[for="user[profile]"]
+      label.form-check-label[for="user_profile_profile_type_employer"]
         | Работодатель
     .form-check
       = radio_button 'user[profile]', :profile_type, :agency, class: 'form-check-input'
-      label.form-check-label[for="radio121"]
+      label.form-check-label[for="user_profile_profile_type_agency"]
         | Агентство
     .form-check
       = radio_button 'user[profile]', :profile_type, :recruiter, class: 'form-check-input'
-      label.form-check-label[for="radio122"]
+      label.form-check-label[for="user_profile_profile_type_recruiter"]
         | Частный рекрутер
     .form-check
       = radio_button 'user[profile]', :profile_type, :employee, class: 'form-check-input'
-      label.form-check-label[for="radio122"]
+      label.form-check-label[for="user_profile_profile_type_employee"]
         | Соискатель
   = f.fields_for :profile do |pf|
     .md-form
@@ -43,10 +43,8 @@
     - else
     - "Ваш пароль"
     = f.label :password, password_label
-
   .text-center.mt-4
-
     = f.submit "Зарегистрироваться", class: 'btn btn-indigo'
-    / .row
-      /   .col-md-12
-      /     .justify-content-center = render "devise/shared/links"
+.row
+  .col-md-12
+    .justify-content-center = render "devise/shared/links"

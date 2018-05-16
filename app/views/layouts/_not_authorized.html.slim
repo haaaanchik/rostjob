@@ -25,11 +25,9 @@ header
               | Помощь
         ul.navbar-nav
           li.nav-item
-            = link_to 'Вход', new_user_session_path,
-                    remote: true, class: 'nav-link'
+            = link_to 'Вход', new_user_session_path, class: 'nav-link'
           li.nav-item
-            = link_to 'Регистрация', new_user_registration_path,
-                    remote: true, class: 'nav-link'
+            = link_to 'Регистрация', new_user_registration_path, class: 'nav-link'
   #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
     .mask.rgba-stylish-light
       .container.h-100.d-flex.justify-content-center.align-items-center#top-section

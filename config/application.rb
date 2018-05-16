@@ -38,7 +38,6 @@ module BestHr
     config.encoding = 'utf-8'
 
     # Don't generate system test files.
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.generators do |g|
       g.test_framework :rspec, fixture: false
       g.system_tests = nil

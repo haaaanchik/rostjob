@@ -19,7 +19,7 @@ class Users::SessionsController < Devise::SessionsController
 
     if resource.valid_password?(params[:user][:password])
       sign_in :user, resource
-      return true
+      return redirect_to root_path
     end
 
     invalid_login_attempt
@@ -33,7 +33,7 @@ class Users::SessionsController < Devise::SessionsController
   protected
 
   def invalid_login_attempt
-    render js: "toastr.error('Неверное сочетание лоигна или пароля!')"
+    render js: "toastr.error('Неверное сочетание лоигна или пароля!')", status: 401
   end
 
   # If you have extra params to permit, append them to the sanitizer.
