@@ -5,6 +5,7 @@
 #= require external/mdb
 #= require external/mdb.ru_RU
 #= require external/jquery.inputmask.bundle.min
+#= require rails-ujs
 #= require jquery.turbolinks
 #= require turbolinks
 #= require external/turbolinks-compatibility
