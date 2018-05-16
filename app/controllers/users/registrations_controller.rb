@@ -1,6 +1,6 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   def new
-    @user = User.new
+    @resource = User.new
   end
 
   def create
