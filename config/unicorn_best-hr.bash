@@ -23,8 +23,8 @@ ENV="production"
 # environment settings
 PATH="/home/$USER/.rbenv/shims:/home/$USER/.rbenv/bin:$PATH"
 UNICORN_OPTS="-D -E $ENV -c $APP_ROOT/config/unicorn.rb"
-GEM_HOME="/home/zerro/.rvm/gems/ruby-2.5.0@best-hr"
-SET_PATH="cd $APP_ROOT; rvm use ruby-2.5.0@best-hr; export GEM_HOME=$GEM_HOME"
+GEM_HOME="/home/zerro/.rvm/gems/ruby-2.5.1@rails5"
+SET_PATH="cd $APP_ROOT; rvm use ruby-2.5.1@rails5; export GEM_HOME=$GEM_HOME"
 CMD="$SET_PATH; $GEM_HOME/bin/unicorn $UNICORN_OPTS"
 
 PID="$APP_ROOT/tmp/pids/unicorn.pid"
