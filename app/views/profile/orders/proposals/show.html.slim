@@ -1,12 +1,20 @@
-h1 Предложения по заявке № #{proposal.order.id}
-p
-  = link_to "Рекрутер: #{proposal.profile.contact_person}", recruiter_path(proposal.profile)
-
-table.table
-  tr
-    th ФИО кандидата
-    th Пол
-    th Дата рождения
-    th Резюме
-    th Нанять
-  = render partial: 'profile/orders/proposals/employee_cv', collection: proposal.employee_cvs
+.col
+  h1 Заявка № #{proposal.order.id} - #{proposal.order.title}
+  p
+    'Рекрутер:
+    = link_to  proposal.profile.contact_person, recruiter_path(proposal.profile)
+  .row
+    .col
+      h3 Чат
+      hr
+      = render partial: 'utils/chat'
+    .col
+      h3 Кандидаты
+      table.table
+        tr
+          th ФИО кандидата
+          th Пол
+          th Дата рождения
+          th Резюме
+          th Нанять
+        = render partial: 'profile/orders/proposals/employee_cv', collection: proposal.employee_cvs

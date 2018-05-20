@@ -6,6 +6,7 @@ class Proposal < ApplicationRecord
   has_many :messages
   has_many :employee_cvs
 
+  accepts_nested_attributes_for :messages
   accepts_nested_attributes_for :employee_cvs
 
   validates :profile_id, uniqueness: { scope: :order_id, message: 'Proposal already exists' }

@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def show
     new_proposal = Proposal.new
-    new_proposal.employee_cvs.build
+    new_proposal.messages.build
     render locals: { order: order, new_proposal: new_proposal }
   end
 

@@ -1,32 +1,14 @@
-h5 Кандидат
-= form_with  model: proposal, url: profile_proposals_path, data: { confirm: "Вы отвечаете на заявку №#{order.id}\n#{order.title}.\nПродолжить?" }, class: 'new-proposal-form' do |f|
+= form_with  model: proposal, url: profile_proposals_path, data: { confirm: 'Вы уверены?' }, class: 'new-proposal-form' do |f|
   = f.hidden_field :order_id, value: order.id
-  = f.fields_for :employee_cvs do |ecvs|
-      .row
-        .col
-          .md-form
-            = ecvs.text_field :name, class: 'form-control'
-            = ecvs.label :name, 'Полное имя'
-      .row
-        .col-3
-          .md-form
-            = ecvs.date_field :birthdate, class: 'form-control'
-            = ecvs.label :birthdate, 'Дата рождения', class: 'active'
-        .col-3.align-self-center
-          .form-inline
-            .form-check
-              = ecvs.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input'
-              = ecvs.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
-            .form-check
-              = ecvs.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
-              = ecvs.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
-        .col
-          .md-form
-            .file-field
-              .btn.btn-indigo.btn-sm.float-left
-                span Выберите файл
-                = ecvs.file_field :file
-              .file-path-wrapper
-                = text_field :file, :path, placeholder: 'Резюме кандидата', class: 'file-path'
+  .md-form
+    = f.fields_for :messages do |m|
+      = m.text_area :text, class: 'md-textarea form-control', rows: 3
+      = m.label :text, ' Кратко опишите суть вашего предложения'
+  .md-form
+    .form-check
+      = f.check_box :accepted, class: 'form-control'
+      = f.label :accepted do
+        'Я принимаю условия
+        = link_to 'Оферты', '/offerta.pdf'
   .text-center.pt-3
-    = f.submit 'Ответить на заявку', class: 'btn btn-indigo'
+    = f.submit 'Отправить ответ', class: "btn btn-indigo proposal-submit-button disabled"

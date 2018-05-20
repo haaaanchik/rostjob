@@ -1,12 +1,25 @@
 h1 Предложение по заявке № #{proposal.order.id}
 p #{proposal.order.title}
 p #{proposal.order.profile.company_name}
-= link_to 'Добавить кандидата', new_profile_proposal_employee_cv_path(proposal), class: 'btn btn-indigo'
+= link_to 'Отказаться', '#', class: 'btn btn-indigo',
+  data: { confirm: "Вы собираетесь отказаться от работы с заявкой №#{proposal.order.id}\nПродолжить?" }
 
-table.table
-  tr
-    th ФИО кандидата
-    th Пол
-    th Дата рождения
-    th Резюме
-  = render partial: 'profile/proposals/employee_cvs/employee_cv', collection: proposal.employee_cvs
+ul.nav.md-pills.nav-justified.pills-indigo
+  li.nav-item
+    = link_to 'Общение', '#panel1', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link active'
+  li.nav-item
+    = link_to 'Кандидаты', '#panel2', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link'
+
+.tab-content.w-100
+  #panel1.tab-pane.fade.in.show.active role='tabpanel'
+    .col.dark-grey
+      'hello world!
+  #panel2.tab-pane.fade role='tabpanel'
+    = link_to 'Добавить кандидата', new_profile_proposal_employee_cv_path(proposal), class: 'btn btn-indigo'
+    table.table
+      tr
+        th ФИО кандидата
+        th Пол
+        th Дата рождения
+        th Резюме
+      = render partial: 'profile/proposals/employee_cvs/employee_cv', collection: proposal.employee_cvs

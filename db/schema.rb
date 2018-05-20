@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 2018_05_14_074133) do
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
+    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false

@@ -46,7 +46,8 @@ class Profile::ProposalsController < ApplicationController
   private
 
   def proposal_params
-    params.require(:proposal).permit(:description, :order_id, :profile_id,
+    params.require(:proposal).permit(:description, :order_id, :profile_id, :accepted,
+                                     messages_attributes: [:text],
                                      employee_cvs_attributes: [:name, :gender, :birthdate, :file])
   end
 
