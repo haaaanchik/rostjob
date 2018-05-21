@@ -14,9 +14,9 @@ class Profile::Proposals::EmployeeCvsController < ApplicationController
   def create
     @cv = employee_cvs.build(employee_cvs_params)
     if @cv.save
-      redirect_to profile_proposal_employee_cvs_path(proposal)
+      render @cv, layout: false
     else
-      render 'index'
+      render json: @cv.errors.messages, status: 422
     end
   end
 

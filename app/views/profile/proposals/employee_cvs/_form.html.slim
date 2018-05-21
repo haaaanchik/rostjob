@@ -1,19 +1,29 @@
-= form_with model: model, url: profile_proposal_employee_cvs_path(proposal), local: true do |f|
-  .md-form
-    = f.text_field :name, class: 'form-control'
-    = f.label :name, 'Полное имя'
-  .md-form
-    = f.collection_select(:gender, [OpenStruct.new(id: 0, gender: 'М'), OpenStruct.new(id: 1, gender: 'Ж')], :gender, :gender, {}, class: 'mdb-select')
-    / = f.label :gender, 'Пол', class: 'active'
-  .md-form
-    = f.date_field :birthdate, class: 'form-control'
-    = f.label :birthdate, 'Дата рождения', class: 'active'
-  .md-form
-    .file-field
-      .btn.btn-indigo.btn-sm.float-left
-        span Выберите файл
-        = f.file_field :file
-      .file-path-wrapper
-        = text_field :wrap, :path, class: 'file-path', placeholder: 'Резюме кандидата'
-  = f.submit 'Добавить кандидата', class: 'btn btn-indigo mt-3'
-  = link_to 'Отмена', profile_proposal_path(proposal), class: 'btn btn-indigo mt-3'
+= form_with model: proposal.employee_cvs.build, url: profile_proposal_employee_cvs_path(proposal), class: 'new-employee_cv-form' do |f|
+  .row
+    .col
+      .md-form
+        = f.text_field :name, class: 'form-control'
+        = f.label :name, 'Полное имя'
+  .row
+    .col-3
+      .md-form
+        = f.date_field :birthdate, class: 'form-control'
+        = f.label :birthdate, 'Дата рождения', class: 'active'
+    .col-3.align-self-center
+      .form-inline
+        .form-check
+          = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
+          = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
+        .form-check
+          = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
+          = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+    .col
+      .md-form
+        .file-field
+          .btn.btn-indigo.btn-sm.float-left
+            span Выберите файл
+            = f.file_field :file
+          .file-path-wrapper
+            = text_field :file, :path, placeholder: 'Резюме кандидата', class: 'file-path'
+  .text-center.pt-3
+    = f.submit 'Загрузить', class: 'btn btn-indigo'

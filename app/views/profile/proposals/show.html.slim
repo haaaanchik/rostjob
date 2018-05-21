@@ -15,11 +15,21 @@ ul.nav.md-pills.nav-justified.pills-indigo
     .col.dark-grey
       'hello world!
   #panel2.tab-pane.fade role='tabpanel'
-    = link_to 'Добавить кандидата', new_profile_proposal_employee_cv_path(proposal), class: 'btn btn-indigo'
-    table.table
+    button.btn.btn-indigo type="button" data-toggle="modal" data-target="#newCandidateModal" Добавить кандидата
+    table.table#candidates
       tr
         th ФИО кандидата
         th Пол
         th Дата рождения
         th Резюме
       = render partial: 'profile/proposals/employee_cvs/employee_cv', collection: proposal.employee_cvs
+
+.modal.fade#newCandidateModal tabindex="-1" role="dialog" aria-labelledby="newCandidatModalLabel" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#newCandidatModalLabel Новый кандидат
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        = render partial: 'profile/proposals/employee_cvs/form', locals: { proposal: proposal }
