@@ -1,12 +1,4 @@
 Rails.application.routes.draw do
-  # namespace :profile do
-  #   namespace :proposals do
-  #     get 'employee_cvs/index'
-  #     get 'employee_cvs/show'
-  #     get 'employee_cvs/create'
-  #     get 'employee_cvs/update'
-  #   end
-  # end
   devise_for :admins, controllers: {
     sessions: 'admins/sessions'
   }
@@ -32,6 +24,7 @@ Rails.application.routes.draw do
             put :reject
           end
         end
+        post 'proposals/:id', to: 'proposals#send_message'
       end
     end
     post :orders, constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'
@@ -43,6 +36,7 @@ Rails.application.routes.draw do
         resources :employee_cvs
       end
     end
+    post 'proposals/:id', to: 'proposals#send_message'
     resource :balance, only: :show
     put :balance, to: 'balances#deposit'
   end

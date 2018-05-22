@@ -4,12 +4,18 @@
     'Рекрутер:
     = link_to  proposal.profile.contact_person, recruiter_path(proposal.profile)
   .row
+    ul.nav.md-pills.nav-justified.pills-indigo
+      li.nav-item
+        = link_to 'Общение', '#panel1', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link active'
+      li.nav-item
+        = link_to 'Кандидаты', '#panel2', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link'
+
+.tab-content.w-100
+  #panel1.tab-pane.fade.in.show.active role='tabpanel'
     .col
-      h3 Чат
-      hr
-      = render partial: 'utils/chat'
-    .col
-      h3 Кандидаты
+      = render partial: 'utils/chat.html.slim', locals: { proposal: proposal }
+  #panel2.tab-pane.fade role='tabpanel'
+    table.table#candidates
       table.table
         tr
           th ФИО кандидата

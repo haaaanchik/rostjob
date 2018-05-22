@@ -1,0 +1,18 @@
+- if message.sender_id == @current_profile.id && !local_assigns[:to_receiver]
+  .row.justify-content-end.p-1
+    .col-8.rounded.rgba-blue-light
+      .row.justify-content-end
+        .col-4.pt-1
+          strong #{l(message.created_at, format: :short)}
+      .row
+        .col.pb-1
+          |#{message.text}
+- else
+  .row.justify-content-start.p-1
+    .col-8.rounded.rgba-blue-slight
+      .row.justify-content-start
+        .col-4.pl-2.pt-1
+          strong #{l(message.created_at, format: :short)}
+      .row
+        .col.pb-1
+          |#{message.text}

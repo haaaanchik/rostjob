@@ -7,6 +7,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'not_authorized', media: 'all', 'data-turbolinks-track': 'reload' unless user_signed_in?
+    = action_cable_meta_tag
   body
     = render partial: user_signed_in? ? 'layouts/authorized' : 'layouts/not_authorized'
     = javascript_include_tag 'application', media: 'all',

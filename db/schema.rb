@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_14_074133) do
+ActiveRecord::Schema.define(version: 2018_05_21_154104) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema.define(version: 2018_05_14_074133) do
     t.bigint "proposal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "sender_id"
     t.index ["proposal_id"], name: "index_messages_on_proposal_id"
   end
 

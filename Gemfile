@@ -36,6 +36,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'conditional_validation'
 gem 'raty_ratings'
+gem 'redis'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant

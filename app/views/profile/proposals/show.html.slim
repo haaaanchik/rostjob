@@ -13,7 +13,7 @@ ul.nav.md-pills.nav-justified.pills-indigo
 .tab-content.w-100
   #panel1.tab-pane.fade.in.show.active role='tabpanel'
     .col.dark-grey
-      'hello world!
+      = render partial: 'utils/chat.html.slim', locals: { proposal: proposal }
   #panel2.tab-pane.fade role='tabpanel'
     button.btn.btn-indigo type="button" data-toggle="modal" data-target="#newCandidateModal" Добавить кандидата
     table.table#candidates
