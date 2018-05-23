@@ -61,9 +61,11 @@ class Profile::ProposalsController < ApplicationController
   end
 
   def proposal_params
-    params.require(:proposal).permit(:description, :order_id, :profile_id, :accepted,
+    p = params.require(:proposal).permit(:description, :order_id, :profile_id, :accepted,
                                      messages_attributes: [:text],
                                      employee_cvs_attributes: [:name, :gender, :birthdate, :file])
+    p[:messages_attributes]['0'].merge!(sender_id: current_profile.id)
+    p
   end
 
   def proposal
