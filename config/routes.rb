@@ -44,5 +44,6 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index show]
   resources :recruiters, only: %i[index show]
 
+  mount ActionCable.server => "/cable"
   root to: 'welcome#index'
 end
