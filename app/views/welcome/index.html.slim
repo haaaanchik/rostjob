@@ -49,11 +49,9 @@
       .col-lg-6.col-xl-5.pr-lg-5.pb-5
         h3
           | Одна заявка — сотни кандидатов и исполнителей из всех регионов
-        a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-          | Разместить заявку
+          = link_to 'Разместить заявку', new_user_registration_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
         br
-        a.blue-text.ml-1[href="#"]
-          | Смотреть исполнителей
+          = link_to 'Найти рекрутера', new_user_registration_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
       .col-lg-6.col-xl-7.pl-lg-5.pb-4
         .row.mb-3
           .col-1.mr-1
@@ -85,13 +83,8 @@
       | Рекрутеру
     .row.pt-5
       .col-lg-6.col-xl-5.mb-3
-        h3
-          | Простой поиск заказов и быстрое расширение клиентской базы
-        a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-          | Найти заявку
-        br
-        a.blue-text.ml-1[href="#"]
-          | Смотреть все заказы
+        h3 Простой поиск заказов и быстрое расширение клиентской базы
+        = link_to 'Найти заявку', new_user_registration_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
       .col-lg-6.col-xl-7.mb-3
         .row.mb-3
           .col-1.mr-1
@@ -200,7 +193,5 @@
         .text-center
           h1.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
             | BEST-HR
-          a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.2s"]
-            | Разместить заявку
-          a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.2s"]
-            | Найти заявку
+          = link_to 'Разместить заявку', new_user_registration_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
+          = link_to 'Найти рекрутера', new_user_registration_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}

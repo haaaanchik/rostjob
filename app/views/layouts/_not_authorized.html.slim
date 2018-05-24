@@ -9,20 +9,15 @@ header
       #navbarSupportedContent-7.collapse.navbar-collapse
         ul.navbar-nav.mr-auto
           li.nav-item
-            a.nav-link[href="#about" data-offset="60"]
-              | О проекте
+            = link_to 'О проекте', "#{root_path}#about", class: 'nav-link', data: { offset: '60' }
           li.nav-item
-            a.nav-link[href="#employer" data-offset="60"]
-              | Работодателю
+            = link_to 'Работодателю', "#{root_path}#employer", class: 'nav-link', data: { offset: '60' }
           li.nav-item
-            a.nav-link[href="#recruiter" data-offset="60"]
-              | Рекрутеру
+            = link_to 'Рекрутеру', "#{root_path}#recruiter", class: 'nav-link', data: { offset: '60' }
           li.nav-item
-            a.nav-link[href="#contact" data-offset="60"]
-              | Контакты
+            = link_to 'Контакты', "#{root_path}#contact", class: 'nav-link', data: { offset: '60' }
           li.nav-item
-            a.nav-link[href="#contact" data-offset="60"]
-              | Помощь
+            = link_to 'Помощь', "#{root_path}#contact", class: 'nav-link', data: { offset: '60' }
         ul.navbar-nav
           li.nav-item
             = link_to 'Вход', new_user_session_path, class: 'nav-link'
@@ -38,10 +33,8 @@ header
                 | BEST-HR
               h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
                 | Сервис для размещения заявок на подбор специалистов любого уровня
-              a.btn.btn-indigo.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | Разместить заявку
-              a.btn.btn-success.btn-lg.wow.fadeInDown[data-wow-delay="0.3s"]
-                | Найти заявку
+              = link_to 'Разместить заявку', new_user_registration_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
+              = link_to 'Найти рекрутера', new_user_registration_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
 main
   #modal_container
   .container
