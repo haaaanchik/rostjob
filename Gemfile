@@ -38,6 +38,7 @@ gem 'conditional_validation'
 gem 'raty_ratings'
 gem 'redis'
 gem 'sentry-raven'
+gem 'wysiwyg-rails'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant

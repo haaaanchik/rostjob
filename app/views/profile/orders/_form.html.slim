@@ -1,6 +1,6 @@
 = form_with model: [:profile, order], local: true do |f|
   .md-form
-    = f.text_field :title, class: 'form-control'
+    = f.text_field :title, class: 'form-control', data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position', 'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
     = f.label :title, 'Должность', class: ('active' if order.persisted?)
   .md-form
     = f.text_field :specialization, class: 'form-control', data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
@@ -17,7 +17,7 @@
       = f.label :salary_to, 'Зарплата до:', class: ('active' if order.persisted?)
   .md-form
     = f.text_area :description, rows: 5, class: 'md-textarea form-control'
-    = f.label :description, 'Описание вакансии', class: ('active' if order.persisted?)
+    = f.label :description, 'Описание вакансии', class: 'active'
   .md-form
     = f.text_field :number_of_employees, class: 'form-control'
     = f.label :number_of_employees, 'Требуемое количество сотрудников', class: ('active' if order.persisted?)

@@ -8,7 +8,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def new
-    @order = Order.new
+    @order = Order.new(description: description)
   end
 
   def edit
@@ -87,5 +87,9 @@ class Profile::OrdersController < ApplicationController
                 else
                   current_profile.orders
                 end
+  end
+
+  def description
+    '<p><strong>Должностные обязанности:</strong></p><p><strong>Требования:</strong></p><p><strong>Условия:</strong></p>'
   end
 end

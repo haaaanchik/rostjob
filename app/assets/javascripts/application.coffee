@@ -10,6 +10,11 @@
 #= require turbolinks
 #= require external/turbolinks-compatibility
 #= require jquery.raty
+#= require froala_editor.min.js
+#= require languages/ru.js
+#= require plugins/lists.min.js
+#= require plugins/paragraph_format.min.js
+#= require plugins/code_view.min.js
 #= require_tree .
 
 @ajax_client = (url, data, success_func, error_func, method = 'get', data_type = 'html') ->
@@ -52,9 +57,15 @@
 
 $(document).ready ->
   init_mdb()
+  $('#order_description').froalaEditor({
+    iconsTemplate: 'font_awesome_5',
+    language: 'ru',
+    toolbarButtons: ['undo', 'redo' , '|', 'paragraphFormat', 'bold', 'italic', 'underline',
+    'outdent', 'indent', 'clearFormatting', 'formatOL', 'formatUL', 'html']
+  })
 
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
     add_autocomplete $(this)
     return
 
-  $('[data-redirect_modal="open"]').modal();
+  $('[data-redirect_modal="open"]').modal()

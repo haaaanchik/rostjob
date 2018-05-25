@@ -18,3 +18,7 @@ $ ->
     # modal.find('.modal-title').text('New message to ' + recipient)
     # modal.find('.modal-body input').val(recipient)
   )
+
+@apply_position = (item) ->
+  html = "<p><strong>Типовые обязанности:</strong><br />#{item.duties}</p>"
+  $('#order_description').froalaEditor('html.insert', html, true)
