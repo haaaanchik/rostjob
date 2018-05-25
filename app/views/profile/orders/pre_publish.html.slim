@@ -6,8 +6,8 @@
     .card-body
       - balance = order.profile.balance.amount
       p Баланс: #{balance}
-      p К оплате: #{order.commission}
-      - if balance < order.commission
+      p К оплате: #{order.summ}
+      - if balance < order.summ
         p Не достаточно средств для публикации заявки
         = link_to 'Пополнить баланс', profile_balance_path
       - else

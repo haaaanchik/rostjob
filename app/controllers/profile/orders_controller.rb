@@ -45,7 +45,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def publish
-    if balance.withdrawal(order.commission, "Публизация заявки #{order.id}")
+    if balance.withdrawal(order.summ, "Публикация заявки #{order.id}")
       order.to_moderation!
       redirect_to profile_orders_path
     else
@@ -70,7 +70,7 @@ class Profile::OrdersController < ApplicationController
                                   :salary_to, :description, :commission, :payment_type,
                                   :number_of_recruiters, :enterpreneurs_only,
                                   :requirements_for_recruiters, :stop_list, :accepted,
-                                  :visibility, :state, :warranty_period)
+                                  :visibility, :state, :warranty_period, :number_of_employees)
   end
 
   def balance

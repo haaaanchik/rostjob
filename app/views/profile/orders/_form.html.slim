@@ -19,8 +19,11 @@
     = f.text_area :description, rows: 5, class: 'md-textarea form-control'
     = f.label :description, 'Описание вакансии', class: ('active' if order.persisted?)
   .md-form
+    = f.text_field :number_of_employees, class: 'form-control'
+    = f.label :number_of_employees, 'Требуемое количество сотрудников', class: ('active' if order.persisted?)
+  .md-form
     = f.text_field :commission, class: 'form-control'
-    = f.label :commission, 'Вознаграждение', class: ('active' if order.persisted?)
+    = f.label :commission, 'Вознаграждение за одного сотрудника', class: ('active' if order.persisted?)
   .md-form
     = f.text_field :warranty_period, class: 'form-control'
     = f.label :warranty_period, 'Гарантийный период, дней', class: ('active' if order.persisted?)

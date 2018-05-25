@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   has_many :proposals
 
   validates :title, presence: true
+  validates :number_of_employees, presence: true
   validates :specialization, presence: true
   validates :city, presence: true
   validates :salary_from, presence: true
@@ -54,5 +55,9 @@ class Order < ApplicationRecord
     event :complete do
       transitions from: %i[hidden published], to: :completed
     end
+  end
+
+  def summ
+    commission * number_of_employees
   end
 end
