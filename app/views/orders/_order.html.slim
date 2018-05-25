@@ -21,7 +21,7 @@ tr.clickable-row data-href=order_path(order)
         span.badge class=class_by_state(proposal)
           |#{t("proposal.state.#{proposal.state}")}
 
-    |#{order.description}
+    |#{strip_tags(order.description).first(200)}
   td.text-center.pl-1
     span.font-weight-bold.mr-1 #{order.commission}
     i.fa.fa-ruble-sign
