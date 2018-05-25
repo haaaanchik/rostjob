@@ -12,6 +12,8 @@ class SearchApp
                   CityReference.autocomplete_search(params['term'])
                 when '/search_specialization'
                   SpecializationReference.autocomplete_search(params['term'])
+                when '/search_position'
+                  PositionReference.autocomplete_search(params['term'])
                 else
                   ''
                 end
