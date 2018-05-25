@@ -16,7 +16,7 @@
       = f.text_field :salary_to, class: 'form-control'
       = f.label :salary_to, 'Зарплата до:', class: ('active' if order.persisted?)
   .md-form
-    = f.text_area :description, rows: 5, class: 'md-textarea form-control'
+    = f.text_area :description, rows: 5, class: 'md-textarea form-control tinymce'
     = f.label :description, 'Описание вакансии', class: 'active'
   .md-form
     = f.text_field :number_of_employees, class: 'form-control'

@@ -90,6 +90,6 @@ class Profile::OrdersController < ApplicationController
   end
 
   def description
-    '<p><strong>Должностные обязанности:</strong></p><p><strong>Требования:</strong></p><p><strong>Условия:</strong></p>'
+    '<p><strong>Требования:</strong></p><p><strong>Условия:</strong></p>'
   end
 end

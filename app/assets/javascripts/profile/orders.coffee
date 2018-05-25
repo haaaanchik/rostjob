@@ -20,5 +20,6 @@ $ ->
   )
 
 @apply_position = (item) ->
-  html = "<p><strong>Типовые обязанности:</strong><br />#{item.duties}</p>"
-  $('#order_description').froalaEditor('html.insert', html, true)
+  content = tinymce.get('order_description').getContent()
+  html = "<p><strong>Должностные обязанности:</strong><br />#{item.duties}</p>"
+  tinymce.get('order_description').setContent(html + content)
