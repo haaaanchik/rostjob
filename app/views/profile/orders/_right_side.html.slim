@@ -31,3 +31,31 @@
       span #{order.specialization}
       h5 Описание вакансии:
       == order.description
+  .card.border-light.mt-2
+    .card-header
+      span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }
+    .card-body
+      table.table
+        tr
+          th ФИО
+          th Дата выхода на работу
+          th Уволить досрочно
+          th Дата досрочного увольнения
+        = render partial: 'hired_candidate', collection: order.selected_candidates
+
+.modal.fade#fireCandidateModal tabindex="-1" role="dialog" aria-labelledby="fireCandidatModalLabel" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#rireCandidatModalLabel Уволить кандидата
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        .candidate
+          span.name Имя:
+          br
+          span.gender Пол:
+          br
+          span.birthdate Дата рождения:
+        .fire_form
+          = render partial: 'profile/orders/candidates/fire_form', locals: { order: order }

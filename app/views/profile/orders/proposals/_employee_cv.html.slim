@@ -1,10 +1,12 @@
 tr
   td #{employee_cv.name}
   td #{employee_cv.gender}
-  td #{employee_cv.birthdate}
+  td #{l(employee_cv.birthdate, format: :long)}
   td
     = link_to employee_cv.file.url do
       i.far.fa-file-alt.fa-2x
   td
-    = link_to '#', data: { confirm: 'Вы уверены?' } do
-      i.far.fa-thumbs-up.fa-2x
+    - unless employee_cv.proposal.order.completed?
+      = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
+        gender: employee_cv.gender, birthdate: employee_cv.birthdate, id: employee_cv.id } do
+        i.far.fa-thumbs-up.fa-2x

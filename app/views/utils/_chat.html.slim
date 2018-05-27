@@ -4,11 +4,12 @@
     .messages
       = render partial: 'shared/messages/message', collection: proposal.messages
     hr
-    - url = request.original_fullpath.include?('orders') ? profile_order_proposal_path(proposal.order) : profile_proposal_path(proposal)
-    = form_with scope: :message, url: url, class: 'send-message-form' do |f|
-      .row
-        .col
-          .md-form
-            = f.text_field :text, class: 'form-control', placeholder: "Наберите сообщение"
-        .col-3
-          = f.submit 'Отправить', class: 'btn btn-indigo float-left'
+    - unless proposal.order.completed?
+      - url = request.original_fullpath.include?('orders') ? profile_order_proposal_path(proposal.order) : profile_proposal_path(proposal)
+      = form_with scope: :message, url: url, class: 'send-message-form' do |f|
+        .row
+          .col
+            .md-form
+              = f.text_field :text, class: 'form-control', placeholder: "Наберите сообщение"
+          .col-3
+            = f.submit 'Отправить', class: 'btn btn-indigo float-left'

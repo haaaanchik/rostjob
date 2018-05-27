@@ -25,6 +25,8 @@ Rails.application.routes.draw do
           end
         end
         post 'proposals/:id', to: 'proposals#send_message'
+        post 'candidates/hire', to: 'candidates#hire'
+        put 'candidates/fire', to: 'candidates#fire'
       end
     end
     post :orders, constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'

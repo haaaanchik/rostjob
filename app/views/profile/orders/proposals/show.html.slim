@@ -24,3 +24,20 @@
           th Резюме
           th Нанять
         = render partial: 'profile/orders/proposals/employee_cv', collection: proposal.employee_cvs
+
+.modal.fade#hireCandidateModal tabindex="-1" role="dialog" aria-labelledby="hireCandidatModalLabel" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#hireCandidatModalLabel Нанять кандидата
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        .candidate
+          span.name Имя:
+          br
+          span.gender Пол:
+          br
+          span.birthdate Дата рождения:
+        .hire_form
+          = render partial: 'profile/orders/candidates/hire_form', locals: { proposal: proposal }

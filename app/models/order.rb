@@ -4,6 +4,7 @@ class Order < ApplicationRecord
   belongs_to :profile
   has_many :invites
   has_many :proposals
+  has_many :candidates, class_name: 'EmployeeCv'
 
   validates :title, presence: true
   validates :number_of_employees, presence: true
@@ -59,5 +60,9 @@ class Order < ApplicationRecord
 
   def summ
     commission * number_of_employees
+  end
+
+  def selected_candidates
+    candidates.select { |c| c.hired? || c.fired? }
   end
 end

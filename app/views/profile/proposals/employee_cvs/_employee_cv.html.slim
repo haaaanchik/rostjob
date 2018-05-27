@@ -1,7 +1,7 @@
 tr
   td #{employee_cv.name}
   td #{employee_cv.gender}
-  td #{employee_cv.birthdate}
+  td #{l(employee_cv.birthdate, format: :long)}
   td
     = link_to employee_cv.file.url do
       i.far.fa-file-alt.fa-2x
