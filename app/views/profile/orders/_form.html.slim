@@ -20,7 +20,7 @@
     = f.label :description, 'Описание вакансии', class: 'active'
   .md-form
     = f.text_field :number_of_employees, class: 'form-control'
-    = f.label :number_of_employees, 'Требуемое количество сотрудников', class: ('active' if order.persisted?)
+    = f.label :number_of_employees, 'Требуемое количество сотрудников', class: 'active'
   .md-form
     = f.text_field :commission, class: 'form-control'
     = f.label :commission, 'Вознаграждение за одного сотрудника', class: ('active' if order.persisted?)

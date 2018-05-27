@@ -8,5 +8,5 @@ tr
   td
     - unless employee_cv.proposal.order.completed?
       = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
-        gender: employee_cv.gender, birthdate: employee_cv.birthdate, id: employee_cv.id } do
+        gender: employee_cv.gender, birthdate: l(employee_cv.birthdate, format: :long), id: employee_cv.id } do
         i.far.fa-thumbs-up.fa-2x

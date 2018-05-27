@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_27_142241) do
+ActiveRecord::Schema.define(version: 2018_05_27_212224) do
 
   create_table "admins", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 2018_05_27_142241) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "number_of_employees"
+    t.integer "number_of_employees", default: 1
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
