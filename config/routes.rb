@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get '/', to: 'dashboards#show'
+    get 'login', to: 'sessions#new'
+    post 'login', to: 'sessions#create'
+    delete 'logout', to: 'sessions#destroy'
+    resources :staffers
+    resources :orders do
+      member do
+        put :accept
+        put :reject
+      end
+    end
+  end
+
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
@@ -26,10 +40,10 @@ Rails.application.routes.draw do
         put 'candidates/fire', to: 'candidates#fire'
       end
     end
-    post :orders, constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'
-    post :orders, constraints: -> (req) { req.params.key?(:create) }, to: 'orders#create'
-    patch 'orders/:id', constraints: -> (req) { req.params.key?(:pre_publish) }, to: 'orders#update_pre_publish'
-    patch 'orders/:id', constraints: -> (req) { req.params.key?(:create) }, to: 'orders#update'
+    post :orders, constraints: ->(req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'
+    post :orders, constraints: ->(req) { req.params.key?(:create) }, to: 'orders#create'
+    patch 'orders/:id', constraints: ->(req) { req.params.key?(:pre_publish) }, to: 'orders#update_pre_publish'
+    patch 'orders/:id', constraints: ->(req) { req.params.key?(:create) }, to: 'orders#update'
     resources :proposals do
       scope module: :proposals do
         resources :employee_cvs
@@ -43,6 +57,6 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index show]
   resources :recruiters, only: %i[index show]
 
-  mount ActionCable.server => "/cable"
+  mount ActionCable.server => '/cable'
   root to: 'welcome#index'
 end

@@ -1,0 +1,15 @@
+.col-4
+  .card
+    .card-body
+      = form_with url: admin_login_path, local: true do |f|
+        p.h4.text-center.mb-4 Вход
+        .md-form
+          i class='fa fa-user prefix grey-text'
+          = f.text_field :login, class: 'from-control'
+          = f.label :login, 'Логин'
+        .md-form
+          i class='fa fa-lock prefix grey-text'
+          = f.password_field :password, class: 'form-control'
+          = f.label :password, 'Пароль'
+        .text-center.mt-4
+          = f.submit 'Войти', class: 'btn btn-indigo'

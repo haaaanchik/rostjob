@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < BaseController
   protect_from_forgery prepend: true
   before_action :set_raven_context
   before_action :authenticate_user!

@@ -120,3 +120,7 @@ p 'Заполняем справочник специализаций'
 %w[продавец токарь водитель врач директор программист учитель кладовщик грузчик].each do |specialization|
   SpecializationReference.create term: specialization
 end
+
+# Создаём админа сервиса
+admin = Staffer.create!(name: 'Администратор сервиса', login: 'admin', password: 'YjdsqHRCthdbc1')
+admin.add_role :admin

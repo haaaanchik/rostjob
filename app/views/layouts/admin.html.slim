@@ -1,0 +1,35 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Admin Best-HR.pro
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = action_cable_meta_tag
+  body
+    - if staffer_signed_in?
+      nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top
+        = link_to admin_path, class: 'navbar-brand' do
+          strong ADMIN BEST-HR
+        button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
+          span.navbar-toggler-icon
+        #navbarSupportedContent-7.collapse.navbar-collapse
+          ul.navbar-nav.mr-auto
+            - if can_access?(%w[admin])
+              li.nav-item
+                = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'nav-link', data: {offset: '60'}
+            - if can_access?(%w[admin moderator])
+              li.nav-item
+                = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
+          ul.navbar-nav
+            li.nav-item.dropdown
+              = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete
+
+    .container
+      .row.justify-content-center.mt-5
+        = yield
+    = javascript_include_tag 'application', media: 'all',
+            data: {'turbolinks-eval' => false,
+                    'turbolinks-suppress-warning' => true,
+                    'turbolinks-track': 'reload'}

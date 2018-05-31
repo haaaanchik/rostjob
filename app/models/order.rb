@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   has_many :invites
   has_many :proposals
   has_many :candidates, class_name: 'EmployeeCv'
+  has_many :comments
 
   validates :title, presence: true
   validates :number_of_employees, presence: true

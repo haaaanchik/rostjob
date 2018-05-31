@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_29_110547) do
+ActiveRecord::Schema.define(version: 2018_05_30_190824) do
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -35,6 +35,14 @@ ActiveRecord::Schema.define(version: 2018_05_29_110547) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["term"], name: "index_city_references_on_term"
+  end
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "text"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_comments_on_order_id"
   end
 
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -140,11 +148,37 @@ ActiveRecord::Schema.define(version: 2018_05_29_110547) do
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
 
+  create_table "royce_connector", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "roleable_type", null: false
+    t.bigint "roleable_id", null: false
+    t.bigint "role_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["role_id"], name: "index_royce_connector_on_role_id"
+    t.index ["roleable_type", "roleable_id"], name: "index_royce_connector_on_roleable_type_and_roleable_id"
+  end
+
+  create_table "royce_role", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_royce_role_on_name"
+  end
+
   create_table "specialization_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "term"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["term"], name: "index_specialization_references_on_term"
+  end
+
+  create_table "staffers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "login"
+    t.string "password_digest"
+    t.string "guid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -172,6 +206,7 @@ ActiveRecord::Schema.define(version: 2018_05_29_110547) do
 
   add_foreign_key "balances", "profiles"
   add_foreign_key "bill_transactions", "balances"
+  add_foreign_key "comments", "orders"
   add_foreign_key "employee_cvs", "proposals"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"

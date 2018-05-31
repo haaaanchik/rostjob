@@ -1,0 +1,22 @@
+.card
+  .card-body
+    h3 #{@staffer.persisted? ? 'Редактировать сотрудника' : 'Новый сотрудник'}
+    - errors = @staffer.errors.messages
+    = form_with model: [:admin, @staffer], local: true do |f|
+      .md-form
+        i class='fa fa-user prefix grey-text'
+        = f.text_field :name, class: "form-control #{'active' if @staffer.persisted?} #{'invalid' unless errors[:name].empty?}"
+        = f.label :name, 'Имя', data: { error: (errors[:name].first unless errors[:name].empty?) }
+      .md-form
+        i class='fa fa-key prefix grey-text'
+        = f.text_field :login, class: "form-control #{'active' if @staffer.persisted?} #{'invalid' unless errors[:login].empty?}"
+        = f.label :login, 'Логин', data: { error: (errors[:login].first unless errors[:login].empty?) }
+      .md-form
+        i class='fa fa-lock prefix grey-text'
+        = f.password_field :password, class: "form-control #{'active' if @staffer.persisted?} #{'invalid' unless errors[:password].empty?}"
+        = f.label :password, 'Пароль', data: { error: (errors[:password].first unless errors[:password].empty?) }
+      .md-form
+        = f.collection_select :staffer_roles, Staffer.roles_list, :role, :label, {}, class: 'mdb-select', multiple: true
+        = f.label :roles, 'Роли'
+
+      = f.submit 'Сохранить', class: 'btn btn-indigo'

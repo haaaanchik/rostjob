@@ -7,11 +7,11 @@ module Accessible
   protected
 
   def check_user
-    if current_admin
-      # redirect_to(rails_admin.dashboard_path) && return
-    elsif current_user
-      # The authenticated root path can be defined in your routes.rb in: devise_scope :user do...
-      # redirect_to(authenticated_user_root_path) && return
-    end
+    # if current_admin
+    #   # redirect_to(rails_admin.dashboard_path) && return
+    # elsif current_user
+    #   # The authenticated root path can be defined in your routes.rb in: devise_scope :user do...
+    #   # redirect_to(authenticated_user_root_path) && return
+    # end
   end
 end

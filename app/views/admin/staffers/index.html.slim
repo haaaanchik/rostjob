@@ -1,0 +1,8 @@
+h1 Сотрудники сервиса
+= link_to 'Добавить сотрудника', new_admin_staffer_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Имя
+    th Логин
+    th Действия
+  = render @staffers

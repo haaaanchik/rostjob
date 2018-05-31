@@ -14,6 +14,11 @@
             i.far.fa-eye-slash.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Скрыть заявку'
           = link_to complete_profile_order_path(order), method: :put do
             i.far.fa-handshake.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Завершить заявку'
+      - if order.rejected?
+        .row
+          .col
+            .alert.alert-danger role="alert"
+              |Заявка не прошла модерацию. Причина: #{order.comments.last.text}
 
     .card-body
       table.table

@@ -40,6 +40,7 @@ gem 'redis'
 gem 'sentry-raven'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
+gem 'royce'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant
