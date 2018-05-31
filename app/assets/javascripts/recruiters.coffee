@@ -1,5 +1,10 @@
 $ ->
-  $('.star-rating').raty({readOnly: true})
+  $('.star-rating').raty(
+    readOnly: true
+    starHalf: image_path('star-half.png')
+    starOff: image_path('star-off.png')
+    starOn: image_path('star-on.png')
+  )
 
   $('#generalRecruiterModal').on('show.bs.modal', (event) ->
     modal = $(this)

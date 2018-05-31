@@ -9,7 +9,7 @@
 #= require jquery.turbolinks
 #= require turbolinks
 #= require external/turbolinks-compatibility
-#= require jquery.raty
+#= require external/jquery.raty
 #= require tinymce
 #= require_tree .
 

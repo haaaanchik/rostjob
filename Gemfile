@@ -35,12 +35,17 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'conditional_validation'
-gem 'raty_ratings'
 gem 'redis'
 gem 'sentry-raven'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
 gem 'royce'
+gem "resque"
+gem "resque-scheduler"
+gem 'resque-web', github: 'resque/resque-web', branch: 'master', require: 'resque_web'
+gem "redis"
+gem "redis-objects"
+gem "active_scheduler"
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant

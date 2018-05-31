@@ -50,5 +50,6 @@ module BestHr
       g.javascripts  true
       g.helper       true
     end
+    config.active_job.queue_adapter = :resque
   end
 end

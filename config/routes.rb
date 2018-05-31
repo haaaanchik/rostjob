@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Resque::Server.new, at: '/resque_web'
+
   namespace :admin do
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'

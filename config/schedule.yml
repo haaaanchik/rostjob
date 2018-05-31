@@ -1,0 +1,5 @@
+refresh_nomenclature_and_eta:
+  cron: "0 1 * * *"
+  class: "CreateWarrantyPeriodProcessingJob"
+  queue: critical
+  description: "Daily creates jobs for warranty period processing"
