@@ -39,9 +39,9 @@
               span.mr-1 #{order.commission}
               i.fa.fa-ruble-sign
             dt.col-sm-4 Гарантийный период
-            dd.col-sm-8 #{order.warranty_period}, мес
+            dd.col-sm-8 #{order.warranty_period}, дней
             dt.col-sm-4 Выплата вознаграждения
-            dd.col-sm-8 #{t("order.payment_type.#{order.payment_type}")}
+            dd.col-sm-8 #{t("order.payment_type.type#{order.payment_type}")}
             dt.col-sm-4 Требования к рекрутерам
             dd.col-sm-8 #{order.requirements_for_recruiters}
             dt.col-sm-4 Стоп-лист кандидатов

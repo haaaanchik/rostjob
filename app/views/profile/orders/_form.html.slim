@@ -33,13 +33,13 @@
     .form-inline
       .form-check
         = f.radio_button :payment_type, 0, class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.zero'), for: 'order_payment_type_zero'
+        = f.label :payment_type, t('order.payment_type.type0'), for: 'order_payment_type_0'
       .form-check
         = f.radio_button :payment_type, 1 , class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.one'), for: 'order_payment_type_one'
+        = f.label :payment_type, t('order.payment_type.type1'), for: 'order_payment_type_1'
       .form-check
         = f.radio_button :payment_type, 2, class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.two'), for: 'order_payment_type_two'
+        = f.label :payment_type, t('order.payment_type.type2'), for: 'order_payment_type_2'
   hr.mt-4
   .md-form
     span Количество реекрутеров
