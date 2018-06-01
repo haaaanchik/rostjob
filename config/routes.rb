@@ -46,7 +46,10 @@ Rails.application.routes.draw do
     post :orders, constraints: ->(req) { req.params.key?(:create) }, to: 'orders#create'
     patch 'orders/:id', constraints: ->(req) { req.params.key?(:pre_publish) }, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: ->(req) { req.params.key?(:create) }, to: 'orders#update'
-    resources :proposals do
+    resources :proposals, only: %i[index show create] do
+      member do
+        put :cancel
+      end
       scope module: :proposals do
         resources :employee_cvs
       end

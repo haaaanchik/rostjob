@@ -12,7 +12,7 @@ tr.clickable-row data-href=order_path(order)
         |#{l(order.created_at, format: :short)}
       li.list-inline-item.pr-2
         i.fas.fa-users.pr-1
-        |#{order.proposals.accepted.count} из #{order.number_of_recruiters}
+        |#{order.proposals.sent.count} из #{order.number_of_recruiters}
       - if order.enterpreneurs_only
         li.list-inline-item.pr-2
           |Только для ИП и юридических лиц

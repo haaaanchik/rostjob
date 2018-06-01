@@ -1,7 +1,7 @@
 h1 Предложение по заявке № #{proposal.order.id}
 p #{proposal.order.title}
 p #{proposal.order.profile.company_name}
-= link_to 'Отказаться', '#', class: 'btn btn-indigo',
+= link_to 'Отказаться', cancel_profile_proposal_path(proposal), method: :put, class: 'btn btn-indigo',
   data: { confirm: "Вы собираетесь отказаться от работы с заявкой №#{proposal.order.id}\nПродолжить?" }
 
 ul.nav.md-pills.nav-justified.pills-indigo

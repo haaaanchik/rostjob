@@ -16,12 +16,12 @@
               |#{l(order.created_at, format: :short)}
             li.list-inline-item.pr-2
               i.fas.fa-users.pr-1
-              |#{order.proposals.accepted.count} из #{order.number_of_recruiters}
+              |#{order.proposals.sent.count} из #{order.number_of_recruiters}
             - if order.enterpreneurs_only
               li.list-inline-item.pr-2
                 |Только для ИП и юридических лиц
         .col-2
-          - proposal = order.proposals.find_by(profile_id: current_user.profile.id)
+          - proposal = order.proposals.sent.find_by(profile_id: current_user.profile.id)
           - if proposal
             span.badge class=class_by_state(proposal)
               |#{t("proposal.state.#{proposal.state}")}

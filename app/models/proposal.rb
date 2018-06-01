@@ -13,20 +13,14 @@ class Proposal < ApplicationRecord
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: true do
     state :sent, initial: true
-    state :accepted
-    state :rejected
-    state :completed
+    state :cancelled
 
-    event :accept do
-      transitions from: :sent, to: :accepted
+    event :cancel do
+      transitions from: :sent, to: :cancelled
     end
 
-    event :reject do
-      transitions from: :sent, to: :rejected
-    end
-
-    event :complete do
-      transitions from: :accepted, to: :completed
+    event :resend do
+      transitions from: :cancelled, to: :sent
     end
   end
 end
