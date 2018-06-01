@@ -21,6 +21,6 @@ $ ->
       $("##{k}").addClass('invalid')
   )
 
-  $('.md-textarea').on('focusin', (event) ->
+  $('.invalid').on('focusin', (event) ->
     $(event.currentTarget).removeClass('invalid')
   )

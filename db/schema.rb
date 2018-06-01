@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_30_190824) do
+ActiveRecord::Schema.define(version: 2018_06_01_183634) do
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 2018_05_30_190824) do
     t.integer "salary_to"
     t.text "description"
     t.integer "commission"
-    t.string "payment_type"
+    t.integer "payment_type", default: 0
     t.integer "warranty_period"
-    t.integer "number_of_recruiters"
+    t.integer "number_of_recruiters", default: 1
     t.boolean "enterpreneurs_only"
     t.text "requirements_for_recruiters"
     t.text "stop_list"

@@ -4,6 +4,6 @@ tr data-url=recruiter_path(recruiter) data-recruiter_id=recruiter.id data-toggle
     |#{recruiter.contact_person}
   td.text-center #{recruiter.city}
   td.text-center.star-rating #{recruiter.rating}
-  td.text-center #{recruiter.proposals.completed.count}
+  td.text-center #{recruiter.proposals.count}
   td.text-center #{l(recruiter.created_at, format: :short)}
   td.text-center #{l(recruiter.users.first.last_sign_in_at, format: :short)}

@@ -16,8 +16,12 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create
-    orders.create!(order_params)
-    redirect_to profile_orders_path
+    @order = orders.create(order_params)
+    if @order.valid?
+      redirect_to profile_orders_path
+    else
+      render 'new'
+    end
   end
 
   def update

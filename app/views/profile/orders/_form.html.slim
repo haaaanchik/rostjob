@@ -1,43 +1,44 @@
 = form_with model: [:profile, order], local: true do |f|
+  - errors = order.errors.messages
   .md-form
-    = f.text_field :title, class: 'form-control', data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position', 'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
-    = f.label :title, 'Должность', class: ('active' if order.persisted?)
+    = f.text_field :title, class: "form-control #{'invalid' unless errors[:title].empty?}", data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position', 'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
+    = f.label :title, 'Должность', data: { error: errors[:title].first }, class: 'active'
   .md-form
-    = f.text_field :specialization, class: 'form-control', data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
-    = f.label :specialization, 'Специализация', class: ('active' if order.persisted?)
+    = f.text_field :specialization, class: "form-control #{'invalid' unless errors[:specialization].empty?}", data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
+    = f.label :specialization, 'Специализация', data: { error: errors[:specialization].first }, class: 'active'
   .md-form
-    = f.text_field :city, class: 'form-control', data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
-    = f.label :city, 'Город', class: ('active' if order.persisted?)
+    = f.text_field :city, class: "form-control #{'invalid' unless errors[:city].empty?}", data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
+    = f.label :city, 'Город', data: { error: errors[:city].first }, class: 'active'
   .form-inline
     .md-form
-      = f.text_field :salary_from, class: 'form-control'
-      = f.label :salary_from, 'Зарплата от:', class: ('active' if order.persisted?)
+      = f.text_field :salary_from, class: "form-control #{'invalid' unless errors[:salary_from].empty?}"
+      = f.label :salary_from, 'Зарплата от:', data: { error: errors[:salary_from].first }, class: 'active'
     .md-form
-      = f.text_field :salary_to, class: 'form-control'
-      = f.label :salary_to, 'Зарплата до:', class: ('active' if order.persisted?)
+      = f.text_field :salary_to, class: "form-control #{'invalid' unless errors[:salary_to].empty?}"
+      = f.label :salary_to, 'Зарплата до:', data: { error: errors[:salary_to].first }, class: 'active'
   .md-form
     = f.text_area :description, rows: 5, class: 'md-textarea form-control tinymce'
-    = f.label :description, 'Описание вакансии', class: 'active'
+    = f.label :description, 'Описание вакансии', data: { error: errors[:description].first }, class: 'active'
   .md-form
-    = f.text_field :number_of_employees, class: 'form-control'
-    = f.label :number_of_employees, 'Требуемое количество сотрудников', class: 'active'
+    = f.text_field :number_of_employees, class: "form-control #{'invalid' unless errors[:number_of_employees].empty?}"
+    = f.label :number_of_employees, 'Требуемое количество сотрудников', data: { error: errors[:number_of_employees].first }, class: 'active'
   .md-form
-    = f.text_field :commission, class: 'form-control'
-    = f.label :commission, 'Вознаграждение за одного сотрудника', class: ('active' if order.persisted?)
+    = f.text_field :commission, class: "form-control #{'invalid' unless errors[:commission].empty?}"
+    = f.label :commission, 'Вознаграждение за одного сотрудника', data: { error: errors[:commission].first }, class: 'active'
   .md-form
-    = f.text_field :warranty_period, class: 'form-control'
-    = f.label :warranty_period, 'Гарантийный период, дней', class: ('active' if order.persisted?)
+    = f.text_field :warranty_period, class: "form-control #{'invalid' unless errors[:warranty_period].empty?}"
+    = f.label :warranty_period, 'Гарантийный период, дней', data: { error: errors[:warranty_period].first }, class: 'active'
   .md-form
     span Варианты выплаты вознаграждения
     .form-inline
       .form-check
-        = f.radio_button :payment_type, 'zero', class: 'form-check-input'
+        = f.radio_button :payment_type, 0, class: 'form-check-input'
         = f.label :payment_type, t('order.payment_type.zero'), for: 'order_payment_type_zero'
       .form-check
-        = f.radio_button :payment_type, 'one' , class: 'form-check-input'
+        = f.radio_button :payment_type, 1 , class: 'form-check-input'
         = f.label :payment_type, t('order.payment_type.one'), for: 'order_payment_type_one'
       .form-check
-        = f.radio_button :payment_type, 'two', class: 'form-check-input'
+        = f.radio_button :payment_type, 2, class: 'form-check-input'
         = f.label :payment_type, t('order.payment_type.two'), for: 'order_payment_type_two'
   hr.mt-4
   .md-form
@@ -64,10 +65,10 @@
     = f.label :enterpreneurs_only, 'Только для юридических лиц и ИП'
   .md-form
     = f.text_area :requirements_for_recruiters, rows: 5, class: 'md-textarea form-control'
-    = f.label :requirements_for_recruiters, 'Требования к рекрутерам', class: ('active' if order.persisted?)
+    = f.label :requirements_for_recruiters, 'Требования к рекрутерам', class: 'active'
   .md-form
     = f.text_area :stop_list, rows: 5, class: 'md-textarea form-control'
-    = f.label :stop_list, 'Стоп-лист кандидатов', class: ('active' if order.persisted?)
+    = f.label :stop_list, 'Стоп-лист кандидатов', class: 'active'
   .md-form
     .form-check
       = f.check_box :accepted, class: 'form-control'

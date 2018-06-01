@@ -8,17 +8,17 @@ class Order < ApplicationRecord
   has_many :comments
 
   validates :title, presence: true
-  validates :number_of_employees, presence: true
+  validates :number_of_employees, presence: true, numericality: { only_integer: true }
   validates :specialization, presence: true
   validates :city, presence: true
-  validates :salary_from, presence: true
-  validates :salary_to, presence: true
+  validates :salary_from, presence: true, numericality: { only_integer: true }
+  validates :salary_to, presence: true, numericality: { only_integer: true }
   validates :description, presence: true
-  validates :commission, presence: true
+  validates :commission, presence: true, numericality: { only_integer: true }
   validates :payment_type, presence: true
-  validates :warranty_period, presence: true
-  validates :number_of_recruiters, presence: true
-  validates :accepted, presence: true
+  validates :warranty_period, presence: true, numericality: { only_integer: true }
+  validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
+  validates :accepted, acceptance: { message: 'must be abided' }
 
   scope :filter_by_day, -> { where 'created_at >= ?', Date.today - 1.day }
   scope :filter_by_3day, -> { where 'created_at >= ?', Date.today - 3.days }
@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   scope :sort_by_reward_desc, -> { order commission: :desc }
   scope :sort_by_date_asc, -> { order created_at: :asc }
   scope :sort_by_date_desc, -> { order created_at: :desc }
-  scope :by_query, -> (term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
+  scope :by_query, ->(term) { where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true
