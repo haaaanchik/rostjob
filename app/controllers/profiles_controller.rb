@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
       profile.fill! unless profile.filled?
       redirect_to root_path
     else
-      render 'show'
+      render profile.filled? ? 'edit' : 'show'
     end
   end
 

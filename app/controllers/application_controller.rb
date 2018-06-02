@@ -8,9 +8,9 @@ class ApplicationController < BaseController
     return unless user_signed_in?
     return if request.fullpath.include?(destroy_user_session_path)
     request_path = URI(request.fullpath).path
-    if !current_profile.filled? && (request_path != profile_path)
-      redirect_to profile_path
-    end
+    request_method = request.request_method_symbol
+    redirect_to profile_path if !current_profile.filled? && (request_path != profile_path)
+    redirect_to root_path if current_profile.filled? && (request_path == profile_path) && (request_method != :patch)
   end
 
   def current_profile
