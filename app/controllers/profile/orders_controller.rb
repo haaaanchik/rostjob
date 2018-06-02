@@ -39,8 +39,12 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create_pre_publish
-    new_order = orders.create!(order_params)
-    render 'pre_publish', locals: { order: new_order }
+    @order = orders.create(order_params)
+    if @order.valid?
+      render 'pre_publish', locals: { order: @order }
+    else
+      render 'new'
+    end
   end
 
   def update_pre_publish
