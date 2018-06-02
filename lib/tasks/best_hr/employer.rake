@@ -15,6 +15,7 @@ namespace :best_hr do
 
       profile = Profile.create! profile_hash
       profile.photo = File.new "#{Rails.root}/public/img/default.png"
+      profile.fill
       profile.save
       profile.create_balance
 

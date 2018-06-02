@@ -4,6 +4,7 @@ namespace :best_hr do
     task clients: :environment do
       Rake::Task['best_hr:seed:employer'].invoke
       Rake::Task['best_hr:seed:recruiter'].invoke
+      Rake::Task['best_hr:seed:agency'].invoke
     end
   end
 end
