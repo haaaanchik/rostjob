@@ -30,6 +30,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  recaptcha:
+    errors:
+      verification_failed: 'Похоже что вы робот. Попробуйте снова.'
   order:
     state:
       draft: 'черновик'

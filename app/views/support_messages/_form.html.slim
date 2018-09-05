@@ -1,0 +1,21 @@
+.card
+  h5.card-header.grey-color.text-center.py-4
+    |Связаться с нами
+  .card-body.px-lg-5.pt-0
+    = form_with model: @message_to_support, url: support_messages_path, class: 'contact-form'  do |f|
+      .md-form.mt-3
+        = f.text_field :sender_name, class: 'form-control'
+        = f.label :sender_name, 'Ваше имя'
+      .md-form
+        = f.email_field :email_address, class: 'form-control'
+        = f.label :email_address, 'Адрес электронной почты'
+      .md-form
+        = f.text_area :text, class: 'form-control md-textarea', rows: 3
+        = f.label :text, 'Текст сообщения'
+      .row
+        .col
+        .col
+          = recaptcha_tags
+        .col
+      .md-form.mt-2
+        =f.submit 'Отправить сообщение', class: 'btn btn-indigo btn-lg'

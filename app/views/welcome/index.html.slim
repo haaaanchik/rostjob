@@ -1,4 +1,4 @@
-- unless user_signed_in?
+- if !user_signed_in?
   section#about.section.team-section.pb-4.wow.fadeIn[data-wow-delay="0.2s"]
     h1.section-heading.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
       | Как это работает
@@ -195,3 +195,15 @@
             | BEST-HR
           = link_to 'Разместить заявку', new_user_registration_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
           = link_to 'Найти рекрутера', new_user_registration_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
+- elsif employer?
+  div style='height: 70vh; width: 100vw;'
+    .container.d-flex.h-100
+      .row.align-self-center.text-center.w-100
+        .col.h-100
+          = link_to 'Разместить заявку', new_profile_order_path, class: 'btn btn-indigo btn-lg'
+          = link_to 'Связаться с нами', new_support_message_path, class: 'btn btn-success btn-lg'
+  / .row
+  /   .col-md-12.mb-3
+  /     .text-center
+  /       h1.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+  /         | BEST-HR

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_183634) do
+ActiveRecord::Schema.define(version: 2018_09_04_103524) do
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -73,6 +73,14 @@ ActiveRecord::Schema.define(version: 2018_06_01_183634) do
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_invites_on_order_id"
     t.index ["profile_id"], name: "index_invites_on_profile_id"
+  end
+
+  create_table "message_to_supports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "sender_name"
+    t.string "email_address"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'email_validator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2'
 # Use mysql as the database for Active Record
@@ -35,7 +36,6 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 gem 'conditional_validation'
-gem 'redis'
 gem 'sentry-raven'
 gem 'tinymce-rails'
 gem 'tinymce-rails-langs'
@@ -46,6 +46,7 @@ gem 'resque-web', github: 'resque/resque-web', branch: 'master', require: 'resqu
 gem "redis"
 gem "redis-objects"
 gem "active_scheduler"
+gem "recaptcha"
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant
