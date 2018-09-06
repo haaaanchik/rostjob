@@ -8,8 +8,9 @@ module Autocompletable
 
     def search_by_term(params)
       cased = "%#{params.mb_chars.to_s.downcase}%"
-      all.select('term')
-        .where('(LOWER(term) LIKE ?)', cased).order('term asc')
+      all.select('title')
+         .where('(LOWER(title) LIKE ?)', cased)
+         .order('title asc')
     end
   end
 end
