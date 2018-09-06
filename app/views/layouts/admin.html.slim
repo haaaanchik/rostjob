@@ -22,6 +22,9 @@ html
             - if can_access?(%w[admin moderator])
               li.nav-item
                 = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
+            - if can_access?(%w[admin moderator])
+              li.nav-item
+                = link_to 'Специализации', admin_specializations_path, class: 'nav-link', data: {offset: '60'}
           ul.navbar-nav
             li.nav-item.dropdown
               = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete

@@ -3,7 +3,7 @@ namespace :best_hr do
     desc 'Creates moderator.'
     task moderator: :environment do
       p 'Создаём модератора'
-      admin = Staffer.create!(name: 'Администратор сервиса', login: 'moderator',
+      admin = Staffer.create!(name: 'Модератор сервиса', login: 'moderator',
                               password: 'VjlthfnjhCthdbcf1')
       admin.add_role :moderator
     end

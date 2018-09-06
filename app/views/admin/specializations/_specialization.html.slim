@@ -1,0 +1,7 @@
+tr
+  td #{specialization.title}
+  td
+    = link_to edit_admin_specialization_path(specialization) do
+      i.far.fa-edit
+    = link_to admin_specialization_path(specialization), method: :delete, data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt

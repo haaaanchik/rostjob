@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :staffers
+    resources :specializations
     resources :orders do
       member do
         put :accept

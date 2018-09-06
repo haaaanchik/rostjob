@@ -1,0 +1,7 @@
+h1 Справочник специализаций
+= link_to 'Добавить специализацию', new_admin_specialization_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Наименование
+    th Действия
+  = render @specializations
