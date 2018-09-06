@@ -10,7 +10,7 @@ namespace :best_hr do
        ['учитель', 'Преподавание математики ученикам старших классов'],
        ['кладовщик', 'Ведение склада ГСМ'],
        ['грузчик', 'Погрузочно-разгрузочные работы']].each do |profession|
-        PositionReference.create term: profession[0], duties: profession[1]
+        Position.create title: profession[0], duties: profession[1]
       end
     end
   end

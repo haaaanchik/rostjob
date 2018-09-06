@@ -1,0 +1,14 @@
+.card
+  .card-body
+    h3 #{@position.persisted? ? 'Редактировать должность' : 'Новая должность'}
+    - errors = @position.errors.messages
+    = form_with model: [:admin, @position], local: true do |f|
+      .md-form
+        i class='fa fa-user prefix grey-text'
+        = f.text_field :title, class: "form-control #{'invalid' unless errors[:title].empty?}"
+        = f.label :title, 'Наименование', class: 'active', data: { error: (errors[:title].first unless errors[:title].empty?) }
+      .md-form.mt-5
+        = f.text_area :duties, rows: 5, class: 'md-textarea form-control tinymce'
+        = f.label :duties, 'Типовые должностные обязанности', data: { error: errors[:duties].first }, class: 'active'
+
+      = f.submit 'Сохранить', class: 'btn btn-indigo mt-5'

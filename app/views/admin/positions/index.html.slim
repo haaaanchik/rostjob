@@ -1,0 +1,7 @@
+h1 Справочник должностей
+= link_to 'Добавить должность', new_admin_position_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Наименование
+    th Действия
+  = render @positions

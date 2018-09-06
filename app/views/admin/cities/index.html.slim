@@ -1,0 +1,7 @@
+h1 Справочник городов
+= link_to 'Добавить город', new_admin_city_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Наименование
+    th Действия
+  = render @cities

@@ -6,7 +6,7 @@ namespace :best_hr do
       ['Розничная торговля', 'Промышленное производство', 'Грузовой транспорт',
        'Стоматология', 'Высший менеджмент', 'Информационные технологии и телеком',
        'Математика', 'ГСМ', 'Рабочий персонал'].each do |specialization|
-        SpecializationReference.create term: specialization
+        Specialization.create title: specialization
       end
     end
   end

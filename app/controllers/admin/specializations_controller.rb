@@ -45,6 +45,6 @@ class Admin::SpecializationsController < Admin::ApplicationController
   end
 
   def specializations
-    @specializations ||= Specialization.all
+    @specializations ||= Specialization.order(title: :asc)
   end
 end

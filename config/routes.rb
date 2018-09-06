@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
     resources :staffers
     resources :specializations
+    resources :positions
+    resources :cities
     resources :orders do
       member do
         put :accept

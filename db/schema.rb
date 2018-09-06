@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_085237) do
+ActiveRecord::Schema.define(version: 2018_09_06_103748) do
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -28,6 +28,12 @@ ActiveRecord::Schema.define(version: 2018_09_06_085237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["balance_id"], name: "index_bill_transactions_on_balance_id"
+  end
+
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "city_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -123,6 +129,13 @@ ActiveRecord::Schema.define(version: 2018_09_06_085237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["term"], name: "index_position_references_on_term"
+  end
+
+  create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.text "duties"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

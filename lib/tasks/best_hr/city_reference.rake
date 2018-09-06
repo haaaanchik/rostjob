@@ -21,10 +21,10 @@ namespace :best_hr do
       Тольятти Томск Тула Тюмень Улан-Удэ Ульяновск Уссурийск Уфа Хабаровск Хасавюрт Химки Чебоксары
       Челябинск Череповец Черкесск Чита Шахты Щёлково Электросталь Элиста Энгельс Южно-Сахалинск
       Якутск Ярославль]. each do |city|
-        CityReference.create term: city
+        City.create title: city
       end
       ['Великий Новгород', 'Набережные Челны', 'Нижний Новгород', 'Нижний Тагил', 'Сергиев Посад', 'Старый Оскол'].each do |city|
-        CityReference.create term: city
+        City.create title: city
       end
     end
   end
