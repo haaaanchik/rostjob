@@ -36,13 +36,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_103748) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "city_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_city_references_on_term"
-  end
-
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.bigint "order_id"
@@ -123,14 +116,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_103748) do
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
-  create_table "position_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.text "duties"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_position_references_on_term"
-  end
-
   create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "duties"
@@ -184,13 +169,6 @@ ActiveRecord::Schema.define(version: 2018_09_06_103748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_royce_role_on_name"
-  end
-
-  create_table "specialization_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_specialization_references_on_term"
   end
 
   create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
