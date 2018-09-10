@@ -15,9 +15,9 @@ class Order < ApplicationRecord
   validates :salary_to, presence: true, numericality: { only_integer: true }
   validates :description, presence: true
   validates :commission, presence: true, numericality: { only_integer: true }
-  validates :payment_type, presence: true
+  # validates :payment_type, presence: true
   validates :warranty_period, presence: true, numericality: { only_integer: true }
-  validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
+  # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
 
   scope :filter_by_day, -> { where 'created_at >= ?', Date.today - 1.day }

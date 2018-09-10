@@ -1,13 +1,20 @@
 = form_with model: [:profile, order], local: true do |f|
   - errors = order.errors.messages
   .md-form
-    = f.text_field :title, class: "form-control #{'invalid' unless errors[:title].empty?}", data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position', 'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
+    = f.text_field :title, class: "form-control #{'invalid' unless errors[:title].empty?}",
+      placeholder: 'Начните набирать название должности',
+      data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position',
+      'auto-add-text' => true , 'autocomplete-on' => 'order_title' }
     = f.label :title, 'Должность', data: { error: errors[:title].first }, class: 'active'
   .md-form
-    = f.text_field :specialization, class: "form-control #{'invalid' unless errors[:specialization].empty?}", data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
+    = f.text_field :specialization, class: "form-control #{'invalid' unless errors[:specialization].empty?}",
+      placeholder: 'Начните набирать название специализации',
+      data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
     = f.label :specialization, 'Специализация', data: { error: errors[:specialization].first }, class: 'active'
   .md-form
-    = f.text_field :city, class: "form-control #{'invalid' unless errors[:city].empty?}", data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
+    = f.text_field :city, class: "form-control #{'invalid' unless errors[:city].empty?}",
+      placeholder: 'Начните набирать название города',
+      data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
     = f.label :city, 'Город', data: { error: errors[:city].first }, class: 'active'
   .form-inline
     .md-form
@@ -28,41 +35,6 @@
   .md-form
     = f.text_field :warranty_period, class: "form-control #{'invalid' unless errors[:warranty_period].empty?}"
     = f.label :warranty_period, 'Гарантийный период, дней', data: { error: errors[:warranty_period].first }, class: 'active'
-  .md-form
-    span Варианты выплаты вознаграждения
-    .form-inline
-      .form-check
-        = f.radio_button :payment_type, 0, class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.type0'), for: 'order_payment_type_0'
-      .form-check
-        = f.radio_button :payment_type, 1 , class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.type1'), for: 'order_payment_type_1'
-      .form-check
-        = f.radio_button :payment_type, 2, class: 'form-check-input'
-        = f.label :payment_type, t('order.payment_type.type2'), for: 'order_payment_type_2'
-  hr.mt-4
-  .md-form
-    span Количество реекрутеров
-    .form-inline
-      .form-check
-        = f.radio_button :number_of_recruiters, 1, class: 'form-check-input'
-        = f.label :number_of_recruiters, '1', for: 'order_number_of_recruiters_1'
-      .form-check
-        = f.radio_button :number_of_recruiters, 2, class: 'form-check-input'
-        = f.label :number_of_recruiters, '2', for: 'order_number_of_recruiters_2'
-      .form-check
-        = f.radio_button :number_of_recruiters, 3, class: 'form-check-input'
-        = f.label :number_of_recruiters, '3', for: 'order_number_of_recruiters_3'
-      .form-check
-        = f.radio_button :number_of_recruiters, 4, class: 'form-check-input'
-        = f.label :number_of_recruiters, '4', for: 'order_number_of_recruiters_4'
-      .form-check
-        = f.radio_button :number_of_recruiters, 5, class: 'form-check-input'
-        = f.label :number_of_recruiters, '5', for: 'order_number_of_recruiters_5'
-  hr.mt-4
-  .md-form
-    = f.check_box :enterpreneurs_only, class: 'form-control'
-    = f.label :enterpreneurs_only, 'Только для юридических лиц и ИП'
   .md-form
     = f.text_area :requirements_for_recruiters, rows: 5, class: 'md-textarea form-control'
     = f.label :requirements_for_recruiters, 'Требования к рекрутерам', class: 'active'
