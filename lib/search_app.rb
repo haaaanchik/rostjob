@@ -14,6 +14,10 @@ class SearchApp
                   Specialization.autocomplete_search(params['term'])
                 when '/search_position'
                   Position.autocomplete_search(params['term'])
+                when '/search_company_dadata'
+                  Company.search_company_dadata(params['term'])
+                when '/search_bank_dadata'
+                  Account.search_bank_dadata(params['term'])
                 else
                   ''
                 end

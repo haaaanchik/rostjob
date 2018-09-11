@@ -1,0 +1,6 @@
+ru:
+  account_number: 'Расчётный счёт'
+  corr_account: 'Корреспондентский счёт'
+  bic: 'БИК'
+  bank: 'Наименование банка'
+  bank_address: 'Адрес банка'

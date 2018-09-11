@@ -21,6 +21,7 @@ $ ->
       $("##{k}").addClass('invalid')
   )
 
-  $('.invalid').on('focusin', (event) ->
-    $(event.currentTarget).removeClass('invalid')
+  $('.is-invalid').on('focusin', (event) ->
+    console.log 'Focus in!'
+    $(event.currentTarget).removeClass('is-invalid')
   )

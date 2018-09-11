@@ -1,0 +1,45 @@
+- errors = @company.errors.messages
+= form_with model: [:admin, @company], local: true do |f|
+  .row
+    .col
+      = f.label :name, t(:name)
+      = f.text_field :name, class: "form-control #{'is-invalid' unless errors[:name].empty?}"
+      .invalid-feedback #{errors[:name].first}
+      = f.label :address, t(:address)
+      = f.text_field :address, class: "form-control #{'is-invalid' unless errors[:address].empty?}"
+      .invalid-feedback #{errors[:address].first}
+      = f.label :phone, t(:phone)
+      = f.text_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
+      .invalid-feedback #{errors[:phone].first}
+      = f.label :email, t(:email)
+      = f.email_field :email, class: "form-control #{'is-invalid' unless errors[:email].empty?}"
+      .invalid-feedback #{errors[:email].first}
+      = f.label :inn, t(:inn)
+      = f.text_field :inn, class: "form-control #{'is-invalid' unless errors[:inn].empty?}"
+      .invalid-feedback #{errors[:inn].first}
+      = f.label :director, t(:director)
+      = f.text_field :director, class: "form-control #{'is-invalid' unless errors[:director].empty?}"
+      .invalid-feedback #{errors[:director].first}
+    .col
+        = f.label :short_name, t(:short_name)
+        = f.text_field :short_name, class: "form-control #{'is-invalid' unless errors[:short_name].empty?}"
+        .invalid-feedback #{errors[:short_name].first}
+        = f.label :mail_address, t(:mail_address)
+        = f.text_field :mail_address, class: "form-control #{'is-invalid' unless errors[:mail_address].empty?}"
+        .invalid-feedback #{errors[:mail_address].first}
+        = f.label :fax, t(:fax)
+        = f.text_field :fax, class: "form-control #{'is-invalid' unless errors[:fax].empty?}"
+        .invalid-feedback #{errors[:fax].first}
+        = f.label :ogrn, t(:ogrn)
+        = f.text_field :ogrn, class: "form-control #{'is-invalid' unless errors[:ogrn].empty?}"
+        .invalid-feedback #{errors[:ogrn].first}
+        = f.label :kpp, t(:kpp)
+        = f.text_field :kpp, class: "form-control #{'is-invalid' unless errors[:kpp].empty?}"
+        .invalid-feedback #{errors[:kpp].first}
+        = f.label :acts_on, t(:acts_on)
+        = f.text_field :acts_on, class: "form-control #{'is-invalid' unless errors[:acts_on].empty?}"
+        .invalid-feedback #{errors[:acts_on].first}
+  .row
+    = render partial: 'admin/accounts/fields', locals: { form: f , company: @company }
+  = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
+  = link_to t('buttons.cancel'), admin_companies_path, class: 'btn btn-indigo mt-5'

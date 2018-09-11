@@ -1,0 +1,11 @@
+.col-md-12
+  .card
+    .card-header
+      h5 #{@company.persisted? ? 'Редактировать юридическое лицо' : 'Новое юридическое лицо'}
+      = text_field :dadata, :search, class: 'form-control',
+               'data-auto-select' => "apply_company_dadata",
+               'data-auto-url' => "/search_company_dadata",
+               'data-autocomplete-on' => "dadata_search",
+        placeholder: 'Поиск юридического лица. Введите ИНН, ОГРН, наименование компании или ИП'
+    .card-body
+      = render partial: 'form'

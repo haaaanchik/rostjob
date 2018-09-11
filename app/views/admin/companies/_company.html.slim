@@ -1,0 +1,8 @@
+tr
+  td #{company.name}
+  td #{company.inn}
+  td
+    = link_to edit_admin_company_path(company) do
+      i.far.fa-edit.fa-2x
+    = link_to admin_company_path(company), method: :delete, data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt.fa-2x

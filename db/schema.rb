@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_06_103748) do
+ActiveRecord::Schema.define(version: 2018_09_07_114853) do
+
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "account_number"
+    t.string "corr_account"
+    t.string "bic"
+    t.text "bank"
+    t.text "bank_address"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_accounts_on_company_id"
+  end
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount", default: 0
@@ -43,6 +55,23 @@ ActiveRecord::Schema.define(version: 2018_09_06_103748) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_comments_on_order_id"
+  end
+
+  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "short_name"
+    t.string "address"
+    t.string "mail_address"
+    t.string "phone"
+    t.string "fax"
+    t.string "email"
+    t.string "inn"
+    t.string "kpp"
+    t.string "ogrn"
+    t.string "director"
+    t.string "acts_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -212,6 +241,7 @@ ActiveRecord::Schema.define(version: 2018_09_06_103748) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "accounts", "companies"
   add_foreign_key "balances", "profiles"
   add_foreign_key "bill_transactions", "balances"
   add_foreign_key "comments", "orders"

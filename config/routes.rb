@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :specializations
     resources :positions
     resources :cities
+    resources :companies
+    resources :accounts
     resources :orders do
       member do
         put :accept
