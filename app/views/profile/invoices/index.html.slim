@@ -1,0 +1,25 @@
+.col
+  .card.border-light
+    .card-header
+      strong Баланс
+    .card-body
+      'Для оплаты услуг доступно:
+      strong #{@current_profile.balance.amount}
+      i.fa.fa-ruble-sign.ml-1
+  .card.border-light.mt-3
+    .card-header
+      strong Выписать счет для пополнения баланса
+    .card-body
+      = render partial: 'new'
+  .card.border-light.mt-3
+    .card-header
+      strong Мои счета
+    .card-body
+      table.table
+        tr
+          th Номер
+          th Дата
+          th Сумма
+          th Статус
+          th Действия
+        = render @invoices.persisted

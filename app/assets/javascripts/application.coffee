@@ -61,6 +61,7 @@
   "hideMethod": "fadeOut"
   }
   $('select.mdb-select:not(.initialized)').material_select()
+  $('[data-toggle="tooltip"]').tooltip()
   $(window).scroll ->
     if $(this).scrollTop() > 50
       $('[href="#top-section"]').fadeIn('slow')

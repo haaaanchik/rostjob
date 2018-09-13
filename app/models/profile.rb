@@ -6,6 +6,7 @@ class Profile < ApplicationRecord
   has_many :orders
   has_many :proposals
   has_one :balance
+  has_many :invoices
 
   validation_flag :sm_registration
 

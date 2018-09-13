@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     resources :cities
     resources :companies
     resources :accounts
+    resources :invoices, only: :index do
+      member do
+        put :pay
+      end
+    end
     resources :orders do
       member do
         put :accept
@@ -28,6 +33,7 @@ Rails.application.routes.draw do
   resources :user_profiles
   resource :profile, only: %i[show edit update]
   namespace :profile do
+    resources :invoices, only: %i[index show create destroy]
     resources :orders, except: %i[create update] do
       member do
         put :hide

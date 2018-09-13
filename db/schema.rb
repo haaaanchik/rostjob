@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_07_114853) do
+ActiveRecord::Schema.define(version: 2018_09_12_190851) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -102,6 +102,23 @@ ActiveRecord::Schema.define(version: 2018_09_07_114853) do
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_invites_on_order_id"
     t.index ["profile_id"], name: "index_invites_on_profile_id"
+  end
+
+  create_table "invoice_number_seqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "invoice_number"
+  end
+
+  create_table "invoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "invoice_number"
+    t.integer "amount"
+    t.json "seller"
+    t.json "buyer"
+    t.json "goods"
+    t.string "state"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_invoices_on_profile_id"
   end
 
   create_table "message_to_supports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -248,6 +265,7 @@ ActiveRecord::Schema.define(version: 2018_09_07_114853) do
   add_foreign_key "employee_cvs", "proposals"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"
+  add_foreign_key "invoices", "profiles"
   add_foreign_key "messages", "proposals"
   add_foreign_key "orders", "profiles"
   add_foreign_key "proposals", "orders"

@@ -30,6 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  time:
+    formats:
+      short: "%e %B %Y"
+  invoice:
+    state:
+      created: 'Выписан'
+      paid: 'Оплачен'
   buttons:
     save: 'Сохранить'
     cancel: 'Отмена'

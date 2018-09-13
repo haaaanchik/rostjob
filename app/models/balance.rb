@@ -1,5 +1,6 @@
 class Balance < ApplicationRecord
   has_many :bill_transactions
+  belongs_to :profile
 
   validates :amount, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
