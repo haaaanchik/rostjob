@@ -20,6 +20,9 @@ html
               li.nav-item
                 = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
             - if can_access?(%w[admin moderator])
+              li.nav-item
+                = link_to 'Выписанные счета', admin_invoices_path, class: 'nav-link', data: {offset: '60'}
+            - if can_access?(%w[admin moderator])
               li.nav-item.dropdown
                 = link_to 'Справочники', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, extended: false }
                 .dropdown-menu

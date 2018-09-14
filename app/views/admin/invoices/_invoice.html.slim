@@ -6,7 +6,8 @@ tr
   td
     span.badge class=(invoice.created? ? 'badge-info' : 'badge-success') #{t("invoice.state.#{invoice.state}")}
   td
-    = link_to pay_admin_invoice_path(invoice), method: :put,
-      data: { confirm: 'Изменить статус счета на "Оплачен"?', toggle: 'tooltip',
-      placement: 'top', title: 'Отметить как "Оплачен"' } do
-      i.fa.fa-check.fa-2x.green-text
+    - unless invoice.paid?
+      = link_to pay_admin_invoice_path(invoice), method: :put,
+        data: { confirm: 'Изменить статус счета на "Оплачен"?', toggle: 'tooltip',
+        placement: 'top', title: 'Отметить как "Оплачен"' } do
+        i.fa.fa-check.fa-2x.green-text
