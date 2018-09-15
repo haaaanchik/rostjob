@@ -6,6 +6,8 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'prawn'
+gem 'prawn-table'
 gem 'ru_propisju'
 gem 'email_validator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

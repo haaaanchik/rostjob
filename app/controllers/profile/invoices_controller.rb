@@ -6,6 +6,15 @@ class Profile::InvoicesController < ApplicationController
 
   def show
     invoice
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = InvoicePdf.new(invoice, view_context)
+        send_data pdf.render, filename: "Счёт #{invoice.invoice_number} от #{l(invoice.created_at, format: :short)}.pdf",
+                              type: 'application/pdf',
+                              disposition: 'inline'
+      end
+    end
   end
 
   def create
