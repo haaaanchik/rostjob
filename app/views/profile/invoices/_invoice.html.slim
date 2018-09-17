@@ -7,6 +7,10 @@ tr
   td
     = link_to profile_invoice_path(invoice) do
       i.fa.fa-print.fa-2x
+    = link_to profile_invoice_path(invoice, format: :pdf),
+      data: { toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF' },
+      class: 'ml-1' do
+      i.far.fa-file-pdf.fa-2x
     - unless invoice.paid?
       = link_to profile_invoice_path(invoice), method: :delete,
         data: { confirm: 'Уверены что хотите удалить счёт?', toggle: 'tooltip',
