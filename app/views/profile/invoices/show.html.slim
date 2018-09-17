@@ -1,6 +1,12 @@
 - seller = @invoice.seller
 - buyer = @invoice.buyer
 - goods = @invoice.goods
+.d-print-none.mb-3
+  button onClick='window.print();' class='btn btn-indigo' Напечатать счёт
+  = link_to profile_invoice_path(@invoice, format: :pdf), class: 'btn btn-indigo' do
+    'Скачать в формате PDF'
+    i.far.fa-file-pdf.ml-2
+
 .invoice.black-text
   p.header.font-weight-normal
     'Внимание! Оплата данного счета означает согласие с условиями поставки товара.
@@ -92,4 +98,3 @@
         tr
           th Бухгалтер
           td Сидоров Б.Б.
-= link_to 'Скачать в формате PDF', profile_invoice_path(@invoice, format: 'pdf')
