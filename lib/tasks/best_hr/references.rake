@@ -5,6 +5,7 @@ namespace :best_hr do
       Rake::Task['best_hr:seed:position_reference'].invoke
       Rake::Task['best_hr:seed:specialization_reference'].invoke
       Rake::Task['best_hr:seed:city_reference'].invoke
+      Rake::Task['best_hr:seed:production_calendar'].invoke
     end
   end
 end

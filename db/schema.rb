@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_190851) do
+ActiveRecord::Schema.define(version: 2018_09_18_090905) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -89,7 +89,14 @@ ActiveRecord::Schema.define(version: 2018_09_12_190851) do
     t.date "hiring_date"
     t.date "firing_date"
     t.string "state"
+    t.date "warranty_date"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
+  end
+
+  create_table "holidays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
