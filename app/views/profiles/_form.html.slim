@@ -3,13 +3,13 @@
   .row
     .col.text-center
       .form-check.form-check-inline
-        = f.radio_button :profile_type, 'customer', checked: true, class: 'form-check-input',
-          disabled: true if @profile.persisted?
+        - options = { class: 'form-check-input' }
+        - options[:disabled] = true if @profile.persisted?
+        = f.radio_button(:profile_type, 'customer', options.merge(checked: true))
         = f.label :profile_type, 'Заказчик (работодатель)', value: 'customer',
           class: "from-check-label #{'disabled' if @profile.persisted?}"
       .form-check.form-check-inline
-        = f.radio_button :profile_type, 'contractor', class: 'form-check-input',
-          disabled: true if @profile.persisted?
+        = f.radio_button(:profile_type, 'contractor', options)
         = f.label :profile_type, 'Исполнитель (рекрутер)', value: 'contractor',
           class: "from-check-label #{'disabled' if @profile.persisted?}"
   .card.mt-3
