@@ -87,3 +87,13 @@ $(document).ready ->
     return
 
   $('[data-redirect_modal="open"]').modal()
+
+  $(document).on('ajax:success', 'form', (event) ->
+    data = event.detail[0]
+    show_validation_errors(data)
+  )
+
+  $(document).on('focusin', '.is-invalid', (event) ->
+      console.log 'Focus in!'
+      $(event.currentTarget).removeClass('is-invalid')
+    )

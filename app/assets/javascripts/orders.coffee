@@ -20,8 +20,3 @@ $ ->
       $("label[for=#{k}]").attr('data-error', v)
       $("##{k}").addClass('invalid')
   )
-
-  $('.is-invalid').on('focusin', (event) ->
-    console.log 'Focus in!'
-    $(event.currentTarget).removeClass('is-invalid')
-  )

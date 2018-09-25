@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount Resque::Server.new, at: '/resque_web'
 
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+
   namespace :admin do
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'
@@ -25,13 +29,14 @@ Rails.application.routes.draw do
     end
   end
 
-  devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations',
-    sessions: 'users/sessions'
-  }
-  resources :user_profiles
-  resource :profile, only: %i[show edit update]
+  # devise_for :users, controllers: {
+  #   omniauth_callbacks: 'users/omniauth_callbacks',
+  #   registrations: 'users/registrations',
+  #   sessions: 'users/sessions'
+  # }
+
+  resources :users, only: %i[new create update]
+  resource :profile, except: :destroy
   namespace :profile do
     resources :invoices, only: %i[index show create destroy]
     resources :orders, except: %i[create update] do

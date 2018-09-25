@@ -1,0 +1,22 @@
+= form_with model: @user, class: 'registration-form' do |f|
+  p.h3.text-center.mb-4 Регистрация
+  .row
+    .col
+      .form-group
+        / i.fa.fa-envelope.prefix.grey-text.fa-2x
+        = f.label :full_name, 'Полное имя'
+        = f.text_field :full_name, placeholder: 'Полное имя', class: 'form-control'
+        .invalid-feedback.full-name
+      .form-group
+        / i.fa.fa-envelope.prefix.grey-text.fa-2x
+        = f.label :email, 'E-mail'
+        = f.email_field :email, placeholder: 'E-Mail', class: 'form-control'
+        .invalid-feedback.email
+      .form-group
+        / i.fa.fa-lock.prefix.grey-text.fa-2x
+        = f.label :password, 'Пароль'
+        = f.password_field :password, placeholder: 'Пароль', autocomplete: "off", class: 'form-control'
+        .invalid-feedback.password
+  .row.mt-3
+    .col.text-center
+      = f.submit 'Зарегистрироваться', class: 'btn btn-indigo'

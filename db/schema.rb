@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_090905) do
+ActiveRecord::Schema.define(version: 2018_09_25_073705) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 2018_09_18_090905) do
     t.string "bic"
     t.text "bank"
     t.text "bank_address"
-    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_accounts_on_company_id"
+    t.string "accountable_type"
+    t.bigint "accountable_id"
+    t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
   end
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -72,6 +73,9 @@ ActiveRecord::Schema.define(version: 2018_09_18_090905) do
     t.string "acts_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "own_company", default: false
+    t.bigint "profile_id"
+    t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -260,15 +264,17 @@ ActiveRecord::Schema.define(version: 2018_09_18_090905) do
     t.string "full_name"
     t.string "photo_url"
     t.bigint "profile_id"
+    t.string "password_digest"
+    t.string "guid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accounts", "companies"
   add_foreign_key "balances", "profiles"
   add_foreign_key "bill_transactions", "balances"
   add_foreign_key "comments", "orders"
+  add_foreign_key "companies", "profiles"
   add_foreign_key "employee_cvs", "proposals"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"

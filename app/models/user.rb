@@ -1,8 +1,12 @@
 class User < ApplicationRecord
-  belongs_to :profile
+  before_validation :set_guid
+  belongs_to :profile, optional: true
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable,
-    :trackable, :validatable, :omniauthable
+  validates :full_name, presence: true, length: { minimum: 8 }
+  validates :email, presence: true, uniqueness: true
+  validates :password, length: { minimum: 8 }
+
+  has_secure_password
 
   def self.find_or_register_facebook_oauth access_token
     if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
@@ -32,5 +36,9 @@ class User < ApplicationRecord
       else
       end
     end
+  end
+
+  def set_guid
+    self.guid = SecureRandom.uuid
   end
 end

@@ -1,10 +1,14 @@
 class Company < ApplicationRecord
-  has_many :accounts, dependent: :destroy
+  belongs_to :profile
+  has_many :accounts, as: :accountable, dependent: :destroy
 
   validates :name, :short_name, :address, :mail_address, :phone, :fax,
             :email, :inn, :kpp, :ogrn, :director, :acts_on, presence: true
 
   accepts_nested_attributes_for :accounts
+
+  scope :own, -> { where own_company: true }
+  scope :clients, -> { where own_company: false }
 
   require 'dadata_api'
 

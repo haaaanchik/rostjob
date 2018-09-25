@@ -1,5 +1,5 @@
 class Account < ApplicationRecord
-  belongs_to :company
+  belongs_to :accountable, polymorphic: true
 
   validates :account_number, :corr_account, :bic, :bank, :bank_address, presence: true
 

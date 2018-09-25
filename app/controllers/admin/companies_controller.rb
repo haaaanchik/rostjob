@@ -13,7 +13,7 @@ class Admin::CompaniesController < Admin::ApplicationController
   end
 
   def create
-    @company = Company.create(company_params)
+    @company = Company.create(company_params.merge(own_company: true))
     if @company.errors.messages.any?
       render 'new'
     else
@@ -49,6 +49,6 @@ class Admin::CompaniesController < Admin::ApplicationController
   end
 
   def companies
-    @companies ||= Company.order(name: :asc)
+    @companies ||= Company.own.order(name: :asc)
   end
 end

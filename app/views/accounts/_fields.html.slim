@@ -1,0 +1,34 @@
+.col-md-12
+  .card.mt-3
+    .card-header
+      h5 #{@profile.company.persisted? ? 'Редактировать расчётный счёт' : 'Новый расчётный счёт'}
+      = text_field :dadata, :search, class: 'form-control',
+               'data-auto-select' => "profile_company_bank_dadata",
+               'data-auto-url' => "/search_bank_dadata",
+               'data-autocomplete-on' => "dadata_search",
+        placeholder: 'Поиск банка. Введите БИК'
+    .card-body
+      = form.fields_for :accounts do |account_form|
+        .row
+          .col
+            = account_form.label :account_number, t(:account_number)
+            = account_form.text_field :account_number,
+              class: "form-control #{'is-invalid' unless errors[:'accounts.account_number'].empty?}"
+            .invalid-feedback #{errors[:'accounts.account_number'].first}
+            = account_form.label :bic, t(:bic)
+            = account_form.text_field :bic,
+              class: "form-control #{'is-invalid' unless errors[:'accounts.bic'].empty?}"
+            .invalid-feedback #{errors[:'accounts.bic'].first}
+            = account_form.label :bank_address, t(:bank_address)
+            = account_form.text_field :bank_address,
+              class: "form-control #{'is-invalid' unless errors[:'accounts.bank_address'].empty?}"
+            .invalid-feedback #{errors[:'accounts.bank_address'].first}
+          .col
+            = account_form.label :corr_account, t(:corr_account)
+            = account_form.text_field :corr_account,
+              class: "form-control #{'is-invalid' unless errors[:'accounts.corr_account'].empty?}"
+            .invalid-feedback #{errors[:'accounts.corr_account'].first}
+            = account_form.label :bank, t(:bank)
+            = account_form.text_field :bank,
+              class: "form-control #{'is-invalid' unless errors[:'accounts.bank'].empty?}"
+            .invalid-feedback #{errors[:'accounts.bank'].first}
