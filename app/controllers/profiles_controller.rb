@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   skip_before_action :create_profile, only: %i[new create]
+  before_action :redirect_if_already_created, only: %i[new create]
 
   def show
     profile
@@ -45,6 +46,10 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def redirect_if_already_created
+    redirect_to edit_profile_path if current_profile
+  end
 
   def company?
     params[:profile][:legal_form] == 'company'
