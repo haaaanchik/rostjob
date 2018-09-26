@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  belongs_to :profile
+  belongs_to :profile, optional: true
   has_many :accounts, as: :accountable, dependent: :destroy
 
   validates :name, :inn, presence: true

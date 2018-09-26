@@ -16,7 +16,7 @@ module NewInvoice
     private
 
     def seller
-      company = Company.first
+      company = Company.own.first
       account = company.accounts.first
       {
         short_name: company[:short_name],
@@ -35,7 +35,7 @@ module NewInvoice
 
     def buyer(profile)
       {
-        short_name: profile.company_name
+        short_name: profile.company.short_name
       }
     end
 

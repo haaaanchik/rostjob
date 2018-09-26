@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   # }
 
   resources :users, only: %i[new create update]
-  resource :profile, except: :destroy
+  resource :profile, except: %i[show destroy]
   namespace :profile do
     resources :invoices, only: %i[index show create destroy]
     resources :orders, except: %i[create update] do
