@@ -60,6 +60,6 @@ class ProfilesController < ApplicationController
                   company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
                                        :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
                                        accounts_attributes: %i[id account_number corr_account bic
-                                                               bank bank_address]])
+                                                               bank bank_address inn kpp]])
   end
 end

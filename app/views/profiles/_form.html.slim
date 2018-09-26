@@ -17,7 +17,8 @@
   .row
     .col.text-center
       .form-check.form-check-inline
-        = hidden_field_tag 'profile[legal_form]', 'company'
+        - legal_form = @profile.persisted? ? @profile.legal_form : 'company'
+        = hidden_field_tag 'profile[legal_form]', legal_form, class: 'hidden-legal-form'
         - legal_form_disabled = persisted || ['customer', nil].include?(profile_type)
         - options = { class: 'form-check-input' }
         - options[:disabled] = true if legal_form_disabled

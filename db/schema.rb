@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_193403) do
+ActiveRecord::Schema.define(version: 2018_09_26_201234) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2018_09_25_193403) do
     t.datetime "updated_at", null: false
     t.string "accountable_type"
     t.bigint "accountable_id"
+    t.string "inn"
+    t.string "kpp"
     t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
   end
 

@@ -25,3 +25,14 @@
       = account_form.text_field :bank_address,
         class: "form-control #{'is-invalid' unless errors[:'accounts.bank_address'].empty?}"
       .invalid-feedback #{errors[:'accounts.bank_address'].first}
+    - disabled = profile.private_person? ? '' : 'disabled'
+    .col-3.mb-2.inn_kpp class=disabled
+      = account_form.label :inn, t(:inn)
+      = account_form.text_field :inn,
+        class: "form-control #{'is-invalid' unless errors[:'accounts.inn'].empty?}"
+      .invalid-feedback #{errors[:'accounts.inn'].first}
+    .col-3.mb-2.inn_kpp class=disabled
+      = account_form.label :kpp, t(:kpp)
+      = account_form.text_field :kpp,
+        class: "form-control #{'is-invalid' unless errors[:'accounts.kpp'].empty?}"
+      .invalid-feedback #{errors[:'accounts.kpp'].first}

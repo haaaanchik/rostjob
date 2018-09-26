@@ -10,7 +10,7 @@
         placeholder: 'Поиск юридического лица. Введите ИНН, ОГРН, наименование юридического лица или ИП'
   .card-body
     = f.fields_for :company do |c|
-      = render partial: 'companies/fields', locals: { f: c , errors: errors , profile: profile }
+      = render partial: 'companies/fields', locals: { f: c, errors: errors, profile: profile }
       .card.mt-3
         .card-header
           h5 Платёжные реквизиты
@@ -20,4 +20,4 @@
                    'data-autocomplete-on' => "dadata_search",
             placeholder: 'Поиск банка. Введите БИК'
         .card-body
-          = render partial: 'accounts/fields', locals: { f: c, errors: errors }
+          = render partial: 'accounts/fields', locals: { f: c, errors: errors, profile: profile }

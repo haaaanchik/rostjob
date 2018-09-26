@@ -25,6 +25,7 @@ $(document).on('click', '[for^=profile_profile_type]', (event) ->
 
 $(document).on('click', '[for^=profile_legal_form]', (event) ->
   legal_form = $(this).data('legal-form')
+  $('.hidden-legal-form').val(legal_form)
   console.log legal_form
   if legal_form == 'private_person'
     show_private_person_interface()
@@ -35,11 +36,13 @@ $(document).on('click', '[for^=profile_legal_form]', (event) ->
 @show_company_interface = ->
   show_company_search()
   show_company_fields()
+  disable_account_inn_kpp()
 
 @show_private_person_interface = ->
   hide_company_search()
   hide_company_fields()
   show_private_person_fields()
+  enable_account_inn_kpp()
 
 @hide_company_fields = ->
   fields = $(".company-field")
@@ -84,7 +87,7 @@ $(document).on('click', '[for^=profile_legal_form]', (event) ->
   header.text(header_text)
 
 @disable_legal_form = ->
-  $('[id^=profile_legal_form]').prop('disabled', true)
+  $('[id^=profile_legal_form][type!=hidden]').prop('disabled', true)
   $('[for^=profile_legal_form]').addClass('disabled')
 
 @enable_legal_form = ->
@@ -93,3 +96,11 @@ $(document).on('click', '[for^=profile_legal_form]', (event) ->
 
 @set_legal_form_to_company = ->
   $('[id=profile_legal_form_company]').prop('checked', true)
+  $('.hidden-legal-form').val('company')
+
+@enable_account_inn_kpp = ->
+  $('.inn_kpp').removeClass('disabled')
+
+@disable_account_inn_kpp = ->
+  $('.inn_kpp').addClass('disabled')
+
