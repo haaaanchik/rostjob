@@ -1,29 +1,34 @@
 - errors = @profile.errors.messages
+- persisted = @profile.persisted?
+- profile_type = @profile.profile_type
 = form_with model: @profile, url: profile_path, class: 'new-profile-form' do |f|
   .row
     .col.text-center
       .form-check.form-check-inline
         - options = { class: 'form-check-input' }
-        - options[:disabled] = true if @profile.persisted?
+        - options[:disabled] = true if persisted
         = f.radio_button(:profile_type, 'customer', options.merge(checked: true))
         = f.label :profile_type, 'Заказчик (работодатель)', value: 'customer',
-          class: "from-check-label #{'disabled' if @profile.persisted?}"
+          class: "from-check-label #{'disabled' if persisted}", data: { profile_type: 'customer' }
       .form-check.form-check-inline
         = f.radio_button(:profile_type, 'contractor', options)
         = f.label :profile_type, 'Исполнитель (рекрутер)', value: 'contractor',
-          class: "from-check-label #{'disabled' if @profile.persisted?}"
-  .card.mt-3
-    .card-header
-      h5 Карточка предприятия
-      = text_field :dadata, :search, class: 'form-control',
-               'data-auto-select' => "profile_company_dadata",
-               'data-auto-url' => "/search_company_dadata",
-               'data-autocomplete-on' => "dadata_search",
-        placeholder: 'Поиск юридического лица. Введите ИНН, ОГРН, наименование компании или ИП'
-    .card-body
-      = f.fields_for :company do |c|
-        = render partial: 'companies/fields', locals: { f: c , errors: errors }
-        .row
-          = render partial: 'accounts/fields', locals: { form: c, errors: errors }
+          class: "from-check-label #{'disabled' if persisted}", data: { profile_type: 'contractor' }
+  .row
+    .col.text-center
+      .form-check.form-check-inline
+        = hidden_field_tag 'profile[legal_form]', 'company'
+        - legal_form_disabled = persisted || ['customer', nil].include?(profile_type)
+        - options = { class: 'form-check-input' }
+        - options[:disabled] = true if legal_form_disabled
+        = f.radio_button(:legal_form, 'company', options.merge(checked: true))
+        = f.label :legal_form, 'Юридическое лицо или ИП', value: 'company',
+          class: "from-check-label #{'disabled' if legal_form_disabled}", data: { legal_form: 'company' }
+      .form-check.form-check-inline
+        = f.radio_button(:legal_form, 'private_person', options)
+        = f.label :legal_form, 'Физическое лицо', value: 'private_person',
+          class: "from-check-label #{'disabled' if legal_form_disabled}", data: { legal_form: 'private_person' }
+
+  = render partial: 'company_card', locals: { f: f, errors: errors, profile: @profile }
   = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
   = link_to t('buttons.cancel'), root_path, class: 'btn btn-indigo mt-5'

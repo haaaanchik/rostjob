@@ -2,10 +2,14 @@ class Company < ApplicationRecord
   belongs_to :profile
   has_many :accounts, as: :accountable, dependent: :destroy
 
-  validates :name, :short_name, :address, :mail_address, :phone, :fax,
-            :email, :inn, :kpp, :ogrn, :director, :acts_on, presence: true
+  validates :name, :inn, presence: true
 
   accepts_nested_attributes_for :accounts
+
+  with_options on: :company do |o|
+    o.validates :short_name, :address, :mail_address, :phone, :fax,
+                :email, :ogrn, :director, :acts_on, presence: true
+  end
 
   scope :own, -> { where own_company: true }
   scope :clients, -> { where own_company: false }

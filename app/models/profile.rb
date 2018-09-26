@@ -14,10 +14,11 @@ class Profile < ApplicationRecord
   validation_flag :sm_registration
 
   PROFILE_TYPES = %w[customer contractor].freeze
-  COMPANIES = %w[employer agency].freeze
 
   # validates :contact_person, presence: true
   validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }
+  validate :private_person_can_only_be_a_contractor, if: :private_person?
+  validate :customer_can_only_be_a_company, if: :customer?
   # with_options unless: :validate_on_sm_registration? do |o|
   #   o.validates :phone, presence: true
   #   o.validates :email, presence: true
@@ -43,5 +44,31 @@ class Profile < ApplicationRecord
     event :delete_profile do
       transitions from: %i[created filled], to: :deleted
     end
+  end
+
+  def private_person?
+    legal_form == 'private_person'
+  end
+
+  def company?
+    legal_form == 'company'
+  end
+
+  def customer?
+    profile_type == 'customer'
+  end
+
+  def contractor?
+    profile_type == 'contractor'
+  end
+
+  def customer_can_only_be_a_company
+    return if customer? && company?
+    errors.add(:base, 'customer can only be a company')
+  end
+
+  def private_person_can_only_be_a_contractor
+    return if private_person? && contractor?
+    errors.add(:base, 'private person can only be a contractor')
   end
 end
