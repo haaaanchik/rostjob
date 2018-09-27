@@ -1,0 +1,13 @@
+.card
+  .card-body
+    h3 #{@price_group.persisted? ? 'Редактировать ценовую группу' : 'Новая ценовая группа'}
+    = form_with model: [:admin, @price_group] do |f|
+      .col.mb-2
+        = f.label :title, t(:title)
+        = f.text_field :title, class: 'form-control'
+        .invalid-feedback
+      .col.mb-2
+        = f.label :price, t(:price)
+        = f.text_field :price, class: 'form-control'
+        .invalid-feedback
+      = f.submit 'Сохранить', class: 'btn btn-indigo mt-5'

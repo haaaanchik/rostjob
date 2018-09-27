@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :cities
     resources :companies
     resources :accounts
+    resources :price_groups, except: :show
     resources :invoices, only: :index do
       member do
         put :pay

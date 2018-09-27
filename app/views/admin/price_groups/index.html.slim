@@ -1,0 +1,8 @@
+h1 Справочник ценовых групп
+= link_to 'Добавить ценовую группу', new_admin_price_group_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Наименование
+    th Цена
+    th Действия
+  = render @price_groups

@@ -1,0 +1,2 @@
+module Admin::PriceGroupsHelper
+end
