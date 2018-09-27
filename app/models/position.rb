@@ -1,7 +1,7 @@
 class Position < ApplicationRecord
   include Autocompletable
 
-  belongs_to :price_group, optional: true
+  belongs_to :price_group
 
   validates :title, presence: true
 
