@@ -1,4 +1,5 @@
 ru:
   price_group:
     title: 'Наименование ценовой группы'
-    price: 'Цена'
+    customer_price: 'Цена для заказчика'
+    contractor_price: 'Цена для исполнителя'

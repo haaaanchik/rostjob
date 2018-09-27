@@ -37,7 +37,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   private
 
   def price_group_params
-    params.require(:price_group).permit(:title, :price)
+    params.require(:price_group).permit(:title, :customer_price, :contractor_price)
   end
 
   def price_group
@@ -45,6 +45,6 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   end
 
   def price_groups
-    @price_groups ||= PriceGroup.order(title: :asc)
+    @price_groups ||= PriceGroup.all
   end
 end
