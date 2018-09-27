@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_201234) do
+ActiveRecord::Schema.define(version: 2018_09_27_110433) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -181,7 +181,16 @@ ActiveRecord::Schema.define(version: 2018_09_26_201234) do
     t.text "duties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "price_group_id"
+    t.index ["price_group_id"], name: "index_positions_on_price_group_id"
     t.index ["title"], name: "index_positions_on_title"
+  end
+
+  create_table "price_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.integer "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -284,6 +293,7 @@ ActiveRecord::Schema.define(version: 2018_09_26_201234) do
   add_foreign_key "invoices", "profiles"
   add_foreign_key "messages", "proposals"
   add_foreign_key "orders", "profiles"
+  add_foreign_key "positions", "price_groups"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
   add_foreign_key "users", "profiles"

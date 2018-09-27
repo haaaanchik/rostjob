@@ -1,6 +1,8 @@
 class Position < ApplicationRecord
   include Autocompletable
 
+  belongs_to :price_group, optional: true
+
   validates :title, presence: true
 
   def self.search_by_term(params)
