@@ -23,7 +23,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   def update
     price_group.update(price_group_params)
     if price_group.errors.messages.any?
-      render 'edit'
+      render json: errors_data(@price_group)
     else
       redirect_to admin_price_groups_path
     end
