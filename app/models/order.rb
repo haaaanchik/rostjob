@@ -8,13 +8,16 @@ class Order < ApplicationRecord
   has_many :comments
 
   validates :title, presence: true
+  validates :customer_price, :contractor_price, :total,
+            presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :contractor_price, presence: true, numericality: { only_integer: true }
   validates :number_of_employees, presence: true, numericality: { only_integer: true }
   validates :specialization, presence: true
   validates :city, presence: true
   validates :salary_from, presence: true, numericality: { only_integer: true }
   validates :salary_to, presence: true, numericality: { only_integer: true }
   validates :description, presence: true
-  validates :commission, presence: true, numericality: { only_integer: true }
+  # validates :commission, presence: true, numericality: { only_integer: true }
   # validates :payment_type, presence: true
   validates :warranty_period, presence: true, numericality: { only_integer: true }
   # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
@@ -57,6 +60,26 @@ class Order < ApplicationRecord
     event :complete do
       transitions from: %i[hidden published], to: :completed
     end
+  end
+
+  def customer_price
+    self[:customer_price] || 0
+  end
+
+  def contractor_price
+    self[:contractor_price] || 0
+  end
+
+  def total
+    self[:total] || 0
+  end
+
+  def warranty_period
+    self[:warranty_period] || 10
+  end
+
+  def calculate_total
+    customer_price * number_of_employees
   end
 
   def summ

@@ -19,7 +19,23 @@ $ ->
     # modal.find('.modal-body input').val(recipient)
   )
 
+$(document).on('change', '#order_number_of_employees', (event) ->
+  price = $(this).parent().data('price')
+  quantity = $(this).val()
+  total = quantity * price
+  $('#price').html(price)
+  $('#total').html(total)
+)
+
 @apply_position = (item) ->
+  price = item.price
+  quantity = $('#num_of_employees').find('input').val()
+  total = quantity * price
+  $('#order_position_id').val(item.id)
+  $('#position_title').html(item.label)
+  $('#num_of_employees').data('price', price)
+  $('#price').html(price)
+  $('#total').html(total)
   content = tinymce.get('order_description').getContent()
   html = "<p><strong>Должностные обязанности:</strong><br />#{item.duties}</p>"
   tinymce.get('order_description').setContent(html + content)

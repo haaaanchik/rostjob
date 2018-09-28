@@ -7,12 +7,12 @@ class Position < ApplicationRecord
 
   def self.search_by_term(params)
     cased = "%#{params.mb_chars.to_s.downcase}%"
-    all.select('title, duties')
+    all.includes(:price_group)
        .where('(LOWER(title) LIKE ?)', cased)
        .order('title asc')
   end
 
   def auto_search_text
-    Hash[label: title, duties: duties]
+    Hash[id: id, label: title, duties: duties, price: price_group.customer_price]
   end
 end

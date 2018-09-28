@@ -16,17 +16,22 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create
-    @order = orders.create(order_params)
-    if @order.valid?
-      redirect_to profile_orders_path
+    @order = orders.create(params_with_price)
+    @order.errors.add(:position_search, 'Выберите профессию') unless position
+    if @order.errors.messages.any?
+      render json: errors_data(@order)
     else
-      render 'new'
+      redirect_to profile_orders_path
     end
   end
 
   def update
-    order.update(order_params)
-    redirect_to profile_order_path(order)
+    order.update(params_with_price)
+    if @order.errors.messages.any?
+      render json: errors_data(order)
+    else
+      redirect_to profile_order_path(order)
+    end
   end
 
   def destroy
@@ -39,7 +44,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create_pre_publish
-    @order = orders.create(order_params)
+    @order = orders.create(params_with_price)
     if @order.valid?
       render 'pre_publish', locals: { order: @order }
     else
@@ -48,7 +53,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def update_pre_publish
-    order.update(order_params)
+    order.update(params_with_price)
     render 'pre_publish', locals: { order: order }
   end
 
@@ -73,12 +78,25 @@ class Profile::OrdersController < ApplicationController
 
   private
 
+  def params_with_price
+    order_params[:title] = position&.title
+    order_params[:customer_price] = position&.price_group&.customer_price
+    order_params[:contractor_price] = position&.price_group&.contractor_price
+    order_params[:total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
+    order_params
+  end
+
+  def position
+    @position ||= Position.find_by(id: order_params[:position_id])
+  end
+
   def order_params
-    params.require(:order).permit(:title, :specialization, :city, :salary_from,
-                                  :salary_to, :description, :commission, :payment_type,
-                                  :number_of_recruiters, :enterpreneurs_only,
-                                  :requirements_for_recruiters, :stop_list, :accepted,
-                                  :visibility, :state, :warranty_period, :number_of_employees)
+    @order_params ||= params.require(:order)
+                            .permit(:title, :specialization, :city, :salary_from, :position_id,
+                                    :salary_to, :description, :payment_type,
+                                    :number_of_recruiters, :enterpreneurs_only,
+                                    :requirements_for_recruiters, :stop_list, :accepted,
+                                    :visibility, :state, :warranty_period, :number_of_employees)
   end
 
   def balance

@@ -34,9 +34,11 @@
     padding: 3px;
 }
 
-.ui-autocomplete li a:hover {
-    background-color: #08C;
-}
+/* .ui-autocomplete li a:hover { */
+/*     background-color: #5c6bc0; */
+/*     color: white; */
+/*     font-weight: bold; */
+/* } */
 
 .ui-autocomplete-loading {
     background: white url('ui-anim_basic_16x16.gif') right center no-repeat;
@@ -80,6 +82,9 @@
 .ui-menu .ui-menu-item a.ui-state-hover,
 .ui-menu .ui-menu-item a.ui-state-active {
     margin: -1px;
+    background-color: #5c6bc0;
+    color: white;
+    font-weight: bold;
 }
 
 /*########################  search_patients  ##############################*/
