@@ -5,5 +5,5 @@ tr
   td
     = link_to edit_admin_price_group_path(price_group) do
       i.far.fa-edit
-    = link_to admin_price_group_path(price_group), method: :delete, data: { confirm: 'Вы уверены?' } do
+    = link_to admin_price_group_path(price_group), method: :delete, data: { confirm: 'Вы уверены?' }, remote: true do
       i.far.fa-trash-alt

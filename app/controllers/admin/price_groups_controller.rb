@@ -31,7 +31,11 @@ class Admin::PriceGroupsController < Admin::ApplicationController
 
   def destroy
     price_group.destroy
-    redirect_to admin_price_groups_path
+    if price_group.errors.messages.any?
+      render json: errors_data(@price_group)
+    else
+      redirect_to admin_price_groups_path
+    end
   end
 
   private

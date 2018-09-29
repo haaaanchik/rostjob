@@ -1,4 +1,12 @@
 ru:
+  activerecord:
+    errors:
+      models:
+        price_group:
+          attributes:
+            base:
+              restrict_dependent_destroy:
+                has_many: 'Невозможно удалить ценовую группу содержащую професии'
   price_group:
     title: 'Наименование ценовой группы'
     customer_price: 'Цена для заказчика'
