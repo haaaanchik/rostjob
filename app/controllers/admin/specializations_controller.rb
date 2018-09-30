@@ -1,6 +1,6 @@
 class Admin::SpecializationsController < Admin::ApplicationController
   def index
-    specializations
+    paginated_specializations
   end
 
   def new
@@ -38,6 +38,10 @@ class Admin::SpecializationsController < Admin::ApplicationController
 
   def specialization_params
     params.require(:specialization).permit(:title)
+  end
+
+  def paginated_specializations
+    @paginated_specializations ||= specializations.page(params[:page])
   end
 
   def specialization

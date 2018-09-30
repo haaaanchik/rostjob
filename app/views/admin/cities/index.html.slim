@@ -4,4 +4,5 @@ table.table
   tr
     th Наименование
     th Действия
-  = render @cities
+  = render @paginated_cities
+= paginate @paginated_cities

@@ -3,4 +3,5 @@ table.table.table-hover
   tr
     th №
     th Профессия
-  = render @orders
+  = render @paginated_orders
+= paginate @paginated_orders

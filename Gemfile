@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'kaminari'
 gem 'prawn'
 gem 'prawn-table'
 gem 'ru_propisju'

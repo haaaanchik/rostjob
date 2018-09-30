@@ -7,5 +7,6 @@ table.table
     th Контрагент
     th Статус
     th Действия
-  = render @invoices
+  = render @paginated_invoices
+= paginate @paginated_invoices
 

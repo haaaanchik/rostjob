@@ -4,4 +4,5 @@ table.table
   tr
     th Наименование
     th Действия
-  = render @specializations
+  = render @paginated_specializations
+= paginate @paginated_specializations

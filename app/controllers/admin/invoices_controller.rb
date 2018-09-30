@@ -1,6 +1,6 @@
 class Admin::InvoicesController < Admin::ApplicationController
   def index
-    invoices
+    paginated_invoices
   end
 
   def pay
@@ -13,6 +13,10 @@ class Admin::InvoicesController < Admin::ApplicationController
 
   def balance
     invoice.profile.balance
+  end
+
+  def paginated_invoices
+    @paginated_invoices ||= invoices.page(params[:page])
   end
 
   def invoice

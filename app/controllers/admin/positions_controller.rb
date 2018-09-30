@@ -2,7 +2,7 @@ class Admin::PositionsController < Admin::ApplicationController
   before_action :price_groups, only: %i[index new edit]
 
   def index
-    positions
+    paginated_positions
   end
 
   def new
@@ -44,6 +44,10 @@ class Admin::PositionsController < Admin::ApplicationController
 
   def position_params
     params.require(:position).permit(:title, :duties, :price_group_id)
+  end
+
+  def paginated_positions
+    @paginated_positions ||= positions.page(params[:page])
   end
 
   def position

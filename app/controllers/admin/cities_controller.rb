@@ -1,6 +1,6 @@
 class Admin::CitiesController < Admin::ApplicationController
   def index
-    cities
+    paginated_cities
   end
 
   def new
@@ -38,6 +38,10 @@ class Admin::CitiesController < Admin::ApplicationController
 
   def city_params
     params.require(:city).permit(:title)
+  end
+
+  def paginated_cities
+    @paginated_cities ||= cities.page(params[:page])
   end
 
   def city

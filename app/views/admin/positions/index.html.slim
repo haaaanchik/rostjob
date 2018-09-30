@@ -5,4 +5,5 @@ table.table
     th Наименование
     th Ценовая группа
     th Действия
-  = render @positions
+  = render @paginated_positions
+= paginate @paginated_positions

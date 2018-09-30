@@ -1,6 +1,6 @@
 class Admin::OrdersController < Admin::ApplicationController
   def index
-    orders
+    paginated_orders
   end
 
   def show
@@ -23,6 +23,10 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   private
+
+  def paginated_orders
+    @paginated_orders ||= orders.page(params[:page])
+  end
 
   def order
     @order ||= orders.find(params[:id])
