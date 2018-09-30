@@ -1,6 +1,6 @@
 class Profile::InvoicesController < ApplicationController
   def index
-    @invoice = Invoice.new
+    @invoice = Invoice.new(amount: params[:amount])
     invoices
   end
 

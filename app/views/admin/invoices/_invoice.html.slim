@@ -2,7 +2,7 @@ tr
   td #{invoice.invoice_number}
   td #{l(invoice.created_at, format: :short)}
   td #{invoice.amount}
-  td #{invoice.profile.company_name}
+  td #{invoice.buyer['short_name']}
   td
     span.badge class=(invoice.created? ? 'badge-info' : 'badge-success') #{t("invoice.state.#{invoice.state}")}
   td

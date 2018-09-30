@@ -46,6 +46,7 @@ Rails.application.routes.draw do
         get :pre_publish
         put :publish
         put :complete
+        put :cancel
       end
       scope module: :orders do
         resources :proposals, only: %i[index show update] do

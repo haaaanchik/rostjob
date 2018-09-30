@@ -16,7 +16,7 @@ class Admin::OrdersController < Admin::ApplicationController
   def reject
     order.reject!
     order.comments.create(text: params[:reason])
-    amount = order.summ
+    amount = order.total
     balance = order.profile.balance
     balance.deposit(amount, "Возврат оплаты за публикацию заявки №#{order.id}. Причина: не прошла модерацию.")
     redirect_to admin_orders_path

@@ -35,14 +35,28 @@ class Order < ApplicationRecord
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true
+    state :publication_started
+    state :paid
     state :moderation
     state :published
     state :rejected
     state :hidden
     state :completed
 
+    event :cancel do
+      transitions from: %i[waiting_for_payment paid moderation rejected], to: :draft
+    end
+
+    event :start_publication do
+      transitions from: %i[draft rejected], to: :publication_started
+    end
+
+    event :pay do
+      transitions from: :waiting_for_payment, to: :paid
+    end
+
     event :to_moderation do
-      transitions from: %i[draft rejected hidden], to: :moderation
+      transitions from: :paid, to: :moderation
     end
 
     event :publish do
@@ -60,6 +74,10 @@ class Order < ApplicationRecord
     event :complete do
       transitions from: %i[hidden published], to: :completed
     end
+  end
+
+  def can_be_paid?
+    profile.balance.amount >= total
   end
 
   def customer_price
@@ -80,10 +98,6 @@ class Order < ApplicationRecord
 
   def calculate_total
     customer_price * number_of_employees
-  end
-
-  def summ
-    commission * number_of_employees
   end
 
   def selected_candidates
