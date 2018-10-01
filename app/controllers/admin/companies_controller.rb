@@ -13,18 +13,20 @@ class Admin::CompaniesController < Admin::ApplicationController
   end
 
   def create
-    @company = Company.create(company_params.merge(own_company: true))
+    @company = Company.build(company_params.merge(own_company: true))
+    @company.save(context: :company)
     if @company.errors.messages.any?
-      render 'new'
+      render json: errors_data(@company)
     else
       redirect_to admin_companies_path
     end
   end
 
   def update
-    company.update(company_params)
+    company.assign_attributes(company_params)
+    company.save(context: :company)
     if company.errors.messages.any?
-      render 'edit'
+      render json: errors_data(@company)
     else
       redirect_to admin_companies_path
     end
