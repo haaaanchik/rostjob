@@ -6,6 +6,7 @@ class Admin::InvoicesController < Admin::ApplicationController
   def pay
     invoice.pay!
     balance.deposit(invoice.amount, 'Пополнение баланса')
+    OrderPublicationJob.perform_later(invoice.id)
     redirect_to admin_invoices_path
   end
 
