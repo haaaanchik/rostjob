@@ -13,7 +13,7 @@ class Admin::CompaniesController < Admin::ApplicationController
   end
 
   def create
-    @company = Company.build(company_params.merge(own_company: true))
+    @company = Company.new(company_params.merge(own_company: true))
     @company.save(context: :company)
     if @company.errors.messages.any?
       render json: errors_data(@company)
