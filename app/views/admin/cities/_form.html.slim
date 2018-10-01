@@ -1,11 +1,10 @@
 .card
   .card-body
     h3 #{@city.persisted? ? 'Редактировать город' : 'Новый город'}
-    - errors = @city.errors.messages
-    = form_with model: [:admin, @city], local: true do |f|
-      .md-form
-        i class='fa fa-user prefix grey-text'
-        = f.text_field :title, class: "form-control #{'invalid' unless errors[:title].empty?}"
-        = f.label :title, 'Наименование', class: 'active', data: { error: (errors[:title].first unless errors[:title].empty?) }
-
-      = f.submit 'Сохранить', class: 'btn btn-indigo mt-5'
+    = form_with model: [:admin, @city] do |f|
+      .form-group
+        = f.label :title, t('city.title')
+        = f.text_field :title, class: "form-control"
+        .invalid-feedback
+      = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
+      = link_to t('buttons.cancel'), admin_cities_path, class: 'btn btn-indigo mt-5'

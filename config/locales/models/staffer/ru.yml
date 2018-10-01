@@ -1,0 +1,6 @@
+ru:
+  staffer:
+    name: 'Полное имя'
+    login: 'Логин'
+    password: 'Пароль'
+    roles: 'Роли'
