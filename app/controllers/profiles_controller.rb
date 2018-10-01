@@ -26,6 +26,7 @@ class ProfilesController < ApplicationController
       render json: errors_data(@profile)
     else
       current_user.update_attribute(:profile_id, @profile.id)
+      @profile.create_balance
       redirect_to root_path
     end
   end
