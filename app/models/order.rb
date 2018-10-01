@@ -35,8 +35,7 @@ class Order < ApplicationRecord
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true
-    state :publication_started
-    state :paid
+    state :waiting_for_payment
     state :moderation
     state :published
     state :rejected
@@ -44,19 +43,15 @@ class Order < ApplicationRecord
     state :completed
 
     event :cancel do
-      transitions from: %i[waiting_for_payment paid moderation rejected], to: :draft
+      transitions from: %i[waiting_for_payment moderation rejected], to: :draft
     end
 
-    event :start_publication do
-      transitions from: %i[draft rejected], to: :publication_started
+    event :wait_for_payment do
+      transitions from: :draft, to: :waiting_for_payment
     end
 
-    event :pay do
-      transitions from: :waiting_for_payment, to: :paid
-    end
-
-    event :to_moderation do
-      transitions from: :paid, to: :moderation
+    event :moderate do
+      transitions from: %i[rejected draft waiting_for_payment], to: :moderation
     end
 
     event :publish do
@@ -77,7 +72,7 @@ class Order < ApplicationRecord
   end
 
   def can_be_paid?
-    profile.balance.amount >= total
+    balance.amount >= total
   end
 
   def customer_price
@@ -102,5 +97,43 @@ class Order < ApplicationRecord
 
   def selected_candidates
     candidates.select { |c| c.hired? || c.fired? }
+  end
+
+  def to_draft
+    cancel! if may_cancel?
+  end
+
+  def to_waiting_for_payment
+    wait_for_payment! if may_wait_for_payment?
+  end
+
+  def to_moderation
+    return unless balance.withdraw(total, "Публикация заявки #{id}")
+    moderate! if may_moderate?
+  end
+
+  def to_published
+    return unless may_publish?
+    publish!
+    comments.create(text: 'Заявка допущена к публикации')
+  end
+
+  def to_rejected(reason)
+    return unless may_reject?
+    reject!
+    comments.create(text: reason)
+    balance.deposit(total, "Возврат оплаты за публикацию заявки №#{id}. Причина: не прошла модерацию.")
+  end
+
+  def to_hidden
+    hide! if may_hide?
+  end
+
+  def to_completed
+    complete! if may_complete?
+  end
+
+  def balance
+    profile.balance
   end
 end

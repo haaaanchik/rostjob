@@ -39,17 +39,12 @@ class Profile::OrdersController < ApplicationController
     redirect_to profile_orders_path
   end
 
-  def pre_publish
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
-  end
-
   def create_pre_publish
     @order = orders.create(params_with_price)
     @order.errors.add(:position_search, 'Выберите профессию') unless position
     if @order.errors.messages.any?
       render json: errors_data(order)
     else
-      @order.wait_for_payment!
       redirect_to pre_publish_profile_order_path(@order)
     end
   end
@@ -63,28 +58,32 @@ class Profile::OrdersController < ApplicationController
     end
   end
 
+  def pre_publish
+    order.to_waiting_for_payment unless order.can_be_paid?
+    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
+  end
+
   def publish
-    if balance.withdrawal(order.total, "Публикация заявки #{order.id}")
-      order.pay!
-      order.to_moderation!
+    if order.to_moderation
       redirect_to profile_orders_path
     else
-      redirect_to profile_invoices_path
+      redirect_to pre_publish_profile_order_path(order)
+      # redirect_to profile_invoices_path
     end
   end
 
   def hide
-    order.hide!
+    order.to_hidden
     redirect_to profile_orders_path
   end
 
   def complete
-    order.complete!
+    order.to_completed
     redirect_to profile_orders_path
   end
 
   def cancel
-    order.cancel! if order.may_cancel?
+    order.to_draft
     redirect_to profile_orders_path
   end
 

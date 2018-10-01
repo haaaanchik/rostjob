@@ -8,17 +8,12 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def accept
-    order.publish!
-    order.comments.create(text: 'Заявка допущена к публикации')
+    order.to_published
     redirect_to admin_orders_path
   end
 
   def reject
-    order.reject!
-    order.comments.create(text: params[:reason])
-    amount = order.total
-    balance = order.profile.balance
-    balance.deposit(amount, "Возврат оплаты за публикацию заявки №#{order.id}. Причина: не прошла модерацию.")
+    order.to_rejected(params[:reason])
     redirect_to admin_orders_path
   end
 
