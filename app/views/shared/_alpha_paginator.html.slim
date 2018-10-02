@@ -1,0 +1,9 @@
+- ph = path_helper.to_sym
+nav aria-label="pagination example"
+  ul.pagination.pagination-circle.pg-blue.mb-0
+    - letters = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('')
+    - letters.each do |letter|
+      li.page-item class="#{'active' if active_letter == letter}"
+        = link_to letter, send(ph, { letter: letter }), class: 'page-link'
+    li.page-item class="#{'active' unless active_letter}"
+      = link_to 'Все', send(ph), class: 'page-link'

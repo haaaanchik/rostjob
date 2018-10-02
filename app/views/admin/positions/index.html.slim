@@ -1,5 +1,10 @@
-h1 Справочник должностей
-= link_to 'Добавить должность', new_admin_position_path, class: 'btn btn-indigo'
+.col-6
+  h1 Справочник профессий
+.col-6.text-right
+  = link_to 'Добавить новую профессию', new_admin_position_path,
+    class: 'btn btn-indigo new_position'
+.col.mt-3
+  = render partial: 'shared/alpha_paginator', locals: { active_letter: @letter, path_helper: 'admin_positions_path' }
 table.table
   tr
     th Наименование

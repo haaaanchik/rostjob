@@ -10,9 +10,14 @@ class Position < ApplicationRecord
     all.includes(:price_group)
        .where('(LOWER(title) LIKE ?)', cased)
        .order('title asc')
+       .limit(50)
   end
 
   def auto_search_text
     Hash[id: id, label: title, duties: duties, price: price_group.customer_price]
+  end
+
+  def search
+    nil
   end
 end

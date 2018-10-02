@@ -1,5 +1,9 @@
-h1 Справочник специализаций
-= link_to 'Добавить специализацию', new_admin_specialization_path, class: 'btn btn-indigo'
+.col-6
+  h1 Справочник специализаций
+.col-6.text-right
+  = link_to 'Добавить специализацию', new_admin_specialization_path, class: 'btn btn-indigo'
+.col.mt-3
+  = render partial: 'shared/alpha_paginator', locals: { active_letter: @letter, path_helper: 'admin_specializations_path' }
 table.table
   tr
     th Наименование

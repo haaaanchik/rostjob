@@ -1,5 +1,9 @@
-h1 Справочник городов
-= link_to 'Добавить город', new_admin_city_path, class: 'btn btn-indigo'
+.col-6
+  h1 Справочник городов
+.col-6.text-right
+  = link_to 'Добавить город', new_admin_city_path, class: 'btn btn-indigo'
+.col.mt-3
+  = render partial: 'shared/alpha_paginator', locals: { active_letter: @letter, path_helper: 'admin_cities_path' }
 table.table
   tr
     th Наименование

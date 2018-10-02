@@ -1,6 +1,6 @@
 .card
   .card-body
-    h3 #{@position.persisted? ? 'Редактировать должность' : 'Новая должность'}
+    h3 #{@position.persisted? ? 'Редактировать профессию' : 'Новая профессия'}
     = form_with model: [:admin, @position] do |f|
       .col.mb-2
         = f.label :title, t('position.title')
