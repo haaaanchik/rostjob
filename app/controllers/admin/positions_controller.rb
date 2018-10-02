@@ -1,8 +1,6 @@
 class Admin::PositionsController < Admin::ApplicationController
   before_action :price_groups, only: %i[index new edit]
 
-  ALPHABET = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('').freeze
-
   def index
     paginated_positions
   end
@@ -56,15 +54,14 @@ class Admin::PositionsController < Admin::ApplicationController
     @position ||= positions.find(params[:id])
   end
 
-  def letter_is_valid
-    params[:letter] && ALPHABET.include?(params[:letter])
+  def term_is_valid
+    params[:term] && !params[:term].empty?
   end
 
   def positions
-    @positions ||= if letter_is_valid
-                     @letter = params[:letter]
-                     letter = "#{params[:letter].downcase}%"
-                     Position.where('lower(title) like ?', letter).order(title: :asc)
+    @positions ||= if term_is_valid
+                     term = "#{params[:term].downcase}%"
+                     Position.where('lower(title) like ?', term).order(title: :asc)
                    else
                      Position.order(title: :asc)
                    end

@@ -1,6 +1,4 @@
 class Admin::SpecializationsController < Admin::ApplicationController
-  ALPHABET = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('').freeze
-
   def index
     paginated_specializations
   end
@@ -50,19 +48,14 @@ class Admin::SpecializationsController < Admin::ApplicationController
     @specialization ||= Specialization.find(params[:id])
   end
 
-  def specializations
-    @specializations ||= Specialization.order(title: :asc)
-  end
-
-  def letter_is_valid
-    params[:letter] && ALPHABET.include?(params[:letter])
+  def term_is_valid
+    params[:term] && !params[:term].empty?
   end
 
   def specializations
-    @specializations ||= if letter_is_valid
-                           @letter = params[:letter]
-                           letter = "#{params[:letter].downcase}%"
-                           Specialization.where('lower(title) like ?', letter)
+    @specializations ||= if term_is_valid
+                           term = "#{params[:term].downcase}%"
+                           Specialization.where('lower(title) like ?', term)
                                          .order(title: :asc)
                          else
                            Specialization.order(title: :asc)

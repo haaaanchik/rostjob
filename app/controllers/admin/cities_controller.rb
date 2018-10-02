@@ -1,6 +1,4 @@
 class Admin::CitiesController < Admin::ApplicationController
-  ALPHABET = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('').freeze
-
   def index
     paginated_cities
   end
@@ -50,15 +48,14 @@ class Admin::CitiesController < Admin::ApplicationController
     @city ||= cities.find(params[:id])
   end
 
-  def letter_is_valid
-    params[:letter] && ALPHABET.include?(params[:letter])
+  def term_is_valid
+    params[:term] && !params[:term].empty?
   end
 
   def cities
-    @cities ||= if letter_is_valid
-                  @letter = params[:letter]
-                  letter = "#{params[:letter].downcase}%"
-                  City.where('lower(title) like ?', letter).order(title: :asc)
+    @cities ||= if term_is_valid
+                  term = "#{params[:term].downcase}%"
+                  City.where('lower(title) like ?', term).order(title: :asc)
                 else
                   City.order(title: :asc)
                 end

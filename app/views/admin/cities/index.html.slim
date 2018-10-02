@@ -2,8 +2,13 @@
   h1 Справочник городов
 .col-6.text-right
   = link_to 'Добавить город', new_admin_city_path, class: 'btn btn-indigo'
-.col.mt-3
-  = render partial: 'shared/alpha_paginator', locals: { active_letter: @letter, path_helper: 'admin_cities_path' }
+.col-9.mt-3
+  = text_field :admin_city, :search, class: "form-control",
+    placeholder: 'Начните набирать название города',
+    data: { 'auto-url' => '/search_city', 'auto-select' => 'search_term',
+    'auto-add-text' => false , 'autocomplete-on' => 'admin_city_search' }
+.col.mt-1
+  = link_to 'Показать все', admin_cities_path, class: 'btn btn-indigo'
 table.table
   tr
     th Наименование
