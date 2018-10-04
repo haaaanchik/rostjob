@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
+  resource :price, only: :show
+
   namespace :admin do
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'

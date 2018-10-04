@@ -23,18 +23,19 @@ header
             = link_to 'Вход', login_path, class: 'nav-link'
           li.nav-item
             = link_to 'Регистрация', new_user_path, class: 'nav-link'
-  #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
-    .mask.rgba-stylish-light
-      .container.h-100.d-flex.justify-content-center.align-items-center#top-section
-        .row.pt-5.mt-3
-          .col-md-12.mb-3
-            .intro-iKnfo-content.text-center
-              h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
-                | BEST-HR
-              h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
-                | Сервис для размещения заявок на подбор специалистов любого уровня
-              = link_to 'Разместить заявку', new_user_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
-              = link_to 'Найти рекрутера', new_user_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
+  - if root_path?
+    #home.view.jarallax[data-jarallax="{'speed': 0.2}" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/img%20%2853%29.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;"]
+      .mask.rgba-stylish-light
+        .container.h-100.d-flex.justify-content-center.align-items-center#top-section
+          .row.pt-5.mt-3
+            .col-md-12.mb-3
+              .intro-iKnfo-content.text-center
+                h1.display-2.white-text.mb-5.wow.fadeInDown[data-wow-delay="0.3s"]
+                  | BEST-HR
+                h3.text-uppercase.white-text.mb-5.mt-1.wow.fadeInDown[data-wow-delay="0.3s"]
+                  | Сервис для размещения заявок на подбор специалистов любого уровня
+                = link_to 'Разместить заявку', new_user_path, class: 'btn btn-indigo btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
+                = link_to 'Прайс', price_path, class: 'btn btn-success btn-lg wow fadeInDown', data: {'wow-delay'=>'0.3s'}
 main
   #modal_container
   .container

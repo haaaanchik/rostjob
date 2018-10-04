@@ -1,0 +1,20 @@
+.row
+  .col-6
+    h1 Прайс
+  .col-7.mt-3
+    = text_field :price_position, :search, class: "form-control",
+      placeholder: 'Наберите название профессии'
+  .col-1.mt-1
+    button#price_search.btn.btn-indigo Найти
+  .col-3.mt-1.ml-5
+    = link_to 'Показать все', price_path, class: 'btn btn-indigo'
+  table.table.mt-3
+    tr
+      th Профессия
+      th Цена
+    = render partial: 'price_item', collection: @paginated_price_items
+.row
+  .col
+  .col
+    = paginate @paginated_price_items
+  .col
