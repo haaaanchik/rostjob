@@ -21,21 +21,34 @@
               |Заявка не прошла модерацию. Причина: #{order.comments.last.text}
 
     .card-body
-      table.table
+      table.table.table-bordered
+        tr.text-center
+          th.align-middle Профессия
+          th.align-middle Требуемое количество сотрудников
+          th.align-middle Цена
+          th.align-middle Сумма
         tr
-          th Уровень зарплаты
-          th Город
-          th Гарантийный период
-        tr
-          td #{order.salary_from} - #{order.salary_to}
-          td #{order.city}
-          td #{order.warranty_period}
-      hr
-
-      h5 Специализация:
-      span #{order.specialization}
-      h5 Описание вакансии:
-      == order.description
+          td#position_title.align-middle #{order.title}
+          td#num_of_employees.align-middle.text-center style="width: 10%" data-price="#{order.customer_price}"
+            = order.number_of_employees
+          td#price.align-middle.text-right style="width: 10%" #{order.customer_price}
+          td#total.align-middle.text-right style="width: 10%" #{order.total}
+    .ml-4
+      dl.row
+        dt.col-sm-4 Специализация
+        dd.col-sm-8 = order.specialization
+        dt.col-sm-4 Город
+        dd.col-sm-8 = order.city
+        dt.col-sm-4 Зарплата
+        dd.col-sm-8 #{order.salary_from} - #{order.salary_to}
+        dt.col-sm-4 Описание вакансии
+        dd.col-sm-8 == order.description
+        - if !order.requirements_for_recruiters.empty?
+          dt.col-sm-4 Требования к рекрутерам
+          dd.col-sm-8 = order.requirements_for_recruiters
+        - if !order.stop_list.empty?
+          dt.col-sm-4 Стоп-лист кандидатов
+          dd.col-sm-8 = order.stop_list
   .card.border-light.mt-2
     .card-header
       span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }

@@ -37,5 +37,9 @@ $(document).on('change', '#order_number_of_employees', (event) ->
   $('#price').html(price)
   $('#total').html(total)
   content = tinymce.get('order_description').getContent()
-  html = "<p><strong>Должностные обязанности:</strong><br />#{item.duties}</p>"
+  if item.duties == null
+    duties = ' '
+  else
+    duties = item.duties
+  html = "<p><strong>Должностные обязанности:</strong><br />#{duties}</p>"
   tinymce.get('order_description').setContent(html + content)
