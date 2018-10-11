@@ -18,6 +18,8 @@ class SearchApp
                   Company.search_company_dadata(params['term'])
                 when '/search_bank_dadata'
                   Account.search_bank_dadata(params['term'])
+                when '/search_ifns'
+                  Company.search_ifns_dadata(params['term'])
                 else
                   ''
                 end

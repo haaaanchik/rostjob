@@ -13,6 +13,28 @@
   $('#profile_company_attributes_accounts_attributes_0_bank').val items.bank
   $('#profile_company_attributes_accounts_attributes_0_bank_address').val items.bank_address
 
+@profile_company_ifns = (item) ->
+  $('#profile_company_attributes_tax_office_attributes_payment_name').val "#{item.payment_name} (#{item.name})"
+  $('#profile_company_attributes_tax_office_attributes_inn').val item.inn
+  $('#profile_company_attributes_tax_office_attributes_kpp').val item.kpp
+  $('#profile_company_attributes_tax_office_attributes_bank_name').val item.bank_name
+  $('#profile_company_attributes_tax_office_attributes_bank_bic').val item.bank_bic
+  $('#profile_company_attributes_tax_office_attributes_bank_account').val item.bank_account
+  oktmo_arr = item.oktmo.split(',')
+  oktmo_list = ''
+  oktmo_arr.forEach (item, index, arr) ->
+    oktmo_list += "<a class='dropdown-item'>#{item}</a>"
+  $('.oktmo-list').html(oktmo_list)
+  if oktmo_arr.length == 1
+    $('#profile_company_attributes_tax_office_attributes_oktmo').val oktmo_arr[0]
+  else
+    $('#profile_company_attributes_tax_office_attributes_oktmo').val ''
+
+$('.oktmo-list').on('click', '.dropdown-item', (event) ->
+  item = $(event.currentTarget).text()
+  $('#profile_company_attributes_tax_office_attributes_oktmo').val item
+)
+
 $(document).on('click', '[for^=profile_profile_type]', (event) ->
   profile_type = $(this).data('profile-type')
   if profile_type == 'customer'
@@ -37,12 +59,27 @@ $(document).on('click', '[for^=profile_legal_form]', (event) ->
   show_company_search()
   show_company_fields()
   disable_account_inn_kpp()
+  hide_tax_office_fields()
 
 @show_private_person_interface = ->
   hide_company_search()
   hide_company_fields()
   show_private_person_fields()
+  show_tax_office_fields()
   enable_account_inn_kpp()
+
+@show_tax_office_fields = ->
+  card = $('.tax-office')
+  tax_office_fields = card.find('input')
+  tax_office_fields.prop('disabled', false)
+  card.removeClass('hide-me')
+
+@hide_tax_office_fields = ->
+  card = $('.tax-office')
+  card.addClass('hide-me')
+  tax_office_fields = card.find('input')
+  tax_office_fields.prop('disabled', true)
+
 
 @hide_company_fields = ->
   fields = $(".company-field")
@@ -103,4 +140,3 @@ $(document).on('click', '[for^=profile_legal_form]', (event) ->
 
 @disable_account_inn_kpp = ->
   $('.inn_kpp').addClass('disabled')
-

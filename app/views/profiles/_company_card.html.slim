@@ -21,3 +21,14 @@
             placeholder: 'Поиск банка. Введите БИК'
         .card-body
           = render partial: 'accounts/fields', locals: { f: c, errors: errors, profile: profile }
+      - disabled = !profile.private_person?
+      .card.mt-3.tax-office class="#{'hide-me' if disabled}"
+        .card-header
+          h5 Реквизиты ИФНС для уплаты налогов физического лица
+          = text_field :dadata, :search, class: 'form-control',
+                   'data-auto-select' => "profile_company_ifns",
+                   'data-auto-url' => "/search_ifns",
+                   'data-autocomplete-on' => true,
+            placeholder: 'Поиск ИФНС. Введите наименование или код вашей ИФНС.'
+        .card-body
+          = render partial: 'companies/tax_office_fields', locals: { f: c, errors: errors, profile: profile, disabled: disabled }

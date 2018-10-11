@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_211348) do
+ActiveRecord::Schema.define(version: 2018_10_08_145544) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -263,6 +263,21 @@ ActiveRecord::Schema.define(version: 2018_09_28_211348) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tax_offices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "code"
+    t.string "payment_name"
+    t.string "inn"
+    t.string "kpp"
+    t.string "oktmo"
+    t.string "bank_name"
+    t.string "bank_bic"
+    t.string "bank_account"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_tax_offices_on_company_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -301,5 +316,6 @@ ActiveRecord::Schema.define(version: 2018_09_28_211348) do
   add_foreign_key "positions", "price_groups"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
+  add_foreign_key "tax_offices", "companies"
   add_foreign_key "users", "profiles"
 end

@@ -43,4 +43,10 @@ module DadataApi
     data = { query: params, count: 10 }
     post_dadata(url, data)
   end
+
+  def self.get_ifns(params)
+    url = URI("#{DEF_URL}fns_unit")
+    data = { query: params, count: 10 }
+    post_dadata(url, data)
+  end
 end

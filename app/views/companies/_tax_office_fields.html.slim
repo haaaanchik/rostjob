@@ -1,0 +1,43 @@
+- options = {}
+- options[:disabled] = disabled
+= f.fields_for :tax_office do |ff|
+  .row
+    .col-12.mb-2
+      = ff.label :payment_name, t('tax_office.payment_name')
+      = ff.text_field :payment_name,
+        { class: "form-control #{'is-invalid' unless errors[:payment_name].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:payment_name].first}
+    .col-6.mb-2
+      = ff.label :inn, t('tax_office.inn')
+      = ff.text_field :inn,
+        { class: "form-control #{'is-invalid' unless errors[:inn].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:inn].first}
+    .col-6.mb-2
+      = ff.label :kpp, t('tax_office.kpp')
+      = ff.text_field :kpp,
+        { class: "form-control #{'is-invalid' unless errors[:kpp].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:kpp].first}
+    .col-6.mb-2
+      = ff.label :bank_name, t('tax_office.bank_name')
+      = ff.text_field :bank_name,
+        { class: "form-control #{'is-invalid' unless errors[:bank_name].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:bank_name].first}
+    .col-6.mb-2
+      = ff.label :bank_bic, t('tax_office.bank_bic')
+      = ff.text_field :bank_bic,
+        { class: "form-control #{'is-invalid' unless errors[:bank_bic].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:bank_bic].first}
+    .col-6.mb-2
+      = ff.label :bank_account, t('tax_office.bank_account')
+      = ff.text_field :bank_account,
+        { class: "form-control #{'is-invalid' unless errors[:bank_account].empty?}" }.merge(options)
+      .invalid-feedback #{errors[:bank_account].first}
+    .col-6.mb-2
+      = ff.label :oktmo, t('tax_office.oktmo')
+      .input-group.oktmo
+        = ff.text_field :oktmo,
+          { class: "form-control #{'is-invalid' unless errors[:oktmo].empty?}" }.merge(options)
+        .input-group-append
+          a.input-group-text.dropdown-toggle data-toggle='dropdown'
+          .dropdown-menu.oktmo-list
+        / .invalid-feedback #{errors[:oktmo].first}

@@ -1,0 +1,9 @@
+ru:
+  tax_office:
+    payment_name: 'Получатель платежа'
+    oktmo: 'ОКТМО'
+    inn: 'ИНН получателя'
+    kpp: 'КПП получателя'
+    bank_name: 'Банк получателя'
+    bank_bic: 'БИК'
+    bank_account: 'Р/с'
