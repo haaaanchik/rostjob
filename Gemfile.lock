@@ -340,6 +340,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    rubocop-rspec (1.26.0)
+      rubocop (>= 0.53.0)
     ruby-progressbar (1.9.0)
     rufus-scheduler (3.5.0)
       fugit (~> 1.1, >= 1.1.1)
@@ -475,6 +477,7 @@ DEPENDENCIES
   rspec-rails
   ru_propisju
   rubocop (~> 0.54.0)
+  rubocop-rspec
   russian (~> 0.6.0)
   sass-rails (~> 5.0)
   sentry-raven

@@ -12,7 +12,7 @@ module SessionsHelper
   end
 
   def user_signed_in?
-    session[:user_guid] && User.find_by(guid: session[:user_guid])
+    session[:user_guid] && User.find_by(guid: session[:user_guid]) ? true : false
   end
 
   def sign_out
