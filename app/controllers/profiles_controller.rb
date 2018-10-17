@@ -69,7 +69,7 @@ class ProfilesController < ApplicationController
                                        :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
                                        accounts_attributes: %i[id account_number corr_account bic
                                                                bank bank_address inn kpp],
-                                       tax_office_attributes: %i[code name name_short payment_name
+                                       tax_office_attributes: %i[id code name name_short payment_name
                                                                  oktmo inn kpp bank_name bank_bic
                                                                  bank_account]])
   end
