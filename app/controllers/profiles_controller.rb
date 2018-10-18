@@ -10,7 +10,6 @@ class ProfilesController < ApplicationController
     @profile = Profile.new
     company = @profile.build_company
     company.accounts.build
-    company.build_tax_office
   end
 
   def edit
@@ -68,9 +67,6 @@ class ProfilesController < ApplicationController
                   company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
                                        :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
                                        accounts_attributes: %i[id account_number corr_account bic
-                                                               bank bank_address inn kpp],
-                                       tax_office_attributes: %i[id code name name_short payment_name
-                                                                 oktmo inn kpp bank_name bank_bic
-                                                                 bank_account]])
+                                                               bank bank_address inn kpp]])
   end
 end

@@ -1,0 +1,34 @@
+= f.fields_for :tax_office do |ff|
+  .row
+    .col-12.mb-2
+      = ff.label :payment_name, t('tax_office.payment_name')
+      = ff.text_field :payment_name, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :inn, t('tax_office.inn')
+      = ff.text_field :inn, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :kpp, t('tax_office.kpp')
+      = ff.text_field :kpp, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :bank_name, t('tax_office.bank_name')
+      = ff.text_field :bank_name, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :bank_bic, t('tax_office.bank_bic')
+      = ff.text_field :bank_bic, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :bank_account, t('tax_office.bank_account')
+      = ff.text_field :bank_account, class: "form-control"
+      .invalid-feedback
+    .col-6.mb-2
+      = ff.label :oktmo, t('tax_office.oktmo')
+      .input-group.oktmo
+        = ff.text_field :oktmo, class: "form-control"
+        .input-group-append
+          a.input-group-text.dropdown-toggle data-toggle='dropdown'
+          .dropdown-menu.oktmo-list
+        / .invalid-feedback

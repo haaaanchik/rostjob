@@ -20,25 +20,35 @@
       = f.text_field :director, class: "form-control"
       .invalid-feedback
     .col
-        = f.label :short_name, t(:short_name)
-        = f.text_field :short_name, class: "form-control"
-        .invalid-feedback
-        = f.label :mail_address, t(:mail_address)
-        = f.text_field :mail_address, class: "form-control"
-        .invalid-feedback
-        = f.label :fax, t(:fax)
-        = f.text_field :fax, class: "form-control"
-        .invalid-feedback
-        = f.label :ogrn, t(:ogrn)
-        = f.text_field :ogrn, class: "form-control"
-        .invalid-feedback
-        = f.label :kpp, t(:kpp)
-        = f.text_field :kpp, class: "form-control"
-        .invalid-feedback
-        = f.label :acts_on, t(:acts_on)
-        = f.text_field :acts_on, class: "form-control"
-        .invalid-feedback
-  .row
+      = f.label :short_name, t(:short_name)
+      = f.text_field :short_name, class: "form-control"
+      .invalid-feedback
+      = f.label :mail_address, t(:mail_address)
+      = f.text_field :mail_address, class: "form-control"
+      .invalid-feedback
+      = f.label :fax, t(:fax)
+      = f.text_field :fax, class: "form-control"
+      .invalid-feedback
+      = f.label :ogrn, t(:ogrn)
+      = f.text_field :ogrn, class: "form-control"
+      .invalid-feedback
+      = f.label :kpp, t(:kpp)
+      = f.text_field :kpp, class: "form-control"
+      .invalid-feedback
+      = f.label :acts_on, t(:acts_on)
+      = f.text_field :acts_on, class: "form-control"
+      .invalid-feedback
     = render partial: 'admin/accounts/fields', locals: { form: f , company: @company }
+    .col
+      .card.mt-3
+        .card-header
+          h5 Реквизиты ИФНС для уплаты налогов
+          = text_field :dadata, :search, class: 'form-control',
+                   'data-auto-select' => "admin_company_ifns",
+                   'data-auto-url' => "/search_ifns",
+                   'data-autocomplete-on' => true,
+            placeholder: 'Поиск ИФНС. Введите наименование или код ИФНС.'
+        .card-body
+          = render partial: 'admin/companies/tax_office_fields', locals: { f: f, errors: {} }
   = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
   = link_to t('buttons.cancel'), admin_companies_path, class: 'btn btn-indigo mt-5'

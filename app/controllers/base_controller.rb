@@ -1,4 +1,6 @@
 class BaseController < ActionController::Base
+  include WordsHelper
+
   def errors_data(obj)
     errors_data = {}
     prefix = obj.class.to_s.underscore
