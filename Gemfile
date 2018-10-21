@@ -86,6 +86,7 @@ group :development, :test do
   gem 'pry-byebug', '~> 3.6'
   gem "pry-inline"
   gem "pry-rescue"
+  gem "pry-alias"
   gem 'factory_bot_rails'
   gem 'rspec-rails'
 end
