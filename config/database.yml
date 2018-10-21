@@ -54,3 +54,12 @@ production:
   reconnect: true
   reaping_frequency: 5
   dead_connection_timeout: 15
+
+staging:
+  <<: *default
+  database: best-hr_production
+  reconnect: true
+  reaping_frequency: 5
+  dead_connection_timeout: 15
+  user: besthr
+  password: 12345678
