@@ -57,7 +57,7 @@ production:
 
 staging:
   <<: *default
-  database: best-hr_production
+  database: best-hr_staging
   reconnect: true
   reaping_frequency: 5
   dead_connection_timeout: 15
