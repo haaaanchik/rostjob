@@ -61,5 +61,5 @@ staging:
   reconnect: true
   reaping_frequency: 5
   dead_connection_timeout: 15
-  user: besthr
+  username: besthr
   password: 12345678
