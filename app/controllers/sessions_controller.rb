@@ -7,14 +7,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
+    if auth
+      user = User.find_or_create_by_auth(auth)
       sign_in(user)
-      redirect_to root_path
     else
-      errors[:email] = 'неправильный логин'
-      errors[:password] = 'или пароль'
-      render json: errors
+      user = User.find_by(email: params[:email])
+      if user && user.authenticate(params[:password])
+        sign_in(user)
+        redirect_to root_path
+      else
+        errors[:email] = 'неправильный логин'
+        errors[:password] = 'или пароль'
+        render json: errors
+      end
     end
   end
 
@@ -24,6 +29,10 @@ class SessionsController < ApplicationController
   end
 
   private
+
+  def auth
+    request.env['omniauth.auth']
+  end
 
   def errors
     @errors ||= {}

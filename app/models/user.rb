@@ -8,35 +8,45 @@ class User < ApplicationRecord
 
   has_secure_password
 
-  def self.find_or_register_facebook_oauth access_token
-    if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
-      user
-    else
-      info = access_token.info
-      result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image, email: info.email })
-      if result.success?
-        User.create!(provider: access_token.provider, uid: access_token.uid,  full_name: info.name, photo_url: info.image,
-                     email: info.email, password:  Devise.friendly_token[0,20],
-                     profile_id: result.profile.id)
-      else
-      end
+  def self.find_or_create_by_auth(auth)
+    User.find_or_create_by(uid: auth['uid']) do |u|
+      u.provider = auth['profider']
+      u.full_name = auth['info']['name']
+      u.email = auth['provider'] == 'vkontakte' ? "#{auth['uid']}@vk.com" : auth['info']['email']
+      u.image = auth['info']['image']
+      u.password = SecureRandom.hex
     end
   end
 
-  def self.find_or_register_vkontakte_oauth access_token
-    if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
-      user
-    else
-      info = access_token.info
-      result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image })
-      if result.success?
-        User.create!(provider: access_token.provider, uid: access_token.uid, full_name: info.name, photo_url: info.image,
-                     email: "#{access_token.uid}@vk.com", password: Devise.friendly_token[0,20],
-                     profile_id: result.profile.id)
-      else
-      end
-    end
-  end
+  # def self.find_or_register_facebook_oauth access_token
+  #   if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
+  #     user
+  #   else
+  #     info = access_token.info
+  #     result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image, email: info.email })
+  #     if result.success?
+  #       User.create!(provider: access_token.provider, uid: access_token.uid,  full_name: info.name, photo_url: info.image,
+  #                    email: info.email, password:  Devise.friendly_token[0,20],
+  #                    profile_id: result.profile.id)
+  #     else
+  #     end
+  #   end
+  # end
+
+  # def self.find_or_register_vkontakte_oauth access_token
+  #   if user = User.find_by(provider: access_token.provider, uid: access_token.uid)
+  #     user
+  #   else
+  #     info = access_token.info
+  #     result = ::UserProfile::Create.call(sm_registration: true, profile_params: { contact_person: info.name, photo_url: info.image })
+  #     if result.success?
+  #       User.create!(provider: access_token.provider, uid: access_token.uid, full_name: info.name, photo_url: info.image,
+  #                    email: "#{access_token.uid}@vk.com", password: Devise.friendly_token[0,20],
+  #                    profile_id: result.profile.id)
+  #     else
+  #     end
+  #   end
+  # end
 
   def set_guid
     self.guid = SecureRandom.uuid
