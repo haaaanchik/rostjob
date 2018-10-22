@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/auth/:provider/callback' => 'oauth#create'
+  get '/auth/:provider/callback' => 'sessions#callback'
 
   # devise_for :users, controllers: {
   #   omniauth_callbacks: 'users/omniauth_callbacks',

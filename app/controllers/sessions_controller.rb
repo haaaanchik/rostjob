@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: :callback
   skip_before_action :authenticate_user!, only: %i[new create]
   skip_before_action :create_profile
 
@@ -23,7 +24,17 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def callback
+    user = User.find_or_create_by_auth(auth)
+    sign_in(user)
+    redirect_to root_path
+  end
+
   private
+
+  def auth
+    request.env['omniauth.auth']
+  end
 
   def errors
     @errors ||= {}
