@@ -88,6 +88,7 @@ GEM
       request_store (~> 1.0)
       scrypt (>= 1.2, < 4.0)
     awesome_print (1.8.0)
+    bcrypt (3.1.12)
     bindex (0.5.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
@@ -431,6 +432,7 @@ DEPENDENCIES
   activerecord-session_store (~> 1.1, >= 1.1.1)
   annotate (~> 2.7, >= 2.7.2)
   authlogic (~> 4.0, >= 4.0.1)
+  bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   coffee-rails (~> 4.2)
   conditional_validation
