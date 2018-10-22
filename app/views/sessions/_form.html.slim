@@ -14,4 +14,6 @@
   .row.mt-3
     .col.text-center
       = f.submit 'Войти', class: 'btn btn-indigo login'
-      / .justify-content-center = render "devise/shared/links"
+  .row.mt-3
+    .col.text-center
+      = link_to 'VK', '/auth/vkontakte', class: 'btn btn-indigo login'
