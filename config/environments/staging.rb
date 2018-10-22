@@ -1,6 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.middleware.use OmniAuth::Builder do
+    provider :facebook, '442243626230816 ', 'bde1d45449f1526350e8c32e0bd19404'
+    provider :vkontakte, '6728830', 'PqblkV3yxGoizq7vkDjl'
+  end
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
