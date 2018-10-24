@@ -1,8 +1,18 @@
 .col
   .card.border-light
     .card-header
-      'Доступно средств:
-      strong #{@balance.amount}
-      i.fa.fa-ruble-sign.ml-1
+      'Остаток на лицевом счёте
     .card-body
-      = render 'form'
+      strong = @balance.amount
+      i.fas.fa-ruble-sign.ml-1
+  .card.border-light.mt-3
+    .card-header
+      'Операции с лицевым счётом
+    .card-body
+      table.table
+        tr
+          th Дата
+          th Описание операции
+          th Приход
+          th Расход
+        = render @balance.bill_transactions

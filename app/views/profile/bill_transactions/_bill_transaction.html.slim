@@ -1,0 +1,5 @@
+tr
+  td = l(bill_transaction.created_at, format: :short)
+  td = bill_transaction.description
+  td #{bill_transaction.amount if bill_transaction.transaction_type == 'deposit'}
+  td #{bill_transaction.amount if bill_transaction.transaction_type == 'withdrawal'}
