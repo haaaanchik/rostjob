@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_08_145544) do
+ActiveRecord::Schema.define(version: 2018_10_25_092226) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -180,6 +180,15 @@ ActiveRecord::Schema.define(version: 2018_10_08_145544) do
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
+  create_table "payment_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.json "data"
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_payment_orders_on_company_id"
+  end
+
   create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "duties"
@@ -263,6 +272,15 @@ ActiveRecord::Schema.define(version: 2018_10_08_145544) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "tax_calculations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "tax_base"
+    t.integer "tax_amount"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_tax_calculations_on_profile_id"
+  end
+
   create_table "tax_offices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code"
     t.string "payment_name"
@@ -313,9 +331,11 @@ ActiveRecord::Schema.define(version: 2018_10_08_145544) do
   add_foreign_key "invoices", "profiles"
   add_foreign_key "messages", "proposals"
   add_foreign_key "orders", "profiles"
+  add_foreign_key "payment_orders", "companies"
   add_foreign_key "positions", "price_groups"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
+  add_foreign_key "tax_calculations", "profiles"
   add_foreign_key "tax_offices", "companies"
   add_foreign_key "users", "profiles"
 end

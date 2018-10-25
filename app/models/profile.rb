@@ -8,6 +8,7 @@ class Profile < ApplicationRecord
   has_one :balance
   has_one :company
   has_many :invoices
+  has_many :tax_calculations
 
   accepts_nested_attributes_for :company
 
@@ -31,6 +32,9 @@ class Profile < ApplicationRecord
 
   scope :executors, -> { where profile_type: %w[agency recruiter] }
   scope :by_query, ->(term) { where('contact_person LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
+  scope :contractors, -> { where profile_type: 'contractor' }
+  scope :contractors_companies, -> { contractors.where legal_form: 'company' }
+  scope :contractors_private_persons, -> { contractors.where legal_form: 'private_person' }
 
   aasm column: :state do
     state :created, initial: true

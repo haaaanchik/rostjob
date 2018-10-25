@@ -1,6 +1,7 @@
 class Company < ApplicationRecord
   belongs_to :profile, optional: true
   has_many :accounts, as: :accountable, dependent: :destroy
+  has_many :payment_orders, dependent: :destroy
   has_one :tax_office
 
   validates :name, :inn, presence: true
