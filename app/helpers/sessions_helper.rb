@@ -9,6 +9,7 @@ module SessionsHelper
 
   def sign_in(user)
     session[:user_guid] = user.guid
+    user.update_attribute(:last_sign_in_at, Time.now)
   end
 
   def user_signed_in?

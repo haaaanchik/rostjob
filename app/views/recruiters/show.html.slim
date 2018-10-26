@@ -1,4 +1,4 @@
 = image_tag(recruiter.photo.url(:thumb), class: 'rounded-circle float-left img-thumbnail')
-h1 #{recruiter.contact_person}
+h1 #{recruiter.user.full_name}
 .star-rating #{recruiter.rating}
 p #{recruiter.description}

@@ -2,7 +2,7 @@ class Profile < ApplicationRecord
   include AASM
   extend ConditionalValidation::ValidationFlag
 
-  has_many :users
+  has_one :user
   has_many :orders
   has_many :proposals
   has_one :balance

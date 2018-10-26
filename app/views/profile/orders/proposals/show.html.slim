@@ -2,7 +2,7 @@
   h1 Заявка № #{proposal.order.id} - #{proposal.order.title}
   p
     'Рекрутер:
-    = link_to  proposal.profile.contact_person, recruiter_path(proposal.profile)
+    = link_to  proposal.profile.user.full_name, recruiter_path(proposal.profile)
   .row
     ul.nav.md-pills.nav-justified.pills-indigo
       li.nav-item

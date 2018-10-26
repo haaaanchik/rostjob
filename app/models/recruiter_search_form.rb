@@ -18,9 +18,9 @@ class RecruiterSearchForm
 
   def submit
     unless query.empty?
-      Profile.executors.by_query(query)
+      Profile.contractors.by_query(query)
     else
-      Profile.executors.limit(20)
+      Profile.contractors.limit(20)
     end
   end
 end

@@ -7,7 +7,7 @@
         - if order.proposals.sent.any?
           - order.proposals.sent.each do |proposal|
             li.list-group-item
-              = link_to proposal.profile.contact_person, profile_order_proposal_path(order, proposal)
+              = link_to proposal.profile.user.full_name, profile_order_proposal_path(order, proposal)
 
         - else
           span Пока предложений нет
