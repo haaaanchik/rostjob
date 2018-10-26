@@ -1,5 +1,5 @@
 class GenerateTaxPaymentOrderJob < ApplicationJob
-  queue_as :default
+  queue_as :payment_orders
 
   def perform
     payer = Company.own.first

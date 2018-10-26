@@ -3,7 +3,9 @@ class Profile::Orders::CandidatesController < ApplicationController
     render(plain: 'order completed', status: 422) and return if order.completed?
 
     if order.selected_candidates.count < order.number_of_employees
-      candidate.update(hiring_date: candidate_params[:hiring_date], order_id: params[:order_id])
+      hiring_date = Date.parse(candidate_params[:hiring_date])
+      candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date),
+                       order_id: params[:order_id])
       candidate.hire!
       if order.reload.selected_candidates.count == order.number_of_employees
         order.complete!

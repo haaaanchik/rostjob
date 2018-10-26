@@ -8,7 +8,7 @@ module Cmd
         company = profile.company
         amount = context.amount
         payment_order_params = payment_order(company, amount)
-        company.payment_orders.create(payment_order_params)
+        company.payment_orders.create(data: payment_order_params)
       end
 
       private

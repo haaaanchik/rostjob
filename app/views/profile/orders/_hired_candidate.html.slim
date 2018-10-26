@@ -1,6 +1,7 @@
 tr
   td #{hired_candidate.name}
   td #{l(hired_candidate.hiring_date, format: :long)}
+  td #{l(hired_candidate.warranty_date, format: :long)}
   td
     = link_to '#', data: { toggle: 'modal', target: '#fireCandidateModal', name: hired_candidate.name,
         gender: hired_candidate.gender, birthdate: l(hired_candidate.birthdate, format: :long), id: hired_candidate.id,

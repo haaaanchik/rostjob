@@ -17,6 +17,7 @@ class EmployeeCv < ApplicationRecord
     state :applyed, initial: true
     state :hired
     state :fired
+    state :charged
 
     event :hire do
       transitions from: :applyed, to: :hired
@@ -24,6 +25,10 @@ class EmployeeCv < ApplicationRecord
 
     event :fire do
       transitions from: :hired, to: :fired
+    end
+
+    event :charge do
+      transitions from: :hired, to: :charged
     end
   end
 end

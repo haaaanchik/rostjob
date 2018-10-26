@@ -6,9 +6,13 @@ class CreateGeneratePaymentOrderForPrivatePersonsJob < ApplicationJob
       balance = profile.balance
       amount = balance.amount
       next unless amount.positive?
-      tax_calc = profile.tax_calculations.create! tax_base: amount
-      balance.withdraw(tax_calc.tax_amount, 'Удержание НДФЛ')
-      ::GeneratePaymentOrderJob.perform_later(profile, tax_calc.tax_base - tax_calc.tax_amount)
+      tax_calculation = profile.tax_calculations.create! tax_base: amount
+      tax_base = tax_calculation.tax_base
+      tax_amount = tax_calculation.tax_amount
+      reward = tax_base - tax_amount
+      balance.withdraw(tax_amount, 'Удержание НДФЛ')
+      balance.withdraw(reward, 'Перечисление вознаграждения исполнителю')
+      ::GeneratePaymentOrderJob.perform_later(profile, reward)
     end
   end
 end

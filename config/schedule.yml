@@ -1,5 +1,20 @@
-refresh_nomenclature_and_eta:
+warranty_period_processing:
   cron: "0 1 * * *"
   class: "CreateWarrantyPeriodProcessingJob"
   queue: critical
   description: "Daily creates jobs for warranty period processing"
+generate_payment_orders_for_companies:
+  cron: "15 1 * * *"
+  class: "CreateGeneratePaymentOrderForCompaniesJob"
+  queue: critical
+  description: "Creates jobs for generating payment orders for companies"
+generate_payment_orders_for_private_persons:
+  cron: "30 1 * * *"
+  class: "CreateGeneratePaymentOrderForPrivatePersonsJob"
+  queue: critical
+  description: "Creates jobs for generating payment orders for private persons"
+generate_tax_payment_orders:
+  cron: "45 1 * * *"
+  class: "GenerateTaxPaymentOrderJob"
+  queue: critical
+  description: "Creates job for generating payment order to pay NDFL tax"
