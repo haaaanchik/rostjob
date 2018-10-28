@@ -1,0 +1,13 @@
+[Unit]
+Description=BEST-HR Unicorn Server
+
+[Service]
+Type=simple
+User=zerro
+WorkingDirectory=/webhome/best-hr
+ExecStart=/bin/bash -lc 'bundle exec unicorn -D -E production -c config/unicorn.rb 2>&1'
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

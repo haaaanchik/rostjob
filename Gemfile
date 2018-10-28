@@ -57,7 +57,8 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # gem 'mini_magick', '~> 4.8'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', group: :development
+gem 'rvm1-capistrano3', group: :development
 
 gem 'activerecord-session_store', '~> 1.1', '>= 1.1.1'
 gem 'authlogic', '~> 4.0', '>= 4.0.1'
