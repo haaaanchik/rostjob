@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_validation :set_guid
+  before_validation :set_guid, on: :create
   belongs_to :profile, optional: true
 
   validates :full_name, presence: true, length: { minimum: 8 }

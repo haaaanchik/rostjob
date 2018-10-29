@@ -2,11 +2,11 @@ class Profile < ApplicationRecord
   include AASM
   extend ConditionalValidation::ValidationFlag
 
-  has_one :user
+  has_one :user, dependent: :destroy
   has_many :orders
   has_many :proposals
-  has_one :balance
-  has_one :company
+  has_one :balance, dependent: :destroy
+  has_one :company, dependent: :destroy
   has_many :invoices
   has_many :tax_calculations
 
