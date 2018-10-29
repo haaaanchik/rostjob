@@ -7,6 +7,9 @@ tr
       i.far.fa-file-alt.fa-2x
   td
     - unless employee_cv.proposal.order.completed?
-      = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
-        gender: employee_cv.gender, birthdate: l(employee_cv.birthdate, format: :long), id: employee_cv.id } do
-        i.far.fa-thumbs-up.fa-2x
+      - if employee_cv.applyed?
+        = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
+          gender: employee_cv.gender, birthdate: l(employee_cv.birthdate, format: :long), id: employee_cv.id } do
+          i.far.fa-thumbs-up.fa-2x
+  td
+    span.badge.badge-info = t("employee_cv.state.#{employee_cv.state}")

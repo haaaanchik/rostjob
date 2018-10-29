@@ -1,0 +1,7 @@
+ru:
+  employee_cv:
+    state:
+      applyed: 'Предложен'
+      hired: 'Нанят'
+      fired: 'Уволен'
+      charged: 'Оплачен'
