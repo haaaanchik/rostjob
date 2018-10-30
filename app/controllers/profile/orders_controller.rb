@@ -93,7 +93,8 @@ class Profile::OrdersController < ApplicationController
     order_params[:title] = position&.title
     order_params[:customer_price] = position&.price_group&.customer_price
     order_params[:contractor_price] = position&.price_group&.contractor_price
-    order_params[:total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
+    order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
+    order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i if position
     order_params
   end
 

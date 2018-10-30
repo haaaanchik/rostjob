@@ -4,16 +4,13 @@
       .row
         .col
           span.h4 Заявка №: #{order.id}
+        .col.text-right
+          span.badge.badge-info = t("order.state.#{order.state}")
+      .row
+        .col-9
           h4 #{order.title}
-        .col-3.align-self-center
-          = link_to edit_profile_order_path(order) do
-            i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
-          = link_to pre_publish_profile_order_path(order) do
-            i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
-          = link_to hide_profile_order_path(order), method: :put do
-            i.far.fa-eye-slash.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Скрыть заявку'
-          = link_to complete_profile_order_path(order), method: :put do
-            i.far.fa-handshake.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Завершить заявку'
+        .col-3.align-self-center.text-right
+          = render partial: 'order_menu', locals: { order: order }
       - if order.rejected?
         .row
           .col
@@ -32,7 +29,7 @@
           td#num_of_employees.align-middle.text-center style="width: 10%" data-price="#{order.customer_price}"
             = order.number_of_employees
           td#price.align-middle.text-right style="width: 10%" #{order.customer_price}
-          td#total.align-middle.text-right style="width: 10%" #{order.total}
+          td#total.align-middle.text-right style="width: 10%" #{order.customer_total}
     .ml-4
       dl.row
         dt.col-sm-4 Специализация

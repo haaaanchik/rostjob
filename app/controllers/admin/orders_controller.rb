@@ -24,7 +24,7 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def order
-    @order ||= orders.find(params[:id])
+    @order ||= Order.find(params[:id])
   end
 
   def orders

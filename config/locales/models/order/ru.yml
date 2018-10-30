@@ -1,0 +1,10 @@
+ru:
+  order:
+    state:
+      draft: 'черновик'
+      waiting_for_payment: 'ожидает оплаты'
+      moderation: 'на модерации'
+      published: 'опубликована'
+      rejected: 'отклонена'
+      hidden: 'скрыта'
+      completed: 'выполнена'

@@ -43,18 +43,6 @@ ru:
   recaptcha:
     errors:
       verification_failed: 'Похоже что вы робот. Попробуйте снова.'
-  order:
-    state:
-      draft: 'черновик'
-      moderation: 'на модерации'
-      published: 'опубликована'
-      rejected: 'отклонена'
-      hidden: 'скрыта'
-      completed: 'завершена'
-    payment_type:
-      type0: '100% за выход сотрудника'
-      type1: '100% по окончании гарантийного периода'
-      type2: '50% за выход + 50% по окончании гарантийного периода'
   proposal:
     state:
       sent: 'Вы ответили на заявку'

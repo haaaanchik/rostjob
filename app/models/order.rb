@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   has_many :comments
 
   validates :title, presence: true
-  validates :customer_price, :contractor_price, :total,
+  validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
             presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :contractor_price, presence: true, numericality: { only_integer: true }
   validates :number_of_employees, presence: true, numericality: { only_integer: true }
@@ -72,7 +72,7 @@ class Order < ApplicationRecord
   end
 
   def can_be_paid?
-    balance.amount >= total
+    balance.amount >= customer_total
   end
 
   def customer_price
@@ -100,7 +100,11 @@ class Order < ApplicationRecord
   end
 
   def to_draft
-    cancel! if may_cancel?
+    return unless may_cancel?
+    if moderation?
+      balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. Причина: публикация отменена пользователем.")
+    end
+    cancel!
   end
 
   def to_waiting_for_payment
@@ -108,7 +112,7 @@ class Order < ApplicationRecord
   end
 
   def to_moderation
-    return unless balance.withdraw(total, "Публикация заявки #{id}")
+    return unless balance.withdraw(customer_total, "Публикация заявки #{id}")
     moderate! if may_moderate?
   end
 
@@ -122,7 +126,7 @@ class Order < ApplicationRecord
     return unless may_reject?
     reject!
     comments.create(text: reason)
-    balance.deposit(total, "Возврат оплаты за публикацию заявки №#{id}. Причина: не прошла модерацию.")
+    balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. Причина: заявка не прошла модерацию.")
   end
 
   def to_hidden

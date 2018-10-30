@@ -12,7 +12,7 @@ tr.clickable-row data-href=order_path(order)
         |#{l(order.created_at, format: :short)}
       li.list-inline-item.pr-2
         i.fas.fa-users.pr-1
-        |#{order.proposals.sent.count} из #{order.number_of_recruiters}
+        |#{order.number_of_employees}
       - if order.enterpreneurs_only
         li.list-inline-item.pr-2
           |Только для ИП и юридических лиц
@@ -23,5 +23,5 @@ tr.clickable-row data-href=order_path(order)
 
     |#{strip_tags(order.description).first(200)}
   td.text-center.pl-1
-    span.font-weight-bold.mr-1 #{order.commission}
+    span.font-weight-bold.mr-1 #{order.contractor_total}
     i.fa.fa-ruble-sign

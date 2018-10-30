@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_25_092226) do
+ActiveRecord::Schema.define(version: 2018_10_29_185624) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -177,6 +177,8 @@ ActiveRecord::Schema.define(version: 2018_10_25_092226) do
     t.integer "contractor_price"
     t.integer "total"
     t.integer "position_id"
+    t.integer "customer_total", default: 0
+    t.integer "contractor_total", default: 0
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
