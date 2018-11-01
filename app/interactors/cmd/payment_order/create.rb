@@ -19,7 +19,7 @@ module Cmd
           date: Date.today,
           type_of_payment: 'Электронно',
           amount: amount,
-          payer: counterparty(Company.own.first),
+          payer: counterparty(Company.own_active),
           receiver: counterparty(company),
           kind_of_payment: '01',
           priority: 5,

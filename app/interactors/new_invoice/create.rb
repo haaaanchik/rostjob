@@ -16,7 +16,7 @@ module NewInvoice
     private
 
     def seller
-      company = Company.own.first
+      company = Company.own_active
       account = company.accounts.first
       {
         short_name: company[:short_name],

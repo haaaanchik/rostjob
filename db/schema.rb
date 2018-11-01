@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_29_185624) do
+ActiveRecord::Schema.define(version: 2018_11_01_053916) do
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2018_10_29_185624) do
     t.datetime "updated_at", null: false
     t.boolean "own_company", default: false
     t.bigint "profile_id"
+    t.boolean "active", default: false
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 

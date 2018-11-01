@@ -38,6 +38,17 @@ class Admin::CompaniesController < Admin::ApplicationController
     redirect_to admin_companies_path
   end
 
+  def set_active
+    current_active = companies.own_active
+    current_active.update_attribute(:active, false)
+    company.update_attribute(:active, true)
+    if company.errors.messages.any?
+      render json: errors_data(@company)
+    else
+      redirect_to admin_companies_path
+    end
+  end
+
   private
 
   def company_params

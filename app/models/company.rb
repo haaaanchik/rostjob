@@ -66,4 +66,8 @@ class Company < ApplicationRecord
       label: "<span>#{short_name}; #{inn}; #{address}</span>"
     }
   end
+
+  def self.own_active
+    own.find_by(active: true)
+  end
 end

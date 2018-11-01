@@ -16,7 +16,11 @@ Rails.application.routes.draw do
     resources :specializations
     resources :positions
     resources :cities
-    resources :companies
+    resources :companies do
+      member do
+        put :set_active
+      end
+    end
     resources :accounts
     resources :price_groups, except: :show
     resources :invoices, only: :index do
