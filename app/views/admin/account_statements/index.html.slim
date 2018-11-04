@@ -1,0 +1,21 @@
+h1 Выписка с расчетного счета
+button type='button' class='btn btn-indigo' data-toggle='modal' data-target='#accountStatementUpload' Загрузить выписку
+.modal.fade#accountStatementUpload tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#exampleModalLabel Загрузка выписки
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        = render 'form'
+= link_to 'Разнести банк', new_admin_company_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th № Документа
+    th Дата
+    th Отправитель
+    th Счёт отправителя
+    th Сумма
+    th Действия
+  = render @account_statements

@@ -22,6 +22,11 @@ Rails.application.routes.draw do
       end
     end
     resources :accounts
+    resources :account_statements, only: %i[index destroy] do
+      collection do
+        post :upload
+      end
+    end
     resources :price_groups, except: :show
     resources :invoices, only: :index do
       member do

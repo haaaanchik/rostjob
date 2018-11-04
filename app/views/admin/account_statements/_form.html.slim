@@ -1,0 +1,6 @@
+= form_with scope: :account_statements_upload, url: upload_admin_account_statements_path do |f|
+  .form-group
+    = f.file_field :file, class: 'form-control'
+    .invalid-feedback
+  = f.submit 'Загрузить выписку', class: 'btn btn-indigo mt-3'
+  button type="button" class="btn btn-indigo mt-3" data-dismiss="modal" Отмена

@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_01_053916) do
+ActiveRecord::Schema.define(version: 2018_11_01_112040) do
+
+  create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "src_account"
+    t.date "date"
+    t.string "sender"
+    t.string "number"
+    t.integer "amount"
+    t.json "data"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_statements_on_account_id"
+  end
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
@@ -324,6 +337,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_053916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "account_statements", "accounts"
   add_foreign_key "balances", "profiles"
   add_foreign_key "bill_transactions", "balances"
   add_foreign_key "comments", "orders"

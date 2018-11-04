@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'client_bank_exchange'
 gem 'kaminari'
 gem 'prawn'
 gem 'prawn-table'
