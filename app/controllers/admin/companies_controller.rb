@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::CompaniesController < Admin::ApplicationController
   def index
     companies
@@ -40,7 +42,7 @@ class Admin::CompaniesController < Admin::ApplicationController
 
   def set_active
     current_active = companies.own_active
-    current_active.update_attribute(:active, false)
+    current_active&.update_attribute(:active, false)
     company.update_attribute(:active, true)
     if company.errors.messages.any?
       render json: errors_data(@company)

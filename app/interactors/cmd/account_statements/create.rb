@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cmd
   module AccountStatements
     class Create
@@ -19,9 +21,13 @@ module Cmd
           }
         end
         account = Company.own_active.accounts.first
+        documents.each do |doc|
+          account.account_statements.create doc
+        rescue StandardError
+          next
+        end
 
-
-        context.fail!(errors: result[:errors]) unless result[:errors].empty?
+        # context.fail!(errors: result[:errors]) unless result[:errors].empty?
       end
     end
   end

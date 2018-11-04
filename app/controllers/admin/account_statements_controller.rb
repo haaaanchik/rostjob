@@ -15,7 +15,7 @@ class Admin::AccountStatementsController < Admin::ApplicationController
       Cmd::AccountStatements::Create.call(documents: result.documents) if result.success?
       redirect_to admin_account_statements_path
     else
-      render json: errors_data(acc_statements)
+      render json: errors_data(acc_statements_upload)
     end
   end
 

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_11_01_112040) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_account_statements_on_account_id"
+    t.index ["number", "date", "src_account"], name: "index_account_statements_on_number_and_date_and_src_account", unique: true
   end
 
   create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

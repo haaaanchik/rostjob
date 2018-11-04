@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateAccountStatements < ActiveRecord::Migration[5.2]
   def change
     create_table :account_statements do |t|
@@ -11,5 +13,7 @@ class CreateAccountStatements < ActiveRecord::Migration[5.2]
 
       t.timestamps
     end
+
+    add_index :account_statements, %i[number date src_account], unique: true
   end
 end
