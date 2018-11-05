@@ -11,8 +11,7 @@ class Admin::AccountStatementsController < Admin::ApplicationController
   def upload
     acc_statements_upload = AccountStatementsUpload.new(account_statements_params)
     if acc_statements_upload.valid?
-      result = Cmd::AccountStatements::Parse.call(file: account_statements_params[:file])
-      Cmd::AccountStatements::Create.call(documents: result.documents) if result.success?
+      Cmd::AccountStatements::Create.call(documents: acc_statements_upload.documents)
       redirect_to admin_account_statements_path
     else
       render json: errors_data(acc_statements_upload)

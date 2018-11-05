@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Cmd
   module AccountStatements
     class Create
@@ -7,9 +5,6 @@ module Cmd
 
       def call
         documents = context.documents
-        documents = documents.select do |document|
-          document[:СекцияДокумент] == "Платежное поручение\r"
-        end
         documents = documents.map do |document|
           {
             number: document[:Номер],
@@ -26,8 +21,6 @@ module Cmd
         rescue StandardError
           next
         end
-
-        # context.fail!(errors: result[:errors]) unless result[:errors].empty?
       end
     end
   end
