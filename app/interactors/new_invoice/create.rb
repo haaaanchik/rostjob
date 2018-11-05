@@ -34,8 +34,20 @@ module NewInvoice
     end
 
     def buyer(profile)
+      company = profile.company
+      account = company.accounts.first
       {
-        short_name: profile.company.short_name
+        short_name: company.short_name,
+        inn: company[:inn],
+        kpp: company[:kpp],
+        address: company[:address],
+        account: {
+          account_number: account[:account_number],
+          corr_account: account[:corr_account],
+          bic: account[:bic],
+          bank: account[:bank],
+          bank_address: account[:bank_address]
+        }
       }
     end
 

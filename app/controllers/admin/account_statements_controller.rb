@@ -18,6 +18,11 @@ class Admin::AccountStatementsController < Admin::ApplicationController
     end
   end
 
+  def handle
+    Cmd::AccountStatements::Handle.call(account: account)
+    redirect_to admin_account_statements_path
+  end
+
   private
 
   def account_statements_params

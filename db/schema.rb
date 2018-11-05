@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_083120) do
+ActiveRecord::Schema.define(version: 2018_11_05_132300) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_083120) do
     t.bigint "account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "state"
     t.index ["account_id"], name: "index_account_statements_on_account_id"
     t.index ["number", "date", "src_account"], name: "index_account_statements_on_number_and_date_and_src_account", unique: true
   end

@@ -1,0 +1,6 @@
+ru:
+  account_statement:
+    state:
+      uploaded: 'загружен'
+      handled: 'разнесён'
+      unidentified: 'не выяснен'

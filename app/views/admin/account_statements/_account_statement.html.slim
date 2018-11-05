@@ -4,6 +4,7 @@ tr
   td = account_statement.sender
   td = account_statement.src_account
   td = account_statement.amount
+  td = t("account_statement.state.#{account_statement.state}")
   td
     = link_to admin_account_statement_path(account_statement), method: :delete, data: { confirm: 'Вы уверены?' } do
       i.far.fa-trash-alt.fa-2x

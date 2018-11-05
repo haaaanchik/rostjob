@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :account_statements, only: %i[index destroy] do
       collection do
         post :upload
+        put :handle
       end
     end
     resources :price_groups, except: :show

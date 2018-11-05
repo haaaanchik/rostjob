@@ -9,7 +9,7 @@ button type='button' class='btn btn-indigo' data-toggle='modal' data-target='#ac
           span aria-hidden="true" &times;
       .modal-body
         = render 'form'
-= link_to 'Разнести банк', new_admin_company_path, class: 'btn btn-indigo'
+= link_to 'Разнести банк', handle_admin_account_statements_path, method: :put, class: 'btn btn-indigo'
 table.table
   tr
     th № Документа
@@ -17,5 +17,6 @@ table.table
     th Отправитель
     th Счёт отправителя
     th Сумма
+    th Статус
     th Действия
   = render @account_statements
