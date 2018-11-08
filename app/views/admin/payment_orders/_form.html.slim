@@ -1,0 +1,7 @@
+= form_with model: @payment_order_search_form, url: admin_payment_orders_path, skip_enforcing_utf8: true, local: true, method: :get, class: 'form-inline payment_orders_form' do |f|
+  = f.label :date_from, 'От:'
+  = f.date_field :date_from, class: 'form-control'
+  = f.label :date_to, 'До:'
+  = f.date_field :date_to, class: 'form-control'
+  = f.submit 'Найти', name: :find, class: 'btn btn-indigo'
+  = f.submit 'Выгрузить', name: :download, class: 'btn btn-indigo'

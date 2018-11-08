@@ -17,6 +17,6 @@ class OrdersController < ApplicationController
   end
 
   def order_search_form_params
-    params.permit(order_search_form: [:query, :sort_by, :filter_by])[:order_search_form]
+    params.permit(order_search_form: %i[query sort_by filter_by])[:order_search_form]
   end
 end

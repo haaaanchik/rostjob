@@ -1,0 +1,15 @@
+.col
+  h1 Платёжные поручения
+  = link_to 'Выгрузить п/п', handle_admin_account_statements_path, method: :put, class: 'btn btn-indigo'
+  .row
+    .col
+      = render 'form'
+  table.table
+    tr
+      th Дата
+      th Получатель
+      th Счёт получателя
+      th Сумма
+      th Статус
+      th Действия
+    = render @payment_orders

@@ -1,0 +1,11 @@
+- data = payment_order.data
+- receiver = data['receiver']
+tr
+  td = l(Date.parse(data['date']), format: :long)
+  td = receiver['name']
+  td = receiver['account']['account_number']
+  td = data['amount']
+  td = t("payment_order.state.#{payment_order.state}")
+  td
+    / = link_to admin_payment_order_path(payment_order), method: :delete, data: { confirm: 'Вы уверены?' } do
+    /   i.far.fa-trash-alt.fa-2x

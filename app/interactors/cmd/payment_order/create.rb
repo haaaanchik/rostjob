@@ -5,22 +5,22 @@ module Cmd
 
       def call
         profile = context.profile
-        company = profile.company
+        receiver = profile.company
         amount = context.amount
-        payment_order_params = payment_order(company, amount)
-        company.payment_orders.create(data: payment_order_params)
+        payment_order_params = payment_order(receiver, amount)
+        Company.own_active.payment_orders.create(data: payment_order_params)
       end
 
       private
 
-      def payment_order(company, amount)
+      def payment_order(receiver, amount)
         {
           number: nil,
           date: Date.today,
           type_of_payment: 'Электронно',
           amount: amount,
           payer: counterparty(Company.own_active),
-          receiver: counterparty(company),
+          receiver: counterparty(receiver),
           kind_of_payment: '01',
           priority: 5,
           purpose_of_payment: 'Вознаграждение по договору. НДС нет.'

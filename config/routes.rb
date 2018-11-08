@@ -29,6 +29,9 @@ Rails.application.routes.draw do
       end
     end
     resources :price_groups, except: :show
+    get :payment_orders, constraints: ->(req) { req.params.key?(:find) }, to: 'payment_orders#index'
+    get :payment_orders, constraints: ->(req) { req.params.key?(:download) }, to: 'payment_orders#download'
+    get :payment_orders, to: 'payment_orders#index'
     resources :invoices, only: :index do
       member do
         put :pay
