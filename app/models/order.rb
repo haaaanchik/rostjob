@@ -9,8 +9,7 @@ class Order < ApplicationRecord
 
   validates :title, presence: true
   validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
-            presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-  validates :contractor_price, presence: true, numericality: { only_integer: true }
+            presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :number_of_employees, presence: true, numericality: { only_integer: true }
   validates :specialization, presence: true
   validates :city, presence: true

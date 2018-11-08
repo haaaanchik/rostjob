@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_132300) do
+ActiveRecord::Schema.define(version: 2018_11_08_200501) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
     t.date "date"
     t.string "sender"
     t.string "number"
-    t.integer "amount"
+    t.decimal "amount", precision: 10, scale: 2
     t.json "data"
     t.bigint "account_id"
     t.datetime "created_at", null: false
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
   end
 
   create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "amount", default: 0
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
   end
 
   create_table "bill_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "amount", default: 0
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.text "description"
     t.string "transaction_type"
     t.bigint "balance_id"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
 
   create_table "invoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "invoice_number"
-    t.integer "amount"
+    t.decimal "amount", precision: 10, scale: 2
     t.json "seller"
     t.json "buyer"
     t.json "goods"
@@ -189,12 +189,12 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "number_of_employees", default: 1
-    t.integer "customer_price"
-    t.integer "contractor_price"
+    t.decimal "customer_price", precision: 10, scale: 2
+    t.decimal "contractor_price", precision: 10, scale: 2
     t.integer "total"
     t.integer "position_id"
-    t.integer "customer_total", default: 0
-    t.integer "contractor_total", default: 0
+    t.decimal "customer_total", precision: 10, scale: 2, default: "0.0"
+    t.decimal "contractor_total", precision: 10, scale: 2, default: "0.0"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
@@ -221,8 +221,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_price"
-    t.integer "contractor_price"
+    t.decimal "customer_price", precision: 10, scale: 2
+    t.decimal "contractor_price", precision: 10, scale: 2
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -291,8 +291,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_132300) do
   end
 
   create_table "tax_calculations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "tax_base"
-    t.integer "tax_amount"
+    t.decimal "tax_base", precision: 10, scale: 2
+    t.decimal "tax_amount", precision: 10, scale: 2
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
