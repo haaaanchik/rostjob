@@ -87,7 +87,11 @@ module Cmd
           Очередность: data['priority'],
           НазначениеПлатежа: data['purpose_of_payment'],
           НазначениеПлатежа1: data['purpose_of_payment']
-        }.collect { |k, v| "#{k}=#{v}" }
+        }.collect { |k, v| "#{k}=#{v}" }.push end_of_document
+      end
+
+      def end_of_document
+        'КонецДокумента'
       end
 
       def end_of_file
