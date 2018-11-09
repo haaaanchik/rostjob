@@ -22,9 +22,9 @@ class Order < ApplicationRecord
   # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
 
-  scope :filter_by_day, -> { where 'created_at >= ?', Date.today - 1.day }
-  scope :filter_by_3day, -> { where 'created_at >= ?', Date.today - 3.days }
-  scope :filter_by_week, -> { where 'created_at >= ?', Date.today - 1.week }
+  scope :filter_by_day, -> { where 'created_at >= ?', Date.current - 1.day }
+  scope :filter_by_3day, -> { where 'created_at >= ?', Date.current - 3.days }
+  scope :filter_by_week, -> { where 'created_at >= ?', Date.current - 1.week }
   scope :filter_by_all_time, -> { all }
   scope :sort_by_reward_asc, -> { order commission: :asc }
   scope :sort_by_reward_desc, -> { order commission: :desc }

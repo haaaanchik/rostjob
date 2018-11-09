@@ -7,18 +7,12 @@ class PaymentOrderSearchForm
   validates :date_from, :date_to, presence: true
 
   def initialize(params)
-    if params
-      @date_from = Time.parse(params.fetch(:date_from, Time.now.beginning_of_day.to_s))
-      @date_to = Time.parse(params.fetch(:date_to, Time.now.end_of_day.to_s))
-      date_tmp = @date_from
-      if @date_from > @date_to
-        @date_from = @date_to
-        @date_to = date_tmp
-      end
-    else
-      @date_from = Time.now.beginning_of_day
-      @date_to = Time.now.end_of_day
-    end
+    @date_from = filter_date_from(params)
+    @date_to = filter_date_to(params)
+    date_tmp = @date_from
+    return if @date_from <= @date_to
+    @date_from = @date_to
+    @date_to = date_tmp
   end
 
   def persisted?
@@ -39,5 +33,19 @@ class PaymentOrderSearchForm
 
   def own_company
     Company.own_active
+  end
+
+  def filter_date_from(params)
+    return Time.current.beginning_of_day unless params
+    date_from = params[:date_from]
+    return Time.current.beginning_of_day if date_from.nil? || date_from.empty?
+    Time.zone.parse(date_from).beginning_of_day
+  end
+
+  def filter_date_to(params)
+    return Time.current.end_of_day unless params
+    date_to = params[:date_to]
+    return Time.current.end_of_day if date_to.nil? || date_to.empty?
+    Time.zone.parse(date_to).end_of_day
   end
 end

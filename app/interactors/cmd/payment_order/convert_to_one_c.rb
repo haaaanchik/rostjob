@@ -41,8 +41,8 @@ module Cmd
           Кодировка: 'Windows',
           Отправитель: '',
           Получатель: '',
-          ДатаСоздания: Time.now.strftime('%d.%m.%Y'),
-          ВремяСоздания: Time.now.strftime('%H:%M:%S')
+          ДатаСоздания: Time.current.strftime('%d.%m.%Y'),
+          ВремяСоздания: Time.current.strftime('%H:%M:%S')
         }.collect { |k, v| "#{k}=#{v}" }
       end
 
@@ -60,7 +60,7 @@ module Cmd
         {
           СекцияДокумент: 'Платёжное поручение',
           Номер: data['number'],
-          Дата: Time.parse(data['date']).strftime('%d.%m.%Y'),
+          Дата: Time.zone.parse(data['date']).strftime('%d.%m.%Y'),
           Сумма: data['amount'],
           ПлательщикСчет: data['payer']['account']['account_number'],
           Плательщик: "ИНН #{data['payer']['inn']} #{data['payer']['name']}",

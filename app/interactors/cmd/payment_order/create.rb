@@ -16,7 +16,7 @@ module Cmd
       def payment_order(receiver, amount)
         {
           number: nil,
-          date: Date.today,
+          date: Date.current,
           type_of_payment: 'Электронно',
           amount: amount,
           payer: counterparty(Company.own_active),

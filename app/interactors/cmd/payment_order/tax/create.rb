@@ -15,11 +15,11 @@ module Cmd
         private
 
         def payment_order(payer, kbk, amount)
-          date = Date.today
+          date = Date.current
           month = I18n.l(date, format: '%B').downcase
           year = date.year
           {
-            date: Date.today,
+            date: date,
             type_of_payment: 'Электронно',
             amount: amount,
             payer: counterparty(payer),
@@ -64,7 +64,7 @@ module Cmd
         end
 
         def tax_payment_fields(payer, kbk)
-          date = Date.today
+          date = Date.current
           month = date.strftime('%m')
           year = date.year
           {
