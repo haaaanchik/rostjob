@@ -4,7 +4,10 @@ class Admin::PaymentOrdersController < Admin::ApplicationController
   def index; end
 
   def download
-    result = Cmd::PaymentOrder::ConvertToOneC.call(payment_orders: @payment_orders)
+    date_from = @payment_order_search_form.date_from
+    date_to = @payment_order_search_form.date_to
+    result = Cmd::PaymentOrder::ConvertToOneC.call(payment_orders: @payment_orders,
+                                                   date_from: date_from, date_to: date_to)
     send_file result.file if result.success?
   end
 

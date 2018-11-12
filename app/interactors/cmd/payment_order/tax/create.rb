@@ -68,14 +68,16 @@ module Cmd
           month = date.strftime('%m')
           year = date.year
           {
-            uin: 0,
-            kbk: kbk,
-            oktmo: payer.tax_office.oktmo,
-            f101: '02',
-            f106: 'ТП',
-            f107: "МС.#{month}.#{year}",
-            f108: 0,
-            f109: 0
+            tax_payment_fields: {
+              uin: 0,
+              kbk: kbk,
+              oktmo: payer.tax_office.oktmo,
+              f101: '02',
+              f106: 'ТП',
+              f107: "МС.#{month}.#{year}",
+              f108: 0,
+              f109: 0
+            }
           }
         end
       end

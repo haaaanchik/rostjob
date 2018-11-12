@@ -6,18 +6,20 @@ module Cmd
       def call
         output_file_path = '/tmp/from-best-hr.txt'
         payment_orders = context.payment_orders
-        content = create_exchange_data(payment_orders)
+        date_from = context.date_from
+        date_to = context.date_to
+        content = create_exchange_data(payment_orders, date_from, date_to)
         create_exchange_file(output_file_path, content)
         context.file = output_file_path
       end
 
       private
 
-      def create_exchange_data(payment_orders)
+      def create_exchange_data(payment_orders, date_from, date_to)
         data = []
         data.push header
         data += general_info
-        data.push selection_conditions
+        data.push selection_conditions(date_from, date_to)
         payment_orders.each do |payment_order|
           data += section_document(payment_order)
         end
@@ -46,19 +48,19 @@ module Cmd
         }.collect { |k, v| "#{k}=#{v}" }
       end
 
-      def selection_conditions
+      def selection_conditions(date_from, date_to)
         {
-          ДатаНачала: '',
-          ДатаКонца: '',
+          ДатаНачала: date_from.strftime('%d.%m.%Y'),
+          ДатаКонца: date_to.strftime('%d.%m.%Y'),
           РасчСчет: Company.own_active.accounts.first.account_number,
-          Документ: 'Платёжное поручение'
+          Документ: 'Платежное поручение'
         }.collect { |k, v| "#{k}=#{v}" }
       end
 
       def section_document(payment_order)
         data = payment_order.data
-        {
-          СекцияДокумент: 'Платёжное поручение',
+        result = {
+          СекцияДокумент: 'Платежное поручение',
           Номер: data['number'],
           Дата: Time.zone.parse(data['date']).strftime('%d.%m.%Y'),
           Сумма: data['amount'],
@@ -87,7 +89,23 @@ module Cmd
           Очередность: data['priority'],
           НазначениеПлатежа: data['purpose_of_payment'],
           НазначениеПлатежа1: data['purpose_of_payment']
-        }.collect { |k, v| "#{k}=#{v}" }.push end_of_document
+        }
+        result.merge! tax_payment_fields(payment_order) if payment_order.data.key? 'tax_payment_fields'
+        result.collect { |k, v| "#{k}=#{v}" }.push end_of_document
+      end
+
+      def tax_payment_fields(payment_order)
+        tax_payment_fields = payment_order.data['tax_payment_fields']
+        {
+          СтатусСоставителя: tax_payment_fields['f101'],
+          ПоказательКБК: tax_payment_fields['kbk'],
+          ОКАТО: tax_payment_fields['oktmo'],
+          ПоказательОснования: tax_payment_fields['f106'],
+          ПоказательПериода: tax_payment_fields['f107'],
+          ПоказательНомера: tax_payment_fields['f108'],
+          ПоказательДаты: tax_payment_fields['f109'],
+          Код: tax_payment_fields['uin']
+        }
       end
 
       def end_of_document
