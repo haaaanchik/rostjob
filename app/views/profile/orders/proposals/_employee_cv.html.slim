@@ -3,7 +3,7 @@ tr
   td #{employee_cv.gender}
   td #{l(employee_cv.birthdate, format: :long)}
   td
-    = link_to employee_cv.file.url do
+    = link_to employee_cv.file.url, target: '_blank' do
       i.far.fa-file-alt.fa-2x
   td
     - unless employee_cv.proposal.order.completed?

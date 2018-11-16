@@ -3,7 +3,7 @@
 - goods = @invoice.goods
 .d-print-none.mb-3
   button onClick='window.print();' class='btn btn-indigo' Напечатать счёт
-  = link_to profile_invoice_path(@invoice, format: :pdf), class: 'btn btn-indigo' do
+  = link_to profile_invoice_path(@invoice, format: :pdf), class: 'btn btn-indigo', target: '_blank' do
     'Скачать в формате PDF'
     i.far.fa-file-pdf.ml-2
 
