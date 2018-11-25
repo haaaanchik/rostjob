@@ -2,11 +2,14 @@ class User < ApplicationRecord
   before_validation :set_guid, on: :create
   belongs_to :profile, optional: true
 
-  validates :full_name, presence: true, length: { minimum: 8 }
+  validates :full_name, presence: true, length: {minimum: 8}
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }
+  validates :password, length: {minimum: 8}
 
   has_secure_password
+
+  devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|

@@ -36,10 +36,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# gem 'devise'
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'omniauth-vkontakte'
+#AUTH ->
+gem 'devise', '~> 4.5'
+gem 'omniauth', '~> 1.8', '>= 1.8.1'
+gem 'omniauth-facebook', '~> 5.0'
+gem 'omniauth-vkontakte', '~> 1.4', '>= 1.4.1'
+gem 'omniauth-google-oauth2', '~> 0.5.3'
+gem 'omniauth-mail_ru', '~> 1.1'
+#AUTH  <-
 gem 'conditional_validation'
 gem 'sentry-raven'
 gem 'tinymce-rails'
@@ -62,7 +66,6 @@ gem 'capistrano-rails', require: false, group: :development
 gem 'rvm1-capistrano3', require: false, group: :development
 
 gem 'activerecord-session_store', '~> 1.1', '>= 1.1.1'
-gem 'authlogic', '~> 4.0', '>= 4.0.1'
 gem 'russian', '~> 0.6.0'
 gem 'petrovich', '~> 1.1', '>= 1.1.1'
 
