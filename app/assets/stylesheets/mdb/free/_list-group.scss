@@ -3,7 +3,7 @@
   .media-left {
     padding: $list-group-padding;
     img {
-      @extend .z-depth-1;
+      box-shadow: $z-depth-1;
     }
   }
 }
@@ -18,7 +18,8 @@
       border-bottom-right-radius: $border-radius-base;
     }
   }
-  a {
+  a,
+  button {
     transition: $list-group-transition;
     &:hover {
       transition: $list-group-transition;

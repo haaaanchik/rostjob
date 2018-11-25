@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB PRO 4.5.1
+ * Version: MDB PRO 4.5.14
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -11,9 +11,9 @@
  *
  * Documentation: https://mdbootstrap.com/
  *
- * Getting started: https://mdbootstrap.com/getting-started/
+ * Getting started: https://mdbootstrap.com/docs/jquery/getting-started/download/
  *
- * Tutorials: https://mdbootstrap.com/bootstrap-tutorial/
+ * Tutorials: https://mdbootstrap.com/education/bootstrap/
  *
  * Templates: https://mdbootstrap.com/templates/
  *
@@ -33,6 +33,8 @@
 
 // CORE
 @import "core/mixins";
+// Your custom variables
+@import "custom-variables";
 @import "core/colors";
 @import "core/variables";
 @import "core/global";
@@ -43,33 +45,38 @@
 
 // FREE
 @import "free/animations-basic";
-@import "free/animations-extended";
+@import "free/modules/animations-extended/module";
 @import "free/buttons";
 @import "free/cards";
 @import "free/dropdowns";
+@import "free/input-group";
 @import "free/navbars";
 @import "free/pagination";
 @import "free/badges";
 @import "free/modals";
 @import "free/carousels";
 @import "free/forms";
-@import "free/input-group";
 @import "free/msc";
 @import "free/footers";
 @import "free/list-group";
 @import "free/tables";
+@import "free/switch";
 @import "free/depreciated";
+@import "free/steppers";
+@import "free/loader";
+// Free addons
+// @import "addons/datatables";
 
 // PRO
 @import "pro/variables";
 @import "pro/buttons";
 @import "pro/social-buttons";
 @import "pro/tabs";
-@import "pro/cards";
+@import "pro/cards-basic";
 @import "pro/dropdowns";
 @import "pro/navbars";
 @import "pro/scrollspy";
-@import "pro/lightbox";
+@import "pro/modules/lightbox/module";
 @import "pro/chips";
 @import "pro/msc";
 @import "pro/forms";
@@ -81,18 +88,21 @@
 @import "pro/range";
 @import "pro/input-group";
 @import "pro/autocomplete";
-@import "pro/accordion";
-@import "pro/parallax";
+@import "pro/accordion-basic";
+@import "pro/modules/accordion-extended/module";
+@import "pro/modules/parallax/module";
 @import "pro/sidenav";
 @import "pro/ecommerce";
 @import "pro/carousels";
-@import "pro/steppers";
 @import "pro/blog";
 @import "pro/toasts";
 @import "pro/animations";
-@import "pro/charts";
+@import "pro/modules/charts/module";
 @import "pro/progress";
 @import "pro/scrollbar";
+@import "pro/modules/megamenu/module";
+// Your custom skin
+@import "custom-skin";
 @import "pro/skins";
 @import "pro/depreciated";
 
@@ -104,13 +114,17 @@
 // Sections
 @import "pro/sections/templates";
 @import "pro/sections/social";
-@import "pro/sections/blog";
 @import "pro/sections/team";
 @import "pro/sections/testimonials";
-@import "pro/sections/projects";
 @import "pro/sections/magazine";
 @import "pro/sections/pricing";
 @import "pro/sections/contacts";
 
+// Pro addons
+// @import "addons-pro/steppers";
+// @import "addons-pro/timeline";
+// @import "addons-pro/cards-extended";
+// @import "addons-pro/chat";
+
 // Your custom styles
-@import "custom";
+@import "custom-styles";

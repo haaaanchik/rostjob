@@ -11,6 +11,20 @@
   background-color: $chip-background-color;
   margin-bottom: $chip-margin-bottom;
   margin-right: $chip-margin-right;
+  cursor: pointer;
+  transition: $pagination-page-link-transition;
+  &:hover {
+    transition: $pagination-page-link-transition;
+    background-color: $grey-lighten-2;
+  }
+  &:focus {
+    transition: $pagination-page-link-transition;
+    background-color: $grey-lighten-1;
+  }
+  &:active {
+    transition: $pagination-page-link-transition;
+    @extend .z-depth-1;
+  }
   img {
     float: left;
     margin: 0 $chip-img-margin-right 0 $chip-img-margin-left;
@@ -38,15 +52,15 @@
   padding-bottom: $chips-padding-bottom;
   transition: all .3s;
   &.focus {
-    border-bottom: 1px solid $input-focus-color;
-    box-shadow: 0 1px 0 0 $input-focus-color;
+    border-bottom: 1px solid $input-md-focus-color;
+    box-shadow: 0 1px 0 0 $input-md-focus-color;
   }
   &:hover {
     cursor: text;
   }
   .tag.selected {
-    border-bottom: 1px solid $input-focus-color;
-    color: $white;
+    border-bottom: 1px solid $input-md-focus-color;
+    color: $white-base;
   }
   .input {
     display: inline-block;
