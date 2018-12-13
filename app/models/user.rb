@@ -6,9 +6,10 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :password, length: {minimum: 8}
 
-  has_secure_password
+  # devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
+  #        :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
-  devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
+  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
   def self.find_or_create_by_auth(auth)

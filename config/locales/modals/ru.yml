@@ -1,0 +1,8 @@
+ru:
+  views:
+    modals:
+      login:
+        form: Вход
+        email: Ваш e-mail
+        password: Ваш пароль
+        submit: Войти

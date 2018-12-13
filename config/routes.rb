@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
   mount Resque::Server.new, at: '/resque_web'
 
-  get 'login', to: 'sessions#new'
-  post 'login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  # get 'login', to: 'sessions#new'
+  # post 'login', to: 'sessions#create'
+  # delete 'logout', to: 'sessions#destroy'
+
+  get '/auth/:provider/callback' => 'sessions#callback'
+  devise_scope :user do
+    get 'login', to: 'users/sessions#new'
+    post 'login', to: 'users/sessions#create'
+    delete 'logout', to: 'users/sessions#destroy'
+  end
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   resource :price, only: :show
 
@@ -28,15 +40,18 @@ Rails.application.routes.draw do
         put :handle
       end
     end
+
     resources :price_groups, except: :show
-    get :payment_orders, constraints: ->(req) { req.params.key?(:find) }, to: 'payment_orders#index'
-    get :payment_orders, constraints: ->(req) { req.params.key?(:download) }, to: 'payment_orders#download'
+    get :payment_orders, constraints: ->(req) {req.params.key?(:find)}, to: 'payment_orders#index'
+    get :payment_orders, constraints: ->(req) {req.params.key?(:download)}, to: 'payment_orders#download'
     get :payment_orders, to: 'payment_orders#index'
+
     resources :invoices, only: :index do
       member do
         put :pay
       end
     end
+
     resources :orders do
       member do
         put :accept
@@ -45,15 +60,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/auth/:provider/callback' => 'sessions#callback'
-
-  # devise_for :users, controllers: {
-  #   omniauth_callbacks: 'users/omniauth_callbacks',
-  #   registrations: 'users/registrations',
-  #   sessions: 'users/sessions'
-  # }
-
-  resources :users, only: %i[new create update]
   resource :profile, except: %i[show destroy]
   namespace :profile do
     resources :invoices, only: %i[index show create destroy]
@@ -77,10 +83,10 @@ Rails.application.routes.draw do
         put 'candidates/fire', to: 'candidates#fire'
       end
     end
-    post :orders, constraints: ->(req) { req.params.key?(:pre_publish) }, to: 'orders#create_pre_publish'
-    post :orders, constraints: ->(req) { req.params.key?(:create) }, to: 'orders#create'
-    patch 'orders/:id', constraints: ->(req) { req.params.key?(:pre_publish) }, to: 'orders#update_pre_publish'
-    patch 'orders/:id', constraints: ->(req) { req.params.key?(:create) }, to: 'orders#update'
+    post :orders, constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#create_pre_publish'
+    post :orders, constraints: ->(req) {req.params.key?(:create)}, to: 'orders#create'
+    patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'
+    patch 'orders/:id', constraints: ->(req) {req.params.key?(:create)}, to: 'orders#update'
     resources :proposals, only: %i[index show create] do
       member do
         put :cancel
