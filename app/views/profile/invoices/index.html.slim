@@ -1,14 +1,28 @@
 .col
   .card.border-light
     .card-header
-      strong Баланс
+      'Лицевой счет
     .card-body
-      'Для оплаты услуг доступно:
+      'Остаток:
       strong #{@current_profile.balance.amount}
       i.fa.fa-ruble-sign.ml-1
+      = link_to 'Подробно', '#collapseExample', class: 'ml-3', data: { toggle: "collapse" },
+      aria: { expanded: false, controls: "collapseExample" }
+  .collapse.mt-3#collapseExample
+    .card.border-light.mt-3
+      .card-header
+        'Операции с лицевым счётом
+      .card-body
+        table.table
+          tr
+            th Дата
+            th Описание операции
+            th Приход
+            th Расход
+          = render @current_profile.balance.bill_transactions.order(id: :desc).last(10)
   .card.border-light.mt-3
     .card-header
-      strong Выписать счет для пополнения баланса
+      strong Выписать счет для пополнения
     .card-body
       = render partial: 'new'
   .card.border-light.mt-3
