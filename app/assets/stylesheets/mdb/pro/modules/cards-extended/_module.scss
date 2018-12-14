@@ -225,12 +225,6 @@
       background-color: $red-lighten-4;
     }
   }
-  &.panels-card {
-    .hour {
-      font-size: .8rem;
-      margin-top: .3rem;
-    }
-  }
 }
 .card-wrapper {
   &.card-action {
@@ -274,68 +268,4 @@
 
 .z-depth-1-bottom {
   box-shadow:  0 5px 5px -2px rgba(0, 0, 0, 0.16);
-}
-
-$checkbox-colors: () !default;
-$checkbox-colors: map-merge((
-  "red": #fb0025,
-  "purple": #69004b,
-  "blue":   #0d47a1,
-  "teal":   #00695c,
-  "unique": #3F729B
-), $checkbox-colors);
-
-.md-calendar {
-  background-color: #69004b;
-  .weekdays,
-  .days {
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    li {
-      text-align: center;
-      width: 13.6%;
-      padding: .9rem 0;
-    }
-  }
-  .days {
-    li {
-      margin-bottom: .5rem;
-      font-size: .9rem;
-      &.active {
-        background-color: #fb0025;
-        &.rounded-right {
-          border-top-right-radius: 50% !important;
-          border-bottom-right-radius: 50% !important;
-        }
-        &.rounded-left {
-          border-top-left-radius: 50% !important;
-          border-bottom-left-radius: 50% !important;
-        }
-      }
-    }
-  }
-  @each $key, $value in $checkbox-colors {
-    .#{$key}-checkbox {
-      .form-check-input[type=checkbox] {
-        &.filled-in {
-          &:checked {
-            +label {
-              &:after {
-                background-color: $value;
-                border: $checkbox-label-before-after-border-width solid $value;
-              }
-            }
-          }
-          &:not(:checked) {
-            +label {
-              &:after {
-                border: $checkbox-label-before-after-border-width solid $value;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
 }

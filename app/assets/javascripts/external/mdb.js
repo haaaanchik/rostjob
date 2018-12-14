@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB Pro 4.5.14
+ * Version: MDB Pro 4.5.16
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -15144,26 +15144,18 @@ var WOW;
             var parent = element.parentNode;
 
             // If input already have parent just pass through
-            if (parent.tagName.toLowerCase() === 'i' && parent.classList.contains('waves-effect')) {
+            if (parent.tagName.toLowerCase() === 'span' && parent.classList.contains('waves-effect')) {
                 return;
             }
 
             // Put element class and style to the specified parent
-            var wrapper       = document.createElement('i');
-            wrapper.className = element.className + ' waves-input-wrapper';
-            element.className = 'waves-button-input';
+            var wrapper       = document.createElement('span');
+            wrapper.className = 'waves-input-wrapper';
+            // element.className = 'waves-button-input';
 
             // Put element as child
             parent.replaceChild(wrapper, element);
             wrapper.appendChild(element);
-
-            // Apply element color and background color to wrapper
-            var elementStyle    = window.getComputedStyle(element, null);
-            var color           = elementStyle.color;
-            var backgroundColor = elementStyle.backgroundColor;
-
-            wrapper.setAttribute('style', 'color:' + color + ';background:' + backgroundColor);
-            element.setAttribute('style', 'background-color:rgba(0,0,0,0);');
 
         },
 
@@ -23856,6 +23848,7 @@ $.extend($.fn.pickadate.defaults, {
 			// If autoclose is not setted, append a button
 		$('<button type="button" class="btn btn-flat clockpicker-button" tabindex="' + (options.twelvehour? '3' : '1') + '">' + options.donetext + '</button>').click($.proxy(this.done, this)).appendTo(this.footer);
 
+		$('<button type="button" class="btn btn-flat clockpicker-button" tabindex="' + (options.twelvehour? '4' : '2') + '">' + options.cleartext + '</button>').click($.proxy(this.clearInput, this)).appendTo(this.footer);
 		this.spanHours.click($.proxy(this.toggleView, this, 'hours'));
 		this.spanMinutes.click($.proxy(this.toggleView, this, 'minutes'));
 
@@ -24043,7 +24036,8 @@ $.extend($.fn.pickadate.defaults, {
 	ClockPicker.DEFAULTS = {
 		'default': '',         // default time, 'now' or '13:14' e.g.
 		fromnow: 0,            // set default time to * milliseconds from now (using with default = 'now')
-		donetext: 'Done',      // done button text
+    donetext: 'Done',      // done button text
+    cleartext: 'Clear',    // clear button text
 		autoclose: false,      // auto close when minute is selected
 		ampmclickable: false,  // set am/pm button on itself
 		darktheme: false,			 // set to dark theme
@@ -24337,6 +24331,15 @@ ClockPicker.prototype.parseInputValue = function(){
     this.bg.setAttribute('cy', cy);
     this.fg.setAttribute('cx', cx);
     this.fg.setAttribute('cy', cy);
+  };
+
+  	// Clear clock text
+  ClockPicker.prototype.clearInput = function() {
+		this.input.val('');
+		this.hide();
+
+		if(this.options.afterDone && typeof this.options.afterDone === 'function')
+			this.options.afterDone(this.input, null);
 	};
 
     // Allow user to get time as Date object
@@ -26063,7 +26066,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.defaults = {
         topSpacing: DEFAULT_TOP_SPACING,
         zIndex: false,
-        stopper: '.sticky-stopper',
+        stopper: '#footer',
         stickyClass: false,
         startScrolling: 'top',
         minWidth: false
@@ -26076,11 +26079,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       this.elementHeight = this.$element.outerHeight(true);
       this.$placeholder = $('<div class="sticky-placeholder"></div>');
       this.scrollTop = 0;
-
-      this._getPushPoint();
-
-      this._getStopperPosition();
-
+      this.setPushPoint();
+      this.setStopperPosition();
       this.bindEvents();
     }
 
@@ -26092,7 +26092,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "bindEvents",
       value: function bindEvents() {
-        this.$window.on('scroll resize', this.init.bind(this));
+        this.$window.on('resize', this.handleResize.bind(this));
+        this.$window.on('scroll', this.init.bind(this));
       }
     }, {
       key: "hasZIndex",
@@ -26102,25 +26103,41 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     }, {
       key: "hasStopper",
       value: function hasStopper() {
-        return !!($(this.options.stopper).length || typeof this.options.stopper === 'number');
+        return $(this.options.stopper).length || typeof this.options.stopper === 'number';
       }
     }, {
-      key: "_getStopperPosition",
-      value: function _getStopperPosition() {
+      key: "isScreenHeightEnough",
+      value: function isScreenHeightEnough() {
+        return this.$element.outerHeight() + this.options.topSpacing < this.$window.height();
+      }
+    }, {
+      key: "setStopperPosition",
+      value: function setStopperPosition() {
         if (typeof this.options.stopper === 'string') {
-          this.stopPoint = $(this.stopper).offset().top - this.options.topSpacing * .3;
+          this.stopPoint = $(this.stopper).offset().top - this.options.topSpacing;
         } else if (typeof this.options.stopper === 'number') {
           this.stopPoint = this.options.stopper;
         }
       }
     }, {
-      key: "_getPushPoint",
-      value: function _getPushPoint() {
-        if (this.options.startScrolling === 'bottom') {
-          this.$pushPoint = this.$element.offset().top + this.$element.outerHeight() - this.$window.innerHeight();
+      key: "setPushPoint",
+      value: function setPushPoint() {
+        if (this.options.startScrolling === 'bottom' && !this.isScreenHeightEnough()) {
+          this.$pushPoint = this.$element.offset().top + this.$element.outerHeight(true) - this.$window.height();
+        } else if (this.options.startScrolling === 'bottom') {
+          this.$pushPoint = this.$element.offset().top + this.$element.outerHeight(true) + this.options.topSpacing - this.$window.height();
         } else {
           this.$pushPoint = this.$element.offset().top - this.options.topSpacing;
         }
+      }
+    }, {
+      key: "handleResize",
+      value: function handleResize() {
+        this.elementWidth = this.$element.outerWidth();
+        this.elementHeight = this.$element.outerHeight(true);
+        this.setPushPoint();
+        this.setStopperPosition();
+        this.init();
       }
     }, {
       key: "init",
@@ -26129,21 +26146,28 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return false;
         }
 
-        this.scrollTop = this.$window.scrollTop();
-
-        if (this.$pushPoint < this.scrollTop) {
-          this._appendPlaceholder();
-
-          this._stickyStart();
+        if (this.options.startScrolling === 'bottom' && !this.isScreenHeightEnough()) {
+          this.scrollTop = this.$window.scrollTop() + this.$window.height();
         } else {
-          this._stickyEnd();
+          this.scrollTop = this.$window.scrollTop();
         }
 
-        this._stop();
+        if (this.$pushPoint < this.scrollTop) {
+          this.appendPlaceholder();
+          this.stickyStart();
+        } else {
+          this.stickyEnd();
+        }
+
+        if (this.$window.scrollTop() > this.$pushPoint) {
+          this.stop();
+        } else {
+          this.stickyEnd();
+        }
       }
     }, {
-      key: "_appendPlaceholder",
-      value: function _appendPlaceholder() {
+      key: "appendPlaceholder",
+      value: function appendPlaceholder() {
         this.$element.after(this.$placeholder);
         this.$placeholder.css({
           width: this.elementWidth,
@@ -26151,21 +26175,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
       }
     }, {
-      key: "_stickyStart",
-      value: function _stickyStart() {
+      key: "stickyStart",
+      value: function stickyStart() {
         if (this.options.stickyClass) {
           this.$element.addClass(this.options.stickyClass);
-        }
+        } // @see: https://stackoverflow.com/a/4370047
 
+
+        this.$element.get(0).style.overflow = 'scroll';
+        var scrollHeight = this.$element.get(0).scrollHeight;
+        this.$element.get(0).style.overflow = '';
         this.$element.css({
           'position': 'fixed',
-          'width': this.elementWidth
+          'width': this.elementWidth,
+          'height': scrollHeight
         });
 
-        if (this.options.startScrolling === 'bottom') {
-          var distanceFromTop = this.$window.innerHeight() - this.$element.height() - this.options.topSpacing / 2;
+        if (this.options.startScrolling === 'bottom' && !this.isScreenHeightEnough()) {
           this.$element.css({
-            top: distanceFromTop
+            bottom: 0,
+            top: ''
           });
         } else {
           this.$element.css({
@@ -26180,8 +26209,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         }
       }
     }, {
-      key: "_stickyEnd",
-      value: function _stickyEnd() {
+      key: "stickyEnd",
+      value: function stickyEnd() {
         if (this.options.stickyClass) {
           this.$element.removeClass(this.options.stickyClass);
         }
@@ -26193,17 +26222,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         });
       }
     }, {
-      key: "_stop",
-      value: function _stop() {
-        if (this.stopPoint < $(this.$element).offset().top + this.$element.height()) {
-          var diff = this.stopPoint - ($(this.$element).offset().top + this.$element.height()) + this.options.topSpacing;
-
-          if (this.options.startScrolling === 'bottom') {
-            diff = this.stopPoint - (this.scrollTop + this.elementHeight);
-          }
-
+      key: "stop",
+      value: function stop() {
+        if (this.stopPoint < $(this.$element).offset().top + this.$element.outerHeight(true)) {
           this.$element.css({
-            top: diff
+            position: 'absolute',
+            bottom: 0,
+            top: ''
           });
         }
       }
@@ -26214,8 +26239,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
   $.fn.sticky = function (options) {
     return this.each(function () {
-      var sticky = new Sticky($(this), options);
-      sticky.init();
+      var $self = $(this);
+      $(window).on('load', function () {
+        var sticky = new Sticky($self, options);
+        sticky.init();
+      });
     });
   };
 })(jQuery);
@@ -29269,3 +29297,25 @@ $('body').on('shown.bs.modal', '.modal', function() {
 $('body').on('hidden.bs.modal', '.modal', function() {
     $('body').removeClass('scrollable');
 });
+"use strict";
+
+(function ($) {
+  $('.input-default-wrapper').on('change', '.input-default-js', function (e) {
+    var $this = $(e.target),
+        $label = $this.next('label'),
+        $files = $this[0].files;
+    var fileName = '';
+
+    if ($files && $files.length > 1) {
+      fileName = ($this.attr('data-multiple-target') || '').replace('{target}', $files.length);
+    } else if (e.target.value) {
+      fileName = e.target.value.split('\\').pop();
+    }
+
+    if (fileName) {
+      $label.find('.span-choose-file').html(fileName);
+    } else {
+      $label.html($label.html());
+    }
+  });
+})(jQuery);
