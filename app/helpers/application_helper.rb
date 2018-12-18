@@ -7,7 +7,8 @@ module ApplicationHelper
 
   def date_rus(date)
     return '' unless date
-    date.to_rus
+    # date.to_rus
+    l date, format: :short
   end
 
   def st_input_class

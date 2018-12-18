@@ -1,7 +1,13 @@
 li.nav-item.dropdown
-  = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: {toggle: 'dropdown'}, aria: {haspopup: 'true', expanded: 'false'} do
-    = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
-    |#{current_user.full_name}
+  = link_to '#', class: 'nav-link dropdown-toggle', role: 'button',
+          id: 'dropdownMenuLink', data: {toggle: 'dropdown'},
+          aria: {haspopup: 'true', expanded: 'false'} do
+    / = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
+    table
+      tr
+        td = current_user.full_name
+      tr
+        td.badge.badge-primary = profile_type_rus @current_profile&.profile_type
   .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
     = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
     = link_to 'Баланс', profile_invoices_path, class: 'dorpdown-item d-block'

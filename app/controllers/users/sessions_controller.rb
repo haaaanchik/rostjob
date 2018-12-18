@@ -17,13 +17,10 @@ class Users::SessionsController < Devise::SessionsController
     user = User.find_by(email: usr[:email].downcase)
     return invalid_login_attempt unless user
 
-    Rails.logger.debug "<<<<<<<<<<<< 0 - #{user&.valid_password?(usr[:password]).inspect}"
-
     if user&.valid_password?(usr[:password])
-      Rails.logger.debug "<<<<<<<<<<<< 1"
       sign_in :user, user
+      redirect_to root_path
     else
-      Rails.logger.debug "<<<<<<<<<<<< 2"
       invalid_login_attempt
     end
   end

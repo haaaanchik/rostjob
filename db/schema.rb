@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_200501) do
+ActiveRecord::Schema.define(version: 2018_12_18_113138) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -177,11 +177,9 @@ ActiveRecord::Schema.define(version: 2018_11_08_200501) do
     t.text "description"
     t.integer "commission"
     t.integer "payment_type", default: 0
-    t.integer "warranty_period"
+    t.integer "warranty_period", default: 10
     t.integer "number_of_recruiters", default: 1
     t.boolean "enterpreneurs_only"
-    t.text "requirements_for_recruiters"
-    t.text "stop_list"
     t.boolean "accepted"
     t.string "visibility"
     t.string "state"
@@ -195,6 +193,12 @@ ActiveRecord::Schema.define(version: 2018_11_08_200501) do
     t.integer "position_id"
     t.decimal "customer_total", precision: 10, scale: 2, default: "0.0"
     t.decimal "contractor_total", precision: 10, scale: 2, default: "0.0"
+    t.json "other_info"
+    t.string "skill"
+    t.string "experience"
+    t.string "district"
+    t.text "schedule"
+    t.string "work_period"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 

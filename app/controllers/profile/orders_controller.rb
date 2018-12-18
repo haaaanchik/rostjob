@@ -60,7 +60,7 @@ class Profile::OrdersController < ApplicationController
 
   def pre_publish
     order.to_waiting_for_payment unless order.can_be_paid?
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
+    render 'pre_publish', locals: {order: order, balance: order.profile.balance.amount}
   end
 
   def publish
@@ -104,11 +104,12 @@ class Profile::OrdersController < ApplicationController
 
   def order_params
     @order_params ||= params.require(:order)
-                            .permit(:title, :specialization, :city, :salary_from, :position_id,
-                                    :salary_to, :description, :payment_type,
-                                    :number_of_recruiters, :enterpreneurs_only,
-                                    :requirements_for_recruiters, :stop_list, :accepted,
-                                    :visibility, :state, :warranty_period, :number_of_employees)
+                        .permit(:title, :specialization, :city, :salary_from, :position_id,
+                                :salary_to, :description, :payment_type,
+                                :number_of_recruiters, :enterpreneurs_only,
+                                :skill, :accepted, :district, :experience,
+                                :visibility, :state, :number_of_employees,
+                                :schedule, :work_period, other_info: {})
   end
 
   def balance
@@ -128,6 +129,6 @@ class Profile::OrdersController < ApplicationController
   end
 
   def description
-    '<p><strong>Требования:</strong></p><p><strong>Условия:</strong></p>'
+    nil
   end
 end

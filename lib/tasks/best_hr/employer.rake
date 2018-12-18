@@ -9,7 +9,7 @@ namespace :best_hr do
         contact_person: name,
         phone: Faker::PhoneNumber.phone_number,
         email: email,
-        profile_type: 'contractor',
+        profile_type: 'customer',
         company_name: Faker::Company.name,
         city: Faker::Address.city
       }
