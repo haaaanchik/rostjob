@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   has_many :proposals
   has_many :candidates, class_name: 'EmployeeCv'
   has_many :comments
+  has_many :favorites, as: :favorable
 
   validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}

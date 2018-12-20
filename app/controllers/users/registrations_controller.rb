@@ -5,14 +5,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @user = User.new
+  end
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    user = User.new configure_sign_up_params
+
+    if user.save
+      sign_in :user, user
+      redirect_to root_path
+    else
+      render js: "toastr.error('#{error_msg_handler user}', 'Не сохранено!');",
+             status: 401
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +66,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  def configure_sign_up_params
+    params.require(:user).permit(:password_confirmation, :password,
+                                 :full_name, :email)
+  end
 end

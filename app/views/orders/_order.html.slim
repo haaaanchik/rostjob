@@ -1,5 +1,5 @@
-tr.clickable-row data-href=order_path(order)
-  td
+tr
+  td.clickable-row data-href=order_path(order)
     p.h6 #{order.title}
     ul.list-unstyled.list-inline
       li.list-inline-item.pr-2
@@ -22,6 +22,9 @@ tr.clickable-row data-href=order_path(order)
           |#{t("proposal.state.#{proposal.state}")}
 
     |#{strip_tags(order.description).first(200)}
-  td.text-center.pl-1
+  td.text-center.pl-1.clickable-row data-href=order_path(order)
     span.font-weight-bold.mr-1 #{order.contractor_total}
     i.fa.fa-ruble-sign
+  td.pl-1
+    i.fa.fa-star
+

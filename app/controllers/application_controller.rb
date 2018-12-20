@@ -21,6 +21,14 @@ class ApplicationController < BaseController
 
   private
 
+  def error_msg_handler(object)
+    html = 'При сохранении произошли следующие ошибки: <br/>'
+    object.errors.full_messages.each do |msg|
+      html += "#{msg} <br/>"
+    end
+    html.html_safe
+  end
+
   def set_raven_context
     # Raven.user_context(id: session[:current_user_id]) # or anything else in session
     ::Raven.extra_context(params: params.to_unsafe_h, url: request.url)

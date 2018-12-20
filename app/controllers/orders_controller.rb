@@ -1,13 +1,21 @@
 class OrdersController < ApplicationController
   def index
-    @order_search_form = OrderSearchForm.new(order_search_form_params)
-    @orders = @order_search_form.submit
+    @fav = params[:favorable_id]
+    if @fav
+      list = Favorite.includes(:favorable).where user_id: params[:favorable_id],
+                                                 favorable_type: 'Order'
+      @orders = list.map(&:favorable) if list
+    else
+      @order_search_form = OrderSearchForm.new(order_search_form_params)
+      @orders = @order_search_form.submit
+    end
+
   end
 
   def show
     new_proposal = Proposal.new
     new_proposal.messages.build
-    render locals: { order: order, new_proposal: new_proposal }
+    render locals: {order: order, new_proposal: new_proposal}
   end
 
   private
