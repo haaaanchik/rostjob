@@ -18,10 +18,25 @@ class OrdersController < ApplicationController
     render locals: {order: order, new_proposal: new_proposal}
   end
 
+  def manage_fav
+    order
+
+    if params[:tag] == 'star'
+      @order.favorites.create user_id: current_user.id, favorable: @order
+    else
+      fv = Favorite.find_by id: params[:fav]
+      @order.favorites.destroy fv
+    end
+
+    str = render_to_string @order
+
+    render js: "$('#req_order_#{@order.id}').replaceWith('#{str}');"
+  end
+
   private
 
   def order
-    @order = Order.find(params[:id])
+    @order = Order.includes(:favorites).find(params[:id])
   end
 
   def order_search_form_params

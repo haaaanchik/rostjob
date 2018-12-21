@@ -100,7 +100,11 @@ Rails.application.routes.draw do
     put :balance, to: 'balances#deposit'
   end
 
-  resources :orders, only: %i[index show]
+  resources :orders, only: %i[index show] do
+    member do
+      put :manage_fav
+    end
+  end
   resources :recruiters, only: %i[index show]
   resources :support_messages, only: %i[new create]
 

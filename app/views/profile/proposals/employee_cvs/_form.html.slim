@@ -1,4 +1,6 @@
-= form_with model: proposal.employee_cvs.build, url: profile_proposal_employee_cvs_path(proposal), class: 'new-employee_cv-form' do |f|
+= form_with model: proposal.employee_cvs.build,
+        url: profile_proposal_employee_cvs_path(proposal),
+        class: 'new-employee_cv-form' do |f|
   .row
     .col
       .md-form
@@ -25,5 +27,15 @@
             = f.file_field :file
           .file-path-wrapper
             = text_field :file, :path, placeholder: 'Резюме кандидата', class: 'file-path'
+  .row
+    = f.fields_for :ext_data, {} do |ef|
+      - EmployeeCv.ext_data_fields.each do |field|
+        .col-4
+          .md-form
+            - if field == :remark
+              = ef.text_area field, class: 'form-control'
+            - else
+              = ef.text_field field, class: 'form-control'
+            = ef.label field, t("employee_cv.ext_data.#{field}")
   .text-center.pt-3
     = f.submit 'Загрузить', class: 'btn btn-indigo'

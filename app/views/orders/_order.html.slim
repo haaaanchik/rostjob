@@ -1,4 +1,4 @@
-tr
+tr id="req_order_#{order.id}"
   td.clickable-row data-href=order_path(order)
     p.h6 #{order.title}
     ul.list-unstyled.list-inline
@@ -26,5 +26,13 @@ tr
     span.font-weight-bold.mr-1 #{order.contractor_total}
     i.fa.fa-ruble-sign
   td.pl-1
-    i.fa.fa-star
-
+    - favs = order&.favorites
+    - sel = (favs.select {|d| d.user_id == current_user.id}).first
+    - if sel
+      = link_to content_tag(:i, '', class: 'fa fa-star'),
+              manage_fav_order_path(order, tag: :unstar, fav: sel.id), remote: true,
+              method: :put, class: 'text-info'
+    - else
+      = link_to content_tag(:i, '', class: 'fa fa-star'),
+              manage_fav_order_path(order, tag: :star), remote: true,
+              method: :put

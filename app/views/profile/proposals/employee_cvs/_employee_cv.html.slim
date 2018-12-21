@@ -3,5 +3,9 @@ tr
   td #{employee_cv.gender}
   td #{l(employee_cv.birthdate, format: :long)}
   td
-    = link_to employee_cv.file.url do
-      i.far.fa-file-alt.fa-2x
+    - if employee_cv&.file
+      = link_to employee_cv.file.url do
+        i.far.fa-file-alt.fa-2x
+  td = link_to content_tag(:i, '', class: 'fa fa-edit fa-2x'),
+          edit_profile_proposal_employee_cv_path(0, employee_cv),
+          remote: true, class: 'text-info'

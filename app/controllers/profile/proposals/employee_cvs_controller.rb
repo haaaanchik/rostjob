@@ -1,6 +1,6 @@
 class Profile::Proposals::EmployeeCvsController < ApplicationController
   def index
-    employee_cvs
+    @list = EmployeeCv.where profile_id: current_profile.id
   end
 
   def new
@@ -11,8 +11,12 @@ class Profile::Proposals::EmployeeCvsController < ApplicationController
   def show
   end
 
+  def edit
+    render js: 'alert("edit!")'
+  end
+
   def create
-    @cv = employee_cvs.build(employee_cvs_params)
+    @cv = employee_cvs.build(employee_cvs_params.merge(profile_id: current_profile.id))
     if @cv.save
       render @cv, layout: false
     else
@@ -26,7 +30,7 @@ class Profile::Proposals::EmployeeCvsController < ApplicationController
   private
 
   def employee_cvs_params
-    params.require(:employee_cv).permit(:name, :gender, :birthdate, :file)
+    params.require(:employee_cv).permit(:name, :gender, :birthdate, :file, ext_data: {})
   end
 
   def employee_cvs

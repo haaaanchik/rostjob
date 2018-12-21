@@ -1,7 +1,12 @@
 li.nav-item
-  = link_to 'Каталог заявок', orders_path, class: 'nav-link', data: {offset: '60'}
+  = link_to 'Каталог заявок', orders_path,
+          class: 'nav-link', data: {offset: '60'}
 li.nav-item
   = link_to 'Мои заявки', orders_path(:favorable_id => current_user.id),
           class: 'nav-link', data: {offset: '60'}
 li.nav-item
-  = link_to 'Мои предложения', profile_proposals_path, class: 'nav-link', data: {offset: '60'}
+  = link_to 'Мои предложения', profile_proposals_path,
+          class: 'nav-link', data: {offset: '60'}
+li.nav-item
+  = link_to 'Мои анкеты', profile_proposal_employee_cvs_path(0),
+          class: 'nav-link', data: {offset: '60'}
