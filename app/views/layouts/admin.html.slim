@@ -2,7 +2,8 @@ doctype html
 html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
-    title Admin Best-HR.pro
+    = favicon_link_tag 'favicon.png'
+    title Admin Best-HR
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -21,14 +22,14 @@ html
                 = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
             - if can_access?(%w[admin moderator])
               li.nav-item.dropdown
-                = link_to 'Бухгалтерия', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, extended: false }
+                = link_to 'Бухгалтерия', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
                   = link_to 'Выписанные счета', admin_invoices_path, class: 'nav-link', data: {offset: '60'}
                   = link_to 'Импорт выписок', admin_account_statements_path, class: 'nav-link', data: {offset: '60'}
                   = link_to 'Экспорт полатёжных поручений', admin_payment_orders_path, class: 'nav-link', data: {offset: '60'}
             - if can_access?(%w[admin moderator])
               li.nav-item.dropdown
-                = link_to 'Справочники', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, extended: false }
+                = link_to 'Справочники', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
                   = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'nav-link', data: {offset: '60'}
                   = link_to 'Специализации', admin_specializations_path, class: 'nav-link', data: {offset: '60'}
@@ -36,7 +37,7 @@ html
                   = link_to 'Города', admin_cities_path, class: 'nav-link', data: {offset: '60'}
                   = link_to 'Ценовые группы', admin_price_groups_path, class: 'nav-link', data: {offset: '60'}
               li.nav-item.dropdown
-                = link_to 'Настройки', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }, aria: { haspopup: true, extended: false }
+                = link_to 'Настройки', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
                   = link_to 'Наши юрлица', admin_companies_path, class: 'nav-link', data: {offset: '60'}
 
