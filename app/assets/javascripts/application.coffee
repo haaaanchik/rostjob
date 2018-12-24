@@ -96,8 +96,8 @@ $(document).ready ->
   $('[data-redirect_modal="open"]').modal()
 
   $(document).on('ajax:success', '[data-remote=true]', (event) ->
-    data = event.detail[0]
-    show_validation_errors(data)
+#    data = event.detail[0]
+#    show_validation_errors(data)
   )
 
   $(document).on('focusin', '.is-invalid', (event) ->

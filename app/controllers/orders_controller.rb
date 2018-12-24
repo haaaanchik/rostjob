@@ -20,17 +20,14 @@ class OrdersController < ApplicationController
 
   def manage_fav
     order
+    favs = @order.favorites
 
     if params[:tag] == 'star'
-      @order.favorites.create user_id: current_user.id, favorable: @order
+      favs.create user_id: current_user.id
     else
       fv = Favorite.find_by id: params[:fav]
-      @order.favorites.destroy fv
+      favs.destroy fv
     end
-
-    str = render_to_string @order
-
-    render js: "$('#req_order_#{@order.id}').replaceWith('#{str}');"
   end
 
   private

@@ -2,36 +2,38 @@ h1 Предложение по заявке № #{proposal.order.id}
 p #{proposal.order.title}
 p #{proposal.order.profile.company_name}
 = link_to 'Отказаться', cancel_profile_proposal_path(proposal), method: :put, class: 'btn btn-indigo',
-  data: { confirm: "Вы собираетесь отказаться от работы с заявкой №#{proposal.order.id}\nПродолжить?" }
+        data: {confirm: "Вы собираетесь отказаться от работы с заявкой №#{proposal.order.id}\nПродолжить?"}
 
 ul.nav.md-pills.nav-justified.pills-indigo
   li.nav-item
-    = link_to 'Общение', '#panel1', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link active'
+    = link_to 'Общение', '#panel1', data: {toggle: 'tab'}, role: 'tab', class: 'nav-link active'
   li.nav-item
-    = link_to 'Кандидаты', '#panel2', data: { toggle: 'tab' }, role: 'tab', class: 'nav-link'
+    = link_to 'Кандидаты', '#panel2', data: {toggle: 'tab'}, role: 'tab', class: 'nav-link'
 
 .tab-content.w-100
   #panel1.tab-pane.fade.in.show.active role='tabpanel'
     .col.dark-grey
-      = render partial: 'utils/chat.html.slim', locals: { proposal: proposal }
+      = render partial: 'utils/chat.html.slim', locals: {proposal: proposal}
   #panel2.tab-pane.fade role='tabpanel'
     - unless proposal.order.completed?
-      button.btn.btn-indigo type="button" data-toggle="modal" data-target="#newCandidateModal" Добавить кандидата
-    table.table#candidates
-      tr
-        th ФИО кандидата
-        th Пол
-        th Дата рождения
-        th Резюме
-      = render partial: 'profile/proposals/employee_cvs/employee_cv', collection: proposal.employee_cvs
-
-- unless proposal.order.completed?
-  .modal.fade#newCandidateModal tabindex="-1" role="dialog" aria-labelledby="newCandidatModalLabel" aria-hidden="true"
-    .modal-dialog.modal-lg role="document"
-      .modal-content
-        .modal-header
-          h5.modal-title#newCandidatModalLabel Новый кандидат
-          button type="button" class="close" data-dismiss="modal" aria-label="Close"
-            span aria-hidden="true" &times;
-        .modal-body
-          = render partial: 'profile/proposals/employee_cvs/form', locals: { proposal: proposal }
+      .row
+        .col-6
+          = link_to 'Добавить нового кандидата', new_profile_employee_cv_path(proposal_id: proposal.id),
+                  method: :get, remote: true, class: 'btn btn-indigo'
+        .col-6
+          .md-form
+            - candids = EmployeeCv.available @current_profile.id
+            = collection_select :proposal_select, :employee_cv,
+                    candids, :id, :with_mobile, {include_blank: 'Выберите из списка'},
+                    class: st_select_class, 'data-proposal_id': proposal.id
+            = label :proposal_select, :employee_cv, 'Анкеты'
+      table.table.table-hover.w-auto#candidates
+        thead
+          tr
+            th ФИО кандидата
+            th Телефон
+            th Статус
+            th colspan="2"
+        tbody#candidates_list
+          = render partial: 'profile/employee_cvs/employee_cv',
+                  collection: proposal.employee_cvs.proposed

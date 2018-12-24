@@ -26,11 +26,12 @@ tr id="req_order_#{order.id}"
     span.font-weight-bold.mr-1 #{order.contractor_total}
     i.fa.fa-ruble-sign
   td.pl-1
-    - favs = order&.favorites
-    - sel = (favs.select {|d| d.user_id == current_user.id}).first
-    - if sel
+    - favs = order&.favorites.where user_id: current_user.id
+    - selected = favs.first
+    - if selected
       = link_to content_tag(:i, '', class: 'fa fa-star'),
-              manage_fav_order_path(order, tag: :unstar, fav: sel.id), remote: true,
+              manage_fav_order_path(order, tag: :unstar, fav: selected.id,
+                      favorable_id: params[:favorable_id]), remote: true,
               method: :put, class: 'text-info'
     - else
       = link_to content_tag(:i, '', class: 'fa fa-star'),

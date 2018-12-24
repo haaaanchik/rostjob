@@ -1,0 +1,14 @@
+tr id="profile_cvs_#{employee_cv}" data-cvs-state="#{employee_cv.state}"
+  td #{employee_cv.name}
+  td #{employee_cv&.ext_data&.fetch(:phone, nil)}
+  td
+    span.badge.badge-primary = employee_cv.state_rus
+  td
+    = link_to content_tag(:i, '', class: 'fa fa-edit fa-2x'),
+            edit_profile_employee_cv_path(employee_cv),
+            remote: true, class: 'text-info' if employee_cv.state == 'draft'
+  td
+    = link_to content_tag(:i, '', class: 'fa fa-trash fa-2x'),
+            profile_employee_cv_path(employee_cv),
+            method: :delete, confirm: 'Уверены?',
+            remote: true, class: 'text-danger' if employee_cv.state == 'draft'

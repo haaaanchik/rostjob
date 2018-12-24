@@ -37,11 +37,18 @@
               i.fa.fa-ruble-sign
             dt.col-sm-4 Гарантийный период
             dd.col-sm-8 #{order.warranty_period}, рабочих дней
-      - unless proposal || order.profile.id == current_user.profile.id
-        hr
-        .row.pt-2
+      hr
+      .row.pt-2
+        |Ответ на заявку:
+        - if proposal || order.profile.id == current_user.profile.id
+          table.table.table-hover.table.mt-3
+            tr.d-flex.clickable-row data-href=profile_proposal_path(proposal)
+              td.col-5 #{proposal.order.profile.company_name}
+              td.col-5 #{proposal.order.title}
+              td.col-2.text-center #{l(proposal.created_at, format: :long)}
+        - else
           .col-1
           .col
             h2 Ответить на заявку
-            = render partial: 'new_proposal_form', locals: { order: order, proposal: new_proposal }
+            = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}
           .col-1
