@@ -1,7 +1,7 @@
 // Cards extended
 .card {
   &.promoting-card {
-    .fa {
+    .fas, .fab, .far {
       transition: .4s;
       &[class*="fa-"] {
         &:hover {

@@ -46,7 +46,7 @@
     // With icons
     &.accordion-3 {
       border-radius: 3px;
-      .fa {
+      .fas, .fab, .far {
         &.fa-angle-down {
           margin-top: -10px;
         }
@@ -74,7 +74,7 @@
             transition: .3s;
             background-color: #455a64;
           }
-          .fa {
+          .fas, .fab, .far {
             background-color: #fff;
             border-top-left-radius: 3px;
           }

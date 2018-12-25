@@ -1,6 +1,6 @@
 /*!
  * Material Design for Bootstrap 4
- * Version: MDB Pro 4.5.16
+ * Version: MDB Pro 4.6.0
  *
  *
  * Copyright: Material Design for Bootstrap
@@ -20602,7 +20602,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         var disabled = $nativeSelectChild.is(':disabled') ? 'disabled' : '';
         var optgroupClass = type === 'optgroup-option' ? 'optgroup-option' : '';
         var iconUrl = $nativeSelectChild.data('icon');
-        var fa = $nativeSelectChild.data('fa') ? "<i class=\"fa fa-".concat($nativeSelectChild.data('fa'), "\"></i>") : '';
+        var fa = $nativeSelectChild.data('fas') ? "<i class=\"fas fa-".concat($nativeSelectChild.data('fas'), "\"></i>") : '';
         var classes = $nativeSelectChild.attr('class');
         var iconHtml = iconUrl ? "<img alt=\"\" src=\"".concat(iconUrl, "\" class=\"").concat(classes, "\">") : '';
         var checkboxHtml = this.isMultiple ? "<input type=\"checkbox\" class=\"form-check-input\" ".concat(disabled, "/><label></label>") : '';
@@ -26124,8 +26124,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       value: function setPushPoint() {
         if (this.options.startScrolling === 'bottom' && !this.isScreenHeightEnough()) {
           this.$pushPoint = this.$element.offset().top + this.$element.outerHeight(true) - this.$window.height();
-        } else if (this.options.startScrolling === 'bottom') {
-          this.$pushPoint = this.$element.offset().top + this.$element.outerHeight(true) + this.options.topSpacing - this.$window.height();
         } else {
           this.$pushPoint = this.$element.offset().top - this.options.topSpacing;
         }
@@ -26279,7 +26277,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       chips: '.chips',
       chip: '.chip',
       input: 'input',
-      delete: '.fa',
+      delete: '.fas',
       selectedChip: '.selected'
     };
     this.keyCodes = {
@@ -26484,7 +26482,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         html += " <img src=\"".concat(elem.image, "\"> ");
       }
 
-      html += '<i class="close fa fa-times"></i>';
+      html += '<i class="close fas fa-times"></i>';
       html += '</div>';
       return html;
     };

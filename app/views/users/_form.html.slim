@@ -10,7 +10,7 @@
       .form-group
         / i.fa.fa-envelope.prefix.grey-text.fa-2x
         = f.label :email, 'E-mail'
-        = f.email_field :email, placeholder: 'E-Mail', class: 'form-control'
+        = f.email_field :email, placeholder: 'E-Mail', class: 'form-control', autocomplete: "nope", type: "search"
         .invalid-feedback.email
       .form-group
         / i.fa.fa-lock.prefix.grey-text.fa-2x

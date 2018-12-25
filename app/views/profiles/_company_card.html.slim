@@ -1,23 +1,24 @@
 - header = profile.private_person? ? 'Карточка физического лица' : 'Карточка предприятия'
-.card.mt-3
-  .card-header
-    h5 data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
-    - unless profile.private_person?
-      = text_field :dadata, :search, class: 'form-control company-search',
-               'data-auto-select' => "profile_company_dadata",
-               'data-auto-url' => "/search_company_dadata",
-               'data-autocomplete-on' => "dadata_search",
-        placeholder: 'Поиск юридического лица. Введите ИНН, ОГРН, наименование юридического лица или ИП'
+.card
+
+
   .card-body
+    h4.h4-responsive data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
+    - unless profile.private_person?
+      = label :dadata, 'Поиск предприятия или ИП', class: 'mb-0'
+      = text_field :dadata, :search, class: 'form-control company-search',
+              'data-auto-select' => "profile_company_dadata",
+              'data-auto-url' => "/search_company_dadata",
+              'data-autocomplete-on' => "dadata_search",
+              placeholder: 'Введите ИНН, ОГРН, наименование юридического лица или ИП'
     = f.fields_for :company do |c|
-      = render partial: 'companies/fields', locals: { f: c, errors: errors, profile: profile }
-      .card.mt-3
-        .card-header
-          h5 Платёжные реквизиты
-          = text_field :dadata, :search, class: 'form-control',
-                   'data-auto-select' => "profile_company_bank_dadata",
-                   'data-auto-url' => "/search_bank_dadata",
-                   'data-autocomplete-on' => "dadata_search",
-            placeholder: 'Поиск банка. Введите БИК'
-        .card-body
-          = render partial: 'accounts/fields', locals: { f: c, errors: errors, profile: profile }
+      = render partial: 'companies/fields', locals: {f: c, errors: errors, profile: profile}
+      hr
+      h4.h4-responsive Платёжные реквизиты
+      = text_field :dadata, :search, class: 'form-control',
+              'data-auto-select' => "profile_company_bank_dadata",
+              'data-auto-url' => "/search_bank_dadata",
+              'data-autocomplete-on' => "dadata_search",
+              placeholder: 'Поиск банка. Введите БИК'
+      .card-body
+      = render partial: 'accounts/fields', locals: {f: c, errors: errors, profile: profile}

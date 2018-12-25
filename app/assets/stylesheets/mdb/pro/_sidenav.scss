@@ -71,7 +71,7 @@
     }
     .social {
       border-bottom: 1px solid $sidenav-light-border-bottom-color;
-      .fa {
+      .fas, .fab, .far {
         color: $sidenav-light-color;
       }
     }
@@ -161,7 +161,7 @@
         border-radius: $collapsible-li-border-radius;
       }
     }
-    .fa {
+    .fas, .fab, .far {
       font-size: $sidenav-collapsible-a-font-size;
       margin-right: $sidenav-fa-margin-right;
     }
@@ -296,7 +296,7 @@
       margin: 0;
       padding: 0;
     }
-    .fa {
+    .fas, .fab, .far {
       font-size: $sidenav-social-fa-font-size;
       padding-right: $sidenav-social-li-padding;
       padding-left: $sidenav-social-li-padding;

@@ -76,12 +76,12 @@
         border-bottom: 1px solid $skins-border-color;
         a {
           @if $skin=="white" {
-            .fa {
+            .fas, .fab, .far {
               color: map-get($data, skin-text);
             }
           }
           &:hover {
-            .fa {
+            .fas, .fab, .far {
               color: map-get($data, skin-accent) !important;
               transition: $skins-side-nav-hover-transition;
             }
@@ -127,7 +127,7 @@
           }
         }
       }
-      .fa {
+      .fas, .fab, .far {
         color: map-get($data, skin-text);
       }
       .sidenav-bg {
