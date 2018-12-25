@@ -38,18 +38,20 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def add_proposal
     @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.update_attributes proposal_id: params[:proposal_id], state: :applyed
+    @employee_cv.update_attributes proposal_id: params[:proposal_id]
+    @employee_cv.apply!
   end
 
   def remove_proposal
     @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.update_attributes proposal_id: nil, state: :draft
+    @employee_cv.update_attributes proposal_id: nil
+    @employee_cv.unapply!
   end
 
   private
 
   def employee_cvs_params
-    params.require(:employee_cv).permit(:proposal_id, :name, :gender,
+    params.require(:employee_cv).permit(:proposal_id, :name, :gender, :mark_ready,
                                         :birthdate, :file, ext_data: {})
   end
 

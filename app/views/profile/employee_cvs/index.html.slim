@@ -10,10 +10,9 @@
           .list-group
             a.list-group-item.list-group-item-action.active data-cvs-index-show="all"
               |Все анкеты
-            a.list-group-item.list-group-item-action data-cvs-index-show="hired"
-              |Нанятые
-            a.list-group-item.list-group-item-action data-cvs-index-show="applyed"
-              |Предложенные
+            - EmployeeCv.possible_states.sort.each do |eng, trans|
+              a.list-group-item.list-group-item-action data-cvs-index-show="#{eng}"
+                = trans
         .col-9
           table.table.table-hover.w-auto
             thead

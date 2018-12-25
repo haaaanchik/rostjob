@@ -1,11 +1,11 @@
 .row.justify-content-center
   .col-8
     hr
-    .messages
+    .messages style="overflow-y: scroll; max-height: 500px; overflow-x: hidden;"
       = render partial: 'shared/messages/message', collection: proposal.messages
     hr
     - unless proposal.order.completed?
-      - url = request.original_fullpath.include?('orders') ? profile_order_proposal_path(proposal.order) : profile_proposal_path(proposal)
+      - url = request.original_fullpath.include?('orders') ? profile_order_proposal_path(proposal.order, proposal) : profile_proposal_path(proposal)
       = form_with scope: :message, url: url, class: 'send-message-form' do |f|
         .row
           .col

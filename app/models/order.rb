@@ -11,7 +11,7 @@ class Order < ApplicationRecord
   validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :number_of_employees, presence: true, numericality: {only_integer: true}
-  validates :title, :specialization, :skill, :city, :experience, :description,
+  validates :title, :city, :experience, :description,
             :schedule, :work_period, presence: true
   validates :salary_from, presence: true, numericality: {only_integer: true}
   validates :salary_to, presence: true, numericality: {only_integer: true}

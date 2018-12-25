@@ -39,13 +39,9 @@
             dd.col-sm-8 #{order.warranty_period}, рабочих дней
       hr
       .row.pt-2
-        |Ответ на заявку:
         - if proposal || order.profile.id == current_user.profile.id
-          table.table.table-hover.table.mt-3
-            tr.d-flex.clickable-row data-href=profile_proposal_path(proposal)
-              td.col-5 #{proposal.order.profile.company_name}
-              td.col-5 #{proposal.order.title}
-              td.col-2.text-center #{l(proposal.created_at, format: :long)}
+          = render partial: 'profile/proposals/show',
+                  locals: {order: order, proposal: proposal}
         - else
           .col-1
           .col

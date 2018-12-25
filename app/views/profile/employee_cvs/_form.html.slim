@@ -40,6 +40,11 @@
               = ef.text_field field, class: 'form-control',
                       value: data.fetch(field.to_s, nil)
             = ef.label field, t("employee_cv.ext_data.#{field}")
+    .col-4
+      .md-form
+        = f.check_box :mark_ready, class: 'form-control',
+                checked: @employee_cv.ready?
+        = f.label :mark_ready, t('employee_cv.mark_ready')
   .text-center.pt-3
     = f.submit @employee_cv.new_record? ? 'Добавить' : 'Обновить',
             class: 'btn btn-indigo'

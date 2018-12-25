@@ -1,0 +1,1 @@
+$('#profile_cvs_<%= @employee_cv.id %>').remove()

@@ -19,12 +19,9 @@
       table.table
         tr
           th ФИО кандидата
-          th Пол
-          th Дата рождения
-          th Резюме
-          th Нанять
+          th Телефон
           th Статус
-          th Подробнее
+          th colspan="2"
         = render partial: 'profile/orders/proposals/employee_cv', collection: proposal.employee_cvs
 
 .modal.fade#hireCandidateModal tabindex="-1" role="dialog" aria-labelledby="hireCandidatModalLabel" aria-hidden="true"

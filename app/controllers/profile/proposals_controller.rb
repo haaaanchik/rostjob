@@ -19,9 +19,12 @@ class Profile::ProposalsController < ApplicationController
   def send_message
     msg = proposal.messages.create(message_params)
     if msg.persisted?
-      message = render_to_string partial: 'shared/messages/message', object: msg, locals: { to_receiver: true }, layout: false
-      ActionCable.server.broadcast("chat_channel_#{msg.receiver}", message)
       render partial: 'shared/messages/message', object: msg, layout: false
+      message = render_to_string partial: 'shared/messages/message',
+                                 object: msg,
+                                 locals: { to_receiver: true }, layout: false
+      ActionCable.server.broadcast("chat_channel_#{msg.receiver}", message)
+
     else
       render json: msg.errors.messages, status: 422
     end

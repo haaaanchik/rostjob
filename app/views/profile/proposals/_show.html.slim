@@ -1,0 +1,37 @@
+= link_to 'Отказаться', cancel_profile_proposal_path(proposal), method: :put,
+        class: 'btn btn-warning float-right',
+        data: {confirm: "Вы собираетесь отказаться от работы с заявкой №#{proposal.order.id}\nПродолжить?"}
+
+ul.nav.md-pills.nav-justified.pills-indigo
+  li.nav-item
+    = link_to 'Общение', '#panel1', data: {toggle: 'tab'}, role: 'tab', class: 'nav-link active'
+  li.nav-item
+    = link_to 'Кандидаты', '#panel2', data: {toggle: 'tab'}, role: 'tab', class: 'nav-link'
+
+.tab-content.w-100
+  #panel1.tab-pane.fade.in.show.active role='tabpanel'
+    .col.dark-grey
+      = render partial: 'utils/chat.html.slim', locals: {proposal: proposal}
+  #panel2.tab-pane.fade role='tabpanel'
+    - unless proposal.order.completed?
+      .row
+        .col-6
+          = link_to 'Добавить нового кандидата', new_profile_employee_cv_path(proposal_id: proposal.id),
+                  method: :get, remote: true, class: 'btn btn-indigo'
+        .col-6
+          .md-form
+            - candids = EmployeeCv.available_free @current_profile.id, proposal.id
+            = collection_select :proposal_select, :employee_cv,
+                    candids, :id, :with_mobile, {include_blank: 'Выберите из списка'},
+                    class: st_select_class, 'data-proposal_id': proposal.id
+            = label :proposal_select, :employee_cv, 'Анкеты'
+      table.table.table-hover.w-auto#candidates
+        thead
+          tr
+            th ФИО кандидата
+            th Телефон
+            th Статус
+            th colspan="2"
+        tbody#candidates_list
+          = render partial: 'profile/employee_cvs/employee_cv',
+                  collection: proposal.employee_cvs.proposed

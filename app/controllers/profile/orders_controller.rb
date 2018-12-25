@@ -19,7 +19,7 @@ class Profile::OrdersController < ApplicationController
     @order = orders.create(params_with_price)
     @order.errors.add(:position_search, 'Выберите профессию') unless position
     if @order.errors.messages.any?
-      render json: errors_data(@order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to profile_orders_path
     end
@@ -28,7 +28,7 @@ class Profile::OrdersController < ApplicationController
   def update
     order.update(params_with_price)
     if @order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to profile_order_path(order)
     end
@@ -43,7 +43,7 @@ class Profile::OrdersController < ApplicationController
     @order = orders.create(params_with_price)
     @order.errors.add(:position_search, 'Выберите профессию') unless position
     if @order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to pre_publish_profile_order_path(@order)
     end
@@ -52,7 +52,7 @@ class Profile::OrdersController < ApplicationController
   def update_pre_publish
     order.update(params_with_price)
     if order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to pre_publish_profile_order_path(@order)
     end

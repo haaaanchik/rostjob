@@ -1,4 +1,5 @@
-= form_with  model: proposal, url: profile_proposals_path, data: { confirm: 'Вы уверены?' }, class: 'new-proposal-form' do |f|
+= form_with  model: proposal, url: profile_proposals_path,
+        data: { confirm: 'Вы уверены?' }, class: 'new-proposal-form' do |f|
   = f.hidden_field :order_id, value: order.id
   .md-form
     = f.fields_for :messages do |m|

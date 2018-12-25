@@ -25,11 +25,9 @@
       = f.text_field :specialization, class: "form-control",
               placeholder: 'Начните набирать название специализации',
               data: {'auto-url' => '/search_specialization', 'auto-add-text' => true, 'autocomplete-on' => 'order_specialization'}
-      .invalid-feedback
     .col
       = f.label :skill, 'Квалификация'
       = f.text_field :skill, class: "form-control"
-      .invalid-feedback
   .row
     .col
       = f.label :city, 'Город'
