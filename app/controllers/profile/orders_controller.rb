@@ -87,6 +87,13 @@ class Profile::OrdersController < ApplicationController
     redirect_to profile_orders_path
   end
 
+  def add_position
+    position_params = params.require(:position).permit(:title, :duties, :price_group_id)
+    @position = Position.new(position_params)
+
+    render js: "alert('#{params.inspect} -- #{@position.inspect}')"
+  end
+
   private
 
   def params_with_price

@@ -71,6 +71,9 @@ Rails.application.routes.draw do
         put :complete
         put :cancel
       end
+      collection do
+        post :add_position
+      end
       scope module: :orders do
         resources :proposals, only: %i[index show update] do
           member do

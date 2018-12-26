@@ -27,6 +27,20 @@ $(document).on('change', '#order_number_of_employees', (event) ->
   $('#total').html(total)
 )
 
+$(document).on('click', '[data-order-position="new"]', (event) ->
+  val = $('#order_position_search').val()
+
+  if val == ''
+    toastr.info('Введите название профессии')
+  else
+    data = position: {title: val, duties: '', price_group_id: 1}
+    $.ajax
+      method: 'post'
+      url: '/profile/orders/add_position'
+      data: data
+    return
+)
+
 @apply_position = (item) ->
   price = item.price
   quantity = $('#num_of_employees').find('input').val()

@@ -10,7 +10,7 @@
         .col-9
           h4 #{order.title}
         .col-3.align-self-center.text-right
-          = render partial: 'order_menu', locals: { order: order }
+          = render partial: 'order_menu', locals: {order: order}
       - if order.rejected?
         .row
           .col
@@ -42,16 +42,28 @@
         dd.col-sm-8 == order.description
   .card.border-light.mt-2
     .card-header
-      span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }
+      span.h4 Кандидаты
     .card-body
+      - ps = order.proposals.map(&:employee_cvs).try(&:flatten) || []
       table.table
         tr
           th ФИО
-          th Дата выхода на работу
-          th Дата окончания гарантийного периода
-          th Уволить досрочно
-          th Дата досрочного увольнения
+          th Тел
+          th Статус
+          th Прочее
+        = render partial: 'profile/orders/proposals/employee_cv', collection: ps
         = render partial: 'hired_candidate', collection: order.selected_candidates
+  / .card.border-light.mt-2
+  /   .card-header
+  /     span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }
+  /   .card-body
+  /     table.table
+  /       tr
+  /         th ФИО
+  /         th Дата выхода на работу
+  /         th Дата окончания гарантийного периода
+  /         th Уволить досрочно
+  /         th Дата досрочного увольнения
 
 .modal.fade#fireCandidateModal tabindex="-1" role="dialog" aria-labelledby="fireCandidatModalLabel" aria-hidden="true"
   .modal-dialog role="document"
@@ -68,4 +80,4 @@
           br
           span.birthdate Дата рождения:
         .fire_form
-          = render partial: 'profile/orders/candidates/fire_form', locals: { order: order }
+          = render partial: 'profile/orders/candidates/fire_form', locals: {order: order}

@@ -1,11 +1,15 @@
 = form_with model: [:profile, order] do |f|
   = f.hidden_field :position_id
-  .form-group
+  .input-group.mb-3
     = f.text_field :position_search, class: "form-control",
             placeholder: 'Начните набирать название профессии',
             data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position',
                     'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
     .invalid-feedback
+    .input-group-append
+      button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
+      type="button" title="Добавить новую профессию" data-order-position="new")
+        i.fa.fa-plus
   .form-group
     table.table.table-bordered
       tr.text-center
@@ -63,15 +67,21 @@
       .invalid-feedback
   = f.fields_for :other_info, {} do |oi_f|
     .row
-      .col
-        = oi_f.label :age, 'Возраст'
+      .col-4
+        = oi_f.label :age_from, 'Возраст от'
         = oi_f.text_field :age, class: "form-control"
-      .col
+      .col-4
+        = oi_f.label :age_to, 'Возраст до'
+        = oi_f.text_field :age, class: "form-control"
+      .col-4
         = oi_f.label :sex, 'Пол'
         = oi_f.text_field :sex, class: "form-control"
-      .col
+      .col-4
         = oi_f.label :optional_specialization, 'Смежная профессия'
         = oi_f.text_field :sex, class: "form-control"
+      .col-8
+        = oi_f.label :terms, 'Предлагаемые условия'
+        = oi_f.text_area :terms, class: "form-control"
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'

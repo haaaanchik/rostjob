@@ -29,6 +29,8 @@ class EmployeeCv < ApplicationRecord
     state :ready
     # принята
     state :applyed
+    state :inspected
+    state :invited
     # нанят
     state :hired
     # уволен (отказано)

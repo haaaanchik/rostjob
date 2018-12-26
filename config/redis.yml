@@ -1,6 +1,7 @@
+<% host = Gem.win_platform? ? '127.0.0.1:6379': 'localhost:6379' %>
 defaults: &defaults
   redis:
-    host: redis://127.0.0.1:6379/1
+    host: <%= "redis://#{host}/1" %>
 
 development:
   <<: *defaults
@@ -8,7 +9,7 @@ development:
 test:
   <<: *defaults
   redis:
-    host: redis://127.0.0.1:6379/2
+    host: <%= "redis://#{host}/2" %>
 
 production:
   <<: *defaults
