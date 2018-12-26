@@ -4,11 +4,12 @@ namespace :best_hr do
     task employer: :environment do
       p 'Создаём работодателя'
       email = 'employer@test.ru'
+      name = Faker::Name.name
       profile_hash = {
-        contact_person: Faker::Name.name,
+        contact_person: name,
         phone: Faker::PhoneNumber.phone_number,
         email: email,
-        profile_type: 'employer',
+        profile_type: 'customer',
         company_name: Faker::Company.name,
         city: Faker::Address.city
       }
@@ -19,8 +20,9 @@ namespace :best_hr do
       profile.save
       profile.create_balance
 
-      User.create!(email: email, password: 'hf,jnjlfntkm', profile: profile,
-                   last_sign_in_at: Time.now - 2.hours)
+      User.create!(email: email, password_confirmation: 'hf,jnjlfntkm',
+                   password: 'hf,jnjlfntkm', profile: profile,
+                   full_name: name, last_sign_in_at: Time.now - 2.hours)
     end
   end
 end

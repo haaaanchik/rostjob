@@ -1,5 +1,6 @@
-tr.clickable-row data-href=order_path(order)
-  td
+- proposal = order.proposals.find_by(profile_id: current_user.profile.id)
+tr id="req_order_#{order.id}"
+  td.clickable-row data-href=order_path(order)
     p.h6 #{order.title}
     ul.list-unstyled.list-inline
       li.list-inline-item.pr-2
@@ -16,12 +17,28 @@ tr.clickable-row data-href=order_path(order)
       - if order.enterpreneurs_only
         li.list-inline-item.pr-2
           |Только для ИП и юридических лиц
-      - proposal = order.proposals.find_by(profile_id: current_user.profile.id)
       - if proposal
         span.badge class=class_by_state(proposal)
           |#{t("proposal.state.#{proposal.state}")}
 
     |#{strip_tags(order.description).first(200)}
-  td.text-center.pl-1
+  td.text-center.pl-1.clickable-row data-href=order_path(order)
     span.font-weight-bold.mr-1 #{order.contractor_total}
     i.fa.fa-ruble-sign
+  td.pl-1
+    - favs = order&.favorites.where user_id: current_user.id
+    - selected = favs.first
+    - if selected
+      - empls = proposal.employee_cvs.size
+      - if empls == 0
+        = link_to content_tag(:i, '', class: 'fa fa-star'),
+                manage_fav_order_path(order, tag: :unstar, fav: selected.id,
+                        proposal_id: proposal&.id,
+                        favorable_id: params[:favorable_id]), remote: true,
+                method: :put, class: 'text-info'
+      - else
+        span.text-warning title="Имеются кандидаты" = content_tag(:i, '', class: 'fa fa-star')
+    - else
+      = link_to content_tag(:i, '', class: 'fa fa-star'),
+              manage_fav_order_path(order, tag: :star), remote: true,
+              method: :put

@@ -1,15 +1,11 @@
-tr
+tr id="profile_cvs_#{employee_cv}" data-cvs-state="#{employee_cv.state}"
   td #{employee_cv.name}
-  td #{employee_cv.gender}
-  td #{l(employee_cv.birthdate, format: :long)}
+  td = employee_cv&.phone
   td
-    = link_to employee_cv.file.url, target: '_blank' do
-      i.far.fa-file-alt.fa-2x
+    span.badge.badge-primary = employee_cv.state_rus
   td
     - unless employee_cv.proposal.order.completed?
       - if employee_cv.applyed?
         = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
-          gender: employee_cv.gender, birthdate: l(employee_cv.birthdate, format: :long), id: employee_cv.id } do
+                id: employee_cv.id } do
           i.far.fa-thumbs-up.fa-2x
-  td
-    span.badge.badge-info = t("employee_cv.state.#{employee_cv.state}")

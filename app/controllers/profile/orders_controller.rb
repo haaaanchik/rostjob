@@ -19,7 +19,7 @@ class Profile::OrdersController < ApplicationController
     @order = orders.create(params_with_price)
     @order.errors.add(:position_search, 'Выберите профессию') unless position
     if @order.errors.messages.any?
-      render json: errors_data(@order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to profile_orders_path
     end
@@ -28,7 +28,7 @@ class Profile::OrdersController < ApplicationController
   def update
     order.update(params_with_price)
     if @order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to profile_order_path(order)
     end
@@ -43,7 +43,7 @@ class Profile::OrdersController < ApplicationController
     @order = orders.create(params_with_price)
     @order.errors.add(:position_search, 'Выберите профессию') unless position
     if @order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to pre_publish_profile_order_path(@order)
     end
@@ -52,7 +52,7 @@ class Profile::OrdersController < ApplicationController
   def update_pre_publish
     order.update(params_with_price)
     if order.errors.messages.any?
-      render json: errors_data(order)
+      render json: {validate: true, data: errors_data(order)}
     else
       redirect_to pre_publish_profile_order_path(@order)
     end
@@ -60,7 +60,7 @@ class Profile::OrdersController < ApplicationController
 
   def pre_publish
     order.to_waiting_for_payment unless order.can_be_paid?
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
+    render 'pre_publish', locals: {order: order, balance: order.profile.balance.amount}
   end
 
   def publish
@@ -104,11 +104,12 @@ class Profile::OrdersController < ApplicationController
 
   def order_params
     @order_params ||= params.require(:order)
-                            .permit(:title, :specialization, :city, :salary_from, :position_id,
-                                    :salary_to, :description, :payment_type,
-                                    :number_of_recruiters, :enterpreneurs_only,
-                                    :requirements_for_recruiters, :stop_list, :accepted,
-                                    :visibility, :state, :warranty_period, :number_of_employees)
+                        .permit(:title, :specialization, :city, :salary_from, :position_id,
+                                :salary_to, :description, :payment_type,
+                                :number_of_recruiters, :enterpreneurs_only,
+                                :skill, :accepted, :district, :experience,
+                                :visibility, :state, :number_of_employees,
+                                :schedule, :work_period, other_info: {})
   end
 
   def balance
@@ -128,6 +129,6 @@ class Profile::OrdersController < ApplicationController
   end
 
   def description
-    '<p><strong>Требования:</strong></p><p><strong>Условия:</strong></p>'
+    nil
   end
 end

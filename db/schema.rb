@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 2018_12_21_080632) do
     t.string "state"
     t.date "warranty_date"
     t.json "ext_data"
-    t.integer "profile_id"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 

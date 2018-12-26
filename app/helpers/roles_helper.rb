@@ -10,4 +10,8 @@ module RolesHelper
   def profile_type
     current_user.profile.profile_type
   end
+
+  def profile_type_rus(tp)
+    tp == 'customer' ? 'Заказчик' : 'Исполнитель'
+  end
 end

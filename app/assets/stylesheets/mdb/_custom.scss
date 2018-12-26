@@ -1,0 +1,15 @@
+// Your custom styles
+// Убираем активный перемещаемый лэйбл
+.md-form label.active, .md-form label {
+  -webkit-transform: translateY(-140%);
+  -ms-transform: translateY(-140%);
+  transform: translateY(-140%);
+  font-size: 0.8rem;
+}
+
+.md-form label.label-select {
+  -webkit-transform: translateY(0%);
+  -ms-transform: translateY(0%);
+  transform: translateY(0%);
+  font-size: 0.8rem;
+}

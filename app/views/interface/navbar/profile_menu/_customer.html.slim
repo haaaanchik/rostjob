@@ -1,6 +1,9 @@
 li.nav-item.dropdown
-  = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: {toggle: 'dropdown'}, aria: {haspopup: 'true', expanded: 'false'} do
-    = image_tag current_user.profile.photo.url(:thumb), class: 'rounded-circle'
+  = link_to '#', class: 'nav-link dropdown-toggle', role: 'button',
+          id: 'dropdownMenuLink', data: {toggle: 'dropdown'},
+          aria: {haspopup: 'true', expanded: 'false'} do
+    .rounded-circle
+      .badge.badge-primary = profile_type_rus @current_profile&.profile_type
     |#{current_user.full_name}
   .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
     = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'

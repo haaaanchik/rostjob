@@ -2,9 +2,9 @@
   = f.hidden_field :position_id
   .form-group
     = f.text_field :position_search, class: "form-control",
-      placeholder: 'Начните набирать название профессии',
-      data: { 'auto-url' => '/search_position', 'auto-select' => 'apply_position',
-      'auto-add-text' => false , 'autocomplete-on' => 'order_title' }
+            placeholder: 'Начните набирать название профессии',
+            data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position',
+                    'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
     .invalid-feedback
   .form-group
     table.table.table-bordered
@@ -19,17 +19,23 @@
           = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control"
         td#price.align-middle.text-right style="width: 10%" #{order.customer_price}
         td#total.align-middle.text-right style="width: 10%" #{order.total}
-  .form-group
-    = f.label :specialization, 'Специализация'
-    = f.text_field :specialization, class: "form-control",
-      placeholder: 'Начните набирать название специализации',
-      data: { 'auto-url' => '/search_specialization', 'auto-add-text' => true , 'autocomplete-on' => 'order_specialization' }
-    .invalid-feedback
-  .form-group
-    = f.label :city, 'Город'
-    = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
-      data: { 'auto-url' => '/search_city', 'auto-add-text' => true , 'autocomplete-on' => 'order_city' }
-    .invalid-feedback
+  .row
+    .col
+      = f.label :specialization, 'Специализация'
+      = f.text_field :specialization, class: "form-control",
+              placeholder: 'Начните набирать название специализации',
+              data: {'auto-url' => '/search_specialization', 'auto-add-text' => true, 'autocomplete-on' => 'order_specialization'}
+    .col
+      = f.label :skill, 'Квалификация'
+      = f.text_field :skill, class: "form-control"
+  .row
+    .col
+      = f.label :city, 'Город'
+      = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
+              data: {'auto-url' => '/search_city', 'auto-add-text' => true, 'autocomplete-on' => 'order_city'}
+    .col
+      = f.label :district, 'Район'
+      = f.text_field :district, class: "form-control"
   .row
     .col
       = f.label :salary_from, 'Зарплата от:'
@@ -39,18 +45,36 @@
       = f.label :salary_to, 'Зарплата до:'
       = f.text_field :salary_to, class: "form-control"
       .invalid-feedback
+  .form-group
+    = f.label :experience, 'Наличие документа, подтверждающего стаж работы'
+    = f.text_field :experience, class: 'form-control'
   .form-group.mt-3
-    = f.label :description, 'Описание вакансии'
+    = f.label :description, 'Виды выполняемых работ'
     = f.text_area :description, rows: 5, class: 'md-textarea form-control tinymce'
-  .form-group.disabled
-    = f.label :warranty_period, 'Гарантийный период, рабочих дней'
-    = f.text_field :warranty_period, class: "form-control"
-  .form-group
-    = f.label :requirements_for_recruiters, 'Требования к рекрутерам', class: 'active'
-    = f.text_area :requirements_for_recruiters, rows: 5, class: 'md-textarea form-control'
-  .form-group
-    = f.label :stop_list, 'Стоп-лист кандидатов', class: 'active'
-    = f.text_area :stop_list, rows: 5, class: 'md-textarea form-control'
+    .invalid-feedback
+  .row
+    .col
+      = f.label :schedule, 'График работы'
+      = f.text_field :schedule, class: "form-control"
+      .invalid-feedback
+    .col
+      = f.label :work_period, 'Период, на который требуются рабочие'
+      = f.text_field :work_period, class: "form-control"
+      .invalid-feedback
+  = f.fields_for :other_info, {} do |oi_f|
+    .row
+      .col
+        = oi_f.label :age, 'Возраст'
+        = oi_f.text_field :age, class: "form-control"
+      .col
+        = oi_f.label :sex, 'Пол'
+        = oi_f.text_field :sex, class: "form-control"
+      .col
+        = oi_f.label :optional_specialization, 'Смежная профессия'
+        = oi_f.text_field :sex, class: "form-control"
+    .form-group.mt-3
+      = oi_f.label :remark, 'Комментарий'
+      = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
   .form-group
     .form-check
       = f.check_box :accepted, class: 'form-control'

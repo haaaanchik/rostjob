@@ -41,24 +41,31 @@
   operand.data 'auto-active', true
   return
 
+@normal_modal_close = (id) ->
+  $('body').css('overflow', 'auto')
+  operand = $('#' + id)
+  operand.modal('hide')
+  setTimeout (->
+    operand.remove()
+  ), 300
+  return
+
+@normal_modal_open = (id, html) ->
+  $('#' + id).remove()
+  setTimeout (->
+    $("#modal_append").append html
+    $('[data-toggle="popover"]').popover('enable')
+    $('#' + id).modal()
+    $('body').css('overflow', 'hidden')
+  ), 100
+  return
+
 @init_mdb = () ->
   new WOW().init()
   toastr.options = {
-  "closeButton": false,
-  "debug": false,
-  "newestOnTop": true,
-  "progressBar": false,
-  "positionClass": "toast-top-full-width",
-  "preventDuplicates": false,
-  "onclick": null,
-  "showDuration": 300,
-  "hideDuration": 1000,
-  "timeOut": 5000,
-  "extendedTimeOut": 1000,
-  "showEasing": "swing",
-  "hideEasing": "linear",
-  "showMethod": "fadeIn",
-  "hideMethod": "fadeOut"
+    "closeButton": true,
+    "positionClass": "toast-top-right",
+    "timeOut": 5000
   }
   $('select.mdb-select:not(.initialized)').material_select()
   $('[data-toggle="tooltip"]').tooltip()
@@ -90,10 +97,12 @@ $(document).ready ->
 
   $(document).on('ajax:success', '[data-remote=true]', (event) ->
     data = event.detail[0]
-    show_validation_errors(data)
+    console.log(data)
+    if data.validate
+      show_validation_errors(data.data)
   )
 
   $(document).on('focusin', '.is-invalid', (event) ->
-      console.log 'Focus in!'
-      $(event.currentTarget).removeClass('is-invalid')
-    )
+    console.log 'Focus in!'
+    $(event.currentTarget).removeClass('is-invalid')
+  )

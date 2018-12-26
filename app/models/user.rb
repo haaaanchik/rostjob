@@ -1,12 +1,18 @@
 class User < ApplicationRecord
   before_validation :set_guid, on: :create
+  # before_validation :fill_from_profile, on: :create
   belongs_to :profile, optional: true
+  # accepts_nested_attributes_for :profile, reject_if: :all_blank
 
-  validates :full_name, presence: true, length: { minimum: 8 }
+  validates :full_name, presence: true, length: {minimum: 8}
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }
+  validates :password, length: {minimum: 8}, presence: true
 
-  has_secure_password
+  # devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
+  #        :omniauthable, omniauth_providers: [:vkontakte, :facebook]
+
+  devise :database_authenticatable, :registerable, :recoverable, :trackable, :validatable,
+         :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|
@@ -50,5 +56,16 @@ class User < ApplicationRecord
 
   def set_guid
     self.guid = SecureRandom.uuid
+  end
+
+  private
+
+  def fill_from_profile
+    return unless profile
+    Rails.logger.debug "<<<<<<<<< 1"
+    self.email = profile.email
+    self.full_name = profile.contact_person
+
+    Rails.logger.debug "<<<<<<<<< #{self.attributes}"
   end
 end

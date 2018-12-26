@@ -40,12 +40,6 @@
         dd.col-sm-8 #{order.salary_from} - #{order.salary_to}
         dt.col-sm-4 Описание вакансии
         dd.col-sm-8 == order.description
-        - if !order.requirements_for_recruiters.empty?
-          dt.col-sm-4 Требования к рекрутерам
-          dd.col-sm-8 = order.requirements_for_recruiters
-        - if !order.stop_list.empty?
-          dt.col-sm-4 Стоп-лист кандидатов
-          dd.col-sm-8 = order.stop_list
   .card.border-light.mt-2
     .card-header
       span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }

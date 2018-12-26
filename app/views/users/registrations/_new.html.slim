@@ -1,0 +1,17 @@
+= form_for @user, method: :post, url: user_registration_path, remote: true do |f|
+  .row
+    div class="#{st_input_form_class(12)}"
+      = f.text_field :full_name, class: st_input_class
+      = f.label :full_name, t("views.modals.signin.full_name")
+    div class="#{st_input_form_class(12)}"
+      = f.email_field :email, class: st_input_class
+      = f.label :email, t("views.modals.signin.email")
+    div class="#{st_input_form_class(12)}"
+      = f.password_field :password, class: st_input_class
+      = f.label :password, t("views.modals.signin.password")
+    div class="#{st_input_form_class(12)}"
+      = f.password_field :password_confirmation, class: st_input_class
+      = f.label :password_confirmation, t("views.modals.signin.password_confirmation")
+
+    .actions
+      = f.submit t("views.modals.signin.submit"), class: st_submit_class

@@ -37,15 +37,14 @@
               i.fa.fa-ruble-sign
             dt.col-sm-4 Гарантийный период
             dd.col-sm-8 #{order.warranty_period}, рабочих дней
-            dt.col-sm-4 Требования к рекрутерам
-            dd.col-sm-8 #{order.requirements_for_recruiters}
-            dt.col-sm-4 Стоп-лист кандидатов
-            dd.col-sm-8 #{order.stop_list}
-      - unless proposal || order.profile.id == current_user.profile.id
-        hr
-        .row.pt-2
+      hr
+      .row.pt-2
+        - if proposal || order.profile.id == current_user.profile.id
+          = render partial: 'profile/proposals/show',
+                  locals: {order: order, proposal: proposal}
+        - else
           .col-1
           .col
             h2 Ответить на заявку
-            = render partial: 'new_proposal_form', locals: { order: order, proposal: new_proposal }
+            = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}
           .col-1

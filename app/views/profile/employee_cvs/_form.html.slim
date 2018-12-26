@@ -1,0 +1,50 @@
+= form_with model: @employee_cv, url: url, method: mth,
+        class: 'new-employee_cv-form' do |f|
+  .row
+    .col
+      .md-form
+        = f.text_field :name, class: 'form-control'
+        = f.label :name, 'Полное имя'
+        = f.hidden_field :proposal_id, value: params[:proposal_id]
+  .row
+    .col-3
+      .md-form
+        = f.date_field :birthdate, class: 'form-control'
+        = f.label :birthdate, 'Дата рождения', class: 'active'
+    .col-3.align-self-center
+      .form-inline
+        .form-check
+          = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
+          = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
+        .form-check
+          = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
+          = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+    .col
+      .md-form
+        .file-field
+          .btn.btn-indigo.btn-sm.float-left
+            span Выберите файл
+            = f.file_field :file
+          .file-path-wrapper
+            = text_field :file, :path, placeholder: 'Резюме кандидата', class: 'file-path'
+  .row
+    - data = @employee_cv.ext_data || {}
+    = f.fields_for :ext_data, data do |ef|
+      - EmployeeCv.ext_data_fields.each do |field|
+        .col-4
+          .md-form
+            - if field == :remark
+              = ef.text_area field, class: 'form-control',
+                      value: data.fetch('remark', nil)
+            - else
+              = ef.text_field field, class: 'form-control',
+                      value: data.fetch(field.to_s, nil)
+            = ef.label field, t("employee_cv.ext_data.#{field}")
+    .col-4
+      .md-form
+        = f.check_box :mark_ready, class: 'form-control',
+                checked: @employee_cv.ready?
+        = f.label :mark_ready, t('employee_cv.mark_ready')
+  .text-center.pt-3
+    = f.submit @employee_cv.new_record? ? 'Добавить' : 'Обновить',
+            class: 'btn btn-indigo'
