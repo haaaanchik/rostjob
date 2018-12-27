@@ -58,6 +58,18 @@ $ ->
     return
   )
 
+  $("#prp_employee_cv_state").on('change', (event) ->
+    state = $(this).val()
+    cvs_pr = $(this).parent().parent().data('cvs-pr')
+    url = '/profile/employee_cvs/' + cvs_pr + '/change_status'
+    data = {state: state}
+    $.ajax
+      method: 'put'
+      url: url
+      data: data
+    return
+  )
+
 #modal_hide = ->
 #  $('#newCandidateModal').modal('hide')
 #

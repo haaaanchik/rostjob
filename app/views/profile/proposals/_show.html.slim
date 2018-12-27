@@ -33,5 +33,5 @@ ul.nav.md-pills.nav-justified.pills-indigo
             th Статус
             th colspan="2"
         tbody#candidates_list
-          = render partial: 'profile/employee_cvs/employee_cv',
-                  collection: proposal.employee_cvs.proposed
+          = render partial: 'profile/employee_cvs/proposed',
+                  collection: proposal.proposal_employees, as: :proposed

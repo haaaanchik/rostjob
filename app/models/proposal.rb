@@ -6,6 +6,9 @@ class Proposal < ApplicationRecord
   has_many :messages
   has_many :employee_cvs
 
+  has_many :proposal_employees
+  has_many :orders, through: :proposal_employees
+
   accepts_nested_attributes_for :messages
   accepts_nested_attributes_for :employee_cvs
 

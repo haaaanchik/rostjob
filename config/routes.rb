@@ -93,6 +93,7 @@ Rails.application.routes.draw do
 
     resources :employee_cvs do
       member do
+        put :change_status
         put :add_proposal
         delete :remove_proposal
       end

@@ -38,14 +38,18 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def add_proposal
     @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.update_attributes proposal_id: params[:proposal_id]
+    @employee_pr = @employee_cv.create_pr_empl params[:proposal_id]
     @employee_cv.apply!
   end
 
   def remove_proposal
     @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.update_attributes proposal_id: nil
-    @employee_cv.unapply!
+    @employee_cv.rempve_pr_empl params[:proposal_id]
+  end
+
+  def change_status
+    @employee_cv = ProposalEmployee.find_by id: params[:id]
+    @employee_cv.update_attributes state: params[:state] if params[:state] != 'hired'
   end
 
   private

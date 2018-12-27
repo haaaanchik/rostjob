@@ -1,6 +1,9 @@
 class EmployeeCv < ApplicationRecord
   include AASM
 
+  has_many :proposal_employees
+  has_many :orders, through: :proposal_employees
+
   belongs_to :proposal, optional: true
   belongs_to :order, optional: true
   belongs_to :profile, optional: true
@@ -29,8 +32,6 @@ class EmployeeCv < ApplicationRecord
     state :ready
     # принята
     state :applyed
-    state :inspected
-    state :invited
     # нанят
     state :hired
     # уволен (отказано)
@@ -100,8 +101,22 @@ class EmployeeCv < ApplicationRecord
     self.state = :ready
   end
 
+  def create_pr_empl(proposal_id)
+    prp = Proposal.find_by id: proposal_id
+    proposal_employees.create proposal_id: prp.id, order_id: prp.order_id,
+                              profile_id: profile_id,
+                              marks: {viewed_by_cunsomer: false}
+  end
+
+  def rempve_pr_empl(proposal_id)
+    empl = proposal_employees.where(proposal_id: proposal_id).first
+    proposal_employees.destroy empl
+  end
+
   def check_state
     return if proposal_id.blank?
+    create_pr_empl(proposal_id)
     self.state = :applyed
+    self.proposal_id = nil
   end
 end

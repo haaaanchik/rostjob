@@ -1,3 +1,3 @@
-<% rdr = render partial: 'profile/employee_cvs/employee_cv',
- object: @employee_cv %>
+<% rdr = render partial: 'profile/employee_cvs/proposed',
+ object: @employee_pr, as: :proposed %>
 $('#candidates_list').prepend('<%= j rdr %>')

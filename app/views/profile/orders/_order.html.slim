@@ -2,5 +2,10 @@ tr.d-flex.clickable-row data-href=profile_order_path(order)
   td.col-5 #{order.title}
   td.col-3.text-center #{order.city}
   td.col-2.text-center #{l(order.created_at, format: :long)}
-  td.col-1.text-center #{order.proposals.count}
+  - pe = order.proposal_employees
+  td.col-1.text-center title="Кандидатов" #{pe.count}
+  - viewed = pe.select {|d| d.marks['viewed_by_cunsomer'] == false}
+  td.col-1.text-center title="Новых Кандидатов"
+    - if viewed.size > 0
+      .badge.badge-info title="Новых" = viewed.size
   td.col-1.text-center #{t("order.state.#{order.state}")}

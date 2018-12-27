@@ -1,11 +1,14 @@
-tr id="profile_cvs_#{employee_cv}" data-cvs-state="#{employee_cv.state}"
+- employee_cv = proposed.employee_cv
+tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data-cvs-pr="#{proposed.id if proposed}"
   td #{employee_cv.name}
   td = employee_cv&.phone
   td
-    span.badge.badge-primary = employee_cv.state_rus
+    - if employee_cv.file
+      = link_to employee_cv.file.url, target: '_blank' do
+        i.far.fa-file-alt.fa-2x
+    - else
+      = 'Файла нету'
   td
-    - unless employee_cv.proposal.order.completed?
-      - if employee_cv.applyed?
-        = link_to '#', data: { toggle: 'modal', target: '#hireCandidateModal', name: employee_cv.name,
-                id: employee_cv.id } do
-          i.far.fa-thumbs-up.fa-2x
+    = select :prp_employee_cv, :state, ProposalEmployee.possible_states.invert,
+            {selected: proposed.state.to_sym},
+            class: inviz_select_class if proposed != employee_cv
