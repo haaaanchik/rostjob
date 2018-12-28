@@ -3,9 +3,13 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
   td #{employee_cv.name}
   td = employee_cv&.phone
   td
-    = select :prp_employee_cv, :state, ProposalEmployee.possible_states.invert,
-            {selected: proposed.state.to_sym},
-            class: inviz_select_class if proposed != employee_cv
+    - if %w[hired denied].include? proposed.state
+      span.badge.badge-primary = employee_cv.state_rus
+    - else
+      - st = ProposalEmployee.possible_states.except(:hired, :denied)
+      = select :prp_employee_cv, "state_#{proposed.id}", st.invert,
+              {selected: proposed.state.to_sym},
+              class: inviz_select_class if proposed != employee_cv
   td
     = link_to content_tag(:i, '', class: 'fa fa-minus fa-2x'),
             remove_proposal_profile_employee_cv_path(employee_cv, proposal_id: proposed.proposal_id),

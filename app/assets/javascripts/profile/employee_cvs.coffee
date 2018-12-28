@@ -58,9 +58,9 @@ $ ->
     return
   )
 
-  $("#prp_employee_cv_state").on('change', (event) ->
+  $('[id^="prp_employee_cv_state"]').on('change', (event) ->
     state = $(this).val()
-    cvs_pr = $(this).parent().parent().data('cvs-pr')
+    cvs_pr = $(this).attr('id').split('_').slice(-1)
     url = '/profile/employee_cvs/' + cvs_pr + '/change_status'
     data = {state: state}
     $.ajax

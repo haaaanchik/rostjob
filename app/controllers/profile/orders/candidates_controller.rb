@@ -4,8 +4,10 @@ class Profile::Orders::CandidatesController < ApplicationController
 
     if order.selected_candidates.count < order.number_of_employees
       hiring_date = Date.parse(candidate_params[:hiring_date])
-      candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date),
-                       order_id: params[:order_id])
+      candidate.update(hiring_date: hiring_date,
+                       warranty_date: Holiday.warranty_date(hiring_date),
+                       order_id: params[:order_id],
+                       proposal_id: candidate_params[:proposal_id])
       candidate.hire!
       if order.reload.selected_candidates.count == order.number_of_employees
         order.complete!
@@ -34,11 +36,11 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def candidate
-    @candidate ||= proposal.employee_cvs.find(candidate_params[:id])
+    @candidate ||= EmployeeCv.find(candidate_params[:id])
   end
 
   def proposal
-    @proposal ||= proposals.find(candidate_params[:proposal_id])
+    @proposal ||= Proposal.find(candidate_params[:proposal_id])
   end
 
   def proposals

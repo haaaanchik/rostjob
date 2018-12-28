@@ -5,6 +5,8 @@ class Profile::OrdersController < ApplicationController
 
   def show
     order
+
+    order.proposal_employees.map(&:mark_as_read)
   end
 
   def new

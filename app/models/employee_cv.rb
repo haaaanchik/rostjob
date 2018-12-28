@@ -49,6 +49,12 @@ class EmployeeCv < ApplicationRecord
 
     event :hire do
       transitions from: :applyed, to: :hired
+      after do
+        ps_s = proposal_employees.select {|d| d.proposal_id == proposal_id}
+        ps_s.map(&:hire!)
+        ps = proposal_employees.reject {|d| d.proposal_id == proposal_id}
+        ps.map(&:destroy)
+      end
     end
 
     event :unapply do
@@ -105,7 +111,7 @@ class EmployeeCv < ApplicationRecord
     prp = Proposal.find_by id: proposal_id
     proposal_employees.create proposal_id: prp.id, order_id: prp.order_id,
                               profile_id: profile_id,
-                              marks: {viewed_by_cunsomer: false}
+                              marks: {viewed_by_customer: false}
   end
 
   def rempve_pr_empl(proposal_id)

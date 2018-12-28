@@ -49,7 +49,8 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def change_status
     @employee_cv = ProposalEmployee.find_by id: params[:id]
-    @employee_cv.update_attributes state: params[:state] if params[:state] != 'hired'
+    return if %w[hired].include?(params[:state])
+    @employee_cv.update_attributes state: params[:state]
   end
 
   private

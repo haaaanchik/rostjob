@@ -56,7 +56,7 @@
           th Прочее
         = render partial: 'profile/orders/proposals/employee_cv', collection: ps,
                 as: :proposed
-        = render partial: 'hired_candidate', collection: order.selected_candidates
+        / = render partial: 'hired_candidate', collection: order.selected_candidates
 / .card.border-light.mt-2
 /   .card-header
 /     span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }
