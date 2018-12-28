@@ -8,8 +8,8 @@ ru:
         submit: Войти
       signin:
         form: Регистрация
-        email: Ваш e-mail
-        full_name: Ваще имя
-        password: Ваш пароль
+        email: e-mail
+        full_name: Имя
+        password: Пароль
         submit: Зарегистрироваться
         password_confirmation: Подтверждение пароля

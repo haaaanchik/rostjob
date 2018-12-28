@@ -1,17 +1,28 @@
-= form_for @user, method: :post, url: user_registration_path, remote: true do |f|
-  .row
-    div class="#{st_input_form_class(12)}"
-      = f.text_field :full_name, class: st_input_class
-      = f.label :full_name, t("views.modals.signin.full_name")
-    div class="#{st_input_form_class(12)}"
-      = f.email_field :email, class: st_input_class
-      = f.label :email, t("views.modals.signin.email")
-    div class="#{st_input_form_class(12)}"
-      = f.password_field :password, class: st_input_class
-      = f.label :password, t("views.modals.signin.password")
-    div class="#{st_input_form_class(12)}"
-      = f.password_field :password_confirmation, class: st_input_class
-      = f.label :password_confirmation, t("views.modals.signin.password_confirmation")
+= form_for @user, method: :post, url: user_registration_path, html: {class: 'text-center p-3 mb-2'},
+        remote: true do |f|
+  .md-form.mb-5
+    = f.text_field :full_name, class: 'form-control'
+    = f.label :full_name, t("views.modals.signin.full_name")
+  .md-form.mb-5
+    = f.email_field :email, class: 'form-control'
+    = f.label :email, t("views.modals.signin.email")
+  .md-form.mb-5
+    = f.password_field :password, class: 'form-control'
+    = f.label :password, t("views.modals.signin.password")
+  .md-form.mb-5
+    = f.password_field :password_confirmation, class: 'form-control'
+    = f.label :password_confirmation, t("views.modals.signin.password_confirmation")
+  .form-group.mt-4
+    input.form-check-input type="checkbox" id="checkbox624"
+    label.form-check-label for="checkbox624"
+      = "#{'Принять '}"
+      a href="#" class="indigo-text font-weight-bold"
+        | условия и положения
+  .d-flex.justify-content-center
+  = f.submit t("views.modals.signin.submit"), class: 'btn btn-deep-orange z-depth-1'
 
-    .actions
-      = f.submit t("views.modals.signin.submit"), class: st_submit_class
+.row.d-flex.align-items-center.pb-3
+  .col-md-12
+    .font-small.d-flex.justify-content-end
+      | Есть аккаунт?
+      = link_to 'Войти', login_path, class: 'indigo-text ml-1 font-weight-bold', remote: true
