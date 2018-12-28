@@ -1,38 +1,44 @@
 = f.fields_for :accounts do |account_form|
-  .row
-    .col-6
-      = account_form.label :bank, t(:bank), class: 'mb-0'
+  .form-group.row
+    = account_form.label :bank, t(:bank), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_area :bank,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bank'].empty?}"
       .invalid-feedback #{errors[:'accounts.bank'].first}
-    .col-6
-      = account_form.label :bank_address, t(:bank_address), class: 'mb-0'
+  .form-group.row
+    = account_form.label :bank_address, t(:bank_address), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_area :bank_address,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bank_address'].empty?}"
       .invalid-feedback #{errors[:'accounts.bank_address'].first}
-    .col-4
-      = account_form.label :bic, t(:bic), class: 'mb-0'
+  .form-group.row
+    = account_form.label :bic, t(:bic), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_field :bic,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bic'].empty?}"
       .invalid-feedback #{errors[:'accounts.bic'].first}
-    .col-4
-      / инн и кпп банка!!
-      = account_form.label :inn, t(:inn), class: 'mb-0'
+  .form-group.row
+    / инн и кпп банка!!
+    = account_form.label :inn, t(:inn), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_field :inn,
               class: "form-control #{'is-invalid' unless errors[:'accounts.inn'].empty?}"
       .invalid-feedback #{errors[:'accounts.inn'].first}
-    .col-4
-      = account_form.label :kpp, t(:kpp), class: 'mb-0'
+  .form-group.row
+    = account_form.label :kpp, t(:kpp), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_field :kpp,
               class: "form-control #{'is-invalid' unless errors[:'accounts.kpp'].empty?}"
       .invalid-feedback #{errors[:'accounts.kpp'].first}
-    .col-6
-      = account_form.label :account_number, t(:account_number), class: 'mb-0'
+  .form-group.row
+    = account_form.label :account_number, t(:account_number), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_field :account_number,
               class: "form-control #{'is-invalid' unless errors[:'accounts.account_number'].empty?}"
       .invalid-feedback #{errors[:'accounts.account_number'].first}
-    .col-6
-      = account_form.label :corr_account, t(:corr_account), class: 'mb-0'
+  .form-group.row
+    = account_form.label :corr_account, t(:corr_account), class: 'col-3 col-form-label'
+    .col-9
       = account_form.text_field :corr_account,
               class: "form-control #{'is-invalid' unless errors[:'accounts.corr_account'].empty?}"
       .invalid-feedback #{errors[:'accounts.corr_account'].first}

@@ -16,7 +16,7 @@
     input.form-check-input type="checkbox" id="checkbox624"
     label.form-check-label for="checkbox624"
       = "#{'Принять '}"
-      a href="#" class="indigo-text font-weight-bold"
+      a href="#" class="blue-text"
         | условия и положения
   .d-flex.justify-content-center
   = f.submit t("views.modals.signin.submit"), class: 'btn btn-deep-orange z-depth-1'
@@ -25,4 +25,4 @@
   .col-md-12
     .font-small.d-flex.justify-content-end
       | Есть аккаунт?
-      = link_to 'Войти', login_path, class: 'indigo-text ml-1 font-weight-bold', remote: true
+      = link_to 'Войти', login_path, class: 'blue-text ml-1', remote: true
