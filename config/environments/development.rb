@@ -33,16 +33,18 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.mail.ru',
     port: 587,
-    user_name: 'best-hr@bk.ru',
-    password: %(Gjxnf<'cn"qxfh1),
-    authentication: :login,
+    user_name: 'noreply@best-hr.pro',
+    password: %(R@OYLwGPTLHmC{guja~#),
+    authentication: :plain,
     enable_starttls_auto: true
   }
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: '10.5.3.5:3022'}
+  config.action_mailer.default :charset => "utf-8"
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

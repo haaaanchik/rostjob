@@ -4,6 +4,9 @@
     = f.text_field :email, class: 'form-control',
             autofocus: true, autocomplete: "email"
     = f.label :email, t("views.modals.login.email")
+  .d-flex.justify-content-center
+    = f.submit 'Отправить инструкции',
+            class: 'btn btn-deep-orange z-depth-1'
 .row.d-flex.align-items-center.pb-3
   .col-md-12
     .font-small.d-flex.justify-content-end
