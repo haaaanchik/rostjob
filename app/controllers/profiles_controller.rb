@@ -24,7 +24,7 @@ class ProfilesController < ApplicationController
       @profile.save
     end
     if @profile.errors.messages.any?
-      render json: errors_data(@profile)
+      render json: {validate: true, data: errors_data(@profile)}
     else
       current_user.update_attribute(:profile_id, @profile.id)
       @profile.create_balance
@@ -41,7 +41,7 @@ class ProfilesController < ApplicationController
     end
 
     if profile.errors.messages.any?
-      render json: errors_data(@profile)
+      render json: {validate: true, data: errors_data(@profile)}
     else
       redirect_to root_path
     end
