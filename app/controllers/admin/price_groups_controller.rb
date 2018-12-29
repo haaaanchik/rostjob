@@ -14,7 +14,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   def create
     @price_group = PriceGroup.create(price_group_params)
     if @price_group.errors.messages.any?
-      render json: errors_data(@price_group)
+      render json: {validate: true, data: errors_data(@price_group)}
     else
       redirect_to admin_price_groups_path
     end
@@ -23,7 +23,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   def update
     price_group.update(price_group_params)
     if price_group.errors.messages.any?
-      render json: errors_data(@price_group)
+      render json: {validate: true, data: errors_data(@price_group)}
     else
       redirect_to admin_price_groups_path
     end
@@ -32,7 +32,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   def destroy
     price_group.destroy
     if price_group.errors.messages.any?
-      render json: errors_data(@price_group)
+      render json: {validate: true, data: errors_data(@price_group)}
     else
       redirect_to admin_price_groups_path
     end
