@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class Users::PasswordsController < Devise::PasswordsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  skip_before_action :authenticate_user!
+  skip_before_action :auth_user
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+  def new
+    @user = User.new
+  end
 
   # POST /resource/password
   # def create
@@ -21,7 +24,13 @@ class Users::PasswordsController < Devise::PasswordsController
   #   super
   # end
 
-  # protected
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+      user_params.permit(:email)
+    end
+  end
 
   # def after_resetting_password_path_for(resource)
   #   super(resource)
@@ -31,4 +40,5 @@ class Users::PasswordsController < Devise::PasswordsController
   # def after_sending_reset_password_instructions_path_for(resource_name)
   #   super(resource_name)
   # end
+  #
 end

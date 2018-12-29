@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def render_escape(name, locals, additional = {})
     pt_hash = {partial: name, locals: locals}.merge(additional)
-    escape_javascript render(pt_hash)
+    j render(pt_hash)
   end
 
   def date_rus(date)
