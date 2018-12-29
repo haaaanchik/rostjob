@@ -184,3 +184,9 @@ header,
     left: 6%;
   }
 }
+
+.require_field:after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
+}

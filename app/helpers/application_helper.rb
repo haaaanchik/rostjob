@@ -31,10 +31,6 @@ module ApplicationHelper
     "md-form col-#{col} m-2"
   end
 
-  def require_field
-    content_tag(:small, '*Обязательное поле', class: "form-text text-muted text-warning")
-  end
-
   def st_submit_class(tag = 'success')
     "btn btn-#{tag} btn-sm"
   end
