@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_21_080632) do
+ActiveRecord::Schema.define(version: 2018_12_27_081552) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -261,6 +261,22 @@ ActiveRecord::Schema.define(version: 2018_12_21_080632) do
     t.string "legal_form"
   end
 
+  create_table "proposal_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "proposal_id"
+    t.bigint "order_id"
+    t.bigint "profile_id"
+    t.bigint "employee_cv_id"
+    t.date "date_hired"
+    t.string "state"
+    t.json "marks"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
+    t.index ["order_id"], name: "index_proposal_employees_on_order_id"
+    t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"
+    t.index ["proposal_id"], name: "index_proposal_employees_on_proposal_id"
+  end
+
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
@@ -288,6 +304,15 @@ ActiveRecord::Schema.define(version: 2018_12_21_080632) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_royce_role_on_name"
+  end
+
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "session_id", null: false
+    t.text "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
+    t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
   create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

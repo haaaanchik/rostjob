@@ -1,6 +1,9 @@
-= form_with scope: :candidate, url: profile_order_candidates_hire_path(proposal.order) do |f|
-  = f.hidden_field :id
-  = f.hidden_field :proposal_id, value: proposal.id
+= form_with scope: :candidate,
+        url: profile_order_candidates_hire_path(pcv.order_id) do |f|
+  = f.hidden_field :id, value: pcv.employee_cv_id
+  = f.hidden_field :proposal_id, value: pcv.proposal_id
+  .text-info
+    |Нанимается кандидат: #{pcv.employee_cv&.name}
   .md-form
     = f.date_field :hiring_date, class: 'form-control', value: Date.today
     = f.label :hiring_date, 'Дата Выхода на работу', class: 'active'

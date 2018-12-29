@@ -1,12 +1,15 @@
+<% host = Gem.win_platform? ? '127.0.0.1:6379': 'localhost:6379' %>
 default: &default
   adapter: redis
-  url: redis://127.0.0.1:6379/1
+  url: <%= "redis://#{host}/1" %>
 
 production:
   <<: *default
+  channel_prefix: besthr_cable
 
 development:
   <<: *default
+  channel_prefix: besthr_cable_dev
 
 test:
   adapter: async

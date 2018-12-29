@@ -5,6 +5,8 @@ class Profile::OrdersController < ApplicationController
 
   def show
     order
+
+    order.proposal_employees.map(&:mark_as_read)
   end
 
   def new
@@ -85,6 +87,11 @@ class Profile::OrdersController < ApplicationController
   def cancel
     order.to_draft
     redirect_to profile_orders_path
+  end
+
+  def add_position
+    position_params = params.require(:position).permit(:title, :duties, :price_group_id)
+    @position = Position.create(position_params)
   end
 
   private

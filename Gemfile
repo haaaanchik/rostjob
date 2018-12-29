@@ -43,6 +43,7 @@ gem 'omniauth-facebook', '~> 5.0'
 gem 'omniauth-vkontakte', '~> 1.4', '>= 1.4.1'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
 gem 'omniauth-mail_ru', '~> 1.1'
+gem 'activerecord-session_store', '~> 1.1', '>= 1.1.1'
 #AUTH  <-
 gem 'conditional_validation'
 gem 'sentry-raven'
