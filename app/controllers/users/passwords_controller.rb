@@ -10,9 +10,10 @@ class Users::PasswordsController < Devise::PasswordsController
   end
 
   # POST /resource/password
-  # def create
-  #   super
-  # end
+  def create
+    @user = User.find_by_email params[:user][:email]
+    @user.send_reset_password_instructions
+  end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
@@ -27,7 +28,7 @@ class Users::PasswordsController < Devise::PasswordsController
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+    devise_parameter_sanitizer.permit(:user) do |user_params|
       user_params.permit(:email)
     end
   end

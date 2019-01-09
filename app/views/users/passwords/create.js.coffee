@@ -1,0 +1,1 @@
+toastr.warn('sent!', 'Внимание!')
