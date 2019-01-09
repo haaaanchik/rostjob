@@ -13,3 +13,5 @@ ru:
         password: Пароль
         submit: Зарегистрироваться
         password_confirmation: Подтверждение пароля
+      resetlogin:
+        form: Сбросить пароль
