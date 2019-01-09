@@ -18,28 +18,28 @@ html
         #navbarSupportedContent-7.collapse.navbar-collapse
           ul.navbar-nav.mr-auto
             - if can_access?(%w[admin moderator])
-              li.nav-item
+              li.nav-item.active
                 = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
             - if can_access?(%w[admin moderator])
               li.nav-item.dropdown
                 = link_to 'Бухгалтерия', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
-                  = link_to 'Выписанные счета', admin_invoices_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Импорт выписок', admin_account_statements_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Экспорт полатёжных поручений', admin_payment_orders_path, class: 'nav-link', data: {offset: '60'}
+                  = link_to 'Выписанные счета', admin_invoices_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Импорт выписок', admin_account_statements_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Экспорт полатёжных поручений', admin_payment_orders_path, class: 'dropdown-item', data: {offset: '60'}
             - if can_access?(%w[admin moderator])
               li.nav-item.dropdown
                 = link_to 'Справочники', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
-                  = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Специализации', admin_specializations_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Профессии', admin_positions_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Города', admin_cities_path, class: 'nav-link', data: {offset: '60'}
-                  = link_to 'Ценовые группы', admin_price_groups_path, class: 'nav-link', data: {offset: '60'}
+                  = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Специализации', admin_specializations_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Профессии', admin_positions_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Города', admin_cities_path, class: 'dropdown-item', data: {offset: '60'}
+                  = link_to 'Ценовые группы', admin_price_groups_path, class: 'dropdown-item', data: {offset: '60'}
               li.nav-item.dropdown
                 = link_to 'Настройки', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                 .dropdown-menu
-                  = link_to 'Наши юрлица', admin_companies_path, class: 'nav-link', data: {offset: '60'}
+                  = link_to 'Наши юрлица', admin_companies_path, class: 'dropdown-item', data: {offset: '60'}
 
           ul.navbar-nav
             li.nav-item.dropdown
