@@ -13,6 +13,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     user = User.new configure_sign_up_params
 
     if user.save
+      user.send_confirmation_instructions
       sign_in :user, user
       redirect_to root_path
     else
