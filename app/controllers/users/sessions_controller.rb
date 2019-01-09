@@ -20,8 +20,14 @@ class Users::SessionsController < Devise::SessionsController
     return invalid_login_attempt unless user
 
     if user&.valid_password?(usr[:password])
-      sign_in :user, user
-      redirect_to root_path
+      if user.confirmed?
+        sign_in :user, user
+        redirect_to root_path
+      else
+        render js: "toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!')",
+               status: 401
+      end
+
     else
       invalid_login_attempt
     end

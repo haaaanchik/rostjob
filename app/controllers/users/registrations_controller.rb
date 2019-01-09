@@ -12,14 +12,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     user = User.new configure_sign_up_params
 
-    if user.save
-      user.send_confirmation_instructions
-      sign_in :user, user
-      redirect_to root_path
-    else
-      render js: "toastr.error('#{error_msg_handler user}', 'Не сохранено!');",
-             status: 401
-    end
+    @status =
+      if user.save
+        # sign_in :user, user
+        'success'
+      else
+        error_msg_handler user
+      end
   end
 
   # GET /resource/edit
@@ -46,7 +45,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
@@ -59,14 +58,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
-  # def after_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_sign_up_path_for(resource)
+    redirect_to root_path
+  end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    render js: "toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!')",
+           status: 401
+  end
+
   def configure_sign_up_params
     params.require(:user).permit(:password_confirmation, :password,
                                  :full_name, :email)

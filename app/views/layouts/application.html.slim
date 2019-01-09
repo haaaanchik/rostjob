@@ -11,12 +11,14 @@ html
     = action_cable_meta_tag
   body
     #modal_append
-    - if notice
-      p.alert.alert-success= notice
-    - if alert
-      p.alert.alert-danger= alert
     = render partial: user_signed_in? ? 'layouts/authorized' : 'layouts/not_authorized'
     = javascript_include_tag 'application', media: 'all',
             data: {'turbolinks-eval' => false,
                     'turbolinks-suppress-warning' => true,
                     'turbolinks-track': 'reload'}
+    - if notice
+      javascript:
+          toastr.info("#{notice}", 'Внимание!', {timeOut: 5000});
+    - if alert
+      javascript:
+          toastr.error("#{alert}", 'Внимание!', {timeOut: 5000});

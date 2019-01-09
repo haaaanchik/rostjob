@@ -15,9 +15,11 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  def show
+    user = User.find_by_confirmation_token params[:confirmation_token]
+    user.confirm
+    redirect_to root_path, notice: 'Электронная почта успешно подтверждена!'
+  end
 
   # protected
 
