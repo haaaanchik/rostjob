@@ -5,6 +5,10 @@
   .text-info
     |Нанимается кандидат: #{pcv.employee_cv&.name}
   .md-form
-    = f.date_field :hiring_date, class: 'form-control', value: Date.today
+    = f.text_field :hiring_date, class: 'form-control',
+            value: Date.today, 'data-mask-on': 'date'
     = f.label :hiring_date, 'Дата Выхода на работу', class: 'active'
-  = f.submit 'Нанять', class: 'btn btn-indigo'
+  = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
+  div
+    .btn.btn-info СПОР
+    .btn.btn-info Отказ

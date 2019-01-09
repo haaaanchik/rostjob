@@ -43,7 +43,7 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.action_cable.url = 'wss://46.21.249.197/cable'
+  config.action_cable.url = 'wss://176.99.12.204/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
@@ -74,7 +74,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: '46.21.249.197' }
+  config.action_mailer.default_url_options = { host: '176.99.12.204' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
