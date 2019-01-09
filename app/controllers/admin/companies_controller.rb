@@ -19,7 +19,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     @company = Company.new(company_params.merge(own_company: true))
     @company.save(context: :company)
     if @company.errors.messages.any?
-      render json: errors_data(@company)
+      render json: {validate: true, data: errors_data(@company)}
     else
       redirect_to admin_companies_path
     end
@@ -29,7 +29,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     company.assign_attributes(company_params)
     company.save(context: :company)
     if company.errors.messages.any?
-      render json: errors_data(@company)
+      render json: {validate: true, data: errors_data(@company)}
     else
       redirect_to admin_companies_path
     end
@@ -45,7 +45,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     current_active&.update_attribute(:active, false)
     company.update_attribute(:active, true)
     if company.errors.messages.any?
-      render json: errors_data(@company)
+      render json: {validate: true, data: errors_data(@company)}
     else
       redirect_to admin_companies_path
     end
@@ -55,10 +55,10 @@ class Admin::CompaniesController < Admin::ApplicationController
 
   def company_params
     params.require(:company)
-          .permit(:name, :short_name, :address, :mail_address, :phone, :fax,
-                  :email, :inn, :kpp, :ogrn, :director, :acts_on,
-                  accounts_attributes: %i[id account_number corr_account bic bank bank_address],
-                  tax_office_attributes: %i[id code name name_short payment_name oktmo inn kpp
+      .permit(:name, :short_name, :address, :mail_address, :phone, :fax,
+              :email, :inn, :kpp, :ogrn, :director, :acts_on,
+              accounts_attributes: %i[id account_number corr_account bic bank bank_address],
+              tax_office_attributes: %i[id code name name_short payment_name oktmo inn kpp
                                             bank_name bank_bic bank_account])
   end
 

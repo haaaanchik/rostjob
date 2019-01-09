@@ -10,6 +10,7 @@
 @import "admin/positions";
 @import "not_authorized";
 @import "external/jquery.raty";
+@import "external/bootstrap-datepicker3";
 @import "welcome";
 
 @media (max-width: 1025px) {
@@ -183,4 +184,10 @@ header,
   .stepper.stepper-vertical.colorful-timeline li:not(:last-child):after {
     left: 6%;
   }
+}
+
+.require_field:after {
+  content: ' *';
+  color: red;
+  font-weight: bold;
 }

@@ -12,7 +12,7 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
     - if %w[hired denied].include? proposed.state
       span.badge.badge-primary = employee_cv.state_rus
     - else
-      - st = ProposalEmployee.possible_states
-      = select :prp_employee_cv, "state_#{proposed.id}", st.invert,
-              {selected: proposed.state.to_sym},
-              class: inviz_select_class if proposed != employee_cv
+      = link_to 'Нанять', change_status_profile_employee_cv_path(proposed.id, state: 'hired'),
+              method: :put, remote: true, class: 'btn btn-success btn-sm'
+      = link_to 'Отказ', change_status_profile_employee_cv_path(proposed.id, state: 'denied'),
+              method: :put, remote: true, class: 'btn btn-info btn-sm'

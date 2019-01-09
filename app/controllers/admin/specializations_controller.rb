@@ -14,7 +14,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   def create
     @specialization = Specialization.create(specialization_params)
     if @specialization.errors.messages.any?
-      render json: errors_data(@specialization)
+      render json: {validate: true, data: errors_data(@specialization)}
     else
       redirect_to admin_specializations_path
     end
@@ -23,7 +23,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   def update
     specialization.update(specialization_params)
     if specialization.errors.messages.any?
-      render json: errors_data(@specialization)
+      render json: {validate: true, data: errors_data(@specialization)}
     else
       redirect_to admin_specializations_path
     end

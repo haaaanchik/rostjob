@@ -10,6 +10,8 @@
 #= require turbolinks
 #= require external/turbolinks-compatibility
 #= require external/jquery.raty
+#= require external/bootstrap-datepicker
+#= require external/bootstrap-datepicker.ru.min
 #= require tinymce
 #= require_tree .
 
@@ -88,6 +90,17 @@ $(document).ready ->
     toolbar: 'undo redo | bold italic underline | indent outdent | numlist bullist'
     plugins: "lists"
   })
+
+  $(document).on 'focusin', '*[data-mask-on="date"]', ->
+    $(this).datepicker({
+      format: 'dd.mm.yyyy',
+      autoclose: true,
+      todayHighlight: true,
+      language: "ru"
+    }).inputmask
+      mask: '99.99.9999'
+      showMaskOnFocus: false
+    return
 
   $(document).on 'focusin', '*[data-autocomplete-on]', ->
     add_autocomplete $(this)

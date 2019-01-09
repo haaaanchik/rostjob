@@ -14,7 +14,7 @@ class Admin::CitiesController < Admin::ApplicationController
   def create
     @city = City.create(city_params)
     if @city.errors.messages.any?
-      render json: errors_data(@city)
+      render json: {validate: true, data: errors_data(@city)}
     else
       redirect_to admin_cities_path
     end
@@ -23,7 +23,7 @@ class Admin::CitiesController < Admin::ApplicationController
   def update
     city.update(city_params)
     if city.errors.messages.any?
-      render json: errors_data(@city)
+      render json: {validate: true, data: errors_data(@city)}
     else
       redirect_to admin_cities_path
     end

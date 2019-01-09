@@ -15,7 +15,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations',
     passwords: 'users/passwords',
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    confirmations: 'users/confirmations'
   }
 
   resource :price, only: :show
