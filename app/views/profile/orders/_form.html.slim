@@ -85,11 +85,15 @@
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
-  .form-group
-    .form-check
-      = f.check_box :accepted, class: 'form-control'
-      = f.label :accepted do
-        'Я принимаю условия
-        = link_to 'Оферты', '/offerta.pdf'
-  = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :create
-  = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :pre_publish
+  .form-group.mt-3.text-center
+    = f.check_box :accepted, class: 'form-check-input'
+    = f.label :accepted do
+      'Я принимаю условия
+      = link_to 'Оферты', '/offerta.pdf'
+  .form-group.mt-3
+    .row
+      .col-3
+        = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-info order-submit-button #{ 'disabled' unless order.accepted}", name: :create
+      .col
+      .col-3
+        = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-primary order-submit-button #{ 'disabled' unless order.accepted}", name: :pre_publish

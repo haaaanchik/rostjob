@@ -1,15 +1,13 @@
 - order_state = order.state
 - case order_state
 - when 'draft'
-  = link_to edit_profile_order_path(order) do
-    i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
+  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn'
+    / i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
   = link_to pre_publish_profile_order_path(order) do
     i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
 - when 'waiting_for_payment'
-  = link_to edit_profile_order_path(order) do
-    i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
-  = link_to pre_publish_profile_order_path(order) do
-    i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
+  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn btn-primary btn-sm'
+  = link_to 'Опубликовать заявку', pre_publish_profile_order_path(order), class: 'btn btn-warning btn-sm'
 - when 'moderation'
   = link_to cancel_profile_order_path(order), method: :put do
     i.fa.fa-arrow-left.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Отменить публикацию'
@@ -20,7 +18,7 @@
     i.far.fa-handshake.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Завершить заявку'
 - when 'rejected'
   = link_to edit_profile_order_path(order) do
-      i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
+    i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
   = link_to pre_publish_profile_order_path(order) do
     i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
 - when 'hidden'

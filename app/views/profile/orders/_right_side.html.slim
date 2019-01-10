@@ -1,24 +1,21 @@
 - ps = order.proposal_employees
 .col
-  .card.border-light
-    .card-header
+  .card.z-depth-1
+    .card-body
       .row
         .col
-          span.h4 Заявка №: #{order.id}
-        .col.text-right
+          h2 Заявка №: #{order.id}
           span.badge.badge-info = t("order.state.#{order.state}")
-      .row
-        .col-9
-          h4 #{order.title}
-        .col-3.align-self-center.text-right
+        .col
           = render partial: 'order_menu', locals: {order: order}
       - if order.rejected?
         .row
           .col
             .alert.alert-danger role="alert"
               |Заявка не прошла модерацию. Причина: #{order.comments.last.text}
-
-    .card-body
+      .row
+        .col-9
+          h3 #{order.title}
       table.table.table-bordered
         tr.text-center
           th.align-middle Профессия
@@ -56,7 +53,7 @@
           th Прочее
         = render partial: 'profile/orders/proposals/employee_cv', collection: ps,
                 as: :proposed
-        / = render partial: 'hired_candidate', collection: order.selected_candidates
+/ = render partial: 'hired_candidate', collection: order.selected_candidates
 / .card.border-light.mt-2
 /   .card-header
 /     span.h4 #{ order.number_of_employees == 1 ? 'Отобранный кандидат' : 'Отобранные кандидаты' }
