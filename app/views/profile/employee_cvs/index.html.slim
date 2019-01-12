@@ -1,25 +1,23 @@
-.col
-  .card.border-light
-    .card-header
-      = link_to 'Добавить анкету', new_profile_employee_cv_path,
-              method: :get, remote: true, class: 'btn btn-success float-right'
-      h3 = 'Мои анкеты'
-    .card-body
-      .row
-        .col-3
-          .list-group
-            a.list-group-item.list-group-item-action.active data-cvs-index-show="all"
-              |Все анкеты
-            - EmployeeCv.possible_states.sort.each do |eng, trans|
-              a.list-group-item.list-group-item-action data-cvs-index-show="#{eng}"
-                = trans
-        .col-9
-          table.table.table-hover.w-auto
-            thead
-              tr
-                th ФИО
-                th Телефон
-                th Статус
-                th colspan="2"
-            tbody#candidates_list
-              = render @list if @list
+.card.border-light
+  .card-body
+    h2 = 'Мои анкеты'
+    = link_to 'Добавить анкету', new_profile_employee_cv_path,
+            method: :get, remote: true, class: 'btn btn-success float-right'
+    .row
+      .col-3
+        .list-group
+          a.list-group-item.list-group-item-action.active data-cvs-index-show="all"
+            |Все анкеты
+          - EmployeeCv.possible_states.sort.each do |eng, trans|
+            a.list-group-item.list-group-item-action data-cvs-index-show="#{eng}"
+              = trans
+      .col-9
+        table.table.table-hover.w-auto
+          thead
+            tr
+              th ФИО
+              th Телефон
+              th Статус
+              th colspan="2"
+          tbody#candidates_list
+            = render @list if @list

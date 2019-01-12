@@ -1,25 +1,19 @@
 - order_state = order.state
 - case order_state
 - when 'draft'
-  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn'
-    / i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
-  = link_to pre_publish_profile_order_path(order) do
-    i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
+  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn btn-info btn-sm'
+  = link_to 'Опубликовать заявку', pre_publish_profile_order_path(order), class: 'btn btn-primary btn-sm'
 - when 'waiting_for_payment'
-  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn btn-primary btn-sm'
-  = link_to 'Опубликовать заявку', pre_publish_profile_order_path(order), class: 'btn btn-warning btn-sm'
+  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn btn-info btn-sm'
+  = link_to 'Опубликовать заявку', pre_publish_profile_order_path(order), class: 'btn btn-success btn-sm'
 - when 'moderation'
-  = link_to cancel_profile_order_path(order), method: :put do
-    i.fa.fa-arrow-left.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Отменить публикацию'
+  = link_to 'Отменить публикацию', cancel_profile_order_path(order), method: :put, class: 'btn btn-warning btn-sm'
 - when 'published'
   / = link_to hide_profile_order_path(order), method: :put do
   /   i.far.fa-eye-slash.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Скрыть заявку'
-  = link_to complete_profile_order_path(order), method: :put do
-    i.far.fa-handshake.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Завершить заявку'
+  = link_to 'Завершить заявку', complete_profile_order_path(order), method: :put, class: 'btn btn-warning btn-sm'
 - when 'rejected'
-  = link_to edit_profile_order_path(order) do
-    i.far.fa-edit.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Редактировать заявку'
-  = link_to pre_publish_profile_order_path(order) do
-    i.fas.fa-eye.fa-2x.mr-1.dark-grey-text data-toggle='tooltip' data-placement='top' title='Опубликовать заявку'
+  = link_to 'Редактировать заявку',edit_profile_order_path(order), class: 'btn btn-info btn-sm'
+  = link_to 'Опубликовать заявку',pre_publish_profile_order_path(order), class: 'btn btn-success btn-sm'
 - when 'hidden'
 - when 'completed'

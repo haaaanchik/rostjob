@@ -1,18 +1,15 @@
 .col
-  .card.border-light
-    .card-header
-      'Лицевой счет
+  .card.z-depth-2
     .card-body
+      h2 Лицевой счет
       'Остаток:
       strong #{@current_profile.balance.amount}
       i.fa.fa-ruble-sign.ml-1
-      = link_to 'Подробно', '#collapseExample', class: 'ml-3', data: { toggle: "collapse" },
-      aria: { expanded: false, controls: "collapseExample" }
-  .collapse.mt-3#collapseExample
-    .card.border-light.mt-3
-      .card-header
-        'Операции с лицевым счётом
-      .card-body
+      = link_to 'Подробно', '#collapseExample', class: 'ml-3', data: {toggle: "collapse"},
+              aria: {expanded: false, controls: "collapseExample"}
+      .collapse.mt-3#collapseExample
+        hr
+        h4 Операции с лицевым счётом
         table.table
           tr
             th Дата
@@ -20,15 +17,15 @@
             th Приход
             th Расход
           = render @current_profile.balance.bill_transactions.order(id: :desc).last(10)
-  .card.border-light.mt-3
-    .card-header
-      strong Выписать счет для пополнения
+  br
+  .card.z-depth-2
     .card-body
+      h2 Выписать счет для пополнения
       = render partial: 'new'
-  .card.border-light.mt-3
-    .card-header
-      strong Мои счета
+  br
+  .card.z-depth-2
     .card-body
+      h2 Мои счета
       table.table
         tr
           th Номер

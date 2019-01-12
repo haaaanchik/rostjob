@@ -13,10 +13,13 @@
   .form-group
     table.table.table-bordered
       tr.text-center
-        th.align-middle Профессия
-        th.align-middle Требуемое количество сотрудников
-        th.align-middle Цена
-        th.align-middle Сумма
+        th Профессия
+        th
+          span
+            |количество
+            = question_help 'Требуемое количество сотрудников'
+        th Цена
+        th Сумма
       tr
         td#position_title.align-middle #{order.title}
         td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}"

@@ -4,8 +4,8 @@
     .card-body
       .row
         .col
-          h2 Заявка №: #{order.id}
-          span.badge.badge-info = t("order.state.#{order.state}")
+          h2.d-inline Заявка №: #{order.id}
+          span.ml-2.badge.badge-info = t("order.state.#{order.state}")
         .col
           = render partial: 'order_menu', locals: {order: order}
       - if order.rejected?
@@ -13,8 +13,9 @@
           .col
             .alert.alert-danger role="alert"
               |Заявка не прошла модерацию. Причина: #{order.comments.last.text}
+      hr
       .row
-        .col-9
+        .col
           h3 #{order.title}
       table.table.table-bordered
         tr.text-center

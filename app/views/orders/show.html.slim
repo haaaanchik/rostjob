@@ -1,10 +1,10 @@
 .col
-  .card.border-light
-    .card-header
+  .card.z-depth-2
+    .card-body
       .row
-        .col
-          span.h4 Заявка №: #{order.id}
-          p #{order.title}
+        .col-12
+          h2 Заявка №: #{order.id}
+          h5 #{order.title}
           ul.list-unstyled.list-inline
             li.list-inline-item.pr-2
               span.font-weight-bold #{order.salary_from} - #{order.salary_to}
@@ -17,34 +17,29 @@
             li.list-inline-item.pr-2
               i.fas.fa-users.pr-1
               |#{order.number_of_employees}
-        .col-2
+      .row
+        .col-12
           - proposal = order.proposals.sent.find_by(profile_id: current_user.profile.id)
           - if proposal
             span.badge class=class_by_state(proposal)
               |#{t("proposal.state.#{proposal.state}")}
-    .card-body
-      dl.row
-        dt.col-sm-3 Специализация
-        dd.col-sm-9 #{order.specialization}
-        dt.col-sm-3 Описание вакансии:
-        dd.col-sm-9 == order.description
-        dt.col-sm-3 Условия сотрудничиства
-        dd.col-sm-9
           dl.row
-            dt.col-sm-4 Вознаграждение за одного сотрудника
-            dd.col-sm-8
+            dt.col-6 Специализация
+            dd.col-6 #{order.specialization}
+            dt.col-6 Описание вакансии:
+            dd.col-6 == order.description
+            dt.col-6 Условия сотрудничиства
+            dd.col-6
+            dt.col-6 Вознаграждение за одного сотрудника
+            dd.col-6
               span.mr-1 #{order.contractor_price}
               i.fa.fa-ruble-sign
-            dt.col-sm-4 Гарантийный период
-            dd.col-sm-8 #{order.warranty_period}, рабочих дней
-      hr
-      .row.pt-2
-        - if proposal || order.profile.id == current_user.profile.id
-          = render partial: 'profile/proposals/show',
-                  locals: {order: order, proposal: proposal}
-        - else
-          .col-1
-          .col
-            h2 Ответить на заявку
+            dt.col-6 Гарантийный период
+            dd.col-6 #{order.warranty_period}, рабочих дней
+      .row
+        .col-12
+          - if proposal || order.profile.id == current_user.profile.id
+            = render partial: 'profile/proposals/show',
+                    locals: {order: order, proposal: proposal}
+          - else
             = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}
-          .col-1
