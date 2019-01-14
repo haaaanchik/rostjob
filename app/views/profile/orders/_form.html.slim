@@ -13,10 +13,13 @@
   .form-group
     table.table.table-bordered
       tr.text-center
-        th.align-middle Профессия
-        th.align-middle Требуемое количество сотрудников
-        th.align-middle Цена
-        th.align-middle Сумма
+        th Профессия
+        th
+          span
+            |количество
+            = question_help 'Требуемое количество сотрудников'
+        th Цена
+        th Сумма
       tr
         td#position_title.align-middle #{order.title}
         td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}"
@@ -85,11 +88,15 @@
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
-  .form-group
-    .form-check
-      = f.check_box :accepted, class: 'form-control'
-      = f.label :accepted do
-        'Я принимаю условия
-        = link_to 'Оферты', '/offerta.pdf'
-  = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :create
-  = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-indigo order-submit-button mt-4 #{ 'disabled' unless order.accepted}", name: :pre_publish
+  .form-group.mt-3.text-center
+    = f.check_box :accepted, class: 'form-check-input'
+    = f.label :accepted do
+      'Я принимаю условия
+      = link_to 'Оферты', '/offerta.pdf'
+  .form-group.mt-3
+    .row
+      .col-3
+        = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-info order-submit-button #{ 'disabled' unless order.accepted}", name: :create
+      .col
+      .col-3
+        = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-primary order-submit-button #{ 'disabled' unless order.accepted}", name: :pre_publish

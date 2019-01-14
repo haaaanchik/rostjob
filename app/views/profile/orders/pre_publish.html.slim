@@ -1,20 +1,19 @@
-.col-md-2
-.col-md-8
-  .card
-    .card-header
-      h5 Публикация заявки №#{order.id}
+.col
+  .card.z-depth-2
     .card-body
+      h2 Публикация заявки №#{order.id}
+      hr
       p Баланс: #{order.balance.amount}
-      p К оплате: #{order.customer_total}
+      p.h3 К оплате: #{order.customer_total}
       - if !order.can_be_paid?
         blockquote.blockquote.bq-warning
           p.bq-title Не достаточно средств для публикации заявки
           p Ваша заявка сохранена со статусом "Ожидает оплаты". При зачислении на баланс необходимой суммы
             и успешном прохождении модерации, она будет опубликована автоматически.
-        = link_to 'Пополнить баланс', profile_invoices_path(params: { amount: order.customer_total - order.balance.amount }), class: 'btn btn-indigo'
+        = link_to 'Пополнить баланс', profile_invoices_path(params: {amount: order.customer_total - order.balance.amount}), class: 'btn btn-success'
       - else
         blockquote.blockquote.bq-success
           p.bq-title Публикация заявки
           p После успешного прохождения модерации Ваша заявка будет опубликована.
-        = link_to 'Опубликовать заявку', publish_profile_order_path(order), method: :put, class: 'btn btn-indigo'
-      = link_to 'Отменить публикацию', cancel_profile_order_path(order), method: :put, class: 'btn btn-indigo'
+        = link_to 'Опубликовать заявку', publish_profile_order_path(order), method: :put, class: 'btn btn-warning'
+      = link_to 'Отменить публикацию', cancel_profile_order_path(order), method: :put, class: 'btn btn-danger float-right'

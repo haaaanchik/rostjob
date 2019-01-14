@@ -1,7 +1,5 @@
-.col-md-2
-.col-md-8
-  .card
-    .card-header
-      h5 Редактирование заявки №#{@order.id}
+.col
+  .card.z-depth-1
     .card-body
-      = render partial: 'form', locals: { order: @order }
+      h2 Редактирование заявки №#{@order.id}
+      = render partial: 'form', locals: {order: @order}

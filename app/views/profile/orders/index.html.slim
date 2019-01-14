@@ -1,5 +1,6 @@
-h1 Мои Заявки
-= link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-indigo'
+h1
+  | Мои Заявки
+  = link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-indigo ml-4'
 
 ul.nav.md-pills
   li.nav-item
@@ -13,9 +14,9 @@ ul.nav.md-pills
 table.table-hover.table.mt-3
   tr.d-flex
     th.col-5 Наименование
-    th.col-3.text-center Город
-    th.col-2.text-center Дата создания
+    th.col-2.text-center Город
+    th.col-1.text-center Дата создания
     th.col-2.text-center colspan="2"
       i.far.fa-bell
-    th.col-1.text-center Статус
+    th.col.text-center Статус
   = render @orders

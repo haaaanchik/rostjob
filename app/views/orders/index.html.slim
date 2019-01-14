@@ -1,12 +1,10 @@
-.col
-  .card.border-light
-    .card-header
-      h3 = @fav ? 'Мои заявки' : 'Поиск заявок'
-      = render partial: 'form' unless params[:favorable_id]
-    .card-body
-      table.table.table-hover
-        tr
-          th.col.text-center Заявка
-          th.col-1.text-center Вознаграждение
-          th.col
-        = render @orders if @orders
+.card
+  .card-body
+    h2 = @fav ? 'Мои заявки' : 'Поиск заявок'
+    = render partial: 'form' unless params[:favorable_id]
+    table.table.table-hover
+      tr
+        th.col.text-center Заявка
+        th.col-1.text-center Вознаграждение
+        th.col
+      = render @orders if @orders
