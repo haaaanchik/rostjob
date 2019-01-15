@@ -1,14 +1,41 @@
-= form_with scope: :candidate,
-        url: profile_order_candidates_hire_path(pcv.order_id) do |f|
-  = f.hidden_field :id, value: pcv.employee_cv_id
-  = f.hidden_field :proposal_id, value: pcv.proposal_id
-  .text-info
-    |Нанимается кандидат: #{pcv.employee_cv&.name}
-  .md-form
-    = f.text_field :hiring_date, class: 'form-control',
-            value: Date.today, 'data-mask-on': 'date'
-    = f.label :hiring_date, 'Дата Выхода на работу', class: 'active'
-  = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
-  div
-    .btn.btn-info СПОР
-    .btn.btn-info Отказ
+.row
+  .col
+    .card.card-cascade
+      .view.view-cascade.overlay
+        img.card-img-top src="https://mdbootstrap.com/img/Photos/Others/men.jpg" alt="Card image cap"
+        a
+          .mask.rgba-white-slight
+
+      .card-body.card-body-cascade.text-center
+        h4.card-title
+          strong Нанимается кандидат: #{pcv.employee_cv&.name}
+        h6.font-weight-bold.indigo-text.py-2
+  .col
+    .card.card-cascade
+      .card-body.card-body-cascade.text-center
+        = form_with scope: :candidate,
+                url: profile_order_candidates_hire_path(pcv.order_id) do |f|
+          = f.hidden_field :id, value: pcv.employee_cv_id
+          = f.hidden_field :proposal_id, value: pcv.proposal_id
+          .text-info
+          .md-form
+            = f.text_field :hiring_date, class: 'form-control',
+                    value: Date.today, 'data-mask-on': 'date'
+            = f.label :hiring_date, 'Дата Выхода на работу', class: 'active'
+          = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
+          div
+            .btn.btn-info СПОР
+            .btn.btn-info Отказ
+.row
+  .col
+    .mt-3
+      a.text-indigo data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" Подробнее
+    .collapse id="collapseExample"
+      .mt-3
+      p.card-text
+        dl.row
+          - data = pcv.employee_cv.ext_data || {}
+          - data.each do |k, v|
+            dt class="col-sm-3" = t("employee_cv.ext_data.#{k}")
+            dd class="col-sm-9" = v
+
