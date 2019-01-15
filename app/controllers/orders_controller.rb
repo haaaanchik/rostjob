@@ -3,6 +3,7 @@ class OrdersController < ApplicationController
 
   def index
     @fav = params[:favorable_id]
+    @employee_cv_id = params[:employee_cv_id]
     if @fav
       list = Favorite.includes(:favorable).where user_id: params[:favorable_id],
                                                  favorable_type: 'Order'

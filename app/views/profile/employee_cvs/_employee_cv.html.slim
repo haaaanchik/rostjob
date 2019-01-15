@@ -4,12 +4,14 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}"
   td
     span.badge.badge-primary = employee_cv.state_rus
   td
-    = link_to content_tag(:i, '', class: 'fa fa-edit fa-2x'),
+    - if employee_cv.draft? || employee_cv.ready?
+      = link_to orders_path(favorable_id: current_user, employee_cv_id: employee_cv), data: { title: 'Отправить анкету', type: :script }, remote: true do
+        i.fa.fa-check.fa-2x.ml-2
+    = link_to content_tag(:i, '', class: 'fa fa-edit fa-2x ml-2'),
             edit_profile_employee_cv_path(employee_cv),
             title: 'Редактировать анкету',
             remote: true, class: 'text-info' if employee_cv.draft? or employee_cv.ready?
-  td
-    = link_to content_tag(:i, '', class: 'fa fa-trash fa-2x'),
+    = link_to content_tag(:i, '', class: 'fa fa-trash fa-2x ml-2'),
             profile_employee_cv_path(employee_cv),
             title: 'Удалить анкету',
             method: :delete, confirm: 'Уверены?',

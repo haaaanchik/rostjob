@@ -1,0 +1,4 @@
+tr
+  td.text-center = short_order.id
+  td.text-left = short_order.title
+  td.text-center = link_to 'Отправить', add_proposal_profile_employee_cv_path(@employee_cv_id, proposal_id: 5), method: :put
