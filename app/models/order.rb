@@ -139,4 +139,8 @@ class Order < ApplicationRecord
   def balance
     profile.balance
   end
+
+  def proposal_by_profile_id(profile_id)
+    Proposal.find_by(order_id: id, profile_id: profile_id)
+  end
 end
