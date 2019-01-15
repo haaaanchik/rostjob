@@ -95,6 +95,7 @@ group :development, :test, :staging do
   gem "pry-alias"
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'rails-erd'
 end
 
 group :development do
