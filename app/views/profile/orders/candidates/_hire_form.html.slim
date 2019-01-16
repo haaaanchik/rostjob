@@ -13,15 +13,16 @@
   .col
     .card.card-cascade
       .card-body.card-body-cascade.text-center
+        h4 Дата выхода на работу
+        - hd = pcv.employee_cv.hiring_date || Date.today.strftime('%d-%m-%Y')
+        #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
         = form_with scope: :candidate,
                 url: profile_order_candidates_hire_path(pcv.order_id) do |f|
           = f.hidden_field :id, value: pcv.employee_cv_id
           = f.hidden_field :proposal_id, value: pcv.proposal_id
           .text-info
           .md-form
-            = f.text_field :hiring_date, class: 'form-control',
-                    value: Date.today, 'data-mask-on': 'date'
-            = f.label :hiring_date, 'Дата Выхода на работу', class: 'active'
+            = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y')
           = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
           div
             .btn.btn-info СПОР
@@ -38,4 +39,12 @@
           - data.each do |k, v|
             dt class="col-sm-3" = t("employee_cv.ext_data.#{k}")
             dd class="col-sm-9" = v
-
+javascript:
+  $('#hiring_form_datepicker').datepicker({
+    language: 'ru'
+  });
+  $('#hiring_form_datepicker').on('changeDate', function() {
+    $('#candidate_hiring_date').val(
+        $('#hiring_form_datepicker').datepicker('getFormattedDate')
+    );
+  });
