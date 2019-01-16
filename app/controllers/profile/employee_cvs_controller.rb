@@ -40,6 +40,12 @@ class Profile::EmployeeCvsController < ApplicationController
     @employee_cv = EmployeeCv.find_by id: params[:id]
     @employee_pr = @employee_cv.create_pr_empl params[:proposal_id]
     @employee_cv.apply!
+    if @employee_cv.errors.none?
+      @status = 'success'
+    else
+      @status = 'error'
+      @text = error_msg_handler @employee_cv
+    end
   end
 
   def remove_proposal
