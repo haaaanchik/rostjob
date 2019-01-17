@@ -5,19 +5,13 @@
             method: :get, remote: true, class: 'btn btn-success float-right'
     .row
       .col-3
-        .list-group
-          a.list-group-item.list-group-item-action.active data-cvs-index-show="all"
-            |Все анкеты
-          - EmployeeCv.possible_states.sort.each do |eng, trans|
-            a.list-group-item.list-group-item-action data-cvs-index-show="#{eng}"
-              = trans
+        = render partial: 'left_menu'
       .col-9
         table.table.table-hover.w-auto
           thead
             tr
               th ФИО
               th Телефон
-              th Статус
-              th colspan="2"
+              th Действия
           tbody#candidates_list
             = render @list if @list

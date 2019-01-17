@@ -4,7 +4,7 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
   td = employee_cv&.phone
   td
     - if %w[hired denied].include? proposed.state
-      span.badge.badge-primary = employee_cv.state_rus
+      span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
     - else
       - st = ProposalEmployee.possible_states.except(:hired, :denied)
       = select :prp_employee_cv, "state_#{proposed.id}", st.invert,

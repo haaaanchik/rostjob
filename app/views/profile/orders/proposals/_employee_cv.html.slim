@@ -10,7 +10,7 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
       = 'Файла нету'
   td
     - if %w[hired denied].include? proposed.state
-      span.badge.badge-primary = employee_cv.state_rus
+      span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
     - else
       = link_to 'Нанять', change_status_profile_employee_cv_path(proposed.id, state: 'hired'),
               method: :put, remote: true, class: 'btn btn-success btn-sm'

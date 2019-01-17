@@ -3,6 +3,10 @@ class Profile::EmployeeCvsController < ApplicationController
     @list = EmployeeCv.where profile_id: current_profile.id
   end
 
+  def show
+    @employee_cv = EmployeeCv.find(params[:id])
+  end
+
   def new
     @employee_cv = EmployeeCv.new proposal_id: params[:proposal_id]
   end

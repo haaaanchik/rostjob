@@ -38,6 +38,30 @@ class EmployeeCv < ApplicationRecord
     state :fired
     # ХЗ
     state :charged
+    # Анкета в архиве
+    state :archieved
+    # Просмотрена
+    state :viewed
+    # Отклонена
+    state :refused
+    # Открыт спор
+    state :disputed
+
+    event :view do
+      transitions from: :applyed, to: :viewed
+    end
+
+    event :refuse do
+      transitions from: %i[applyed viewed], to: :refused
+    end
+
+    event :disput do
+      transitions to: :disputed
+    end
+
+    event :archive do
+      transitions to: :archieved
+    end
 
     event :make_ready do
       transitions from: :draft, to: :ready
@@ -74,18 +98,8 @@ class EmployeeCv < ApplicationRecord
     %i[pser pnum pdate pcode address phone phone_alt education experiense remark]
   end
 
-  def state_rus
-    self.class.possible_states[state.to_sym]
-  end
-
   def self.possible_states
-    {
-      draft: 'Черновик',
-      ready: 'Готов',
-      applyed: 'Отправлена',
-      hired: 'Нанят',
-      archieved: 'Архивирован'
-    }
+    aasm.states.map(&:name)
   end
 
   def with_mobile

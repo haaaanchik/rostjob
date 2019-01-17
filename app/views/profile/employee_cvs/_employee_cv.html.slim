@@ -1,11 +1,12 @@
 tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}"
   td #{employee_cv.name}
   td = employee_cv&.phone
-  td
-    span.badge.badge-primary = employee_cv.state_rus
+  / td
+  /   span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
   td
     - if employee_cv.draft? || employee_cv.ready?
-      = link_to orders_path(favorable_id: current_user, employee_cv_id: employee_cv), data: { title: 'Отправить анкету', type: :script }, remote: true do
+      = link_to orders_path(favorable_id: current_user, employee_cv_id: employee_cv),
+        data: { type: :script }, title: 'Отправить анкету', remote: true do
         i.fa.fa-check.fa-2x.ml-2
     = link_to content_tag(:i, '', class: 'fa fa-edit fa-2x ml-2'),
             edit_profile_employee_cv_path(employee_cv),
@@ -16,3 +17,7 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}"
             title: 'Удалить анкету',
             method: :delete, confirm: 'Уверены?',
             remote: true, class: 'text-danger' if employee_cv.draft?
+    = link_to profile_employee_cv_path(employee_cv),
+      data: { type: :script }, title: 'Просмотреть статус', remote: true do
+      i.fas.fa-search.fa-2x.ml-2
+

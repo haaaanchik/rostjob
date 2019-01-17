@@ -1,10 +1,17 @@
 ru:
   employee_cv:
     state:
-      applyed: 'Предложен'
+      draft: 'Черновик'
+      applyed: 'Отправлена'
       hired: 'Нанят'
-      fired: 'Уволен'
-      charged: 'Оплачен'
+      fired: 'Уволен досрочно'
+      charged: 'Оплачено'
+      archieved: 'Архивирован'
+      ready: 'Готов'
+      viewed: 'Просмотрено'
+      disputed: 'Спор'
+      refused: 'Отклонено'
+
     ext_data:
       pser: Серия паспорта
       pnum: Номер паспорта
