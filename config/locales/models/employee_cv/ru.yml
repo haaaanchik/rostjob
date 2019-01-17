@@ -5,12 +5,12 @@ ru:
       applyed: 'Отправлена'
       hired: 'Нанят'
       fired: 'Уволен досрочно'
-      charged: 'Оплачено'
-      archieved: 'Архивирован'
-      ready: 'Готов'
-      viewed: 'Просмотрено'
+      charged: 'Оплачена'
+      archieved: 'Архивная'
+      ready: 'Готовa'
+      viewed: 'Просмотрена'
       disputed: 'Спор'
-      refused: 'Отклонено'
+      refused: 'Отклонена'
 
     ext_data:
       pser: Серия паспорта

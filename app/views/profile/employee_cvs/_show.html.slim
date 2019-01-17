@@ -8,24 +8,39 @@
 
       .card-body.card-body-cascade.text-center
         h4.card-title
-          strong Нанимается кандидат: #{@employee_cv&.name}
+          strong Кандидат: #{@employee_cv&.name}
         h6.font-weight-bold.indigo-text.py-2
   .col
     .card.card-cascade
       .card-body.card-body-cascade.text-center
         h4 Дата выхода на работу
-        - hd = @employee_cv.hiring_date || Date.today.strftime('%d-%m-%Y')
+        - hd = @employee_cv.hiring_date&.strftime('%d-%m-%Y')
         #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
-        = form_with scope: :candidate  do |f|
-          / = f.hidden_field :id, value: pcv.employee_cv_id
-          / = f.hidden_field :proposal_id, value: pcv.proposal_id
-          .text-info
-          .md-form
-            = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y')
-          = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
-          div
-            .btn.btn-info СПОР
-            .btn.btn-info Отказ
+        .mt-3
+          - state = @employee_cv.state
+          - case state
+          - when 'applyed'
+            span.text-center.text-success В очереди
+          - when 'viewed'
+            span.text-center.text-success = t("employee_cv.state.#{state}")
+          - when 'hired'
+            span.text-center.text-success
+              = t("employee_cv.state.#{state}")
+              |. Предполагаемая дата заключения договора #{l(@employee_cv.warranty_date, fromat: :showrt)}.
+          - when 'fired'
+            span.text-center.text-danger = t("employee_cv.state.#{state}")
+          - when 'ready'
+            span.text-center.text-success = t("employee_cv.state.#{state}")
+          - when 'refused'
+            span.text-center.text-warning = t("employee_cv.state.#{state}")
+          - when 'disputed'
+            span.text-center.text-danger = t("employee_cv.state.#{state}")
+          - when 'charged'
+            span.text-center.text-success
+              = t("employee_cv.state.#{state}")
+              |. Деньги в кассе.
+        .mt-3
+          .btn.btn-info СПОР
 .row
   .col
     .mt-3
