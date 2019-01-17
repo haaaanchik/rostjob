@@ -58,7 +58,7 @@
     $("#modal_append").append html
     $('[data-toggle="popover"]').popover('enable')
     $('#' + id).modal()
-    $('body').css('overflow', 'hidden')
+    # $('body').css('overflow', 'hidden')
   ), 100
   return
 
