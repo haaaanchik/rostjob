@@ -96,6 +96,7 @@ group :development, :test, :staging do
   gem 'factory_bot_rails'
   gem 'rspec-rails'
   gem 'rails-erd'
+  gem 'i18n-debug'
 end
 
 group :development do
