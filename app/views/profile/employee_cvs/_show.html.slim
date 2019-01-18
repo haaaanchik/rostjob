@@ -13,7 +13,7 @@
   .col
     .card.card-cascade
       .card-body.card-body-cascade.text-center
-        h4 Дата выхода на работу
+        h4 Гарантийный период
         - hd = @employee_cv.hiring_date&.strftime('%d-%m-%Y')
         #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
         .mt-3
@@ -26,7 +26,7 @@
           - when 'hired'
             span.text-center.text-success
               = t("employee_cv.state.#{state}")
-              |. До заключения договора осталось #{t(:day, count: @remained_warranty_days.size)}.
+              |. Осталось #{t(:day, count: @remained_warranty_days.size)}.
           - when 'fired'
             span.text-center.text-danger = t("employee_cv.state.#{state}")
           - when 'ready'
