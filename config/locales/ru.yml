@@ -30,6 +30,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  day:
+    zero: '%{count} дней'
+    one: '%{count} день'
+    few: '%{count} дня'
+    many: '%{count} дней'
   time:
     formats:
       short: "%e %B %Y"

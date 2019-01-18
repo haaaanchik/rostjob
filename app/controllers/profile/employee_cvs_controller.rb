@@ -5,6 +5,7 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def show
     @employee_cv = EmployeeCv.find(params[:id])
+    @remained_warranty_days = Holiday.remained_warranty_days(@employee_cv.hiring_date, @employee_cv.warranty_date)
   end
 
   def new

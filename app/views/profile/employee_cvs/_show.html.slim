@@ -26,7 +26,7 @@
           - when 'hired'
             span.text-center.text-success
               = t("employee_cv.state.#{state}")
-              |. Предполагаемая дата заключения договора #{l(@employee_cv.warranty_date, fromat: :showrt)}.
+              |. До заключения договора осталось #{t(:day, count: @remained_warranty_days.size)}.
           - when 'fired'
             span.text-center.text-danger = t("employee_cv.state.#{state}")
           - when 'ready'
@@ -56,10 +56,23 @@
 javascript:
   $('#hiring_form_datepicker').datepicker({
     language: 'ru',
-    todayHighlight: true
+    multidate: true,
+    beforeShowDay: function() {
+      $('.datepicker-switch').closest('tr').on('click', e => {
+        console.log('hello');
+        e.preventDefault();
+        e.stopPropagation();
+      });
+      return false;
+    },
+    beforeShowMonth: function() {
+       return false;
+    },
+    beforeShowYear: function() {
+       return false;
+    }
   });
-  $('#hiring_form_datepicker').on('changeDate', function() {
-    $('#candidate_hiring_date').val(
-        $('#hiring_form_datepicker').datepicker('getFormattedDate')
-    );
-  });
+  var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+  $('#hiring_form_datepicker').datepicker(
+    'update', ...remained_warranty_days);
+

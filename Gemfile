@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'rails-i18n'
 gem 'client_bank_exchange'
 gem 'kaminari'
 gem 'prawn'
