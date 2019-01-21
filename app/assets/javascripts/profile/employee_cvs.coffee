@@ -70,6 +70,15 @@ $ ->
     return
   )
 
+  $(document).on('click', 'label[for=employee_cv_contractor_terms_of_service]', (event) ->
+    element = $('#employee_cv_contractor_terms_of_service')
+    checked = element.prop('checked')
+    if checked == false
+      $('.employee-cv-submit-button').removeClass('disabled')
+    else
+      $('.employee-cv-submit-button').addClass('disabled')
+  )
+
 #modal_hide = ->
 #  $('#newCandidateModal').modal('hide')
 #

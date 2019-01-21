@@ -20,6 +20,7 @@ class Profile::EmployeeCvsController < ApplicationController
     @employee_cv = EmployeeCv.new employee_cvs_params.merge(profile_id: current_profile.id)
     if @employee_cv.save
       @status = 'success'
+      @employee_cv.make_ready! if params[:save]
     else
       @status = 'error'
       @text = error_msg_handler @employee_cv
@@ -67,8 +68,8 @@ class Profile::EmployeeCvsController < ApplicationController
   private
 
   def employee_cvs_params
-    params.require(:employee_cv).permit(:proposal_id, :name, :gender, :mark_ready,
-                                        :birthdate, :file, ext_data: {})
+    params.require(:employee_cv).permit(:phone_number, :contractor_terms_of_service, :proposal_id,
+                                        :name, :gender, :mark_ready, :birthdate, :file, ext_data: {})
   end
 
   def employee_cvs

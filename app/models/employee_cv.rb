@@ -14,7 +14,7 @@ class EmployeeCv < ApplicationRecord
 
   validates :name, presence: true
   validates :phone_number, presence: true, phone: true
-  validates :terms_of_service, acceptance: true
+  validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true
@@ -99,7 +99,7 @@ class EmployeeCv < ApplicationRecord
   end
 
   def self.ext_data_fields
-    %i[pser pnum pdate pcode address phone phone_alt education experiense remark]
+    %i[pser pnum pdate pcode address phone_alt education experiense remark]
   end
 
   def self.possible_states

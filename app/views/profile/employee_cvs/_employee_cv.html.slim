@@ -1,6 +1,6 @@
 tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}"
   td #{employee_cv.name}
-  td = employee_cv&.phone
+  td = employee_cv&.phone_number
   / td
   /   span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
   td
