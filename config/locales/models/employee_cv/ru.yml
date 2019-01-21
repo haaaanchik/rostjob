@@ -1,5 +1,6 @@
 ru:
   employee_cv:
+    contractor_terms_of_service: 'Принять условие оферты'
     state:
       draft: 'Черновик'
       applyed: 'Отправлена'

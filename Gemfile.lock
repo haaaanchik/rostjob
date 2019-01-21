@@ -250,6 +250,7 @@ GEM
       ast (~> 2.4.0)
     pdf-core (0.7.0)
     petrovich (1.1.1)
+    phonelib (0.6.28)
     powerpack (0.1.2)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
@@ -449,6 +450,9 @@ GEM
     unicorn-worker-killer (0.4.4)
       get_process_mem (~> 0)
       unicorn (>= 4, < 6)
+    validates (1.0.0)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
     vegas (0.1.11)
       rack (>= 1.0.0)
     warden (1.2.8)
@@ -496,6 +500,7 @@ DEPENDENCIES
   omniauth-vkontakte (~> 1.4, >= 1.4.1)
   paperclip!
   petrovich (~> 1.1, >= 1.1.1)
+  phonelib
   prawn
   prawn-table
   pry-alias
@@ -532,6 +537,7 @@ DEPENDENCIES
   uglifier (~> 4.1, >= 4.1.10)
   unicorn (~> 5.4)
   unicorn-worker-killer (~> 0.4.4)
+  validates
   web-console (~> 3.5, >= 3.5.1)
 
 BUNDLED WITH

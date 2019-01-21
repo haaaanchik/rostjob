@@ -8,19 +8,23 @@ class EmployeeCv < ApplicationRecord
   belongs_to :order, optional: true
   belongs_to :profile, optional: true
 
-  scope :proposed, -> {where(state: %w[hired applyed])}
-  scope :available, ->(profile_id) {where(state: %w[ready applyed], profile_id: profile_id)}
-  scope :available_free, ->(profile_id, proposal_id) {available(profile_id).where("proposal_id IS NULL")}
+  scope :proposed, -> { where(state: %w[hired applyed]) }
+  scope :available, ->(profile_id) { where(state: %w[ready applyed], profile_id: profile_id) }
+  scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where("proposal_id IS NULL") }
 
   validates :name, presence: true
-  validate :ext_data_phone
+  validates :phone_number, presence: true, phone: true
+  validates :terms_of_service, acceptance: true
+  # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true
 
-  attr_accessor :mark_ready
+  # attr_accessor :mark_ready
   has_attached_file :file
   # validates_attachment_content_type :file,
   #                                   content_type: [%r{\Aapplication/pdf\z}, %r{\Aimage/.*}, %r{text/.*}]
+  has_attached_file :photo, styles: { medium: '300x300>', thumb: '100x100>' }, default_url: '/img/no-avatar.jpg'
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\z/
 
   before_create :check_state
   before_save :check_marks

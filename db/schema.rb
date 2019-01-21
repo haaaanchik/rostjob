@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_09_135713) do
+ActiveRecord::Schema.define(version: 2019_01_21_095135) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -114,6 +114,11 @@ ActiveRecord::Schema.define(version: 2019_01_09_135713) do
     t.date "warranty_date"
     t.json "ext_data"
     t.integer "profile_id"
+    t.string "photo_file_name"
+    t.string "photo_content_type"
+    t.bigint "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string "phone_number"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 

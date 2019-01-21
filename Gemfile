@@ -6,6 +6,8 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'phonelib'
+gem 'validates'
 gem 'rails-i18n'
 gem 'client_bank_exchange'
 gem 'kaminari'
