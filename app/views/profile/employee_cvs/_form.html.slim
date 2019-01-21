@@ -15,7 +15,7 @@
   .row
     .col-8
       .md-form
-        = text_field :phone_number, class: 'file-path'
+        = f.text_field :phone_number, class: 'form-control'
         = f.label :phone_number, 'Номер телефона'
     .col-4
       .form-inline
@@ -58,10 +58,14 @@
                             value: data.fetch(field.to_s, nil)
                   = ef.label field, t("employee_cv.ext_data.#{field}")
           .col-4
-      .md-form.input-group.mb-3
-        .input-group-prepend
-          .input-group-text.md-addon
-            = f.check_box :contractor_terms_of_service, class: 'form-check-input', checked: false
-            = f.label :contractor_terms_of_service, t('employee_cv.contractor_terms_of_service'), class: 'from-check-label ml-2'
-        = f.submit @employee_cv.new_record? ? 'Добавить' : 'Обновить', class: 'btn btn-indigo'
-        = f.submit @employee_cv.new_record? ? 'Добавить' : 'Обновить', class: 'btn btn-indigo'
+      .md-form.input-group.mb-3.d-flex.justify-content-center data-controller='employee-cv'
+        - if @employee_cv.new_record?
+          .input-group-prepend
+            .input-group-text.md-addon
+              = f.check_box :contractor_terms_of_service, class: 'form-check-input', checked: false
+              = f.label :contractor_terms_of_service, t('employee_cv.contractor_terms_of_service'),
+                class: 'from-check-label ml-2', data: { action: 'click->employee-cv#tosToggle' }
+          = f.submit 'Сохранить', class: 'btn btn-indigo'
+          = f.submit 'Сохранить как черновик', class: 'btn btn-indigo'
+        - else
+          = f.submit 'Сохранить', class: 'btn btn-indigo'

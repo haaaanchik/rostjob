@@ -19,7 +19,7 @@ class EmployeeCv < ApplicationRecord
   # validates :gender, presence: true
   # validates :birthdate, presence: true
 
-  # attr_accessor :mark_ready
+  attr_accessor :mark_ready
   has_attached_file :file
   # validates_attachment_content_type :file,
   #                                   content_type: [%r{\Aapplication/pdf\z}, %r{\Aimage/.*}, %r{text/.*}]
