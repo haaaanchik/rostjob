@@ -72,8 +72,31 @@ class Profile::EmployeeCvsController < ApplicationController
     @employee_cv.update_attributes state: params[:state]
   end
 
+  def to_ready
+    if employee_cv.make_ready!
+      @status = 'success'
+      redirect_to profile_employee_cvs_path(term: :ready)
+    else
+      @status = 'error'
+      @text = error_msg_handler @employee_cv
+    end
+  end
+
+  def to_disput
+    if employee_cv.disput!
+      @status = 'success'
+      redirect_to profile_employee_cvs_path(term: :disputed)
+    else
+      @status = 'error'
+      @text = error_msg_handler @employee_cv
+    end
+  end
+
   private
 
+  def employee_cv
+    @employee_cv ||= EmployeeCv.find(params[:id])
+  end
 
   def employee_cvs_params
     params.require(:employee_cv)

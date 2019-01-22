@@ -42,7 +42,12 @@
               = t("employee_cv.state.#{state}")
               |. Деньги в кассе.
         .mt-3
-          .btn.btn-info СПОР
+          - if !%w[fired hired].include?(@employee_cv.state)
+            = link_to 'Вернуть', to_ready_profile_employee_cv_path(@employee_cv), method: :put,
+              data: { confirm: 'Вернуть анкету в готовые?' }, class: 'btn btn-info', title: 'В готовые', remote: true
+          - else
+             = link_to 'Спор', to_disput_profile_employee_cv_path(@employee_cv), method: :put,
+               data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
 .row
   .col
     .mt-3

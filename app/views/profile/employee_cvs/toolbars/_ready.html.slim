@@ -1,0 +1,12 @@
+= link_to profile_employee_cv_path(employee_cv),
+  data: { confirm: 'Удалить анкету?' }, title: 'Удалить анкету', method: :delete, remote: true do
+  i.fas.fa-trash.fa-2x.ml-2.text-danger
+
+= link_to edit_profile_employee_cv_path(employee_cv),
+  data: { type: :script }, title: 'Редактировать анкету', remote: true do
+  i.fa.fa-edit.fa-2x.ml-2.text-info
+
+= link_to orders_path(favorable_id: current_user, employee_cv_id: employee_cv),
+ data: { type: :script }, title: 'Отправить анкету', remote: true do
+ i.fa.fa-check.fa-2x.ml-2
+

@@ -30,7 +30,7 @@ class EmployeeCv < ApplicationRecord
   before_save :check_marks
 
   aasm column: :state, skip_validation_on_save: true,
-       no_direct_assignment: false do
+       no_direct_assignment: false, whiny_transitions: false do
     # черновик
     state :draft, initial: true
     state :ready
@@ -73,11 +73,11 @@ class EmployeeCv < ApplicationRecord
     end
 
     event :make_ready do
-      transitions from: :draft, to: :ready
+      transitions from: %i[applyed draft deleted], to: :ready
     end
 
     event :apply do
-      transitions from: [:draft, :ready], to: :applyed
+      transitions from: %i[draft ready], to: :applyed
     end
 
     event :hire do
@@ -164,8 +164,12 @@ class EmployeeCv < ApplicationRecord
       draft: %w[draft],
       ready: %w[ready],
       sent: %w[applyed viewed hired],
-      disputed: %w[fired],
+      disputed: %w[disputed fired],
       deleted: %w[deleted]
     }
+  end
+
+  def self.contractor_menu_item_by_state(state)
+    self.contractor_menu_items.find { |_key, values| values.include? state }.first
   end
 end
