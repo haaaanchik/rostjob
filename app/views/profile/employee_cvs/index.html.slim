@@ -14,4 +14,5 @@
               th Телефон
               th Действия
           tbody#candidates_list
-            = render @list if @list
+            = render @paginated_employee_cvs
+        = paginate @paginated_employee_cvs

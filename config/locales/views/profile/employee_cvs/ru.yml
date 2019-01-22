@@ -1,0 +1,18 @@
+ru:
+  employee_cv:
+    contractor:
+      menu:
+        all: 'Все анкеты'
+        draft: 'Черновики'
+        ready: 'Готовые'
+        sent: 'Отправленные'
+        disputed: 'Спорные'
+        deleted: 'Удалённые'
+    customer:
+      menu:
+        all: 'Все анкеты'
+        draft: 'Черновики'
+        ready: 'Готовые'
+        sent: 'Отправленные'
+        disputed: 'Спорные'
+        deleted: 'Удалённые'

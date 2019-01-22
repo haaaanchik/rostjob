@@ -1,6 +1,6 @@
 class Profile::EmployeeCvsController < ApplicationController
   def index
-    @list = EmployeeCv.where profile_id: current_profile.id
+    paginated_employee_cvs
   end
 
   def show
@@ -20,7 +20,12 @@ class Profile::EmployeeCvsController < ApplicationController
     @employee_cv = EmployeeCv.new employee_cvs_params.merge(profile_id: current_profile.id)
     if @employee_cv.save
       @status = 'success'
-      @employee_cv.make_ready! if params[:save]
+      if params[:save]
+        @employee_cv.make_ready!
+        redirect_to profile_employee_cvs_path(term: :ready)
+      else
+        redirect_to profile_employee_cvs_path(term: :draft)
+      end
     else
       @status = 'error'
       @text = error_msg_handler @employee_cv
@@ -39,7 +44,8 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def destroy
     @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.destroy
+    @employee_cv.to_deleted!
+    # redirect_to profile_employee_cvs_path(term: term)
   end
 
   def add_proposal
@@ -48,6 +54,7 @@ class Profile::EmployeeCvsController < ApplicationController
     @employee_cv.apply!
     if @employee_cv.errors.none?
       @status = 'success'
+      redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
       @text = error_msg_handler @employee_cv
@@ -67,20 +74,37 @@ class Profile::EmployeeCvsController < ApplicationController
 
   private
 
+
   def employee_cvs_params
-    params.require(:employee_cv).permit(:phone_number, :contractor_terms_of_service, :proposal_id,
-                                        :name, :gender, :mark_ready, :birthdate, :file, ext_data: {})
+    params.require(:employee_cv)
+          .permit(:phone_number, :contractor_terms_of_service, :proposal_id,
+                  :name, :gender, :mark_ready, :birthdate, :file, ext_data: {})
+  end
+
+  def states_by_term
+    EmployeeCv.contractor_menu_items[term]
+  end
+
+  def term
+    term = params[:term]
+    @term = if !term
+              :ready
+            elsif term.empty?
+              :ready
+            else
+              EmployeeCv.contractor_menu_items.keys.include?(term.to_sym) ? term.to_sym : :ready
+            end
+  end
+
+  def paginated_employee_cvs
+    @paginated_employee_cvs ||= scoped_employee_cvs.page(params[:page])
+  end
+
+  def scoped_employee_cvs
+    @scoped_employee_cvs ||= states_by_term.empty? ? employee_cvs : employee_cvs.where(state: states_by_term)
   end
 
   def employee_cvs
-    @employee_cvs ||= proposal.employee_cvs
+    @employee_cvs = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc)
   end
-
-  # def proposal
-  #   @proposal ||= proposals.find(params[:proposal_id])
-  # end
-  #
-  # def proposals
-  #   @proposals ||= current_profile.proposals
-  # end
 end

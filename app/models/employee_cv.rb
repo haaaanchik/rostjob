@@ -50,6 +50,11 @@ class EmployeeCv < ApplicationRecord
     state :refused
     # Открыт спор
     state :disputed
+    state :deleted
+
+    event :to_deleted do
+      transitions from: %i[draft ready], to: :deleted
+    end
 
     event :view do
       transitions from: :applyed, to: :viewed
@@ -142,5 +147,25 @@ class EmployeeCv < ApplicationRecord
     create_pr_empl(proposal_id)
     self.state = :applyed
     self.proposal_id = nil
+  end
+
+  def self.customer_menu_items
+    {
+      inbox: %w[applyed],
+      hired: %w[hired],
+      disputed: %w[fired],
+      deleted: %w[deleted]
+    }
+  end
+
+  def self.contractor_menu_items
+    {
+      all: %w[],
+      draft: %w[draft],
+      ready: %w[ready],
+      sent: %w[applyed viewed hired],
+      disputed: %w[fired],
+      deleted: %w[deleted]
+    }
   end
 end
