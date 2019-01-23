@@ -10,27 +10,26 @@ class ProposalEmployee < ApplicationRecord
   scope :available_free, ->(profile_id, proposal_id) {available(profile_id).where(proposal_id: proposal_id)}
 
   aasm column: :state do
-    state :applyed, initial: true
-    state :inspected
+    state :inbox, initial: true
     state :hired
-    state :denied
+    state :disputed
+    state :deleted
+    state :viewed
 
-    event :make_inspected do
-      transitions from: :applyed, to: :inspected
+    event :to_viewed do
+      transitions from: :inbox, to: :viewed
+    end
+
+    event :to_disputed do
+      transitions from: %i[inbox hired deleted], to: :disputed
+    end
+
+    event :to_deleted do
+      transitions from: :inbox, to: :deleted
     end
 
     event :hire do
-      transitions from: %i[applyed inspected], to: :hired
-      after do
-        self.update_attributes date_hired: Date.current
-      end
-    end
-
-    event :deny do
-      transitions from: %i[applyed inspected], to: :denied
-      after do
-        self.update_attributes date_hired: Date.current
-      end
+      transitions from: %i[inbox viewed deleted], to: :hired
     end
 
   end

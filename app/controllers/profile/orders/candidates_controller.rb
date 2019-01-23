@@ -4,15 +4,20 @@ class Profile::Orders::CandidatesController < ApplicationController
     render partial: 'profile/orders/candidates/index', locals: { items: paginated_candidates }, layout: false
   end
 
+  def show
+    @pecv = candidate
+    @remained_warranty_days = Holiday.remained_warranty_days(@pecv.employee_cv.hiring_date, @pecv.employee_cv.warranty_date)
+  end
+
   def hire
     render(plain: 'order completed', status: 422) and return if order.completed?
 
     if order.selected_candidates.count < order.number_of_employees
       hiring_date = Date.parse(candidate_params[:hiring_date])
-      candidate.update(hiring_date: hiring_date,
-                       warranty_date: Holiday.warranty_date(hiring_date),
-                       order_id: params[:order_id],
-                       proposal_id: candidate_params[:proposal_id])
+      candidate.employee_cv.update(hiring_date: hiring_date,
+                                   warranty_date: Holiday.warranty_date(hiring_date),
+                                   order_id: params[:order_id],
+                                   proposal_id: candidate_params[:proposal_id])
       candidate.hire!
       if order.reload.selected_candidates.count == order.number_of_employees
         order.complete!
@@ -29,9 +34,19 @@ class Profile::Orders::CandidatesController < ApplicationController
   def fire
     render(plain: 'candidate already fired', status: 422) and return if candidate.fired?
 
-    candidate.update(firing_date: candidate_params[:firing_date])
+    candidate.employee_cv.update(firing_date: candidate_params[:firing_date])
     candidate.fire!
 
+    redirect_to profile_order_path(order)
+  end
+
+  def destroy
+    candidate.to_deleted!
+    redirect_to profile_order_path(order)
+  end
+
+  def disput
+    candidate.to_disputed!
     redirect_to profile_order_path(order)
   end
 
@@ -42,7 +57,8 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def candidate
-    @candidate ||= EmployeeCv.find(candidate_params[:id])
+    @candidate ||= candidates.find(params[:id])
+    # @candidate ||= EmployeeCv.find(candidate_params[:id])
   end
 
   def proposal
@@ -69,11 +85,11 @@ class Profile::Orders::CandidatesController < ApplicationController
   def term
     term = params[:term]
     @term = if !term
-              :inbox
+              'inbox'
             elsif term.empty?
-              :inbox
+              'inbox'
             else
-              EmployeeCv.customer_menu_items.keys.include?(term.to_sym) ? term.to_sym : :inbox
+              EmployeeCv.customer_menu_items.include?(term) ? term : 'inbox'
             end
   end
 
@@ -82,7 +98,7 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def scoped_candidates
-    @scoped_candidates ||= states_by_term.empty? ? candidates : candidates.where(state: states_by_term)
+    @scoped_candidates ||= candidates.where(state: term)
   end
 
   def candidates

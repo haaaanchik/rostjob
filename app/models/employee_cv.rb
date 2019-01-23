@@ -124,12 +124,13 @@ class EmployeeCv < ApplicationRecord
   end
 
   def self.customer_menu_items
-    {
-      inbox: %w[applyed],
-      hired: %w[hired],
-      disputed: %w[fired],
-      deleted: %w[deleted]
-    }
+    %w[inbox hired disputed deleted]
+    # {
+    #   inbox: %w[applyed],
+    #   hired: %w[hired],
+    #   disputed: %w[fired],
+    #   deleted: %w[deleted]
+    # }
   end
 
   def self.contractor_menu_items

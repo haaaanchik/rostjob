@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :profile
   has_many :invites
   has_many :proposals
-  has_many :candidates, class_name: 'EmployeeCv'
+  has_many :candidates, class_name: 'ProposalEmployee'
   has_many :comments
   has_many :favorites, as: :favorable
   has_many :proposal_employees
@@ -95,7 +95,7 @@ class Order < ApplicationRecord
   end
 
   def selected_candidates
-    candidates.select {|c| c.hired? || c.fired?}
+    candidates.select {|c| c.hired? || c.disputed?}
   end
 
   def to_draft

@@ -9,6 +9,7 @@ class Profile < ApplicationRecord
   has_one :company, dependent: :destroy
   has_many :invoices
   has_many :tax_calculations
+  has_many :proposal_employees
 
   accepts_nested_attributes_for :company
 

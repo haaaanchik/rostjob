@@ -9,8 +9,8 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
     - else
       | Файл не выбран
   td
-    - if %w[hired denied].include? proposed.state
-      span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
-    - else
-    - folder = EmployeeCv.customer_menu_item_by_state(employee_cv.state)
-    = render partial: "profile/orders/proposals/toolbars/#{folder}.html.slim", locals: { employee_cv: employee_cv }
+    / - if %w[hired denied].include? proposed.state
+    /   span.badge.badge-primary = t("employee_cv.state.#{proposed.state}")
+    / - else
+    - filename = proposed.state
+    = render partial: "profile/orders/proposals/toolbars/#{filename}.html.slim", locals: { proposed: proposed }
