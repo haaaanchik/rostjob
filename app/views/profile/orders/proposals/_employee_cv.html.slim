@@ -7,12 +7,10 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
       = link_to employee_cv.file.url, target: '_blank' do
         i.far.fa-file-alt.fa-2x
     - else
-      = 'Файла нету'
+      | Файл не выбран
   td
     - if %w[hired denied].include? proposed.state
       span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
     - else
-      = link_to 'Нанять', change_status_profile_employee_cv_path(proposed.id, state: 'hired'),
-              method: :put, remote: true, class: 'btn btn-success btn-sm'
-      = link_to 'Отказ', change_status_profile_employee_cv_path(proposed.id, state: 'denied'),
-              method: :put, remote: true, class: 'btn btn-info btn-sm'
+    - folder = EmployeeCv.customer_menu_item_by_state(employee_cv.state)
+    = render partial: "profile/orders/proposals/toolbars/#{folder}.html.slim", locals: { employee_cv: employee_cv }

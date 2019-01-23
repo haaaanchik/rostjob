@@ -1,4 +1,4 @@
-- ps = order.proposal_employees
+- ps = order.proposal_employees.select { |e| e.employee_cv.applyed? }
 .col
   .card.z-depth-1
     .card-body
@@ -45,15 +45,28 @@
     .card-header
       span.h4 Кандидаты
     .card-body
-      table.table
-        tr
-          th ФИО
-          th Тел
-          th Файл
-          th Статус
-          th Прочее
-        = render partial: 'profile/orders/proposals/employee_cv', collection: ps,
-                as: :proposed
+      .row
+        .col
+          ul.nav.nav-pills.mb-3 id="pills-tab" role="tablist"
+            li.nav-item
+              = link_to 'Входящие', profile_order_candidates_path(order, term: :inbox),
+                  class: 'nav-link active candidates-menu-button',
+                  data: { toggle: 'pill' }, remote: true
+            li.nav-item
+              = link_to 'Нанятые', profile_order_candidates_path(order, term: :hired),
+                class: 'nav-link candidates-menu-button',
+                data: { toggle: 'pill' }, remote: true
+            li.nav-item
+              = link_to 'Удалённые', profile_order_candidates_path(order, term: :deleted),
+                class: 'nav-link candidates-menu-button',
+                data: { toggle: 'pill' }, remote: true
+            li.nav-item
+              = link_to 'Спор', profile_order_candidates_path(order, term: :disputed),
+                class: 'nav-link candidates-menu-button',
+                data: { toggle: 'pill' }, remote: true
+      #order_candidates
+        = render partial: 'profile/orders/candidates/index' , locals: { items: ps }
+
 / = render partial: 'hired_candidate', collection: order.selected_candidates
 / .card.border-light.mt-2
 /   .card-header

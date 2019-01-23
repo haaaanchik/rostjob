@@ -1,0 +1,4 @@
+= link_to 'Нанять', change_status_profile_employee_cv_path(employee_cv, state: 'hired'),
+        method: :put, remote: true, class: 'btn btn-success btn-sm'
+= link_to 'Отказ', change_status_profile_employee_cv_path(employee_cv, state: 'denied'),
+              method: :put, remote: true, class: 'btn btn-info btn-sm'

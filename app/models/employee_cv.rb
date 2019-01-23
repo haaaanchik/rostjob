@@ -30,77 +30,51 @@ class EmployeeCv < ApplicationRecord
   before_save :check_marks
 
   aasm column: :state, skip_validation_on_save: true,
-       no_direct_assignment: false, whiny_transitions: false do
+       no_direct_assignment: true, whiny_transitions: false do
     # черновик
     state :draft, initial: true
+    # готова к отправке
     state :ready
-    # принята
-    state :applyed
-    # нанят
-    state :hired
-    # уволен (отказано)
-    state :fired
-    # ХЗ
-    state :charged
-    # Анкета в архиве
-    state :archieved
-    # Просмотрена
-    state :viewed
-    # Отклонена
-    state :refused
-    # Открыт спор
+    # отправлена
+    state :sent
+    # открыт спор
     state :disputed
+    # удалена
     state :deleted
+
+    event :to_sent do
+      transitions from: :ready, to: :sent
+    end
 
     event :to_deleted do
       transitions from: %i[draft ready], to: :deleted
     end
 
-    event :view do
-      transitions from: :applyed, to: :viewed
-    end
-
-    event :refuse do
-      transitions from: %i[applyed viewed], to: :refused
-    end
-
-    event :disput do
+    event :to_disputed do
       transitions to: :disputed
     end
 
-    event :archive do
-      transitions to: :archieved
+    event :to_ready do
+      transitions from: %i[draft deleted], to: :ready
     end
 
-    event :make_ready do
-      transitions from: %i[applyed draft deleted], to: :ready
+    event :revoke do
+      transitions from: :sent, to: :ready, guard: :may_revoke?
     end
 
-    event :apply do
-      transitions from: %i[draft ready], to: :applyed
-    end
+    # event :hire do
+    #   transitions from: :applyed, to: :hired
+    #   after do
+    #     ps_s = proposal_employees.select {|d| d.proposal_id == proposal_id}
+    #     ps_s.map(&:hire!)
+    #     ps = proposal_employees.reject {|d| d.proposal_id == proposal_id}
+    #     ps.map(&:destroy)
+    #   end
+    # end
+  end
 
-    event :hire do
-      transitions from: :applyed, to: :hired
-      after do
-        ps_s = proposal_employees.select {|d| d.proposal_id == proposal_id}
-        ps_s.map(&:hire!)
-        ps = proposal_employees.reject {|d| d.proposal_id == proposal_id}
-        ps.map(&:destroy)
-      end
-    end
-
-    event :unapply do
-      transitions from: :applyed, to: :ready
-    end
-
-    event :fire do
-      transitions from: :hired, to: :ready
-    end
-
-    event :charge do
-      transitions from: :hired, to: :charged
-    end
+  def may_revoke?
+    true
   end
 
   def self.ext_data_fields
@@ -159,17 +133,22 @@ class EmployeeCv < ApplicationRecord
   end
 
   def self.contractor_menu_items
-    {
-      all: %w[],
-      draft: %w[draft],
-      ready: %w[ready],
-      sent: %w[applyed viewed hired],
-      disputed: %w[disputed fired],
-      deleted: %w[deleted]
-    }
+    EmployeeCv.aasm.states.map(&:name)
+    # {
+    #   all: %w[],
+    #   draft: %w[draft],
+    #   ready: %w[ready],
+    #   sent: %w[applyed viewed hired],
+    #   disputed: %w[disputed fired],
+    #   deleted: %w[deleted]
+    # }
   end
 
-  def self.contractor_menu_item_by_state(state)
-    self.contractor_menu_items.find { |_key, values| values.include? state }.first
+  # def self.contractor_menu_item_by_state(state)
+  #   self.contractor_menu_items.find { |_key, values| values.include? state }.first
+  # end
+
+  def self.customer_menu_item_by_state(state)
+    self.customer_menu_items.find { |_key, values| values.include? state }.first
   end
 end

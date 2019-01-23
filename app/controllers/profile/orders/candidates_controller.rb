@@ -1,4 +1,9 @@
 class Profile::Orders::CandidatesController < ApplicationController
+  def index
+    paginated_candidates
+    render partial: 'profile/orders/candidates/index', locals: { items: paginated_candidates }, layout: false
+  end
+
   def hire
     render(plain: 'order completed', status: 422) and return if order.completed?
 
@@ -11,10 +16,11 @@ class Profile::Orders::CandidatesController < ApplicationController
       candidate.hire!
       if order.reload.selected_candidates.count == order.number_of_employees
         order.complete!
-        redirect_to profile_order_path(order)
-      else
-        redirect_to profile_order_proposal_path(order, proposal)
       end
+      redirect_to profile_order_path(order)
+      # else
+      #   redirect_to profile_order_proposal_path(order, proposal)
+      # end
     else
       render plain: 'all employees has been hired', status: 422
     end
@@ -50,7 +56,36 @@ class Profile::Orders::CandidatesController < ApplicationController
   def order
     @order ||= orders.find(params[:order_id])
   end
+
   def orders
     @orders ||= current_profile.orders
+  end
+
+  # Меню кандидатов и постраничный вывод
+  def states_by_term
+    EmployeeCv.customer_menu_items[term]
+  end
+
+  def term
+    term = params[:term]
+    @term = if !term
+              :inbox
+            elsif term.empty?
+              :inbox
+            else
+              EmployeeCv.customer_menu_items.keys.include?(term.to_sym) ? term.to_sym : :inbox
+            end
+  end
+
+  def paginated_candidates
+    @paginated_candidates ||= scoped_candidates.page(params[:page])
+  end
+
+  def scoped_candidates
+    @scoped_candidates ||= states_by_term.empty? ? candidates : candidates.where(state: states_by_term)
+  end
+
+  def candidates
+    @candidates ||= order.proposal_employees
   end
 end

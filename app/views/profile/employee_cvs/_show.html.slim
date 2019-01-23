@@ -21,7 +21,8 @@
         .mt-3
           - state = @employee_cv.state
           - case state
-          - when 'applyed'
+          - when 'sent'
+            // FIXME: get states from ProposalEmployee here
             span.text-center.text-success В очереди
           - when 'viewed'
             span.text-center.text-success = t("employee_cv.state.#{state}")

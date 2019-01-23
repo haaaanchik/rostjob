@@ -86,6 +86,7 @@ Rails.application.routes.draw do
         post 'proposals/:id', to: 'proposals#send_message'
         post 'candidates/hire', to: 'candidates#hire'
         put 'candidates/fire', to: 'candidates#fire'
+        get 'candidates', to: 'candidates#index'
       end
     end
     post :orders, constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#create_pre_publish'

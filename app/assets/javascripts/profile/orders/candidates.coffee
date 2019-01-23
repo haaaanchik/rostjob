@@ -12,3 +12,8 @@ $(document).on('show.bs.modal', '#fireCandidateModal', (event) ->
   modal.find('#candidate_id').val(id)
   modal.find('#candidate_proposal_id').val(proposal_id)
 )
+
+$(document).on('ajax:success', '.candidates-menu-button', (event) ->
+  result = event.detail[2].response
+  $('#order_candidates').replaceWith(result)
+)

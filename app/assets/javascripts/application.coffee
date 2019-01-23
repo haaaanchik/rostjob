@@ -110,7 +110,6 @@ $(document).ready ->
 
   $(document).on('ajax:success', '[data-remote=true]', (event) ->
     data = event.detail[0]
-    console.log(data)
     if data.validate
       show_validation_errors(data.data)
   )

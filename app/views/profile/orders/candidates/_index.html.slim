@@ -1,0 +1,9 @@
+#order_candidates
+  table.table
+    tr
+      th ФИО
+      th Тел
+      th Файл
+      th Статус
+      th Прочее
+    = render partial: 'profile/orders/proposals/employee_cv', collection: items, as: :proposed

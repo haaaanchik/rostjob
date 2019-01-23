@@ -21,7 +21,7 @@ class Profile::EmployeeCvsController < ApplicationController
     if @employee_cv.save
       @status = 'success'
       if params[:save]
-        @employee_cv.make_ready!
+        @employee_cv.to_ready!
         redirect_to profile_employee_cvs_path(term: :ready)
       else
         redirect_to profile_employee_cvs_path(term: :draft)
@@ -51,7 +51,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def add_proposal
     @employee_cv = EmployeeCv.find_by id: params[:id]
     @employee_pr = @employee_cv.create_pr_empl params[:proposal_id]
-    @employee_cv.apply!
+    @employee_cv.to_sent!
     if @employee_cv.errors.none?
       @status = 'success'
       redirect_to profile_employee_cvs_path(term: :ready)
@@ -73,7 +73,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def to_ready
-    if employee_cv.make_ready!
+    if employee_cv.to_ready!
       @status = 'success'
       redirect_to profile_employee_cvs_path(term: :ready)
     else
@@ -115,7 +115,7 @@ class Profile::EmployeeCvsController < ApplicationController
             elsif term.empty?
               :ready
             else
-              EmployeeCv.contractor_menu_items.keys.include?(term.to_sym) ? term.to_sym : :ready
+              EmployeeCv.contractor_menu_items.include?(term.to_sym) ? term.to_sym : :ready
             end
   end
 
@@ -124,7 +124,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def scoped_employee_cvs
-    @scoped_employee_cvs ||= states_by_term.empty? ? employee_cvs : employee_cvs.where(state: states_by_term)
+    @scoped_employee_cvs ||= employee_cvs.where(state: term)
   end
 
   def employee_cvs
