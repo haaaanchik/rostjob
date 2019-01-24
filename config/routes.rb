@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resource :price, only: :show
 
   namespace :admin do
+    get 'analytics/export_to_excel'
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'

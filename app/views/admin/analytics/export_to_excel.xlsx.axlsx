@@ -1,0 +1,54 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "orders") do |sheet|
+  # Create the header row
+  sheet.add_row [
+    "Профессия",
+    "Количество",
+    "Цена",
+    "Вознаграждение",
+    "Специализация",
+    "Квалификация",
+    "Город",
+    "Район",
+    "Зарплата от",
+    "Зарплата до",
+    "Документ подтверждающий стаж",
+    "Виды выполняемых работ",
+    "График работы",
+    "Период, на который требуются рабочие",
+    "Возраст от",
+    "Возраст до",
+    "Пол",
+    "Смежная профессия",
+    "Предлагаемые условия",
+    "Комментарий",
+    "Дата/Время"
+  ]
+  # Create entries for each item
+  @orders.each do |order|
+    sheet.add_row [
+      order.title,
+      order.number_of_employees,
+      order.customer_price,
+      order.contractor_price,
+      order.specialization,
+      order.skill,
+      order.city,
+      order.district,
+      order.salary_from,
+      order.salary_to,
+      order.experience,
+      order.description,
+      order.schedule,
+      order.work_period,
+      order.other_info['age'],
+      order.other_info['age'],
+      order.other_info['gender'],
+      order.other_info['sex'],
+      order.other_info['terms'],
+      order.other_info['remark'],
+      order.created_at
+    ]
+  end
+end

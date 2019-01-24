@@ -1,0 +1,14 @@
+.row
+  .col
+    .card
+      .card-body
+        .card-title
+          h1 Экспорт заявок
+          = form_with url: admin_analytics_export_to_excel_path(format: :xlsx), method: :get, local: true, skip_enforcing_utf8: true, class: 'export-form' do |f|
+            .md-form
+              = f.date_field :from, class: 'form-control', value: Date.current - 1.week
+              = f.label :from, 'От:', class: 'active'
+            .md-form
+              = f.date_field :to, class: 'form-control', value: Date.current
+              = f.label :to, 'До:', class: 'active'
+            = f.submit 'Выгрузить', class: 'btn btn-indigo export-button'
