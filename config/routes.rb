@@ -64,6 +64,13 @@ Rails.application.routes.draw do
 
   resource :profile, except: %i[show destroy]
   namespace :profile do
+    resources :proposal_employees, only: :show do
+      member do
+        put :to_disput
+        put :revoke
+      end
+    end
+    # get 'proposal_employee/:id', to: 'proposal_employee#show'
     resources :invoices, only: %i[index show create destroy]
     resources :orders, except: %i[create update] do
       member do
@@ -93,7 +100,6 @@ Rails.application.routes.draw do
             put :disput
           end
         end
-        # get 'candidates', to: 'candidates#index'
         # put 'candidates/:id/hire', to: 'candidates#hire'
         # put 'candidates/:id/fire', to: 'candidates#fire'
       end

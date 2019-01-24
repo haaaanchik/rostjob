@@ -15,6 +15,16 @@ class ProposalEmployee < ApplicationRecord
     state :disputed
     state :deleted
     state :viewed
+    state :revoked
+    state :paid
+
+    event :to_paid do
+      transitions from: :hired, to: :paid
+    end
+
+    event :to_revoked do
+      transitions to: :revoked
+    end
 
     event :to_viewed do
       transitions from: :inbox, to: :viewed

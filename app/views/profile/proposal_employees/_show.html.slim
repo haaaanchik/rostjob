@@ -1,3 +1,6 @@
+- pe = @proposal_employee
+- ecv = pe.employee_cv
+- state = pe.state
 .row
   .col
     .card.card-cascade
@@ -8,36 +11,46 @@
 
       .card-body.card-body-cascade.text-center
         h4.card-title
-          strong Кандидат: #{@pecv.employee_cv&.name}
+          strong Кандидат: #{ecv&.name}
           br
-          strong Телефон: #{@pecv.employee_cv&.phone_number}
+          strong Телефон: #{ecv&.phone_number}
         h6.font-weight-bold.indigo-text.py-2
   .col
     .card.card-cascade
       .card-body.card-body-cascade.text-center
         h4 Гарантийный период
-        - hd = @pecv.hiring_date&.strftime('%d-%m-%Y')
+        - hd = pe.hiring_date&.strftime('%d-%m-%Y')
         #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
         .mt-3
-          - state = @pecv.state
           - case state
+          - when 'inbox'
+            span.text-center.text-success В очереди
           - when 'viewed'
             span.text-center.text-success = t("employee_cv.state.#{state}")
           - when 'hired'
             span.text-center.text-success
               = t("employee_cv.state.#{state}")
               |. Осталось #{t(:day, count: @remained_warranty_days.size)}.
-          - when 'deleted'
+          - when 'fired'
             span.text-center.text-danger = t("employee_cv.state.#{state}")
+          - when 'ready'
+            span.text-center.text-success = t("employee_cv.state.#{state}")
+          - when 'refused'
+            span.text-center.text-warning = t("employee_cv.state.#{state}")
           - when 'disputed'
             span.text-center.text-danger = t("employee_cv.state.#{state}")
+          - when 'charged'
+            span.text-center.text-success
+              = t("employee_cv.state.#{state}")
+              |. Деньги в кассе.
         .mt-3
-          / - if !%w[fired hired].include?(@employee_cv.state)
-          /   = link_to 'Вернуть', to_ready_profile_employee_cv_path(@employee_cv), method: :put,
+          - if !%w[fired hired disputed].include?(state)
+            = link_to 'Вернуть', revoke_profile_proposal_employee_path(pe), method: :put,
               data: { confirm: 'Вернуть анкету в готовые?' }, class: 'btn btn-info', title: 'В готовые', remote: true
-          / - else
-          = link_to 'Спор', disput_profile_order_candidate_path(@pecv.order_id, @pecv), method: :put,
-               data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
+          - else
+            - unless pe.disputed?
+              = link_to 'Спор', to_disput_profile_proposal_employee_path(pe), method: :put,
+                data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
 .row
   .col
     .mt-3
@@ -46,7 +59,7 @@
       .mt-3
       p.card-text
         dl.row
-          - data = @pecv.employee_cv.ext_data || {}
+          - data = ecv.ext_data || {}
           - data.each do |k, v|
             dt class="col-sm-3" = t("employee_cv.ext_data.#{k}")
             dd class="col-sm-9" = v

@@ -1,0 +1,13 @@
+- pe = proposal_employee
+- employee_cv = pe.employee_cv
+tr id="proposal_employee_#{pe.id}" data-cvs-state="#{pe.state}"
+  td #{employee_cv.name}
+  td = employee_cv&.phone_number
+  / td
+  /   span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
+  td
+    / - filename = employee_cv.state
+    / = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
+    = link_to profile_proposal_employee_path(pe),
+      data: { type: :script }, title: 'Просмотреть статус', remote: true do
+      i.fas.fa-search.fa-2x.ml-2

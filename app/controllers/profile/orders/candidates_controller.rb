@@ -6,7 +6,7 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def show
     @pecv = candidate
-    @remained_warranty_days = Holiday.remained_warranty_days(@pecv.employee_cv.hiring_date, @pecv.employee_cv.warranty_date)
+    @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
   end
 
   def hire
@@ -14,9 +14,8 @@ class Profile::Orders::CandidatesController < ApplicationController
 
     if order.selected_candidates.count < order.number_of_employees
       hiring_date = Date.parse(candidate_params[:hiring_date])
-      candidate.employee_cv.update(hiring_date: hiring_date,
-                                   warranty_date: Holiday.warranty_date(hiring_date),
-                                   order_id: params[:order_id],
+      candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
+      candidate.employee_cv.update(order_id: params[:order_id],
                                    proposal_id: candidate_params[:proposal_id])
       candidate.hire!
       if order.reload.selected_candidates.count == order.number_of_employees

@@ -1,6 +1,11 @@
 class Profile::EmployeeCvsController < ApplicationController
   def index
-    paginated_employee_cvs
+    if term == :sent
+      paginated_sent_employee_cvs
+      render 'profile/employee_cvs/sent_index'
+    else
+      paginated_employee_cvs
+    end
   end
 
   def show
@@ -123,8 +128,16 @@ class Profile::EmployeeCvsController < ApplicationController
     @paginated_employee_cvs ||= scoped_employee_cvs.page(params[:page])
   end
 
+  def paginated_sent_employee_cvs
+    @paginated_sent_employee_cvs ||= sent_employee_cvs.page(params[:page])
+  end
+
   def scoped_employee_cvs
     @scoped_employee_cvs ||= employee_cvs.where(state: term)
+  end
+
+  def sent_employee_cvs
+    @sent_employee_cvs = ProposalEmployee.where(profile_id: current_profile.id).where.not(state: 'revoked').order(id: :desc)
   end
 
   def employee_cvs

@@ -30,7 +30,7 @@ class EmployeeCv < ApplicationRecord
   before_save :check_marks
 
   aasm column: :state, skip_validation_on_save: true,
-       no_direct_assignment: true, whiny_transitions: false do
+       no_direct_assignment: false, whiny_transitions: false do
     # черновик
     state :draft, initial: true
     # готова к отправке
@@ -51,11 +51,11 @@ class EmployeeCv < ApplicationRecord
     end
 
     event :to_disputed do
-      transitions to: :disputed
+      transitions from: :sent, to: :disputed
     end
 
     event :to_ready do
-      transitions from: %i[draft deleted], to: :ready
+      transitions from: %i[sent draft deleted], to: :ready
     end
 
     event :revoke do

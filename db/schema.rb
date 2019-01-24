@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_21_095135) do
+ActiveRecord::Schema.define(version: 2019_01_24_164105) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -108,10 +108,7 @@ ActiveRecord::Schema.define(version: 2019_01_21_095135) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
-    t.date "hiring_date"
-    t.date "firing_date"
     t.string "state"
-    t.date "warranty_date"
     t.json "ext_data"
     t.integer "profile_id"
     t.string "photo_file_name"
@@ -276,6 +273,9 @@ ActiveRecord::Schema.define(version: 2019_01_21_095135) do
     t.json "marks"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "hiring_date"
+    t.date "firing_date"
+    t.date "warranty_date"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"

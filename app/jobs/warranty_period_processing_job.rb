@@ -7,6 +7,6 @@ class WarrantyPeriodProcessingJob < ApplicationJob
     order = proposal.order
     amount = order.contractor_price
     result = profile.balance.deposit(amount, "Вознаграждение по заявке №#{order.id}")
-    candidate.charge! if result
+    candidate.to_paid! if result
   end
 end
