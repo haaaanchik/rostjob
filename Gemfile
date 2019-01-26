@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'draper'
 gem 'rubyzip'
 gem 'axlsx'
 gem 'axlsx_rails'
