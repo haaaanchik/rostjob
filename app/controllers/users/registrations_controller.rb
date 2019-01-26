@@ -10,16 +10,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    @user = User.new configure_sign_up_params
-
-    @status =
-      if @user.save
-        Cmd::UserActionLogger::User::CreateLog.call(params: logger_params)
-        # sign_in :user, user
-        'success'
-      else
-        error_msg_handler @user
-      end
+    result = Cmd::User::Registration::Create.call(user_params: user_params)
+    @user = result.user
+    @status = if result.success?
+                'success'
+              else
+                error_msg_handler @user
+              end
   end
 
   # GET /resource/edit
@@ -69,20 +66,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
            status: 401
   end
 
-  def configure_sign_up_params
+  def user_params
     params.require(:user).permit(:password_confirmation, :password,
                                  :full_name, :email)
-  end
-
-  def logger_params
-    {
-      receiver_id: @user.id,
-      subject_id: @user.id,
-      subject_type: 'User',
-      subject_role: 'unknown',
-      action: 'Создал учетную запись',
-      object_id: @user.id,
-      object_type: 'User'
-    }
   end
 end

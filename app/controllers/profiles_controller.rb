@@ -17,33 +17,23 @@ class ProfilesController < ApplicationController
   end
 
   def create
-    @profile = current_user.build_profile(profile_params)
-    if company?
-      @profile.save(context: :company)
-    else
-      @profile.save
-    end
-    if @profile.errors.messages.any?
-      render json: {validate: true, data: errors_data(@profile)}
-    else
-      current_user.update_attribute(:profile_id, @profile.id)
-      @profile.create_balance
+    result = Cmd::Profile::Create.call(user: current_user, params: profile_params)
+    profile = result.profile
+    if result.success?
+      Cmd::Profile::Balance::Create.call(profile: profile)
       redirect_to root_path
+    else
+      render json: { validate: true, data: errors_data(profile) }
     end
   end
 
   def update
-    profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
-    if company?
-      profile.save(context: :company)
-    else
-      profile.save
-    end
-
-    if profile.errors.messages.any?
-      render json: {validate: true, data: errors_data(@profile)}
-    else
+    result = Cmd::Profile::Update.call(profile: current_profile, params: profile_params)
+    profile = result.profile
+    if result.success?
       redirect_to root_path
+    else
+      render json: { validate: true, data: errors_data(profile) }
     end
   end
 

@@ -15,6 +15,9 @@ class User < ApplicationRecord
          :validatable, :confirmable, :omniauthable,
          omniauth_providers: [:vkontakte, :facebook]
 
+  # devise :database_authenticatable, :registerable, :recoverable, :trackable,
+  #        :validatable, :omniauthable,
+  #        omniauth_providers: [:vkontakte, :facebook]
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|
       u.provider = auth['profider']
