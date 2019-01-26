@@ -11,6 +11,10 @@ class Admin::AnalyticsController < Admin::ApplicationController
     end
   end
 
+  def user_action_log
+    user_action_log_records
+  end
+
   private
 
   def date_interval
@@ -21,5 +25,11 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def orders
     @orders ||= Order.where(created_at: date_interval)
+  end
+
+  def user_action_log_records
+    @user_action_log_records ||= UserActionLog.order(id: :asc)
+                                              .page(params[:page])
+                                              .decorate
   end
 end

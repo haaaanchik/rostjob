@@ -1,0 +1,13 @@
+- if staffer_signed_in?
+  table.table
+    tr
+      th Логин
+      th Роль
+      th Заявка
+      th Действие
+      th Анкета
+      th Дата
+      th Время
+      th Кнопка возврата
+    = render partial: 'user_action_logs/user_action_log', collection: @user_action_log_records
+  = paginate @user_action_log_records
