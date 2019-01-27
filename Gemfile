@@ -73,7 +73,6 @@ gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 gem 'capistrano-rails', require: false, group: :development
 gem 'rvm1-capistrano3', require: false, group: :development
 
-gem 'activerecord-session_store', '~> 1.1', '>= 1.1.1'
 gem 'russian', '~> 0.6.0'
 gem 'petrovich', '~> 1.1', '>= 1.1.1'
 

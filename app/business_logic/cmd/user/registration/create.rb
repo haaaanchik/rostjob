@@ -5,10 +5,8 @@ module Cmd
         include Interactor
 
         def call
-          user_params = context.user_params
-          @user = ::User.new user_params
-          context.user = @user
-          context.failed! unless context.user.save
+          @user = ::User.new context.user_params
+          context.failed! unless @user.save
           Cmd::UserActionLogger::Log.call(params: logger_params)
         end
 
@@ -19,7 +17,7 @@ module Cmd
             receiver_id: @user.id,
             subject_id: @user.id,
             subject_type: 'User',
-            subject_role: @user.profile ? @user.profile.profile_type : '',
+            subject_role: @user.profile ? @user.profile.profile_type : nil,
             action: 'Учетная запись создана',
             object_id: @user.id,
             object_type: 'User'

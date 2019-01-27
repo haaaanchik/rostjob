@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    result = Cmd::User::Registration::Create.call(user_params: user_params)
+    result = ::Cmd::User::Registration::Create.call(user_params: user_params)
     @user = result.user
     @status = if result.success?
                 'success'

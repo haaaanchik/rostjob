@@ -30,6 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  user_action_log:
+    role:
+      customer: 'Заказчик'
+      contractor: 'Исполнитель'
   day:
     zero: '%{count} дней'
     one: '%{count} день'
@@ -55,10 +59,8 @@ ru:
       rejected: 'отклонён'
   profile:
     profile_type:
-      employer: 'Работодатель'
-      agency: 'Агентство'
-      recruiter: 'Частный рекрутер'
-      employee: 'Соискатель'
+      customer: 'Заказчик'
+      contractor: 'Исполнитель'
     orders:
       commit:
         save_as_draft: 'Сохранить как черновик'

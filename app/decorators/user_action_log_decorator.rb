@@ -5,15 +5,6 @@ class UserActionLogDecorator < ApplicationDecorator
     PaginatingDecorator
   end
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
-
   def login
     subject.email
   end
@@ -23,13 +14,11 @@ class UserActionLogDecorator < ApplicationDecorator
   end
 
   def order
-    obj.id if model.object_type.include? 'Order'
-    obj.order.id if model.object_type.include? 'ProposalEmployee'
+    obj.order_id
   end
 
   def employee_cv
-    obj.id if model.object_type.include? 'EmployeeCv'
-    obj.employee_cv.id if model.object_type.include? 'ProposalEmployee'
+    obj.employee_cv_id
   end
 
   def date
@@ -38,5 +27,19 @@ class UserActionLogDecorator < ApplicationDecorator
 
   def time
     model.created_at.strftime('%H:%M:%S')
+  end
+
+  private
+
+  def subject
+    @subject ||= entity(model.subject_type, model.subject_id)
+  end
+
+  def obj
+    @obj ||= entity(model.object_type, model.object_id).decorate
+  end
+
+  def entity(type, id)
+    type.camelize.constantize.find_by(id: id)
   end
 end
