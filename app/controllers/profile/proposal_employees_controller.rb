@@ -13,8 +13,8 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def revoke
-    proposal_employee.to_revoked!
-    proposal_employee.employee_cv.to_ready!
+    Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: false)
+    Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv)
     redirect_to profile_employee_cvs_path(term: :ready)
   end
 

@@ -10,6 +10,7 @@ class Profile < ApplicationRecord
   has_many :invoices
   has_many :tax_calculations
   has_many :proposal_employees
+  has_many :employee_cvs
 
   accepts_nested_attributes_for :company
 

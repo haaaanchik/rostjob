@@ -22,42 +22,44 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def create
-    @employee_cv = EmployeeCv.new employee_cvs_params.merge(profile_id: current_profile.id)
-    if @employee_cv.save
+    result = Cmd::EmployeeCv::Create.call(params: employee_cvs_params, profile: current_profile)
+    if result.success?
       @status = 'success'
       if params[:save]
-        @employee_cv.to_ready!
+        Cmd::EmployeeCv::ToReady.call(employee_cv: result.employee_cv)
         redirect_to profile_employee_cvs_path(term: :ready)
       else
         redirect_to profile_employee_cvs_path(term: :draft)
       end
     else
       @status = 'error'
-      @text = error_msg_handler @employee_cv
+      @text = error_msg_handler result.employee_cv
     end
   end
 
   def update
-    @employee_cv = EmployeeCv.find_by id: params[:id]
-    if @employee_cv.update_attributes employee_cvs_params
+    result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
+    if result.success?
       @status = 'success'
     else
       @status = 'error'
-      @text = error_msg_handler @employee_cv
+      @text = error_msg_handler result.employee_cv
     end
   end
 
   def destroy
-    @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.to_deleted!
+    result = Cmd::EmployeeCv::ToDeleted.call(employee_cv: employee_cv)
+    @employee_cv = result.employee_cv
     # redirect_to profile_employee_cvs_path(term: term)
   end
 
   def add_proposal
-    @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_pr = @employee_cv.create_pr_empl params[:proposal_id]
-    @employee_cv.to_sent!
-    if @employee_cv.errors.none?
+    result = Cmd::ProposalEmployee::Create.call(employee_cv: employee_cv,
+                                                proposal_id: params[:proposal_id])
+    @employee_cv = employee_cv
+    @employee_pr = result.employee_pr
+    if result.success?
+      Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
       @status = 'success'
       redirect_to profile_employee_cvs_path(term: :ready)
     else
@@ -78,22 +80,24 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def to_ready
-    if employee_cv.to_ready!
+    result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv)
+    if result.success?
       @status = 'success'
       redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
-      @text = error_msg_handler @employee_cv
+      @text = error_msg_handler result.employee_cv
     end
   end
 
   def to_disput
-    if employee_cv.disput!
+    result = Cmd::EmployeeCv::ToDisput.call(employee_cv: employee_cv)
+    if result.success?
       @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :disputed)
+      redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
-      @text = error_msg_handler @employee_cv
+      @text = error_msg_handler result.employee_cv
     end
   end
 
