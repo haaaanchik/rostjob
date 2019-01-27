@@ -8,7 +8,7 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def accept
-    order.to_published
+    Cmd::Order::ToPublished.call(order: order)
     redirect_to admin_orders_path
   end
 

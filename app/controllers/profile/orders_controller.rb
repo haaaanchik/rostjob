@@ -18,21 +18,20 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create
-    @order = orders.create(params_with_price)
-    @order.errors.add(:position_search, 'Выберите профессию') unless position
-    if @order.errors.messages.any?
-      render json: {validate: true, data: errors_data(order)}
-    else
+    result = Cmd::Order::Create.call(profile: current_profile, params: params_with_price, position: position)
+    if result.success?
       redirect_to profile_orders_path
+    else
+      render json: { validate: true, data: errors_data(result.order) }
     end
   end
 
   def update
-    order.update(params_with_price)
-    if @order.errors.messages.any?
-      render json: {validate: true, data: errors_data(order)}
+    result = Cmd::Order::Update.call(order: order, params: params_with_price)
+    if result.success?
+      redirect_to profile_order_path(result.order)
     else
-      redirect_to profile_order_path(order)
+      render json: { validate: true, data: errors_data(context.order) }
     end
   end
 
@@ -42,34 +41,35 @@ class Profile::OrdersController < ApplicationController
   end
 
   def create_pre_publish
-    @order = orders.create(params_with_price)
-    @order.errors.add(:position_search, 'Выберите профессию') unless position
-    if @order.errors.messages.any?
-      render json: {validate: true, data: errors_data(order)}
+    result = Cmd::Order::Create.call(profile: current_profile, params: params_with_price,
+                                     position: position)
+    if result.success?
+      redirect_to pre_publish_profile_order_path(result.order)
     else
-      redirect_to pre_publish_profile_order_path(@order)
+      render json: { validate: true, data: errors_data(result.order) }
     end
   end
 
   def update_pre_publish
-    order.update(params_with_price)
-    if order.errors.messages.any?
-      render json: {validate: true, data: errors_data(order)}
+    result = Cmd::Order::Update.call(order: order, params: params_with_price)
+    if result.success?
+      redirect_to pre_publish_profile_order_path(result.order)
     else
-      redirect_to pre_publish_profile_order_path(@order)
+      render json: { validate: true, data: errors_data(context.order) }
     end
   end
 
   def pre_publish
-    order.to_waiting_for_payment unless order.can_be_paid?
-    render 'pre_publish', locals: {order: order, balance: order.profile.balance.amount}
+    Cmd::Order::WaitForPayment.call(order: order)
+    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
   end
 
   def publish
-    if order.to_moderation
+    result = Cmd::Order::ToModeration.call(order: order)
+    if result.success?
       redirect_to profile_orders_path
     else
-      redirect_to pre_publish_profile_order_path(order)
+      redirect_to pre_publish_profile_order_path(result.order)
       # redirect_to profile_invoices_path
     end
   end
@@ -80,7 +80,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def complete
-    order.to_completed
+    Cmd::Order::Complete.call(order: order)
     redirect_to profile_orders_path
   end
 
