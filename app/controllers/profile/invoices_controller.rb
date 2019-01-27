@@ -18,7 +18,7 @@ class Profile::InvoicesController < ApplicationController
   end
 
   def create
-    result = ::NewInvoice::Create.call(invoice_params: invoice_params, profile: current_profile)
+    result = ::Cmd::Invoice::Create.call(invoice_params: invoice_params, profile: current_profile)
     if result.success?
       redirect_to profile_invoices_path
     else
