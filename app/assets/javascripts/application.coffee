@@ -19,6 +19,21 @@
 # require jquery.inputmask.date.extensions
 #= require_tree .
 
+@bootstrapClearButton = () ->
+  $('.position-relative :input').on('keydown focus', () ->
+    if ($(this).val().length > 0)
+      $(this).nextAll('.form-clear').removeClass('d-none')
+  ).on('keydown keyup blur', () ->
+    if ($(this).val().length == 0)
+      $(this).nextAll('.form-clear').addClass('d-none')
+  )
+  $('.form-clear').on('click', () ->
+    $(this).addClass('d-none').prevAll(':input').val('')
+    $('#order_search_form').submit()
+  )
+
+bootstrapClearButton()
+
 @ajax_client = (url, data, success_func, error_func, method = 'get', data_type = 'html') ->
   $.ajax
     method: method

@@ -20,3 +20,8 @@ $ ->
       $("label[for=#{k}]").attr('data-error', v)
       $("##{k}").addClass('invalid')
   )
+
+$(document).on('keyPress', '#order_search_form_query', (event) ->
+ if event.keyCode == 13
+   $('#order_search_from').submit()
+)

@@ -1,0 +1,7 @@
+.row
+  .col
+    = label_tag :sort_by, 'Сортировать по:'
+    = collection_select :order_search_form, :sort_by, @order_search_form.sort_by_list, :key, :label, {}, class: 'browser-default custom-select', onchange: 'this.form.submit()', form: form_id
+    = label_tag :filter_by, 'Фильтровать за:'
+    = collection_select :order_search_form, :filter_by, @order_search_form.filter_by_list, :key, :label, {}, class: 'browser-default custom-select', onchange: 'this.form.submit()', form: form_id
+
