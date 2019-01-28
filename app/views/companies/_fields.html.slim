@@ -22,12 +22,12 @@
 .form-group.row.private-person-field
   = f.label :phone, t(:phone), class: 'col-3 col-form-label require_field'
   .col-9
-    = f.text_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
+    = f.phone_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
     .invalid-feedback #{errors[:phone].first}
 .form-group.row.private-person-field
   = f.label :fax, t(:fax), class: 'col-3 col-form-label require_field'
   .col-9
-    = f.text_field :fax, class: "form-control #{'is-invalid' unless errors[:fax].empty?}"
+    = f.phone_field :fax, class: "form-control #{'is-invalid' unless errors[:fax].empty?}"
     .invalid-feedback #{errors[:fax].first}
 .form-group.row.private-person-field
   = f.label :email, t(:email), class: 'col-3 col-form-label require_field'

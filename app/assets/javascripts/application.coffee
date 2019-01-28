@@ -13,6 +13,10 @@
 #= require external/bootstrap-datepicker
 #= require external/bootstrap-datepicker.ru.min
 #= require tinymce
+#= require jquery.inputmask
+# require jquery.inputmask.extensions
+# require jquery.inputmask.numeric.extensions
+# require jquery.inputmask.date.extensions
 #= require_tree .
 
 @ajax_client = (url, data, success_func, error_func, method = 'get', data_type = 'html') ->
@@ -115,6 +119,8 @@ $(document).ready ->
   )
 
   $(document).on('focusin', '.is-invalid', (event) ->
-    console.log 'Focus in!'
     $(event.currentTarget).removeClass('is-invalid')
   )
+
+  $(document).on "turbolinks:load", ->
+    $('input[type=tel]').inputmask("+7(999)-999-99-99")

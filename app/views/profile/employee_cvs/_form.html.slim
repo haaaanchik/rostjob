@@ -15,8 +15,8 @@
   .row
     .col-8
       .md-form
-        = f.text_field :phone_number, class: 'form-control'
-        = f.label :phone_number, 'Номер телефона'
+        = f.phone_field :phone_number, class: 'form-control'
+        = f.label :phone_number, 'Номер телефона', class: 'active'
     .col-4
       .form-inline
         .form-check

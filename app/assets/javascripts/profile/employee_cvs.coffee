@@ -79,6 +79,9 @@ $ ->
       $('.employee-cv-submit-button').addClass('disabled')
   )
 
+  $(document).on('show.bs.modal', '#formModalNewEmployeeCv', ->
+    $('input[type=tel]').inputmask("+7(999)-999-99-99")
+  )
 #modal_hide = ->
 #  $('#newCandidateModal').modal('hide')
 #
