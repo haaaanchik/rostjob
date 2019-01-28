@@ -1,13 +1,4 @@
 = form_with  model: @order_search_form, url: orders_path, method: :get, skip_enforcing_utf8: true, local: true do |f|
-  .input-group.md-form
-    = f.text_field :query, class: "form-control", placeholder:"Пример: подбор кассиров", aria_label: "Query"
-    .input-group-append
-      = f.submit 'Найти', name: nil,  class: 'btn btn-indigo'
-  / div.mt-3
-  /   a.text-indigo data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" Расширенный поиск
-  / .collapse id="collapseExample"
-  /   .mt-3
-  /     'Hello world!
   .row.mt-5
     .col
       = f.label :sort_by, 'Сортировать по:'
