@@ -5,14 +5,14 @@ class OrderSearchForm
   attr_accessor :query, :sort_by, :filter_by
   attr_reader :sort_by_list, :filter_by_list
 
-  validates :sort_by, inclusion: {in: %w[date_asc date_desc reward_asc reward_desc]}
-  validates :filter_by, inclusion: {in: %w[day 3day week all_time]}
+  validates :sort_by, inclusion: { in: %w[date_asc date_desc reward_asc reward_desc] }
+  validates :filter_by, inclusion: { in: %w[day 3day week all_time] }
 
   def initialize(params)
     if params
       @query, @sort_by, @filter_by = params[:query], params[:sort_by], params[:filter_by]
     else
-      @query, @sort_by, @filter_by = '', 'date_desc', 'week'
+      @query, @sort_by, @filter_by = '', 'date_desc', 'all_time'
     end
   end
 

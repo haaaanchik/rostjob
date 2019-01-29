@@ -1,7 +1,7 @@
 - employee_cv = proposed.employee_cv
 tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data-cvs-pr="#{proposed.id if proposed}"
   td #{employee_cv.name}
-  td = employee_cv&.phone
+  td = employee_cv.phone_number
   td
     - if employee_cv.file
       = link_to employee_cv.file.url, target: '_blank' do

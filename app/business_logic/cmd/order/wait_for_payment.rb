@@ -1,6 +1,6 @@
 module Cmd
   module Order
-    class Update
+    class WaitForPayment
       include Interactor
 
       def call
