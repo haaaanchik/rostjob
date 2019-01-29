@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_25_220630) do
+ActiveRecord::Schema.define(version: 2019_01_29_191935) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -120,11 +120,11 @@ ActiveRecord::Schema.define(version: 2019_01_25_220630) do
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "favorable_type"
-    t.bigint "favorable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "favorable_type"
+    t.bigint "favorable_id"
+    t.bigint "user_id"
     t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable_type_and_favorable_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
@@ -180,6 +180,15 @@ ActiveRecord::Schema.define(version: 2019_01_25_220630) do
     t.datetime "updated_at", null: false
     t.integer "sender_id"
     t.index ["proposal_id"], name: "index_messages_on_proposal_id"
+  end
+
+  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_profiles_on_order_id"
+    t.index ["profile_id"], name: "index_order_profiles_on_profile_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -411,6 +420,8 @@ ActiveRecord::Schema.define(version: 2019_01_25_220630) do
   add_foreign_key "invites", "profiles"
   add_foreign_key "invoices", "profiles"
   add_foreign_key "messages", "proposals"
+  add_foreign_key "order_profiles", "orders"
+  add_foreign_key "order_profiles", "profiles"
   add_foreign_key "orders", "profiles"
   add_foreign_key "payment_orders", "companies"
   add_foreign_key "positions", "price_groups"

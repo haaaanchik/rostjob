@@ -39,14 +39,8 @@
               li
                 = order.salary_from
               li
-                = link_to 'Подробнее', order_path(order)
-    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-      .card.mt-2
-        .card-body
-          .row
-            .col
-              = Nokogiri::HTML.parse(order.other_info['remark']).text
-
+                - proposal = order.proposal_by_profile_id(@current_profile.id)
+                = link_to 'Отправить', add_proposal_profile_employee_cv_path(@employee_cv_id, proposal_id: proposal.id), method: :put, remote: true
 / tr id="req_order_#{order.id}"
 /   td.clickable-row data-href=order_path(order)
 /     p.h6 #{order.title}

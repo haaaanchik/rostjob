@@ -66,6 +66,7 @@ Rails.application.routes.draw do
 
   resource :profile, except: %i[show destroy]
   namespace :profile do
+    resources :favorites, only: %i[index]
     resources :proposal_employees, only: :show do
       member do
         put :to_disput
@@ -137,6 +138,8 @@ Rails.application.routes.draw do
   resources :orders, only: %i[index show] do
     member do
       put :manage_fav
+      put :add_to_favorites
+      put :remove_from_favorites
     end
   end
   resources :recruiters, only: %i[index show]

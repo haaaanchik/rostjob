@@ -2,17 +2,8 @@ class OrdersController < ApplicationController
   before_action :order, except: :index
 
   def index
-    @fav = params[:favorable_id]
-    @employee_cv_id = params[:employee_cv_id]
-    if @fav
-      list = Favorite.includes(:favorable).where user_id: params[:favorable_id],
-                                                 favorable_type: 'Order'
-      @orders = list.map(&:favorable) if list
-    else
-      @order_search_form = OrderSearchForm.new(order_search_form_params)
-      @orders = @order_search_form.submit
-    end
-
+    @order_search_form = OrderSearchForm.new(order_search_form_params)
+    @orders = @order_search_form.submit
   end
 
   def show
@@ -37,10 +28,18 @@ class OrdersController < ApplicationController
     end
   end
 
+  def add_to_favorites
+    Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
+  end
+
+  def remove_from_favorites
+    Cmd::Order::RemoveFromFavorites.call(order: order, profile: current_profile)
+  end
+
   private
 
   def order
-    @order = Order.includes(:favorites).find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def order_search_form_params

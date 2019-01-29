@@ -8,6 +8,7 @@ class Order < ApplicationRecord
   has_many :comments
   has_many :favorites, as: :favorable
   has_many :proposal_employees
+  has_many :order_profiles
 
   validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}

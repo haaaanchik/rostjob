@@ -1,14 +1,11 @@
 - search_form_id = 'order_search_form'
-/ .card
-  .card-body
-    / h2 = @fav ? 'Мои заявки' : 'Поиск заявок'
 .row
   .col-2
     .card
       .card-body
-        = render partial: 'search_filters', locals: { form_id: search_form_id } unless params[:favorable_id]
+        = render partial: 'search_filters', locals: { form_id: search_form_id }
   .col-10
     .card
       .card-body
-        = render partial: 'search_form', locals: { form_id: search_form_id } unless params[:favorable_id]
+        = render partial: 'search_form', locals: { form_id: search_form_id }
     = render @orders if @orders

@@ -11,6 +11,8 @@ class Profile < ApplicationRecord
   has_many :tax_calculations
   has_many :proposal_employees
   has_many :employee_cvs
+  has_many :order_profiles
+  has_many :favorites, through: :order_profiles, source: :order
 
   accepts_nested_attributes_for :company
 

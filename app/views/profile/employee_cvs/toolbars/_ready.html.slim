@@ -6,7 +6,7 @@
   data: { type: :script }, title: 'Редактировать анкету', remote: true do
   i.fa.fa-edit.fa-2x.ml-2.text-info
 
-= link_to orders_path(favorable_id: current_user, employee_cv_id: employee_cv),
+= link_to profile_favorites_path(employee_cv_id: employee_cv),
  data: { type: :script }, title: 'Отправить анкету', remote: true do
  i.fa.fa-check.fa-2x.ml-2
 
