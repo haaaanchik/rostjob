@@ -7,9 +7,8 @@
       .col
         = order.profile.company.name.delete('\n')
       .col
-        i.fab.fa-gripfire.fa-2x.text-info
-        i.fab.fa-gripfire.fa-2x.text-warning
-        i.fab.fa-gripfire.fa-2x.text-danger
+        - urgency = :normal
+        = render partial: 'urgency', locals: { urgency: urgency }
       .col
         = order.contractor_price
         i.fa.fa-ruble-sign.ml-1
@@ -19,26 +18,31 @@
                         favorable_id: params[:favorable_id]), remote: true,
                 method: :put, class: 'text-info'
 
-    .row
-      .col
-        ul
-          li
-            = order.title
-          li
-            = order.city
-          li
-            = order.schedule
-      .col
-        ul
-          li
-            | Ищем #{order.number_of_employees} человек
-          li
-            = order.salary_from
-          li
-            = link_to 'Подробнее', order_path(order)
-    .row
-      .col
-        = Nokogiri::HTML.parse(order.other_info['remark']).text
+    .card.mt-2
+      .card-body
+        .row
+          .col
+            ul
+              li
+                = order.title
+              li
+                = order.city
+              li
+                = order.schedule
+          .col
+            ul
+              li
+                | Ищем #{order.number_of_employees} человек
+              li
+                = order.salary_from
+              li
+                = link_to 'Подробнее', order_path(order)
+    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+      .card.mt-2
+        .card-body
+          .row
+            .col
+              = Nokogiri::HTML.parse(order.other_info['remark']).text
 
 / tr id="req_order_#{order.id}"
 /   td.clickable-row data-href=order_path(order)
