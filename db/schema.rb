@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_191935) do
+ActiveRecord::Schema.define(version: 2019_01_30_222608) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -222,6 +222,9 @@ ActiveRecord::Schema.define(version: 2019_01_29_191935) do
     t.string "district"
     t.text "schedule"
     t.string "work_period"
+    t.string "urgency"
+    t.integer "base_customer_price"
+    t.integer "base_contractor_price"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 

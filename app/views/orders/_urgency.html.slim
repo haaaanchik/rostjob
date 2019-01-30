@@ -1,3 +1,4 @@
-i.fab.fa-gripfire.fa-2x class=(urgency == :low ? 'text-info' : 'grey-text') title='Срочность низкая'
-i.fab.fa-gripfire.fa-2x class=(urgency == :normal ? 'text-warning' : 'grey-text') title='Срочность обычная'
-i.fab.fa-gripfire.fa-2x class=(urgency == :high ? 'text-danger' : 'grey-text') title='Срочность высокая'
+.urgency title=order.urgency_title
+  i.fab.fa-gripfire.fa-2x class=order.urgency_low_class
+  i.fab.fa-gripfire.fa-2x class=order.urgency_middle_class
+  i.fab.fa-gripfire.fa-2x class=order.urgency_high_class

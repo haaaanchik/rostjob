@@ -14,7 +14,9 @@ class Position < ApplicationRecord
   end
 
   def auto_search_text
-    Hash[id: id, label: title, duties: duties, price: price_group.customer_price]
+    Hash[id: id, label: title, duties: duties,
+         price: price_group.customer_price,
+         contractor_price: price_group.contractor_price]
   end
 
   def search

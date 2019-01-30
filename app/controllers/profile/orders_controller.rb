@@ -97,11 +97,23 @@ class Profile::OrdersController < ApplicationController
   private
 
   def params_with_price
+    order_params[:base_customer_price] = position&.price_group&.customer_price
+    order_params[:base_contractor_price] = position&.price_group&.contractor_price
     order_params[:title] = position&.title
-    order_params[:customer_price] = position&.price_group&.customer_price
-    order_params[:contractor_price] = position&.price_group&.contractor_price
-    order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
-    order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i if position
+
+    if order_params[:contractor_price].to_i == position.price_group.contractor_price
+      order_params[:customer_price] = position&.price_group&.customer_price
+      order_params[:contractor_price] = position&.price_group&.contractor_price
+      order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
+      order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i if position
+    else
+      factor = order_params[:contractor_price].to_d / position.price_group.contractor_price
+      new_customer_price = (position.price_group.customer_price * factor).ceil
+
+      order_params[:customer_price] = new_customer_price
+      order_params[:customer_total] = order_params[:customer_price].to_i * order_params[:number_of_employees].to_i if position
+      order_params[:contractor_total] = order_params[:contractor_price].to_i * order_params[:number_of_employees].to_i if position
+    end
     order_params
   end
 
@@ -111,12 +123,12 @@ class Profile::OrdersController < ApplicationController
 
   def order_params
     @order_params ||= params.require(:order)
-                        .permit(:title, :specialization, :city, :salary_from, :position_id,
-                                :salary_to, :description, :payment_type,
-                                :number_of_recruiters, :enterpreneurs_only,
-                                :skill, :accepted, :district, :experience,
-                                :visibility, :state, :number_of_employees,
-                                :schedule, :work_period, other_info: {})
+                            .permit(:title, :specialization, :city, :salary_from, :position_id,
+                                    :salary_to, :description, :payment_type, :contractor_price,
+                                    :number_of_recruiters, :enterpreneurs_only,
+                                    :skill, :accepted, :district, :experience,
+                                    :visibility, :state, :number_of_employees,
+                                    :schedule, :work_period, other_info: {})
   end
 
   def balance

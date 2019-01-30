@@ -21,11 +21,19 @@
         th Цена
         th Сумма
       tr
-        td#position_title.align-middle #{order.title}
-        td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}"
+        td#position_title.align-middle rowspan=3
+          #{order.title}
+        td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}" rowspan=3
           = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control"
         td#price.align-middle.text-right style="width: 10%" #{order.customer_price}
         td#total.align-middle.text-right style="width: 10%" #{order.total}
+      tr
+        td colspan=2
+          |В т.ч. исполнителю:
+      tr
+        td#contractor_price.align-middle.text-right
+          = f.text_field :contractor_price, class: 'form-control'
+        td#contractor_total.align-middle.text-right #{order.contractor_total}
   .row
     .col
       = f.label :specialization, 'Специализация'

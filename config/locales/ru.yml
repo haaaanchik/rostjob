@@ -30,6 +30,12 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 ru:
+  enumerize:
+    order:
+      urgency:
+        low: "низкая"
+        middle: "обычная"
+        high: "высокая"
   user_action_log:
     role:
       customer: 'Заказчик'

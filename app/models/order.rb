@@ -1,5 +1,8 @@
 class Order < ApplicationRecord
   include AASM
+  extend Enumerize
+
+  enumerize :urgency, in: %i[low middle high], scope: true
 
   belongs_to :profile
   has_many :invites

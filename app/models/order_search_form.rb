@@ -24,15 +24,15 @@ class OrderSearchForm
     if valid?
       sort_by_sym = "sort_by_#{sort_by}".to_sym
       filter_by_sym = "filter_by_#{filter_by}".to_sym
-      unless query.empty?
-        Order.published.send(:by_query, query)
-          .send(sort_by_sym).send(filter_by_sym)
-      else
+      if query.empty?
         Order.published.send(sort_by_sym)
-          .send(filter_by_sym)
+             .send(filter_by_sym).decorate
+      else
+        Order.published.send(:by_query, query)
+             .send(sort_by_sym).send(filter_by_sym).decorate
       end
     else
-      Order.includes(:favorites).published
+      Order.published.decorate
     end
   end
 
