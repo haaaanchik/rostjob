@@ -7,8 +7,7 @@
       .col
         = order.profile.company.name.delete('\n')
       .col
-        - urgency = :normal
-        = render partial: 'orders/urgency', locals: { urgency: urgency }
+        = render partial: 'orders/urgency', locals: { order: order }
       .col
         = order.contractor_price
         i.fa.fa-ruble-sign.ml-1
