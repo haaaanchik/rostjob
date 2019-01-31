@@ -7,18 +7,18 @@
       .col
         = order.profile.company.name.delete('\n')
       .col
-        - urgency = :normal
         = render partial: 'orders/urgency', locals: { order: order }
       .col
         = order.contractor_price
         i.fa.fa-ruble-sign.ml-1
       .col
-        - if order.order_profiles.empty?
-          = link_to add_to_favorites_order_path(order), method: :put, remote: true do
-            i.fa.fa-star.text-warning
-        - else
-          = link_to remove_from_favorites_order_path(order), method: :put, remote: true do
-            i.fa.fa-star.text-info
+        - unless @current_profile.profile_type == 'customer'
+          - if order.order_profiles.empty?
+            = link_to add_to_favorites_order_path(order), method: :put, remote: true do
+              i.fa.fa-star.text-warning
+          - else
+            = link_to remove_from_favorites_order_path(order), method: :put, remote: true do
+              i.fa.fa-star.text-info
 
 
     .card.mt-2
