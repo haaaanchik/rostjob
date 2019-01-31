@@ -65,7 +65,7 @@
                 class: 'nav-link candidates-menu-button',
                 data: { toggle: 'pill' }, remote: true
       #order_candidates
-        = render partial: 'profile/orders/candidates/index' , locals: { items: ps }
+        = render partial: 'profile/orders/candidates/index' , locals: { order: order }
 
 / = render partial: 'hired_candidate', collection: order.selected_candidates
 / .card.border-light.mt-2

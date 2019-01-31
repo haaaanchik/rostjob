@@ -11,6 +11,7 @@ class Order < ApplicationRecord
   has_many :comments
   has_many :favorites, as: :favorable
   has_many :proposal_employees
+  has_many :profiles, -> { distinct }, through: :proposal_employees
   has_many :order_profiles
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,

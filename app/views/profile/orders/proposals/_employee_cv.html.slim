@@ -1,16 +1,16 @@
 - employee_cv = proposed.employee_cv
 tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data-cvs-pr="#{proposed.id if proposed}"
+  td
+    - filename = proposed.state
+    = render partial: "profile/orders/proposals/toolbars/#{filename}.html.slim", locals: { proposed: proposed }
   td #{employee_cv.name}
   td = employee_cv.phone_number
-  td
-    - if employee_cv.file
-      = link_to employee_cv.file.url, target: '_blank' do
-        i.far.fa-file-alt.fa-2x
-    - else
-      | Файл не выбран
-  td
+  / td
+  /   - if employee_cv.file
+  /     = link_to employee_cv.file.url, target: '_blank' do
+  /       i.far.fa-file-alt.fa-2x
+  /   - else
+  /     | Файл не выбран
     / - if %w[hired denied].include? proposed.state
     /   span.badge.badge-primary = t("employee_cv.state.#{proposed.state}")
     / - else
-    - filename = proposed.state
-    = render partial: "profile/orders/proposals/toolbars/#{filename}.html.slim", locals: { proposed: proposed }

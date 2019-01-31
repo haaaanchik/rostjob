@@ -79,4 +79,8 @@ class Profile < ApplicationRecord
     return if private_person? && contractor?
     errors.add(:base, 'private person can only be a contractor')
   end
+
+  def sent_proposal_employees(order_id)
+    proposal_employees.where(order_id: order_id)
+  end
 end
