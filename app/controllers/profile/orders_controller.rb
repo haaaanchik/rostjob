@@ -97,22 +97,24 @@ class Profile::OrdersController < ApplicationController
   private
 
   def params_with_price
-    order_params[:base_customer_price] = position&.price_group&.customer_price
-    order_params[:base_contractor_price] = position&.price_group&.contractor_price
-    order_params[:title] = position&.title
+    if position
+      order_params[:base_customer_price] = position&.price_group&.customer_price
+      order_params[:base_contractor_price] = position&.price_group&.contractor_price
+      order_params[:title] = position&.title
 
-    if order_params[:contractor_price].to_i == position.price_group.contractor_price
-      order_params[:customer_price] = position&.price_group&.customer_price
-      order_params[:contractor_price] = position&.price_group&.contractor_price
-      order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i if position
-      order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i if position
-    else
-      factor = order_params[:contractor_price].to_d / position.price_group.contractor_price
-      new_customer_price = (position.price_group.customer_price * factor).ceil
+      if order_params[:contractor_price].to_i == position.price_group.contractor_price
+        order_params[:customer_price] = position&.price_group&.customer_price
+        order_params[:contractor_price] = position&.price_group&.contractor_price
+        order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i
+        order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i
+      else
+        factor = order_params[:contractor_price].to_d / position.price_group.contractor_price
+        new_customer_price = (position.price_group.customer_price * factor).ceil
 
-      order_params[:customer_price] = new_customer_price
-      order_params[:customer_total] = order_params[:customer_price].to_i * order_params[:number_of_employees].to_i if position
-      order_params[:contractor_total] = order_params[:contractor_price].to_i * order_params[:number_of_employees].to_i if position
+        order_params[:customer_price] = new_customer_price
+        order_params[:customer_total] = order_params[:customer_price].to_i * order_params[:number_of_employees].to_i
+        order_params[:contractor_total] = order_params[:contractor_price].to_i * order_params[:number_of_employees].to_i
+      end
     end
     order_params
   end

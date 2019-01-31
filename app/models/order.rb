@@ -83,7 +83,14 @@ class Order < ApplicationRecord
       customer_total: 0,
       contractor_total: 0,
       warranty_period: 10,
-      other_info: {}
+      other_info: {
+        age_from: nil,
+        age_to: nil,
+        remark: nil,
+        sex: nil,
+        terms: nil,
+        related_profession: nil
+      }
     }
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)

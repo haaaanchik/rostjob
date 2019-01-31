@@ -39,17 +39,21 @@
       = f.text_field :specialization, class: "form-control",
               placeholder: 'Начните набирать название специализации',
               data: {'auto-url' => '/search_specialization', 'auto-add-text' => true, 'autocomplete-on' => 'order_specialization'}
+    .invalid-feedback
     .col
       = f.label :skill, 'Квалификация'
       = f.text_field :skill, class: "form-control"
+      .invalid-feedback
   .row
     .col
       = f.label :city, 'Город'
       = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
               data: {'auto-url' => '/search_city', 'auto-add-text' => true, 'autocomplete-on' => 'order_city'}
+      .invalid-feedback
     .col
       = f.label :district, 'Район'
       = f.text_field :district, class: "form-control"
+      .invalid-feedback
   .row
     .col
       = f.label :salary_from, 'Зарплата от:'
@@ -62,6 +66,7 @@
   .form-group
     = f.label :experience, 'Наличие документа, подтверждающего стаж работы'
     = f.text_field :experience, class: 'form-control'
+    .invalid-feedback
   .form-group.mt-3
     = f.label :description, 'Виды выполняемых работ'
     = f.text_area :description, rows: 5, class: 'md-textarea form-control tinymce'
@@ -75,20 +80,20 @@
       = f.label :work_period, 'Период, на который требуются рабочие'
       = f.text_field :work_period, class: "form-control"
       .invalid-feedback
-  = f.fields_for :other_info, {} do |oi_f|
+  = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
     .row
       .col-4
         = oi_f.label :age_from, 'Возраст от'
-        = oi_f.text_field :age, class: "form-control"
+        = oi_f.text_field :age_from, class: "form-control"
       .col-4
         = oi_f.label :age_to, 'Возраст до'
-        = oi_f.text_field :age, class: "form-control"
+        = oi_f.text_field :age_to, class: "form-control"
       .col-4
         = oi_f.label :sex, 'Пол'
         = oi_f.text_field :sex, class: "form-control"
       .col-4
-        = oi_f.label :optional_specialization, 'Смежная профессия'
-        = oi_f.text_field :sex, class: "form-control"
+        = oi_f.label :related_profession, 'Смежная профессия'
+        = oi_f.text_field :related_profession, class: "form-control"
       .col-8
         = oi_f.label :terms, 'Предлагаемые условия'
         = oi_f.text_area :terms, class: "form-control"
