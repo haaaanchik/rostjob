@@ -21,11 +21,12 @@
         th Вознаграждение исполнителя
         th Стоимость заявки
       tr
+        - disabled = order.position_id ? false : true
         td#position_title.align-middle #{order.title}
         td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}"
-          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control"
+          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control", disabled: disabled
         td#contractor_price.align-middle.text-right style="width: 10%"
-          = f.text_field :contractor_price, class: 'form-control'
+          = f.text_field :contractor_price, class: 'form-control', disabled: disabled
         td#customer_total.align-middle.text-right style="width: 10%" #{order.customer_total}
   .row
     .col

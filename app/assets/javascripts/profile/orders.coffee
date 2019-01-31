@@ -86,6 +86,8 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
   $('#customer_price').html(customer_price)
   $('#customer_total').html(customer_total)
   $('#order_contractor_price').val(contractor_price)
+  $('#order_contractor_price').prop('disabled', false)
+  $('#order_number_of_employees').prop('disabled', false)
   $('#contractor_total').html(contractor_total)
 #  content = tinymce.get('order_description').getContent()
 #  if item.duties == null
