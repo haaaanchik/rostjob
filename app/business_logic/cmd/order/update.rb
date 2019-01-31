@@ -4,7 +4,8 @@ module Cmd
       include Interactor
 
       def call
-        context.fail! unless order.update(params)
+        result = Cmd::Order::CalculateUrgency.call(params: params)
+        context.fail! unless order.update(params.merge(urgency: result.urgency))
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

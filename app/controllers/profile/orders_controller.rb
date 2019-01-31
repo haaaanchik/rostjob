@@ -31,7 +31,7 @@ class Profile::OrdersController < ApplicationController
     if result.success?
       redirect_to profile_order_path(result.order)
     else
-      render json: { validate: true, data: errors_data(context.order) }
+      render json: { validate: true, data: errors_data(result.order) }
     end
   end
 

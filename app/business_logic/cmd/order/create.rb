@@ -4,7 +4,8 @@ module Cmd
       include Interactor
 
       def call
-        @order = profile.orders.create(params)
+        result = Cmd::Order::CalculateUrgency.call(params: params)
+        @order = profile.orders.create(params.merge(urgency: result.urgency))
         @order.errors.add(:position_search, 'Выберите профессию') unless position
         context.fail! unless @order.persisted?
         context.order = @order

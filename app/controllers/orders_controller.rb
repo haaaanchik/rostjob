@@ -12,22 +12,6 @@ class OrdersController < ApplicationController
     render locals: {order: @order, new_proposal: new_proposal}
   end
 
-  def manage_fav
-    favs = @order.favorites
-
-    if params[:tag] == 'star'
-      favs.create user_id: current_user.id
-      cr = @order.proposals.create accepted: true,
-                                  profile_id: current_profile.id
-      cr.messages.create! text: 'СООБЩЕНИЕ ДЛЯ ЗАКАЗЧИКА',
-                          sender_id: current_profile.id
-    else
-      fv = Favorite.find_by id: params[:fav]
-      Proposal.destroy params[:proposal_id]
-      favs.destroy fv
-    end
-  end
-
   def add_to_favorites
     Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
   end
@@ -39,7 +23,7 @@ class OrdersController < ApplicationController
   private
 
   def order
-    @order = Order.find(params[:id])
+    @order = Order.find(params[:id]).decorate
   end
 
   def order_search_form_params

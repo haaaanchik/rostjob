@@ -9,7 +9,6 @@ namespace :best_hr do
       Favorite.find_by(favorable_id: 17)&.destroy
       Favorite.find_by(favorable_id: 18)&.destroy
       Favorite.all.each do |f|
-        binding.irb
         OrderProfile.create! order_id: f.favorable_id, profile: f.user.profile
       end
     end

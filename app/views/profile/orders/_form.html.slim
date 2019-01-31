@@ -11,7 +11,7 @@
       type="button" title="Добавить новую профессию" data-order-position="new")
         i.fa.fa-plus
   .form-group
-    table.table.table-bordered
+    table#position_table.table.table-bordered data-base-customer-price=order.base_customer_price data-base-contractor-price=order.base_contractor_price data-customer-price=order.customer_price data-contractor-price=order.contractor_price data-customer-total=order.customer_total data-contractor-total=order.contractor_total
       tr.text-center
         th Профессия
         th
@@ -21,12 +21,11 @@
         th Цена
         th Сумма
       tr
-        td#position_title.align-middle rowspan=3
-          #{order.title}
+        td#position_title.align-middle rowspan=3 #{order.title}
         td#num_of_employees.align-middle style="width: 10%" data-price="#{order.customer_price}" rowspan=3
           = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control"
-        td#price.align-middle.text-right style="width: 10%" #{order.customer_price}
-        td#total.align-middle.text-right style="width: 10%" #{order.total}
+        td#customer_price.align-middle.text-right style="width: 10%" #{order.customer_price}
+        td#customer_total.align-middle.text-right style="width: 10%" #{order.customer_total}
       tr
         td colspan=2
           |В т.ч. исполнителю:

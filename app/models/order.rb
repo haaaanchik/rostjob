@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   include AASM
   extend Enumerize
 
-  enumerize :urgency, in: %i[low middle high], scope: true
+  enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
 
   belongs_to :profile
   has_many :invites
@@ -13,7 +13,7 @@ class Order < ApplicationRecord
   has_many :proposal_employees
   has_many :order_profiles
 
-  validates :customer_price, :contractor_price, :total, :customer_total, :contractor_total,
+  validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :number_of_employees, presence: true, numericality: {only_integer: true}
   validates :title, :city, :experience, :description,
@@ -74,24 +74,23 @@ class Order < ApplicationRecord
     end
   end
 
+  def initialize(attrs = nil)
+    defaults = {
+      base_customer_price: 0,
+      base_contractor_price: 0,
+      customer_price: 0,
+      contractor_price: 0,
+      customer_total: 0,
+      contractor_total: 0,
+      warranty_period: 10,
+      other_info: {}
+    }
+    attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
+    super(attrs_with_defaults)
+  end
+
   def can_be_paid?
     balance.amount >= customer_total
-  end
-
-  def customer_price
-    self[:customer_price] || 0
-  end
-
-  def contractor_price
-    self[:contractor_price] || 0
-  end
-
-  def total
-    self[:total] || 0
-  end
-
-  def warranty_period
-    self[:warranty_period] || 10
   end
 
   def calculate_total
@@ -99,7 +98,7 @@ class Order < ApplicationRecord
   end
 
   def selected_candidates
-    candidates.select {|c| c.hired? || c.disputed?}
+    candidates.select { |c| c.hired? || c.disputed? }
   end
 
   def to_draft

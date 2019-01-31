@@ -7,6 +7,6 @@ class Profile::FavoritesController < ApplicationController
   private
 
   def favorites
-    @favorites ||= current_profile.favorites
+    @favorites ||= current_profile.favorites.decorate
   end
 end

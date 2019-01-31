@@ -21,19 +21,20 @@ $ ->
 
 $(document).on('change', '#order_number_of_employees', (event) ->
   price = $(this).parent().data('price')
-  contractor_price = $(this).parent().data('contractor_price')
+  customer_price = $('#position_table').data('customer-price')
+  contractor_price = $('#position_table').data('contractor-price')
   quantity = $(this).val()
-  total = quantity * price
+  customer_total = quantity * customer_price
   contractor_total = quantity * contractor_price
-  $('#price').html(price)
-  $('#total').html(total)
+  $('#customer_price').html(customer_price)
+  $('#customer_total').html(customer_total)
   $('#order_contractor_price').val(contractor_price)
   $('#contractor_total').html(contractor_total)
 )
 
 $(document).on('change', '#order_contractor_price', (event) ->
-  base_customer_price = $('#num_of_employees').data('base_customer_price')
-  base_contractor_price = $('#num_of_employees').data('base_contractor_price')
+  base_customer_price = $('#position_table').data('base-customer-price')
+  base_contractor_price = $('#position_table').data('base-contractor-price')
   quantity = $('#order_number_of_employees').val()
   contractor_price = $(this).val()
   customer_price = base_customer_price
@@ -45,13 +46,13 @@ $(document).on('change', '#order_contractor_price', (event) ->
     console.log factor, customer_price
 
 
-  $('#num_of_employees').data('price', customer_price)
-  $('#num_of_employees').data('contractor_price', contractor_price)
+  $('#position_table').data('customer-price', customer_price)
+  $('#position_table').data('contractor-price', contractor_price)
 
-  total = quantity * customer_price
+  customer_total = quantity * customer_price
   contractor_total = quantity * contractor_price
-  $('#price').html(customer_price)
-  $('#total').html(total)
+  $('#customer_price').html(customer_price)
+  $('#customer_total').html(customer_total)
   $('#order_contractor_price').val(contractor_price)
   $('#contractor_total').html(contractor_total)
 )
@@ -71,19 +72,19 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
 )
 
 @apply_position = (item) ->
-  price = item.price
+  customer_price = item.price
   contractor_price = item.contractor_price
-  quantity = $('#num_of_employees').find('input').val()
-  total = quantity * price
+  quantity = $('#order_number_of_employees').val()
+  customer_total = quantity * customer_price
   contractor_total = quantity * contractor_price
   $('#order_position_id').val(item.id)
   $('#position_title').html(item.label)
-  $('#num_of_employees').data('price', price)
-  $('#num_of_employees').data('contractor_price', contractor_price)
-  $('#num_of_employees').data('base_customer_price', price)
-  $('#num_of_employees').data('base_contractor_price', contractor_price)
-  $('#price').html(price)
-  $('#total').html(total)
+  $('#position_table').data('customer-price', customer_price)
+  $('#position_table').data('contractor-price', contractor_price)
+  $('#position_table').data('base-customer-price', customer_price)
+  $('#position_table').data('base-contractor-price', contractor_price)
+  $('#customer_price').html(customer_price)
+  $('#customer_total').html(customer_total)
   $('#order_contractor_price').val(contractor_price)
   $('#contractor_total').html(contractor_total)
 #  content = tinymce.get('order_description').getContent()
