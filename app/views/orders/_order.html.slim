@@ -13,7 +13,7 @@
         i.fa.fa-ruble-sign.ml-1
       .col
         - unless @current_profile.profile_type == 'customer'
-          - if @current_profile.favorites.empty?
+          - if !@current_profile.favorites.find_by(id: order.id)
             = link_to add_to_favorites_order_path(order), method: :put, remote: true do
               i.fa.fa-star.text-warning
           - else

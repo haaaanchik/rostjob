@@ -1,20 +1,22 @@
-.card.mt-3
-  .card-body
-    .row
-      .col
-        = image_tag('/img/no-avatar.jpg', size: 80)
-      .col
-        = contractor_card.company.name.delete('\n')
-      .col
-        |10/10
-      .col
-        |Заблокировать
-    .card.mt-2
-      .card-body
-        table.table
-          tr
-            th Действия
-            th ФИО
-            th Тел
-          - contractor_card.sent_proposal_employees(order.id).each do |candidate|
-            = render partial: 'profile/orders/proposals/employee_cv', object: candidate, as: :proposed
+- candidates = contractor_card.sent_proposal_employees(order.id).where.not(state: 'revoked')
+- if candidates.any?
+  .card.mt-3
+    .card-body
+      .row
+        .col
+          = image_tag('/img/no-avatar.jpg', size: 80)
+        .col
+          = contractor_card.company.name.delete('\n')
+        .col
+          |10/10
+        .col
+          |Заблокировать
+      .card.mt-2
+        .card-body
+          table.table
+            tr
+              th Действия
+              th ФИО
+              th Тел
+            - candidates.each do |candidate|
+              = render partial: 'profile/orders/proposals/employee_cv', object: candidate, as: :proposed
