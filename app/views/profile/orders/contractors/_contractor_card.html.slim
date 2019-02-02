@@ -1,4 +1,4 @@
-- candidates = contractor_card.sent_proposal_employees(order.id).where.not(state: 'revoked')
+- candidates = contractor_card.sent_proposal_employees
 - if candidates.any?
   .card.mt-3
     .card-body
@@ -19,4 +19,5 @@
               th ФИО
               th Тел
             - candidates.each do |candidate|
-              = render partial: 'profile/orders/proposals/employee_cv', object: candidate, as: :proposed
+              = render partial: 'profile/orders/proposals/employee_cv',
+                       object: candidate, as: :proposed

@@ -15,5 +15,5 @@ $(document).on('show.bs.modal', '#fireCandidateModal', (event) ->
 
 $(document).on('ajax:success', '.candidates-menu-button', (event) ->
   result = event.detail[2].response
-  $('#order_candidates').replaceWith(result)
+  $('#order_candidates').html(result)
 )

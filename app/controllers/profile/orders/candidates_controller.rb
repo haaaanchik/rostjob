@@ -1,7 +1,6 @@
 class Profile::Orders::CandidatesController < ApplicationController
   def index
-    paginated_candidates
-    render partial: 'profile/orders/candidates/index', locals: { items: paginated_candidates }, layout: false
+    render partial: 'profile/orders/contractors/contractor_card', collection: contractors, layout: false
   end
 
   def show
@@ -50,6 +49,13 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   private
+
+  def contractors
+    @contractors ||= order.profiles.map do |profile|
+      profile.sent_proposal_employees = profile.sent_proposal_employees_by_order(order).where(state: term)
+      profile
+    end
+  end
 
   def candidate_params
     params.require(:candidate).permit(:id, :hiring_date, :firing_date, :proposal_id)

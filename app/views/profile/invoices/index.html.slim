@@ -16,7 +16,7 @@
             th Описание операции
             th Приход
             th Расход
-          = render @current_profile.balance.bill_transactions.order(id: :desc).last(10)
+          = render @current_profile.balance.bill_transactions.order(id: :desc).first(10)
   br
   .card.z-depth-2
     .card-body

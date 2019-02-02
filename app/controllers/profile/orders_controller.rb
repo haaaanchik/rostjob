@@ -5,6 +5,7 @@ class Profile::OrdersController < ApplicationController
 
   def show
     order
+    contractors
 
     order.proposal_employees.map(&:mark_as_read)
   end
@@ -95,6 +96,13 @@ class Profile::OrdersController < ApplicationController
   end
 
   private
+
+  def contractors
+    @contractors ||= order.profiles.map do |profile|
+      profile.sent_proposal_employees = profile.sent_proposal_employees_by_order(order).inbox
+      profile
+    end
+  end
 
   def params_with_price
     if position

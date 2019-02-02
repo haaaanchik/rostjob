@@ -14,6 +14,8 @@ class Profile < ApplicationRecord
   has_many :order_profiles
   has_many :favorites, through: :order_profiles, source: :order
 
+  attr_accessor :sent_proposal_employees
+
   accepts_nested_attributes_for :company
 
   validation_flag :sm_registration
@@ -80,7 +82,7 @@ class Profile < ApplicationRecord
     errors.add(:base, 'private person can only be a contractor')
   end
 
-  def sent_proposal_employees(order_id)
-    proposal_employees.where(order_id: order_id)
+  def sent_proposal_employees_by_order(order)
+    proposal_employees.where(order_id: order).where.not(state: 'revoked')
   end
 end
