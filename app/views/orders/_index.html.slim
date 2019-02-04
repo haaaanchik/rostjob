@@ -1,16 +1,1 @@
-.modal.fade#formModalMyOrders tabindex="-1" role="dialog" aria-labelledby="formModalMyOrdersLabel" aria-hidden="true"
-  .modal-dialog.modal-lg role="document"
-    .modal-content
-      .modal-header
-        h4.modal-title#formModalMyOrdersLabel Мои заявки
-        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          span aria-hidden="true" &times;
-      .modal-body
-        table.table.table-hover
-          tr
-            th.col-1.text-center №
-            th.col.text-center Заявка
-            th.col.text-center Действия
-          = render partial: 'short_order', collection: @orders
-      .modal-footer
-
+= render partial: 'order', collection: @orders

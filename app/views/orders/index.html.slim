@@ -8,4 +8,5 @@
     .card
       .card-body
         = render partial: 'search_form', locals: { form_id: search_form_id }
-    = render @orders if @orders
+    #order_search_results
+      = render @orders if @orders

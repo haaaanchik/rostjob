@@ -3,17 +3,20 @@ class OrderSearchForm
   include ActiveModel::Validations
 
   attr_accessor :query, :sort_by, :filter_by
-  attr_reader :sort_by_list, :filter_by_list
 
   validates :sort_by, inclusion: { in: %w[date_asc date_desc reward_asc reward_desc] }
   validates :filter_by, inclusion: { in: %w[day 3day week all_time] }
 
-  def initialize(params)
-    if params
-      @query, @sort_by, @filter_by = params[:query], params[:sort_by], params[:filter_by]
-    else
-      @query, @sort_by, @filter_by = '', 'date_desc', 'all_time'
-    end
+  def initialize(attrs = {})
+    attrs ||= {}
+    defaults = {
+      query: '',
+      sort_by: 'date_desc',
+      filter_by: 'all_time'
+    }
+
+    attrs_with_defaults = defaults.merge(attrs)
+    attrs_with_defaults.each { |k, v| instance_variable_set("@#{k}", v) }
   end
 
   def persisted?
@@ -25,11 +28,9 @@ class OrderSearchForm
       sort_by_sym = "sort_by_#{sort_by}".to_sym
       filter_by_sym = "filter_by_#{filter_by}".to_sym
       if query.empty?
-        Order.published.send(sort_by_sym)
-             .send(filter_by_sym).decorate
+        Order.published.send(sort_by_sym).send(filter_by_sym).decorate
       else
-        Order.published.send(:by_query, query)
-             .send(sort_by_sym).send(filter_by_sym).decorate
+        Order.published.send(:by_query, query).send(sort_by_sym).send(filter_by_sym).decorate
       end
     else
       Order.published.decorate
