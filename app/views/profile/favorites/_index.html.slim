@@ -3,9 +3,12 @@
     .modal-content
       .modal-header
         h4.modal-title#formModalMyOrdersLabel Мои заявки
+        = render partial: 'search_form'
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" &times;
       .modal-body
+        #favorites
           = render partial: 'order', collection: @favorites
+        #order_search_results
       .modal-footer
 
