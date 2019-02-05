@@ -1,6 +1,16 @@
 = form_with  model: @order_search_form, url: orders_path, method: :get,
   skip_enforcing_utf8: true, id: 'order_search_in_favorites_form' do |f|
   .form-group.position-relative
-    = f.text_field :query, class: "form-control search-in-favrites", placeholder:"Пример: подбор кассиров", aria_label: "Query", id: 'order_search_in_favorites'
+    = f.text_field :query, class: "form-control", placeholder:"Поиск по всем заявкам", aria_label: "Query", id: 'order_search_in_favorites'
     span.form-clear.d-none
       i.fas.fa-times
+javascript:
+  $('#order_search_in_favorites_form').on('submit', function(event) {
+    event_source = $(event.originalEvent.explicitOriginalTarget)
+    val = event_source.val();
+    if (val.length == 0) {
+      $('#orders_search_result').empty();
+      event.preventDefault();
+      return false;
+    }
+  });
