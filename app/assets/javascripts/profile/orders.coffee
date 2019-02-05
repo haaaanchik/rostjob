@@ -19,6 +19,12 @@ $ ->
 # modal.find('.modal-body input').val(recipient)
   )
 
+$('#order_form').on('submit', (event) ->
+  event_source = $(event.originalEvent.explicitOriginalTarget)
+  type = event_source.attr('type')
+  if type != 'submit'
+    return false
+)
 $(document).on('change', '#order_number_of_employees', (event) ->
   price = $(this).parent().data('price')
   customer_price = $('#position_table').data('customer-price')

@@ -1,4 +1,4 @@
-= form_with model: [:profile, order] do |f|
+= form_with model: [:profile, order], id: 'order_form' do |f|
   = f.hidden_field :position_id
   .input-group.mb-3
     = f.text_field :position_search, class: "form-control",
