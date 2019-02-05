@@ -10,7 +10,7 @@ class WelcomeController < ApplicationController
 
   def user_action_log_records
     @user_action_log_records ||= UserActionLog.where(receiver_id: current_user.id)
-                                              .order(id: :asc)
+                                              .order(id: :desc)
                                               .page(params[:page])
                                               .decorate
   end
