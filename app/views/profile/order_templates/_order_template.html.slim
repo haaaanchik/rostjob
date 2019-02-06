@@ -1,0 +1,33 @@
+.card.mt-3
+  .card-body
+    .row
+      .col
+        |Шаблон №1
+      .col
+        |Статус шаблона
+      .col.text-right
+        = link_to '#' do
+          i.fa.fa-edit.fa-2x.ml-1.mr-1.text-black-50
+        = link_to '#' do
+          i.fa.fa-copy.fa-2x.ml-1.mr-1.text-black-50
+        = link_to '#' do
+          i.fa.fa-trash.fa-2x.ml-1.mr-1.text-black-50
+    .card.mt-3
+      .card-body
+        .row
+          .col-9
+            b Профессия:
+            br
+            |Слесарь механо-сборочных работ
+          .col-3
+            = label :order_template, 'Количество сотрудников:'
+            = number_field :order_template, :number_of_employees, in: 1..1000, step: 1, class: "form-control"
+            b.mt-2 Итого: 10 000
+            i.fas.fa-ruble-sign.ml-1.mt-2
+        .row
+          .col-9
+            b Коментарий:
+            br
+            |Комменнтарий к заявке.
+          .col-3
+            = link_to 'Поиск персонала', '#', class: 'btn btn-indigo'
