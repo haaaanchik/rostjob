@@ -13,6 +13,7 @@ class Profile < ApplicationRecord
   has_many :employee_cvs
   has_many :order_profiles
   has_many :favorites, through: :order_profiles, source: :order
+  has_many :order_templates
 
   attr_accessor :sent_proposal_employees
 

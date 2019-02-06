@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_30_222608) do
+ActiveRecord::Schema.define(version: 2019_02_06_201719) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -67,13 +67,6 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.index ["title"], name: "index_cities_on_title"
   end
 
-  create_table "city_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_city_references_on_term"
-  end
-
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.bigint "order_id"
@@ -127,11 +120,11 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
   end
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "favorable_type"
-    t.bigint "favorable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "favorable_type"
+    t.bigint "favorable_id"
+    t.bigint "user_id"
     t.index ["favorable_type", "favorable_id"], name: "index_favorites_on_favorable_type_and_favorable_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
@@ -198,6 +191,37 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.index ["profile_id"], name: "index_order_profiles_on_profile_id"
   end
 
+  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
+    t.text "specialization"
+    t.string "city"
+    t.integer "salary_from"
+    t.integer "salary_to"
+    t.text "description"
+    t.integer "warranty_period"
+    t.string "state"
+    t.bigint "profile_id"
+    t.integer "number_of_employees"
+    t.decimal "customer_price", precision: 10, scale: 2
+    t.decimal "contractor_price", precision: 10, scale: 2
+    t.integer "position_id"
+    t.decimal "customer_total", precision: 10, scale: 2
+    t.decimal "contractor_total", precision: 10, scale: 2
+    t.json "other_info"
+    t.string "skill"
+    t.string "experience"
+    t.string "district"
+    t.text "schedule"
+    t.string "work_period"
+    t.string "urgency"
+    t.integer "base_customer_price"
+    t.integer "base_contractor_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_order_templates_on_profile_id"
+  end
+
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "specialization"
@@ -244,14 +268,6 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.index ["company_id"], name: "index_payment_orders_on_company_id"
   end
 
-  create_table "position_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.text "duties"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_position_references_on_term"
-  end
-
   create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "duties"
@@ -276,7 +292,6 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
-    t.text "description"
     t.string "city"
     t.string "rating"
     t.timestamp "last_seen"
@@ -285,6 +300,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.string "photo_content_type"
     t.integer "photo_file_size"
     t.datetime "photo_updated_at"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "legal_form"
@@ -312,11 +328,11 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
+    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accepted"
     t.index ["order_id"], name: "index_proposals_on_order_id"
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
@@ -345,13 +361,6 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
-  end
-
-  create_table "specialization_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_specialization_references_on_term"
   end
 
   create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -394,7 +403,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
     t.index ["company_id"], name: "index_tax_offices_on_company_id"
   end
 
-  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "receiver_id"
     t.integer "subject_id"
     t.string "subject_type"
@@ -447,6 +456,7 @@ ActiveRecord::Schema.define(version: 2019_01_30_222608) do
   add_foreign_key "messages", "proposals"
   add_foreign_key "order_profiles", "orders"
   add_foreign_key "order_profiles", "profiles"
+  add_foreign_key "order_templates", "profiles"
   add_foreign_key "orders", "profiles"
   add_foreign_key "payment_orders", "companies"
   add_foreign_key "positions", "price_groups"

@@ -8,6 +8,15 @@ $ ->
       $('.order-submit-button').addClass('disabled')
   )
 
+  $(document).on('click', 'label[for=order_template_accepted]', (event) ->
+    element = $('#order_template_accepted')
+    checked = element.prop('checked')
+    if checked == false
+      $('.order-template-submit-button').removeClass('disabled')
+    else
+      $('.order-template-submit-button').addClass('disabled')
+  )
+
   $('#executorModal').on('show.bs.modal', (event) ->
     target = $(event.relatedTarget)
     order_id = target.data('order_id')
@@ -76,6 +85,25 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
       data: data
     return
 )
+
+@apply_position2 = (item) ->
+  customer_price = item.price
+  contractor_price = item.contractor_price
+  quantity = $('#order_number_of_employees').val()
+  customer_total = quantity * customer_price
+  contractor_total = quantity * contractor_price
+  $('#order_template_position_id').val(item.id)
+  $('#position_title').html(item.label)
+  $('#position_table').data('customer-price', customer_price)
+  $('#position_table').data('contractor-price', contractor_price)
+  $('#position_table').data('base-customer-price', customer_price)
+  $('#position_table').data('base-contractor-price', contractor_price)
+  $('#customer_price').html(customer_price)
+  $('#customer_total').html(customer_total)
+  $('#order_contractor_price').val(contractor_price)
+  $('#order_contractor_price').prop('disabled', false)
+  $('#order_number_of_employees').prop('disabled', false)
+  $('#contractor_total').html(contractor_total)
 
 @apply_position = (item) ->
   customer_price = item.price

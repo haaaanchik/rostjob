@@ -1,25 +1,22 @@
 class Profile::OrderTemplatesController < ApplicationController
   def index
-    # orders
+    order_templates
   end
 
   def show
-    order
-    contractors
-
-    order.proposal_employees.map(&:mark_as_read)
+    order_template
   end
 
   def new
-    @order = Order.new(description: description)
+    @order_template = OrderTemplate.new
   end
 
   def edit
-    order
+    order_template
   end
 
   def create
-    result = Cmd::Order::Create.call(profile: current_profile, params: params_with_price, position: position)
+    result = Cmd::OrderTemplate::Create.call(profile: current_profile, params: params_with_price, position: position)
     if result.success?
       redirect_to profile_orders_path
     else
@@ -37,8 +34,8 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def destroy
-    order.destroy
-    redirect_to profile_orders_path
+    order_template.destroy
+    redirect_to profile_order_templates_path
   end
 
   def create_pre_publish
@@ -97,67 +94,47 @@ class Profile::OrderTemplatesController < ApplicationController
 
   private
 
-  def contractors
-    @contractors ||= order.profiles.map do |profile|
-      profile.sent_proposal_employees = profile.sent_proposal_employees_by_order(order).inbox
-      profile
-    end
-  end
-
   def params_with_price
     if position
-      order_params[:base_customer_price] = position&.price_group&.customer_price
-      order_params[:base_contractor_price] = position&.price_group&.contractor_price
-      order_params[:title] = position&.title
+      order_template_params[:base_customer_price] = position&.price_group&.customer_price
+      order_template_params[:base_contractor_price] = position&.price_group&.contractor_price
+      order_template_params[:title] = position&.title
 
-      if order_params[:contractor_price].to_i == position.price_group.contractor_price
-        order_params[:customer_price] = position&.price_group&.customer_price
-        order_params[:contractor_price] = position&.price_group&.contractor_price
-        order_params[:customer_total] = position.price_group.customer_price * order_params[:number_of_employees].to_i
-        order_params[:contractor_total] = position.price_group.contractor_price * order_params[:number_of_employees].to_i
+      if order_template_params[:contractor_price].to_i == position.price_group.contractor_price
+        order_template_params[:customer_price] = position&.price_group&.customer_price
+        order_template_params[:contractor_price] = position&.price_group&.contractor_price
+        order_template_params[:customer_total] = position.price_group.customer_price * order_template_params[:number_of_employees].to_i
+        order_template_params[:contractor_total] = position.price_group.contractor_price * order_template_params[:number_of_employees].to_i
       else
-        factor = order_params[:contractor_price].to_d / position.price_group.contractor_price
+        factor = order_template_params[:contractor_price].to_d / position.price_group.contractor_price
         new_customer_price = (position.price_group.customer_price * factor).ceil
 
-        order_params[:customer_price] = new_customer_price
-        order_params[:customer_total] = order_params[:customer_price].to_i * order_params[:number_of_employees].to_i
-        order_params[:contractor_total] = order_params[:contractor_price].to_i * order_params[:number_of_employees].to_i
+        order_template_params[:customer_price] = new_customer_price
+        order_template_params[:customer_total] = order_template_params[:customer_price].to_i * order_template_params[:number_of_employees].to_i
+        order_template_params[:contractor_total] = order_params[:contractor_price].to_i * order_teplate_params[:number_of_employees].to_i
       end
     end
-    order_params
+    order_template_params
   end
 
   def position
-    @position ||= Position.find_by(id: order_params[:position_id])
+    @position ||= Position.find_by(id: order_template_params[:position_id])
   end
 
-  def order_params
-    @order_params ||= params.require(:order)
-                            .permit(:title, :specialization, :city, :salary_from, :position_id,
-                                    :salary_to, :description, :payment_type, :contractor_price,
-                                    :number_of_recruiters, :enterpreneurs_only,
-                                    :skill, :accepted, :district, :experience,
-                                    :visibility, :state, :number_of_employees,
-                                    :schedule, :work_period, other_info: {})
+  def order_template_params
+    @order_template_params ||= params.require(:order_template)
+                                     .permit(:name, :title, :specialization, :city, :salary_from, :position_id,
+                                             :salary_to, :description, :contractor_price,
+                                             :skill, :accepted, :district, :experience,
+                                             :visibility, :state, :number_of_employees,
+                                             :schedule, :work_period, other_info: {})
   end
 
-  def balance
-    order.profile.balance
+  def order_template
+    @order_template ||= order_teplates.find(params[:id])
   end
 
-  def order
-    @order ||= orders.find(params[:id])
-  end
-
-  def orders
-    @orders ||= if params[:state] && !params[:state].empty?
-                  current_profile.orders.where state: params[:state]
-                else
-                  current_profile.orders
-                end
-  end
-
-  def description
-    nil
+  def order_templates
+    @order_templates ||= current_profile.order_templates
   end
 end
