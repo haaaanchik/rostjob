@@ -29,7 +29,7 @@
   )
   $('.form-clear').on('click', () ->
     $(this).addClass('d-none').prevAll(':input').val('')
-    $('#order_search_form').submit()
+    $('[id$=search_form]').submit()
   )
 
 bootstrapClearButton()

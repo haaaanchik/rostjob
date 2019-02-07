@@ -1,6 +1,9 @@
 class Profile::OrderTemplatesController < ApplicationController
   def index
-    order_templates
+    # order_templates
+    @order_template_search_form = OrderTemplateSearchForm.new(profile: current_profile,
+                                                              params: order_template_search_form_params)
+    @order_templates = @order_template_search_form.submit
   end
 
   def show
@@ -43,61 +46,11 @@ class Profile::OrderTemplatesController < ApplicationController
     redirect_to profile_order_templates_path result.success?
   end
 
-  def create_pre_publish
-    result = Cmd::Order::Create.call(profile: current_profile, params: params_with_price,
-                                     position: position)
-    if result.success?
-      redirect_to pre_publish_profile_order_path(result.order)
-    else
-      render json: { validate: true, data: errors_data(result.order) }
-    end
-  end
-
-  def update_pre_publish
-    result = Cmd::Order::Update.call(order: order, params: params_with_price)
-    if result.success?
-      redirect_to pre_publish_profile_order_path(result.order)
-    else
-      render json: { validate: true, data: errors_data(context.order) }
-    end
-  end
-
-  def pre_publish
-    Cmd::Order::WaitForPayment.call(order: order)
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
-  end
-
-  def publish
-    result = Cmd::Order::ToModeration.call(order: order)
-    if result.success?
-      redirect_to profile_orders_path
-    else
-      redirect_to pre_publish_profile_order_path(result.order)
-      # redirect_to profile_invoices_path
-    end
-  end
-
-  def hide
-    order.to_hidden
-    redirect_to profile_orders_path
-  end
-
-  def complete
-    Cmd::Order::Complete.call(order: order)
-    redirect_to profile_orders_path
-  end
-
-  def cancel
-    order.to_draft
-    redirect_to profile_orders_path
-  end
-
-  def add_position
-    position_params = params.require(:position).permit(:title, :duties, :price_group_id)
-    @position = Position.create(position_params)
-  end
-
   private
+
+  def order_template_search_form_params
+    params.permit(order_template_search_form: %i[query])[:order_template_search_form]
+  end
 
   def params_with_price
     if position
@@ -128,10 +81,10 @@ class Profile::OrderTemplatesController < ApplicationController
 
   def order_template_params
     @order_template_params ||= params.require(:order_template)
-                                     .permit(:name, :title, :specialization, :city, :salary_from, :position_id,
-                                             :salary_to, :description, :contractor_price,
-                                             :skill, :accepted, :district, :experience,
-                                             :visibility, :state, :number_of_employees,
+                                     .permit(:name, :title, :specialization, :city, :salary_from,
+                                             :position_id, :salary_to, :description, :state,
+                                             :contractor_price, :skill, :accepted, :district,
+                                             :experience, :visibility, :number_of_employees,
                                              :schedule, :work_period, other_info: {})
   end
 

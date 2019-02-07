@@ -11,6 +11,8 @@ class OrderTemplate < ApplicationRecord
   validates :warranty_period, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
 
+  scope :by_query, ->(term) { where('name LIKE ? OR title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%") }
+
   def initialize(attrs = nil)
     defaults = {
       name: "Шаблон заявки от #{Time.current.strftime('%d-%m-%Y %T')}",

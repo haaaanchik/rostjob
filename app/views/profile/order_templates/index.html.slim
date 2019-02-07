@@ -1,7 +1,7 @@
 .row.justify-content-around
   .col-9
     .form-group
-      = text_field :search, :order_temlpate, class: 'form-control', placeholder: 'Найти шаблон ...'
+      = render partial: 'search_form'
   .col-3
     = link_to 'Создать шаблон', new_profile_order_template_path, class: 'btn btn-indigo', remote: true
 #order_template_list

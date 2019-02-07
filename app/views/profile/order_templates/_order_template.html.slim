@@ -6,7 +6,8 @@
       .col.text-right
         = link_to edit_profile_order_template_path(order_template), remote: true do
           i.fa.fa-edit.fa-2x.ml-1.mr-1.text-black-50
-        = link_to copy_profile_order_template_path(order_template), remote: true, method: :post do
+        = link_to copy_profile_order_template_path(order_template), remote: true,
+          method: :post, data: { confirm: 'Точно хотите скопировать шаблон?' } do
           i.fa.fa-copy.fa-2x.ml-1.mr-1.text-black-50
         = link_to profile_order_template_path(order_template), remote: true,
           method: :delete, data: { confirm: 'Вы уверены?' } do
@@ -33,7 +34,7 @@
                       li
                         = order_template.salary_from
                       li
-                        = link_to 'Подробнее', profile_order_template_path(order_template)
+                        = link_to 'Подробнее', edit_profile_order_template_path(order_template), remote: true
           .col-3
             = label :order_template, 'Количество сотрудников:'
             = number_field :order_template, :number_of_employees, in: 1..1000, step: 1, class: "form-control"
