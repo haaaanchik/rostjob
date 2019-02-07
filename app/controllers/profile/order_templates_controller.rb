@@ -46,7 +46,29 @@ class Profile::OrderTemplatesController < ApplicationController
     redirect_to profile_order_templates_path result.success?
   end
 
+  def create_order
+    number_of_employees = create_order_params[:number_of_employees].to_i
+    profession = Position.find(order_template.position_id)
+    customer_total = order_template.customer_price * number_of_employees
+    contractor_total = order_template.contractor_price * create_order_params[:number_of_employees].to_i
+    attributes = order_template.attributes
+    order_attributes = attributes.merge('id' => nil, 'number_of_employees' => number_of_employees,
+                                        'customer_total' => customer_total, 'contractor_total' => contractor_total)
+                                 .except('name')
+    result = Cmd::Order::Create.call(profile: current_profile, params: order_attributes, position: profession)
+    if result.success?
+      redirect_to pre_publish_profile_order_path(result.order)
+    else
+      redirect_to edit_profile_order_path(result.order)
+    end
+
+  end
+
   private
+
+  def create_order_params
+    params.require(:order_template).permit(:number_of_employees)
+  end
 
   def order_template_search_form_params
     params.permit(order_template_search_form: %i[query])[:order_template_search_form]

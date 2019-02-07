@@ -36,9 +36,11 @@
                       li
                         = link_to 'Подробнее', edit_profile_order_template_path(order_template), remote: true
           .col-3
-            = label :order_template, 'Количество сотрудников:'
-            = number_field :order_template, :number_of_employees, in: 1..1000, step: 1, class: "form-control"
-            b.mt-2 Итого: 10 000
+            - form_id = "create_order_form_#{order_template.id}"
+            = render partial: 'create_order_form', locals: { order_template: order_template, form_id: form_id }
+            b.mt-2
+              'Итого:
+            b.mt-2 class="customer-total-#{order_template.id}" #{order_template.customer_total}
             i.fas.fa-ruble-sign.ml-1.mt-2
         .row
           .col-9
@@ -49,4 +51,4 @@
                     .col
                       = Nokogiri::HTML.parse(order_template.other_info['remark']).text
           .col-3
-            = link_to 'Создать заявку', '#', class: 'btn btn-indigo'
+            button class='btn btn-indigo' type='submit' form=form_id Создать заявку'

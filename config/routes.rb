@@ -69,6 +69,7 @@ Rails.application.routes.draw do
     resources :order_templates do
       member do
         post :copy
+        post :create_order
       end
     end
     resources :favorites, only: %i[index]
