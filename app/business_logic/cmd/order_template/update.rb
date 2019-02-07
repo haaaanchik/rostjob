@@ -1,18 +1,18 @@
 module Cmd
-  module Order
+  module OrderTemplate
     class Update
       include Interactor
 
       def call
         result = Cmd::Order::CalculateUrgency.call(params: params)
-        context.fail! unless order.update(params.merge(urgency: result.urgency))
-        Cmd::UserActionLogger::Log.call(params: logger_params)
+        context.fail! unless order_template.update(params.merge(urgency: result.urgency))
+        # Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
       private
 
-      def order
-        context.order
+      def order_template
+        context.order_template
       end
 
       def params

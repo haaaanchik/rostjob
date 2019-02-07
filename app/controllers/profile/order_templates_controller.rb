@@ -18,24 +18,29 @@ class Profile::OrderTemplatesController < ApplicationController
   def create
     result = Cmd::OrderTemplate::Create.call(profile: current_profile, params: params_with_price, position: position)
     if result.success?
-      redirect_to profile_orders_path
+      redirect_to profile_order_templates_path
     else
-      render json: { validate: true, data: errors_data(result.order) }
+      render json: { validate: true, data: errors_data(result.order_teplate) }
     end
   end
 
   def update
-    result = Cmd::Order::Update.call(order: order, params: params_with_price)
+    result = Cmd::OrderTemplate::Update.call(order_template: order_template, params: params_with_price)
     if result.success?
-      redirect_to profile_order_path(result.order)
+      redirect_to profile_order_templates_path
     else
-      render json: { validate: true, data: errors_data(result.order) }
+      render json: { validate: true, data: errors_data(result.order_template) }
     end
   end
 
   def destroy
     order_template.destroy
     redirect_to profile_order_templates_path
+  end
+
+  def copy
+    result = Cmd::OrderTemplate::Copy.call(order_template: order_template)
+    redirect_to profile_order_templates_path result.success?
   end
 
   def create_pre_publish
@@ -111,7 +116,7 @@ class Profile::OrderTemplatesController < ApplicationController
 
         order_template_params[:customer_price] = new_customer_price
         order_template_params[:customer_total] = order_template_params[:customer_price].to_i * order_template_params[:number_of_employees].to_i
-        order_template_params[:contractor_total] = order_params[:contractor_price].to_i * order_teplate_params[:number_of_employees].to_i
+        order_template_params[:contractor_total] = order_template_params[:contractor_price].to_i * order_template_params[:number_of_employees].to_i
       end
     end
     order_template_params
@@ -131,10 +136,10 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def order_template
-    @order_template ||= order_teplates.find(params[:id])
+    @order_template ||= order_templates.find(params[:id])
   end
 
   def order_templates
-    @order_templates ||= current_profile.order_templates
+    @order_templates ||= current_profile.order_templates.order(id: :desc)
   end
 end

@@ -66,7 +66,11 @@ Rails.application.routes.draw do
 
   resource :profile, except: %i[show destroy]
   namespace :profile do
-    resources :order_templates
+    resources :order_templates do
+      member do
+        post :copy
+      end
+    end
     resources :favorites, only: %i[index]
     resources :proposal_employees, only: :show do
       member do

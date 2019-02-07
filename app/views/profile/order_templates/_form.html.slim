@@ -98,13 +98,13 @@
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
-  .form-group.mt-3.text-center
-    = f.check_box :accepted, class: 'form-check-input'
-    = f.label :accepted do
-      'Я принимаю условия
-      = link_to 'Оферты', '/offerta.pdf'
+  / .form-group.mt-3.text-center
+  /   = f.check_box :accepted, class: 'form-check-input'
+  /   = f.label :accepted do
+  /     'Я принимаю условия
+  /     = link_to 'Оферты', '/offerta.pdf'
   .form-group.mt-3
     .row
       .col-3
-        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-info order-template-submit-button #{ 'disabled' unless order_template.accepted}", name: :create
+        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-info"
 

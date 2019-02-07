@@ -2,23 +2,38 @@
   .card-body
     .row
       .col
-        |Шаблон №1
-      .col
-        |Статус шаблона
+        b #{order_template.name}
       .col.text-right
-        = link_to '#' do
+        = link_to edit_profile_order_template_path(order_template), remote: true do
           i.fa.fa-edit.fa-2x.ml-1.mr-1.text-black-50
-        = link_to '#' do
+        = link_to copy_profile_order_template_path(order_template), remote: true, method: :post do
           i.fa.fa-copy.fa-2x.ml-1.mr-1.text-black-50
-        = link_to '#' do
+        = link_to profile_order_template_path(order_template), remote: true,
+          method: :delete, data: { confirm: 'Вы уверены?' } do
           i.fa.fa-trash.fa-2x.ml-1.mr-1.text-black-50
     .card.mt-3
       .card-body
         .row
           .col-9
-            b Профессия:
-            br
-            |Слесарь механо-сборочных работ
+            .card.mt-2
+              .card-body
+                .row
+                  .col
+                    ul
+                      li
+                        = order_template.title
+                      li
+                        = order_template.city
+                      li
+                        = order_template.schedule
+                  .col
+                    ul
+                      li
+                        | Ищем #{order_template.number_of_employees} человек
+                      li
+                        = order_template.salary_from
+                      li
+                        = link_to 'Подробнее', profile_order_template_path(order_template)
           .col-3
             = label :order_template, 'Количество сотрудников:'
             = number_field :order_template, :number_of_employees, in: 1..1000, step: 1, class: "form-control"
@@ -26,8 +41,11 @@
             i.fas.fa-ruble-sign.ml-1.mt-2
         .row
           .col-9
-            b Коментарий:
-            br
-            |Комменнтарий к заявке.
+            - unless order_template.other_info['remark'].nil? || order_template.other_info['remark'].empty?
+              .card.mt-2
+                .card-body
+                  .row
+                    .col
+                      = Nokogiri::HTML.parse(order_template.other_info['remark']).text
           .col-3
-            = link_to 'Поиск персонала', '#', class: 'btn btn-indigo'
+            = link_to 'Создать заявку', '#', class: 'btn btn-indigo'
