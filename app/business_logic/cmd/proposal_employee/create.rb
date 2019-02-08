@@ -28,9 +28,13 @@ module Cmd
         employee_cv.profile
       end
 
+      def receiver_ids
+        [current_user.id, @employee_pr.order.profile.user.id]
+      end
+
       def logger_params
         {
-          receiver_ids: [current_user.id],
+          receiver_ids: receiver_ids,
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
