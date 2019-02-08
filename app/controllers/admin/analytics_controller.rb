@@ -28,7 +28,7 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def user_action_log_records
-    @user_action_log_records ||= UserActionLog.order(id: :asc)
+    @user_action_log_records ||= UserActionLog.order(id: :desc)
                                               .page(params[:page])
                                               .decorate
   end
