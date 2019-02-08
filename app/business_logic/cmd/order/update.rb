@@ -25,7 +25,7 @@ module Cmd
 
       def logger_params
         {
-          receiver_id: current_user.id,
+          receiver_ids: [current_user.id],
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,

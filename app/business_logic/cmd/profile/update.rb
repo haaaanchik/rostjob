@@ -30,7 +30,7 @@ module Cmd
 
       def logger_params
         {
-          receiver_id: profile.user.id,
+          receiver_ids: [profile.user.id],
           subject_id: profile.user.id,
           subject_type: 'User',
           subject_role: profile.profile_type,

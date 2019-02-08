@@ -22,9 +22,13 @@ module Cmd
         order.profile.user
       end
 
+      def receiver_ids
+        [current_user.id] + order.profiles.map(&:user).pluck(:id)
+      end
+
       def logger_params
         {
-          receiver_id: current_user.id,
+          receiver_ids: receiver_ids,
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
