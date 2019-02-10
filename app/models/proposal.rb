@@ -3,8 +3,8 @@ class Proposal < ApplicationRecord
 
   belongs_to :order
   belongs_to :profile
-  has_many :messages
-  has_many :employee_cvs
+  has_many :messages, dependent: :destroy
+  has_many :employee_cvs, dependent: :nullify
 
   has_many :proposal_employees
   has_many :orders, through: :proposal_employees
