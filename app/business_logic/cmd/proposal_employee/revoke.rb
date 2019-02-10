@@ -30,7 +30,7 @@ module Cmd
           subject_role: current_user.profile.profile_type,
           action: 'Анкета отозвана исполнителем',
           object_id: proposal_employee.id,
-          object_type: 'EmployeeCv'
+          object_type: 'ProposalEmployee'
         }
       end
     end
