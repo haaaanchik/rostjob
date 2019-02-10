@@ -11,7 +11,8 @@ module Cmd
         result = profile.balance.deposit(amount, "Вознаграждение по заявке №#{order.id}")
         context.fail! unless result
         candidate.to_paid!
-        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+        Cmd::UserActionLogger::Log.call(params: contractor_params) unless context.log == false
+        Cmd::UserActionLogger::Log.call(params: customer_params) unless context.log == false
       end
 
       private
@@ -24,21 +25,33 @@ module Cmd
         candidate
       end
 
-      def current_user
+      def contractor
         candidate.employee_cv.profile.user
       end
 
-      def receiver_ids
-        [current_user.id]
+      def customer
+        candidate.order.profile.user
       end
 
-      def logger_params
+      def contractor_params
         {
-          receiver_ids: receiver_ids,
-          subject_id: current_user.id,
+          receiver_ids: [contractor.id],
+          subject_id: contractor.id,
           subject_type: 'User',
-          subject_role: current_user.profile.profile_type,
+          subject_role: contractor.profile.profile_type,
           action: 'Получено вознаграждение',
+          object_id: proposal_employee.id,
+          object_type: 'ProposalEmployee'
+        }
+      end
+
+      def customer_params
+        {
+          receiver_ids: [customer.id],
+          subject_id: customer.id,
+          subject_type: 'User',
+          subject_role: customer.profile.profile_type,
+          action: 'Условие выполнено',
           object_id: proposal_employee.id,
           object_type: 'ProposalEmployee'
         }
