@@ -6,7 +6,7 @@
         .col
           = image_tag('/img/no-avatar.jpg', size: 80)
         .col
-          = contractor_card.company.name.delete('\n')
+          = contractor_card.user.full_name.delete('\n')
         .col
           |10/10
         .col

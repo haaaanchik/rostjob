@@ -18,14 +18,17 @@ class Profile::InvoicesController < ApplicationController
   end
 
   def create
-    redirect_to edit_profile_path unless current_profile.filled?
-    result = ::Cmd::Invoice::Create.call(invoice_params: invoice_params, profile: current_profile)
-    if result.success?
-      redirect_to profile_invoices_path
+    if current_profile.filled?
+      result = ::Cmd::Invoice::Create.call(invoice_params: invoice_params, profile: current_profile)
+      if result.success?
+        redirect_to profile_invoices_path
+      else
+        @invoice = result.invoice
+        invoices
+        render 'index'
+      end
     else
-      @invoice = result.invoice
-      invoices
-      render 'index'
+      redirect_to edit_profile_path
     end
   end
 
