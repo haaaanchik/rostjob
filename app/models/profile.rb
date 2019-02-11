@@ -25,8 +25,8 @@ class Profile < ApplicationRecord
 
   # validates :contact_person, presence: true
   validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }
-  validate :private_person_can_only_be_a_contractor, if: :private_person?
-  validate :customer_can_only_be_a_company, if: :customer?
+  # validate :private_person_can_only_be_a_contractor, if: :private_person?
+  # validate :customer_can_only_be_a_company, if: :customer?
   # with_options unless: :validate_on_sm_registration? do |o|
   #   o.validates :phone, presence: true
   #   o.validates :email, presence: true
@@ -85,5 +85,9 @@ class Profile < ApplicationRecord
 
   def sent_proposal_employees_by_order(order)
     proposal_employees.where(order_id: order).where.not(state: 'revoked')
+  end
+
+  def filled?
+    true if company
   end
 end

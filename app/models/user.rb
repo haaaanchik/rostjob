@@ -12,8 +12,8 @@ class User < ApplicationRecord
   #        :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
   devise :database_authenticatable, :registerable, :recoverable, :trackable,
-         :validatable, :confirmable, :omniauthable,
-         omniauth_providers: [:vkontakte, :facebook]
+         :validatable, :omniauthable, :confirmable,
+         omniauth_providers: %i[vkontakte facebook]
 
   # devise :database_authenticatable, :registerable, :recoverable, :trackable,
   #        :validatable, :omniauthable,

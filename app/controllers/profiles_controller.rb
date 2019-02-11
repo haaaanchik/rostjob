@@ -14,6 +14,10 @@ class ProfilesController < ApplicationController
 
   def edit
     profile
+    unless profile.company
+      company = @profile.build_company
+      company.accounts.build
+    end
   end
 
   def create

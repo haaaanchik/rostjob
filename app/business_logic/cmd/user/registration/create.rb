@@ -7,7 +7,8 @@ module Cmd
         def call
           @user = ::User.new context.user_params
           context.failed! unless @user.save
-          Cmd::UserActionLogger::Log.call(params: logger_params)
+          context.user = @user
+          Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
         end
 
         private

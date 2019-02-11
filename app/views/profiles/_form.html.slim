@@ -6,33 +6,33 @@
   .row
     .col
       h2.h2-responsive Профиль
-    .col
-      .form-check.form-check-inline
-        - options = {class: 'form-check-input'}
-        - options[:disabled] = true if persisted
-        = f.radio_button(:profile_type, 'customer', options.merge(checked: true))
-        = f.label :profile_type, 'Заказчик (работодатель)', value: 'customer',
-                class: "from-check-label #{'disabled' if persisted}", data: {profile_type: 'customer'}
-      .form-check.form-check-inline
-        = f.radio_button(:profile_type, 'contractor', options)
-        = f.label :profile_type, 'Исполнитель (рекрутер)', value: 'contractor',
-                class: "from-check-label #{'disabled' if persisted}", data: {profile_type: 'contractor'}
-  .row
-    .col
-    .col
-      .form-check.form-check-inline
-        - legal_form = @profile.persisted? ? @profile.legal_form : 'company'
-        = hidden_field_tag 'profile[legal_form]', legal_form, class: 'hidden-legal-form'
-        - legal_form_disabled = persisted || ['customer', nil].include?(profile_type)
-        - options = {class: 'form-check-input'}
-        - options[:disabled] = true if legal_form_disabled
-        = f.radio_button(:legal_form, 'company', options.merge(checked: true))
-        = f.label :legal_form, 'Юридическое лицо или ИП', value: 'company',
-                class: "from-check-label #{'disabled' if legal_form_disabled}", data: {legal_form: 'company'}
-      .form-check.form-check-inline
-        = f.radio_button(:legal_form, 'private_person', options)
-        = f.label :legal_form, 'Физическое лицо', value: 'private_person',
-                class: "from-check-label #{'disabled' if legal_form_disabled}", data: {legal_form: 'private_person'}
+    / .col
+    /   .form-check.form-check-inline
+        / - options = {class: 'form-check-input'}
+        / - options[:disabled] = true if persisted
+        / = f.radio_button(:profile_type, 'customer', options.merge(checked: true))
+        / = f.label :profile_type, 'Заказчик (работодатель)', value: 'customer',
+        /         class: "from-check-label #{'disabled' if persisted}", data: {profile_type: 'customer'}
+      / .form-check.form-check-inline
+        / = f.radio_button(:profile_type, 'contractor', options)
+        / = f.label :profile_type, 'Исполнитель (рекрутер)', value: 'contractor',
+        /         class: "from-check-label #{'disabled' if persisted}", data: {profile_type: 'contractor'}
+  / .row
+  /   .col
+  /   .col
+  /     .form-check.form-check-inline
+  /       - legal_form = @profile.persisted? ? @profile.legal_form : 'company'
+  /       = hidden_field_tag 'profile[legal_form]', legal_form, class: 'hidden-legal-form'
+  /       - legal_form_disabled = persisted || ['customer', nil].include?(profile_type)
+  /       - options = {class: 'form-check-input'}
+  /       - options[:disabled] = true if legal_form_disabled
+  /       = f.radio_button(:legal_form, 'company', options.merge(checked: true))
+  /       = f.label :legal_form, 'Юридическое лицо или ИП', value: 'company',
+  /               class: "from-check-label #{'disabled' if legal_form_disabled}", data: {legal_form: 'company'}
+  /     .form-check.form-check-inline
+  /       = f.radio_button(:legal_form, 'private_person', options)
+  /       = f.label :legal_form, 'Физическое лицо', value: 'private_person',
+  /               class: "from-check-label #{'disabled' if legal_form_disabled}", data: {legal_form: 'private_person'}
 
   = render partial: 'company_card', locals: {f: f, errors: errors, profile: @profile}
   = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'

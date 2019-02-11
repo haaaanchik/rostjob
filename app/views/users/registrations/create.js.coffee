@@ -8,7 +8,7 @@ normal_modal_close 'formModalLogin'
 setTimeout (->
   normal_modal_open 'formModalLogin', "<%= over_partial %>"
 ), 300
-toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!', {timeOut: 5000})
+toastr.info('На указанный вами адрес электронной почты направлена ссылка для активации учетной записи', 'Внимание!', {timeOut: 5000})
 <% else %>
 toastr.error('<%= @status %>', 'Не сохранено!', {timeOut: 5000})
 <% end %>
