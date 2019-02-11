@@ -13,14 +13,13 @@
     = f.password_field :password_confirmation, class: 'form-control'
     = f.label :password_confirmation, t("views.modals.signin.password_confirmation")
   .form-group.mt-4
-    input.form-check-input type="checkbox" id="checkbox624"
-    label.form-check-label for="checkbox624"
-      = "#{'Принять '}"
-      a href="#" class="blue-text"
-        | условия и положения
+    = f.check_box :terms_of_service, class: 'form-check-input'
+    = f.label :terms_of_service, class: 'from-check-label' do
+      'Принять
+      = link_to 'условия и положения', '#', class: 'blue-text'
   .d-flex.justify-content-center
-    = f.submit t("views.modals.signin.customer"), name: :customer, class: 'btn btn-deep-orange z-depth-1'
-    = f.submit t("views.modals.signin.contractor"), name: :contractor, class: 'btn btn-deep-orange z-depth-1'
+    = f.submit t("views.modals.signin.customer"), name: :customer, class: 'btn btn-deep-orange z-depth-1 disabled'
+    = f.submit t("views.modals.signin.contractor"), name: :contractor, class: 'btn btn-deep-orange z-depth-1 disabled'
 
 .row.d-flex.align-items-center.pb-3
   .col-md-12

@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates :full_name, presence: true, length: {minimum: 8}
   validates :email, presence: true, uniqueness: true
   validates :password, length: {minimum: 8}, presence: true
+  validates :terms_of_service, acceptance: true
 
   # devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
   #        :omniauthable, omniauth_providers: [:vkontakte, :facebook]
