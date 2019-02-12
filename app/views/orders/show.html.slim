@@ -39,7 +39,7 @@
       .row
         .col-12
           - if current_user.profile.profile_type.include? 'contractor'
-            = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success float-right', remote: true
+            = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success float-right disabled', remote: true
           / - if proposal || order.profile.id == current_user.profile.id
           /   = render partial: 'profile/proposals/show',
           /           locals: {order: order, proposal: proposal}
