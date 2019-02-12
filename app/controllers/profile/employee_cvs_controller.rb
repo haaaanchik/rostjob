@@ -15,25 +15,50 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def new
     @employee_cv = EmployeeCv.new proposal_id: params[:proposal_id]
+    order
   end
 
   def edit
     @employee_cv = EmployeeCv.find_by id: params[:id]
   end
 
-  def create
-    result = Cmd::EmployeeCv::Create.call(params: employee_cvs_params, profile: current_profile)
+  def create_as_draft
+    result = Cmd::EmployeeCv::CreateAsDraft.call(params: employee_cvs_params, profile: current_profile)
     if result.success?
       @status = 'success'
-      if params[:save]
-        Cmd::EmployeeCv::ToReady.call(employee_cv: result.employee_cv)
-        redirect_to profile_employee_cvs_path(term: :ready)
-      else
-        redirect_to profile_employee_cvs_path(term: :draft)
-      end
+      redirect_to profile_employee_cvs_path(term: :draft)
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv
+    end
+  end
+
+  def create_as_ready
+    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    if result.success?
+      @status = 'success'
+      redirect_to profile_employee_cvs_path(term: :ready)
+    else
+      @status = 'error'
+      @text = error_msg_handler result.employee_cv
+    end
+  end
+
+  #FIXME: Refactor this beautiful code ASAP!!!
+  def create_as_sent
+    ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
+    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv,
+                                                proposal_id: order_result.proposal.id)
+    @employee_cv = ecv_result.employee_cv
+    @employee_pr = result.employee_pr
+    if result.success?
+      Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
+      @status = 'success'
+      redirect_to profile_employee_cvs_path(term: :sent)
+    else
+      @status = 'error'
+      @text = error_msg_handler ecv_result.employee_cv
     end
   end
 
@@ -109,7 +134,7 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def employee_cvs_params
     params.require(:employee_cv)
-          .permit(:phone_number, :contractor_terms_of_service, :proposal_id,
+          .permit(:phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
                   :name, :gender, :mark_ready, :birthdate, :file, ext_data: {})
   end
 
@@ -146,5 +171,13 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def employee_cvs
     @employee_cvs = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc)
+  end
+
+  def order
+    @order ||= Order.find_by(id: params[:order_id])
+  end
+
+  def order2
+    @order ||= Order.find_by(id: employee_cvs_params[:order_id])
   end
 end

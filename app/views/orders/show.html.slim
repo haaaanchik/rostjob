@@ -38,8 +38,9 @@
             dd.col-6 #{order.warranty_period}, рабочих дней
       .row
         .col-12
-          - if proposal || order.profile.id == current_user.profile.id
-            = render partial: 'profile/proposals/show',
-                    locals: {order: order, proposal: proposal}
-          - else
-            = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}
+          = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success float-right', remote: true
+          / - if proposal || order.profile.id == current_user.profile.id
+          /   = render partial: 'profile/proposals/show',
+          /           locals: {order: order, proposal: proposal}
+          / - else
+          /   = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}

@@ -118,7 +118,7 @@ Rails.application.routes.draw do
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:create)}, to: 'orders#update'
 
-    resources :employee_cvs do
+    resources :employee_cvs, except: :create do
       member do
         put :to_ready
         put :to_disput
@@ -127,6 +127,9 @@ Rails.application.routes.draw do
         delete :remove_proposal
       end
     end
+    post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
+    post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'
+    post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_as_sent'
 
     resources :proposals, only: %i[index show create] do
       member do
