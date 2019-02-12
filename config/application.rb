@@ -52,5 +52,6 @@ module BestHr
     end
     config.active_job.queue_adapter = :resque
     config.email_to = 'alkos.network@gmail.com, yusupov_ilshat@mail.ru'
+    config.user_action_log = false
   end
 end
