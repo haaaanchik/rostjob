@@ -6,8 +6,9 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-server "bhr.os72.ru", user: "deployer", roles: %w[app db web]
-
+server '138.197.184.93', user: 'root', roles: %w[app db web]
+set :deploy_to, '/webhome/best-hr'
+set :branch, 'staging'
 
 # role-based syntax
 # ==================
@@ -30,8 +31,6 @@ server "bhr.os72.ru", user: "deployer", roles: %w[app db web]
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-
-
 
 # Custom SSH Options
 # ==================
