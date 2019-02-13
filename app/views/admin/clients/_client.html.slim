@@ -1,0 +1,6 @@
+tr
+  td #{client.id}
+  td #{client.full_name}
+  td #{client.balance_amount}
+  td #{@type.include?('customer') ? client.orders_count : client.employee_cvs_count}
+  td #{client.disputs_count}

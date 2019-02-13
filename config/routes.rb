@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
     resources :staffers
+    resources :clients
     resources :specializations
     resources :positions
     resources :cities

@@ -1,0 +1,14 @@
+h4 Наши клиенты - #{@type.include?('customer') ? 'заказчики' : 'исполнители'}
+.form-group
+  = label :user_lients, 'Поиск по номеру или имени', for: :user_clients_search
+  = text_field :user_clients, :search, class: 'from-control'
+table.table.table-striped
+  thead
+    tr
+      th №
+      th Имя
+      th Остаток на балансе
+      th #{@type.include?('customer') ? 'Количество заявок' : 'Количество анкет'}
+      th Открытые споры
+  tbody
+    = render partial: 'client', collection: @clients
