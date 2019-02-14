@@ -44,12 +44,11 @@ class Profile::EmployeeCvsController < ApplicationController
     end
   end
 
-  #FIXME: Refactor this beautiful code ASAP!!!
+  # FIXME: Refactor this beautiful code ASAP!!!
   def create_as_sent
     ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
     order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv,
-                                                proposal_id: order_result.proposal.id)
+    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv, proposal_id: order_result.proposal.id)
     @employee_cv = ecv_result.employee_cv
     @employee_pr = result.employee_pr
     if result.success?
