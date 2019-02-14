@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'ransack', github: 'activerecord-hackery/ransack'
 gem 'jquery-inputmask-rails'
 gem 'draper'
 gem 'rubyzip'

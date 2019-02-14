@@ -10,6 +10,19 @@ GIT
       terrapin (~> 0.6.0)
 
 GIT
+  remote: https://github.com/activerecord-hackery/ransack.git
+  revision: ce254a97e8c390d7ab0b08d466682e5f83ddc5cd
+  specs:
+    polyamorous (2.1.1)
+      activerecord (>= 5.0)
+    ransack (2.1.1)
+      actionpack (>= 5.0)
+      activerecord (>= 5.0)
+      activesupport (>= 5.0)
+      i18n
+      polyamorous (= 2.1.1)
+
+GIT
   remote: https://github.com/resque/resque-web.git
   revision: 717bc8d08a5b04fa98007cc96086796dc274264d
   branch: master
@@ -539,6 +552,7 @@ DEPENDENCIES
   rails (~> 5.2)
   rails-erd
   rails-i18n
+  ransack!
   recaptcha
   redis
   redis-objects
