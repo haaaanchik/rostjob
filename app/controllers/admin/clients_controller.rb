@@ -1,13 +1,22 @@
 class Admin::ClientsController < Admin::ApplicationController
+  CLIENT_TYPES = %w[customer contractor].freeze
+
   def index
-    @clients_search_form = ClientsSearchForm.new(clients_search_form_params)
-    @clients = @clients_search_form.submit
-    @type = @clients_search_form.client_type
+    @q = if client_type.include?('customer')
+           User.customers.ransack(params[:q])
+         elsif client_type.include?('contractor')
+           User.contractors.ransack(params[:q])
+         else
+           User.clients.ransack(params[:q])
+         end
+
+    @clients = @q.result.decorate
+    @client_type = client_type
   end
 
   private
 
-  def clients_search_form_params
-    params.permit(:query, :type)
+  def client_type
+    CLIENT_TYPES.include?(params.try(:[], :clients_type)) ? params[:clients_type] : 'all'
   end
 end

@@ -3,10 +3,11 @@ class User < ApplicationRecord
   # before_validation :fill_from_profile, on: :create
   belongs_to :profile, optional: true
   # accepts_nested_attributes_for :profile, reject_if: :all_blank
+  has_one :balance, through: :profile
 
   validates :full_name, presence: true, length: {minimum: 8}
   validates :email, presence: true, uniqueness: true
-  validates :password, length: {minimum: 8}, presence: true
+  validates :password, length: { minimum: 8 }, presence: true
   validates :terms_of_service, acceptance: true
 
   # devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
@@ -19,6 +20,11 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable, :recoverable, :trackable,
   #        :validatable, :omniauthable,
   #        omniauth_providers: [:vkontakte, :facebook]
+
+  scope :clients, -> { select(:id, :full_name, :amount, :profile_type).joins(:balance) }
+  scope :customers, -> { clients.where('profiles.profile_type = ?', 'customer') }
+  scope :contractors, -> { clients.where('profiles.profile_type = ?', 'contractor') }
+
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|
       u.provider = auth['profider']
@@ -27,6 +33,10 @@ class User < ApplicationRecord
       u.image = auth['info']['image']
       u.password = SecureRandom.hex
     end
+  end
+
+  ransacker :id do
+    Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")
   end
 
   # def self.find_or_register_facebook_oauth access_token
