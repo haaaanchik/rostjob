@@ -1,17 +1,18 @@
+h4 Наши клиенты:
 = search_form_for @q, url: admin_clients_path do |f|
   - customer_checked = @client_type.include?('customer') ? true : false
   - contractor_checked = @client_type.include?('contractor') ? true : false
   - all_checked = @client_type.include?('all') ? true : false
-  .form-check.form-check-inline
-    = radio_button_tag :clients_type, :customer, customer_checked, class: 'form-check-input'
-    = label_tag :cilents_type_customer, 'Заказчики', class: 'form-check-label', for: 'clients_type_customer'
-  .form-check.form-check-inline
-    = f.radio_button_tag :clients_type, :contractor, contractor_checked, class: 'form-check-input'
-    = f.label_tag :cilents_type_contractor, 'Исполнители', class: 'form-check-label', for: 'clients_type_contractor'
-  .form-check.form-check-inline
-    = f.radio_button_tag :clients_type, :all, all_checked, class: 'form-check-input'
-    = f.label_tag :cilents_type_all, 'Все', class: 'form-check-label', for: 'clients_type_all'
+  .mt-3.mb-3
+    .form-check.form-check-inline
+      = radio_button_tag :clients_type, :customer, customer_checked, class: 'form-check-input'
+      = label_tag :cilents_type_customer, 'Заказчики', class: 'form-check-label', for: 'clients_type_customer'
+    .form-check.form-check-inline
+      = f.radio_button_tag :clients_type, :contractor, contractor_checked, class: 'form-check-input'
+      = f.label_tag :cilents_type_contractor, 'Исполнители', class: 'form-check-label', for: 'clients_type_contractor'
+    .form-check.form-check-inline
+      = f.radio_button_tag :clients_type, :all, all_checked, class: 'form-check-input'
+      = f.label_tag :cilents_type_all, 'Все', class: 'form-check-label', for: 'clients_type_all'
   .form-group
-    = f.label :id_or_full_name_cont
+    = f.label :id_or_full_name_cont, class: 'mr-3'
     = f.search_field :id_or_full_name_cont
-  = f.submit 'Найти', class: 'btn btn-indigo'

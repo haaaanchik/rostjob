@@ -1,9 +1,4 @@
-h4 Наши клиенты
-/ - #{@type.include?('customer') ? 'заказчики' : 'исполнители'}
 = render 'search_form'
-/ .form-group
-/   = label :user_lients, 'Поиск по номеру или имени', for: :user_clients_search
-/   = text_field :user_clients, :search, class: 'from-control'
 table.table.table-striped
   thead
     tr
@@ -11,7 +6,13 @@ table.table.table-striped
       th = sort_link(@q, :full_name)
       th = sort_link(@q, :amount)
       / th #{@client_type.include?('customer') ? 'Количество заявок' : 'Количество анкет'}
-      th Количество заявок / анкет
+      th
+        - if @client_type.include?('customer')
+          = sort_link(@q, :orders_count, 'Количество заявок')
+        - elsif @client_type.include?('contractor')
+          = sort_link(@q, :employee_cvs_count, 'Количество анкет')
+        - elsif @client_type.include?('all')
+          'Количество заявок / анкет'
       th Открытые споры
   tbody
     = render partial: 'client', collection: @clients

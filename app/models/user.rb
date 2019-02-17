@@ -21,9 +21,20 @@ class User < ApplicationRecord
   #        :validatable, :omniauthable,
   #        omniauth_providers: [:vkontakte, :facebook]
 
-  scope :clients, -> { select(:id, :full_name, :amount, :profile_type).joins(:balance) }
+  scope :clients, -> {
+    select(:id, :full_name, :amount, :profile_type, :employee_cvs_count, :orders_count)
+      .joins(:balance)
+      .joins('left join (select profile_id, count(profile_id) as employee_cvs_count from employee_cvs group by profile_id) e on profiles.id = e.profile_id')
+      .joins('left join (select profile_id, count(profile_id) as orders_count from orders group by profile_id) o on profiles.id = o.profile_id')
+  }
   scope :customers, -> { clients.where('profiles.profile_type = ?', 'customer') }
   scope :contractors, -> { clients.where('profiles.profile_type = ?', 'contractor') }
+  scope :sort_by_amount_asc, -> { order('amount asc') }
+  scope :sort_by_amount_desc, -> { order('amount desc') }
+  scope :sort_by_orders_count_asc, -> { order('orders_count asc') }
+  scope :sort_by_orders_count_desc, -> { order('orders_count desc') }
+  scope :sort_by_employee_cvs_count_asc, -> { order('employee_cvs_count asc') }
+  scope :sort_by_employee_cvs_count_desc, -> { order('employee_cvs_count desc') }
 
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|
