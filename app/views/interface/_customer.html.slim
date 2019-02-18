@@ -1,0 +1,14 @@
+header
+  nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top
+    = link_to root_path, class: 'navbar-brand' do
+      strong
+        | BEST-HR
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+    #navbarSupportedContent-7.collapse.navbar-collapse
+      = render partial: 'interface/navbar'
+  #home
+main
+  #modal_container
+  .container
+    = yield

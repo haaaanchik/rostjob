@@ -1,17 +1,1 @@
-header
-  nav.navbar.navbar-expand-lg.fixed-top
-    = link_to root_path, class: 'navbar-brand' do
-      strong
-        | BEST-HR
-    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
-      span.navbar-toggler-icon
-    #navbarSupportedContent-7.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        = render partial: "interface/navbar/#{@current_profile&.profile_type || 'nil'}.html.slim"
-      ul.navbar-nav
-        = render partial: "interface/navbar/profile_menu/#{@current_profile&.profile_type || 'nil'}.html.slim"
-  #home
-main
-  #modal_container
-  .container
-    = yield
+= render partial: "interface/#{@current_profile&.profile_type || 'nil'}.html.slim"
