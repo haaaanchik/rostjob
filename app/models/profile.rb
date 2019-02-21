@@ -6,7 +6,7 @@ class Profile < ApplicationRecord
   has_many :orders
   has_many :proposals
   has_one :balance, dependent: :destroy
-  has_one :company, dependent: :destroy
+  has_one :company, as: :companyable, dependent: :destroy
   has_many :invoices
   has_many :tax_calculations
   has_many :proposal_employees
@@ -14,6 +14,7 @@ class Profile < ApplicationRecord
   has_many :order_profiles
   has_many :favorites, through: :order_profiles, source: :order
   has_many :order_templates
+  has_many :withdrawal_methods
 
   attr_accessor :sent_proposal_employees
 

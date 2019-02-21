@@ -1,3 +1,20 @@
+@withdrawal_method_ip_dadata = (items) ->
+  $('#withdrawal_method_ip_account_company_attributes_name').val items.name
+  $('#withdrawal_method_ip_account_company_attributes_short_name').val items.short_name
+  $('#withdrawal_method_ip_account_company_attributes_address').val items.address
+  $('#withdrawal_method_ip_account_company_attributes_inn').val items.inn
+  $('#withdrawal_method_ip_account_company_attributes_ogrn').val items.ogrn
+  $('#withdrawal_method_ip_account_company_attributes_director').val items.director
+
+@withdrawal_method_company_dadata = (items) ->
+  $('#withdrawal_method_company_account_company_attributes_name').val items.name
+  $('#withdrawal_method_company_account_company_attributes_short_name').val items.short_name
+  $('#withdrawal_method_company_account_company_attributes_address').val items.address
+  $('#withdrawal_method_company_account_company_attributes_inn').val items.inn
+  $('#withdrawal_method_company_account_company_attributes_kpp').val items.kpp
+  $('#withdrawal_method_company_account_company_attributes_ogrn').val items.ogrn
+  $('#withdrawal_method_company_account_company_attributes_director').val items.director
+
 @profile_company_dadata = (items) ->
   $('#profile_company_attributes_name').val items.name
   $('#profile_company_attributes_short_name').val items.short_name
@@ -6,6 +23,24 @@
   $('#profile_company_attributes_kpp').val items.kpp
   $('#profile_company_attributes_ogrn').val items.ogrn
   $('#profile_company_attributes_director').val items.director
+
+@withdrawal_method_ip_bank_dadata = (items) ->
+  $('#withdrawal_method_ip_account_company_attributes_accounts_attributes_0_bic').val items.bic
+  $('#withdrawal_method_ip_account_company_attributes_accounts_attributes_0_corr_account').val items.corr_account
+  $('#withdrawal_method_ip_account_company_attributes_accounts_attributes_0_bank').val items.bank
+  $('#withdrawal_method_ip_account_company_attributes_accounts_attributes_0_bank_address').val items.bank_address
+
+@withdrawal_method_private_person_bank_dadata = (items) ->
+  $('#withdrawal_method_private_person_account_company_attributes_accounts_attributes_0_bic').val items.bic
+  $('#withdrawal_method_private_person_account_company_attributes_accounts_attributes_0_corr_account').val items.corr_account
+  $('#withdrawal_method_private_person_account_company_attributes_accounts_attributes_0_bank').val items.bank
+  $('#withdrawal_method_private_person_account_company_attributes_accounts_attributes_0_bank_address').val items.bank_address
+
+@withdrawal_method_company_bank_dadata = (items) ->
+  $('#withdrawal_method_company_account_company_attributes_accounts_attributes_0_bic').val items.bic
+  $('#withdrawal_method_company_account_company_attributes_accounts_attributes_0_corr_account').val items.corr_account
+  $('#withdrawal_method_company_account_company_attributes_accounts_attributes_0_bank').val items.bank
+  $('#withdrawal_method_company_account_company_attributes_accounts_attributes_0_bank_address').val items.bank_address
 
 @profile_company_bank_dadata = (items) ->
   $('#profile_company_attributes_accounts_attributes_0_bic').val items.bic

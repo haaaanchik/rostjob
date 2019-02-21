@@ -1,0 +1,6 @@
+- company = @withdrawal_method.company
+- errors = company.errors.messages
+/ TODO сделать обязательные поля
+= form_with model: @withdrawal_method, url: profile_balance_withdrawal_method_path(@withdrawal_method) do |f|
+  = render partial: 'profile/withdrawal_methods/companies/company_card', locals: { f: f, company: company, errors: errors }
+  = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'

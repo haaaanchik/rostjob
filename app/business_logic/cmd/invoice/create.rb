@@ -4,11 +4,16 @@ module Cmd
       include Interactor
 
       def call
-        invoice_params = context.invoice_params
-        profile = context.profile
-        invoice_params[:seller] = seller
-        invoice_params[:buyer] = buyer(profile)
-        invoice_params[:goods] = goods(invoice_params[:amount].to_i)
+        invoice_params = {}
+        seller, buyer = if profile.customer?
+                          [Company.own_active, profile.company]
+                        elsif profile.contractor?
+                          [company, Company.own_active]
+                        end
+        invoice_params[:amount] = amount
+        invoice_params[:seller] = counterparty(seller)
+        invoice_params[:buyer] = counterparty(buyer)
+        invoice_params[:goods] = goods(amount)
         invoice = profile.invoices.create(invoice_params)
         context.invoice = invoice if invoice.persisted?
         context.fail!(invoice: invoice) unless invoice.persisted?
@@ -17,31 +22,25 @@ module Cmd
 
       private
 
-      def seller
-        company = Company.own_active
-        account = company.accounts.first
-        {
-          short_name: company[:short_name],
-          inn: company[:inn],
-          kpp: company[:kpp],
-          address: company[:address],
-          account: {
-            account_number: account[:account_number],
-            corr_account: account[:corr_account],
-            bic: account[:bic],
-            bank: account[:bank],
-            bank_address: account[:bank_address]
-          }
-        }
+      def company
+        context.company
       end
 
-      def buyer(profile)
-        company = profile.company
-        account = company.accounts.first
+      def profile
+        context.profile
+      end
+
+      def amount
+        context.amount
+      end
+
+      def counterparty(company)
+        account = company.active_account
         {
+          name: company.name,
           short_name: company.short_name,
-          inn: company[:inn],
-          kpp: company[:kpp],
+          inn: company.private_person? ? account[:inn] : company[:inn],
+          kpp: company.private_person? ? account[:kpp] : company[:kpp],
           address: company[:address],
           account: {
             account_number: account[:account_number],

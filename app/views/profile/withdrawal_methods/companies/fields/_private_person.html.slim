@@ -1,0 +1,11 @@
+.form-group.row
+  - name = client_type.include?('private_person') ? :full_name : :name
+  = f.label :name, t(name), data: {name: t(:name), full_name: t(:full_name)}, class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_area :name, class: "form-control  #{'is-invalid' unless errors[:name].empty?}"
+    .invalid-feedback #{errors[:name].first}
+.form-group.row.mb-2.private-person-field
+  = f.label :inn, t(:inn), class: 'col-3 col-form-label require_field '
+  .col-9
+    = f.text_field :inn, class: "form-control #{'is-invalid' unless errors[:inn].empty?}"
+    .invalid-feedback #{errors[:inn].first}

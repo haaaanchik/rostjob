@@ -1,0 +1,17 @@
+- name = contractor_invoice.seller['short_name'] ? contractor_invoice.seller['short_name'] : contractor_invoice.seller['name']
+tr
+  td #{contractor_invoice.invoice_number}
+  td #{l(contractor_invoice.created_at, format: :short)}
+  td #{contractor_invoice.amount}
+  td = name
+  td
+    = link_to admin_contractor_invoice_path(contractor_invoice, format: :pdf),
+      data: { toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF' },
+      class: 'ml-1' do
+      i.far.fa-file-pdf.fa-2x.mr-2
+
+    / - unless contractor_invoice.paid?
+    /   = link_to pay_admin_invoice_path(contractor_invoice), method: :put,
+    /     data: { confirm: 'Изменить статус счета на "Оплачен"?', toggle: 'tooltip',
+    /     placement: 'top', title: 'Отметить как "Оплачен"' } do
+    /     i.fa.fa-check.fa-2x.green-text

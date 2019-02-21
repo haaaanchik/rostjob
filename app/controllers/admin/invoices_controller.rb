@@ -25,6 +25,6 @@ class Admin::InvoicesController < Admin::ApplicationController
   end
 
   def invoices
-    @invoices ||= Invoice.order(created_at: :desc)
+    @invoices ||= Invoice.customers.order(created_at: :desc)
   end
 end

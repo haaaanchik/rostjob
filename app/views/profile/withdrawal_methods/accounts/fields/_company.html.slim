@@ -1,0 +1,30 @@
+.form-group.row
+  = f.label :bank, t(:bank), class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_area :bank,
+            class: "form-control #{'is-invalid' unless errors[:'accounts.bank'].empty?}"
+    .invalid-feedback #{errors[:'accounts.bank'].first}
+.form-group.row
+  = f.label :bank_address, t(:bank_address), class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_area :bank_address,
+            class: "form-control #{'is-invalid' unless errors[:'accounts.bank_address'].empty?}"
+    .invalid-feedback #{errors[:'accounts.bank_address'].first}
+.form-group.row
+  = f.label :bic, t(:bic), class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_field :bic,
+            class: "form-control #{'is-invalid' unless errors[:'accounts.bic'].empty?}"
+    .invalid-feedback #{errors[:'accounts.bic'].first}
+.form-group.row
+  = f.label :account_number, t(:account_number), class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_field :account_number,
+            class: "form-control #{'is-invalid' unless errors[:'accounts.account_number'].empty?}"
+    .invalid-feedback #{errors[:'accounts.account_number'].first}
+.form-group.row
+  = f.label :corr_account, t(:corr_account), class: 'col-3 col-form-label require_field'
+  .col-9
+    = f.text_field :corr_account,
+            class: "form-control #{'is-invalid' unless errors[:'accounts.corr_account'].empty?}"
+    .invalid-feedback #{errors[:'accounts.corr_account'].first}

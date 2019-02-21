@@ -2,7 +2,15 @@ class Account < ApplicationRecord
   belongs_to :accountable, polymorphic: true
   has_many :account_statements
 
-  validates :account_number, :corr_account, :bic, :bank, :bank_address, presence: true
+  # validates :account_number, :corr_account, :bic, :bank, :bank_address, presence: true
+
+  def initialize(attrs = nil)
+    defaults = {
+      active: true
+    }
+    attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
+    super(attrs_with_defaults)
+  end
 
   def self.search_bank_dadata(term)
     find_by_dadata(term).map { |s| make_result_data(s) }

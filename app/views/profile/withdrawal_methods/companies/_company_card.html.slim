@@ -1,0 +1,26 @@
+- client_type = company.legal_form
+- errors = company.errors.messages
+
+- unless client_type.include?('private_person')
+  .company-search
+    .form-group.row
+      = label :dadata, 'Поиск предприятия или ИП', class: 'col-3 col-form-label'
+      .col-9
+        = text_field :dadata, :search, class: 'form-control',
+          'data-auto-select' => "withdrawal_method_#{client_type}_dadata",
+                'data-auto-url' => "/search_company_dadata",
+                'data-autocomplete-on' => "dadata_search",
+                placeholder: 'Введите ИНН, ОГРН, наименование юридического лица или ИП'
+= f.fields_for :company do |c|
+  = render partial: "profile/withdrawal_methods/companies/fields/#{client_type}", locals: { f: c, errors: errors, client_type: client_type }
+  h4.h4-responsive.mt-3.pt-3 Платёжные реквизиты
+  .form-group.row
+    = label :dadata, 'Поиск банка. Введите БИК', class: 'col-3 col-form-label'
+    .col-9
+      = text_field :dadata, :search, class: 'form-control',
+        'data-auto-select' => "withdrawal_method_#{client_type}_bank_dadata",
+              'data-auto-url' => "/search_bank_dadata",
+              'data-autocomplete-on' => "dadata_search",
+              placeholder: 'Поиск банка. Введите БИК'
+  = c.fields_for :accounts do |acc|
+    = render partial: "profile/withdrawal_methods/accounts/fields/#{client_type}", locals: { f: acc, errors: errors }

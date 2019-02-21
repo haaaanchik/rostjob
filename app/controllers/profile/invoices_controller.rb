@@ -19,7 +19,7 @@ class Profile::InvoicesController < ApplicationController
 
   def create
     if current_profile.filled?
-      result = ::Cmd::Invoice::Create.call(invoice_params: invoice_params, profile: current_profile)
+      result = ::Cmd::Invoice::Create.call(amount: amount, profile: current_profile)
       if result.success?
         redirect_to profile_invoices_path
       else
@@ -39,6 +39,10 @@ class Profile::InvoicesController < ApplicationController
 
   private
 
+  def amount
+    invoice_params[:amount]
+  end
+
   def invoice_params
     params.require(:invoice).permit(:amount)
   end
@@ -48,6 +52,6 @@ class Profile::InvoicesController < ApplicationController
   end
 
   def invoices
-    @invoices ||= current_profile.invoices.order(created_at: :desc)
+    @invoices ||= current_profile.invoices.customers.order(created_at: :desc)
   end
 end

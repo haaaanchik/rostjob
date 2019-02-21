@@ -26,6 +26,7 @@ html
                   = link_to 'Бухгалтерия', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                   .dropdown-menu
                     = link_to 'Выписанные счета', admin_invoices_path, class: 'dropdown-item', data: {offset: '60'}
+                    = link_to 'Перечисления исполнителям', admin_contractor_invoices_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Импорт выписок', admin_account_statements_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Экспорт полатёжных поручений', admin_payment_orders_path, class: 'dropdown-item', data: {offset: '60'}
               - if can_access?(%w[admin moderator])

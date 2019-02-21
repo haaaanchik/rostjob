@@ -8,6 +8,9 @@ class Invoice < ApplicationRecord
 
   before_save :set_invoice_number
 
+  scope :customers, -> { joins(:profile).where('profiles.profile_type = ?', 'customer') }
+  scope :contractors, -> { joins(:profile).where('profiles.profile_type = ?', 'contractor') }
+
   aasm column: :state do
     state :created, initial: true
     state :paid

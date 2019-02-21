@@ -1,0 +1,11 @@
+h1 Перечисления исполнителям
+table.table
+  tr
+    th Номер
+    th Дата
+    th Сумма
+    th Исполнитель
+    th Действия
+  = render partial: 'contractor_invoice', collection: @paginated_invoices
+= paginate @paginated_invoices
+

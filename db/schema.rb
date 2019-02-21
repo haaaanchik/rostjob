@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_08_081033) do
+ActiveRecord::Schema.define(version: 2019_02_20_165811) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
     t.bigint "accountable_id"
     t.string "inn"
     t.string "kpp"
+    t.boolean "active"
     t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
   end
 
@@ -100,6 +101,10 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
     t.boolean "own_company", default: false
     t.bigint "profile_id"
     t.boolean "active", default: false
+    t.string "companyable_type"
+    t.bigint "companyable_id"
+    t.string "legal_form"
+    t.index ["companyable_type", "companyable_id"], name: "index_companies_on_companyable_type_and_companyable_id"
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 
@@ -189,7 +194,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
     t.index ["proposal_id"], name: "index_messages_on_proposal_id"
   end
 
-  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
@@ -198,7 +203,7 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
     t.index ["profile_id"], name: "index_order_profiles_on_profile_id"
   end
 
-  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "name"
     t.string "title"
     t.text "specialization"
@@ -467,6 +472,15 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "type"
+    t.bigint "profile_id"
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_withdrawal_methods_on_profile_id"
+  end
+
   add_foreign_key "account_statements", "accounts"
   add_foreign_key "balances", "profiles"
   add_foreign_key "bill_transactions", "balances"
@@ -488,4 +502,5 @@ ActiveRecord::Schema.define(version: 2019_02_08_081033) do
   add_foreign_key "tax_calculations", "profiles"
   add_foreign_key "tax_offices", "companies"
   add_foreign_key "users", "profiles"
+  add_foreign_key "withdrawal_methods", "profiles"
 end

@@ -1,10 +1,12 @@
 class Company < ApplicationRecord
-  belongs_to :profile, optional: true
+  # belongs_to :profile, optional: true
+  belongs_to :companyable, polymorphic: true
   has_many :accounts, as: :accountable, dependent: :destroy
+  has_one :active_account, -> { where(active: true) }, as: :accountable, class_name: 'Account'
   has_many :payment_orders, dependent: :destroy
   has_one :tax_office
 
-  validates :name, :inn, presence: true
+  # validates :name, :inn, presence: true
 
   accepts_nested_attributes_for :accounts
   accepts_nested_attributes_for :tax_office
@@ -69,5 +71,9 @@ class Company < ApplicationRecord
 
   def self.own_active
     own.find_by(active: true)
+  end
+
+  def private_person?
+    legal_form.include? 'private_person'
   end
 end
