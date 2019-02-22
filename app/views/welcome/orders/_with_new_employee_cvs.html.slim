@@ -1,0 +1,10 @@
+- if profile.customer?
+  .card.mb-3
+    .card-body
+      h4 Заявки с новыми анкетами
+      table.table
+        tr
+          th №
+          th Заявка
+          th Новые анкеты
+        = render partial: 'welcome/orders/order', collection: orders

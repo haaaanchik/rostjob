@@ -83,6 +83,7 @@ Rails.application.routes.draw do
     end
     # get 'proposal_employee/:id', to: 'proposal_employee#show'
     resources :invoices, only: %i[index show create destroy]
+    resources :answered_orders
     resources :orders, except: %i[create update] do
       member do
         put :hide

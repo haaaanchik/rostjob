@@ -151,9 +151,9 @@ class Profile::OrdersController < ApplicationController
 
   def orders
     @orders ||= if params[:state] && !params[:state].empty?
-                  current_profile.orders.where state: params[:state]
+                  current_profile.orders.with_pe_counts.where state: params[:state]
                 else
-                  current_profile.orders
+                  current_profile.orders.with_pe_counts
                 end
   end
 

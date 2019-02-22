@@ -13,6 +13,7 @@ class Order < ApplicationRecord
   has_many :proposal_employees
   has_many :profiles, -> { distinct }, through: :proposal_employees
   has_many :order_profiles
+  has_many :employee_cvs, through: :proposal_employees, source: :employee_cv
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
@@ -27,15 +28,7 @@ class Order < ApplicationRecord
   # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: {message: 'must be abided'}
 
-  scope :filter_by_day, -> {where 'created_at >= ?', Date.current - 1.day}
-  scope :filter_by_3day, -> {where 'created_at >= ?', Date.current - 3.days}
-  scope :filter_by_week, -> {where 'created_at >= ?', Date.current - 1.week}
-  scope :filter_by_all_time, -> {all}
-  scope :sort_by_reward_asc, -> {order commission: :asc}
-  scope :sort_by_reward_desc, -> {order commission: :desc}
-  scope :sort_by_date_asc, -> {order created_at: :asc}
-  scope :sort_by_date_desc, -> {order created_at: :desc}
-  scope :by_query, ->(term) {where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%")}
+  include OrderRepository
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true

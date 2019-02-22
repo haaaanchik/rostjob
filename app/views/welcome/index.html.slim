@@ -1,14 +1,17 @@
 - if user_signed_in?
-  h2 Журнал событий
-  table.table
-    tr
-      th Логин
-      th Роль
-      th Заявка
-      th Действие
-      th Анкета
-      th Дата
-      th Время
-      th Кнопка возврата
-    = render @user_action_log_records
-  = paginate @user_action_log_records
+  = render partial: 'welcome/quick_decision', locals: { profile: @current_profile }
+  .card
+    .card-body
+      h4 Журнал событий
+      table.table
+        tr
+          th Логин
+          th Роль
+          th Заявка
+          th Действие
+          th Анкета
+          th Дата
+          th Время
+          th Кнопка возврата
+        = render @user_action_log_records
+      = paginate @user_action_log_records

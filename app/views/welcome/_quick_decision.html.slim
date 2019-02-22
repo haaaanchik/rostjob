@@ -1,0 +1,6 @@
+- if profile.customer?
+  = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count } if @orders_with_unviewed_pe_count.any?
+  = render partial: 'welcome/orders/with_disputed_employee_cvs', locals: { profile: profile, orders: @orders_with_disputed_employee_cvs } if @orders_with_disputed_employee_cvs.any?
+- elsif profile.contractor?
+  = render partial: 'welcome/orders/with_deleted_employee_cvs2', locals: { profile: profile, orders: @orders_with_deleted_employee_cvs } if @orders_with_deleted_employee_cvs.any?
+  = render partial: 'welcome/orders/with_disputed_employee_cvs2', locals: { profile: profile, orders: @orders_with_disputed_employee_cvs } if @orders_with_disputed_employee_cvs.any?

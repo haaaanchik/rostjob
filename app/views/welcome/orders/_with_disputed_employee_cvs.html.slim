@@ -1,0 +1,8 @@
+.card.mb-3
+  .card-body
+    h4 Спорные анкеты
+    table.table
+      tr
+        th ФИО
+        th Заявка
+      = render partial: 'welcome/orders/employee_cv', collection: orders, as: :order
