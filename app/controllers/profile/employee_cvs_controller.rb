@@ -77,11 +77,10 @@ class Profile::EmployeeCvsController < ApplicationController
     # redirect_to profile_employee_cvs_path(term: term)
   end
 
-  def add_proposal
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: employee_cv,
-                                                proposal_id: params[:proposal_id])
+  def send_proposal
+    Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
+    result = Cmd::ProposalEmployee::Create.call(employee_cv: employee_cv, order_id: params[:order_id])
     @employee_cv = employee_cv
-    @employee_pr = result.employee_pr
     if result.success?
       Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
       @status = 'success'
@@ -90,11 +89,6 @@ class Profile::EmployeeCvsController < ApplicationController
       @status = 'error'
       @text = error_msg_handler @employee_cv
     end
-  end
-
-  def remove_proposal
-    @employee_cv = EmployeeCv.find_by id: params[:id]
-    @employee_cv.rempve_pr_empl params[:proposal_id]
   end
 
   def change_status

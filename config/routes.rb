@@ -126,8 +126,7 @@ Rails.application.routes.draw do
         put :to_ready
         put :to_disput
         put :change_status
-        put :add_proposal
-        delete :remove_proposal
+        put :send_proposal
       end
     end
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'

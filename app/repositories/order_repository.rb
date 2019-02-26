@@ -31,6 +31,8 @@ module OrderRepository
         .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
     }
 
+    scope :without_favorites_of, ->(profile) { where.not(id: profile.answered_orders.pluck(:id)) }
+
     scope :filter_by_day, -> {where 'created_at >= ?', Date.current - 1.day}
     scope :filter_by_3day, -> {where 'created_at >= ?', Date.current - 3.days}
     scope :filter_by_week, -> {where 'created_at >= ?', Date.current - 1.week}

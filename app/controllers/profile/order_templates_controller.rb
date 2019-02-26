@@ -54,7 +54,7 @@ class Profile::OrderTemplatesController < ApplicationController
     attributes = order_template.attributes
     order_attributes = attributes.merge('id' => nil, 'number_of_employees' => number_of_employees,
                                         'customer_total' => customer_total, 'contractor_total' => contractor_total)
-                                 .except('name')
+                                 .except('name', 'created_at', 'updated_at')
     result = Cmd::Order::Create.call(profile: current_profile, params: order_attributes, position: profession)
     if result.success?
       redirect_to pre_publish_profile_order_path(result.order)

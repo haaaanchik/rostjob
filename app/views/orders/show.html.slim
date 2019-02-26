@@ -19,10 +19,13 @@
               |#{order.number_of_employees}
       .row
         .col-12
-          - proposal = order.proposals.sent.find_by(profile_id: current_user.profile.id)
-          - if proposal
-            span.badge class=class_by_state(proposal)
-              |#{t("proposal.state.#{proposal.state}")}
+          / / - proposal = order.proposals.sent.find_by(profile_id: current_user.profile.id)
+          / / - if proposal
+          /   span.badge class=class_by_state(proposal)
+          /     |#{t("proposal.state.#{proposal.state}")}
+          / - proposal = OpenStruct.new(state: 'sent')
+          / span.badge class=class_by_state(proposal)
+          /   |#{t("proposal.state.#{proposal.state}")}
           dl.row
             dt.col-6 Специализация
             dd.col-6 #{order.specialization}
@@ -40,8 +43,3 @@
         .col-12
           - if current_user.profile.profile_type.include? 'contractor'
             = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success float-right', remote: true
-          / - if proposal || order.profile.id == current_user.profile.id
-          /   = render partial: 'profile/proposals/show',
-          /           locals: {order: order, proposal: proposal}
-          / - else
-          /   = render partial: 'new_proposal_form', locals: {order: order, proposal: new_proposal}

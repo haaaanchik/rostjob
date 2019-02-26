@@ -1,7 +1,6 @@
 class ProposalEmployee < ApplicationRecord
   include AASM
 
-  belongs_to :proposal
   belongs_to :order
   belongs_to :profile
   belongs_to :employee_cv
