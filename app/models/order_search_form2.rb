@@ -30,7 +30,7 @@ class OrderSearchForm2
       if query.empty?
         profile.favorites.decorate
       else
-        Order.published.without_favorites_of(profile).send(:by_query, query).send(sort_by_sym).send(filter_by_sym).decorate
+        Order.published.send(:by_query, query).send(sort_by_sym).send(filter_by_sym).decorate
       end
     else
       profile.favorites.decorate
