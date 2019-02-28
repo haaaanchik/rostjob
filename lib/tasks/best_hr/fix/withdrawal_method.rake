@@ -1,7 +1,7 @@
 namespace :best_hr do
-  namespace :seed do
-    desc 'Fix profiles data'
-    task fix_withdrawal_method: :environment do
+  namespace :fix do
+    desc 'Fix withdrawal method'
+    task withdrawal_method: :environment do
       p 'фиксим способ вывода'
       Profile.find_each do |p|
         next unless p.contractor?

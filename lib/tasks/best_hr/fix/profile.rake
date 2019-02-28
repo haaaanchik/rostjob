@@ -1,7 +1,7 @@
 namespace :best_hr do
-  namespace :seed do
+  namespace :fix do
     desc 'Fix profiles data'
-    task fix_profiles: :environment do
+    task profiles: :environment do
       p 'Добавляем шаблон компании к профилям'
       template_company = {
         name: 'ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ "БЭСТ-ЭЙЧАР"',

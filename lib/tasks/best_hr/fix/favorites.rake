@@ -1,7 +1,7 @@
 namespace :best_hr do
-  namespace :seed do
-    desc 'Creates service admin.'
-    task fix_favorites: :environment do
+  namespace :fix do
+    desc 'Fix favorites'
+    task favorites: :environment do
       p 'Фиксим избранное'
       Favorite.find_by(id: 4)&.destroy
       Favorite.find_by(id: 5)&.destroy

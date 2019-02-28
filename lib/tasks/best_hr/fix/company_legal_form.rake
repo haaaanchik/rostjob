@@ -1,7 +1,7 @@
 namespace :best_hr do
-  namespace :seed do
-    desc 'Fix profiles data'
-    task fix_company_legal_form: :environment do
+  namespace :fix do
+    desc 'Fix company legal form'
+    task company_legal_form: :environment do
       p 'фиксим правовую форму компании'
       Company.find_each do |c|
         if c.companyable.is_a? Profile
