@@ -1,6 +1,7 @@
 class OauthController < ApplicationController
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
+  skip_before_action :auth_user
   skip_before_action :create_profile
 
   def create

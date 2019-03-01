@@ -2,7 +2,7 @@
 
 class Users::PasswordsController < Devise::PasswordsController
   before_action :configure_permitted_parameters, if: :devise_controller?
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
   skip_before_action :auth_user
   # GET /resource/password/new
   def new

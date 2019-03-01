@@ -1,5 +1,6 @@
 class PricesController < ApplicationController
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
+  skip_before_action :auth_user
 
   def show
     paginated_price_items
