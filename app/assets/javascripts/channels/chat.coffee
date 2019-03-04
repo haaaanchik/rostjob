@@ -1,9 +1,9 @@
-App.chat = App.cable.subscriptions.create "ChatChannel",
-  connected: ->
+# App.chat = App.cable.subscriptions.create "ChatChannel",
+#   connected: ->
 
-  disconnected: ->
+#   disconnected: ->
 
-  received: (data) ->
-    console.log data
-    $('.messages').append(data)
+#   received: (data) ->
+#     console.log data
+#     $('.messages').append(data)
 
