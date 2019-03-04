@@ -1,0 +1,87 @@
+
+
+body {
+  font-family: Verdana, Geneva, sans-serif!important;
+}
+
+
+
+
+
+
+
+
+.bg-best-hr {
+	background-color: #534741 !important;
+}
+
+.form-box {
+    margin: .375rem;
+    border-radius: 0;
+}
+
+
+
+
+
+
+.btn-box {
+  border-radius: 0;
+  line-height: 0.4;
+  font-size: 1rem;
+  border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+.btn-box:hover {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+
+.btn-box:focus {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+
+.btn-box:visited {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+
+
+
+
+
+
+.button-menu {
+  width: 100%;
+}
+
+
+
+
+

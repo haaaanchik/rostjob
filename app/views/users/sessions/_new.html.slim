@@ -1,23 +1,4 @@
-= form_with model: @user, url: login_path, html: {class: 'text-center p-3 mb-2'} do |f|
-  .md-form.mb-5
-    = f.text_field :email, class: 'form-control', autofocus: true, autocomplete: "email"
-    = f.label :email, t("views.modals.login.email")
-  .md-form.mb-5
-    = f.password_field :password, class: 'form-control', autocomplete: "current-password"
-    = f.label :password, t("views.modals.login.password")
-    p.font-small.blue-text.d-flex.justify-content-end
-      = link_to "Забыли пароль?", new_user_password_path, class: 'blue-text ml-1', remote: true
-  / - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-  /   p.font-small.grey-text.d-flex.justify-content-center.mt-4
-  /     = link_to "Забыли пароль?", new_password_path(@resource), class: 'grey-text'
-  / - if devise_mapping.rememberable?
-  /   .md-form
-  /     = f.check_box :remember_me
-  /     = f.label :remember_me, 'Запомнить меня'
-  .d-flex.justify-content-center
-    = f.submit t("views.modals.login.submit"), class: 'btn btn-deep-orange z-depth-1'
-.row.d-flex.align-items-center.pb-3
-  .col-md-12
-    .font-small.d-flex.justify-content-end
-      | Не зарегистрированны?
-      = link_to 'Пройти регистрацию', new_user_registration_path, class: 'blue-text ml-1', remote: true
+= form_with model: @user, url: login_path, html: { class: 'form-inline my-2 my-lg-0' } do |f|
+  = f.text_field :email, class: 'form-control form-control-sm form-box', placeholder: 'Логин'
+  = f.password_field :password, class: 'form-control form-control-sm form-box', placeholder: 'Пароль'
+  = f.submit 'Вход', class: 'btn btn-outline-success waves-effect btn-box'

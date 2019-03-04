@@ -3,6 +3,7 @@ class WelcomeController < ApplicationController
   skip_before_action :auth_user
 
   def index
+    @user = User.new
     if user_signed_in?
       prepare_data
       user_action_log_records
