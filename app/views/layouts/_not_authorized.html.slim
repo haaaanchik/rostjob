@@ -18,10 +18,9 @@ header
           .row.mt-5
             .col-md-12.wow.fadeIn.mb-3
               h5.white-text.mb-3.mt-1.font-weight-bold.wow.fadeIn data-wow-delay="0.4s" Платформа для людей занимающихся набором персонала
-              = link_to new_user_registration_path, class: 'btn btn-dark-green btn-lg wow fadeInDown',
-                data: {'wow-delay'=>'0.4s'}, remote: true do
-                i.fas.fa-door-open
-                | Зарегистрироваться
+              = link_to new_user_registration_path, class: 'btn btn-dark-green btn-lg wow fadeInDown', data: {'wow-delay'=>'0.4s'}, remote: true do
+                i.fas.fa-door-open.mr-3
+                | Регистрируйся
 main
   #modal_container
   .container
