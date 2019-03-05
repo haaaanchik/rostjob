@@ -15,6 +15,7 @@
 @import "external/bootstrap-datepicker3";
 @import "welcome";
 @import "style";
+@import "contractor";
 
 @media (max-width: 1025px) {
   .stepper.colorful-timeline li {
@@ -29,7 +30,7 @@ html,
 body,
 header,
 .jarallax {
-  height: 100px;
+  height: 50px;
 }
 
 .question-help {

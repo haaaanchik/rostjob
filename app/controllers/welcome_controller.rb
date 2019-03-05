@@ -15,7 +15,7 @@ class WelcomeController < ApplicationController
   def user_action_log_records
     @user_action_log_records ||= UserActionLog.where('JSON_CONTAINS(receiver_ids, ?) = 1', current_user.id.to_s)
                                               .order(id: :desc)
-                                              .page(params[:page])
+                                              .page(params[:page]).per(10)
                                               .decorate
   end
 

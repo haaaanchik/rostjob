@@ -1,0 +1,71 @@
+body {
+  font-family: Verdana, Geneva, sans-serif!important;
+
+}
+
+.bg-best-hr {
+	background-color: #534741 !important;
+}
+
+.dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:active, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
+.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
+.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
+.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
+.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
+.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
+.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
+.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
+.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
+.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a.active {
+    background-color: #534741 !important;    
+  }
+
+.button-menu-l, .button-menu-r {
+  padding: 14px;
+  text-align: left;
+  border: 2px solid #fff !important;
+  background-color: transparent !important;
+  color: #534741 !important; 
+    -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);}
+  .button-menu:hover, .button-menu:focus, .button-menu:active, .button-menu:active:focus, .button-menu.active  {
+    border-color: #eeeeee !important;
+    background-color: #eeeeee !important;
+    color: #000 !important; 
+  -webkit-box-shadow:  0 5px 11px 0 rgba(0, 0, 0, 0.18),  0 5px 11px 0 rgba(0, 0, 0, 0.18);}
+  .button-menu:not([disabled]):not(.disabled):active, .button-menu:not([disabled]):not(.disabled).active,
+  .show > .button-menu.dropdown-toggle {
+    -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    background-color: transparent !important;
+    border-color: #534741 !important; }
+  .button-menu:not([disabled]):not(.disabled):active:focus, .button-menu:not([disabled]):not(.disabled).active:focus,
+  .show > .button-menu.dropdown-toggle:focus {
+    -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+
+.button-menu-l {
+  width: 20%;
+}
+
+ .button-menu-r {
+  width: 80%;
+}
+
+.group-menu {
+  width: 90%;
+}
+
+.hr-menu {
+  margin: 10px 0px 10px 0px;
+}
+
+
+.menu-style {
+  padding: 0px !important;
+}
+
+
+.w-10 {
+  width: 10%;
+}

@@ -1,4 +1,6 @@
 class Profile::EmployeeCvsController < ApplicationController
+  layout false, only: :index
+
   def index
     if term == :sent
       paginated_sent_employee_cvs
@@ -37,7 +39,7 @@ class Profile::EmployeeCvsController < ApplicationController
     result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
     if result.success?
       @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :ready)
+      # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv
@@ -84,7 +86,7 @@ class Profile::EmployeeCvsController < ApplicationController
     if result.success?
       Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
       @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :ready)
+      # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
       @text = error_msg_handler @employee_cv
@@ -101,7 +103,7 @@ class Profile::EmployeeCvsController < ApplicationController
     result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv)
     if result.success?
       @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :ready)
+      # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv

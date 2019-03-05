@@ -13,7 +13,7 @@ class EmployeeCv < ApplicationRecord
   scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where("proposal_id IS NULL") }
 
   validates :name, presence: true
-  validates :phone_number, presence: true, phone: true
+  # validates :phone_number, presence: true, phone: true
   validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true

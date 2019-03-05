@@ -1,11 +1,14 @@
-li.nav-item
-  .badge.badge-primary.ml-3.mt-2 = profile_type_rus @current_profile&.profile_type
-li.nav-item.dropdown
+li.nav-item.mr-2
+  = link_to '#', class: 'nav-link waves-effect waves-light' do
+    '0
+    i.fas.fa-envelope
+li.nav-item.avatar.dropdown
   = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: {toggle: 'dropdown'}, aria: {haspopup: 'true', expanded: 'false'} do
-    |#{current_user.full_name}
-  .dropdown-menu.dropdown-primary aria-labelledby="#dropdownMenuLink"
-    / = link_to 'Мой профиль', edit_profile_path, class: 'dorpdown-item d-block'
-    = link_to 'Лицевой счёт', profile_balance_path, class: 'dorpdown-item d-block'
-    = link_to 'Выход', logout_path, class: 'dorpdown-item d-block', method: :delete
-  .dropdown-menu aria-labelledby="dropdownMenuLink"
-    = link_to 'Выход', logout_path, class: 'dorpdown-item', method: :delete
+    = image_tag('/img/no-avatar.jpg', class: 'rounded-circle z-depth-zero', alt: 'avatar image')
+  .dropdown-menu.dropdown-menu-right.dropdown-secondary aria-labelledby="#dropdownMenuLink"
+    = link_to profile_balance_path, class: 'dropdown-item bg-best-hr-a' do
+      i.fas.fa-money-bill-alt.w-25
+      |Счёт
+    = link_to logout_path, class: 'dropdown-item bg-best-hr-a', method: :delete do
+      i.fas.fa-sign-out-alt.w-25
+      |Выход

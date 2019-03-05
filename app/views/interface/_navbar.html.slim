@@ -1,4 +1,4 @@
 ul.navbar-nav.mr-auto
   = render partial: "interface/navbar/#{@current_profile&.profile_type || 'nil'}.html.slim"
-ul.navbar-nav
+ul.navbar-nav.ml-auto.nav-flex-icons
   = render partial: "interface/navbar/profile_menu/#{@current_profile&.profile_type || 'nil'}.html.slim"

@@ -1,11 +1,11 @@
 .card.border-light
   .card-body
-    h2 = 'Мои анкеты'
-    = link_to 'Добавить анкету', new_profile_employee_cv_path,
-            method: :get, remote: true, class: 'btn btn-success float-right'
+    / h2 = 'Мои анкеты'
+    / = link_to 'Добавить анкету', new_profile_employee_cv_path,
+    /         method: :get, remote: true, class: 'btn btn-success float-right'
     .row
       .col-3
-        = render partial: 'left_menu'
+        / = render partial: 'left_menu'
       .col-9
         table.table.table-hover.w-auto
           thead

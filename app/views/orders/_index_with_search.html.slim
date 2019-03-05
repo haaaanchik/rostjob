@@ -1,10 +1,10 @@
 - search_form_id = 'order_search_form'
 .row
-  .col-2.mt-3
+  / .col-2
     .card
       .card-body
         = render partial: 'search_filters', locals: { form_id: search_form_id }
-  .col-10.mt-3
+  .col-12
     .card
       .card-body
         = render partial: 'search_form', locals: { form_id: search_form_id }
