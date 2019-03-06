@@ -50,13 +50,13 @@ class Profile::EmployeeCvsController < ApplicationController
   def create_as_sent
     ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
     order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv, proposal_id: order_result.proposal.id)
+    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv, order_id: order_result.order.id)
     @employee_cv = ecv_result.employee_cv
     @employee_pr = result.employee_pr
     if result.success?
       Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
       @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :sent)
+      # redirect_to profile_employee_cvs_path(term: :sent)
     else
       @status = 'error'
       @text = error_msg_handler ecv_result.employee_cv
