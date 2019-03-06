@@ -1,47 +1,141 @@
-.card.mt-3 id="favorite_id_#{order.id}"
-  .card-body
-    .row
-      .col
-        = image_tag('/img/no-avatar.jpg', size: 80)
-      .col
-        = order.profile.company.name.delete('\n')
-      .col
-        = render partial: 'orders/urgency', locals: { order: order }
-      .col
-        = order.contractor_price
-        i.fa.fa-ruble-sign.ml-1
-      .col
-        - unless @current_profile.profile_type == 'customer'
-          - if !@current_profile.favorites.find_by(id: order.id)
-            = link_to add_to_favorites_order_path(order), method: :put, remote: true do
-              i.fa.fa-star.text-warning
-          - else
-            = link_to remove_from_favorites_order_path(order), method: :put, remote: true do
-              i.fa.fa-star.text-info
+- id = order_id + order.id.to_s
+.row.m-1.mt-3 id=id
+  .container-fluid
+    .card.testimonial-card.card-hr
+      .card-up.bg-best-hr.lighten-1.card-up-hr
+        .container-fluid
+          .row.m-card-up
+            .container-fluid.p-0.box
+              .ava-m.d-none.d-md-block
+              .w-100
+                table.w-100[height="90px"]
+                  tr
+                    td.align-bottom
+                      h4.card-title.white-text
+                        = order.profile.company.name
+                    td.align-middle.text-right[width="200px"]
+                      - unless @current_profile.profile_type == 'customer'
+                        - unless @employee_cv_id
+                          - if !@current_profile.favorites.find_by(id: order.id)
+                            = link_to add_to_favorites_order_path(order), class: 'btn-floating btn-sm blue', method: :put, remote: true do
+                              i.fas.fa-star
+                            span.counter
+                              i.fas.fa-plus
+                            p.card-title.white-text
+                              | В избранное
+                          - else
+                            = link_to remove_from_favorites_order_path(order), class: 'btn-floating btn-sm blue', method: :put, remote: true do
+                              i.fas.fa-star
+                            span.counter.mt-1
+                              i.fas.fa-minus
+                            p.card-title.white-text
+                              | Убрать из избранного
+      .box
+        .text-center
+          .avatar.ml-2.white.mr-1.d-none.d-md-block
+            = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
+          .ml-2.mr-2
+            p.h4
+              br
+              |# #{order.id}
+        .container-fluid.p-0.up-box.m-2
+          = render partial: 'orders/urgency', locals: { order: order }
+          .price.container-fluid.border.rounded.mb-0
+            p.h4.text-center.mt-1.mb-0
+              i.fas.fa-hammer.mr-2
+              strong #{order.title} (#{order.skill})
+            p.text-center.m-0
+              i.fas.fa-money-bill-alt.w-2.mr-2
+              strong #{order.salary_from}
+              i.fas.fa-ruble-sign.m-1
+              '-
+              strong #{order.salary_to}
+              i.fas.fa-ruble-sign.ml-1
+            p.m-0
+              i.fas.fa-map-marker.w-2
+              strong.ml-2 #{order.city}, район: #{order.district}
+            p.m-0
+              i.fas.fa-passport.w-2.mr-2
+              strong #{order.experience}
+            p.m-0
+              i.far.fa-calendar-alt.w-2.mr-2
+              strong #{order.work_period} (#{order.schedule})
+            p.m-0
+              i.fas.fa-clipboard-list.w-2.mr-2
+              - unless order.description.nil? || order.description.empty?
+                strong = Nokogiri::HTML.parse(order.description).text
+            p.m-0
+              i.fas.fa-plus.w-2.mr-2
+              strong #{order.other_info['related_profession']}
+            p.m-0
+              i.fas.fa-bed.w-2.mr-2
+              strong #{order.other_info['terms']}
+            hr.mb-0
+            .box-spice
+              div
+                p.mt-0
+                  i.fas.fa-comment-alt.w-2.mr-2
+                  |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
+                  br
+                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                    = Nokogiri::HTML.parse(order.other_info['remark']).text
+
+              - if @current_profile.contractor?
+                .m-2
+                  p.m-0.green-text.text-center
+                    'Отправить анкету
+                    - if @employee_cv_id
+                      = link_to send_proposal_profile_employee_cv_path(@employee_cv_id, order_id: order.id), class: 'btn btn-success btn-rounded m-0', method: :put, remote: true
+                        i.fas.fa-paper-plane
+                    - else
+                      = link_to new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success btn-rounded m-0', remote: true do
+                        i.fas.fa-paper-plane
 
 
-    .card.mt-2
-      .card-body
-        .row
-          .col
-            ul
-              li
-                = order.title
-              li
-                = order.city
-              li
-                = order.schedule
-          .col
-            ul
-              li
-                | Ищем #{order.number_of_employees} человек
-              li
-                = order.salary_from
-              li
-                = link_to 'Подробнее', order_path(order)
-    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-      .card.mt-2
-        .card-body
-          .row
-            .col
-              = Nokogiri::HTML.parse(order.other_info['remark']).text
+/ .card.mt-3 id="favorite_id_#{order.id}"
+/   .card-body
+/     .row
+/       .col
+/         = image_tag('/img/no-avatar.jpg', size: 80)
+/       .col
+/         = order.profile.company.name.delete('\n')
+/       .col
+/         = render partial: 'orders/urgency', locals: { order: order }
+/       .col
+/         = order.contractor_price
+/         i.fa.fa-ruble-sign.ml-1
+/       .col
+/         - unless @current_profile.profile_type == 'customer'
+/           - if !@current_profile.favorites.find_by(id: order.id)
+/             = link_to add_to_favorites_order_path(order), method: :put, remote: true do
+/               i.fa.fa-star.text-warning
+/           - else
+/             = link_to remove_from_favorites_order_path(order), method: :put, remote: true do
+/               i.fa.fa-star.text-info
+
+
+/     .card.mt-2
+/       .card-body
+/         .row
+/           .col
+/             ul
+/               li
+/                 = order.title
+/               li
+/                 = order.city
+/               li
+/                 = order.schedule
+/           .col
+/             ul
+/               li
+/                 | Ищем #{order.number_of_employees} человек
+/               li
+/                 = order.salary_from
+/               li
+/                 = link_to 'Подробнее', order_path(order)
+/     - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+/       .card.mt-2
+/         .card-body
+/           .row
+/             .col
+/               = Nokogiri::HTML.parse(order.other_info['remark']).text

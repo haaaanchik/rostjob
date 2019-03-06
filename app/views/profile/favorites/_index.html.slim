@@ -1,12 +1,10 @@
 .modal.fade#formModalMyOrders tabindex="-1" role="dialog" aria-labelledby="formModalMyOrdersLabel" aria-hidden="true"
-  .modal-dialog.modal-lg role="document"
+  .modal-dialog.modal-fluid role="document"
     .modal-content
       .modal-header
         h4.modal-title#formModalMyOrdersLabel Мои заявки
         = render partial: 'search_form'
-        / button type="button" class="close" data-dismiss="modal" aria-label="Close"
-        /   span aria-hidden="true" &times;
       .modal-body
         #orders_search_result
-          = render partial: 'order', collection: @favorites
+          = render partial: 'orders/order', collection: @favorites, locals: { order_id: 'order_id_' }
       .modal-footer

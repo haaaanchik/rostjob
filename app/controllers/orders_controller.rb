@@ -17,10 +17,12 @@ class OrdersController < ApplicationController
   end
 
   def add_to_favorites
+    @employee_cv_id = params[:employee_cv_id]
     Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
   end
 
   def remove_from_favorites
+    @employee_cv_id = params[:employee_cv_id]
     Cmd::Order::RemoveFromFavorites.call(order: order, profile: current_profile)
   end
 

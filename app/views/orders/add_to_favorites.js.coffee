@@ -1,5 +1,5 @@
-<% rdr = render partial: 'orders/order', object: @order %>
+<% rdr = render partial: 'orders/order', object: @order, locals: { order_id: 'order_id_' } %>
 
-$('#req_order_<%= @order.id %>').replaceWith('<%= j rdr %>');
+$('#order_id_<%= @order.id %>').replaceWith('<%= j rdr %>')
 <% text = 'Добавлено в избранное' %>
 toastr.info('<%= text %>', 'Успех!')

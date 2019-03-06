@@ -1,12 +1,6 @@
 - search_form_id = 'order_search_form'
-.row
-  / .col-2
-    .card
-      .card-body
-        = render partial: 'search_filters', locals: { form_id: search_form_id }
-  .col-12
-    .card
-      .card-body
-        = render partial: 'search_form', locals: { form_id: search_form_id }
+.row.mt-4.border
+  .col
+    = render partial: 'search_form', locals: { form_id: search_form_id }
     #order_search_results
-      = render @orders if @orders
+      = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }

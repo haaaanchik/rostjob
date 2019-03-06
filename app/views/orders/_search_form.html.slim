@@ -1,5 +1,5 @@
 = form_with  model: @order_search_form, url: orders_path, method: :get, skip_enforcing_utf8: true, id: form_id do |f|
-  .form-group.position-relative
-    = f.text_field :query, class: "form-control", placeholder:"Пример: подбор кассиров", aria_label: "Query"
+  .form-group.mt-4
+    = f.text_field :query, class: "form-control", placeholder: 'Поиск по заявкам', aria_label: "Query"
     span.form-clear.d-none
       i.fas.fa-times

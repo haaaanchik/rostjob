@@ -1,4 +1,18 @@
-.urgency title=order.urgency_title
-  i.fab.fa-gripfire.fa-2x class=order.urgency_low_class
-  i.fab.fa-gripfire.fa-2x class=order.urgency_middle_class
-  i.fab.fa-gripfire.fa-2x class=order.urgency_high_class
+- background_color = 'bg-best-hr'
+- background_color = 'red' if order.urgency.high?
+- background_color = 'blue'if order.urgency.low?
+
+.d-flex.justify-content-end
+  .text-right.z-depth-1.rounded.mb-0.position-relative class=background_color
+    p.white-text.m-1.h4
+      '#{order.contractor_price} рублей
+      - if order.urgency.high?
+        '/
+        i.fas.fa-fire.ml-1
+        i.fas.fa-fire
+        i.fas.fa-fire
+      - elsif order.urgency.low?
+        '/
+        i.far.fa-snowflake.ml-1
+        i.far.fa-snowflake
+        i.far.fa-snowflake
