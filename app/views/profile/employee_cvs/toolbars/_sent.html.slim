@@ -1,3 +1,21 @@
-= link_to profile_employee_cv_path(employee_cv),
-  data: { type: :script }, title: 'Просмотреть статус', remote: true do
-  i.fas.fa-search.fa-2x.ml-2
+div
+  = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-lg green', data: { type: :script }, title: 'Просмотр', remote: true do
+    i.fas.fa-info
+  p.green-text
+    |  Инфо
+div
+  = link_to profile_favorites_path(employee_cv_id: employee_cv), class: 'btn-floating btn-lg blue disabled', data: { type: :script }, title: 'Вернуть', remote: true do
+    i.fas.fa-backward
+  p.blue-text
+    |  Вернуть
+div
+  = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-lg red disabled', data: { confirm: 'Удалить анкету?' }, title: 'Спор', method: :delete, remote: true do
+    i.fas.fa-angry
+  p.red-text
+    |  Спор
+
+
+
+/ = link_to profile_employee_cv_path(employee_cv),
+/   data: { type: :script }, title: 'Просмотреть статус', remote: true do
+/   i.fas.fa-search.fa-2x.ml-2

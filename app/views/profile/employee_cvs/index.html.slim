@@ -1,18 +1,22 @@
-.card.border-light.mt-3
-  .card-body
-    / h2 = 'Мои анкеты'
-    / = link_to 'Добавить анкету', new_profile_employee_cv_path,
-    /         method: :get, remote: true, class: 'btn btn-success float-right'
-    .row
-      .col-3
-        / = render partial: 'left_menu'
-      .col-9
-        table.table.table-hover.w-auto
-          thead
-            tr
-              th ФИО
-              th Телефон
-              th Действия
-          tbody#candidates_list
-            = render @paginated_employee_cvs
-        = paginate @paginated_employee_cvs
+.row.mt-4
+  = render @paginated_employee_cvs
+= paginate @paginated_employee_cvs
+
+/ .card.border-light.mt-3
+/   .card-body
+/     / h2 = 'Мои анкеты'
+/     / = link_to 'Добавить анкету', new_profile_employee_cv_path,
+/     /         method: :get, remote: true, class: 'btn btn-success float-right'
+/     .row
+/       .col-3
+/         / = render partial: 'left_menu'
+/       .col-9
+/         table.table.table-hover.w-auto
+/           thead
+/             tr
+/               th ФИО
+/               th Телефон
+/               th Действия
+/           tbody#candidates_list
+/             = render @paginated_employee_cvs
+/         = paginate @paginated_employee_cvs

@@ -3,7 +3,7 @@ ru:
     contractor_terms_of_service: 'Я принимаю условия оферты'
     state:
       draft: 'Черновик'
-      applyed: 'Отправлена'
+      sent: 'Отправлена'
       hired: 'Нанят'
       fired: 'Уволен досрочно'
       charged: 'Оплачена'
@@ -12,6 +12,7 @@ ru:
       viewed: 'Просмотрена'
       disputed: 'Спор'
       refused: 'Отклонена'
+      deleted: 'Удалена'
 
     ext_data:
       pser: Серия паспорта

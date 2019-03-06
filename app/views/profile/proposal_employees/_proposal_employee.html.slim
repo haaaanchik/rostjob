@@ -1,13 +1,53 @@
 - pe = proposal_employee
 - employee_cv = pe.employee_cv
-tr id="proposal_employee_#{pe.id}" data-cvs-state="#{pe.state}"
-  td #{employee_cv.name}
-  td = employee_cv&.phone_number
-  / td
-  /   span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
-  td
-    / - filename = employee_cv.state
-    / = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
+.col-md-4.order-md-2 id="proposal_employee_#{pe.id}"
+  .container.p-0.up-box.m-2
+    .d-flex.justify-content-end
+      .blue.text-right.z-depth-1.rounded.mb-0.position-relative
+        p.white-text.m-1.h4
+          i.fas.fa-bookmark
+          = t("employee_cv.state.#{employee_cv.state}")
+    .card.testimonial-card.position-static.price.mb-3
+      .card-up.bg-best-hr.card-title.white-text.text-center.m-0[style="height: 120px"]
+        p.h3.mt-3.mb-0
+          |##{employee_cv.id} #{employee_cv.name}
+      .avatar.mx-auto.white
+        = image_tag('/img/no-avatar.jpg', alt: 'no avatar', class: 'rounded-circle img-responsive')
+      .card.card-form.md-calendar.white.z-depth-0
+        .card-body.rounded-top.white-text.pr-0.m-0
+          / = render partial: 'calendar.html.slim'
+          .box-spice
+            div
+              = link_to profile_proposal_employee_path(pe), class: 'btn-floating btn-lg green', data: { type: :script }, title: 'Просмотр', remote: true do
+                i.fas.fa-info
+              p.green-text
+                |  Инфо
+            div
+              = link_to profile_favorites_path(employee_cv_id: employee_cv), class: 'btn-floating btn-lg blue disabled', data: { type: :script }, title: 'Вернуть', remote: true do
+                i.fas.fa-backward
+              p.blue-text
+                |  Вернуть
+            div
+              = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-lg red disabled', data: { confirm: 'Удалить анкету?' }, title: 'Спор', method: :delete, remote: true do
+                i.fas.fa-angry
+              p.red-text
+                |  Спор
+
+
+
+
+
+
+/ - pe = proposal_employee
+/ - employee_cv = pe.employee_cv
+/ tr id="proposal_employee_#{pe.id}" data-cvs-state="#{pe.state}"
+/   td #{employee_cv.name}
+/   td = employee_cv&.phone_number
+/   / td
+/   /   span.badge.badge-primary = t("employee_cv.state.#{employee_cv.state}")
+/   td
+/     / - filename = employee_cv.state
+/     / = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
     = link_to profile_proposal_employee_path(pe),
       data: { type: :script }, title: 'Просмотреть статус', remote: true do
       i.fas.fa-search.fa-2x.ml-2
