@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback' => 'sessions#callback'
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
+    get 'secret_reg', to: 'users/registrations#secret_new'
     post 'login', to: 'users/sessions#create'
     delete 'logout', to: 'users/sessions#destroy'
   end

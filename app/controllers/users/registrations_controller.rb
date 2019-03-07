@@ -9,6 +9,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new
   end
 
+  def secret_new
+    @user = User.new
+  end
+
   def create
     result = if params.key? :customer
                ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)

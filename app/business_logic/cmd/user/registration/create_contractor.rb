@@ -7,18 +7,19 @@ module Cmd
         def call
           result = ::Cmd::User::Registration::Create.call(user_params: context.user_params, log: false)
           @user = result.user
-          context.failed! unless result.success?
+          context.user = result.user
+          context.fail! unless result.success?
           result = ::Cmd::Profile::Create.call(user: @user, params: profile_params, log: false)
-          context.failed! unless result.success?
+          context.fail! unless result.success?
           profile = result.profile
           result = ::Cmd::Profile::Balance::Create.call(profile: profile)
-          context.failed! unless result.success?
+          context.fail! unless result.success?
           result = ::Cmd::Profile::Balance::WithdrawalMethod::Create.call(profile: profile, legal_form: 'company')
-          context.failed! unless result.success?
+          context.fail! unless result.success?
           result = ::Cmd::Profile::Balance::WithdrawalMethod::Create.call(profile: profile, legal_form: 'ip')
-          context.failed! unless result.success?
+          context.fail! unless result.success?
           result = ::Cmd::Profile::Balance::WithdrawalMethod::Create.call(profile: profile, legal_form: 'private_person')
-          context.failed! unless result.success?
+          context.fail! unless result.success?
           Cmd::UserActionLogger::Log.call(params: logger_params)
         end
 
