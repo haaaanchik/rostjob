@@ -4,9 +4,8 @@ module Cmd
       include Interactor
 
       def call
-        proposal = candidate.proposal
-        profile = proposal.profile
-        order = proposal.order
+        profile = candidate.profile
+        order = candidate.order
         amount = order.contractor_price
         result = profile.balance.deposit(amount, "Вознаграждение по заявке №#{order.id}")
         context.fail! unless result
