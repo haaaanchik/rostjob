@@ -18,8 +18,8 @@ main
               =link_to root_path, class: 'btn button-menu-r btn-rounded waves-effect left-menu'  do
                 i.fas.fa-user-circle.w-10
                 = current_user.full_name
-            span.counter
-              |  0
+            / span.counter
+            /   |  0
           hr.mb-0.mt-0
           .card
             #heading4.card-header.menu-style[role="tab"]
@@ -31,8 +31,8 @@ main
                     button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
                       i.fas.fa-users.w-10
                       |  Мои анкеты
-                  span.counter
-                    |  0
+                  / span.counter
+                  /   |  0
             .card
               #collapse4.collapse[role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx194"]
                 .card-body.pt-0.menu-style
@@ -50,8 +50,8 @@ main
                       = link_to profile_employee_cvs_path(term: :sent), id: 'employee_cvs_sent', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
                         i.fas.fa-briefcase.w-10
                         |  Отправленные
-                    span.counter
-                      |  0
+                    / span.counter
+                    /   |  0
                   .mb-3.mt-3
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button" style="width: 20%"]
@@ -69,8 +69,8 @@ main
                       button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
                         i.far.fa-handshake.w-10
                         |  Заявки
-                    span.counter.blue
-                      |  new
+                    / span.counter.blue
+                    /   |  new
               #collapse5.collapse[role="tabpanel" aria-labelledby="heading5" data-parent="#accordionEx194"]
                 .card-body.pt-0.menu-style
                   .mb-3
@@ -80,8 +80,8 @@ main
                       = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect', remote: true do
                         i.fas.fa-align-justify.w-10
                         |  Каталог заявок
-                    span.counter.blue
-                      |  new
+                    / span.counter.blue
+                    /   |  new
                   .mb-3.mt-3
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]

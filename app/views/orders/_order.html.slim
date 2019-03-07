@@ -24,9 +24,9 @@
                             p.card-title.white-text
                               | В избранное
                           - else
-                            = link_to remove_from_favorites_order_path(order), class: 'btn-floating btn-sm blue', method: :put, remote: true do
+                            = link_to remove_from_favorites_order_path(order), class: 'btn-floating btn-sm grey', method: :put, remote: true do
                               i.fas.fa-star
-                            span.counter.mt-1
+                            span.counter.mt-1.grey
                               i.fas.fa-minus
                             p.card-title.white-text
                               | Убрать из избранного
