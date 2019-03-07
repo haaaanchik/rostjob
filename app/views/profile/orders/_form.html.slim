@@ -99,7 +99,7 @@
     = f.check_box :accepted, class: 'form-check-input'
     = f.label :accepted do
       'Я принимаю условия
-      = link_to 'Оферты', '/offerta.pdf'
+      = render partial: 'utils/oferta'
   .form-group.mt-3
     .row
       .col-3

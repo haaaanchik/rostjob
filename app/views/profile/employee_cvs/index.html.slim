@@ -4,7 +4,7 @@
     |Добавить анкету
 .row.mt-4
   = render @paginated_employee_cvs
-= paginate @paginated_employee_cvs
+= paginate @paginated_employee_cvs, remote: true
 
 / .card.border-light.mt-3
 /   .card-body
