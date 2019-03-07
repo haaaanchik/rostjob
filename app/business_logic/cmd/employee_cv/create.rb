@@ -5,8 +5,8 @@ module Cmd
 
       def call
         @employee_cv = profile.employee_cvs.create params
-        context.fail! unless @employee_cv.persisted?
         context.employee_cv = @employee_cv
+        context.fail! unless @employee_cv.persisted?
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

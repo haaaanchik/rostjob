@@ -66,10 +66,11 @@
               = f.check_box :contractor_terms_of_service, class: 'form-check-input', checked: false
               = f.label :contractor_terms_of_service, t('employee_cv.contractor_terms_of_service'),
                 class: 'from-check-label ml-2', data: { action: 'click->employee-cv#tosToggle' }
+              = render partial: 'utils/oferta'
           - if @order
             = f.submit 'Отправить', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_sent
           - else
             = f.submit 'Сохранить', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save
-            = f.submit 'Сохранить как черновик', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_draft
+            / = f.submit 'Сохранить как черновик', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_draft
         - else
           = f.submit 'Сохранить', class: 'btn btn-indigo'

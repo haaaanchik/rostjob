@@ -1,3 +1,7 @@
+.row.mt-4.mr-1.ml-0.d-flex.justify-content-end
+  = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
+    i.fas.fa-plus.mr-2
+    |Добавить анкету
 .row.mt-4
   = render @paginated_employee_cvs
 = paginate @paginated_employee_cvs
