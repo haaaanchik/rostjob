@@ -4,6 +4,7 @@ module Cmd
       include Interactor
 
       def call
+        binding.pry
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
           profile.save(context: :company)
@@ -15,6 +16,15 @@ module Cmd
       end
 
       private
+
+      def new_profile_params
+        profile_params[:company_attributes].merge!(legal_form: legal_form)
+        profile_params
+      end
+
+      def legal_form
+        profile.legal_form
+      end
 
       def profile_params
         context.params

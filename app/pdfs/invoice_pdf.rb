@@ -84,7 +84,7 @@ class InvoicePdf < Prawn::Document
     tdata = [['№', 'Наименование товара, работ, услуг', 'Коли-чество', 'Ед. Изм.', 'Цена', 'Сумма']]
     @goods.each_with_index do |good, index|
       summ = good['price'] * good['quantity']
-      @total += summ
+      @total += summ.to_i
       tdata.push([index + 1, good['title'], good['quantity'], good['unit'], good['price'], summ])
     end
     table(tdata, position: :center, column_widths: [10.mm, 103.mm, 15.mm, 12.mm, 25.mm, 25.mm],

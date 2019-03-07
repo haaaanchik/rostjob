@@ -11,6 +11,7 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :accounts
   accepts_nested_attributes_for :tax_office
 
+  validates :legal_form, presence: true
   with_options on: :company do |o|
     o.validates :short_name, :address, :mail_address, :phone, :fax,
                 :email, :ogrn, :director, :acts_on, presence: true
