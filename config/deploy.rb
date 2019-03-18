@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "best-hr"
-set :repo_url, "git@bitbucket.org:apis_media/best-hr.git"
+set :repo_url, "git@bitbucket.org:Dyos/best-hr.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
