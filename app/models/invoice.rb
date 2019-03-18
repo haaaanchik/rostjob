@@ -4,7 +4,8 @@ class Invoice < ApplicationRecord
 
   belongs_to :profile
 
-  validates :seller, :buyer, :amount, :goods, presence: true
+  validates :seller, :buyer, :goods, presence: true
+  validates :amount, presence: true, numericality: { greater_than: 0, less_than: 100_000_000.00 }
 
   before_save :set_invoice_number
 
