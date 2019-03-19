@@ -151,7 +151,11 @@ class Profile::OrdersController < ApplicationController
 
   def orders
     @orders ||= if params[:state] && !params[:state].empty?
-                  current_profile.orders.with_pe_counts.where state: params[:state]
+                  if params[:state] == 'completed'
+                    current_profile.orders.with_pe_counts.where state: params[:state]
+                  else
+                    current_profile.orders.with_pe_counts.where.not state: 'completed'
+                  end
                 else
                   current_profile.orders.with_pe_counts
                 end

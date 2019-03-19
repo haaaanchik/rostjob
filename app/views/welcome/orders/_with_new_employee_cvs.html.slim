@@ -1,10 +1,10 @@
 - if profile.customer?
-  .card.mb-3.mt-3
-    .card-body
-      h4 Заявки с новыми анкетами
-      table.table
-        tr
-          th №
-          th Заявка
-          th Новые анкеты
-        = render partial: 'welcome/orders/order', collection: orders
+  .row.mt-4.border
+    .m-2
+      p.h4
+        strong Примите решение:
+      ul
+        - orders.each do |order|
+          li
+            Поступило #{order.count} анкет(ы) в заявку
+            u = link_to order.title, profile_order_path(order)

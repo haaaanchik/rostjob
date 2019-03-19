@@ -23,7 +23,6 @@ class WelcomeController < ApplicationController
     if current_profile.customer?
       orders_with_unviewed_pe_count
       orders_with_disputed_employee_cvs
-      # binding.pry
     elsif current_profile.contractor?
       orders_with_disputed_employee_cvs
       orders_with_deleted_employee_cvs

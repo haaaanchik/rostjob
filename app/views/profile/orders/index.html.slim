@@ -1,17 +1,8 @@
 h1.mt-3
   | Мои Заявки
-  = link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-indigo ml-4'
-  = link_to 'Шаблоны заявок', profile_order_templates_path, class: 'btn btn-indigo ml-4'
+  = link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-success ml-4'
+  = link_to 'Шаблоны заявок', profile_order_templates_path, class: 'btn btn-success ml-4'
 
-ul.nav.md-pills
-  li.nav-item
-    = link_to 'В работе', profile_orders_path(state: :active), class: 'nav-link'
-  li.nav-item
-    = link_to 'Завершённые', profile_orders_path(state: :completed), class: 'nav-link'
-  li.nav-item
-    = link_to 'Черновики', profile_orders_path(state: :draft), class: 'nav-link'
-  li.nav-item
-    = link_to 'Все', profile_orders_path, class: 'nav-link'
 table.table-hover.table.mt-3
   tr.d-flex
     th.col-5 Наименование
