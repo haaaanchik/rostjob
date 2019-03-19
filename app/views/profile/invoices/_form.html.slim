@@ -2,5 +2,5 @@
   - errors = @invoice.errors.messages
   = f.label :amount, t(:amount)
   = f.text_field :amount, class: "form-control mr-2 ml-2 #{'is-invalid' unless errors[:amount].empty?}"
-  = f.submit 'Выписать', class: 'btn btn-indigo mb-2'
+  = f.submit 'Выписать', class: 'btn btn-success mb-2'
   .invalid-feedback #{errors[:amount].first}
