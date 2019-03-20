@@ -1,9 +1,66 @@
-tr.d-flex.clickable-row data-href=profile_order_path(order)
-  td.col-5 #{order.title}
-  td.col-3.text-center #{order.city}
-  td.col-2.text-center #{l(order.created_at, format: :long)}
-  td.col-1.text-center title="Кандидатов" #{order.total_pe_count || 0}
-  td.col-1.text-center title="Новых Кандидатов"
-    - if order.unviewed_pe_count
-      .badge.badge-info title="Новых" = order.unviewed_pe_count
-  td.col-1.text-center #{t("order.state.#{order.state}")}
+.row.m-1.mt-3
+  .container-fluid
+    .card.testimonial-card.card-hr
+      .card-up.bg-best-hr.lighten-1.card-up-hr
+        .container-fluid
+          .row.m-card-up
+            .container-fluid.p-0.box
+              .ava-m.d-none.d-md-block
+              .w-100
+                table.w-100[height="90px"]
+                  tr
+                    td.align-bottom
+                      h4.card-title.white-text
+                        = order.profile.company.name
+                    td.align-middle.text-right[width="200px"]
+      .box
+        .text-center
+          .avatar.ml-2.white.mr-1.d-none.d-md-block
+            = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
+          .ml-2.mr-2
+            p.h4
+              br
+              |# #{order.id}
+        .container-fluid.p-0.up-box.m-2
+          = render partial: 'orders/urgency', locals: { order: order }
+          .price.container-fluid.border.rounded.mb-0
+            p.h4.text-center.mt-1.mb-0
+              i.fas.fa-hammer.mr-2
+              strong #{order.title} (#{order.skill})
+            p.text-center.m-0
+              i.fas.fa-money-bill-alt.w-2.mr-2
+              strong #{order.salary_from}
+              i.fas.fa-ruble-sign.m-1
+              '-
+              strong #{order.salary_to}
+              i.fas.fa-ruble-sign.ml-1
+            p.m-0
+              i.fas.fa-map-marker.w-2
+              strong.ml-2 #{order.city}, #{order.district}
+            p.m-0
+              i.fas.fa-passport.w-2.mr-2
+              strong #{order.experience}
+            p.m-0
+              i.far.fa-calendar-alt.w-2.mr-2
+              strong #{order.work_period} (#{order.schedule})
+            p.m-0
+              i.fas.fa-clipboard-list.w-2.mr-2
+              - unless order.description.nil? || order.description.empty?
+                strong = Nokogiri::HTML.parse(order.description).text
+            p.m-0
+              i.fas.fa-plus.w-2.mr-2
+              strong #{order.other_info['related_profession']}
+            p.m-0
+              i.fas.fa-bed.w-2.mr-2
+              strong #{order.other_info['terms']}
+            hr.mb-0
+            .box-spice
+              div
+                p.mt-0
+                  i.fas.fa-comment-alt.w-2.mr-2
+                  |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
+                  br
+                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                    = Nokogiri::HTML.parse(order.other_info['remark']).text
+            .text-center
+              = link_to 'Просмотреть', profile_order_path(order), class: 'btn btn-success'
