@@ -27,11 +27,12 @@ module Cmd
 
         def logger_params
           {
+            login: @user.email,
             receiver_ids: [@user.id],
             subject_id: @user.id,
             subject_type: 'User',
             subject_role: @user.profile ? @user.profile.profile_type : nil,
-            action: 'Создана учетная запись заказчика',
+            action: "Создана учетная запись заказчика #{@user.email}",
             object_id: @user.id,
             object_type: 'User'
           }

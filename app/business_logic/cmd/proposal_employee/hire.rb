@@ -24,13 +24,16 @@ module Cmd
 
       def logger_params
         {
+          login: current_user.email,
           receiver_ids: receiver_ids,
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: 'Кандидат нанят',
+          action: "Кандидат с анкетой №#{candidate.employee_cv.id} нанят",
           object_id: candidate.employee_cv.id,
-          object_type: 'EmployeeCv'
+          object_type: 'EmployeeCv',
+          order_id: candidate.order_id,
+          employee_cv_id: candidate.employee_cv_id
         }
       end
     end

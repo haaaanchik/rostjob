@@ -15,6 +15,7 @@ module Cmd
 
         def logger_params
           {
+            login: @user,
             receiver_ids: [@user.id],
             subject_id: @user.id,
             subject_type: 'User',

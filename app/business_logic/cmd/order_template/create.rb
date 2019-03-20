@@ -32,13 +32,15 @@ module Cmd
 
       def logger_params
         {
-          receiver_id: current_user.id,
-          subject_id: current_user.id,
-          subject_type: 'User',
-          subject_role: current_user.profile.profile_type,
-          action: 'Создан черновик заявки',
-          object_id: @order.id,
-          object_type: 'Order'
+          # login: current_user.email,
+          # receiver_id: current_user.id,
+          # subject_id: current_user.id,
+          # subject_type: 'User',
+          # subject_role: current_user.profile.profile_type,
+          # action: 'Создан черновик заявки',
+          # object_id: @order.id,
+          # object_type: 'Order',
+          # order_id: @order.id
         }
       end
     end

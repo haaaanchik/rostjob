@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_205250) do
+ActiveRecord::Schema.define(version: 2019_03_19_161742) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -106,6 +106,17 @@ ActiveRecord::Schema.define(version: 2019_02_25_205250) do
     t.string "legal_form"
     t.index ["companyable_type", "companyable_id"], name: "index_companies_on_companyable_type_and_companyable_id"
     t.index ["profile_id"], name: "index_companies_on_profile_id"
+  end
+
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "proposal_employee_id"
+    t.string "state"
+    t.text "text"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_complaints_on_profile_id"
+    t.index ["proposal_employee_id"], name: "index_complaints_on_proposal_employee_id"
   end
 
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -431,6 +442,9 @@ ActiveRecord::Schema.define(version: 2019_02_25_205250) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "receiver_ids"
+    t.string "login"
+    t.integer "order_id"
+    t.integer "employee_cv_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -462,7 +476,7 @@ ActiveRecord::Schema.define(version: 2019_02_25_205250) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "type"
     t.bigint "profile_id"
     t.string "title"
@@ -476,6 +490,8 @@ ActiveRecord::Schema.define(version: 2019_02_25_205250) do
   add_foreign_key "bill_transactions", "balances"
   add_foreign_key "comments", "orders"
   add_foreign_key "companies", "profiles"
+  add_foreign_key "complaints", "profiles"
+  add_foreign_key "complaints", "proposal_employees"
   add_foreign_key "employee_cvs", "proposals"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"

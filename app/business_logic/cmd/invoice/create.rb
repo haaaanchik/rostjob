@@ -61,11 +61,12 @@ module Cmd
       def logger_params
         user = context.profile.user
         {
+          login: user.email,
           receiver_ids: [user.id],
           subject_id: user.id,
           subject_type: 'User',
           subject_role: user.profile ? user.profile.profile_type : nil,
-          action: 'Выписан счет',
+          action: "Выписан счет №#{context.invoice.invoice_number} на сумму #{context.invoice.amount}",
           object_id: context.invoice.id,
           object_type: 'Invoice'
         }

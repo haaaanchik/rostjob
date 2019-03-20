@@ -25,13 +25,15 @@ module Cmd
 
       def logger_params
         {
+          login: current_user.email,
           receiver_ids: [current_user.id],
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: 'Заявка отредактирована',
+          action: "Заявка №#{order.id} отредактирована",
           object_id: order.id,
-          object_type: 'Order'
+          object_type: 'Order',
+          order_id: order.id
         }
       end
     end

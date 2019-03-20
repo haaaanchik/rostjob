@@ -4,7 +4,6 @@ module Cmd
       include Interactor
 
       def call
-        binding.pry
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
           profile.save(context: :company)
@@ -40,11 +39,12 @@ module Cmd
 
       def logger_params
         {
+          login: profile.user.email,
           receiver_ids: [profile.user.id],
           subject_id: profile.user.id,
           subject_type: 'User',
           subject_role: profile.profile_type,
-          action: 'Профиль обновлён',
+          action: "Учётная запись #{profile.user.email} обновлена",
           object_id: profile.id,
           object_type: 'Profile'
         }
