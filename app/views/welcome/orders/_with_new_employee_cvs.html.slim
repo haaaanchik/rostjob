@@ -1,10 +1,10 @@
 - if profile.customer?
-  .row.mt-4.border
+  .row.mt-4
     .m-2
       p.h4
         strong Примите решение:
       ul
         - orders.each do |order|
           li
-            Поступило #{order.count} анкет(ы) в заявку
-            u = link_to order.title, profile_order_path(order)
+            |Поступило #{order.unviewed_pe_count} анкет(ы) в заявку
+            u.ml-2 = link_to order.title, profile_order_path(order)
