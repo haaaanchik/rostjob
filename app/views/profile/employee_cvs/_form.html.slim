@@ -40,7 +40,7 @@
           .col
             .md-form
               .file-field
-                .btn.btn-indigo.btn-sm.float-left
+                .btn.btn-success.btn-sm.float-left
                   span Выберите файл
                   = f.file_field :file
                 .file-path-wrapper
@@ -68,9 +68,9 @@
                 class: 'from-check-label ml-2', data: { action: 'click->employee-cv#tosToggle' }
               = render partial: 'utils/oferta'
           - if @order
-            = f.submit 'Отправить', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_sent
+            = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save_as_sent
           - else
-            = f.submit 'Сохранить', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save
+            = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save
             / = f.submit 'Сохранить как черновик', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_draft
         - else
-          = f.submit 'Сохранить', class: 'btn btn-indigo'
+          = f.submit 'Сохранить', class: 'btn btn-success'

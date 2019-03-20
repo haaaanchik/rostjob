@@ -6,10 +6,10 @@
             data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position',
                     'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
     .invalid-feedback
-    .input-group-append
-      button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
-      type="button" title="Добавить новую профессию" data-order-position="new")
-        i.fa.fa-plus
+    / .input-group-append
+    /   button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
+    /   type="button" title="Добавить новую профессию" data-order-position="new")
+    /     i.fa.fa-plus
   .form-group
     table#position_table.table.table-bordered data-base-customer-price=order.base_customer_price data-base-contractor-price=order.base_contractor_price data-customer-price=order.customer_price data-contractor-price=order.contractor_price data-customer-total=order.customer_total data-contractor-total=order.contractor_total
       tr.text-center
@@ -100,10 +100,11 @@
     = f.label :accepted do
       'Я принимаю условия
       = render partial: 'utils/oferta'
-  .form-group.mt-3
-    .row
-      .col-3
-        = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-info order-submit-button #{ 'disabled' unless order.accepted}", name: :create
-      .col
-      .col-3
-        = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-primary order-submit-button #{ 'disabled' unless order.accepted}", name: :pre_publish
+    = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-success ml-2 order-submit-button #{ 'disabled' unless order.accepted}", name: :pre_publish
+  / .form-group.mt-3
+  /   .row
+  /     .col-3
+  /       / = f.submit t(order.new_record? ? 'profile.orders.commit.save_as_draft' : 'profile.orders.commit.save'), class: "btn btn-info order-submit-button #{ 'disabled' unless order.accepted}", name: :create
+  /     .col
+  /     .col-3
+  /       = f.submit t(order.new_record? ? 'profile.orders.commit.save_and_publish' : 'profile.orders.commit.publish'), class: "btn btn-success order-submit-button #{ 'disabled' unless order.accepted}", name: :pre_publish

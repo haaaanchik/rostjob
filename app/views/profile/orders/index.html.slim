@@ -1,7 +1,11 @@
 h1.mt-3
   | Мои Заявки
-  = link_to 'Создать заявку', new_profile_order_path, class: 'btn btn-success ml-4'
-  = link_to 'Шаблоны заявок', profile_order_templates_path, class: 'btn btn-success ml-4'
+  = link_to new_profile_order_path, class: 'btn btn-success btn-rounded ml-4' do
+    i.fas.fa-plus.mr-2
+    |Создать заявку
+  = link_to profile_order_templates_path, class: 'btn btn-success btn-rounded ml-4' do
+    i.far.fa-copy.mr-2
+    |Шаблоны заявок
 
 table.table-hover.table.mt-3
   tr.d-flex
