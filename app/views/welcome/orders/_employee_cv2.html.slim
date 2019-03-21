@@ -1,4 +1,4 @@
 li
-  = link_to order.employee_cv_name, '#'
+  = link_to order.employee_cv_name, edit_profile_employee_cv_path(order.employee_cv_id), remote: true
   span.ml-2.mr-2 в заявке
-  = link_to order.title, '#'
+  = link_to order.title, order_path(order)
