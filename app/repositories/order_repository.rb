@@ -26,7 +26,7 @@ module OrderRepository
     }
 
     scope :with_deleted_employee_cvs_contractor, -> {
-      select('orders.*, proposal_employees.employee_cv_id as employee_cv_id, employee_cvs.name as employee_cv_name')
+      select('orders.*, proposal_employees.id as pe_id, employee_cvs.name as employee_cv_name')
         .where('proposal_employees.state = ?', 'deleted')
         .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
     }
