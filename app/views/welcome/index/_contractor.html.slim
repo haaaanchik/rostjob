@@ -23,7 +23,8 @@
               p.card-text
                 = @current_profile.balance.amount
                 span.ml-3 рублей
-              = link_to '#', class: 'btn-floating btn-small bg-best-hr' do
+              / = link_to '#', class: 'btn-floating btn-small bg-best-hr tmp-unavailable' do
+              span.btn-floating.btn-small.bg-best-hr.tmp-unavailable
                 i.fas.fa-envelope
               / span.counter.mt-2
               /   |  1
