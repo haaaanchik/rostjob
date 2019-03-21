@@ -61,6 +61,6 @@
                   |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
                   br
                   - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-                    = Nokogiri::HTML.parse(order.other_info['remark']).text
+                    == order.other_info['remark']
             .text-center
               = link_to 'Просмотреть', profile_order_path(order), class: 'btn btn-success'
