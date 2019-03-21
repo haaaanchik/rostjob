@@ -137,8 +137,8 @@ class Profile::OrdersController < ApplicationController
                                     :salary_to, :description, :payment_type, :contractor_price,
                                     :number_of_recruiters, :enterpreneurs_only,
                                     :skill, :accepted, :district, :experience,
-                                    :visibility, :state, :number_of_employees,
-                                    :schedule, :work_period, other_info: {})
+                                    :visibility, :state, :number_of_employees, :document,
+                                    :schedule, :work_period, :place_of_work, other_info: {})
   end
 
   def balance

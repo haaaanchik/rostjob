@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_19_161742) do
+ActiveRecord::Schema.define(version: 2019_03_21_165625) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -269,6 +269,11 @@ ActiveRecord::Schema.define(version: 2019_03_19_161742) do
     t.string "urgency"
     t.integer "base_customer_price"
     t.integer "base_contractor_price"
+    t.string "document_file_name"
+    t.string "document_content_type"
+    t.bigint "document_file_size"
+    t.datetime "document_updated_at"
+    t.text "place_of_work"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
@@ -476,7 +481,7 @@ ActiveRecord::Schema.define(version: 2019_03_19_161742) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "type"
     t.bigint "profile_id"
     t.string "title"
