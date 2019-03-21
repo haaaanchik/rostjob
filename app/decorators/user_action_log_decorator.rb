@@ -10,10 +10,10 @@ class UserActionLogDecorator < ApplicationDecorator
   end
 
   def date
-    model.created_at.strftime('%d-%m-%Y')
+    model.created_at.strftime('%d.%m.%Y')
   end
 
   def time
-    model.created_at.strftime('%H:%M:%S')
+    model.created_at.strftime('%H:%M')
   end
 end

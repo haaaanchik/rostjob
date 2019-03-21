@@ -23,10 +23,20 @@ class WelcomeController < ApplicationController
     if current_profile.customer?
       orders_with_unviewed_pe_count
       orders_with_disputed_employee_cvs
+      customer_deals_count
     elsif current_profile.contractor?
       orders_with_disputed_employee_cvs
       orders_with_deleted_employee_cvs
+      contractor_deals_count
     end
+  end
+
+  def contractor_deals_count
+    @contractor_deals_count ||= current_profile.proposal_employees.paid.count
+  end
+
+  def customer_deals_count
+    @customer_deals_count ||= 1
   end
 
   def orders_with_unviewed_pe_count

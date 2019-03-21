@@ -34,25 +34,31 @@ module Cmd
 
       def contractor_params
         {
+          login: contractor.email,
           receiver_ids: [contractor.id],
           subject_id: contractor.id,
           subject_type: 'User',
           subject_role: contractor.profile.profile_type,
-          action: 'Получено вознаграждение',
+          action: "Получено вознаграждение за анкету №#{proposal_employee.employee_cv.id}",
           object_id: proposal_employee.id,
-          object_type: 'ProposalEmployee'
+          object_type: 'ProposalEmployee',
+          employee_cv_id: proposal_employee.employee_cv_id,
+          order_id: proposal_employee.order_id
         }
       end
 
       def customer_params
         {
+          login: customer.email,
           receiver_ids: [customer.id],
           subject_id: customer.id,
           subject_type: 'User',
           subject_role: customer.profile.profile_type,
-          action: "Условие по анкете №#{proposal_employee.employee_cv.id} выполнено",
+          action: "Условие по анкете №#{proposal_employee.employee_cv_id} выполнено",
           object_id: proposal_employee.id,
-          object_type: 'ProposalEmployee'
+          object_type: 'ProposalEmployee',
+          employee_cv_id: proposal_employee.employee_cv_id,
+          order_id: proposal_employee.order_id
         }
       end
     end
