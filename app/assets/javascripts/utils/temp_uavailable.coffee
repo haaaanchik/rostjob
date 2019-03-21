@@ -1,3 +1,3 @@
 $(document).on('click', '.tmp-unavailable', ->
-  toastr.info('Функционал временно не доступен')
+  toastr.info('Функционал временно недоступен')
 )
