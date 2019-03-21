@@ -108,6 +108,7 @@ $(document).ready ->
     menubar: false
     toolbar: 'undo redo | bold italic underline | indent outdent | numlist bullist'
     plugins: "lists"
+    forced_root_block: false
   })
 
   $(document).on 'focusin', '*[data-mask-on="date"]', ->
