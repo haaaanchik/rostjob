@@ -40,7 +40,7 @@
               |# #{order.id}
             - if order.document.present?
               div
-                = link_to '#', class: 'btn-floating btn-sm blue' do
+                = link_to order.document.url, class: 'btn-floating btn-sm blue' do
                   i.fas.fa-file-download
               p.card-title.blue-text
                 |Скачать

@@ -21,6 +21,13 @@
             p.h4
               br
               |# #{order.id}
+            - if order.document.present?
+              div
+                = link_to order.document.url, class: 'btn-floating btn-sm blue' do
+                  i.fas.fa-file-download
+              p.card-title.blue-text
+                |Скачать
+                br анкету
         .container-fluid.p-0.up-box.m-2
           = render partial: 'orders/urgency', locals: { order: order }
           .price.container-fluid.border.rounded.mb-0

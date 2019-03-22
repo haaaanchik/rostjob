@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   validates :accepted, acceptance: {message: 'must be abided'}
 
   has_attached_file :document
-  # validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  validates_attachment_content_type :document, content_type: /.*\/.*\z/
 
   include OrderRepository
 
