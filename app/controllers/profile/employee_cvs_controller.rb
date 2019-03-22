@@ -130,7 +130,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def employee_cvs_params
     params.require(:employee_cv)
           .permit(:phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
-                  :name, :gender, :mark_ready, :birthdate, :file, ext_data: {})
+                  :name, :gender, :mark_ready, :birthdate, :photo, :document, ext_data: {})
   end
 
   def states_by_term

@@ -12,7 +12,7 @@
         p.h3.mt-3.mb-0
           |##{employee_cv.id} #{employee_cv.name}
       .avatar.mx-auto.white
-        = image_tag('/img/no-avatar.jpg', alt: 'no avatar', class: 'rounded-circle img-responsive')
+        = image_tag(employee_cv.photo.url(:medium), alt: 'no avatar', class: 'rounded-circle img-responsive')
       .card.card-form.md-calendar.white.z-depth-0
         .card-body.rounded-top.white-text.pr-0.m-0
           / = render partial: 'calendar.html.slim'

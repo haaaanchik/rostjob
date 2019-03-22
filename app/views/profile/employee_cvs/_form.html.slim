@@ -5,7 +5,7 @@
   .row
     .col
     .col
-          = image_tag @employee_cv.photo.url
+          = image_tag @employee_cv.photo.url(:medium)
     .col
   .row
     .col
@@ -32,19 +32,27 @@
         a.text-indigo data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" Подробнее
       .collapse id="collapseExample"
         .row
-          .col-3
+          .col-2
             .md-form
               = f.date_field :birthdate, class: 'form-control'
               = f.label :birthdate, 'Дата рождения', class: 'active'
-          .col-3.align-self-center
-          .col
+          / .col-3.align-self-center
+          .col-5
             .md-form
               .file-field
                 .btn.btn-success.btn-sm.float-left
-                  span Выберите файл
-                  = f.file_field :file
+                  span Выберите фото
+                  = f.file_field :photo
                 .file-path-wrapper
-                  = text_field :file, :path, placeholder: 'Резюме кандидата', class: 'file-path'
+                  = text_field :ph, :path, placeholder: 'Фото кандидата', class: 'file-path'
+          .col-5
+            .md-form
+              .file-field
+                .btn.btn-success.btn-sm.float-left
+                  span Выберите анкету
+                  = f.file_field :document
+                .file-path-wrapper
+                  = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
         .row
           - data = @employee_cv.ext_data || {}
           = f.fields_for :ext_data, data do |ef|
