@@ -7,4 +7,6 @@
       .modal-body
         #orders_search_result
           = render partial: 'orders/order', collection: @favorites, locals: { order_id: 'order_id_' }
+          - if @favorites.empty?
+            |Здесь пока ничего нет, но вы можете воспользоваться поиском в правом верхнем углу формы, либо перейти в каталог заявок и добавить в избранное интересующую вас заявку.
       .modal-footer
