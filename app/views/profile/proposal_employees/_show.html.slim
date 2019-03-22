@@ -51,6 +51,8 @@
             - unless pe.disputed?
               = link_to 'Спор', to_disput_profile_proposal_employee_path(pe), method: :put,
                 data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
+    - if ecv.document.present?
+      = link_to 'Анкета для СБ', ecv.document.url
 .row
   .col
     .mt-3
