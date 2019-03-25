@@ -26,7 +26,7 @@ main
           .btn-group.group-menu  role="group" aria-label="Basic example"
             button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
               i.fas.fa-folder-open
-            = link_to profile_orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
+            = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
               i.fas.fa-users.w-10.mr-2
               |Мои заявки
           / span.counter
@@ -47,14 +47,14 @@ main
             = link_to profile_orders_path(state: :completed), class: 'btn button-menu-r btn-rounded waves-effect'
               i.fas.fa-user-check.w-10.mr-2
               |Завершённые
-        .mb-3
-          .btn-group.group-menu[role="group" aria-label="Basic example"]
-            button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-              i.fas.fa-folder-open
+        / .mb-3
+        /   .btn-group.group-menu[role="group" aria-label="Basic example"]
+        /     button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
+        /       i.fas.fa-folder-open
 
-            = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-              i.fas.fa-align-justify.w-10
-              |  Каталог заявок
+        /     = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
+        /       i.fas.fa-align-justify.w-10
+        /       |  Каталог заявок
 
         hr.mb-0.mt-0
 
