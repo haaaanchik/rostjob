@@ -1,4 +1,12 @@
-= form_with model: @user, url: login_path, html: { class: 'form-inline my-2 my-lg-0' } do |f|
-  = f.text_field :email, class: 'form-control form-control-sm form-box', placeholder: 'Логин'
-  = f.password_field :password, class: 'form-control form-control-sm form-box', placeholder: 'Пароль'
-  = f.submit 'Вход', class: 'btn btn-outline-success waves-effect btn-box'
+- if @user.errors.messages.any?
+  p.red-text #{@user.errors[:base].first}
+= form_with model: @user, url: login_path, class: 'text-center p-3 mb-2' do |f|
+  .md-form.mb-5
+    = f.text_field :email, class: 'form-control', placeholder: 'Логин'
+  .md-form.mb-5
+    = f.password_field :password, class: 'form-control', placeholder: 'Пароль'
+  .d-flex.justify-content-center
+    = f.submit 'Вход', class: 'btn btn-deep-orange'
+- if controller_name != 'passwords' && controller_name != 'registrations'
+  p.font-small.grey-text.d-flex.justify-content-center.mt-4
+    = link_to "Я забыл пароль", new_user_password_path(@user), class: 'blue-text', remote: true

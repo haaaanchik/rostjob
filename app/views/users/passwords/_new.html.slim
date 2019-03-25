@@ -12,9 +12,3 @@
     .font-small.d-flex.justify-content-end
       | Не зарегистрированны?
       = link_to 'Пройти регистрацию', new_user_registration_path, class: 'blue-text ml-1', remote: true
-
-.row.d-flex.align-items-center.pb-3
-  .col-md-12
-    .font-small.d-flex.justify-content-end
-      | Есть аккаунт?
-      = link_to 'Войти', login_path, class: 'blue-text ml-1', remote: true

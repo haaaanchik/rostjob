@@ -12,7 +12,7 @@ class Users::PasswordsController < Devise::PasswordsController
   # POST /resource/password
   def create
     @user = User.find_by_email params[:user][:email]
-    @user.send_reset_password_instructions
+    @user.send_reset_password_instructions if @user
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef
