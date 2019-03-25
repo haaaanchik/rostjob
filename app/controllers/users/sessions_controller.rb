@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :configure_permitted_parameters, if: :devise_controller?
   # skip_before_action :authenticate_user!, except: :destroy
   skip_before_action :auth_user, except: :destroy
   skip_before_action :create_profile
@@ -13,12 +13,12 @@ class Users::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    usr = configure_sign_in_params[:user]
-    return invalid_login_attempt if usr[:email].blank? ||
-      usr[:password].blank?
+    usr = sessions_params
+    # return invalid_login_attempt if usr[:email].blank? || usr[:password].blank?
+    return new_login_form if usr[:email].blank? || usr[:password].blank?
 
     user = User.find_by(email: usr[:email].downcase)
-    return invalid_login_attempt unless user
+    # return invalid_login_attempt unless user
 
     if user&.valid_password?(usr[:password])
       if user.confirmed?
@@ -28,9 +28,9 @@ class Users::SessionsController < Devise::SessionsController
         render js: "toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!')",
                status: 401
       end
-
     else
-      invalid_login_attempt
+      new_login_form
+      # invalid_login_attempt
     end
   end
 
@@ -41,20 +41,30 @@ class Users::SessionsController < Devise::SessionsController
 
   protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_in_params
-    params.permit(user: %i[email password])
+  def sessions_params
+    params.require(:user).permit(:email, :password)
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
-      user_params.permit(:password, :email)
-    end
-  end
+  # If you have extra params to permit, append them to the sanitizer.
+  # def configure_sign_in_params
+  #   params.permit(user: %i[email password])
+  # end
+
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+  #     user_params.permit(:password, :email)
+  #   end
+  # end
 
   def invalid_login_attempt
     set_flash_message(:alert, :invalid)
     render js: "toastr.error('Сочетания логина и пароля не найдено', 'Неудача!')",
            status: 401
+  end
+
+  def new_login_form
+    @user = User.new(sessions_params)
+    @user.errors[:base] << 'Введённое сочетание логина и пароля не найдено.'
+    render 'users/sessions/new'
   end
 end
