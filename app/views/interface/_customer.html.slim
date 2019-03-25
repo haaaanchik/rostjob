@@ -14,7 +14,7 @@ main
           .btn-group.group-menu role="group" aria-label="Basic example"
             = link_to profile_invoices_path, class: 'btn button-menu-l btn-rounded waves-effect' do
               i.fas.fa-money-bill-alt
-            button type="button" class="btn button-menu-r btn-rounded waves-effect"
+            = link_to root_path, class: 'btn button-menu-r btn-rounded waves-effect' do
               i.fas.fa-user-circle.w-10.mr-2
               = current_user.full_name
           / span.counter
