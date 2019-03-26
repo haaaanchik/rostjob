@@ -23,7 +23,7 @@ class Profile::OrderTemplatesController < ApplicationController
     if result.success?
       redirect_to profile_order_templates_path
     else
-      render json: { validate: true, data: errors_data(result.order_teplate) }
+      render json: { validate: true, data: errors_data(result.order_template) }
     end
   end
 
@@ -107,7 +107,7 @@ class Profile::OrderTemplatesController < ApplicationController
                                              :position_id, :salary_to, :description, :state,
                                              :contractor_price, :skill, :accepted, :district,
                                              :experience, :visibility, :number_of_employees,
-                                             :schedule, :work_period, other_info: {})
+                                             :schedule, :work_period, :place_of_work, other_info: {})
   end
 
   def order_template

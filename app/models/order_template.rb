@@ -5,7 +5,7 @@ class OrderTemplate < ApplicationRecord
             presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :number_of_employees, presence: true, numericality: { only_integer: true }
   validates :name, :title, :city, :experience, :description,
-            :schedule, :work_period, presence: true
+            :schedule, :work_period, :place_of_work, presence: true
   validates :salary_from, presence: true, numericality: { only_integer: true }
   validates :salary_to, presence: true, numericality: { only_integer: true }
   validates :warranty_period, presence: true, numericality: { only_integer: true }

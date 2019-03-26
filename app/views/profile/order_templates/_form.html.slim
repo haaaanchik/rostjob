@@ -3,16 +3,20 @@
   = f.label :name, 'Название шаблона'
   = f.text_field :name, class: 'form-control'
   .invalid-feedback
+  .form-group
+    = f.label :place_of_work, 'Место работы'
+    = f.text_field :place_of_work, class: 'form-control'
+    .invalid-feedback
   .input-group.mb-3.mt-3
     = f.text_field :position_search, class: "form-control",
             placeholder: 'Начните набирать название профессии',
             data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position2',
                     'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
     .invalid-feedback
-    .input-group-append
-      button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
-      type="button" title="Добавить новую профессию" data-order-position="new")
-        i.fa.fa-plus
+    / .input-group-append
+    /   button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
+    /   type="button" title="Добавить новую профессию" data-order-position="new")
+    /     i.fa.fa-plus
   .form-group
     table#position_table.table.table-border_templateed data-base-customer-price=order_template.base_customer_price data-base-contractor-price=order_template.base_contractor_price data-customer-price=order_template.customer_price data-contractor-price=order_template.contractor_price data-customer-total=order_template.customer_total data-contractor-total=order_template.contractor_total
       tr.text-center
