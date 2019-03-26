@@ -77,7 +77,7 @@ main
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
 
-                      = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect', remote: true do
+                      = link_to orders_path, id: 'orders_catalog', class: 'btn button-menu-r btn-rounded waves-effect', remote: true do
                         i.fas.fa-align-justify.w-10
                         |  Каталог заявок
                     / span.counter.blue
