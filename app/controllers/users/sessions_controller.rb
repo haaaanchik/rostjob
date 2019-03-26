@@ -14,6 +14,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     usr = sessions_params
+    flash['user_email'] = usr[:email]
     # return invalid_login_attempt if usr[:email].blank? || usr[:password].blank?
     return new_login_form if usr[:email].blank? || usr[:password].blank?
 

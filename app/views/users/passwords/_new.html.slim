@@ -1,8 +1,7 @@
 = form_for :user, method: :post, url: user_password_path, html: {class: 'text-center p-3 mb-2'},
         remote: true do |f|
   .md-form.mb-5
-    = f.text_field :email, class: 'form-control',
-            autofocus: true, autocomplete: "email"
+    = f.text_field :email, class: 'form-control', autofocus: true, autocomplete: "email", value: flash['user_email']
     = f.label :email, t("views.modals.login.email")
   .d-flex.justify-content-center
     = f.submit 'Отправить инструкции',
