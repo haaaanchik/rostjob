@@ -1,0 +1,19 @@
+- employee_cv = @proposal_employee.employee_cv
+- order = @proposal_employee.order
+.modal.fade#formModalMyComplaints tabindex="-1" role="dialog" aria-labelledby="formModalMyComplaintsLabel" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title#formModalMyComplaintsLabel Спор
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        h5 Анкета: #{employee_cv.name}
+        |Заявка: №#{order.id} '#{order.title}'
+        = render partial: 'form'
+        table.table
+          tr
+            th Автор
+            th Текст
+          = render partial: 'complaint', collection: @complaints
+      .modal-footer

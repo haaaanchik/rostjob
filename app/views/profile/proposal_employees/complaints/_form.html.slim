@@ -1,0 +1,5 @@
+= form_with model: @complaint, url: profile_proposal_employee_complaints_path do |f|
+  .md-form
+    = f.text_area :text, class: 'form-control', placeholder: 'Опишите предмет спора'
+  .text-center
+    = f.submit 'Отправить', class: 'btn btn-indigo'

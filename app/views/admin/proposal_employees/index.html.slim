@@ -1,0 +1,10 @@
+- if staffer_signed_in?
+  h2.mt-2 Спорные анкеты
+  table.table
+    tr
+      th Анкета
+      th Заявка
+      th Дата
+      th Время
+    = render @proposal_employees
+  = paginate @proposal_employees

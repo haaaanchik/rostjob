@@ -1,0 +1,17 @@
+- dpe = @disputed_proposal_employee
+h3.mt-2 Спорная анкета №#{dpe.employee_cv_id} #{dpe.employee_cv.name}
+h4 Заявка №#{dpe.order_id} #{dpe.order.title}
+
+h4 Жалобы:
+table.table
+  th Логин
+  th Жалоба
+  th Статус
+  th Действия
+  - dpe.complaints.each do |complaint|
+    tr
+      td = complaint.profile.user.email
+      td = complaint.text
+      td = complaint.state
+      td = link_to 'Закрыть', close_admin_complaint_path(complaint), remote: true
+

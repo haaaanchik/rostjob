@@ -1,0 +1,12 @@
+ru:
+  proposal_employee:
+    state:
+      inbox: 'Входящие'
+      hired: 'Нанят'
+      disputed: 'Спор'
+      deleted: 'Удалена'
+      viewed: 'Просмотрена'
+      fired: 'Уволен досрочно'
+      revoked: 'Отозвана'
+      rejected: 'Отклонена'
+      paid:  'Оплачена'

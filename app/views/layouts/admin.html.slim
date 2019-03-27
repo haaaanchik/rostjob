@@ -49,6 +49,7 @@ html
                   .dropdown-menu
                     = link_to 'Экспорт заявок в EXCEL', admin_analytics_export_to_excel_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Журнал событий', admin_analytics_user_action_log_path, class: 'dropdown-item', data: {offset: '60'}
+                    = link_to 'Спорные анкеты', admin_proposal_employees_path(scope: :disputed), class: 'dropdown-item', data: {offset: '60'}
             ul.navbar-nav
               li.nav-item.dropdown
                 = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete

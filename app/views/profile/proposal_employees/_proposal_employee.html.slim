@@ -3,10 +3,11 @@
 .col-md-4.order-md-2 id="proposal_employee_#{pe.id}"
   .container.p-0.up-box.m-2
     .d-flex.justify-content-end
-      .blue.text-right.z-depth-1.rounded.mb-0.position-relative
+      - color = pe.state == 'disputed' ? 'red' : 'blue'
+      .text-right.z-depth-1.rounded.mb-0.position-relative class=color
         p.white-text.m-1.h4
           i.fas.fa-bookmark
-          = t("employee_cv.state.#{employee_cv.state}")
+          = t("proposal_employee.state.#{pe.state}")
     .card.testimonial-card.position-static.price.mb-3
       .card-up.bg-best-hr.card-title.white-text.text-center.m-0[style="height: 120px"]
         p.h3.mt-3.mb-0
@@ -28,7 +29,7 @@
               p.blue-text
                 |  Вернуть
             div
-              = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-lg red disabled', data: { confirm: 'Удалить анкету?' }, title: 'Спор', method: :delete, remote: true do
+              = link_to profile_proposal_employee_complaints_path(pe), class: 'btn-floating btn-lg red', title: 'Спор', remote: true do
                 i.fas.fa-angry
               p.red-text
                 |  Спор

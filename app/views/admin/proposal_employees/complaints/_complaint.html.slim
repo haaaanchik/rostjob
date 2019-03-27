@@ -1,0 +1,7 @@
+tr id="complaint_#{complaint.id}"
+  td = complaint.profile.user.email
+  td = complaint.text
+  td = complaint.state
+  td
+    - if complaint.opened?
+      = link_to 'Закрыть', close_admin_proposal_employee_complaint_path(dpe, complaint), remote: true, method: :put

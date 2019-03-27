@@ -29,6 +29,15 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
+    resources :proposal_employees, only: %i[index show] do
+      scope module: :proposal_employees do
+        resources :complaints, only: %i[] do
+          member do
+            put :close
+          end
+        end
+      end
+    end
     resources :staffers
     resources :clients
     resources :specializations
@@ -77,6 +86,9 @@ Rails.application.routes.draw do
     end
     resources :favorites, only: %i[index]
     resources :proposal_employees, only: :show do
+      scope module: :proposal_employees do
+        resources :complaints, only: %i[index new create]
+      end
       member do
         put :to_disput
         put :revoke

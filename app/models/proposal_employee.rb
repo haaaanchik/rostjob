@@ -4,6 +4,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :order
   belongs_to :profile
   belongs_to :employee_cv
+  has_many :complaints
 
   scope :available, ->(profile_id) { where(state: %w[applyed], profile_id: profile_id) }
   scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
