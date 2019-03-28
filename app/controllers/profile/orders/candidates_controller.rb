@@ -8,6 +8,13 @@ class Profile::Orders::CandidatesController < ApplicationController
     @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
   end
 
+  def update
+    hiring_date = Date.parse(correction_params[:hiring_date])
+    candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
+    @pecv = candidate
+    @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
+  end
+
   def hire
     render(plain: 'order completed', status: 422) and return if order.completed?
 
@@ -48,6 +55,10 @@ class Profile::Orders::CandidatesController < ApplicationController
     redirect_to profile_order_path(order)
   end
 
+  def hd_correction
+    candidate
+  end
+
   private
 
   def contractors
@@ -57,8 +68,12 @@ class Profile::Orders::CandidatesController < ApplicationController
     end
   end
 
+  def correction_params
+    params.require(:proposal_employee).permit(:id, :hiring_date, :hd_correction_reason)
+  end
+
   def candidate_params
-    params.require(:candidate).permit(:id, :hiring_date, :firing_date, :proposal_id)
+    params.require(:candidate).permit(:id, :hiring_date, :firing_date, :hd_correction_reason, :proposal_id)
   end
 
   def candidate

@@ -1,0 +1,25 @@
+.row
+  .col
+  .col-8
+    .card.card-cascade
+      .card-body.card-body-cascade.text-center
+        h4 Корректировка даты подписания договора
+        - hd = @candidate.hiring_date
+        - start_date = Holiday.minus_five_working_days(hd).strftime('%d-%m-%Y')
+        - end_date = Holiday.plus_five_working_days(hd).strftime('%d-%m-%Y')
+        #hd_correction_form_datepicker.d-flex.justify-content-center data-date=hd.strftime('%d-%m-%Y')
+        = form_with model: @candidate, url: profile_order_candidate_path(@candidate.order_id, @candidate), method: :put do |f|
+          = f.hidden_field :hiring_date
+          = f.submit 'Сохранить', class: 'btn btn-success'
+  .col
+javascript:
+  $('#hd_correction_form_datepicker').datepicker({
+    language: 'ru',
+    startDate: "#{start_date}",
+    endDate: "#{end_date}"
+  });
+  $('#hd_correction_form_datepicker').on('changeDate', function() {
+    $('#proposal_employee_hiring_date').val(
+        $('#hd_correction_form_datepicker').datepicker('getFormattedDate')
+    );
+  });

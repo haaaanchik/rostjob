@@ -17,7 +17,7 @@
       .card-body.card-body-cascade.text-center
         h4 Гарантийный период
         - hd = @pecv.hiring_date&.strftime('%d-%m-%Y')
-        #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
+        #hiring_form_datepicker.d-flex.justify-content-center
         .mt-3
           - state = @pecv.state
           - case state
@@ -36,8 +36,9 @@
           /   = link_to 'Вернуть', to_ready_profile_employee_cv_path(@employee_cv), method: :put,
               data: { confirm: 'Вернуть анкету в готовые?' }, class: 'btn btn-info', title: 'В готовые', remote: true
           / - else
-          = link_to 'Спор', disput_profile_order_candidate_path(@pecv.order_id, @pecv), method: :put,
-               data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
+          / = link_to 'Спор', disput_profile_order_candidate_path(@pecv.order_id, @pecv), method: :put,
+          /      data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
+          = link_to 'Скорректировать', hd_correction_profile_order_candidate_path(@pecv.order_id, @pecv), class: 'btn btn-indigo', title: 'Скорректировать дату подписания договора', remote: true
 .row
   .col
     .mt-3
@@ -53,20 +54,8 @@
 javascript:
   $('#hiring_form_datepicker').datepicker({
     language: 'ru',
-    multidate: true,
     beforeShowDay: function() {
-      $('.datepicker-switch').closest('tr').on('click', e => {
-        console.log('hello');
-        e.preventDefault();
-        e.stopPropagation();
-      });
       return false;
-    },
-    beforeShowMonth: function() {
-       return false;
-    },
-    beforeShowYear: function() {
-       return false;
     }
   });
   var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');

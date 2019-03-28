@@ -22,7 +22,7 @@
           .text-info
           .md-form
             = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y')
-          = f.submit 'НАНЯТЬ', class: 'btn btn-indigo btn-lg'
+          = f.submit 'НАНЯТЬ', class: 'btn btn-indigo'
           div
             = link_to 'Спор', disput_profile_order_candidate_path(pcv.order_id, pcv),
                           method: :put, remote: true, class: 'btn btn-info btn-sm'

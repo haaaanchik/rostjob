@@ -118,8 +118,9 @@ Rails.application.routes.draw do
         post 'proposals/:id', to: 'proposals#send_message'
         # post 'candidates/hire', to: 'candidates#hire'
         # put 'candidates/fire', to: 'candidates#fire'
-        resources :candidates, only: %i[index show destroy] do
+        resources :candidates, only: %i[index show update destroy] do
           member do
+            get :hd_correction
             put :hire
             put :fire
             put :disput
