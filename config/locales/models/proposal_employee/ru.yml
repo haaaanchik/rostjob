@@ -1,7 +1,7 @@
 ru:
   proposal_employee:
     state:
-      inbox: 'Входящие'
+      inbox: 'В очереди'
       hired: 'Нанят'
       disputed: 'Спор'
       deleted: 'Удалена'
