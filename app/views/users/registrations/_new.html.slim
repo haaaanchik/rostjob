@@ -1,17 +1,21 @@
 = form_for @user, method: :post, url: user_registration_path, html: {class: 'text-center p-3 mb-2'},
         remote: true do |f|
   .md-form.mb-5
-    = f.text_field :full_name, class: 'form-control'
     = f.label :full_name, t("views.modals.signin.full_name")
+    = f.text_field :full_name, class: 'form-control'
+    .invalid-feedback
   .md-form.mb-5
-    = f.email_field :email, class: 'form-control'
     = f.label :email, t("views.modals.signin.email")
+    = f.email_field :email, class: 'form-control'
+    .invalid-feedback
   .md-form.mb-5
-    = f.password_field :password, class: 'form-control'
     = f.label :password, t("views.modals.signin.password")
+    = f.password_field :password, class: 'form-control'
+    .invalid-feedback
   .md-form.mb-5
-    = f.password_field :password_confirmation, class: 'form-control'
     = f.label :password_confirmation, t("views.modals.signin.password_confirmation")
+    = f.password_field :password_confirmation, class: 'form-control'
+    .invalid-feedback
   .form-group.mt-4
     = f.check_box :terms_of_service, class: 'form-check-input'
     = f.label :terms_of_service, class: 'from-check-label' do

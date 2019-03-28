@@ -6,6 +6,4 @@ toastr.info('На указанный вами адрес электронной 
 setTimeout (->
   window.location.replace('/')
 ), 5000
-<% else %>
-toastr.error('<%= @status %>', 'Не сохранено!', {timeOut: 5000})
 <% end %>

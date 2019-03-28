@@ -23,7 +23,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @status = if result.success?
                 'success'
               else
-                error_msg_handler @user
+                render json: { validate: true, data: errors_data(result.user) }
               end
   end
 
