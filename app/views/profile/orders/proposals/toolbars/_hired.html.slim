@@ -1,3 +1,4 @@
 = link_to profile_order_candidate_path(proposed.order_id, proposed),
-  data: { type: :script }, title: 'Просмотреть статус', remote: true do
-  i.fas.fa-search.fa-2x.ml-2
+  data: { type: :script }, title: 'Просмотреть статус', class: 'btn btn-blue btn-sm',  remote: true do
+  |Просмотр
+= link_to 'Спор', profile_proposal_employee_complaints_path(proposed), remote: true, class: 'btn btn-red btn-sm'
