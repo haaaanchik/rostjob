@@ -51,4 +51,6 @@
                     .col
                       = Nokogiri::HTML.parse(order_template.other_info['remark']).text
           .col-3
+            - if order_template.document.present?
+              = link_to 'Анкета для СБ', order_template.document.url
             button class='btn btn-success' type='submit' form=form_id Создать заявку'

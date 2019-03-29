@@ -102,6 +102,15 @@
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
+  .row
+      .col
+        .file-field
+          .btn.btn-success.btn-sm.float-left
+            span Выберите анкету
+            = f.file_field :document
+          .file-path-wrapper
+            input class="file-path validate" type="text" placeholder="Загрузите анкету">
+
   / .form-group.mt-3.text-center
   /   = f.check_box :accepted, class: 'form-check-input'
   /   = f.label :accepted do

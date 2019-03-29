@@ -11,6 +11,9 @@ class OrderTemplate < ApplicationRecord
   validates :warranty_period, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
 
+  has_attached_file :document
+  validates_attachment_content_type :document, content_type: /.*\/.*\z/
+
   scope :by_query, ->(term) { where('name LIKE ? OR title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%") }
 
   def initialize(attrs = nil)

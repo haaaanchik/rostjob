@@ -106,7 +106,7 @@ class Profile::OrderTemplatesController < ApplicationController
                                      .permit(:name, :title, :specialization, :city, :salary_from,
                                              :position_id, :salary_to, :description, :state,
                                              :contractor_price, :skill, :accepted, :district,
-                                             :experience, :visibility, :number_of_employees,
+                                             :experience, :visibility, :number_of_employees, :document,
                                              :schedule, :work_period, :place_of_work, other_info: {})
   end
 
