@@ -56,6 +56,8 @@ class Profile::OrderTemplatesController < ApplicationController
                                         'customer_total' => customer_total, 'contractor_total' => contractor_total)
                                  .except('name', 'created_at', 'updated_at')
     result = Cmd::Order::Create.call(profile: current_profile, params: order_attributes, position: profession)
+    result.order.document = order_template.document
+    result.order.save
     if result.success?
       redirect_to pre_publish_profile_order_path(result.order)
     else
