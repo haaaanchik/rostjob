@@ -35,7 +35,7 @@ main
         .mb-3
           .btn-group.group-menu role="group" aria-label="Basic example"
             button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-            = link_to profile_orders_path(state: :in_progress), class: 'btn button-menu-r btn-rounded waves-effect'
+            = link_to profile_orders_with_state_path(:in_progress), class: 'btn button-menu-r btn-rounded waves-effect'
               i.fas.fa-user-plus.w-10.mr-2
               |В работе
           / span.counter
@@ -44,7 +44,7 @@ main
         .mb-3.mt-3
           .btn-group.group-menu role="group" aria-label="Basic example"
             button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-            = link_to profile_orders_path(state: :completed), class: 'btn button-menu-r btn-rounded waves-effect'
+            = link_to profile_orders_with_state_path(:completed), class: 'btn button-menu-r btn-rounded waves-effect'
               i.fas.fa-user-check.w-10.mr-2
               |Завершённые
         / .mb-3

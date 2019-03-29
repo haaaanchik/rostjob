@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     # get 'proposal_employee/:id', to: 'proposal_employee#show'
     resources :invoices, only: %i[index show create destroy]
     resources :answered_orders
+    get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
     resources :orders, except: %i[create update] do
       member do
         put :hide

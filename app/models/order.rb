@@ -30,6 +30,21 @@ class Order < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
 
+  ransack_alias :all_fields, :id_or_title_or_description_or_city_or_place_of_work_or_salary_from_or_salary_to
+
+  ransacker :id do
+    Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")
+  end
+
+  ransacker :salary_from do
+    Arel.sql("CONVERT(#{table_name}.salary_from, CHAR(8))")
+  end
+
+  ransacker :salary_to do
+    Arel.sql("CONVERT(#{table_name}.salary_to, CHAR(8))")
+  end
+
+
   include OrderRepository
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do

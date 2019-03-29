@@ -1,5 +1,6 @@
 class Profile::OrdersController < ApplicationController
   def index
+    @state = params[:state]
     orders
   end
 
@@ -150,15 +151,17 @@ class Profile::OrdersController < ApplicationController
   end
 
   def orders
-    @orders ||= if params[:state] && !params[:state].empty?
-                  if params[:state] == 'completed'
-                    current_profile.orders.with_pe_counts.where state: params[:state]
-                  else
-                    current_profile.orders.with_pe_counts.where.not state: 'completed'
-                  end
-                else
-                  current_profile.orders.with_pe_counts
-                end
+    @q = if params[:state] && !params[:state].empty?
+           if params[:state] == 'completed'
+             Order.where(profile: current_profile).with_pe_counts.where(state: params[:state]).ransack(params[:q])
+           else
+             Order.where(profile: current_profile).with_pe_counts.where.not(state: 'completed').ransack(params[:q])
+           end
+         else
+           Order.where(profile: current_profile).with_pe_counts.ransack(params[:q])
+         end
+
+    @orders ||= @q.result
   end
 
   def description

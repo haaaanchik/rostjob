@@ -1,10 +1,4 @@
-h1.mt-3
+h1.mt-3.ml-3
   | Мои Заявки
-  / = link_to new_profile_order_path, class: 'btn btn-success btn-rounded ml-4' do
-  /   i.fas.fa-plus.mr-2
-  /   |Создать заявку
-  / = link_to profile_order_templates_path, class: 'btn btn-success btn-rounded ml-4' do
-  /   i.far.fa-copy.mr-2
-  /   |Шаблоны заявок
-
+= render partial: 'search_form', locals: { state: @state }
 = render @orders
