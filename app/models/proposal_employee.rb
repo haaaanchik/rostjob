@@ -44,7 +44,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :hire do
-      transitions from: %i[inbox viewed deleted], to: :hired
+      transitions from: %i[inbox viewed deleted disputed], to: :hired
     end
 
   end
