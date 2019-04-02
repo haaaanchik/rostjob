@@ -102,7 +102,15 @@
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
       = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
-  .row
+  = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+    .row
+      .col
+        = cp_f.label :name, 'Контактное лицо'
+        = cp_f.text_field :name, class: 'form-control'
+      .col
+        = cp_f.label :phone, 'Телефон'
+        = cp_f.phone_field :phone, class: 'form-control'
+  .row.mt-4
       .col
         .file-field
           .btn.btn-success.btn-sm.float-left

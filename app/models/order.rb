@@ -101,6 +101,10 @@ class Order < ApplicationRecord
         sex: nil,
         terms: nil,
         related_profession: nil
+      },
+      contact_person: {
+        name: nil,
+        phone: nil
       }
     }
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults

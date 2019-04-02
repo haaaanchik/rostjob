@@ -1,3 +1,16 @@
 = form_with model: order_template, url: create_order_profile_order_template_path(order_template), method: :post, id: form_id do |f|
-  = f.label :order_template, 'Количество сотрудников:'
-  = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control order-template-number-of-employees", data: { order_template_id: order_template.id, customer_price: order_template.customer_price }
+  div
+    p.text-center
+      |  Нужно людей
+  .d-flex.justify-content-between
+    div
+      a.btn-floating.btn-sm.blue id="order_template_number_of_employees_step_down_#{order_template.id}" data-order-template-id=order_template.id
+        i.fas.fa-minus
+    .md-form.m-0.p-0
+      = f.number_field :number_of_employees, in: 1..1000, step: 1, id: "order_template_number_of_employees_#{order_template.id}",
+        class: "form-control text-center number_field order-template-number-of-employees-short",
+        data: { order_template_id: order_template.id, customer_price: order_template.customer_price }
+
+    div
+      a.btn-floating.btn-sm.blue id="order_template_number_of_employees_step_up#{order_template.id}" data-order-template-id=order_template.id
+        i.fas.fa-plus
