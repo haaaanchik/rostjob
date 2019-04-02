@@ -85,7 +85,7 @@ bootstrapClearButton()
   new WOW().init()
   toastr.options = {
     "closeButton": true,
-    "positionClass": "toast-top-right",
+    "positionClass": "custom-toast-top-right",
     "timeOut": 5000
   }
   $('select.mdb-select:not(.initialized)').material_select()

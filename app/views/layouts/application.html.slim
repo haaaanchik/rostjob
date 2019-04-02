@@ -20,7 +20,7 @@ html
                     'turbolinks-track': 'reload'}
     - if notice
       javascript:
-          toastr.info("#{notice}", 'Внимание!', {timeOut: 5000});
+          toastr.info("#{notice}", 'Внимание!', { "positionClass": "custom-toast-top-right", timeOut: 5000});
     - if alert
       javascript:
-          toastr.error("#{alert}", 'Внимание!', {timeOut: 5000});
+          toastr.error("#{alert}", 'Внимание!', { "positionClass": "custom-toast-top-right", timeOut: 5000});
