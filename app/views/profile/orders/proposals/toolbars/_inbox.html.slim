@@ -1,5 +1,5 @@
 = link_to 'Нанять', change_status_profile_employee_cv_path(proposed, state: 'hired'),
         method: :put, remote: true, class: 'btn btn-success btn-sm'
-= link_to 'Удалить', profile_order_candidate_path(proposed.order_id, proposed),
+= link_to 'Отказ', profile_order_candidate_path(proposed.order_id, proposed),
               method: :delete, remote: true, class: 'btn btn-info btn-sm'
 = link_to 'Спор', profile_proposal_employee_complaints_path(proposed), remote: true, class: 'btn btn-red btn-sm'

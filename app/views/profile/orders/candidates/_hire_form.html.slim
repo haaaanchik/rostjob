@@ -26,7 +26,7 @@
           div
             = link_to 'Спор', disput_profile_order_candidate_path(pcv.order_id, pcv),
                           method: :put, remote: true, class: 'btn btn-info btn-sm'
-            = link_to 'Удалить', profile_order_candidate_path(pcv.order_id, pcv),
+            = link_to 'Отказ', profile_order_candidate_path(pcv.order_id, pcv),
                           method: :delete, remote: true, class: 'btn btn-info btn-sm'
 .row
   .col
