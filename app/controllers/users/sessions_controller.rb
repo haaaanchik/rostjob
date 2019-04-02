@@ -26,7 +26,7 @@ class Users::SessionsController < Devise::SessionsController
         sign_in :user, user
         redirect_to root_path
       else
-        render js: "toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!')",
+        render js: "toastr.error('Необходимо подтвердить адрес электронной почты! Если письма долго нет, проверьте папку СПАМ вашей почты.', 'Неудача!')",
                status: 401
       end
     else
