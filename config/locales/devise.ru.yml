@@ -20,13 +20,13 @@ ru:
       confirmation_instructions:
         subject: "Подтверждение адреса электронной почты"
       reset_password_instructions:
-        subject: "Reset password instructions"
+        subject: "Сброс пароля"
       unlock_instructions:
-        subject: "Unlock instructions"
+        subject: "Разблокировка учётной записи"
       email_changed:
-        subject: "Email Changed"
+        subject: "Email изменён"
       password_change:
-        subject: "Password Changed"
+        subject: "Пароль изменён"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
