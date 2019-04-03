@@ -69,6 +69,7 @@ class Profile::OrdersController < ApplicationController
   def publish
     result = Cmd::Order::ToModeration.call(order: order)
     if result.success?
+      SendModerationMailJob.perform_later(order: result.order)
       redirect_to profile_orders_path
     else
       redirect_to pre_publish_profile_order_path(result.order)
