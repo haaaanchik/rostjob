@@ -1,0 +1,11 @@
+tr.rounded.mb-0.example.hoverable
+  td.text-center.align-middle
+    .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
+      i.fas.fa-bookmark.mr-2
+      = t("proposal_employee.state.#{candidate.state}")
+  td.text-center.align-middle ##{candidate.employee_cv_id} #{candidate.name}
+  td.text-center.align-middle = candidate.created_at.strftime('%H:%M %d.%m.%Y')
+  td.text-center.align-middle №#{candidate.order_id} #{candidate.title}
+  td.text-center.align-middle = candidate.place_of_work
+  td.text-center.align-middle = candidate.hiring_date.strftime('%d.%m.%Y') if candidate.state == 'hired'
+  = render partial: 'profile/candidates/toolbars/actions.html.slim', locals: { candidate: candidate }

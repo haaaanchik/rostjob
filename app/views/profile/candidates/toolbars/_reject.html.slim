@@ -1,0 +1,6 @@
+- if false
+  = link_to profile_order_candidate_path(candidate.id, candidate), method: :delete, remote: true, class: 'btn-floating btn-blue btn-sm', title: 'Отказ' do
+    i.fas.fa-user-alt-slash
+- else
+  a.btn-floating.btn-grey.btn-sm.disabled
+    i.fas.fa-user-alt-slash

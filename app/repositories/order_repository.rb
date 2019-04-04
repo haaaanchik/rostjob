@@ -31,6 +31,18 @@ module OrderRepository
         .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
     }
 
+    scope :candidates, -> {
+      select('orders.*, proposal_employees.id as pe_id, proposal_employees.state as pe_state, proposal_employees.updated_at as pe_updated_at, employee_cvs.id as employee_cv_id, employee_cvs.name as employee_cv_name')
+        .joins('join proposal_employees on proposal_employees.order_id = orders.id')
+        .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
+    }
+
+    # scope :candidates, -> {
+    #   select('orders.*, proposal_employees.state as pe_state')
+    #     .joins(:proposal_employees)
+    #   # joins('inner join proposal_employees on proposal_employees.order_id = orders.id')
+    #   # .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
+    # }
     scope :filter_by_day, -> {where 'created_at >= ?', Date.current - 1.day}
     scope :filter_by_3day, -> {where 'created_at >= ?', Date.current - 3.days}
     scope :filter_by_week, -> {where 'created_at >= ?', Date.current - 1.week}
@@ -40,5 +52,9 @@ module OrderRepository
     scope :sort_by_date_asc, -> {order created_at: :asc}
     scope :sort_by_date_desc, -> {order created_at: :desc}
     scope :by_query, ->(term) {where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%")}
+    scope :sort_by_order_title_asc, lambda { order('orders.title asc') }
+    scope :sort_by_order_title_desc, lambda { order('orders.title desc') }
+    scope :sort_by_order_place_of_work_asc, lambda { order('orders.place_of_work asc') }
+    scope :sort_by_order_place_of_work_desc, lambda { order('orders.place_of_work desc') }
   end
 end

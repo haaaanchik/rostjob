@@ -1,0 +1,48 @@
+.border.rounded.p-1.mt-4
+  .mt-4
+    .container
+      .row
+        .col-md-6
+          = render partial: 'search_form'
+        .col-md-2
+          .form-check.form-check-inline.tmp-unavailable
+            input type="checkbox" class="form-check-input" id="materialInline1"
+            label class="form-check-label disabled" for="materialInline1" 1
+        .col-md-2
+          .form-check.form-check-inline.tmp-unavailable
+            input type="checkbox" class="form-check-input" id="materialInline2"
+            label class="form-check-label disabled" for="materialInline2" 2
+        .col-md-2
+          .form-check.form-check-inline.tmp-unavailable
+            input type="checkbox" class="form-check-input" id="materialInline3"
+            label class="form-check-label disabled" for="materialInline3" 3
+  table.table.table-sm.table-borderless.mt-4
+    thead
+      tr
+        th.text-center style="width: 15%"
+          = sort_link(@q, :state) do
+            strong Статус
+        th.text-center style="width: 20%"
+          = sort_link(@q, :employee_cv_name) do
+            strong Анкета
+        th.text-center style="width: 8%"
+          = sort_link(@q, :created_at) do
+            strong Поступила
+        th.text-center style="width: 15%"
+          = sort_link(@q, :order_title) do
+            strong Заявка
+        th.text-center style="width: 13%"
+          = sort_link(@q, :order_place_of_work) do
+            strong Площадка
+        th.text-center style="width: 8%"
+          = sort_link(@q, :hiring_date) do
+            strong Договор
+        th.text-center style="width: 7"
+          strong Нанять
+        th.text-center style="width: 7%"
+          strong Отказ
+        th.text-center style="width: 7%"
+          strong Спор
+      tbody
+      = render partial: 'profile/candidates/candidate', collection: @paginated_candidates
+  = paginate @paginated_candidates

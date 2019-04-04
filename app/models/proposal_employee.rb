@@ -6,8 +6,9 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :employee_cv
   has_many :complaints
 
-  scope :available, ->(profile_id) { where(state: %w[applyed], profile_id: profile_id) }
-  scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
+  ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
+
+  include ProposalEmployeeRepository
 
   aasm column: :state do
     state :inbox, initial: true
@@ -62,4 +63,11 @@ class ProposalEmployee < ApplicationRecord
     }
   end
 
+  ransacker :order_id do
+    Arel.sql("CONVERT(#{table_name}.order_id, CHAR(8))")
+  end
+
+  ransacker :employee_cv_id do
+    Arel.sql("CONVERT(#{table_name}.employee_cv_id, CHAR(8))")
+  end
 end

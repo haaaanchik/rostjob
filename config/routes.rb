@@ -78,6 +78,7 @@ Rails.application.routes.draw do
 
   resource :profile, except: %i[show destroy]
   namespace :profile do
+    resources :candidates, only: %i[index]
     resources :order_templates do
       member do
         post :copy

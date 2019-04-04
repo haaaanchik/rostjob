@@ -65,5 +65,17 @@ main
             = link_to profile_order_templates_path, class: 'btn button-menu-r btn-rounded waves-effect' do
               i.far.fa-handshake.w-10.mr-2
               |Мои шаблоны
+
+        hr.mb-0.mt-0
+
+        .mb-3.mt-3
+          .btn-group.group-menu  role="group" aria-label="Basic example"
+            button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
+              i.fas.fa-folder-open
+            / = link_to new_profile_order_template_path, class: 'btn button-menu-l btn-rounded waves-effect', remote: true, title: 'Создать шаблон' do
+            = link_to profile_candidates_path, class: 'btn button-menu-r btn-rounded waves-effect' do
+              i.fas.fa-address-card.w-10.mr-2
+              |Анкеты
+
       .col-md-9#right-window
         = yield
