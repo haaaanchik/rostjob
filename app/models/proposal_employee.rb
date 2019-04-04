@@ -10,7 +10,7 @@ class ProposalEmployee < ApplicationRecord
 
   include ProposalEmployeeRepository
 
-  aasm column: :state do
+  aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
     state :hired
     state :disputed
@@ -29,7 +29,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_revoked do
-      transitions to: :revoked
+      transitions from: %i[inbox], to: :revoked
     end
 
     event :to_viewed do
