@@ -14,7 +14,12 @@ class Profile::ProposalEmployeesController < ApplicationController
 
   def revoke
     result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: true)
-    Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv) if result.success?
+    if result.success?
+      Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv)
+      @status = 'success'
+    else
+      @status = 'error'
+    end
     # redirect_to profile_employee_cvs_path(term: :ready)
   end
 
