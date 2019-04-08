@@ -28,6 +28,21 @@ class EmployeeCv < ApplicationRecord
   before_create :check_state
   before_save :check_marks
 
+  def initialize(attrs = nil)
+    defaults = {
+      passport: {
+        seria: nil,
+        number: nil,
+        code: nil,
+        date: nil,
+        issuer: nil,
+        reg_address: nil
+      }
+    }
+    attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
+    super(attrs_with_defaults)
+  end
+
   aasm column: :state, skip_validation_on_save: true,
        no_direct_assignment: false, whiny_transitions: false do
     # черновик

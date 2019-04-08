@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_180407) do
+ActiveRecord::Schema.define(version: 2019_04_08_120443) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -143,6 +143,11 @@ ActiveRecord::Schema.define(version: 2019_04_01_180407) do
     t.string "document_content_type"
     t.bigint "document_file_size"
     t.datetime "document_updated_at"
+    t.string "phone_number_alt"
+    t.json "passport"
+    t.text "education"
+    t.text "remark"
+    t.text "experience"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 
