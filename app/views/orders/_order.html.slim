@@ -93,13 +93,12 @@
               - if @current_profile.contractor?
                 .m-2
                   p.m-0.green-text.text-center
-                    'Отправить анкету
                     - if @employee_cv_id
-                      = link_to send_proposal_profile_employee_cv_path(@employee_cv_id, order_id: order.id), class: 'btn btn-success btn-rounded m-0', method: :put, remote: true
-                        i.fas.fa-paper-plane
+                      = render partial: 'orders/proposal_employee_form', locals: { order: order, employee_cv_id: @employee_cv_id }
                     - else
                       = link_to new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success btn-rounded m-0', remote: true do
-                        i.fas.fa-paper-plane
+                        i.fas.fa-paper-plane.mr-2
+                        |Отправить анкету
 
 
 / .card.mt-3 id="favorite_id_#{order.id}"

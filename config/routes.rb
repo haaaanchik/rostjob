@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       end
     end
     resources :favorites, only: %i[index]
-    resources :proposal_employees, only: %i[index show] do
+    resources :proposal_employees, only: %i[index show create] do
       scope module: :proposal_employees do
         resources :complaints, only: %i[index new create]
       end
@@ -142,7 +142,6 @@ Rails.application.routes.draw do
         put :to_ready
         put :to_disput
         put :change_status
-        put :send_proposal
       end
     end
     post :employee_cvs, constraints: ->(req) { req.params.key?(:new_full) }, to: 'employee_cvs#new_full'

@@ -1,0 +1,4 @@
+= form_with model: [:profile, ProposalEmployee.new] do |f|
+  = f.hidden_field :order_id, value: order.id
+  = f.hidden_field :employee_cv_id, value: employee_cv_id
+  = f.submit 'Отправить анкету', class: 'btn btn-success btn-rounded m-0'

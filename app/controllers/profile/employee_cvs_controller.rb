@@ -86,20 +86,6 @@ class Profile::EmployeeCvsController < ApplicationController
     # redirect_to profile_employee_cvs_path(term: term)
   end
 
-  def send_proposal
-    Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: employee_cv, order_id: params[:order_id])
-    @employee_cv = employee_cv
-    if result.success?
-      Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
-      @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :ready)
-    else
-      @status = 'error'
-      @text = error_msg_handler @employee_cv
-    end
-  end
-
   def change_status
     @proposal_employee_cv = ProposalEmployee.find_by id: params[:id]
     return if %w[hired].include?(params[:state])
