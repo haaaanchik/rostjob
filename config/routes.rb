@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       end
     end
     resources :favorites, only: %i[index]
-    resources :proposal_employees, only: :show do
+    resources :proposal_employees, only: %i[index show] do
       scope module: :proposal_employees do
         resources :complaints, only: %i[index new create]
       end
@@ -145,6 +145,7 @@ Rails.application.routes.draw do
         put :send_proposal
       end
     end
+    post :employee_cvs, constraints: ->(req) { req.params.key?(:new_full) }, to: 'employee_cvs#new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_as_sent'

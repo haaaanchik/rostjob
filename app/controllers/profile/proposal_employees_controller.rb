@@ -1,4 +1,10 @@
 class Profile::ProposalEmployeesController < ApplicationController
+  layout false, only: :index
+
+  def index
+    paginated_proposal_employees
+  end
+
   def show
     proposal_employee
     @remained_warranty_days = Holiday.remained_warranty_days(@proposal_employee.hiring_date,
@@ -29,7 +35,12 @@ class Profile::ProposalEmployeesController < ApplicationController
     @proposal_employee ||= proposal_employees.find(params[:id])
   end
 
+  def paginated_proposal_employees
+    @paginated_proposal_employees ||= proposal_employees.page(params[:page]).per(10).decorate
+  end
+
   def proposal_employees
-    @proposal_employees = ProposalEmployee.where(profile_id: current_profile.id).order(id: :desc)
+    @q = ProposalEmployee.where(profile_id: current_profile.id, state: %w[inbox hired disputed]).order(id: :desc).ransack(params[:q])
+    @proposal_employees ||= @q.result
   end
 end

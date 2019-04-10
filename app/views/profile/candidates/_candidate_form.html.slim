@@ -93,7 +93,7 @@
                             /       = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
                           .col-8
                             .md-form.mt-1
-                              = phone_field :employee_cv, :phone_number_alt, class: 'form-control disabled'
+                              = phone_field :employee_cv, :phone_number_alt, class: 'form-control disabled', value: employee_cv.phone_number_alt
                               = label :employee_cv, :phone_number_alt, 'Дополнительный телефон', class: 'active disabled'
                     .border.rounded.white.mt-1
                       .modal-body.pt-1
@@ -104,46 +104,47 @@
                         .row
                           .col
                             .md-form.mt-2
-                              = text_area 'employee_cv[ext_data][additional_info]', :experience, rows: 3, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][additional_info]', :experience, 'Опыт работы', class: 'ml-2 disabled'
+                              = text_area :employee_cv, :experience, rows: 3, class: 'form-control disabled', value: employee_cv.experience
+                              = label :employee_cv, :experience, 'Опыт работы', class: 'ml-2 disabled'
                         .row
                           .col
                             .md-form.mt-0
-                              = text_area 'employee_cv[ext_data][additional_info]', :education, rows: 2, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][additional_info]', :education, 'Образование', class: 'ml-2 disabled'
+                              = text_area :employee_cv, :education, rows: 2, class: 'form-control disabled', value: employee_cv.education
+                              = label :employee_cv, :education, 'Образование', class: 'ml-2 disabled'
                         .row
                           .col
                             .md-form.mt-0
-                              = text_area 'employee_cv[ext_data][additional_info]', :remark, rows: 2, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][additional_info]', :remark, 'Дополнительные сведения', class: 'ml-2 disabled'
+                              = text_area :employee_cv, :remark, rows: 2, class: 'form-control disabled', value: employee_cv.remark
+                              = label :employee_cv, :remark, 'Дополнительные сведения', class: 'ml-2 disabled'
                     .border.rounded.white.mt-1
                       .modal-body.pt-1
                         .row
                           .col.mt-1
                             p.h5.text-center
                               | Паспортные данные
+                              - passport = employee_cv.passport
                         .row
                           .col-2
                             .md-form.mt-2
-                              = text_field 'employee_cv[ext_data][passport]', :seria, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][passport]', :seria, 'Серия', class: 'disabled'
+                              = text_field :employee_cv_passport, :seria, class: 'form-control disabled', value: passport['seria']
+                              = label :employee_cv_passport, :seria, 'Серия', class: 'disabled'
                           .col-2
                             .md-form.mt-2
-                              = text_field 'employee_cv[ext_data][passport]', :number, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][passport]', :number, 'Номер', class: 'disabled'
+                              = text_field :employee_cv_passport, :number, class: 'form-control disabled', value: passport['number']
+                              = label :employee_cv_passport, :number, 'Номер', class: 'disabled'
                           .col-4
                             .md-form.mt-2
-                              = text_field 'employee_cv[ext_data][passport]', :code, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][passport]', :code, '№ подразделения', class: 'disabled'
+                              = text_field :employee_cv_passport, :code, class: 'form-control disabled', value: passport['code']
+                              = label :employee_cv_passport, :code, '№ подразделения', class: 'disabled'
                           .col-4
                             .md-form.mt-2
-                              = text_field 'employee_cv[ext_data][passport]', :date, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][passport]', :date, 'Дата выдачи', class: 'disabled'
+                              = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
+                              = label :employee_cv_passport, :date, 'Дата выдачи', class: 'disabled'
                         .row
                           .col
                             .md-form.mt-1
-                              = text_area 'employee_cv[ext_data][passport]', :reg_address, class: 'form-control disabled'
-                              = label 'employee_cv[ext_data][passport]', :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
+                              = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
+                              = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
                   .col-md-4.border.rounded.white.mt-1.pt-1
                     h4
                       |  Каледарь

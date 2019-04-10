@@ -8,4 +8,5 @@ tr.rounded.mb-0.example.hoverable
   td.text-center.align-middle №#{candidate.order_id} #{candidate.title}
   td.text-center.align-middle = candidate.place_of_work
   td.text-center.align-middle = candidate.hiring_date.strftime('%d.%m.%Y') if candidate.state == 'hired'
-  = render partial: 'profile/candidates/toolbars/actions.html.slim', locals: { candidate: candidate }
+  - filename = candidate.state
+  = render partial: "profile/proposal_employees/toolbars/#{filename}.html.slim", locals: { candidate: candidate }

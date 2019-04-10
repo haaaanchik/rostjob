@@ -14,6 +14,18 @@ class ProposalEmployeeDecorator < ObjDecorator
     PaginatingDecorator
   end
 
+  def name
+    model.employee_cv.name
+  end
+
+  def title
+    model.order.title
+  end
+
+  def place_of_work
+    model.order.place_of_work
+  end
+
   def order_id
     model.order_id
   end

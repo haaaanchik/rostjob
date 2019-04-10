@@ -47,7 +47,8 @@ main
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
 
-                      = link_to profile_employee_cvs_path(term: :sent), id: 'employee_cvs_sent', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
+                      / = link_to profile_employee_cvs_path(term: :sent), id: 'employee_cvs_sent', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
+                      = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
                         i.fas.fa-briefcase.w-10
                         |  Отправленные
                     / span.counter

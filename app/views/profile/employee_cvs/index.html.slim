@@ -1,10 +1,27 @@
-.row.mt-4.mr-1.ml-0.d-flex.justify-content-end
-  = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
-    i.fas.fa-plus.mr-2
-    |Добавить анкету
-.row.mt-4
-  = render @paginated_employee_cvs
-= paginate @paginated_employee_cvs, remote: true
+.border.rounded.p-1.mt-4
+  .mt-4
+    .container
+      .row.mt-4.mr-1.ml-0.d-flex.justify-content-end
+        = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
+          i.fas.fa-plus.mr-2
+          |Добавить анкету
+  / table.table.table-hover.w-auto
+  table.table.table-sm.table-hover.table-borderless.mt-4
+    thead
+      tr
+        th.text-center style="width: 10%"
+          strong Статус
+        th.text-center style="width: 30%"
+          strong Анкета
+        th.text-center style="width: 15%"
+          strong Телефон
+        - filename = @term.to_s
+        = render partial: "profile/employee_cvs/toolbars/#{filename}.header.html.slim"
+    tbody#candidates_list
+      = render @paginated_employee_cvs
+  = paginate @paginated_employee_cvs, remote: true
+  / = render @paginated_employee_cvs
+/ = paginate @paginated_employee_cvs, remote: true
 
 / .card.border-light.mt-3
 /   .card-body

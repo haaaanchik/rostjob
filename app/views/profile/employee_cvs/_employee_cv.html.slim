@@ -1,21 +1,30 @@
-.col-md-4.order-md-2 id="profile_cvs_#{employee_cv.id}"
-  .container.p-0.up-box.m-2
-    .d-flex.justify-content-end
-      .blue.text-right.z-depth-1.rounded.mb-0.position-relative
-        p.white-text.m-1.h4
-          i.fas.fa-bookmark
-          = t("employee_cv.state.#{employee_cv.state}")
-    .card.testimonial-card.position-static.price.mb-3
-      .card-up.bg-best-hr.card-title.white-text.text-center.m-0[style="height: 120px"]
-        p.h3.mt-3.mb-0
-          |##{employee_cv.id} #{employee_cv.name}
-      .avatar.mx-auto.white
-        = image_tag(employee_cv.photo.url(:medium), alt: 'no avatar', class: 'rounded-circle img-responsive')
-      .card.card-form.md-calendar.white.z-depth-0
-        .card-body.rounded-top.white-text.pr-0.m-0
-          .box-spice
-            - filename = employee_cv.state
-            = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
+tr.rounded.mb-0.example.hoverable.clickable-row id="profile_cvs_#{employee_cv.id}"
+  td.text-center.align-middle
+    .border.rounded.white-text.z-depth-1 class='blue'
+      i.fas.fa-bookmark.mr-2
+      = t("employee_cv.state.#{employee_cv.state}")
+  td.text-center.align-middle ##{employee_cv.id} #{employee_cv.name}
+  td.text-center.align-middle = employee_cv.phone_number
+  - filename = employee_cv.state
+  = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
+/ .col-md-4.order-md-2 id="profile_cvs_#{employee_cv.id}"
+/   .container.p-0.up-box.m-2
+/     .d-flex.justify-content-end
+/       .blue.text-right.z-depth-1.rounded.mb-0.position-relative
+/         p.white-text.m-1.h4
+/           i.fas.fa-bookmark
+/           = t("employee_cv.state.#{employee_cv.state}")
+/     .card.testimonial-card.position-static.price.mb-3
+/       .card-up.bg-best-hr.card-title.white-text.text-center.m-0[style="height: 120px"]
+/         p.h3.mt-3.mb-0
+/           |##{employee_cv.id} #{employee_cv.name}
+/       .avatar.mx-auto.white
+/         = image_tag(employee_cv.photo.url(:medium), alt: 'no avatar', class: 'rounded-circle img-responsive')
+/       .card.card-form.md-calendar.white.z-depth-0
+/         .card-body.rounded-top.white-text.pr-0.m-0
+/           .box-spice
+/             - filename = employee_cv.state
+/             = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
 
 / tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}"
 /   td #{employee_cv.name}

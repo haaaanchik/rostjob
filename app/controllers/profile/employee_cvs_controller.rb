@@ -20,6 +20,11 @@ class Profile::EmployeeCvsController < ApplicationController
     order
   end
 
+  def new_full
+    @employee_cv = EmployeeCv.new employee_cvs_params
+    order2
+  end
+
   def edit
     @employee_cv = EmployeeCv.find_by id: params[:id]
   end
@@ -42,7 +47,8 @@ class Profile::EmployeeCvsController < ApplicationController
       # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
-      @text = error_msg_handler result.employee_cv
+      # @text = error_msg_handler result.employee_cv
+      render json: { validate: true, data: errors_data(result.employee_cv) }
     end
   end
 
@@ -69,7 +75,8 @@ class Profile::EmployeeCvsController < ApplicationController
       @status = 'success'
     else
       @status = 'error'
-      @text = error_msg_handler result.employee_cv
+      # @text = error_msg_handler result.employee_cv
+      render json: { validate: true, data: errors_data(result.employee_cv) }
     end
   end
 
@@ -130,7 +137,8 @@ class Profile::EmployeeCvsController < ApplicationController
   def employee_cvs_params
     params.require(:employee_cv)
           .permit(:phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
-                  :name, :gender, :mark_ready, :birthdate, :photo, :document, ext_data: {})
+                  :name, :gender, :mark_ready, :birthdate, :photo, :document, :remark,
+                  :education, :phone_number_alt, :experience, ext_data: {}, passport: {})
   end
 
   def states_by_term
