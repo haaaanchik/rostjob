@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_08_120443) do
+ActiveRecord::Schema.define(version: 2019_04_10_124807) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -362,6 +362,7 @@ ActiveRecord::Schema.define(version: 2019_04_08_120443) do
     t.date "firing_date"
     t.date "warranty_date"
     t.text "hd_correction_reason"
+    t.date "arrival_date"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"

@@ -37,4 +37,7 @@
               li
                 = order.salary_from
               li
-                = link_to 'Отправить', send_proposal_profile_employee_cv_path(@employee_cv_id, order_id: order.id), method: :put, remote: true
+                - if @employee_cv_id
+                  - pe_form = "#{render partial: 'orders/proposal_employee_form', locals: { order: order, employee_cv_id: @employee_cv_id }}"
+                  button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
+                / = link_to 'Отправить', send_proposal_profile_employee_cv_path(@employee_cv_id, order_id: order.id), method: :put, remote: true

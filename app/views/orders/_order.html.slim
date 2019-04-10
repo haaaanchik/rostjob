@@ -94,7 +94,8 @@
                 .m-2
                   p.m-0.green-text.text-center
                     - if @employee_cv_id
-                      = render partial: 'orders/proposal_employee_form', locals: { order: order, employee_cv_id: @employee_cv_id }
+                      - pe_form = "#{render partial: 'orders/proposal_employee_form', locals: { order: order, employee_cv_id: @employee_cv_id }}"
+                      button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
                     - else
                       = link_to new_profile_employee_cv_path(order_id: order.id), class: 'btn btn-success btn-rounded m-0', remote: true do
                         i.fas.fa-paper-plane.mr-2

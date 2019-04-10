@@ -6,6 +6,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :employee_cv
   has_many :complaints
 
+  validates :arrival_date, :order_id, :employee_cv_id, presence: true
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
 
   include ProposalEmployeeRepository

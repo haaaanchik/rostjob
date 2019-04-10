@@ -5,3 +5,4 @@ normal_modal_open('formModalMyOrders', "<%= j my_orders_modal %>")
 <% orders = render partial: 'index_with_search.html.slim' %>
 $('#right_window').html("<%= j orders %>")
 <% end %>
+$('[data-toggle="popover"]').popover()

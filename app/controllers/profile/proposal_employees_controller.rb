@@ -13,7 +13,7 @@ class Profile::ProposalEmployeesController < ApplicationController
 
   def create
     Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: employee_cv, order_id: proposal_employee_params[:order_id])
+    result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: proposal_employee_params)
     @employee_cv = employee_cv
     if result.success?
       Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
@@ -21,7 +21,7 @@ class Profile::ProposalEmployeesController < ApplicationController
       # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
-      @text = error_msg_handler @employee_cv
+      render json: { validate: true, data: errors_data(result.proposal_employee) }
     end
   end
 
@@ -46,7 +46,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   private
 
   def proposal_employee_params
-    params.require(:proposal_employee).permit(:order_id, :employee_cv_id)
+    params.require(:proposal_employee).permit(:order_id, :employee_cv_id, :arrival_date)
   end
 
   def order
