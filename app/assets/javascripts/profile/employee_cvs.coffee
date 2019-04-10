@@ -79,6 +79,16 @@ $ ->
       $('.employee-cv-submit-button').addClass('disabled')
   )
 
+  $(document).on('click', 'label[for=proposal_employee_employee_cv_attributes_contractor_terms_of_service]', (event) ->
+    console.log 'aaa'
+    element = $('#proposal_employee_employee_cv_attributes_contractor_terms_of_service')
+    checked = element.prop('checked')
+    if checked == false
+      $('.proposal-employee-cv-submit-button').removeClass('disabled')
+    else
+      $('.proposal-employee-cv-submit-button').addClass('disabled')
+  )
+
   $(document).on('show.bs.modal', '#formModalNewEmployeeCv', ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
   )

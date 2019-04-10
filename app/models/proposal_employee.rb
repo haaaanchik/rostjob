@@ -7,6 +7,9 @@ class ProposalEmployee < ApplicationRecord
   has_many :complaints
 
   validates :arrival_date, :order_id, :employee_cv_id, presence: true
+
+  accepts_nested_attributes_for :employee_cv
+
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
 
   include ProposalEmployeeRepository

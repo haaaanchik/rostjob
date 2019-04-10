@@ -86,7 +86,7 @@ Rails.application.routes.draw do
       end
     end
     resources :favorites, only: %i[index]
-    resources :proposal_employees, only: %i[index show create] do
+    resources :proposal_employees, only: %i[index show new create] do
       scope module: :proposal_employees do
         resources :complaints, only: %i[index new create]
       end

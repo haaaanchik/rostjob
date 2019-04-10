@@ -10,7 +10,7 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def update
     hiring_date = Date.parse(correction_params[:hiring_date])
-    candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
+    candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date), hiring_date_corrected: true)
     @pecv = candidate
     @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
   end
@@ -77,7 +77,7 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def candidate
-    @candidate ||= candidates.find(params[:id])
+    @candidate ||= candidates.find(params[:id]).decorate
     # @candidate ||= EmployeeCv.find(candidate_params[:id])
   end
 

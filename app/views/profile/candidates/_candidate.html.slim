@@ -1,4 +1,4 @@
-tr.rounded.mb-0.example.hoverable
+tr.rounded.mb-0.example.hoverable id="candidate_#{candidate.id}"
   td.text-center.align-middle.clickable-row data-href=profile_candidate_path(candidate)
     .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
       i.fas.fa-bookmark.mr-2
@@ -7,5 +7,11 @@ tr.rounded.mb-0.example.hoverable
   td.text-center.align-middle = candidate.created_at.strftime('%H:%M %d.%m.%Y')
   td.text-center.align-middle №#{candidate.order_id} #{candidate.title}
   td.text-center.align-middle = candidate.place_of_work
-  td.text-center.align-middle = candidate.hiring_date.strftime('%d.%m.%Y') if candidate.state == 'hired'
+  td.text-center.align-middle
+    - if candidate.state == 'hired'
+      - if candidate.hiring_date_corrected
+        i.fas.fa-check.green-text
+        b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
+      - else
+        = candidate.hiring_date.strftime('%d.%m.%Y')
   = render partial: 'profile/candidates/toolbars/actions.html.slim', locals: { candidate: candidate }

@@ -11,6 +11,12 @@ class Profile::ProposalEmployeesController < ApplicationController
                                                              @proposal_employee.warranty_date)
   end
 
+  def new
+    @proposal_employee = current_profile.proposal_employees.build
+    @proposal_employee.build_employee_cv
+    order2
+  end
+
   def create
     Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
     result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: proposal_employee_params)
@@ -46,11 +52,15 @@ class Profile::ProposalEmployeesController < ApplicationController
   private
 
   def proposal_employee_params
-    params.require(:proposal_employee).permit(:order_id, :employee_cv_id, :arrival_date)
+    params.require(:proposal_employee).permit(:order_id, :employee_cv_id, :arrival_date, employee_cv_attributes: [])
   end
 
   def order
     @order ||= Order.find(proposal_employee_params[:order_id])
+  end
+
+  def order2
+    @order2 ||= Order.find(params[:order_id])
   end
 
   def employee_cv

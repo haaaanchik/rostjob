@@ -138,7 +138,7 @@
                               = label :employee_cv_passport, :code, '№ подразделения', class: 'disabled'
                           .col-4
                             .md-form.mt-2
-                              = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
+                              = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] && !passport['date'].empty? ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
                               = label :employee_cv_passport, :date, 'Дата выдачи', class: 'disabled'
                         .row
                           .col

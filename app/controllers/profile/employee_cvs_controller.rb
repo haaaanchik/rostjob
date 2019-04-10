@@ -21,7 +21,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def new_full
-    @employee_cv = EmployeeCv.new employee_cvs_params
+    @employee_cv = EmployeeCv.new employee_cvs_params.except('arrival_date')
     order2
   end
 
@@ -54,9 +54,9 @@ class Profile::EmployeeCvsController < ApplicationController
 
   # FIXME: Refactor this beautiful code ASAP!!!
   def create_as_sent
-    ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params.except('arrival_date'), profile: current_profile)
     order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(employee_cv: ecv_result.employee_cv, order_id: order_result.order.id)
+    result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: { employee_cv_id: ecv_result.employee_cv.id, order_id: order_result.order.id, arrival_date: arrival_date })
     @employee_cv = ecv_result.employee_cv
     @employee_pr = result.employee_pr
     if result.success?
@@ -65,7 +65,8 @@ class Profile::EmployeeCvsController < ApplicationController
       # redirect_to profile_employee_cvs_path(term: :sent)
     else
       @status = 'error'
-      @text = error_msg_handler ecv_result.employee_cv
+      render json: { validate: true, data: errors_data(result.employee_cv) }
+      # @text = error_msg_handler ecv_result.employee_cv
     end
   end
 
@@ -123,7 +124,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def employee_cvs_params
     params.require(:employee_cv)
           .permit(:phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
-                  :name, :gender, :mark_ready, :birthdate, :photo, :document, :remark,
+                  :name, :gender, :mark_ready, :birthdate, :photo, :document, :remark, :arrival_date,
                   :education, :phone_number_alt, :experience, ext_data: {}, passport: {})
   end
 
@@ -168,5 +169,9 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def order2
     @order ||= Order.find_by(id: employee_cvs_params[:order_id])
+  end
+
+  def arrival_date
+    employee_cvs_params[:arrival_date]
   end
 end
