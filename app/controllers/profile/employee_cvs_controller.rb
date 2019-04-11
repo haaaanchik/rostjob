@@ -21,7 +21,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def new_full
-    @employee_cv = EmployeeCv.new employee_cvs_params.except('arrival_date')
+    @employee_cv = EmployeeCv.new employee_cvs_params
     order2
   end
 
@@ -53,21 +53,33 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   # FIXME: Refactor this beautiful code ASAP!!!
-  def create_as_sent
-    ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params.except('arrival_date'), profile: current_profile)
-    order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: { employee_cv_id: ecv_result.employee_cv.id, order_id: order_result.order.id, arrival_date: arrival_date })
-    @employee_cv = ecv_result.employee_cv
-    @employee_pr = result.employee_pr
+  def create_for_send
+    order2
+    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    @employee_cv = result.employee_cv
     if result.success?
-      Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
       @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :sent)
+      # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
+      # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }
-      # @text = error_msg_handler ecv_result.employee_cv
     end
+
+    # ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    # order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
+    # result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: { employee_cv_id: ecv_result.employee_cv.id, order_id: order_result.order.id, arrival_date: arrival_date })
+    # @employee_cv = ecv_result.employee_cv
+    # @employee_pr = result.employee_pr
+    # if result.success?
+    #   Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
+    #   @status = 'success'
+    #   # redirect_to profile_employee_cvs_path(term: :sent)
+    # else
+    #   @status = 'error'
+    #   render json: { validate: true, data: errors_data(result.employee_cv) }
+    #   # @text = error_msg_handler ecv_result.employee_cv
+    # end
   end
 
   def update
@@ -164,7 +176,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def order
-    @order ||= Order.find_by(id: params[:order_id])
+    @order ||= Order.find(params[:order_id])
   end
 
   def order2

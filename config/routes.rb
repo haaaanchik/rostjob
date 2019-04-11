@@ -147,7 +147,7 @@ Rails.application.routes.draw do
     post :employee_cvs, constraints: ->(req) { req.params.key?(:new_full) }, to: 'employee_cvs#new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'
-    post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_as_sent'
+    post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_for_send'
 
     resources :proposals, only: %i[index show create] do
       member do

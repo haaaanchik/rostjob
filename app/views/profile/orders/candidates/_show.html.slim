@@ -21,6 +21,8 @@
         .mt-3
           - state = @pecv.state
           - case state
+          - when 'paid'
+            span.text-center.text-success = 'Оплачена'
           - when 'viewed'
             span.text-center.text-success = t("employee_cv.state.#{state}")
           - when 'hired'
@@ -38,7 +40,7 @@
           / - else
           / = link_to 'Спор', disput_profile_order_candidate_path(@pecv.order_id, @pecv), method: :put,
           /      data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
-          = link_to 'Скорректировать', hd_correction_profile_order_candidate_path(@pecv.order_id, @pecv), class: 'btn btn-indigo', title: 'Скорректировать дату подписания договора', remote: true
+          = link_to 'Скорректировать', hd_correction_profile_order_candidate_path(@pecv.order_id, @pecv), class: 'btn btn-indigo', title: 'Скорректировать дату подписания договора', remote: true if @pecv.state == 'hired'
 .row
   .col
     .mt-3

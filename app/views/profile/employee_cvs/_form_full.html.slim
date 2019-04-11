@@ -87,15 +87,10 @@
                                   = f.file_field :document
                                 .file-path-wrapper.md-form.m-0.mt-1
                                   = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
-                            .col
+                            .col-8
                               .md-form.mt-1
                                 = f.phone_field :phone_number_alt, class: 'form-control'
                                 = f.label :phone_number_alt, 'Дополнительный номер телефона'
-                            - if @order
-                              .col-4
-                                .md-form.mt-1
-                                  = f.date_field :arrival_date, class: 'form-control'
-                                  = f.label :arrival_date, 'Дата прибытия', class: 'active'
                       .border.rounded.white.mt-1
                         .modal-body.pt-1
                           .row

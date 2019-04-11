@@ -105,11 +105,13 @@ class Profile::Orders::CandidatesController < ApplicationController
   def term
     term = params[:term]
     @term = if !term
-              'inbox'
+              %w[inbox]
             elsif term.empty?
-              'inbox'
+              %w[inbox]
+            elsif EmployeeCv.customer_menu_items.include?(term)
+              term == 'hired' ? %w[hired paid] : [term]
             else
-              EmployeeCv.customer_menu_items.include?(term) ? term : 'inbox'
+              %w[inbox]
             end
   end
 

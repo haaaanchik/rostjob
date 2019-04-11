@@ -10,15 +10,10 @@
             .invalid-feedback
             = f.hidden_field :proposal_id, value: params[:proposal_id]
       .row
-        .col
+        .col-8
           .md-form.mt-0
             = f.phone_field :phone_number, class: 'form-control'
             = f.label :phone_number, 'Номер телефона', class: 'active'
-        - if @order
-          .col-4
-            .md-form.mt-0
-              = f.date_field :arrival_date, class: 'form-control'
-              = f.label :arrival_date, 'Дата прибытия', class: 'active'
         .col-2
           .form-inline.mt-2.d-flex.justify-content-center
             .form-check
