@@ -18,7 +18,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def new
     @employee_cv = EmployeeCv.new proposal_id: params[:proposal_id]
     # FIXME: refactor this asap
-    order if params[:order_if]
+    order if params[:order_id]
   end
 
   def new_full
