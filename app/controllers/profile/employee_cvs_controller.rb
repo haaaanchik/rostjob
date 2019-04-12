@@ -17,12 +17,14 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def new
     @employee_cv = EmployeeCv.new proposal_id: params[:proposal_id]
-    order
+    # FIXME: refactor this asap
+    order if params[:order_if]
   end
 
   def new_full
     @employee_cv = EmployeeCv.new employee_cvs_params
-    order2
+    # FIXME: refactor this asap
+    order2 if employee_cvs_params[:order_id]
   end
 
   def edit
