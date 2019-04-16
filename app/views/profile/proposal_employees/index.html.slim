@@ -35,6 +35,9 @@
           = sort_link(@q, :order_place_of_work) do
             strong Площадка
         th.text-center style="width: 8%"
+          = sort_link(@q, :arrival_date) do
+            strong Прибытие
+        th.text-center style="width: 8%"
           = sort_link(@q, :hiring_date) do
             strong Договор
         = render partial: "profile/proposal_employees/toolbars/header.html.slim"
