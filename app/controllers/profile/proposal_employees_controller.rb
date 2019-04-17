@@ -68,7 +68,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def proposal_employee
-    @proposal_employee ||= proposal_employees.find(params[:id])
+    @proposal_employee ||= ProposalEmployee.where(profile_id: current_profile.id).find(params[:id])
   end
 
   def paginated_proposal_employees
