@@ -17,7 +17,7 @@
             tr
               th Действия
               th ФИО
-              th Тел
+              th Дата прибытия
             - candidates.each do |candidate|
               = render partial: 'profile/orders/proposals/employee_cv',
                        object: candidate, as: :proposed

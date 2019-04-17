@@ -4,7 +4,7 @@ tr id="profile_cvs_#{employee_cv.id}" data-cvs-state="#{employee_cv.state}" data
     - filename = proposed.state
     = render partial: "profile/orders/proposals/toolbars/#{filename}.html.slim", locals: { proposed: proposed }
   td #{employee_cv.name}
-  td = employee_cv.phone_number
+  td = proposed.arrival_date.strftime('%d.%m.%Y')
   / td
   /   - if employee_cv.file
   /     = link_to employee_cv.file.url, target: '_blank' do
