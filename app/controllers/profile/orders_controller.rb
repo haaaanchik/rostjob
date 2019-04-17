@@ -156,13 +156,17 @@ class Profile::OrdersController < ApplicationController
            if params[:state] == 'completed'
              Order.where(profile: current_profile).with_pe_counts.where(state: params[:state]).ransack(params[:q])
            else
-             Order.where(profile: current_profile).with_pe_counts.where.not(state: 'completed').ransack(params[:q])
+             Order.where(profile: current_profile).with_pe_counts.where.not(state: not_in_work_states).ransack(params[:q])
            end
          else
            Order.where(profile: current_profile).with_pe_counts.ransack(params[:q])
          end
 
     @orders ||= @q.result
+  end
+
+  def not_in_work_states
+    %w[completed draft]
   end
 
   def description
