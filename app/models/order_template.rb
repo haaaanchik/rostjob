@@ -10,8 +10,7 @@ class OrderTemplate < ApplicationRecord
   validates :number_of_employees, presence: true, numericality: { only_integer: true }
   validates :name, :title, :city, :experience, :description,
             :schedule, :work_period, :place_of_work, presence: true
-  validates :salary_from, presence: true, numericality: { only_integer: true }
-  validates :salary_to, presence: true, numericality: { only_integer: true }
+  validates :salary, presence: true
   validates :warranty_period, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_044923) do
+ActiveRecord::Schema.define(version: 2019_04_17_162348) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_044923) do
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 
-  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "state"
     t.text "text"
     t.bigint "proposal_employee_id"
@@ -247,6 +247,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_044923) do
     t.bigint "document_file_size"
     t.datetime "document_updated_at"
     t.json "contact_person"
+    t.text "salary"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
 
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_044923) do
     t.datetime "document_updated_at"
     t.text "place_of_work"
     t.json "contact_person"
+    t.text "salary"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 

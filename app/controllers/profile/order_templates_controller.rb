@@ -63,7 +63,6 @@ class Profile::OrderTemplatesController < ApplicationController
     else
       redirect_to edit_profile_order_path(result.order)
     end
-
   end
 
   private
@@ -105,8 +104,8 @@ class Profile::OrderTemplatesController < ApplicationController
 
   def order_template_params
     @order_template_params ||= params.require(:order_template)
-                                     .permit(:name, :title, :specialization, :city, :salary_from,
-                                             :position_id, :salary_to, :description, :state,
+                                     .permit(:name, :title, :specialization, :city, :salary,
+                                             :position_id, :description, :state,
                                              :contractor_price, :skill, :accepted, :district,
                                              :experience, :visibility, :number_of_employees, :document,
                                              :schedule, :work_period, :place_of_work, contact_person: {}, other_info: {})

@@ -53,14 +53,9 @@
       = f.label :district, 'Район'
       = f.text_field :district, class: "form-control"
       .invalid-feedback
-  .row
-    .col
-      = f.label :salary_from, 'Зарплата от:'
-      = f.text_field :salary_from, class: "form-control"
-      .invalid-feedback
-    .col
-      = f.label :salary_to, 'Зарплата до:'
-      = f.text_field :salary_to, class: "form-control"
+  .form-group
+      = f.label :salary, 'Зарплата:'
+      = f.text_field :salary, class: "form-control"
       .invalid-feedback
   .form-group
     = f.label :experience, 'Наличие документа, подтверждающего стаж работы'
