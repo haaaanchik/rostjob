@@ -3,7 +3,7 @@
     .container
       .row.mt-4.mr-1.ml-0
         .col-8
-          = render partial: 'search_form', locals: { url: "profile/employee_cvs/state/#{@term}" }
+          = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
         .col-4
           = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
             i.fas.fa-plus.mr-2

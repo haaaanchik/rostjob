@@ -144,7 +144,7 @@ Rails.application.routes.draw do
         put :change_status
       end
     end
-    get 'employee_cvs/state/:employee_cv_state', to: 'employee_cvs#index', constraints: { employee_cv_state: /[A-Za-z]+/ }
+    get 'employee_cvs/state/:employee_cv_state', as: :employee_cvs_with_state, to: 'employee_cvs#index', constraints: { employee_cv_state: /[_A-Za-z]+/ }
     post :employee_cvs, constraints: ->(req) { req.params.key?(:new_full) }, to: 'employee_cvs#new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'
