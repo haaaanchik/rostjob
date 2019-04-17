@@ -4,7 +4,7 @@ ru:
       inbox: 'В очереди'
       hired: 'Нанят'
       disputed: 'Спор'
-      deleted: 'Удалена'
+      deleted: 'В архиве'
       viewed: 'Просмотрена'
       fired: 'Уволен досрочно'
       revoked: 'Отозвана'
