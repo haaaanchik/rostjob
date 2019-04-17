@@ -1,20 +1,26 @@
 .border.rounded.p-1.mt-4
   .mt-4
     .container
-      .row.mt-4.mr-1.ml-0.d-flex.justify-content-end
-        = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
-          i.fas.fa-plus.mr-2
-          |Добавить анкету
+      .row.mt-4.mr-1.ml-0
+        .col-8
+          = render partial: 'search_form', locals: { url: "profile/employee_cvs/state/#{@term}" }
+        .col-4
+          = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
+            i.fas.fa-plus.mr-2
+            |Добавить анкету
   / table.table.table-hover.w-auto
   table.table.table-sm.table-hover.table-borderless.mt-4
     thead
       tr
         th.text-center style="width: 10%"
-          strong Статус
+          = sort_link(@q, :state, {}, class: 'left-menu', remote: true) do
+            strong Статус
         th.text-center style="width: 30%"
-          strong Анкета
+          = sort_link(@q, :name, {}, class: 'left-menu', remote: true) do
+            strong Анкета
         th.text-center style="width: 15%"
-          strong Телефон
+          = sort_link(@q, :phone_number, {}, class: 'left-menu', remote: true) do
+            strong Телефон
         - filename = @term.to_s
         = render partial: "profile/employee_cvs/toolbars/#{filename}.header.html.slim"
     tbody#candidates_list

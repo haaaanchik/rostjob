@@ -3,9 +3,10 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   STATUS_BACKGROUND_COLORS = {
     'hired' => 'green',
-    'inbox' => 'blue',
+    'inbox' => 'yellow',
     'disputed' => 'red',
-    'paid' => 'grey'
+    'paid' => 'grey',
+    'deleted' => 'blue'
   }
 
   STATUS_BACKGROUND_COLORS.default = 'blue'

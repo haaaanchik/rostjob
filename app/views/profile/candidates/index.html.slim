@@ -1,21 +1,22 @@
 .border.rounded.p-1.mt-4
   .mt-4
     .container
-      .row
-        .col-md-6
-          = render partial: 'search_form'
-        .col-md-2
-          .form-check.form-check-inline.tmp-unavailable
-            input type="checkbox" class="form-check-input" id="materialInline1"
-            label class="form-check-label disabled" for="materialInline1" 1
-        .col-md-2
-          .form-check.form-check-inline.tmp-unavailable
-            input type="checkbox" class="form-check-input" id="materialInline2"
-            label class="form-check-label disabled" for="materialInline2" 2
-        .col-md-2
-          .form-check.form-check-inline.tmp-unavailable
-            input type="checkbox" class="form-check-input" id="materialInline3"
-            label class="form-check-label disabled" for="materialInline3" 3
+      = render partial: 'search_form'
+      / .row
+      /   .col-md-6
+      /     = render partial: 'search_form'
+      /   .col-md-2
+      /     .form-check.form-check-inline.tmp-unavailable
+      /       input type="checkbox" class="form-check-input" id="materialInline1"
+      /       label class="form-check-label disabled" for="materialInline1" 1
+      /   .col-md-2
+      /     .form-check.form-check-inline.tmp-unavailable
+      /       input type="checkbox" class="form-check-input" id="materialInline2"
+      /       label class="form-check-label disabled" for="materialInline2" 2
+      /   .col-md-2
+      /     .form-check.form-check-inline.tmp-unavailable
+      /       input type="checkbox" class="form-check-input" id="materialInline3"
+      /       label class="form-check-label disabled" for="materialInline3" 3
   table.table.table-sm.table-borderless.mt-4.table-hover
     thead
       tr

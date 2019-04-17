@@ -1,3 +1,28 @@
-= search_form_for @q, url: profile_candidates_path do |f|
-  .input-group.flex.no-wrap
-    = f.search_field :candidate_fields_cont, placeholder: 'Поиск анкет', class: 'form-control ml-3 mr-3'
+- val =  params[:q] ? params[:q][:pe_fields_cont] : nil
+- filter = params[:q] ? params[:q][:state_in] : []
+= search_form_for @q, url: profile_proposal_employees_path, class: 'left-menu', remote: true do |f|
+  .row
+    .col
+      .input-group.flex.no-wrap
+        = f.search_field :pe_fields_cont, placeholder: 'Поиск анкет', class: 'form-control ml-3 mr-3', value: val
+  .row.mt-4
+    .col-md-2.ml-4
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'hired', filter&.include?('hired'), { class: 'form-check-input', id: 'candidate_filter_hired' }
+        = label :state, 'Нанят', class: 'form-check-label', for: 'candidate_filter_hired'
+    .col-md-3
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { class: 'form-check-input', id: 'candidate_filter_inbox' }
+        = label :state, 'В очереди', class: 'form-check-label', for: 'candidate_filter_inbox'
+    .col-md-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { class: 'form-check-input', id: 'candidate_filter_paid' }
+        = label :state, 'Оплачен', class: 'form-check-label', for: 'candidate_filter_paid'
+    .col-md-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'deleted', filter&.include?('deleted'), { class: 'form-check-input', id: 'candidate_filter_deleted' }
+        = label :state, 'В архиве', class: 'form-check-label', for: 'candidate_filter_deleted'
+    .col-md-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'disputed', filter&.include?('disputed'), { class: 'form-check-input', id: 'candidate_filter_disputed' }
+        = label :state, 'Спор', class: 'form-check-label', for: 'candidate_filter_disputed'

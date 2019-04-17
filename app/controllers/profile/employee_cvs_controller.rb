@@ -147,14 +147,15 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def term
-    term = params[:term]
-    @term = if !term
-              :ready
-            elsif term.empty?
-              :ready
-            else
-              EmployeeCv.contractor_menu_items.include?(term.to_sym) ? term.to_sym : :ready
-            end
+    # term = params[:term]
+    # @term = if !term
+    #           :ready
+    #         elsif term.empty?
+    #           :ready
+    #         else
+    #           EmployeeCv.contractor_menu_items.include?(term.to_sym) ? term.to_sym : :ready
+    #         end
+    @term = params[:employee_cv_state]
   end
 
   def paginated_employee_cvs
@@ -166,7 +167,8 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def scoped_employee_cvs
-    @scoped_employee_cvs ||= employee_cvs.where(state: term)
+    # @scoped_employee_cvs ||= employee_cvs.where(state: term)
+    @scoped_employee_cvs ||= employee_cvs.where(state: params[:employee_cv_state])
   end
 
   def sent_employee_cvs
@@ -174,7 +176,8 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def employee_cvs
-    @employee_cvs = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc)
+    @q = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc).ransack(params[:q])
+    @employee_cvs ||= @q.result
   end
 
   def order

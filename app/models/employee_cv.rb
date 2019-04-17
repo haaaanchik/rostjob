@@ -19,6 +19,8 @@ class EmployeeCv < ApplicationRecord
   # validates :gender, presence: true
   # validates :birthdate, presence: true
 
+  ransack_alias :employee_cvs_fields, :id_or_name_or_phone_number
+
   attr_accessor :mark_ready
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
@@ -165,5 +167,10 @@ class EmployeeCv < ApplicationRecord
 
   def self.customer_menu_item_by_state(state)
     self.customer_menu_items.find { |_key, values| values.include? state }.first
+  end
+
+
+  ransacker :id do
+    Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")
   end
 end
