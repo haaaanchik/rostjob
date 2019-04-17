@@ -55,6 +55,15 @@ class ProposalEmployee < ApplicationRecord
 
   end
 
+  def initialize(attrs = nil)
+    defaults = {
+      arrival_date: Date.today
+    }
+
+    attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
+    super(attrs_with_defaults)
+  end
+
   def mark_as_read
     update_attribute :marks, viewed_by_customer: true
   end

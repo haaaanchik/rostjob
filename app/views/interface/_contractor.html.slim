@@ -40,7 +40,7 @@ main
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
 
-                      = link_to 'profile/employee_cvs/state/ready', id: 'employee_cvs_ready', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
+                      = link_to '/profile/employee_cvs/state/ready', id: 'employee_cvs_ready', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
                         i.fas.fa-address-card.w-10
                         |  Готовые
                   .mb-3.mt-3
@@ -57,7 +57,7 @@ main
                     .btn-group.group-menu[role="group" aria-label="Basic example"]
                       button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button" style="width: 20%"]
 
-                      = link_to 'profile/employee_cvs/state/deleted', id: 'employee_cvs_deleted', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
+                      = link_to '/profile/employee_cvs/state/deleted', id: 'employee_cvs_deleted', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
                         i.fas.fa-trash.w-10
                         |  Удаленные
             .card
