@@ -76,7 +76,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def proposal_employees
-    @q = ProposalEmployee.where(profile_id: current_profile.id).order(id: :desc).ransack(params[:q])
+    @q = ProposalEmployee.where(profile_id: current_profile.id).order(id: :desc).ransack(params[:q] ? params[:q] : { state_in: %w[hired disputed] })
     @proposal_employees ||= @q.result
   end
 end
