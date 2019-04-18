@@ -86,16 +86,17 @@
                   br
                   - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
                     == order.other_info['remark']
-                - if order.contact_person['name'] || order.contact_person['phone']
-                  .text-center.border.rounded.mb-3
-                      p.p-0.m-0.font-weight-bold
-                        |  Контактное лицо:
-                      p.font-italic.m-1
-                        nobr
-                          = order.contact_person['name']
-                      p.font-italic.m-1
-                        nobr
-                          = order.contact_person['phone']
+                  - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
+                    order.contact_person['phone'] && !order.contact_person['phone'].empty?
+                    .text-center.border.rounded.mb-3
+                        p.p-0.m-0.font-weight-bold
+                          |  Контактное лицо:
+                        p.font-italic.m-1
+                          nobr
+                            = order.contact_person['name']
+                        p.font-italic.m-1
+                          nobr
+                            = order.contact_person['phone']
 
               - if @current_profile.contractor?
                 .m-2

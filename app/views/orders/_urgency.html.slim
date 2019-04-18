@@ -1,6 +1,6 @@
 - background_color = 'bg-best-hr'
-- background_color = 'red' if order.urgency.high?
-- background_color = 'blue'if order.urgency.low?
+- background_color = 'red' if order.urgency_level.high?
+- background_color = 'blue'if order.urgency_level.low?
 
 .d-flex.justify-content-end
   .text-right.z-depth-1.rounded.mb-0.position-relative class=background_color
@@ -9,12 +9,12 @@
         '#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
         i.fas.fa-ruble-sign.mr-2
         |/ чел.
-      - if order.urgency.high?
+      - if order.urgency_level.high?
         '/
         i.fas.fa-fire.ml-1
         i.fas.fa-fire
         i.fas.fa-fire
-      - elsif order.urgency.low?
+      - elsif order.urgency_level.low?
         '/
         i.far.fa-snowflake.ml-1
         i.far.fa-snowflake

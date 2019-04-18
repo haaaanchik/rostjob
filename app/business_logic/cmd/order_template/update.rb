@@ -5,7 +5,7 @@ module Cmd
 
       def call
         result = Cmd::Order::CalculateUrgency.call(params: params)
-        context.fail! unless order_template.update(params.merge(urgency: result.urgency))
+        context.fail! unless order_template.update(params.merge(urgency_level: result.urgency))
         # Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

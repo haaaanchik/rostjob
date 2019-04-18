@@ -4,6 +4,7 @@ class OrderTemplate < ApplicationRecord
   belongs_to :profile
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
+  enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: { greater_than_or_equal_to: 0 }
@@ -41,8 +42,10 @@ class OrderTemplate < ApplicationRecord
       contact_person: {
         name: nil,
         phone: nil
-      }
+      },
+      urgency_level: :middle
     }
+
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
   end

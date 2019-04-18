@@ -50,7 +50,7 @@ module OrderRepository
     scope :sort_by_reward_asc, -> {order commission: :asc}
     scope :sort_by_reward_desc, -> {order commission: :desc}
     scope :sort_by_date_asc, -> {order created_at: :asc}
-    scope :sort_by_date_desc, -> {order created_at: :desc}
+    scope :sort_by_date_desc, -> { order(urgency_level: :desc, created_at: :desc) }
     scope :by_query, ->(term) {where('title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%")}
     scope :sort_by_order_title_asc, lambda { order('orders.title asc') }
     scope :sort_by_order_title_desc, lambda { order('orders.title desc') }

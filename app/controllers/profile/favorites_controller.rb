@@ -13,9 +13,9 @@ class Profile::FavoritesController < ApplicationController
 
   def favorites
     @favorites ||= if employee_cv_id
-                     current_profile.favorites.published.decorate
+                     current_profile.favorites.published.order(urgency_level: :desc, created_at: :desc).decorate
                    else
-                     current_profile.favorites.decorate
+                     current_profile.favorites.order(urgency_level: :desc, created_at: :desc).decorate
                    end
   end
 end

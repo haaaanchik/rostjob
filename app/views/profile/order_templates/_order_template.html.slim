@@ -90,15 +90,17 @@
                       br
                       - unless order_template.other_info['remark'].nil? || order_template.other_info['remark'].empty?
                         == order_template.other_info['remark']
-                  .text-center.border.rounded.mb-3
-                    p.p-0.m-0.font-weight-bold
-                      |  Контактное лицо:
-                    p.font-italic.m-1
-                      nobr
-                        = order_template.contact_person['name']
-                    p.font-italic.m-1
-                      nobr
-                        = order_template.contact_person['phone']
+                  - if order_template.contact_person['name'] && !order_template.contact_person['name'].empty? || \
+                    order_template.contact_person['phone'] && !order_template.contact_person['phone'].empty?
+                    .text-center.border.rounded.mb-3
+                      p.p-0.m-0.font-weight-bold
+                        |  Контактное лицо:
+                      p.font-italic.m-1
+                        nobr
+                          = order_template.contact_person['name']
+                      p.font-italic.m-1
+                        nobr
+                          = order_template.contact_person['phone']
             .col-md-3.price.border.rounded.m-0.mt-3.d-flex.flex-column.justify-content-center
               - form_id = "create_order_form_#{order_template.id}"
               = render partial: 'create_order_form', locals: { order_template: order_template, form_id: form_id }

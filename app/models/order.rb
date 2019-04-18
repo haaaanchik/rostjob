@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   extend Enumerize
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
+  enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true
 
   belongs_to :profile
   has_many :invites
@@ -107,6 +108,7 @@ class Order < ApplicationRecord
         phone: nil
       }
     }
+
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
   end
