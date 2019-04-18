@@ -6,8 +6,10 @@ module Cmd
       def call
         profile = candidate.profile
         order = candidate.order
+        employee_cv = candidate.employee_cv
         amount = order.contractor_price
-        result = profile.balance.deposit(amount, "Вознаграждение по заявке №#{order.id}")
+        description = "Вознаграждение по заявке №#{order.id}, за кандидата №#{candidate.employee_cv_id} #{employee_cv.name}"
+        result = profile.balance.deposit(amount, description)
         context.fail! unless result
         candidate.to_paid!
         Cmd::UserActionLogger::Log.call(params: contractor_params) unless context.log == false
