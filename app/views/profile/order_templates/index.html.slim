@@ -1,8 +1,8 @@
-.row.justify-content-around.mt-3
-  .col-9
-    .form-group
+.border.rounded.p-1.mt-4
+  .row.justify-content-center
+    .col-9
       = render partial: 'search_form'
-  .col-3
-    = link_to 'Создать шаблон', new_profile_order_template_path, class: 'btn btn-success', remote: true
-#order_template_list
-  = render partial: @order_templates
+    .col-3
+      = link_to 'Создать шаблон', new_profile_order_template_path, class: 'btn btn-success mt-4', remote: true
+  #order_template_list
+    = render partial: @order_templates

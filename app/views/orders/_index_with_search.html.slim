@@ -1,6 +1,7 @@
-- search_form_id = 'order_search_form'
-.row.mt-4.border
-  .col
-    = render partial: 'search_form', locals: { form_id: search_form_id }
-    #order_search_results
-      = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
+.border.rounded.p-1.mt-4
+  - search_form_id = 'order_search_form'
+  .row
+    .col
+      = render partial: 'search_form', locals: { form_id: search_form_id }
+      #order_search_results
+        = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
