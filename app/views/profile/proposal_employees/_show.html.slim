@@ -53,18 +53,7 @@
                 data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
     - if ecv.document.present?
       = link_to 'Анкета для СБ', ecv.document.url
-.row
-  .col
-    .mt-3
-      a.text-indigo data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" Подробнее
-    .collapse id="collapseExample"
-      .mt-3
-      p.card-text
-        dl.row
-          - data = ecv.ext_data || {}
-          - data.each do |k, v|
-            dt class="col-sm-3" = t("employee_cv.ext_data.#{k}")
-            dd class="col-sm-9" = v
+
 javascript:
   $('#hiring_form_datepicker').datepicker({
     language: 'ru',

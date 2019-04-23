@@ -10,7 +10,7 @@ class Profile::CandidatesController < ApplicationController
   private
 
   def candidate
-    @candidate ||= candidates.find(params[:id]).decorate
+    @candidate ||= ProposalEmployee.candidates(current_profile).find(params[:id]).decorate
   end
 
   def paginated_candidates
