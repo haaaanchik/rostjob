@@ -1,12 +1,12 @@
 - collapse_0 = 'show' if %i[ready sent deleted].include? active_item
 - collapse_1 = 'show' if %i[orders favorites].include? active_item
-.col-md-3.order-2.order-sm-2.order-md-1.mt-4
+.col-md-3.order-2.order-sm-2.order-md-1
   #accordionEx194.accordion.md-accordion.accordion-3.menu-style[role="tablist" aria-multiselectable="true"]
     .mb-3.mt-4
       .btn-group.group-menu[role="group" aria-label="Basic example"]
         = link_to new_profile_employee_cv_path, class: 'btn button-menu-l btn-rounded waves-effect', remote: true do
           i.fas.fa-plus
-        = link_to root_path, class: 'btn button-menu-r btn-rounded waves-effect left-menu'  do
+        = link_to root_path, class: "btn button-menu-r btn-rounded waves-effect left-menu #{'active' if active_item == :root}"  do
           i.fas.fa-user-circle.w-10
           = current_user.full_name
       / span.counter

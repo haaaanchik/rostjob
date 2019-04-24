@@ -1,6 +1,7 @@
 class Profile::CandidatesController < ApplicationController
   def index
     paginated_candidates
+    @active_item = :candidates
   end
 
   def show

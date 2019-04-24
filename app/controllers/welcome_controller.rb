@@ -8,6 +8,7 @@ class WelcomeController < ApplicationController
       prepare_data
       user_action_log_records
     end
+    @active_item = :root
   end
 
   private

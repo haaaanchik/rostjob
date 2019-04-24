@@ -1,11 +1,11 @@
 - if user_signed_in?
-  .col-md-6.order-1.order-sm-1.order-md-2.green
+  .col-md-6.order-1.order-sm-1.order-md-2
     .container-fluid
       - if @orders_with_deleted_employee_cvs.any?
         .row.mt-4.img-thumbnail
           = render partial: 'welcome/orders/with_deleted_employee_cvs2', locals: { profile: profile, orders: @orders_with_deleted_employee_cvs }
       = render partial: 'user_action_log', locals: { profile: @current_profile }
-  .col-md-3.pt-4.d-none.d-md-block.order-sm-3.grey
+  .col-md-3.pt-4.d-none.d-md-block.order-sm-3
     .container-fluid
       .card.card-cascade
         .view.view-cascade.overlay

@@ -4,6 +4,7 @@ class Profile::OrderTemplatesController < ApplicationController
     @order_template_search_form = OrderTemplateSearchForm.new(profile: current_profile,
                                                               params: order_template_search_form_params)
     @order_templates = @order_template_search_form.submit
+    @active_item = :order_templates
   end
 
   def show

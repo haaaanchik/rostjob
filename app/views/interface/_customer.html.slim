@@ -7,75 +7,7 @@ header
   #home
 main
   #modal_container
-  .container-fluid
+  .container-fluid#right_window
     .row
-      .col-md-3
-        .mb-3.mt-4
-          .btn-group.group-menu role="group" aria-label="Basic example"
-            = link_to profile_invoices_path, class: 'btn button-menu-l btn-rounded waves-effect' do
-              i.fas.fa-money-bill-alt
-            = link_to root_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-              i.fas.fa-user-circle.w-10.mr-2
-              = current_user.full_name
-          / span.counter
-          /   |0
-
-        hr.mb-0.mt-0
-
-        .mb-3.mt-3
-          .btn-group.group-menu  role="group" aria-label="Basic example"
-            button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-              i.fas.fa-folder-open
-            = link_to profile_orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-              i.fas.fa-users.w-10.mr-2
-              |Мои заявки
-          / span.counter
-          /   |0
-
-        .mb-3
-          .btn-group.group-menu role="group" aria-label="Basic example"
-            button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-            = link_to profile_orders_with_state_path(:in_progress), class: 'btn button-menu-r btn-rounded waves-effect'
-              i.fas.fa-user-plus.w-10.mr-2
-              |В работе
-          / span.counter
-          /   |0
-
-        .mb-3.mt-3
-          .btn-group.group-menu role="group" aria-label="Basic example"
-            button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-            = link_to profile_orders_with_state_path(:completed), class: 'btn button-menu-r btn-rounded waves-effect'
-              i.fas.fa-user-check.w-10.mr-2
-              |Завершённые
-        / .mb-3
-        /   .btn-group.group-menu[role="group" aria-label="Basic example"]
-        /     button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-        /       i.fas.fa-folder-open
-
-        /     = link_to orders_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-        /       i.fas.fa-align-justify.w-10
-        /       |  Каталог заявок
-
-        hr.mb-0.mt-0
-
-        .mb-3.mt-3
-          .btn-group.group-menu  role="group" aria-label="Basic example"
-            = link_to new_profile_order_template_path, class: 'btn button-menu-l btn-rounded waves-effect', remote: true, title: 'Создать шаблон' do
-              i.fas.fa-plus
-            = link_to profile_order_templates_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-              i.far.fa-handshake.w-10.mr-2
-              |Мои шаблоны
-
-        hr.mb-0.mt-0
-
-        .mb-3.mt-3
-          .btn-group.group-menu  role="group" aria-label="Basic example"
-            button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-              i.fas.fa-folder-open
-            / = link_to new_profile_order_template_path, class: 'btn button-menu-l btn-rounded waves-effect', remote: true, title: 'Создать шаблон' do
-            = link_to profile_candidates_path, class: 'btn button-menu-r btn-rounded waves-effect' do
-              i.fas.fa-address-card.w-10.mr-2
-              |Анкеты
-
-      .col-md-9#right-window
-        = yield
+      = render partial: 'interface/left_menu/customer', locals: { active_item: @active_item }
+      = yield

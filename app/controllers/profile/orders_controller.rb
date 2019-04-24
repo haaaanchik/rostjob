@@ -2,6 +2,14 @@ class Profile::OrdersController < ApplicationController
   def index
     @state = params[:state]
     orders
+    @active_item = case params[:state]
+                   when nil
+                     :my_orders
+                   when 'in_progress'
+                     :in_progress
+                   when 'completed'
+                     :completed
+                   end
   end
 
   def show
