@@ -1,37 +1,30 @@
-.col.order-1.order-sm-1.order-md-2.border.rounded.p-1.mt-4.mr-2
-  .mt-4
-    .container
+.col-lg-3.order-1.order-sm-1.order-md-3.p-1.mt-4.mr-2
       = render partial: 'search_form'
-  table.table.table-sm.table-borderless.mt-4.table-hover
-    thead
-      tr
-        th.text-center style="width: 15%"
-          = sort_link(@q, :state) do
-            strong Статус
-        th.text-center style="width: 20%"
-          = sort_link(@q, :employee_cv_name) do
-            strong Анкета
-        th.text-center style="width: 8%"
-          = sort_link(@q, :created_at) do
-            strong Поступила
-        th.text-center style="width: 15%"
-          = sort_link(@q, :order_title) do
-            strong Заявка
-        th.text-center style="width: 13%"
-          = sort_link(@q, :order_place_of_work) do
-            strong Площадка
-        th.text-center style="width: 8%"
-          = sort_link(@q, :arrival_date) do
-            strong Прибытие
-        th.text-center style="width: 8%"
-          = sort_link(@q, :hiring_date) do
-            strong Договор
-        th.text-center style="width: 7"
-          strong Нанять
-        th.text-center style="width: 7%"
-          strong Отказ
-        th.text-center style="width: 7%"
-          strong Спор
-      tbody
-      = render partial: 'profile/candidates/candidate', collection: @paginated_candidates
-  = paginate @paginated_candidates
+.col-lg-6.order-1.order-sm-1.order-md-2.border.rounded.p-1.mt-4.mr-2
+      p.text-center.font-italic
+        |*Здесь расположены все присланные анкеты.
+      .border.rounded.p-1
+        table.table.table-sm.table-borderless.table-hover
+          thead
+            tr
+              th.text-center style="width: 130px"
+                = sort_link(@q, :created_at) do
+                  strong Статус
+              th.text-center
+                = sort_link(@q, :employee_cv_name) do
+                  strong Анкета
+              th.text-center
+                .d-none.d-lg-block
+                  = sort_link(@q, :order_title) do
+                    strong Заявка
+              th.text-center
+                .d-none.d-xl-block
+                  = sort_link(@q, :order_place_of_work) do
+                    strong Площадка
+              th.text-center style="width: 130px"
+                = sort_link(@q, :hiring_date) do
+                  strong Договор
+          tbody
+            = render partial: 'profile/candidates/candidate', collection: @paginated_candidates
+      = paginate @paginated_candidates
+        /Уменьшить мобильную версию сделать по центру make0001

@@ -4,16 +4,25 @@ tr.rounded.mb-0.example.hoverable id="candidate_#{candidate.id}"
     .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
       i.fas.fa-bookmark.mr-2
       = t("proposal_employee.state.#{candidate.state}")
-  td.text-center.align-middle ##{candidate.employee_cv_id} #{candidate.name}
-  td.text-center.align-middle = candidate.created_at.strftime('%H:%M %d.%m.%Y')
-  td.text-center.align-middle №#{candidate.order_id} #{candidate.title}
-  td.text-center.align-middle = candidate.place_of_work
-  td.text-center.align-middle = candidate.arrival_date.strftime('%d.%m.%Y')
-  td.text-center.align-middle
-    - if candidate.state == 'hired'
+    p
+      nobr
+        |с &nbsp;
+        = candidate.created_at.strftime('%d.%m.%Y')
+  td.text-center
+    p.font-weight-bold
+      |##{candidate.employee_cv_id} #{candidate.name}
+  td.text-center
+    .d-none.d-lg-block
+      p
+        |№#{candidate.order_id} #{candidate.title}
+  td.text-center
+    .d-none.d-xl-block
+      p
+        = candidate.place_of_work
+  td.text-center
+    p
+      - if candidate.state == 'hired'
       - if candidate.hiring_date_corrected
         i.fas.fa-check.green-text
         b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
-      - else
-        = candidate.hiring_date.strftime('%d.%m.%Y')
-  = render partial: 'profile/candidates/toolbars/actions.html.slim', locals: { candidate: candidate }
+      / я здесь удалил условие потому что применялся метод на нилл вернуть Договор make0002

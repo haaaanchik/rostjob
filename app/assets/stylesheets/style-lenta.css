@@ -20,7 +20,7 @@ body {
     background-color: #534741 !important;    
   }
 
-.button-menu-l, .button-menu-r {
+.button-menu-l, .button-menu-r, .button-hr {
   padding: 14px;
   text-align: left;
   border: 2px solid #fff !important;
