@@ -1,29 +1,29 @@
-.border.rounded.p-1.mt-4
+.col.order-1.order-sm-1.order-md-1.border.rounded.p-1.mt-4.mr-2
   .container.mt-4
     = render partial: 'search_form'
   table.table.table-sm.table-borderless.mt-4
     tr
       th.text-center style="width: 15%"
-        = sort_link(@q, :state, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :state) do
           strong Статус
       th.text-center style="width: 20%"
-        = sort_link(@q, :employee_cv_name, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :employee_cv_name) do
           strong Анкета
       th.text-center style="width: 8%"
-        = sort_link(@q, :created_at, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :created_at) do
           strong Поступила
       th.text-center style="width: 15%"
-        = sort_link(@q, :order_title, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :order_title) do
           strong Заявка
       th.text-center style="width: 13%"
-        = sort_link(@q, :order_place_of_work, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :order_place_of_work) do
           strong Площадка
       th.text-center style="width: 8%"
-        = sort_link(@q, :arrival_date, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :arrival_date) do
           strong Прибытие
       th.text-center style="width: 8%"
-        = sort_link(@q, :hiring_date, {}, class: 'left-menu', remote: true) do
+        = sort_link(@q, :hiring_date) do
           strong Договор
       = render partial: "profile/proposal_employees/toolbars/header.html.slim"
       = render partial: 'profile/proposal_employees/candidate', collection: @paginated_proposal_employees
-  = paginate @paginated_proposal_employees, remote: true
+  = paginate @paginated_proposal_employees

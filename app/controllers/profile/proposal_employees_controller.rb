@@ -1,8 +1,9 @@
 class Profile::ProposalEmployeesController < ApplicationController
-  layout false, only: :index
+  # layout false, only: :index
 
   def index
     paginated_proposal_employees
+    @active_item = :sent
   end
 
   def show

@@ -1,5 +1,5 @@
 class Profile::EmployeeCvsController < ApplicationController
-  layout false, only: :index
+  # layout false, only: :index
 
   def index
     if term == :sent
@@ -7,6 +7,7 @@ class Profile::EmployeeCvsController < ApplicationController
       render 'profile/employee_cvs/sent_index'
     else
       paginated_employee_cvs
+      @active_item = term.to_sym
     end
   end
 

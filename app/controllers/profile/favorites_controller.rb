@@ -3,6 +3,7 @@ class Profile::FavoritesController < ApplicationController
     favorites
     @employee_cv_id = employee_cv_id
     @order_search_form = OrderSearchForm.new
+    @active_item = :favorites
   end
 
   private

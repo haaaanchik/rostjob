@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   before_action :order, except: :index
 
   def index
+    @active_item = :orders
     @employee_cv_id = order_search_form_params[:employee_cv_id] if order_search_form_params
     @order_search_form = if @employee_cv_id
                            osf_params = order_search_form_params.merge(profile: current_profile)

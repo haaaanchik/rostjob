@@ -1,12 +1,7 @@
-- search_form_id = 'order_search_form'
-.row
-  / .col-2.mt-3
-  /   .card
-  /     .card-body
-  /       = render partial: 'search_filters', locals: { form_id: search_form_id }
-  / .col-10.mt-3
-  /   .card
-  /     .card-body
-  /       = render partial: 'search_form', locals: { form_id: search_form_id }
-  #order_search_results
-    = render partial: 'orders/order', collection: @orders, locals: { order_id: 'customer_order_id_' }
+.col.order-1.order-sm-1.order-md-2.border.rounded.p-1.mt-4.mr-2
+  - search_form_id = 'order_search_form'
+  .row
+    .col
+      = render partial: 'search_form', locals: { form_id: search_form_id }
+      #order_search_results
+        = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
