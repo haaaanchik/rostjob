@@ -16,8 +16,16 @@ module Cmd
         context.params[:employee_cv_id]
       end
 
+      def employee_cv_name
+        ::EmployeeCv.find(employee_cv_id).name
+      end
+
       def order_id
         context.params[:order_id]
+      end
+
+      def order_title
+        ::Order.find(order_id).title
       end
 
       def current_user
@@ -39,7 +47,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: profile.profile_type,
-          action: "Анкета №#{employee_cv_id} отправлена в заявку №#{order_id}",
+          action: "Анкета №#{employee_cv_id} #{employee_cv_name} отправлена в заявку №#{order_id} #{order_title}",
           object_id: @proposal_employee.id,
           object_type: 'ProposalEmployee',
           order_id: order_id,

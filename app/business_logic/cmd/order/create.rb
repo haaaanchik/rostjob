@@ -37,7 +37,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Создана заявка №#{@order.id}",
+          action: "Создана заявка №#{@order.id} #{@order.title}",
           object_id: @order.id,
           object_type: 'Order',
           order_id: @order.id

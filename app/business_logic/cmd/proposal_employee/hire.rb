@@ -29,7 +29,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Кандидат с анкетой №#{candidate.employee_cv.id} нанят",
+          action: "Кандидат #{candidate.employee_cv.name} с анкетой №#{candidate.employee_cv.id} нанят",
           object_id: candidate.employee_cv.id,
           object_type: 'EmployeeCv',
           order_id: candidate.order_id,

@@ -33,7 +33,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Заявка №#{order.id} завершена",
+          action: "Заявка №#{order.id} #{order.title} завершена",
           object_id: order.id,
           object_type: 'Order',
           order_id: order.id

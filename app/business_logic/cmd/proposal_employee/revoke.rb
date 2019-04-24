@@ -29,7 +29,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Анкета №#{proposal_employee.employee_cv.id} отозвана исполнителем",
+          action: "Анкета №#{proposal_employee.employee_cv.id} #{proposal_employee.employee_cv.name} отозвана исполнителем",
           object_id: proposal_employee.id,
           object_type: 'ProposalEmployee',
           order_id: proposal_employee.order_id,

@@ -29,7 +29,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "По анкете №#{employee_cv.id} открыт спор",
+          action: "По анкете №#{employee_cv.id} #{employee_cv.name} открыт спор",
           object_id: employee_cv.id,
           object_type: 'EmployeeCv',
           employee_cv_id: employee_cv.id

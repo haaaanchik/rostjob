@@ -28,7 +28,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Статус заявки №#{order.id} изменён на: 'Ожидание оплаты'",
+          action: "Статус заявки №#{order.id} #{order.title} изменён на: 'Ожидание оплаты'",
           object_id: order.id,
           object_type: 'Order'
         }

@@ -25,7 +25,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Анкета №#{employee_cv.id} отправлена",
+          action: "Анкета №#{employee_cv.id} #{employee_cv.name} отправлена",
           object_id: employee_cv.id,
           object_type: 'EmployeeCv',
           employee_cv_id: employee_cv.id

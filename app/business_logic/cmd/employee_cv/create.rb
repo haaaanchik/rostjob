@@ -31,7 +31,7 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Создана анкета №#{@employee_cv.id}",
+          action: "Создана анкета №#{@employee_cv.id} #{@employee_cv.name}",
           object_id: @employee_cv.id,
           object_type: 'EmployeeCv',
           employee_cv_id: @employee_cv.id
