@@ -20,10 +20,11 @@ tr.rounded.mb-0.example.hoverable id="candidate_#{candidate.id}"
       p
         = candidate.place_of_work
   td.text-center
-    p
-      - if candidate.state == 'hired'
-        - if candidate.hiring_date_corrected
-          i.fas.fa-check.green-text
-          b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
-        - else
-          = candidate.hiring_date.strftime('%d.%m.%Y')
+    .d-none.d-sm-block
+      p
+        - if candidate.state == 'hired'
+          - if candidate.hiring_date_corrected
+            i.fas.fa-check.green-text
+            b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
+          - else
+            = candidate.hiring_date.strftime('%d.%m.%Y')

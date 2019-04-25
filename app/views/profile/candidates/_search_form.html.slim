@@ -1,6 +1,13 @@
 - val =  params[:q] ? params[:q][:candidate_fields_cont] : nil
 - filter = params[:q] ? params[:q][:state_in] : %w[hired disputed]
 = search_form_for @q, url: profile_candidates_path do |f|
+
+  .row
+    .col.d-none.d-lg-block
+      . style="height: 100px"
+  .row
+    .col
+      hr
   .row.mt-1
     .col.d-none.d-lg-block
       p.h4.text-center
@@ -51,3 +58,6 @@
       button class='btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2' type='submit'
         i.fas.fa-check.w-10.mr-2
         |Применить
+  .row
+    .col
+      hr
