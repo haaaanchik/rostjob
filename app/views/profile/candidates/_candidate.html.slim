@@ -22,7 +22,8 @@ tr.rounded.mb-0.example.hoverable id="candidate_#{candidate.id}"
   td.text-center
     p
       - if candidate.state == 'hired'
-      - if candidate.hiring_date_corrected
-        i.fas.fa-check.green-text
-        b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
-      / я здесь удалил условие потому что применялся метод на нилл вернуть Договор make0002
+        - if candidate.hiring_date_corrected
+          i.fas.fa-check.green-text
+          b.green-text = candidate.hiring_date.strftime('%d.%m.%Y')
+        - else
+          = candidate.hiring_date.strftime('%d.%m.%Y')
