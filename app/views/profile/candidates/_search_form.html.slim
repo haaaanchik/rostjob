@@ -48,6 +48,6 @@
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-4
       = f.search_field :candidate_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-3
-      = link_to root_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2' do
+      button class='btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2' type='submit'
         i.fas.fa-check.w-10.mr-2
         |Применить
