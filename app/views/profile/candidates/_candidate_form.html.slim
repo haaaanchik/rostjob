@@ -19,25 +19,24 @@
                         td.align-bottom
                           h4.card-title.white-text
                             |##{employee_cv.id} #{employee_cv.name}
-                        td.align-bottom.text-center[width="15%"]
-                          /= link_to profile_proposal_employee_complaints_path(proposed), remote: true, class: 'btn-floating btn-sm red', remote: true do
-                            i.fas.fa-angry
-                              p.card-title.white-text
-                                | СПОР
-                        td.align-bottom.text-center[width="15%"]
-                          /= link_to profile_order_candidate_path(proposed.order_id, proposed),
-                                  method: :delete, remote: true, class: 'btn-floating btn-sm green', remote: true do
-                            i.fas.fa-trash
-                              p.card-title.white-text
-                                | В архив
-                        td.align-bottom.text-center[width="15%"]
-                          /= link_to change_status_profile_employee_cv_path(proposed, state: 'hired'),
-                                  method: :put, remote: true, class: 'btn-floating btn-sm green', remote: true do
-                            i.fas.fa-handshake
-                              p.card-title.white-text
-                                | Нанять
-                        td.red-text
-                          | Поставь кнопки плз make0003
+                        = render partial: 'profile/candidates/toolbars/actions', locals: { candidate: candidate }
+                        /td.align-bottom.text-center[width="15%"]
+                        /  /= link_to profile_proposal_employee_complaints_path(proposed), remote: true, class: 'btn-floating btn-sm red', remote: true do
+                        /    i.fas.fa-angry
+                        /      p.card-title.white-text
+                        /        | СПОР
+                        /td.align-bottom.text-center[width="15%"]
+                        /  /= link_to profile_order_candidate_path(proposed.order_id, proposed),
+                        /          method: :delete, remote: true, class: 'btn-floating btn-sm green', remote: true do
+                        /    i.fas.fa-trash
+                        /      p.card-title.white-text
+                        /        | В архив
+                        /td.align-bottom.text-center[width="15%"]
+                        /  /= link_to change_status_profile_employee_cv_path(proposed, state: 'hired'),
+                        /          method: :put, remote: true, class: 'btn-floating btn-sm green', remote: true do
+                        /    i.fas.fa-handshake
+                        /      p.card-title.white-text
+                        /        | Нанять
             .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
               .card-body.rounded-top
                 .container
