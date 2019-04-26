@@ -1,237 +1,238 @@
-.container-fluid
-  .row
-    .col.order-md-2
-      .container.p-0.m-2.price
-        .d-flex.justify-content-start
-          .grey.text-right.z-depth-2.rounded.mb-0.position-relative
-            p.white-text.m-1.h4
-              i.fas.fa-bookmark
-              | В очереди
-        .card.testimonial-card.price.position-static
-          .card-up.bg-best-hr
-            .container-fluid.p-1
-              .w-100
-                table[width="100%" height="90px"]
-                  tbody
-                    tr
-                      td.align-bottom
-                        h4.card-title.white-text
-                          |  #123 Фамилия Имя Отчество
-                      td.align-bottom.text-center[width="15%"]
-                        a.btn-floating.btn-sm.red[type="button" role="button"]
-                          i.fas.fa-trash
-                        p.card-title.white-text
-                          | Удалить
-                      td.align-bottom.text-center[width="15%"]
-                        a.btn-floating.btn-sm.green[type="button" role="button"]
-                          i.fas.fa-save
-                        p.card-title.white-text
-                          | Сохранить
-                      td.align-bottom.text-center[width="15%"]
-                        a.btn-floating.btn-sm.blue[type="button" role="button"]
-                          i.fas.fa-paper-plane
-                        p.card-title.white-text
-                          | Отправить
-          .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
-            .card-body.rounded-top
-              .container
-                .row
-                  .col-md-8.ml-0.pl-0
-                    = form_with model: [:profile, @employee_cv], class: 'new-employee_cv-form' do |f|
-                      = f.hidden_field :order_id, value: @order&.id
-                      .border.rounded.white.mt-1
-                        .modal-body.pt-1
-                          .row
-                            .col
-                              h4
-                                | Анкета
-                          .row
-                            .col-8
-                              .md-form.mt-1
-                                = f.text_field :name, class: 'form-control'
-                                = f.label :name, 'Полное имя'
-                            .col-4.d-flex.justify-content-center
-                              .form-inline
-                                .form-check
-                                  = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
-                                  = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
-                                .form-check
-                                  = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
-                                  = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
-                          .row
-                            .col-4
-                              .md-form.mt-1
-                                = f.date_field :birthdate, class: 'form-control'
-                                = f.label :birthdate, 'Дата рождения', class: 'active'
-                            .col-8
-                              .md-form.mt-1
-                                = f.phone_field :phone_number, class: 'form-control'
-                                = f.label :phone_number, 'Номер телефона', class: 'active'
-                          .row
-                            .col-4
-                              form.md-form
-                                .file-field
-                                  a.btn-floating.btn-sm.red.m-0.float-left
-                                    i.fas.fa-paperclip[aria-hidden="true"]
-                                    = f.file_field :document
-                                  .file-path-wrapper.md-form.m-0.mt-1
-                                    = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
-                            .col-8
-                              .md-form.mt-1
-                                input#employee_cv_ext_data_phone_alt.form-control[type="text" name="employee_cv[ext_data][phone_alt]"]
-                                label[for="employee_cv_ext_data_phone_alt"]
-                                  |  Дополнительный телефон
-                      .border.rounded.white.mt-1
-                        .modal-body.pt-1
-                          .row
-                            .col
-                              p.h5.text-center
-                                |  Дополнительные сведения
-                          .row
-                            .col
-                              .md-form.mt-2
-                                textarea#employee_cv_ext_data_experiense.form-control[type="text" name="employee_cv[ext_data][experiense]"]
-                                label[for="employee_cv_ext_data_experiense"]
-                                  |  Опыт работы
-                          .row
-                            .col
-                              .md-form.mt-0
-                                textarea#employee_cv_ext_data_education.form-control[type="text" name="employee_cv[ext_data][education]"]
-                                label[for="employee_cv_ext_data_education"]
-                                  |  Образование
-                          .row
-                            .col
-                              .md-form.mt-0
-                                textarea#employee_cv_ext_data_remark.form-control[name="employee_cv[ext_data][remark]"]
-                                label[for="employee_cv_ext_data_remark"]
+.col-md-9.order-md-2.order-1
+  .container-fluid
+    .row
+      .col.order-md-2
+        .container.p-0.m-2.price
+          .d-flex.justify-content-start
+            .grey.text-right.z-depth-2.rounded.mb-0.position-relative
+              p.white-text.m-1.h4
+                i.fas.fa-bookmark
+                | В очереди
+          .card.testimonial-card.price.position-static
+            .card-up.bg-best-hr
+              .container-fluid.p-1
+                .w-100
+                  table[width="100%" height="90px"]
+                    tbody
+                      tr
+                        td.align-bottom
+                          h4.card-title.white-text
+                            |  #123 Фамилия Имя Отчество
+                        td.align-bottom.text-center[width="15%"]
+                          a.btn-floating.btn-sm.red[type="button" role="button"]
+                            i.fas.fa-trash
+                          p.card-title.white-text
+                            | Удалить
+                        td.align-bottom.text-center[width="15%"]
+                          a.btn-floating.btn-sm.green[type="button" role="button"]
+                            i.fas.fa-save
+                          p.card-title.white-text
+                            | Сохранить
+                        td.align-bottom.text-center[width="15%"]
+                          a.btn-floating.btn-sm.blue[type="button" role="button"]
+                            i.fas.fa-paper-plane
+                          p.card-title.white-text
+                            | Отправить
+            .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
+              .card-body.rounded-top
+                .container
+                  .row
+                    .col-md-8.ml-0.pl-0
+                      = form_with model: [:profile, @employee_cv], class: 'new-employee_cv-form' do |f|
+                        = f.hidden_field :order_id, value: @order&.id
+                        .border.rounded.white.mt-1
+                          .modal-body.pt-1
+                            .row
+                              .col
+                                h4
+                                  | Анкета
+                            .row
+                              .col-8
+                                .md-form.mt-1
+                                  = f.text_field :name, class: 'form-control'
+                                  = f.label :name, 'Полное имя'
+                              .col-4.d-flex.justify-content-center
+                                .form-inline
+                                  .form-check
+                                    = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
+                                    = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
+                                  .form-check
+                                    = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
+                                    = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+                            .row
+                              .col-4
+                                .md-form.mt-1
+                                  = f.date_field :birthdate, class: 'form-control'
+                                  = f.label :birthdate, 'Дата рождения', class: 'active'
+                              .col-8
+                                .md-form.mt-1
+                                  = f.phone_field :phone_number, class: 'form-control'
+                                  = f.label :phone_number, 'Номер телефона', class: 'active'
+                            .row
+                              .col-4
+                                form.md-form
+                                  .file-field
+                                    a.btn-floating.btn-sm.red.m-0.float-left
+                                      i.fas.fa-paperclip[aria-hidden="true"]
+                                      = f.file_field :document
+                                    .file-path-wrapper.md-form.m-0.mt-1
+                                      = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
+                              .col-8
+                                .md-form.mt-1
+                                  input#employee_cv_ext_data_phone_alt.form-control[type="text" name="employee_cv[ext_data][phone_alt]"]
+                                  label[for="employee_cv_ext_data_phone_alt"]
+                                    |  Дополнительный телефон
+                        .border.rounded.white.mt-1
+                          .modal-body.pt-1
+                            .row
+                              .col
+                                p.h5.text-center
                                   |  Дополнительные сведения
-                      .border.rounded.white.mt-1
-                        .modal-body.pt-1
+                            .row
+                              .col
+                                .md-form.mt-2
+                                  textarea#employee_cv_ext_data_experiense.form-control[type="text" name="employee_cv[ext_data][experiense]"]
+                                  label[for="employee_cv_ext_data_experiense"]
+                                    |  Опыт работы
+                            .row
+                              .col
+                                .md-form.mt-0
+                                  textarea#employee_cv_ext_data_education.form-control[type="text" name="employee_cv[ext_data][education]"]
+                                  label[for="employee_cv_ext_data_education"]
+                                    |  Образование
+                            .row
+                              .col
+                                .md-form.mt-0
+                                  textarea#employee_cv_ext_data_remark.form-control[name="employee_cv[ext_data][remark]"]
+                                  label[for="employee_cv_ext_data_remark"]
+                                    |  Дополнительные сведения
+                        .border.rounded.white.mt-1
+                          .modal-body.pt-1
+                            .row
+                              .col.mt-1
+                                p.h5.text-center
+                                  | Паспортные данные
+                            .row
+                              .col-2
+                                .md-form.mt-2
+                                  input#employee_cv_ext_data_pser.form-control[type="text" name="employee_cv[ext_data][pser]"]
+                                  label[for="employee_cv_ext_data_pser"]
+                                    | Серия
+                              .col-2
+                                .md-form.mt-2
+                                  input#employee_cv_ext_data_pnum.form-control[type="text" name="employee_cv[ext_data][pnum]"]
+                                  label[for="employee_cv_ext_data_pnum"]
+                                    | Номер
+                              .col-4
+                                .md-form.mt-2
+                                  input#employee_cv_ext_data_pcode.form-control[type="text" name="employee_cv[ext_data][pcode]"]
+                                  label[for="employee_cv_ext_data_pcode"]
+                                    | № подразделения
+                              .col-4
+                                .md-form.mt-2
+                                  input#employee_cv_ext_data_pdate.form-control[type="text" name="employee_cv[ext_data][pdate]"]
+                                  label[for="employee_cv_ext_data_pdate"]
+                                    | Дата выдачи
+                            .row
+                              .col
+                                .md-form.mt-1
+                                  textarea#employee_cv_ext_data_address.form-control[type="text" name="employee_cv[ext_data][address]"]
+                                  label[for="employee_cv_ext_data_address"]
+                                    |  Адрес прописки в паспорте
+                        .modal-body.pt-1.pb-0
                           .row
-                            .col.mt-1
-                              p.h5.text-center
-                                | Паспортные данные
-                          .row
-                            .col-2
-                              .md-form.mt-2
-                                input#employee_cv_ext_data_pser.form-control[type="text" name="employee_cv[ext_data][pser]"]
-                                label[for="employee_cv_ext_data_pser"]
-                                  | Серия
-                            .col-2
-                              .md-form.mt-2
-                                input#employee_cv_ext_data_pnum.form-control[type="text" name="employee_cv[ext_data][pnum]"]
-                                label[for="employee_cv_ext_data_pnum"]
-                                  | Номер
-                            .col-4
-                              .md-form.mt-2
-                                input#employee_cv_ext_data_pcode.form-control[type="text" name="employee_cv[ext_data][pcode]"]
-                                label[for="employee_cv_ext_data_pcode"]
-                                  | № подразделения
-                            .col-4
-                              .md-form.mt-2
-                                input#employee_cv_ext_data_pdate.form-control[type="text" name="employee_cv[ext_data][pdate]"]
-                                label[for="employee_cv_ext_data_pdate"]
-                                  | Дата выдачи
-                          .row
-                            .col
-                              .md-form.mt-1
-                                textarea#employee_cv_ext_data_address.form-control[type="text" name="employee_cv[ext_data][address]"]
-                                label[for="employee_cv_ext_data_address"]
-                                  |  Адрес прописки в паспорте
-                      .modal-body.pt-1.pb-0
-                        .row
-                          .col-md-8.border.rounded.white
-                            .md-form.input-group.d-flex.justify-content-center[data-controller="employee-cv"]
-                              .input-group-prepend
-                                .input-group-text.md-addon.pl-0
-                                  input[name="employee_cv[contractor_terms_of_service]" type="hidden" value="0"]
-                                  input#employee_cv_contractor_terms_of_service.form-check-input[type="checkbox" value="1" name="employee_cv[contractor_terms_of_service]"]
-                                  label.from-check-label.ml-2[data-action="click->employee-cv#tosToggle" for="employee_cv_contractor_terms_of_service"]
-                                    |  Я принимаю условия
-                                  a.font-weight-bold.ml-2[data-placement="top" data-toggle="tooltip" title="В соответствие с ФЗ «О персональных данных №152-ФЗ от 27.07.2006 г.», настоящим условием сайт уведомляет что, сайт не несет ответственность за сбор, передачу, хранение, обработку, распространение персональных данных."]
-                                    | оферты
-                          .col-md-4.d-flex.align-items-center
-                            button.btn.button-menu-w100.btn-rounded.waves-effect.active.pl-1.pr-0.text-center.white[type="button"]
-                              i.fas.fa-save
-                              |  Сохранить
-                  .col-md-4.border.rounded.white.mt-1.pt-1
-                    h4
-                      |  Каледарь
-                    ul.list-unstyled.weekdays.black-text.m-0
-                      li
-                        | Пн
-                      li
-                        | Вт
-                      li
-                        | Ср
-                      li
-                        | Чт
-                      li
-                        | Пт
-                      li
-                        | Сб
-                      li
-                        | Вс
-                    ul.list-unstyled.days.black-text.m-0
-                      li
-                        | 1
-                      li
-                        | 2
-                      li
-                        | 3
-                      li
-                        | 4
-                      li
-                        | 5
-                      li
-                        | 6
-                      li
-                        | 7
-                      li
-                        | 8
-                      li
-                        | 9
-                      li
-                        | 10
-                      li
-                        | 11
-                      li
-                        | 12
-                      li
-                        | 13
-                      li
-                        | 14
-                      li
-                        | 15
-                      li
-                        | 16
-                      li
-                        | 17
-                      li
-                        | 18
-                      li
-                        | 19
-                      li
-                        | 20
-                      li
-                        | 21
-                      li
-                        | 22
-                      li
-                        | 23
-                      li
-                        | 24
-                      li
-                        | 25
-                      li
-                        | 26
-                      li
-                        | 27
-                      li
-                        | 28
-                      li
-                        | 29
-                      li
-                        | 30
-                      li
-                        | 31
+                            .col-md-8.border.rounded.white
+                              .md-form.input-group.d-flex.justify-content-center[data-controller="employee-cv"]
+                                .input-group-prepend
+                                  .input-group-text.md-addon.pl-0
+                                    input[name="employee_cv[contractor_terms_of_service]" type="hidden" value="0"]
+                                    input#employee_cv_contractor_terms_of_service.form-check-input[type="checkbox" value="1" name="employee_cv[contractor_terms_of_service]"]
+                                    label.from-check-label.ml-2[data-action="click->employee-cv#tosToggle" for="employee_cv_contractor_terms_of_service"]
+                                      |  Я принимаю условия
+                                    a.font-weight-bold.ml-2[data-placement="top" data-toggle="tooltip" title="В соответствие с ФЗ «О персональных данных №152-ФЗ от 27.07.2006 г.», настоящим условием сайт уведомляет что, сайт не несет ответственность за сбор, передачу, хранение, обработку, распространение персональных данных."]
+                                      | оферты
+                            .col-md-4.d-flex.align-items-center
+                              button.btn.button-menu-w100.btn-rounded.waves-effect.active.pl-1.pr-0.text-center.white[type="button"]
+                                i.fas.fa-save
+                                |  Сохранить
+                    .col-md-4.border.rounded.white.mt-1.pt-1
+                      h4
+                        |  Каледарь
+                      ul.list-unstyled.weekdays.black-text.m-0
+                        li
+                          | Пн
+                        li
+                          | Вт
+                        li
+                          | Ср
+                        li
+                          | Чт
+                        li
+                          | Пт
+                        li
+                          | Сб
+                        li
+                          | Вс
+                      ul.list-unstyled.days.black-text.m-0
+                        li
+                          | 1
+                        li
+                          | 2
+                        li
+                          | 3
+                        li
+                          | 4
+                        li
+                          | 5
+                        li
+                          | 6
+                        li
+                          | 7
+                        li
+                          | 8
+                        li
+                          | 9
+                        li
+                          | 10
+                        li
+                          | 11
+                        li
+                          | 12
+                        li
+                          | 13
+                        li
+                          | 14
+                        li
+                          | 15
+                        li
+                          | 16
+                        li
+                          | 17
+                        li
+                          | 18
+                        li
+                          | 19
+                        li
+                          | 20
+                        li
+                          | 21
+                        li
+                          | 22
+                        li
+                          | 23
+                        li
+                          | 24
+                        li
+                          | 25
+                        li
+                          | 26
+                        li
+                          | 27
+                        li
+                          | 28
+                        li
+                          | 29
+                        li
+                          | 30
+                        li
+                          | 31

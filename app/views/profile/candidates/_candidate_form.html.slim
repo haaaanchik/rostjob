@@ -1,228 +1,233 @@
 - employee_cv = candidate.employee_cv
-.container-fluid
-  .row
-    .col.order-md-2
-      .container.p-0.m-2.price
-        .d-flex.justify-content-start
-          .text-right.z-depth-2.rounded.mb-0.position-relative class=candidate.status_background_class
-            p.white-text.m-1.h4
-              i.fas.fa-bookmark
-              = t("proposal_employee.state.#{candidate.state}")
-        .card.testimonial-card.price.position-static
-          .card-up.bg-best-hr
-            .container-fluid.p-1
-              .w-100
-                table[width="100%" height="90px"]
-                  tbody
-                    tr
-                      td.align-bottom
-                        h4.card-title.white-text
-                          |##{employee_cv.id} #{employee_cv.name}
-                      td.align-bottom.text-center[width="15%"]
-                        / a.btn-floating.btn-sm.red[type="button" role="button"]
-                        /   i.fas.fa-trash
-                        / p.card-title.white-text
-                        /   | Удалить
-                      td.align-bottom.text-center[width="15%"]
-                        / a.btn-floating.btn-sm.green[type="button" role="button"]
-                        /   i.fas.fa-save
-                        / p.card-title.white-text
-                        /   | Сохранить
-                      td.align-bottom.text-center[width="15%"]
-                        / a.btn-floating.btn-sm.blue[type="button" role="button"]
-                        /   i.fas.fa-paper-plane
-                        / p.card-title.white-text
-                        /   | Отправить
-          .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
-            .card-body.rounded-top
-              .container
-                .row
-                  .col-md-8.ml-0.pl-0
-                    .border.rounded.white.mt-1
-                      .modal-body.pt-1
-                        .row
-                          .col
-                            h4
-                              | Анкета
-                        .row
-                          .col-8
-                            .md-form.mt-1
-                              = text_field :employee_cv, :name, class: 'form-control disabled', value: employee_cv.name
-                              = label :employee_cv, :name, 'Полное имя'
-                          .col-4.d-flex.justify-content-center
-                            .form-inline
-                              .form-check
-                                = radio_button_tag 'employee_cv[gender]', employee_cv.gender, employee_cv.gender.include?('М'),
-                                  id: 'gender_male', class: 'form-check-input'
-                                = label employee_cv, :gender, 'М', for: 'gender_male', class: 'form-check-label disabled'
-                              .form-check.pl-3
-                                = radio_button_tag 'employee_cv[gender]', employee_cv.gender, employee_cv.gender.include?('Ж'),
-                                  id: 'gender_female', class: 'form-check-input'
-                                = label employee_cv, :gender, 'Ж', for: 'gender_female', class: 'form-check-label disabled'
-                        .row
-                          .col-4
-                            .md-form.mt-1
-                              = date_field :employee_cv, :birthdate, class: 'form-control disabled', value: employee_cv.birthdate
-                              = label :employee_cv, :birthdate, 'Дата рождения', class: 'active disabled'
-                          .col-8
-                            .md-form.mt-1
-                              = phone_field :employee_cv, :phone_number, class: 'form-control disabled', value: employee_cv.phone_number
-                              = label :employee_cv, :phone_number, 'Номер телефона', class: 'active disabled'
-                        .row
-                          .col-4
-                            .row
-                              - if employee_cv.document.present?
-                                .file-field
-                                  = link_to employee_cv.document.url, class: 'btn-floating btn-sm blue float-left', target: :_blank do
-                                    i.fas.fa-file-download
-                                  .file-path-wrapper.md-form.m-0.mt-1
-                                    = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path disabled'
-                              - else
-                                .file-field
-                                  a.btn-floating.btn-sm.grey.disable.float-left
-                                    i.fas.fa-file-download
-                                  .file-path-wrapper.md-form.m-0.mt-1
-                                    = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path disabled'
+.col-md-9.order-md-2.order-1
+  .container-fluid
+    .row
+      .col.order-md-2
+        .container.p-0.m-2.price
+          .d-flex.justify-content-start
+            .text-right.z-depth-2.rounded.mb-0.position-relative class=candidate.status_background_class
+              p.white-text.m-1.h4
+                i.fas.fa-bookmark
+                = t("proposal_employee.state.#{candidate.state}")
+          .card.testimonial-card.price.position-static
+            .card-up.bg-best-hr [style="height: 95px"]
+              .container-fluid.p-1
+                .w-100
+                  table[width="100%" height="90px"]
+                    tbody
+                      tr
+                        td.align-bottom
+                          h4.card-title.white-text
+                            |##{employee_cv.id} #{employee_cv.name}
+                        td.align-bottom.text-center[width="15%"]
+                          /= link_to profile_proposal_employee_complaints_path(proposed), remote: true, class: 'btn-floating btn-sm red', remote: true do
+                            i.fas.fa-angry
+                              p.card-title.white-text
+                                | СПОР
+                        td.align-bottom.text-center[width="15%"]
+                          /= link_to profile_order_candidate_path(proposed.order_id, proposed),
+                                  method: :delete, remote: true, class: 'btn-floating btn-sm green', remote: true do
+                            i.fas.fa-trash
+                              p.card-title.white-text
+                                | В архив
+                        td.align-bottom.text-center[width="15%"]
+                          /= link_to change_status_profile_employee_cv_path(proposed, state: 'hired'),
+                                  method: :put, remote: true, class: 'btn-floating btn-sm green', remote: true do
+                            i.fas.fa-handshake
+                              p.card-title.white-text
+                                | Нанять
+                        td.red-text
+                          | Поставь кнопки плз make0003
+            .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
+              .card-body.rounded-top
+                .container
+                  .row
+                    .col-md-8.ml-0.pl-0
+                      .border.rounded.white.mt-1
+                        .modal-body.pt-1
+                          .row
+                            .col
+                              h4
+                                | Анкета
+                          .row
+                            .col-8
+                              .md-form.mt-1
+                                = text_field :employee_cv, :name, class: 'form-control disabled', value: employee_cv.name
+                                = label :employee_cv, :name, 'Полное имя'
+                            .col-4.d-flex.justify-content-center
+                              .form-inline
+                                .form-check
+                                  = radio_button_tag 'employee_cv[gender]', employee_cv.gender, employee_cv.gender.include?('М'),
+                                    id: 'gender_male', class: 'form-check-input'
+                                  = label employee_cv, :gender, 'М', for: 'gender_male', class: 'form-check-label disabled'
+                                .form-check.pl-3
+                                  = radio_button_tag 'employee_cv[gender]', employee_cv.gender, employee_cv.gender.include?('Ж'),
+                                    id: 'gender_female', class: 'form-check-input'
+                                  = label employee_cv, :gender, 'Ж', for: 'gender_female', class: 'form-check-label disabled'
+                          .row
+                            .col-4
+                              .md-form.mt-1
+                                = date_field :employee_cv, :birthdate, class: 'form-control disabled', value: employee_cv.birthdate
+                                = label :employee_cv, :birthdate, 'Дата рождения', class: 'active disabled'
+                            .col-8
+                              .md-form.mt-1
+                                = phone_field :employee_cv, :phone_number, class: 'form-control disabled', value: employee_cv.phone_number
+                                = label :employee_cv, :phone_number, 'Номер телефона', class: 'active disabled'
+                          .row
+                            .col-4
+                              .row
+                                - if employee_cv.document.present?
+                                  .file-field
+                                    = link_to employee_cv.document.url, class: 'btn-floating btn-sm blue float-left', target: :_blank do
+                                      i.fas.fa-file-download
+                                    .file-path-wrapper.md-form.m-0.mt-1
+                                      = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path disabled'
+                                - else
+                                  .file-field
+                                    a.btn-floating.btn-sm.grey.disable.float-left
+                                      i.fas.fa-file-download
+                                    .file-path-wrapper.md-form.m-0.mt-1
+                                      = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path disabled'
 
-                            / form.md-form
-                            /   .file-field
-                            /     a.btn-floating.btn-sm.red.m-0.float-left
-                            /       i.fas.fa-paperclip[aria-hidden="true"]
-                            /       = f.file_field :document
-                            /     .file-path-wrapper.md-form.m-0.mt-1
-                            /       = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
-                          .col-8
-                            .md-form.mt-1
-                              = phone_field :employee_cv, :phone_number_alt, class: 'form-control disabled', value: employee_cv.phone_number_alt
-                              = label :employee_cv, :phone_number_alt, 'Дополнительный телефон', class: 'active disabled'
-                    .border.rounded.white.mt-1
-                      .modal-body.pt-1
-                        .row
-                          .col
-                            p.h5.text-center
-                              |  Дополнительные сведения
-                        .row
-                          .col
-                            .md-form.mt-2
-                              = text_area :employee_cv, :experience, rows: 3, class: 'form-control disabled', value: employee_cv.experience
-                              = label :employee_cv, :experience, 'Опыт работы', class: 'ml-2 disabled'
-                        .row
-                          .col
-                            .md-form.mt-0
-                              = text_area :employee_cv, :education, rows: 2, class: 'form-control disabled', value: employee_cv.education
-                              = label :employee_cv, :education, 'Образование', class: 'ml-2 disabled'
-                        .row
-                          .col
-                            .md-form.mt-0
-                              = text_area :employee_cv, :remark, rows: 2, class: 'form-control disabled', value: employee_cv.remark
-                              = label :employee_cv, :remark, 'Дополнительные сведения', class: 'ml-2 disabled'
-                    .border.rounded.white.mt-1
-                      .modal-body.pt-1
-                        .row
-                          .col.mt-1
-                            p.h5.text-center
-                              | Паспортные данные
-                              - passport = employee_cv.passport
-                        .row
-                          .col-2
-                            .md-form.mt-2
-                              = text_field :employee_cv_passport, :seria, class: 'form-control disabled', value: passport['seria']
-                              = label :employee_cv_passport, :seria, 'Серия', class: 'disabled'
-                          .col-2
-                            .md-form.mt-2
-                              = text_field :employee_cv_passport, :number, class: 'form-control disabled', value: passport['number']
-                              = label :employee_cv_passport, :number, 'Номер', class: 'disabled'
-                          .col-4
-                            .md-form.mt-2
-                              = text_field :employee_cv_passport, :code, class: 'form-control disabled', value: passport['code']
-                              = label :employee_cv_passport, :code, '№ подразделения', class: 'disabled'
-                          .col-4
-                            .md-form.mt-2
-                              = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] && !passport['date'].empty? ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
-                              = label :employee_cv_passport, :date, 'Дата выдачи', class: 'disabled'
-                        .row
-                          .col
-                            .md-form.mt-1
-                              = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
-                              = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
-                  .col-md-4.border.rounded.white.mt-1.pt-1
-                    h4
-                      |  Каледарь
-                    ul.list-unstyled.weekdays.black-text.m-0
-                      li
-                        | Пн
-                      li
-                        | Вт
-                      li
-                        | Ср
-                      li
-                        | Чт
-                      li
-                        | Пт
-                      li
-                        | Сб
-                      li
-                        | Вс
-                    ul.list-unstyled.days.black-text.m-0
-                      li
-                        | 1
-                      li
-                        | 2
-                      li
-                        | 3
-                      li
-                        | 4
-                      li
-                        | 5
-                      li
-                        | 6
-                      li
-                        | 7
-                      li
-                        | 8
-                      li
-                        | 9
-                      li
-                        | 10
-                      li
-                        | 11
-                      li
-                        | 12
-                      li
-                        | 13
-                      li
-                        | 14
-                      li
-                        | 15
-                      li
-                        | 16
-                      li
-                        | 17
-                      li
-                        | 18
-                      li
-                        | 19
-                      li
-                        | 20
-                      li
-                        | 21
-                      li
-                        | 22
-                      li
-                        | 23
-                      li
-                        | 24
-                      li
-                        | 25
-                      li
-                        | 26
-                      li
-                        | 27
-                      li
-                        | 28
-                      li
-                        | 29
-                      li
-                        | 30
-                      li
-                        | 31
+                              / form.md-form
+                              /   .file-field
+                              /     a.btn-floating.btn-sm.red.m-0.float-left
+                              /       i.fas.fa-paperclip[aria-hidden="true"]
+                              /       = f.file_field :document
+                              /     .file-path-wrapper.md-form.m-0.mt-1
+                              /       = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
+                            .col-8
+                              .md-form.mt-1
+                                = phone_field :employee_cv, :phone_number_alt, class: 'form-control disabled', value: employee_cv.phone_number_alt
+                                = label :employee_cv, :phone_number_alt, 'Дополнительный телефон', class: 'active disabled'
+                      .border.rounded.white.mt-1
+                        .modal-body.pt-1
+                          .row
+                            .col
+                              p.h5.text-center
+                                |  Дополнительные сведения
+                          .row
+                            .col
+                              .md-form.mt-2
+                                = text_area :employee_cv, :experience, rows: 3, class: 'form-control disabled', value: employee_cv.experience
+                                = label :employee_cv, :experience, 'Опыт работы', class: 'ml-2 disabled'
+                          .row
+                            .col
+                              .md-form.mt-0
+                                = text_area :employee_cv, :education, rows: 2, class: 'form-control disabled', value: employee_cv.education
+                                = label :employee_cv, :education, 'Образование', class: 'ml-2 disabled'
+                          .row
+                            .col
+                              .md-form.mt-0
+                                = text_area :employee_cv, :remark, rows: 2, class: 'form-control disabled', value: employee_cv.remark
+                                = label :employee_cv, :remark, 'Дополнительные сведения', class: 'ml-2 disabled'
+                      .border.rounded.white.mt-1
+                        .modal-body.pt-1
+                          .row
+                            .col.mt-1
+                              p.h5.text-center
+                                | Паспортные данные
+                                - passport = employee_cv.passport
+                          .row
+                            .col-2
+                              .md-form.mt-2
+                                = text_field :employee_cv_passport, :seria, class: 'form-control disabled', value: passport['seria']
+                                = label :employee_cv_passport, :seria, 'Серия', class: 'disabled'
+                            .col-2
+                              .md-form.mt-2
+                                = text_field :employee_cv_passport, :number, class: 'form-control disabled', value: passport['number']
+                                = label :employee_cv_passport, :number, 'Номер', class: 'disabled'
+                            .col-4
+                              .md-form.mt-2
+                                = text_field :employee_cv_passport, :code, class: 'form-control disabled', value: passport['code']
+                                = label :employee_cv_passport, :code, '№ подразделения', class: 'disabled'
+                            .col-4
+                              .md-form.mt-2
+                                = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] && !passport['date'].empty? ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
+                                = label :employee_cv_passport, :date, 'Дата выдачи', class: 'disabled'
+                          .row
+                            .col
+                              .md-form.mt-1
+                                = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
+                                = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
+                    .col-md-4.border.rounded.white.mt-1.pt-1
+                      h4
+                        |  Каледарь
+                      ul.list-unstyled.weekdays.black-text.m-0
+                        li
+                          | Пн
+                        li
+                          | Вт
+                        li
+                          | Ср
+                        li
+                          | Чт
+                        li
+                          | Пт
+                        li
+                          | Сб
+                        li
+                          | Вс
+                      ul.list-unstyled.days.black-text.m-0
+                        li
+                          | 1
+                        li
+                          | 2
+                        li
+                          | 3
+                        li
+                          | 4
+                        li
+                          | 5
+                        li
+                          | 6
+                        li
+                          | 7
+                        li
+                          | 8
+                        li
+                          | 9
+                        li
+                          | 10
+                        li
+                          | 11
+                        li
+                          | 12
+                        li
+                          | 13
+                        li
+                          | 14
+                        li
+                          | 15
+                        li
+                          | 16
+                        li
+                          | 17
+                        li
+                          | 18
+                        li
+                          | 19
+                        li
+                          | 20
+                        li
+                          | 21
+                        li
+                          | 22
+                        li
+                          | 23
+                        li
+                          | 24
+                        li
+                          | 25
+                        li
+                          | 26
+                        li
+                          | 27
+                        li
+                          | 28
+                        li
+                          | 29
+                        li
+                          | 30
+                        li
+                          | 31
