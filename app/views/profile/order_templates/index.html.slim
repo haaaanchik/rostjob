@@ -1,8 +1,9 @@
-.col.order-1.order-sm-1.order-md-1.border.rounded.p-1.mt-4.mr-2
-  .row.justify-content-center
-    .col-9
-      = render partial: 'search_form'
-    .col-3
-      = link_to 'Создать шаблон', new_profile_order_template_path, class: 'btn btn-success mt-4', remote: true
-  #order_template_list
-    = render partial: @order_templates
+.col-md-9.order-md-2.order-1.p-4
+  .container.border.rounded
+    .row.justify-content-center
+      .col-9
+        = render partial: 'search_form'
+      .col-3
+        = link_to 'Создать шаблон', new_profile_order_template_path, class: 'btn btn-success mt-4', remote: true
+    #order_template_list
+      = render partial: @order_templates
