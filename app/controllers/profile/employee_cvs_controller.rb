@@ -48,6 +48,7 @@ class Profile::EmployeeCvsController < ApplicationController
     if result.success?
       @status = 'success'
       # redirect_to profile_employee_cvs_path(term: :ready)
+      redirect_to profile_employee_cvs_with_state_path(:ready)
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
