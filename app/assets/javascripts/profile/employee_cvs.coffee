@@ -93,22 +93,6 @@ $ ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
   )
 
- $(document).on('submit', '.new-employee_cv-form:not([data-remote])', (event) ->
-   event.preventDefault()
-   name = document.activeElement.getAttribute('name')
-   button = $(document.activeElement)
-   console.log button
-   form = $(this)
-   if name == 'save'
-     form.attr('data-remote', true)
-   # event.preventDefault()
-   # button = $("input[type=submit]", form)
-   # console.log button
-   # form.submit()
-   button.removeAttr('data-disable-with')
-   console.log button
-   button[0].click()
- )
 #modal_hide = ->
 #  $('#newCandidateModal').modal('hide')
 #

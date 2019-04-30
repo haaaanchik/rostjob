@@ -22,10 +22,18 @@ class Profile::EmployeeCvsController < ApplicationController
     order if params[:order_id]
   end
 
+  def pre_new_full
+    flash['params'] = employee_cvs_params
+    redirect_to new_full_profile_employee_cv_path
+  end
+
   def new_full
-    @employee_cv = EmployeeCv.new employee_cvs_params
+    ecv_params = flash['params']
+    @employee_cv = EmployeeCv.new ecv_params
     # FIXME: refactor this asap
-    order2 if employee_cvs_params[:order_id]
+    if ecv_params
+      @order ||= Order.find_by(id: ecv_params['order_id']) if !ecv_params['order_id'].nil? || !ecv_params['order_id'].empty?
+    end
   end
 
   def edit

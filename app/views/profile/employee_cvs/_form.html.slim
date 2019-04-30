@@ -1,4 +1,4 @@
-= form_with model: @employee_cv, url: url, method: mth, class: 'new-employee_cv-form', local: true do |f|
+= form_with model: @employee_cv, url: url, method: mth, class: 'new-employee_cv-form' do |f|
   = f.hidden_field :order_id, value: @order&.id
   .border.rounded.white.mt-1
     .modal-body.pt-1
@@ -48,4 +48,4 @@
   / - unless @order || !@employee_cv.new_record?
   .row
     .col.mt-2.text-center
-      = f.submit 'Мне нужно ввести больше данных', name: :new_full
+      = f.submit 'Мне нужно ввести больше данных', name: :pre_new_full
