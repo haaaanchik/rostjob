@@ -2,6 +2,7 @@ class Profile::OrdersController < ApplicationController
   def index
     @state = params[:state]
     orders
+    orders_kind
     @active_item = case params[:state]
                    when nil
                      :my_orders
@@ -179,5 +180,19 @@ class Profile::OrdersController < ApplicationController
 
   def description
     nil
+  end
+
+  def state
+    params[:state]
+  end
+
+  def orders_kind
+    @orders_kind = if state.nil?
+                     'все ваши заявки'
+                   elsif state.include?('in_progress')
+                     'ваши заявки, находящиеся в работе.'
+                   elsif state.include?('completed')
+                     'ваши завершённые заявки'
+                   end
   end
 end
