@@ -86,7 +86,7 @@
                     = order_template.contact_person['name']
                   p.font-italic.m-1
                     = order_template.contact_person['phone']
-            div
+            div.text-center
               - if order_template.document.present?
                 div
                   = link_to order_template.document.url, class: 'btn-floating btn-sm blue' do
