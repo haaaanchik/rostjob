@@ -1,3 +1,131 @@
-.row
-  / = render partial: 'left_side', locals: { order: @order }
-  = render partial: 'right_side', locals: { order: @order }
+- order = @order
+.col-md-9.order-md-2.mt-4
+  .container-fluid
+    .card.testimonial-card.card-hr
+      .card-up.bg-best-hr.lighten-1.card-up-hr
+        .container-fluid
+          .row.m-card-up
+            .container-fluid.p-0.box
+              table[width="100%" height="90px"]
+                tbody
+                  tr
+                    td.align-bottom
+                      p.h5.card-title.white-text
+                        |№#{order.id}  #{order.place_of_work} - #{order.title} #{order.skill}
+                    td.align-bottom.text-right
+                      = link_to complete_profile_order_path(order), class: 'btn-floating btn-sm red', remote: true, method: :put do
+                        i.fas.fa-times
+                      p.card-title.white-text
+                        | Завершить
+      .box
+        .container-fluid.p-0.up-box.m-2
+          .row.pl-2.pr-2
+            .col-md-6.p-1
+              .d-flex.justify-content-end
+                .bg-best-hr.text-right.z-depth-1.rounded.mb-0.position-relative
+                  p.white-text.m-1.h4
+                    i.fas.fa-user-check
+                    |  #{order.candidates.hired.count} / #{order.number_of_employees}
+                    i.fas.fa-users
+              .price.container-fluid.border.rounded.mb-0
+                .row.mt-4
+                  .col-12
+                    .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
+                      / button.btn.button-menu-quadr.btn-rounded.waves-effect.active[type="button"]
+                      /   |  Входящие
+                      = link_to 'Входящие', profile_order_candidates_path(order, term: :inbox),
+                          class: 'button btn button-menu-quadr btn-rounded waves-effect active candidates-menu-button',
+                          data: { toggle: 'pill' }, remote: true
+                      / button.btn.button-menu-quadr.btn-rounded.waves-effect[type="button"]
+                      /   |  Нанятые
+                      = link_to 'Нанятые', profile_order_candidates_path(order, term: :hired),
+                        class: 'button btn button-menu-quadr btn-rounded waves-effect candidates-menu-button',
+                        data: { toggle: 'pill' }, remote: true
+                      / button.btn.button-menu-quadr.btn-rounded.waves-effect[type="button"]
+                      /   |  Удаленные
+                      = link_to 'Удалённые', profile_order_candidates_path(order, term: :deleted),
+                        class: 'button btn button-menu-quadr btn-rounded waves-effect candidates-menu-button',
+                        data: { toggle: 'pill' }, remote: true
+                      / button.btn.button-menu-quadr.btn-rounded.waves-effect[type="button"]
+                      /   |  СПОР
+                      = link_to 'Спор', profile_order_candidates_path(order, term: :disputed),
+                        class: 'button btn button-menu-quadr btn-rounded waves-effect candidates-menu-button',
+                        data: { toggle: 'pill' }, remote: true
+
+                #order_candidates
+                  = render partial: 'profile/orders/contractors/contractor_card' , collection: @contractors
+                / .row.ml-1.mr-1.z-depth-1.bg-best-hr.white-text
+                /   .col-2.text-right.m-0.p-0
+
+                /   .col-6
+                /     h6.font-weight-bold.mb-2
+                /       | Имя фамилия
+                /   .col-4.text-center
+                /     p.card-text.m-0.p-0
+                /       |  899889898
+                /     a.btn-floating.btn-sm.blue.m-0.p-0[type="button" role="button"]
+                /       i.fas.fa-times
+                / br
+            .col-md-6.p-1
+              = render partial: 'orders/urgency', locals: { order: order }
+              .price.container-fluid.border.rounded.mb-0
+                p.h5.text-center.mt-1.mb-0
+                  i.fas.fa-city.mr-2
+                  strong = order.place_of_work
+                p.h4.text-center.mt-1.mb-0
+                  i.fas.fa-hammer
+                  strong
+                    |  #{order.title} #{order.skill}
+                p.text-center.m-0
+                  i.fas.fa-money-bill-alt.w-2
+                  i.fas.fa-ruble-sign.mx-2
+                  strong = order.salary
+                p.m-0
+                  i.fas.fa-map-marker.w-2
+                  strong
+                    |#{order.city} #{order.district}
+                p.m-0
+                  i.fas.fa-passport.w-2.mr-2
+                  strong = order.experience
+
+                p.m-0
+                  i.far.fa-calendar-alt.w-2.mr-2
+                  strong = order.work_period
+                p.m-0
+                  i.fas.fa-clipboard-list.w-2.mr-2
+                  strong = order.description
+                p.m-0
+                  i.fas.fa-plus.w-2.mr-2
+                  strong
+                    = order.other_info['related_profession']
+                p.m-0
+                  i.fas.fa-bed.w-2.mr-2
+                  strong = order.other_info['terms']
+                hr.mb-0
+                .box-spice
+                  div
+                    p.mt-0
+                      i.fas.fa-comment-alt.w-2.mr-2
+                      |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
+                      br
+                      - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                        == order.other_info['remark']
+
+                  - if order.contact_person['name'] || order.contact_person['phone']
+                    div
+                      .text-center.border.rounded.mb-3
+                        p.p-0.m-0.font-weight-bold
+                          |  Контактное лицо:
+                        p.font-italic.m-1
+                          nobr
+                            = order.contact_person['name']
+                        p.font-italic.m-1
+                          nobr
+                            = order.contact_person['phone']
+                    - if order.document.present?
+                      div
+                        = link_to order.document.url, class: 'btn-floating btn-sm blue' do
+                          i.fas.fa-file-download
+                      p.card-title.blue-text
+                        |Скачать
+                        br анкету

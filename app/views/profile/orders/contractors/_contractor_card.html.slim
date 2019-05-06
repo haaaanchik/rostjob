@@ -1,23 +1,30 @@
 - candidates = contractor_card.sent_proposal_employees
 - if candidates.any?
-  .card.mt-3
-    .card-body
-      .row
-        .col
-          = image_tag('/img/no-avatar.jpg', size: 80)
-        .col
-          = contractor_card.user.full_name.delete('\n')
-        .col
-          |10/10
-        .col
-          |Заблокировать
-      .card.mt-2
-        .card-body
-          table.table
-            tr
-              th Действия
-              th ФИО
-              th Дата прибытия
-            - candidates.each do |candidate|
-              = render partial: 'profile/orders/proposals/employee_cv',
-                       object: candidate, as: :proposed
+  .row.mt-4
+    .col-2.text-right.m-0.p-0.align-self-center
+      p
+        = image_tag('/img/no-avatar.jpg', size: 80)
+    .col-6
+      h6.font-weight-bold
+        = contractor_card.user.full_name.delete('\n')
+      p
+        | рейтинг: 10/10
+        br
+        |  сделок: 5
+    .col-4.text-center
+      p.card-text.m-0.p-0
+        |  Блокировать
+      a.btn-floating.btn-sm.blue.m-0.p-0.disabled[type="button" role="button"]
+        i.fas.fa-times
+    table.table.table-sm.table-borderless.table-hover
+      tr
+        th.text-center
+          strong Статус
+        th.text-center
+          strong Анкета
+        th.text-center
+          strong Прибытие
+
+      - candidates.each do |candidate|
+        = render partial: 'profile/orders/proposals/employee_cv',
+                 object: candidate.decorate, as: :proposed

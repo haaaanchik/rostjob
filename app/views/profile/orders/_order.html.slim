@@ -14,9 +14,8 @@
                         h4.card-title.white-text
                           = order.profile.company.name
                     td.align-bottom.text-center width="15%"
-                      i.fas.fa-eye
-                      /= link_to 'Просмотреть', profile_order_path(order), class: 'btn btn-success'
-                        /ссылочка в круглой кнопке с глазом
+                      = link_to profile_order_path(order), class: 'btn-floating btn-sm blue' do
+                        i.fas.fa-eye
                       p.card-title.white-text
                         | Просмотреть
     .d-flex.align-self-stretch
@@ -70,23 +69,23 @@
                   br
                   - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
                     == order.other_info['remark']
-              - if order.contact_person['name'] || order.contact_person['phone']
           .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
-            div
-              .text-center.border.rounded.mb-3
-                p.p-0.m-0.font-weight-bold
-                  |  Контактное лицо:
-                p.font-italic.m-1
-                  nobr
-                    = order.contact_person['name']
-                p.font-italic.m-1
-                  nobr
-                    = order.contact_person['phone']
-            - if order.document.present?
+            - if order.contact_person['name'] || order.contact_person['phone']
               div
-                = link_to order.document.url, class: 'btn-floating btn-sm blue' do
-                  i.fas.fa-file-download
-              p.card-title.blue-text
-                |Скачать
-                br анкету
+                .text-center.border.rounded.mb-3
+                  p.p-0.m-0.font-weight-bold
+                    |  Контактное лицо:
+                  p.font-italic.m-1
+                    nobr
+                      = order.contact_person['name']
+                  p.font-italic.m-1
+                    nobr
+                      = order.contact_person['phone']
+              - if order.document.present?
+                div
+                  = link_to order.document.url, class: 'btn-floating btn-sm blue' do
+                    i.fas.fa-file-download
+                p.card-title.blue-text
+                  |Скачать
+                  br анкету
 
