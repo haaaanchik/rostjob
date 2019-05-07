@@ -36,6 +36,15 @@ class User < ApplicationRecord
   scope :sort_by_employee_cvs_count_asc, -> { order('employee_cvs_count asc') }
   scope :sort_by_employee_cvs_count_desc, -> { order('employee_cvs_count desc') }
 
+  def initialize(attrs = nil)
+    defaults = {
+      is_active: true
+    }
+
+    attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
+    super(attrs_with_defaults)
+  end
+
   def self.find_or_create_by_auth(auth)
     User.find_or_create_by(uid: auth['uid']) do |u|
       u.provider = auth['profider']
@@ -82,6 +91,10 @@ class User < ApplicationRecord
 
   def set_guid
     self.guid = SecureRandom.uuid
+  end
+
+  def active_for_authentication?
+    super and self.is_active?
   end
 
   private
