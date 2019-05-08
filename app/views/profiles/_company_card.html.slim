@@ -1,6 +1,6 @@
 - header = profile.private_person? ? 'Карточка физического лица' : 'Карточка предприятия'
 
-h4.h4-responsive data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
+h4.h4-responsive.mb-3 data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
 - unless profile.private_person?
   .company-search
     .form-group.row
