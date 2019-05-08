@@ -41,7 +41,7 @@ module Cmd
           subject_id: contractor.id,
           subject_type: 'User',
           subject_role: contractor.profile.profile_type,
-          action: "Получено вознаграждение за анкету №#{proposal_employee.employee_cv.id} #{proposal_employee.emplyoee_cv.name}",
+          action: "Получено вознаграждение за анкету №#{proposal_employee.employee_cv.id} #{proposal_employee.employee_cv.name}",
           object_id: proposal_employee.id,
           object_type: 'ProposalEmployee',
           employee_cv_id: proposal_employee.employee_cv_id,
