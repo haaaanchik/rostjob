@@ -1,5 +1,5 @@
-.col.mt-3
-  .card.z-depth-2
+.col-md-9.order-md-2.mt-4
+  .card.border.rounded
     .card-body
       h2 Лицевой счет
       'Остаток:
@@ -18,12 +18,12 @@
             th Расход
           = render @current_profile.balance.bill_transactions.order(id: :desc).first(10)
   br
-  .card.z-depth-2
+  .card.border.rounded
     .card-body
       h2 Выписать счет для пополнения
       = render partial: 'new'
   br
-  .card.z-depth-2
+  .card.border.rounded
     .card-body
       h2 Мои счета
       table.table
