@@ -1,6 +1,6 @@
 $ ->
   $(document).on('click', '.clickable-row', (event) ->
-    window.location = $(event.currentTarget).data('href')
+    window.location = $(event.currentTarget).closest('tr').data('href')
   )
   $(document).on('mouseenter', '.clickable-row', (event) ->
     $(this).css('cursor', 'pointer')

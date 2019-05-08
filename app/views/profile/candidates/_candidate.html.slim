@@ -1,6 +1,5 @@
-tr.rounded.mb-0.example.hoverable id="candidate_#{candidate.id}"
-  td.text-center.align-middle.clickable-row data-href=profile_candidate_path(candidate)
-    / td.text-center.align-middle
+tr.rounded.mb-0.example.hoverable.clickable-row id="candidate_#{candidate.id}" data-href=profile_candidate_path(candidate)
+  td.text-center.align-middle
     .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
       i.fas.fa-bookmark.mr-2
       = t("proposal_employee.state.#{candidate.state}")

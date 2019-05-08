@@ -1,5 +1,8 @@
-.col.order-1.order-sm-1.order-md-1.border.rounded.p-1.mt-4.mr-2
-  h1.mt-3.ml-3
-    | Мои Заявки
-  = render partial: 'search_form', locals: { state: @state }
-  = render @orders
+.col-md-9.order-md-2.order-1.p-2.pt-4
+  p.h6.text-center.font-italic
+    | * Здесь расположены #{@orders_kind}
+  .container.w-100.border.rounded.mt-2
+    .row
+      .col.p-0.mt-2
+        = render partial: 'search_form', locals: { state: @state }
+    = render @orders

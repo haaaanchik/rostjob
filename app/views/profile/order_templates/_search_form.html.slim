@@ -1,5 +1,5 @@
 = form_with  model: @order_template_search_form, url: profile_order_templates_path, method: :get, skip_enforcing_utf8: true, local: true, id: 'order_template_search_form' do |f|
-  .form-group.ml-4.mt-4
+  .form-group.m-0
     = f.text_field :query, class: "form-control", placeholder: 'Поиск шаблона', aria_label: "Query"
     span.form-clear.d-none
       i.fas.fa-times

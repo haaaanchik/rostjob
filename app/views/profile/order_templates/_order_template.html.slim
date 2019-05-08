@@ -1,115 +1,108 @@
-.row.mt-3.
-  .container-fluid
-    .card.testimonial-card.w-100
-      .card-up.bg-best-hr.lighten-1.card-up-hr
-        .container-fluid
-          .row.m-card-up
-            .container-fluid.p-0.d-flex.align-self-stretch
-              .ava-m.d-none.d-md-block
-              .w-100
-                table[width="100%" height="90px"]
-                  tbody
-                    tr
-                      td.align-bottom
+.row
+  .card.testimonial-card.w-100.m-2
+    .card-up.bg-best-hr.lighten-1.card-up-hr
+      .container
+        .row.m-card-up
+          .p-0.d-flex.align-self-stretch.w-100
+            .ava-m.d-none.d-lg-block
+            .w-100
+              table[width="100%" height="90px"]
+                tbody
+                  tr
+                    td.align-bottom
+                      .d-none.d-md-block
                         h4.card-title.white-text #{order_template.name}
-                      td.align-bottom.text-center width="15%"
-                        = link_to profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm red',
-                          method: :delete, data: { confirm: 'Вы уверены?' } do
-                          i.fas.fa-trash
-                        p.card-title.white-text
-                          | Удалить
-                      td.align-bottom.text-center width="15%"
-                        = link_to copy_profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm blue',
-                          method: :post, data: { confirm: 'Точно хотите скопировать шаблон?' } do
-                          i.fas.fa-clone
-                        p.card-title.white-text
-                          | Копия
-                      td.align-bottom.text-center[width="15%"]
-                        = link_to edit_profile_order_template_path(order_template), class: 'btn-floating btn-sm green', remote: true do
-                          i.fas.fa-pen-alt
-                        p.card-title.white-text
-                          | Изменить
-      .d-flex.align-self-stretch
-        .d-flex.flex-column.justify-content-between.align-items-stretch.text-center
-          div
-            .avatar.ml-2.white.mr-1.d-none.d-md-block
-              = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'avatar')
-            .ml-2.mr-2
-              p.h4
-                / |  #41:
-          div
-            - if order_template.document.present?
-              div
-                = link_to order_template.document.url, class: 'btn-floating btn-sm blue' do
-                  i.fas.fa-file-download
-              p.card-title.blue-text
-                |Скачать
-                br
-                |анкету
-
-        .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.m-2
-          .row.m-0
-            .col-md-9
-              = render partial: 'orders/urgency', locals: { order: order_template }
-              .price.container-fluid.border.rounded.mb-0
-                p.h5.text-center.mt-1.mb-0
-                  i.fas.fa-city.mr-2
-                  strong #{order_template.place_of_work}
-                p.h4.text-center.mt-1.mb-0
-                  i.fas.fa-hammer.mr-1
-                  strong #{order_template.title} #{order_template.skill}
-                p.text-center.m-0
-                  i.fas.fa-money-bill-alt.w-2.mr-2
-                  i.fas.fa-ruble-sign.mr-2
-                  strong #{order_template.salary}
-                p.m-0
-                  i.fas.fa-map-marker.w-2
-                  strong.ml-2 #{order_template.city} #{order_template.district}
-                p.m-0
-                  i.fas.fa-passport.w-2.mr-2
-                  strong #{order_template.experience}
-                p.m-0
-                  i.far.fa-calendar-alt.w-2.mr-2
-                  strong #{order_template.work_period} (#{order_template.schedule})
-                p.m-0
+                    td.align-bottom.text-center width="15%"
+                      = link_to profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm red',
+                        method: :delete, data: { confirm: 'Вы уверены?' } do
+                        i.fas.fa-trash
+                      p.card-title.white-text
+                        | Удалить
+                    td.align-bottom.text-center width="15%"
+                      = link_to copy_profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm blue',
+                        method: :post, data: { confirm: 'Точно хотите скопировать шаблон?' } do
+                        i.fas.fa-clone
+                      p.card-title.white-text
+                        | Копия
+                    td.align-bottom.text-center[width="15%"]
+                      = link_to edit_profile_order_template_path(order_template), class: 'btn-floating btn-sm green', remote: true do
+                        i.fas.fa-pen-alt
+                      p.card-title.white-text
+                        | Изменить
+    .d-flex.align-self-stretch
+      div
+        .avatar.ml-1.white.mr-0.d-none.d-lg-block
+          = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'avatar')
+      .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
+        .row.m-0.p-0.pr-1.pl-1.pb-1
+          .col-md-9.pr-0.pl-0
+            = render partial: 'orders/urgency', locals: { order: order_template }
+            .price.w-100.border.rounded.mb-0.p-1
+              p.h5.text-center.mt-1.mb-0
+                i.fas.fa-city.mr-2
+                strong #{order_template.place_of_work}
+              p.h4.text-center.mt-1.mb-0
+                i.fas.fa-hammer.mr-1
+                strong #{order_template.title} #{order_template.skill}
+              p.text-center.m-0
+                i.fas.fa-money-bill-alt.w-2.mr-2
+                i.fas.fa-ruble-sign.mr-2
+                strong #{order_template.salary}
+              p.m-0
+                i.fas.fa-map-marker.w-2
+                strong.ml-2 #{order_template.city} #{order_template.district}
+              p.m-0
+                i.fas.fa-passport.w-2.mr-2
+                strong #{order_template.experience}
+              p.m-0
+                i.far.fa-calendar-alt.w-2.mr-2
+                strong #{order_template.work_period} (#{order_template.schedule})
+              .d-none.d-md-block
+                p.h6.m-0
                   i.fas.fa-clipboard-list.w-2.mr-2
                   - unless order_template.description.nil? || order_template.description.empty?
                     strong == order_template.description
                 p.m-0
                   i.fas.fa-plus.w-2.mr-2
                   strong #{order_template.other_info['related_profession']}
-                p.m-0
+                p.h6.m-0
                   i.fas.fa-bed.w-2.mr-2
-                  strong #{order_template.other_info['terms']}
-                hr.mb-0
-                .d-flex.justify-content-between.align-items-end
-                  div
-                    p.mt-0
-                      i.fas.fa-comment-alt.w-2.mr-2
-                      |#{order_template.other_info['age_from']} - #{order_template.other_info['age_to']} (#{order_template.other_info['sex']})
-                      br
-                      - unless order_template.other_info['remark'].nil? || order_template.other_info['remark'].empty?
-                        == order_template.other_info['remark']
-                  - if order_template.contact_person['name'] && !order_template.contact_person['name'].empty? || \
-                    order_template.contact_person['phone'] && !order_template.contact_person['phone'].empty?
-                    .text-center.border.rounded.mb-3
-                      p.p-0.m-0.font-weight-bold
-                        |  Контактное лицо:
-                      p.font-italic.m-1
-                        nobr
-                          = order_template.contact_person['name']
-                      p.font-italic.m-1
-                        nobr
-                          = order_template.contact_person['phone']
-            .col-md-3.price.border.rounded.m-0.mt-3.d-flex.flex-column.justify-content-center
+                  |#{order_template.other_info['terms']}
+                hr.h6.m-0
+                p.h6.m-0
+                  i.fas.fa-comment-alt.w-2.mr-2
+                  |#{order_template.other_info['age_from']} - #{order_template.other_info['age_to']} (#{order_template.other_info['sex']})
+                  br
+                  - unless order_template.other_info['remark'].nil? || order_template.other_info['remark'].empty?
+                    == order_template.other_info['remark']
+          .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
+            div
+              - if order_template.contact_person['name'] && !order_template.contact_person['name'].empty? || \
+                                  order_template.contact_person['phone'] && !order_template.contact_person['phone'].empty?
+                .text-center.border.rounded.mb-3
+                  p.p-0.m-0.font-weight-bold
+                    |  Контактное лицо:
+                  p.font-italic.m-1
+                    = order_template.contact_person['name']
+                  p.font-italic.m-1
+                    = order_template.contact_person['phone']
+            div.text-center
+              - if order_template.document.present?
+                div
+                  = link_to order_template.document.url, class: 'btn-floating btn-sm blue' do
+                    i.fas.fa-file-download
+                p.card-title.blue-text
+                  |Скачать
+                  br
+                  |анкету
+            div
+              hr
               - form_id = "create_order_form_#{order_template.id}"
               = render partial: 'create_order_form', locals: { order_template: order_template, form_id: form_id }
-              div
-                p.h4.text-center
-                  |  Итого:
-                p.h4.text-center class="customer-total-#{order_template.id}"
-                  = order_template.customer_total
-                br
-                button.btn.button-hr.w-100.pt-2.pb-2.btn-rounded.waves-effect.active.pl-1.pr-1.text-center.blue-text type="submit" form=form_id
-                  i.fas.fa-plus
-                  |  Опубликовать
+              p.h4.text-center
+                |  Итого:
+              p.h4.text-center class="customer-total-#{order_template.id}"
+                = order_template.customer_total
+              button.btn.button-hr.pt-2.pb-2.m-0.btn-rounded.w-100.waves-effect.active.text-center.blue-text type="submit" form=form_id
+                i.fas.fa-plus
+                |  Опубликовать
