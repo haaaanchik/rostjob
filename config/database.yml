@@ -62,3 +62,10 @@ staging:
   reaping_frequency: 5
   dead_connection_timeout: 15
   password: 12345678
+
+demo:
+  <<: *default
+  database: best-hr_demo
+  reconnect: true
+  reaping_frequency: 5
+  dead_connection_timeout: 15
