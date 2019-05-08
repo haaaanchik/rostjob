@@ -24,7 +24,7 @@ body {
   padding: 14px;
   text-align: left;
   border: 2px solid #fff !important;
-  background-color: transparent !important;
+  background-color: #ffffff !important;
   color: #534741 !important; 
     -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);}
   .button-menu:hover, .button-menu:focus, .button-menu:active, .button-menu:active:focus, .button-menu.active  {
@@ -36,7 +36,7 @@ body {
   .show > .button-menu.dropdown-toggle {
     -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
-    background-color: transparent !important;
+    background-color: #ffffff !important;
     border-color: #534741 !important; }
   .button-menu:not([disabled]):not(.disabled):active:focus, .button-menu:not([disabled]):not(.disabled).active:focus,
   .show > .button-menu.dropdown-toggle:focus {
