@@ -48,17 +48,9 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def create_order
-    number_of_employees = create_order_params[:number_of_employees].to_i
-    profession = Position.find(order_template.position_id)
-    customer_total = order_template.customer_price * number_of_employees
-    contractor_total = order_template.contractor_price * create_order_params[:number_of_employees].to_i
-    attributes = order_template.attributes
-    order_attributes = attributes.merge('id' => nil, 'number_of_employees' => number_of_employees,
-                                        'customer_total' => customer_total, 'contractor_total' => contractor_total)
-                                 .except('name', 'created_at', 'updated_at')
-    result = Cmd::Order::Create.call(profile: current_profile, params: order_attributes, position: profession)
-    result.order.document = order_template.document
-    result.order.save
+    number_of_employees = create_order_params[:number_of_employees]
+    result = Cmd::OrderTemplate::CreateOrder.call(order_template: order_template, number_of_employees: number_of_employees)
+
     if result.success?
       redirect_to pre_publish_profile_order_path(result.order)
     else
