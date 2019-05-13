@@ -10,9 +10,11 @@ module Cmd
           context.user = result.user
           context.fail! unless result.success?
           result = ::Cmd::Profile::Create.call(user: @user, params: profile_params, log: false)
+          @profile = result.profile
           context.fail! unless result.success?
           result = ::Cmd::Profile::Balance::Create.call(profile: result.profile)
           context.fail! unless result.success?
+          ::CreateDemoDataJob.perform_later(profile: @profile) if Rails.env.development? || Rails.env.demo?
           Cmd::UserActionLogger::Log.call(params: logger_params)
         end
 

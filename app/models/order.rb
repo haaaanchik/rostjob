@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   belongs_to :profile
   has_many :invites
   has_many :candidates, class_name: 'ProposalEmployee'
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :proposals
   has_many :proposal_employees
   has_many :profiles, -> { distinct }, through: :proposal_employees

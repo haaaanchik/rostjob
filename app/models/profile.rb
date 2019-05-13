@@ -3,7 +3,7 @@ class Profile < ApplicationRecord
   extend ConditionalValidation::ValidationFlag
 
   has_one :user, dependent: :destroy
-  has_many :orders
+  has_many :orders, dependent: :destroy
   has_many :proposals
   has_one :balance, dependent: :destroy
   has_one :company, as: :companyable, dependent: :destroy
@@ -14,8 +14,8 @@ class Profile < ApplicationRecord
   has_many :employee_cvs
   has_many :order_profiles
   has_many :favorites, through: :order_profiles, source: :order
-  has_many :order_templates
-  has_many :withdrawal_methods
+  has_many :order_templates, dependent: :destroy
+  has_many :withdrawal_methods, dependent: :destroy
   has_many :complaints
 
   attr_accessor :sent_proposal_employees

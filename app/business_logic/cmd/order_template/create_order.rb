@@ -29,7 +29,11 @@ module Cmd
       end
 
       def number_of_employees
-        context.number_of_employees.to_i
+        if context.number_of_employees && !context.number_of_employees.empty?
+          context.number_of_employees.to_i
+        else
+          order_template.number_of_employees
+        end
       end
     end
   end
