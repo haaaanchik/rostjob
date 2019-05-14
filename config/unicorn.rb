@@ -52,6 +52,7 @@ after_fork do |server, worker|
 
   if defined?(Resque)
     Resque.redis = ENV['REDIS_URI']
+    Resque.redis.namespace = REDIS_NAMESPACE
     Rails.logger.info('Connected to Redis')
   end
 
