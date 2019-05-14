@@ -46,7 +46,7 @@
                 |Скачать
                 br анкету
         .container-fluid.p-0.up-box.m-2
-          = render partial: 'orders/urgency', locals: { order: order }
+          = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
           .price.container-fluid.border.rounded.mb-0
             p.h5.text-center.mt-1.mb-0
               i.fas.fa-city

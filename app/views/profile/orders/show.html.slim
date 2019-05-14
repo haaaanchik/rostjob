@@ -20,12 +20,6 @@
     .container.w-100.p-0
       .row.p-0.m-0.grey.lighten-4
         .col-md-6.p-1
-          .d-flex.justify-content-start
-            .bg-best-hr.text-right.z-depth-1.rounded.mb-0.position-relative
-              p.white-text.m-1.h4
-                i.fas.fa-user-check
-                |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
-                i.fas.fa-users
           .price.p-1
             .btn-group.group-menu.w-100.mt-4[role="group" aria-label="Basic example"]
               = link_to profile_order_candidates_path(order, term: :inbox),
@@ -58,7 +52,7 @@
                     i.fas.fa-plus
                     | добавить
         .col-md-6.p-1
-          = render partial: 'orders/urgency', locals: { order: order }
+          = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
           .price.container-fluid.border.rounded.mb-0.white
             p.h5.text-center.mt-1.mb-0
               i.fas.fa-city.mr-2

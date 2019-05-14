@@ -1,12 +1,12 @@
 - background_color = 'bg-best-hr'
 - background_color = 'red' if order.urgency_level.high?
 - background_color = 'blue'if order.urgency_level.low?
-
+- amount = current_profile.profile_type == 'customer' ? order.customer_price : order.contractor_price
 .d-flex.justify-content-end
   .text-right.z-depth-1.rounded.mb-0.position-relative class=background_color
     p.white-text.m-1.h4
       b
-        '#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
+        '#{number_with_precision(amount, strip_insignificant_zeros: true)}
         i.fas.fa-ruble-sign.mr-2
         |/ чел.
       - if order.urgency_level.high?

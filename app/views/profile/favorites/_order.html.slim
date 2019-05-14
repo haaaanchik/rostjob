@@ -6,7 +6,7 @@
       .col
         = order.profile.company.name.delete('\n')
       .col
-        = render partial: 'orders/urgency', locals: { order: order }
+        = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
       .col
         = order.contractor_price
         i.fa.fa-ruble-sign.ml-1
