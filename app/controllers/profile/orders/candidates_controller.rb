@@ -13,6 +13,7 @@ class Profile::Orders::CandidatesController < ApplicationController
     candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date), hiring_date_corrected: true)
     @pecv = candidate
     @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
+    redirect_to profile_candidate_path(candidate)
   end
 
   def hire
