@@ -157,7 +157,7 @@
                         = f.hidden_field :id, value: candidate.employee_cv_id
                         = f.hidden_field :proposal_id, value: candidate.proposal_id
                         = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y')
-                        = f.submit 'НАНЯТЬ', class: 'btn btn-indigo' if candidate.state == 'inbox'
+                        = f.submit 'НАНЯТЬ', class: 'btn green' if candidate.state == 'inbox'
                         / div
                         /   = link_to 'Спор', disput_profile_order_candidate_path(candidate.order_id, candidate),
                         /                 method: :put, remote: true, class: 'btn btn-info btn-sm'
@@ -188,13 +188,13 @@
                         / - else
                         / = link_to 'Спор', disput_profile_order_candidate_path(@pecv.order_id, @pecv), method: :put,
                         /      data: { confirm: 'Открыть спор по анкете?' }, class: 'btn btn-info', title: 'Открыть спор', remote: true
-                        = link_to 'Скорректировать', hd_correction_profile_order_candidate_path(candidate.order_id, candidate), class: 'btn btn-indigo', title: 'Скорректировать дату подписания договора', remote: true if candidate.state == 'hired'
+                        = link_to 'Скорректировать', hd_correction_profile_order_candidate_path(candidate.order_id, candidate), class: 'btn green', title: 'Скорректировать дату подписания договора', remote: true if candidate.state == 'hired'
 
 javascript:
   function init_datepicker() {
     $('#hiring_form_datepicker').datepicker({
       language: 'ru',
-      todayHighlight: false,
+      todayHighlight: true,
       beforeShowDay: function() {
         if("#{candidate.inbox?}" == 'false') {
           return false;
