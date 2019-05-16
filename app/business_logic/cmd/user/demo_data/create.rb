@@ -7,7 +7,8 @@ module Cmd
         def call
           if profile.profile_type == 'customer'
             profile.balance.deposit(100000, 'Пополнение баланса')
-            profile.create_company(company_params)
+            company = profile.create_company(company_params)
+            company.accounts.create(account_params)
             context.contractors = []
             context.employee_cvs = []
             context.proposal_employees = []
@@ -324,6 +325,16 @@ module Cmd
             kpp: '1234567890',
             ogrn: '1234567890',
             legal_form: 'company'
+          }
+        end
+
+        def account_params
+          {
+            account_number: '1234567890',
+            corr_account: '1234567890',
+            bic: '1234567890',
+            bank: 'Надёжный Банк, ПАО',
+            bank_address: 'г. Москва',
           }
         end
       end
