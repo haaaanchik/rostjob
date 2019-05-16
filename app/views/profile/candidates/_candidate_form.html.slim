@@ -108,18 +108,18 @@
                           .row
                             .col
                               .md-form.mt-2
-                                = text_area :employee_cv, :experience, rows: 3, class: 'form-control disabled', value: employee_cv.experience
-                                = label :employee_cv, :experience, 'Опыт работы', class: 'ml-2 disabled'
+                                = text_area :employee_cv, :experience, rows: 4, readonly: true, class: 'form-control', value: employee_cv.experience
+                                = label :employee_cv, :experience, 'Опыт работы', class: 'ml-2'
                           .row
                             .col
                               .md-form.mt-0
-                                = text_area :employee_cv, :education, rows: 2, class: 'form-control disabled', value: employee_cv.education
-                                = label :employee_cv, :education, 'Образование', class: 'ml-2 disabled'
+                                = text_area :employee_cv, :education, rows: 4, readonly: true, class: 'form-control', value: employee_cv.education
+                                = label :employee_cv, :education, 'Образование', class: 'ml-2'
                           .row
                             .col
                               .md-form.mt-0
-                                = text_area :employee_cv, :remark, rows: 2, class: 'form-control disabled', value: employee_cv.remark
-                                = label :employee_cv, :remark, 'Дополнительные сведения', class: 'ml-2 disabled'
+                                = text_area :employee_cv, :remark, rows: 4, readonly: true, class: 'form-control', value: employee_cv.remark
+                                = label :employee_cv, :remark, 'Дополнительные сведения', class: 'ml-2'
                       .border.rounded.white.mt-1
                         .modal-body.pt-1
                           .row
@@ -147,7 +147,7 @@
                           .row
                             .col
                               .md-form.mt-1
-                                = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
+                                = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['reg_address']
                                 = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
                     .col-md-4.border.rounded.white.mt-1.pt-1
                       h4 Дата выхода на работу
