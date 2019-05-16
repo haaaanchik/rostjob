@@ -93,7 +93,7 @@ class Profile::OrdersController < ApplicationController
 
   def complete
     Cmd::Order::Complete.call(order: order)
-    redirect_to profile_orders_path
+    redirect_to profile_orders_with_state_path(:in_progress)
   end
 
   def cancel
