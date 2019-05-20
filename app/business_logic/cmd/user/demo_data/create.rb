@@ -7,7 +7,8 @@ module Cmd
         def call
           if profile.profile_type == 'customer'
             profile.balance.deposit(100000, 'Пополнение баланса')
-            profile.create_company(company_params)
+            company = profile.create_company(company_params)
+            company.accounts.create(account_params)
             context.contractors = []
             context.employee_cvs = []
             context.proposal_employees = []
@@ -159,10 +160,50 @@ module Cmd
             name: Faker::Name.name,
             birthdate: Faker::Date.birthday(18, 65),
             phone_number: Faker::PhoneNumber.phone_number,
-            experience: Faker::Lorem.paragraph(2),
-            education: Faker::Lorem.sentence,
-            remark: Faker::Lorem.sentence(5),
-            gender: 'М'
+            phone_number_alt: Faker::PhoneNumber.phone_number,
+            experience: experience,
+            education: education,
+            remark: remark,
+            gender: 'М',
+            passport: passport
+          }
+        end
+
+        def experience
+          <<~HEREDOC
+            май 2000 г. – май 2001 г.
+            Прохождение годовой практики в ООО «Автомобилист»,
+            г. Тольятти. Функциональные обязанности:
+            — разборка, чистка и мойка деталей;
+            — дефектация, замена поврежденных и изношенных деталей;
+            — сборка и регулировка карбюратора.
+          HEREDOC
+        end
+
+        def education
+          <<~HEREDOC
+            сентябрь 1995 г.
+            – июнь 1998 г., Профессиональное училище №39 г.  Тольятти, специализация «Слесарь-механик» (дневная форма обучения) сентябрь 1998 г.
+            – май 2000 г., Технический колледж ВАЗа, факультет «Автомобильное машиностроение», специальность «Технология машиностроения», диплом специалиста (заочная форма обучения).
+          HEREDOC
+        end
+
+        def remark
+          <<~HEREDOC
+            Семейное положение: женат.
+            Дети: нет.
+            Возможность командировок: да.
+            Хобби: занятия в тренажерном зале.
+          HEREDOC
+        end
+
+        def passport
+          {
+            seria: '0000',
+            number: '000000',
+            code: '000-000',
+            date: Date.parse('01-01-1980'),
+            reg_address: 'г.Москва, ул. Ленина, д. 1, кв. 1'
           }
         end
 
@@ -170,7 +211,7 @@ module Cmd
           [
             {
               name: 'Сварщики на завод ЖБИ',
-              title: 'Электросварщик на автоматических и полу- автоматических машинах (3 разряд)',
+              title: 'Электросварщик на автоматических и полу- автоматических машинах. 3 разряд.',
               place_of_work: 'Завод Железо-бетонных изделий',
               city: 'г.Алексин',
               salary: '61 000 - 65 000',
@@ -235,11 +276,11 @@ module Cmd
             {
               name: 'Разнорабочие',
               title: 'Разнорабочий (Без опыта работы)',
-              place_of_work: 'Домостроительный комбинат "ПИК-Индустрия" (строительство жилых домов)',
+              place_of_work: 'Домостроительный комбинат "ПИК-Индустрия". Строительство жилых домов.',
               city: 'г.Москва',
               salary: '45 000',
-              experience: 'Трудовая книжка',
-              description: 'Выполнение неквалифицированных видов работ на площадке Заказчика (строительные объекты). Разноска, затарка, уборка мусора и пр.',
+              experience: 'Не требуется',
+              description: 'Выполнение неквалифицированных видов работ на стройплощадке Заказчика. Разноска, затарка, уборка мусора и пр.',
               work_period: 'Постоянно',
               schedule: '6/1 - 12 - дневные смены',
               other_info: {
@@ -284,6 +325,16 @@ module Cmd
             kpp: '1234567890',
             ogrn: '1234567890',
             legal_form: 'company'
+          }
+        end
+
+        def account_params
+          {
+            account_number: '1234567890',
+            corr_account: '1234567890',
+            bic: '1234567890',
+            bank: 'Надёжный Банк, ПАО',
+            bank_address: 'г. Москва',
           }
         end
       end

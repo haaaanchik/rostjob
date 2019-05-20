@@ -56,7 +56,7 @@
                 strong #{order_template.experience}
               p.m-0
                 i.far.fa-calendar-alt.w-2.mr-2
-                strong #{order_template.work_period} (#{order_template.schedule})
+                strong #{order_template.work_period}. #{order_template.schedule}.
               .d-none.d-md-block
                 p.h6.m-0
                   i.fas.fa-clipboard-list.w-2.mr-2
@@ -71,7 +71,7 @@
                 hr.h6.m-0
                 p.h6.m-0
                   i.fas.fa-comment-alt.w-2.mr-2
-                  |#{order_template.other_info['age_from']} - #{order_template.other_info['age_to']} (#{order_template.other_info['sex']})
+                  |#{order_template.other_info['age_from']} - #{order_template.other_info['age_to']}. #{order_template.other_info['sex']}
                   br
                   - unless order_template.other_info['remark'].nil? || order_template.other_info['remark'].empty?
                     == order_template.other_info['remark']

@@ -4,7 +4,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :order
   belongs_to :profile
   belongs_to :employee_cv
-  has_many :complaints
+  has_many :complaints, dependent: :destroy
 
   validates :arrival_date, :order_id, :employee_cv_id, presence: true
 

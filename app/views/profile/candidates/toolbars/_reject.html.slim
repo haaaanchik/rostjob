@@ -1,6 +1,10 @@
-- if false
-  = link_to profile_order_candidate_path(candidate.id, candidate), method: :delete, remote: true, class: 'btn-floating btn-blue btn-sm', title: 'Отказ' do
-    i.fas.fa-user-alt-slash
+- if candidate.state == 'inbox'
+  = link_to profile_order_candidate_path(candidate.order_id, candidate), method: :delete, remote: true, class: 'btn-floating btn-blue btn-sm', title: 'В архив' do
+    i.fas.fa-trash
+  p.card-title.white-text
+    | В Архив
 - else
   a.btn-floating.btn-grey.btn-sm.disabled
-    i.fas.fa-user-alt-slash
+    i.fas.fa-trash
+  p.card-title.white-text
+    | В Архив

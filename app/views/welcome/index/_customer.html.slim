@@ -4,6 +4,9 @@
       - if @orders_with_unviewed_pe_count.any?
         .row.mt-4.img-thumbnail
           = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count } if @orders_with_unviewed_pe_count.any?
+      - if @orders_with_hired_candidates.any?
+        .row.mt-4.img-thumbnail
+          = render partial: 'welcome/orders/with_hired_candidates', locals: { profile: profile, orders: @orders_with_hired_candidates } if @orders_with_hired_candidates.any?
       / - if @orders_with_disputed_employee_cvs.any?
       /   .row.mt-4.img-thumbnail
       /     = render partial: 'welcome/orders/with_disputed_employee_cvs', locals: { profile: profile, orders: @orders_with_disputed_employee_cvs }

@@ -31,7 +31,7 @@ class Profile::OrdersController < ApplicationController
   def create
     result = Cmd::Order::Create.call(profile: current_profile, params: params_with_price, position: position)
     if result.success?
-      redirect_to profile_orders_path
+      redirect_to profile_orders_with_state_path(:in_progress)
     else
       render json: { validate: true, data: errors_data(result.order) }
     end
@@ -48,7 +48,7 @@ class Profile::OrdersController < ApplicationController
 
   def destroy
     order.destroy
-    redirect_to profile_orders_path
+    redirect_to profile_orders_with_state_path(:in_progress)
   end
 
   def create_pre_publish
@@ -79,7 +79,7 @@ class Profile::OrdersController < ApplicationController
     result = Cmd::Order::ToModeration.call(order: order)
     if result.success?
       SendModerationMailJob.perform_later(order: result.order)
-      redirect_to profile_orders_path
+      redirect_to profile_orders_with_state_path(:in_progress)
     else
       redirect_to pre_publish_profile_order_path(result.order)
       # redirect_to profile_invoices_path
@@ -88,17 +88,17 @@ class Profile::OrdersController < ApplicationController
 
   def hide
     order.to_hidden
-    redirect_to profile_orders_path
+    redirect_to profile_orders_with_state_path(:in_progress)
   end
 
   def complete
     Cmd::Order::Complete.call(order: order)
-    redirect_to profile_orders_path
+    redirect_to profile_orders_with_state_path(:in_progress)
   end
 
   def cancel
     order.to_draft
-    redirect_to profile_orders_path
+    redirect_to profile_orders_with_state_path(:in_progress)
   end
 
   def add_position

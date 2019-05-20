@@ -6,6 +6,7 @@ class Profile::CandidatesController < ApplicationController
 
   def show
     candidate
+    @remained_warranty_days = Holiday.remained_warranty_days(candidate.hiring_date, candidate.warranty_date)
   end
 
   private

@@ -53,7 +53,7 @@
               strong.ml-2 #{order.place_of_work}
             p.h4.text-center.mt-1.mb-0
               i.fas.fa-hammer.mr-2
-              strong #{order.title} (#{order.skill})
+              strong #{order.title}. #{order.skill}
             p.text-center.m-0
               i.fas.fa-money-bill-alt.w-2.mr-2
               i.fas.fa-ruble-sign.mr-2
@@ -66,7 +66,7 @@
               strong #{order.experience}
             p.m-0
               i.far.fa-calendar-alt.w-2.mr-2
-              strong #{order.work_period} (#{order.schedule})
+              strong #{order.work_period}. #{order.schedule}.
             p.m-0
               i.fas.fa-clipboard-list.w-2.mr-2
               - unless order.description.nil? || order.description.empty?
@@ -82,7 +82,7 @@
               div
                 p.mt-0
                   i.fas.fa-comment-alt.w-2.mr-2
-                  |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
+                  |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
                   br
                   - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
                     == order.other_info['remark']
