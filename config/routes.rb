@@ -39,6 +39,7 @@ Rails.application.routes.draw do
       end
     end
     resources :staffers
+    resources :users, only: %i[index edit update]
     resources :clients
     resources :specializations
     resources :positions

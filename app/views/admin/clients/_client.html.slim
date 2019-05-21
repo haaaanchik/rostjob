@@ -1,6 +1,6 @@
 tr
   td #{client.id}
-  td #{client.full_name}
+  td = link_to client.full_name, edit_admin_user_path(client)
   td #{client.amount}
   td #{client.profile_type.include?('customer') ? client.orders_count : client.employee_cvs_count}
   td #{client.disputs_count}

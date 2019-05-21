@@ -1,0 +1,22 @@
+.card
+  .card-body
+    h3 Редактировать клиента
+    = form_with model: [:admin, @user] do |f|
+      .form-group
+        = f.label :full_name, t('staffer.name')
+        = f.text_field :full_name, class: "form-control"
+        .invalid-feedback
+      .form-group
+        = f.label :email, t('staffer.login')
+        = f.text_field :email, class: "form-control"
+        .invalid-feedback
+      .form-group
+        / = f.label :password, t('staffer.password')
+        / = f.password_field :password, class: "form-control"
+        .invalid-feedback
+      .form-group
+        = f.check_box :is_active, class: 'form-check-input'
+        = f.label :is_active, 'Активен', class: 'form-check-label'
+      .form-group
+      = f.submit t('buttons.save'), class: 'btn btn-indigo'
+      = f.link_to t('buttons.cancel'), admin_users_path, class: 'btn btn-indigo'

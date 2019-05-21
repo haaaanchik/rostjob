@@ -94,7 +94,11 @@ class User < ApplicationRecord
   end
 
   def active_for_authentication?
-    super and self.is_active?
+    super && is_active?
+  end
+
+  def inactive_message
+    'Ваша учётная запись заблокирована. Для восстановления доступа обратитесь к менеджеру по email: manager@best-hr.pro'
   end
 
   private
