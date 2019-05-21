@@ -25,7 +25,7 @@
     .btn-group.group-menu  role="group" aria-label="Basic example"
       button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
         i.fas.fa-folder-open
-      = link_to profile_orders_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :my_orders}" do
+      = link_to profile_orders_path, class: "btn button-menu-r btn-rounded waves-effect disabled" do
         i.fas.fa-users.w-10.mr-2
         |Мои заявки
     / span.counter

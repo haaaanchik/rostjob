@@ -163,7 +163,7 @@ class Profile::OrdersController < ApplicationController
   def orders
     @q = if params[:state] && !params[:state].empty?
            if params[:state] == 'completed'
-             Order.where(profile: current_profile).with_pe_counts.where(state: params[:state]).order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
+             Order.where(profile: current_profile).with_pe_counts.where(state: not_in_work_states).order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
            else
              Order.where(profile: current_profile).with_pe_counts.where.not(state: not_in_work_states).order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
            end
