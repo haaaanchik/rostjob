@@ -14,6 +14,7 @@ $(document).on('show.bs.modal', '#fireCandidateModal', (event) ->
 )
 
 $(document).on('ajax:success', '.candidates-menu-button', (event) ->
+  $('.candidates-menu-button').removeClass('active')
   result = event.detail[2].response
   $('#order_candidates').html(result)
 )

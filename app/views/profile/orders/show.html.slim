@@ -23,7 +23,7 @@
           .price.p-1
             .btn-group.group-menu.w-100.mt-4[role="group" aria-label="Basic example"]
               = link_to profile_order_candidates_path(order, term: :inbox),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center active",
                       data: {toggle: 'pill'}, remote: true  do
                 | В очереди
                 | &nbsp;#{order.candidates.inbox.count}
