@@ -8,18 +8,19 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    user.update(user_params)
+    user.update_attribute(:full_name, user_params[:full_name])
+    user.update_attribute(:is_active, user_params[:is_active])
     if user.errors.messages.any?
       render json: { validate: true, data: errors_data(user) }
     else
-      redirect_to admin_users_path
+      redirect_to admin_clients_path
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :login, :password, :password_confirmation, :is_active)
+    params.require(:user).permit(:full_name, :is_active)
   end
 
   def user
