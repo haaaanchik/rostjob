@@ -1,19 +1,19 @@
-.row
-  .col
-  .col-6
-    h2.mt-2 Восстановление пароля
-    = form_for(resource, as: resource_name, url: password_path(resource_name),
-            html: {method: :put, class: 'text-center p-3 mb-2 mt-2'}) do |f|
-      = devise_error_messages!
-      = f.hidden_field :reset_password_token
-      .md-form.mb-5
-        = f.label :password, "Новый пароль. Минимально 8 символов."
-        = f.password_field :password, autofocus: true,
-                autocomplete: "new-password", class: 'form-control'
-      .md-form.mb-5
-        = f.label :password_confirmation, "Подтверждение пароля"
-        = f.password_field :password_confirmation,
-                autocomplete: "off", class: 'form-control'
-      .md-form.mb-5
-        = f.submit "Изменить!", class: 'btn btn-deep-orange z-depth-1'
-  .col
+.row.justify-content-center
+  .col-md-6
+    .card.mt-4
+      h5.card-header.bg-best-hr.font-weight-bold.white-text.text-center.py-4 Восстановление пароля
+      .card-body.px-lg-5.pt-0
+        = form_for(resource, as: resource_name, url: password_path(resource_name),
+                html: {method: :put, class: 'text-center p-3 mb-2 mt-2'}) do |f|
+          = devise_error_messages!
+          = f.hidden_field :reset_password_token
+          .md-form.mb-5
+            = f.label :password, "Новый пароль. Минимально 8 символов."
+            = f.password_field :password, autofocus: true,
+                    autocomplete: "new-password", class: 'form-control'
+          .md-form.mb-5
+            = f.label :password_confirmation, "Подтверждение пароля"
+            = f.password_field :password_confirmation,
+                    autocomplete: "off", class: 'form-control'
+          .md-form.mb-5
+            = f.submit "Изменить", class: 'btn btn-deep-orange z-depth-1'

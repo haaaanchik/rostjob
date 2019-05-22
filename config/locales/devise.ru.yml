@@ -60,5 +60,5 @@ ru:
       not_found: "not found"
       not_locked: "was not locked"
       not_saved:
-        one: "1 error prohibited this %{resource} from being saved:"
-        other: "%{count} errors prohibited this %{resource} from being saved:"
+        one: "Ошибка при сохранении:"
+        other: "%{count} ошибок при сохранении:"
