@@ -10,18 +10,18 @@ header
         /     = link_to 'Вход', login_path, class: 'nav-link', remote: true
         /   li.nav-item
         /     = link_to 'Регистрация', new_user_registration_path, class: 'nav-link', remote: true
-  - if root_path?
-    #home.view.jarallax[style="height: 100vh;"]
-      = image_tag('/img/first.jpg', class: 'jarallax-img', alt: '')
-      .mask.rgba-brown-slight
-        .container.flex-center.text-center
-          .row.mt-5
-            .col-md-12.wow.fadeIn.mb-3
-              h5.white-text.mb-3.mt-1.font-weight-bold.wow.fadeIn data-wow-delay="0.4s" Платформа для людей занимающихся набором персонала
-              = link_to new_user_registration_path, class: 'btn btn-dark-green btn-lg wow fadeInDown', data: {'wow-delay'=>'0.4s'}, remote: true do
-                i.fas.fa-door-open.mr-3
-                | Регистрируйся
-main
+  / - if root_path?
+  /   #home.view.jarallax[style="height: 100vh;"]
+  /     = image_tag('/img/first.jpg', class: 'jarallax-img', alt: '')
+  /     .mask.rgba-brown-slight
+  /       .container.flex-center.text-center
+  /         .row.mt-5
+  /           .col-md-12.wow.fadeIn.mb-3
+  /             h5.white-text.mb-3.mt-1.font-weight-bold.wow.fadeIn data-wow-delay="0.4s" Платформа для людей занимающихся набором персонала
+  /             = link_to new_user_registration_path, class: 'btn btn-dark-green btn-lg wow fadeInDown', data: {'wow-delay'=>'0.4s'}, remote: true do
+  /               i.fas.fa-door-open.mr-3
+  /               | Регистрируйся
+main.h-100
   #modal_container
-  .container
+  .container.h-100
     = yield

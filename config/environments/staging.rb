@@ -71,9 +71,11 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: 'smtp.mail.ru',
     port: 587,
-    user_name: 'best-hr@bk.ru',
-    password: %(Gjxnf<'cn"qxfh1),
-    authentication: :login,
+    user_name: 'noreply@best-hr.pro',
+    password: %(R@OYLwGPTLHmC{guja~#),
+    # user_name: 'best-hr@bk.ru',
+    # password: %(Gjxnf<'cn"qxfh1),
+    authentication: :plain,
     enable_starttls_auto: true
   }
   # Don't care if the mailer can't send.
@@ -81,6 +83,9 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = { host: 'bhr.os72.ru' }
+  config.action_mailer.default :charset => "utf-8"
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

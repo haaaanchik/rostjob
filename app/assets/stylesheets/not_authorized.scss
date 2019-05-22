@@ -1,57 +1,65 @@
-html,
-body,
-header,
-.jarallax {
-  height: 700px;
+body {
+  background: asset_url('img/first.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  height: 100vh;
 }
-
-@media (max-width: 740px) {
-  html,
-  body,
-  header,
-  .jarallax {
-    height: 100vh;
-  }
-}
-
-@media (min-width: 800px) and (max-width: 850px) {
-  html,
-  body,
-  header,
-  .jarallax {
-    height: 100vh;
-  }
-}
-
-@media (min-width: 560px) and (max-width: 650px) {
-  header .jarallax h1 {
-    margin-bottom: 1.5rem !important;
-  }
-  header .jarallax h5 {
-    margin-bottom: 1.5rem !important;
-  }
-}
-
-.top-nav-collapse {
-  background-color: #534741 !important;
-}
-
-// .navbar:not(.top-nav-collapse) {
-//   background: transparent !important;
+// html,
+// body,
+// header,
+// .jarallax {
+//   height: 700px;
 // }
 
-@media (max-width: 768px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #534741 !important;
-  }
-}
+// @media (max-width: 740px) {
+//   html,
+//   body,
+//   header,
+//   .jarallax {
+//     height: 100vh;
+//   }
+// }
 
-@media (min-width: 800px) and (max-width: 850px) {
-  .navbar:not(.top-nav-collapse) {
-    background: #534741 !important;
-  }
-}
+// @media (min-width: 800px) and (max-width: 850px) {
+//   html,
+//   body,
+//   header,
+//   .jarallax {
+//     height: 100vh;
+//   }
+// }
 
-h5 {
-  letter-spacing: 3px;
-}
+// @media (min-width: 560px) and (max-width: 650px) {
+//   header .jarallax h1 {
+//     margin-bottom: 1.5rem !important;
+//   }
+//   header .jarallax h5 {
+//     margin-bottom: 1.5rem !important;
+//   }
+// }
+
+// .top-nav-collapse {
+//   background-color: #534741 !important;
+// }
+
+// // .navbar:not(.top-nav-collapse) {
+// //   background: transparent !important;
+// // }
+
+// @media (max-width: 768px) {
+//   .navbar:not(.top-nav-collapse) {
+//     background: #534741 !important;
+//   }
+// }
+
+// @media (min-width: 800px) and (max-width: 850px) {
+//   .navbar:not(.top-nav-collapse) {
+//     background: #534741 !important;
+//   }
+// }
+
+// h5 {
+//   letter-spacing: 3px;
+// }

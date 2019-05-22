@@ -1,2 +1,10 @@
 - if user_signed_in?
   = render partial: "welcome/index/#{@current_profile.profile_type}.html.slim", locals: { profile: @current_profile }
+- else
+ .row.h-100.justify-content-center.text-center.align-items-center
+   .col-md-12.mb-3
+     h5.white-text.mb-3.mt-1.font-weight-bold Платформа для людей занимающихся набором персонала
+     = link_to new_user_registration_path, class: 'btn btn-dark-green btn-lg', data: {'wow-delay'=>'0.4s'} do
+       i.fas.fa-door-open.mr-3
+       | Регистрируйся
+

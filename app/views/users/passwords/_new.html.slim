@@ -1,5 +1,4 @@
-= form_for :user, method: :post, url: user_password_path, html: {class: 'text-center p-3 mb-2'},
-        remote: true do |f|
+= form_for :user, method: :post, url: user_password_path, html: {class: 'text-center p-3 mb-2'} do |f|
   .md-form.mb-5
     = f.text_field :email, class: 'form-control', autofocus: true, autocomplete: "email", value: flash['user_email']
     = f.label :email, t("views.modals.login.email")
@@ -10,4 +9,4 @@
   .col-md-12
     .font-small.d-flex.justify-content-end
       | Не зарегистрированны?
-      = link_to 'Пройти регистрацию', new_user_registration_path, class: 'blue-text ml-1', remote: true
+      = link_to 'Пройти регистрацию', new_user_registration_path, class: 'blue-text ml-1'
