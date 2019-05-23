@@ -1,17 +1,24 @@
 - employee_cv = @proposal_employee.employee_cv
 - order = @proposal_employee.order
 .modal.fade#formModalMyComplaints tabindex="-1" role="dialog" aria-labelledby="formModalMyComplaintsLabel" aria-hidden="true"
-  .modal-dialog.modal-lg role="document"
+  .modal-dialog.modal-lg.mt-4 role="document"
     .modal-content
-      .modal-header
-        h4.modal-title#formModalMyComplaintsLabel Спор
-        button type="button" class="close" data-dismiss="modal" aria-label="Close"
-          span aria-hidden="true" &times;
+      .modal-header.bg-best-hr
+        .container
+          .row
+            .col-1
+            .col-10
+              h4.modal-title.text-center.text-white
+                | Спор - #{employee_cv.name}
+            .col-1
+              h4.text-white.modal-title#formModalMyComplaintsLabel
+                button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                  span aria-hidden="true" &times;
       .modal-body
         h5 Анкета: #{employee_cv.name}
         |Заявка: №#{order.id} '#{order.title}'
         = render partial: 'form'
-        table.table
+        table.table.mt-4
           tr
             th Автор
             th Текст
