@@ -175,7 +175,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def not_in_work_states
-    %w[completed draft]
+    %w[completed moderation draft]
   end
 
   def description
