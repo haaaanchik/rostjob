@@ -1,9 +1,6 @@
 class Profile::OrderTemplatesController < ApplicationController
   def index
-    # order_templates
-    @order_template_search_form = OrderTemplateSearchForm.new(profile: current_profile,
-                                                              params: order_template_search_form_params)
-    @order_templates = @order_template_search_form.submit
+    order_templates
     @active_item = :order_templates
   end
 
@@ -109,6 +106,7 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def order_templates
-    @order_templates ||= current_profile.order_templates.order(id: :desc)
+    @q = current_profile.order_templates.order(id: :desc).ransack(params[:q])
+    @order_templates ||= @q.result
   end
 end

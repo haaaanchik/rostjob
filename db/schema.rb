@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_130042) do
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 
-  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.text "text"
     t.bigint "proposal_employee_id"
@@ -204,7 +204,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_130042) do
     t.index ["proposal_id"], name: "index_messages_on_proposal_id"
   end
 
-  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
@@ -213,7 +213,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_130042) do
     t.index ["profile_id"], name: "index_order_profiles_on_profile_id"
   end
 
-  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "title"
     t.text "specialization"
@@ -459,7 +459,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_130042) do
     t.index ["company_id"], name: "index_tax_offices_on_company_id"
   end
 
-  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "receiver_id"
     t.integer "subject_id"
     t.string "subject_type"
@@ -505,7 +505,7 @@ ActiveRecord::Schema.define(version: 2019_05_07_130042) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.bigint "profile_id"
     t.string "title"

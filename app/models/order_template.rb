@@ -20,6 +20,8 @@ class OrderTemplate < ApplicationRecord
 
   scope :by_query, ->(term) { where('name LIKE ? OR title LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%", "%#{term}%") }
 
+  ransack_alias :order_template_fields, :name_or_title_or_description_or_city_or_specialization_or_skill_or_district_or_place_of_work_or_salary
+
   def initialize(attrs = nil)
     defaults = {
       name: "Шаблон заявки от #{Time.current.strftime('%d-%m-%Y %T')}",
