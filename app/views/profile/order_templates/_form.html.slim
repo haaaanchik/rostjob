@@ -66,7 +66,7 @@
     .invalid-feedback
   .form-group.mt-3
     = f.label :description, 'Виды выполняемых работ'
-    = f.text_area :description, rows: 5, class: 'md-textarea form-control tinymce'
+    = f.text_area :description, rows: 5, class: 'form-control tinymce'
     .invalid-feedback
   .row
     .col
@@ -93,10 +93,10 @@
         = oi_f.text_field :related_profession, class: "form-control"
       .col-8
         = oi_f.label :terms, 'Предлагаемые условия'
-        = oi_f.text_area :terms, class: "form-control"
+        = oi_f.text_area :terms, class: "form-control tinymce"
     .form-group.mt-3
       = oi_f.label :remark, 'Комментарий'
-      = oi_f.text_area :remark, rows: 5, class: 'md-textarea form-control tinymce'
+      = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
   = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
     .row
       .col

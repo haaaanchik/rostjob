@@ -38,3 +38,21 @@ $(document).on('click', '[id^=order_template_number_of_employees_step_up]', (eve
   customer_total_class = '.customer-total-' + order_template_id
   $(customer_total_class).html(customer_total)
 )
+
+$(document).on('show.bs.modal', '#formModalNewOrderTemplate', ->
+  tinymce.init({
+    selector: 'textarea.tinymce'
+    branding: false
+    language: 'ru_RU'
+    elementpath: false
+    statusbar: false
+    menubar: false
+    toolbar: 'undo redo | bold italic underline | indent outdent | numlist bullist'
+    plugins: "lists"
+    forced_root_block: false
+  })
+)
+
+$(document).on('hide.bs.modal', '#formModalNewOrderTemplate', ->
+  tinymce.remove('textarea.tinymce')
+)

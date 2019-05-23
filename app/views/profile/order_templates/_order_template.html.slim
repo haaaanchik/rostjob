@@ -61,13 +61,15 @@
                 p.h6.m-0
                   i.fas.fa-clipboard-list.w-2.mr-2
                   - unless order_template.description.nil? || order_template.description.empty?
+                    strong.mr-2 Виды выполняемых работ:
                     strong == order_template.description
                 p.m-0
                   i.fas.fa-plus.w-2.mr-2
                   strong #{order_template.other_info['related_profession']}
                 p.h6.m-0
                   i.fas.fa-bed.w-2.mr-2
-                  |#{order_template.other_info['terms']}
+                  strong.mr-2 Предлагаемые условия:
+                  == order_template.other_info['terms']
                 hr.h6.m-0
                 p.h6.m-0
                   i.fas.fa-comment-alt.w-2.mr-2
