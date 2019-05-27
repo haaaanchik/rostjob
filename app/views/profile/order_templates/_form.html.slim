@@ -13,10 +13,6 @@
             data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position2',
                     'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
     .invalid-feedback
-    / .input-group-append
-    /   button#button-addon2.btn.btn-sm.btn-primary.m-0.px-3.py-2.z-depth-0.waves-effect(
-    /   type="button" title="Добавить новую профессию" data-order-position="new")
-    /     i.fa.fa-plus
   .form-group
     table#position_table.table.table-border_templateed data-base-customer-price=order_template.base_customer_price data-base-contractor-price=order_template.base_contractor_price data-customer-price=order_template.customer_price data-contractor-price=order_template.contractor_price data-customer-total=order_template.customer_total data-contractor-total=order_template.contractor_total
       tr.text-center
@@ -114,13 +110,7 @@
           .file-path-wrapper
             input class="file-path validate" type="text" placeholder="Загрузите анкету">
 
-  / .form-group.mt-3.text-center
-  /   = f.check_box :accepted, class: 'form-check-input'
-  /   = f.label :accepted do
-  /     'Я принимаю условия
-  /     = link_to 'Оферты', '/offerta.pdf'
   .form-group.mt-3
     .row
       .col-3
         = f.submit t('profile.order_templates.commit.save'), class: "btn btn-info"
-

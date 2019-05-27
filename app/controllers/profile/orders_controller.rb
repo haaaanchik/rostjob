@@ -40,9 +40,9 @@ class Profile::OrdersController < ApplicationController
   def update
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
     if result.success?
-      redirect_to profile_order_path(result.order)
+      redirect_to profile_orders_path
     else
-      render json: { validate: true, data: errors_data(result.order) }
+      render 'edit'
     end
   end
 
@@ -144,12 +144,13 @@ class Profile::OrdersController < ApplicationController
 
   def order_params
     @order_params ||= params.require(:order)
-                            .permit(:title, :specialization, :city, :salary_from, :position_id,
-                                    :salary_to, :description, :payment_type, :contractor_price,
+                            .permit(:title, :specialization, :city, :salary, :position_id,
+                                    :description, :payment_type, :contractor_price,
                                     :number_of_recruiters, :enterpreneurs_only,
                                     :skill, :accepted, :district, :experience,
                                     :visibility, :state, :number_of_employees, :document,
-                                    :schedule, :work_period, :place_of_work, other_info: {})
+                                    :schedule, :work_period, :place_of_work, other_info: {},
+                                    contact_person: {})
   end
 
   def balance

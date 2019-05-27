@@ -101,7 +101,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create destroy]
     resources :answered_orders
     get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
-    resources :orders, except: %i[create update] do
+    resources :orders, except: %i[create] do
       member do
         put :hide
         get :pre_publish

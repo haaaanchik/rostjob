@@ -12,6 +12,11 @@
               .d-none.d-sm-block
                 p.h5.card-title.white-text
                   | #{order.title} #{order.skill} - #{order.place_of_work}
+            td.align-bottom.text-center width="15%"
+              = link_to edit_profile_order_path(order), class: 'btn-floating btn-sm green' do
+                i.fas.fa-pen-alt
+              p.card-title.white-text
+                | Редактировать
             td.align-bottom.text-right
               = link_to complete_profile_order_path(order), class: 'btn-floating btn-sm red', remote: true, method: :put do
                 i.fas.fa-times
@@ -78,14 +83,16 @@
               strong = order.work_period
             p.m-0
               i.fas.fa-clipboard-list.w-2.mr-2
-              strong = order.description
+              strong.mr-2 Виды выполняемых работ:
+              strong == order.description
             p.m-0
               i.fas.fa-plus.w-2.mr-2
               strong
                 = order.other_info['related_profession']
             p.m-0
               i.fas.fa-bed.w-2.mr-2
-              strong = order.other_info['terms']
+              strong Предлагаемые условия:
+              strong == order.other_info['terms']
             hr.mb-0
               div
                 p.mt-0
@@ -113,4 +120,3 @@
                     p.card-title.blue-text.text-center
                       |Скачать
                       br анкету
-
