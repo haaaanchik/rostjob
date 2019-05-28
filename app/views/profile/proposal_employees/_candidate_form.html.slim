@@ -16,17 +16,18 @@
                   td.align-bottom
                     h4.card-title.white-text
                       |##{employee_cv.id} #{employee_cv.name}
-                  td.align-bottom.text-center[width="15%"]
+                  = render partial: 'profile/proposal_employees/toolbars/actions', locals: { candidate: candidate }
+                  / td.align-bottom.text-center[width="15%"]
                     / a.btn-floating.btn-sm.red[type="button" role="button"]
                     /   i.fas.fa-trash
                     / p.card-title.white-text
                     /   | Удалить
-                  td.align-bottom.text-center[width="15%"]
+                  / td.align-bottom.text-center[width="15%"]
                     / a.btn-floating.btn-sm.green[type="button" role="button"]
                     /   i.fas.fa-save
                     / p.card-title.white-text
                     /   | Сохранить
-                  td.align-bottom.text-center[width="15%"]
+                  / td.align-bottom.text-center[width="15%"]
                     / a.btn-floating.btn-sm.blue[type="button" role="button"]
                     /   i.fas.fa-paper-plane
                     / p.card-title.white-text
