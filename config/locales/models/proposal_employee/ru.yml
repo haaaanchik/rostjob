@@ -10,3 +10,4 @@ ru:
       revoked: 'Отозвана'
       rejected: 'Отклонена'
       paid:  'Оплачена'
+      reserved:  'В резерве'

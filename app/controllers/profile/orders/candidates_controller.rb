@@ -60,6 +60,16 @@ class Profile::Orders::CandidatesController < ApplicationController
     candidate
   end
 
+  def reserve
+    candidate.to_reserved! if candidate.may_to_reserved?
+    redirect_to profile_order_path(order)
+  end
+
+  def to_inbox
+    candidate.to_inbox! if candidate.may_to_inbox?
+    redirect_to profile_order_path(order)
+  end
+
   private
 
   def contractors
@@ -111,6 +121,8 @@ class Profile::Orders::CandidatesController < ApplicationController
               %w[inbox]
             elsif EmployeeCv.customer_menu_items.include?(term)
               term == 'hired' ? %w[hired paid] : [term]
+            elsif term == 'reserved'
+              %w[reserved]
             else
               %w[inbox]
             end

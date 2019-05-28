@@ -1,10 +1,15 @@
-- if candidate.state == 'inbox'
-  = link_to profile_order_candidate_path(candidate.order_id, candidate), method: :delete, remote: true, class: 'btn-floating btn-blue btn-sm', title: 'В архив' do
+- if candidate.inbox?
+  = link_to reserve_profile_order_candidate_path(candidate.order_id, candidate), method: :put, remote: true, class: 'btn-floating btn-blue btn-sm', title: 'В резерв' do
     i.fas.fa-trash
   p.card-title.white-text
-    | В Архив
+    | В резерв
+- elsif candidate.reserved?
+  = link_to to_inbox_profile_order_candidate_path(candidate.order_id, candidate), method: :put, remote: true, class: 'btn-floating btn-yellow btn-sm', title: 'В очередь' do
+    i.fas.fa-trash
+  p.card-title.white-text
+    | В очередь
 - else
   a.btn-floating.btn-grey.btn-sm.disabled
     i.fas.fa-trash
   p.card-title.white-text
-    | В Архив
+    | В резерв

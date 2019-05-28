@@ -37,11 +37,11 @@
                       data: {toggle: 'pill'}, remote: true  do
                 | Нанятые
                 | &nbsp;#{order.candidates.hired.count}
-              = link_to profile_order_candidates_path(order, term: :deleted),
+              = link_to profile_order_candidates_path(order, term: :reserved),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
                       data: {toggle: 'pill'}, remote: true  do
-                | В Архиве
-                | &nbsp;#{order.candidates.deleted.count}
+                | В резерве
+                | &nbsp;#{order.candidates.reserved.count}
               = link_to profile_order_candidates_path(order, term: :disputed),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
                       data: {toggle: 'pill'}, remote: true  do

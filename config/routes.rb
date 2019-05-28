@@ -128,6 +128,8 @@ Rails.application.routes.draw do
             put :hire
             put :fire
             put :disput
+            put :reserve
+            put :to_inbox
           end
         end
         # put 'candidates/:id/hire', to: 'candidates#hire'

@@ -24,6 +24,15 @@ class ProposalEmployee < ApplicationRecord
     state :revoked
     state :rejected
     state :paid
+    state :reserved
+
+    event :to_inbox do
+      transitions from: :reserved, to: :inbox
+    end
+
+    event :to_reserved do
+      transitions from: :inbox, to: :reserved
+    end
 
     event :to_rejected do
       transitions from: :nbox, to: :rejected
