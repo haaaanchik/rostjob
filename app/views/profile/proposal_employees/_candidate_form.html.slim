@@ -144,83 +144,51 @@
                           = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
                           = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
               .col-md-4.border.rounded.white.mt-1.pt-1
-                h4
-                  |  Каледарь
-                ul.list-unstyled.weekdays.black-text.m-0
-                  li
-                    | Пн
-                  li
-                    | Вт
-                  li
-                    | Ср
-                  li
-                    | Чт
-                  li
-                    | Пт
-                  li
-                    | Сб
-                  li
-                    | Вс
-                ul.list-unstyled.days.black-text.m-0
-                  li
-                    | 1
-                  li
-                    | 2
-                  li
-                    | 3
-                  li
-                    | 4
-                  li
-                    | 5
-                  li
-                    | 6
-                  li
-                    | 7
-                  li
-                    | 8
-                  li
-                    | 9
-                  li
-                    | 10
-                  li
-                    | 11
-                  li
-                    | 12
-                  li
-                    | 13
-                  li
-                    | 14
-                  li
-                    | 15
-                  li
-                    | 16
-                  li
-                    | 17
-                  li
-                    | 18
-                  li
-                    | 19
-                  li
-                    | 20
-                  li
-                    | 21
-                  li
-                    | 22
-                  li
-                    | 23
-                  li
-                    | 24
-                  li
-                    | 25
-                  li
-                    | 26
-                  li
-                    | 27
-                  li
-                    | 28
-                  li
-                    | 29
-                  li
-                    | 30
-                  li
-                    | 31
+                h4 Дата выхода на работу
+                - hd = candidate.hiring_date&.strftime('%d-%m-%Y') || Date.today.strftime('%d-%m-%Y')
+                #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
+
+                .mt-3
+                  - state = candidate.state
+                  - case state
+                  - when 'paid'
+                    span.text-center.text-success = 'Оплачена'
+                  - when 'viewed'
+                    span.text-center.text-success = t("employee_cv.state.#{state}")
+                  - when 'hired'
+                    span.text-center.text-success
+                      = t("employee_cv.state.#{state}")
+                      |. Осталось #{t(:day, count: @remained_warranty_days.size)}.
+                  - when 'deleted'
+                    span.text-center.text-danger = t("employee_cv.state.#{state}")
+                  - when 'disputed'
+                    span.text-center.text-danger = 'Спор'
+                  - when 'inbox'
+                    span.text-center.text-warning = 'В очереди'
+
+javascript:
+  function init_datepicker() {
+    $('#hiring_form_datepicker').datepicker({
+      language: 'ru',
+      todayHighlight: true,
+      beforeShowDay: function() {
+        return false;
+      }
+    });
+
+    var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+    $('#hiring_form_datepicker').datepicker(
+      'update', ...remained_warranty_days);
+  }
+
+ function defer(method) {
+   if(window.jQuery && $.fn.datepicker) {
+     method();
+   } else {
+     setTimeout(function () {
+      defer(method);
+      }, 50);
+   }
+ }
+
+ defer(init_datepicker);
