@@ -8,9 +8,7 @@ class EmployeeCv < ApplicationRecord
   belongs_to :order, optional: true
   belongs_to :profile, optional: true
 
-  scope :proposed, -> { where(state: %w[hired applyed]) }
-  scope :available, ->(profile_id) { where(state: %w[ready applyed], profile_id: profile_id) }
-  scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where("proposal_id IS NULL") }
+  include EmployeeCvRepository
 
   validates :name, presence: true
   # validates :phone_number, presence: true, phone: true

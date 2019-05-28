@@ -1,0 +1,21 @@
+h1 Статистика сервиса
+table.table
+  tr
+    th Показатель
+    th Сегодня
+    th 2 дня
+    th 3 дня
+    th 7 дней
+    th 14 дней
+    th 1 месяц
+    th Всего
+  - @metrics.each do |metric|
+    tr
+      td = metric.title
+      td = metric.today
+      td = metric.two_days
+      td = metric.three_days
+      td = metric.seven_days
+      td = metric.fourteen_days
+      td = metric.one_month
+      td = metric.total
