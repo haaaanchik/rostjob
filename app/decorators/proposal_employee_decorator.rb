@@ -36,11 +36,11 @@ class ProposalEmployeeDecorator < ObjDecorator
   end
 
   def date
-    model.created_at.strftime('%d.%m.%Y')
+    model.last_complaint_time.in_time_zone.strftime('%d.%m.%Y')
   end
 
   def time
-    model.created_at.strftime('%H:%M')
+    model.last_complaint_time.in_time_zone.strftime('%H:%M')
   end
 
   def status_background_class

@@ -10,5 +10,11 @@ module ProposalEmployeeRepository
     }
     scope :sort_by_employee_cv_name_asc, lambda { order('employee_cvs.name asc') }
     scope :sort_by_employee_cv_name_desc, lambda { order('employee_cvs.name desc') }
+    scope :with_last_complaint_time, -> {
+      joins(:complaints)
+        .select('proposal_employees.*, max(complaints.created_at) as last_complaint_time')
+        .group('proposal_employees.id')
+        .order('last_complaint_time desc')
+    }
   end
 end
