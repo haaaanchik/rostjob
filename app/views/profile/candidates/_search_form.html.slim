@@ -46,8 +46,8 @@
             span.mr-2 Оплачен
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-4
       .form-check.form-check-inline
-        = check_box_tag 'q[state_in][]', 'deleted', filter&.include?('deleted'), { class: 'form-check-input', id: 'candidate_filter_deleted' }
-        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_deleted' do
+        = check_box_tag 'q[state_in][]', 'reserved', filter&.include?('reserved'), { class: 'form-check-input', id: 'candidate_filter_reserved' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_reserved' do
           p.border.rounded.white-text.z-depth-1.blue.m-0[style="width: 125px;"]
             i.fas.fa-bookmark.ml-2.mr-2
             span.mr-2 В резерве
