@@ -66,7 +66,7 @@ class ProposalEmployeeDecorator < ObjDecorator
   end
 
   def to_inbox_action_enabled?(subject)
-    subject.customer? ? %w[reserve].include?(model.state) : nil
+    subject.customer? ? %w[reserved].include?(model.state) : nil
   end
 
   def disput_action_enabled?(subject)

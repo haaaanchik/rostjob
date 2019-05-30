@@ -36,7 +36,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_reserved do
-      transitions from: :inbox, to: :reserved
+      transitions from: %i[inbox interview disputed], to: :reserved
     end
 
     event :to_rejected do

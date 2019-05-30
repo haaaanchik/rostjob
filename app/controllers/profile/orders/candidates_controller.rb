@@ -61,12 +61,12 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def reserve
-    candidate.to_reserved! if candidate.may_to_reserved?
+    candidate.to_reserved!
     redirect_to profile_order_path(order)
   end
 
   def to_inbox
-    candidate.to_inbox! if candidate.may_to_inbox?
+    candidate.to_inbox!
     redirect_to profile_order_path(order)
   end
 
