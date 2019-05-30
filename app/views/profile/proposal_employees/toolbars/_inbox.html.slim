@@ -1,9 +1,0 @@
-td.text-center.align-middle
-  = link_to profile_proposal_employee_path(candidate), remote: true, class: 'btn-floating btn-green btn-sm', title: 'Инфо' do
-    i.fas.fa-info
-td.text-center.align-middle
-  = link_to revoke_profile_proposal_employee_path(candidate), method: :put, data: { confirm: 'Отозвать анкету?' }, remote: true, class: 'btn-floating btn-black btn-sm', title: 'Отозвать' do
-    i.fas.fa-undo-alt
-td.text-center.align-middle
-  = link_to profile_proposal_employee_complaints_path(candidate), remote: true, class: 'btn-floating btn-red btn-sm', title: 'Спор' do
-    i.fas.fa-angry

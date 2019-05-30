@@ -1,46 +1,69 @@
 - val =  params[:q] ? params[:q][:pe_fields_cont] : nil
 - filter = params[:q] ? params[:q][:state_in] : %w[hired disputed]
 = search_form_for @q, url: profile_proposal_employees_path do |f|
-  .row.mt-4
-    .col.text-center
-      .form-check.form-check-inline
-        = check_box_tag 'q[state_in][]', 'hired', filter&.include?('hired'), { class: 'form-check-input', id: 'candidate_filter_hired' }
-        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_hired' do
-          .border.rounded.white-text.z-depth-1.green
-            i.fas.fa-bookmark.ml-2.mr-2
-            span.mr-2 Нанят
-    .col.text-center
+  .row
+    .col.d-none.d-lg-block
+      . style="height: 50px"
+  .row
+    .col
+      hr
+  .row.mt-1
+    .col.d-none.d-lg-block
+      p.h4.text-center
+        i.fas.fa-filter
+        |Фильтры
+  .row.mt-1
+    .col-sm-12.col-md-4.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
         = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { class: 'form-check-input', id: 'candidate_filter_inbox' }
         = label :state, nil, class: 'form-check-label', for: 'candidate_filter_inbox' do
-          .border.rounded.white-text.z-depth-1.yellow
-            i.fas.fa-bookmark.ml-1
-            span.mr-2 В очереди
-    .col.text-center
+          p.border.rounded.white-text.z-depth-1.yellow.m-0[style="width: 160px;"]
+            nobr
+              i.fas.fa-bookmark.ml-2.mr-1
+              span.mr-2 В очереди
+    .col-sm-12.col-md-4.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
-        = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { class: 'form-check-input', id: 'candidate_filter_paid' }
-        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_paid' do
-          .border.rounded.white-text.z-depth-1.grey
-            i.fas.fa-bookmark.ml-2.mr-2
-            span.mr-2 Оплачен
-    .col.text-center
+        = check_box_tag 'q[state_in][]', 'interview', filter&.include?('interview'), { class: 'form-check-input', id: 'candidate_filter_interview' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_interview' do
+          p.border.rounded.white-text.z-depth-1.orange.m-0[style="width: 160px;"]
+            nobr
+              i.fas.fa-bookmark.ml-2.mr-1
+              span.mr-2 Собеседование
+    .col-sm-12.col-md-4.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
-        = check_box_tag 'q[state_in][]', 'reserved', filter&.include?('reserved'), { class: 'form-check-input', id: 'candidate_filter_reserved' }
-        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_reserved' do
-          .border.rounded.white-text.z-depth-1.blue
+        = check_box_tag 'q[state_in][]', 'hired', filter&.include?('hired'), { class: 'form-check-input', id: 'candidate_filter_hired' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_hired' do
+          p.border.rounded.white-text.z-depth-1.green.m-0[style="width: 160px;"]
             i.fas.fa-bookmark.ml-2.mr-2
-            span.mr-2 В резерве
-    .col.text-center
+            span.mr-2 Нанят
+    .col-sm-12.col-md-4.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
         = check_box_tag 'q[state_in][]', 'disputed', filter&.include?('disputed'), { class: 'form-check-input', id: 'candidate_filter_disputed' }
         = label :state, nil, class: 'form-check-label', for: 'candidate_filter_disputed' do
-          .border.rounded.white-text.z-depth-1.red
+          p.border.rounded.white-text.z-depth-1.red.m-0[style="width: 160px;"]
             i.fas.fa-bookmark.ml-2.mr-2
             span.mr-2 Спор
-  .row.mt-4.align-items-center
-    .col-md-9
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { class: 'form-check-input', id: 'candidate_filter_paid' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_paid' do
+          p.border.rounded.white-text.z-depth-1.grey.m-0[style="width: 160px;"]
+            i.fas.fa-bookmark.ml-2.mr-2
+            span.mr-2 Оплачен
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'reserved', filter&.include?('reserved'), { class: 'form-check-input', id: 'candidate_filter_reserved' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_reserved' do
+          p.border.rounded.white-text.z-depth-1.blue.m-0[style="width: 160px;"]
+            i.fas.fa-bookmark.ml-2.mr-2
+            span.mr-2 В резерве
+  .row
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-4
       = f.search_field :pe_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
-    .col-sm-3.col-md-3.col-lg-3.justify-content-center
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-3
       button class='btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2' type='submit'
         i.fas.fa-check.w-10.mr-2
         |Применить
+  .row
+    .col
+      hr

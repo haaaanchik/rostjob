@@ -16,10 +16,6 @@ class ApplicationController < BaseController
     user_signed_in? && !current_profile
   end
 
-  def current_profile
-    @current_profile ||= current_user.profile
-  end
-
   private
 
   def auth_user

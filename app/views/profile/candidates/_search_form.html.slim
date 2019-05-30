@@ -44,7 +44,6 @@
           p.border.rounded.white-text.z-depth-1.red.m-0[style="width: 160px;"]
             i.fas.fa-bookmark.ml-2.mr-2
             span.mr-2 Спор
-  .row
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
         = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { class: 'form-check-input', id: 'candidate_filter_paid' }

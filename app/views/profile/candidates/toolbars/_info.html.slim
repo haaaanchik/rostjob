@@ -1,9 +1,0 @@
-- if candidate.hire_link_enabled?
-  = link_to change_status_profile_employee_cv_path(candidate, state: 'hired'), method: :put, remote: true, class: 'btn-floating btn-green btn-sm', title: 'Инфо' do
-    i.fas.fa-handshake
-- elsif candidate.info_link_enabled?
-  = link_to profile_order_candidate_path(candidate.order_id, candidate), remote: true, class: 'btn-floating btn-green btn-sm', title: 'Инфо' do
-    i.fas.fa-info
-- else
-  a.btn-floating.btn-grey.btn-sm.disabled
-    i.fas.fa-handshake

@@ -49,15 +49,31 @@ class ProposalEmployeeDecorator < ObjDecorator
     STATUS_BACKGROUND_COLORS[model.state]
   end
 
-  def hire_link_enabled?
-    %w[inbox].include?(model.state)
+  def interview_action_enabled?(subject)
+    subject.customer? ? %w[inbox reserved].include?(model.state) : nil
   end
 
-  def info_link_enabled?
-    %w[hired].include?(model.state)
+  def hire_action_enabled?(subject)
+    subject.customer? ? %w[interview].include?(model.state) : nil
   end
 
-  def disput_link_enabled?
-    %w[inbox hired disputed].include?(model.state)
+  def reserve_action_enabled?(subject)
+    subject.customer? ? %w[inbox interview disputed].include?(model.state) : nil
+  end
+
+  def revoke_action_enabled?(subject)
+    subject.contractor? ? %w[inbox].include?(model.state) : nil
+  end
+
+  def to_inbox_action_enabled?(subject)
+    subject.customer? ? %w[reserve].include?(model.state) : nil
+  end
+
+  def disput_action_enabled?(subject)
+    if subject.customer?
+      %w[inbox interview hired disputed].include?(model.state)
+    elsif subject.contractor?
+      %w[inbox interview hired disputed].include?(model.state)
+    end
   end
 end
