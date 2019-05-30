@@ -130,6 +130,7 @@ Rails.application.routes.draw do
             put :disput
             put :reserve
             put :to_inbox
+            put :to_interview
           end
         end
         # put 'candidates/:id/hire', to: 'candidates#hire'

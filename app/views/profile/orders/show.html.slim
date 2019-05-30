@@ -28,22 +28,28 @@
           .price.p-1
             .btn-group.group-menu.w-100.mt-4[role="group" aria-label="Basic example"]
               = link_to profile_order_candidates_path(order, term: :inbox),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center active",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center active",
                       data: {toggle: 'pill'}, remote: true  do
-                | В очереди
+                | Очередь
                 | &nbsp;#{order.candidates.inbox.count}
-              = link_to profile_order_candidates_path(order, term: :hired),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
+              = link_to profile_order_candidates_path(order, term: :interview),
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
                       data: {toggle: 'pill'}, remote: true  do
-                | Нанятые
+                | Собеседование
+                | &nbsp;#{order.candidates.interview.count}
+
+              = link_to profile_order_candidates_path(order, term: :hired),
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
+                      data: {toggle: 'pill'}, remote: true  do
+                | Нанято
                 | &nbsp;#{order.candidates.hired.count}
               = link_to profile_order_candidates_path(order, term: :reserved),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
                       data: {toggle: 'pill'}, remote: true  do
-                | В резерве
+                | Резерв
                 | &nbsp;#{order.candidates.reserved.count}
               = link_to profile_order_candidates_path(order, term: :disputed),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-25 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
                       data: {toggle: 'pill'}, remote: true  do
                 | Спор
                 | &nbsp;#{order.candidates.disputed.count}

@@ -17,6 +17,7 @@ class ProposalEmployee < ApplicationRecord
 
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
+    state :interview
     state :hired
     state :disputed
     state :deleted
@@ -25,6 +26,10 @@ class ProposalEmployee < ApplicationRecord
     state :rejected
     state :paid
     state :reserved
+
+    event :to_interview do
+      transitions from: %i[inbox reserved disputed], to: :interview
+    end
 
     event :to_inbox do
       transitions from: :reserved, to: :inbox
@@ -59,9 +64,8 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :hire do
-      transitions from: %i[inbox viewed deleted disputed], to: :hired
+      transitions from: %i[interview viewed deleted disputed], to: :hired
     end
-
   end
 
   def initialize(attrs = nil)

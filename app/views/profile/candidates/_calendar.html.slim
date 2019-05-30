@@ -1,0 +1,50 @@
+- if candidate.interview?
+  h4 Дата выхода на работу
+- elsif candidate.inbox?
+  h4 Дата собеседования
+- elsif candidate.hired?
+  h4 Гарантийный период
+- hd = candidate.interview_date&.strftime('%d-%m-%Y') || Date.today.strftime('%d-%m-%Y')
+- url = to_interview_profile_order_candidate_path(candidate.order_id, candidate) if candidate.inbox?
+- url = hire_profile_order_candidate_path(candidate.order_id, candidate) if candidate.interview?
+#candidate_form_datepicker.d-flex.justify-content-center data-date=hd
+= form_with scope: :candidate, url: url, method: :put do |f|
+  = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y') if candidate.interview?
+  = f.hidden_field :interview_date, value: Date.today.strftime('%d-%m-%Y') if candidate.inbox?
+  = f.submit 'НАЗНАЧИТЬ', class: 'btn green' if candidate.inbox?
+  = f.submit 'НАНЯТЬ', class: 'btn green' if candidate.interview?
+
+javascript:
+  function init_datepicker() {
+    $('#candidate_form_datepicker').datepicker({
+      language: 'ru',
+      todayHighlight: true,
+      beforeShowDay: function() {
+        if("#{%w[inbox interview].include?(candidate.state)}" == 'false') {
+          return false;
+        }
+      }
+    });
+    $('#candidate_form_datepicker').on('changeDate', function() {
+      var field_id = "#{candidate.inbox? ? '#candidate_interview_date' : '#candidate_hiring_date'}"
+      $(field_id).val(
+        $('#candidate_form_datepicker').datepicker('getFormattedDate')
+      );
+    });
+
+    var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+    $('#candidate_form_datepicker').datepicker(
+      'update', ...remained_warranty_days);
+  }
+
+ function defer(method) {
+   if(window.jQuery && $.fn.datepicker) {
+     method();
+   } else {
+     setTimeout(function () {
+      defer(method);
+      }, 50);
+   }
+ }
+
+ defer(init_datepicker);

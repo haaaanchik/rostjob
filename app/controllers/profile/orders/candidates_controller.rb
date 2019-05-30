@@ -70,6 +70,16 @@ class Profile::Orders::CandidatesController < ApplicationController
     redirect_to profile_order_path(order)
   end
 
+  def to_interview
+    render(plain: 'order completed', status: 422) and return if order.completed?
+
+    result = Cmd::ProposalEmployee::ToInterview.call(candidate: candidate,
+                                                     interview_date: candidate_params[:interview_date])
+    if result.success?
+      redirect_to profile_order_path(order)
+    end
+  end
+
   private
 
   def contractors
@@ -84,7 +94,7 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def candidate_params
-    params.require(:candidate).permit(:id, :hiring_date, :firing_date, :hd_correction_reason, :proposal_id)
+    params.require(:candidate).permit(:id, :interview_date, :hiring_date, :firing_date, :hd_correction_reason, :proposal_id)
   end
 
   def candidate
@@ -123,6 +133,8 @@ class Profile::Orders::CandidatesController < ApplicationController
               term == 'hired' ? %w[hired paid] : [term]
             elsif term == 'reserved'
               %w[reserved]
+            elsif term == 'interview'
+              %w[interview]
             else
               %w[inbox]
             end
