@@ -13,6 +13,25 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   STATUS_BACKGROUND_COLORS.default = 'blue'
 
+  ACTIONS = {
+    'customer' => {
+      'inbox' => %w[reserved interview],
+      'reserved' => %w[inbox interview],
+      'interview' => %w[hired disputed],
+      'hired' => %w[disputed],
+      'disputed' => %w[disputed]
+    },
+    'contractor' => {
+      'inbox' => %w[revoked disputed],
+      'interview' => %w[disputed],
+      'hired' => %w[disputed],
+      'disputed' => %w[disputed]
+    },
+    'staffer' => {
+      'disputed' => %w[inbox interview hired reserved]
+    }
+  }.freeze
+
   def self.collection_decorator_class
     PaginatingDecorator
   end
@@ -50,30 +69,26 @@ class ProposalEmployeeDecorator < ObjDecorator
   end
 
   def interview_action_enabled?(subject)
-    subject.customer? ? %w[inbox reserved].include?(model.state) : nil
+    ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end
 
   def hire_action_enabled?(subject)
-    subject.customer? ? %w[interview].include?(model.state) : nil
+    ACTIONS[subject.subject_type][model.state]&.include?('hire')
   end
 
   def reserve_action_enabled?(subject)
-    subject.customer? ? %w[inbox interview disputed].include?(model.state) : nil
+    ACTIONS[subject.subject_type][model.state]&.include?('reserved')
   end
 
   def revoke_action_enabled?(subject)
-    subject.contractor? ? %w[inbox].include?(model.state) : nil
+    ACTIONS[subject.subject_type][model.state]&.include?('revoked')
   end
 
   def to_inbox_action_enabled?(subject)
-    subject.customer? ? %w[reserved].include?(model.state) : nil
+    ACTIONS[subject.subject_type][model.state]&.include?('inbox')
   end
 
   def disput_action_enabled?(subject)
-    if subject.customer?
-      %w[inbox interview hired disputed].include?(model.state)
-    elsif subject.contractor?
-      %w[inbox interview hired disputed].include?(model.state)
-    end
+    ACTIONS[subject.subject_type][model.state]&.include?('disputed')
   end
 end

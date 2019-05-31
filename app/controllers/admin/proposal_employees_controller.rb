@@ -10,7 +10,7 @@ class Admin::ProposalEmployeesController < Admin::ApplicationController
   private
 
   def proposal_employee
-    @proposal_employee ||= ProposalEmployee.find(params[:id])
+    @proposal_employee ||= ProposalEmployee.find(params[:id]).decorate
   end
 
   def proposal_employees

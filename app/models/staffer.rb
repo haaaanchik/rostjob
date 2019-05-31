@@ -37,4 +37,8 @@ class Staffer < ApplicationRecord
   def set_guid
     self.guid = SecureRandom.uuid
   end
+
+  def subject_type
+    'staffer'
+  end
 end

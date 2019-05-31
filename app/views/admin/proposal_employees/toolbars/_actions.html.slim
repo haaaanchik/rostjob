@@ -1,0 +1,15 @@
+- if candidate.interview_action_enabled?(current_staffer)
+  td.text-center.align-middle
+    = render partial: "admin/proposal_employees/toolbars/interview.html.slim", locals: { candidate: candidate }
+- if candidate.reserve_action_enabled?(current_staffer)
+  td.text-center.align-middle
+    = render partial: "admin/proposal_employees/toolbars/reserve.html.slim", locals: { candidate: candidate }
+- if candidate.revoke_action_enabled?(current_staffer)
+  td.text-center.align-middle
+    = render partial: "admin/proposal_employees/toolbars/revoke.html.slim", locals: { candidate: candidate }
+- if candidate.disput_action_enabled?(current_staffer)
+  td.text-center.align-middle
+    = render partial: "admin/proposal_employees/toolbars/disput.html.slim", locals: { candidate: candidate }
+- if candidate.to_inbox_action_enabled?(current_staffer)
+  td.text-center.align-middle
+    = render partial: "admin/proposal_employees/toolbars/to_inbox.html.slim", locals: { candidate: candidate }

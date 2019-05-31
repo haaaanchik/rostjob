@@ -76,6 +76,10 @@ class Profile < ApplicationRecord
     profile_type == 'contractor'
   end
 
+  def subject_type
+    profile_type
+  end
+
   def customer_can_only_be_a_company
     return if customer? && company?
     errors.add(:base, 'customer can only be a company')

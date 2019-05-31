@@ -1,7 +1,9 @@
 - dpe = @proposal_employee
 h3.mt-2 Спорная анкета №#{dpe.employee_cv_id} #{dpe.employee_cv.name}
-h4 Заявка №#{dpe.order_id} #{dpe.order.title}
-
+h4 Заявка №#{dpe.order_id} #{dpe.order.title} #{dpe.state}
+table.table
+  tr
+    = render partial: 'admin/proposal_employees/toolbars/actions.html.slim', locals: { candidate: dpe }
 h4 Жалобы:
 table.table
   th Логин
