@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
       orders_with_unviewed_pe_count
       orders_with_disputed_employee_cvs
       customer_deals_count
-      orders_with_hired_candidates
+      orders_with_interviewed_candidates
     elsif current_profile.contractor?
       orders_with_disputed_employee_cvs
       orders_with_deleted_employee_cvs
@@ -33,8 +33,8 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def orders_with_hired_candidates
-    @orders_with_hired_candidates ||= current_profile.orders.with_hired_candidates
+  def orders_with_interviewed_candidates
+    @orders_with_interviewed_candidates ||= current_profile.orders.with_interviewed_candidates
   end
 
   def contractor_deals_count

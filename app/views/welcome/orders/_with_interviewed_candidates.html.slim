@@ -1,0 +1,9 @@
+- if profile.customer?
+  .row
+    .col
+      p.h4.pl-2
+        strong Примите решение о найме кандидатов:
+      ul
+        - orders.each do |order|
+          li
+            = link_to order.employee_cv_name, profile_candidate_path(order.pe_id)
