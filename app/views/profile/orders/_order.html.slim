@@ -1,6 +1,6 @@
 .row.rounded.hoverable
   .col-12.p-0
-    table[width="100%"]
+    table.collapsable width="100%" data-order-id=order.id
       tbody
         tr
           td.text-left.align-items-center width="8%"
@@ -8,14 +8,14 @@
               |№#{order.id}
           td.text-center.align-items-center width="12%"
             p.m-0.font-weight-bold
-              | #{order.profile.company.name}
+              | #{order.customer_name}
           td.text-center.align-items-center width="15%"
             p.m-0.font-weight-bold
               | #{order.city}
           td.text-center.align-items-center width="20%"
             p.m-0
               | #{order.place_of_work}
-          td.text-center.align-items-center width="25%"
+          td.text-center.align-items-center width="33%"
             p.m-0
               | #{order.title}. #{order.skill}
           td.text-center.align-items-center width="12%"
@@ -23,10 +23,10 @@
               p.white-text.m-1.font-weight-bold
                 i.fas.fa-user-check
                 |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
-          td.text-center.align-items-center width="8%"
-            p.m-0
-              button.btn-floating.btn-sm.blue type="button" data-toggle="collapse" data-target="#order_collapse_#{order.id}" aria-expanded="false"
-                i.fas.fa-arrow-alt-circle-down
+          / td.text-center.align-items-center width="8%"
+          /   p.m-0
+          /     button.btn-floating.btn-sm.blue type="button" data-toggle="collapse" data-target="#order_collapse_#{order.id}" aria-expanded="false"
+          /       i.fas.fa-arrow-alt-circle-down
   .col-12.p-0.collapse id="order_collapse_#{order.id}"
     .card.testimonial-card.w-100.z-depth-0.border
       .card-up.bg-best-hr.lighten-1.card-up-hr
@@ -130,4 +130,3 @@
                   p.card-title.blue-text
                     |Скачать
                     br анкету
-

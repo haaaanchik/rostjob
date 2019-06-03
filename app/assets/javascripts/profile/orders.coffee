@@ -26,6 +26,24 @@ $('#order_form').on('submit', (event) ->
     return false
 )
 
+
+$(document).on('mouseenter', 'table.collapsable', (event) ->
+  $(this).css('cursor', 'pointer')
+)
+
+$(document).on('click', 'table.collapsable', (event) ->
+  order_id = $(this).data('order-id')
+  $('#order_collapse_' + order_id).collapse('toggle')
+)
+
+$(document).on('click', '#show_all', (event) ->
+  $('.collapse').collapse('show')
+)
+
+$(document).on('click', '#hide_all', (event) ->
+  $('.collapse').collapse('hide')
+)
+
 $(document).on('change', '#order_template_number_of_employees', (event) ->
   price = $(this).parent().data('price')
   customer_price = $('#position_table').data('customer-price')

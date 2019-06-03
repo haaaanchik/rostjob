@@ -2,11 +2,18 @@ module OrderRepository
   extend ActiveSupport::Concern
 
   included do
+    scope :with_customer_name, -> {
+      select('orders.*, companies.name as customer_name')
+        .joins(:profile)
+        .joins('inner join companies on companies.profile_id = profiles.id')
+    }
+
     scope :with_pe_counts, -> {
       select('orders.*, total_pe_count, unviewed_pe_count')
         .joins('left join (select order_id, count(*) as total_pe_count from proposal_employees group by order_id) tpe on tpe.order_id = orders.id')
         .joins('left join (select order_id, count(*) as unviewed_pe_count from proposal_employees where marks ->"$.viewed_by_customer" = false group by order_id) upe on upe.order_id = orders.id')
     }
+
     scope :with_unviewed_pe_count, -> {
       select('orders.*, unviewed_pe_count')
         .joins('join (select order_id, count(*) as unviewed_pe_count from proposal_employees where state = "inbox" group by order_id) upe on upe.order_id = orders.id')
