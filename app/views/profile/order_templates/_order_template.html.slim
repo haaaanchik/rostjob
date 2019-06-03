@@ -91,12 +91,13 @@
             div.text-center
               - if order_template.document.present?
                 div
-                  = link_to order_template.document.url, class: 'btn-floating btn-sm blue' do
-                    i.fas.fa-file-download
-                p.card-title.blue-text
-                  |Скачать
-                  br
-                  |анкету
+                  .d-flex.justify-content-center
+                    = link_to order_template.document.url, class: 'btn-floating btn-sm blue' do
+                      i.fas.fa-file-download
+                  p.card-title.blue-text.text-center
+                    |Скачать
+                    br
+                    |анкету
             div
               hr
               - form_id = "create_order_form_#{order_template.id}"
