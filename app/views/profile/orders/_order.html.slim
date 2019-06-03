@@ -1,4 +1,6 @@
-.row
+button.w-100 type="button" data-toggle="collapse" data-target="#order_collapse_#{order.id}" aria-expanded="false"
+  |#{order.title} #{order.city}
+.row.collapse id="order_collapse_#{order.id}"
   .card.testimonial-card.w-100.m-2
     .card-up.bg-best-hr.lighten-1.card-up-hr
       .container
