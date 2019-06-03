@@ -1,8 +1,47 @@
 .col-md-9.order-md-2.order-1.p-2.pt-4
   p.h6.text-center.font-italic
     | * Здесь расположены #{@orders_kind}
-  .container.w-100.border.rounded.mt-2
+  .container.w-100.mt-2
     .row
-      .col.p-0.mt-2
+      .col-8.p-0.mt-2
         = render partial: 'search_form', locals: { state: @state }
+      .col-4.p-0.mt-3
+        .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
+          button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center[type="button"]
+            i.far.fa-eye.w-10
+            |  Подробно
+          button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center.active[type="button"]
+            i.far.fa-eye-slash.w-10
+            |  Скрыть
+
+    .row
+      .col-12.p-0
+        table[width="100%" ]
+          tbody
+            tr
+              td.text-left.align-items-center.m-0 width="8%"
+                p.m-0.ml-1.font-weight-bold
+                  |Номер
+              td.text-center.align-items-center width="12%"
+                p.m-0.font-weight-bold
+                  | Заказчик
+              td.text-center.align-items-center width="15%"
+                p.m-0.font-weight-bold
+                  | Город
+              td.text-center.align-items-center width="20%"
+                p.m-0.font-weight-bold
+                  | Производственная площадка
+              td.text-center.align-items-center width="25%"
+                p.m-0.font-weight-bold
+                  | Вакансия
+              td.text-center.align-items-center width="12%"
+                p.m-0.font-weight-bold
+                  |  Нанято / Объем
+              td.text-center.align-items-center.p-0 width="8%"
+                p.m-0
+                  i.far.fa-eye.w-10
+
+
+
+
     = render @orders

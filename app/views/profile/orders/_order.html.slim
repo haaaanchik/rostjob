@@ -1,106 +1,133 @@
-button.w-100 type="button" data-toggle="collapse" data-target="#order_collapse_#{order.id}" aria-expanded="false"
-  |#{order.title} #{order.city}
-.row.collapse id="order_collapse_#{order.id}"
-  .card.testimonial-card.w-100.m-2
-    .card-up.bg-best-hr.lighten-1.card-up-hr
-      .container
-        .row.m-card-up
-          .p-0.d-flex.align-self-stretch.w-100
-            .ava-m.d-none.d-lg-block
-            .w-100
-              table[width="100%" height="90px"]
-                tbody
-                  tr
-                    td.align-bottom
-                      .d-none.d-md-block
-                        h4.card-title.white-text
-                          = order.profile.company.name
-                    td.align-bottom.text-center width="15%"
-                      = link_to edit_profile_order_path(order), class: 'btn-floating btn-sm green' do
-                        i.fas.fa-pen-alt
-                      p.card-title.white-text
-                        | Редактировать
-                    td.align-bottom.text-center width="15%"
-                      = link_to profile_order_path(order), class: 'btn-floating btn-sm blue' do
-                        i.fas.fa-eye
-                      p.card-title.white-text
-                        | Просмотреть
-    .d-flex.align-self-stretch
-      .text-center
-        .avatar.ml-2.white.mr-1.d-none.d-md-block
-          = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
-        .ml-2.mr-2
-          p.h4
-            br
-            |№ #{order.id}
+.row.rounded.hoverable
+  .col-12.p-0
+    table[width="100%"]
+      tbody
+        tr
+          td.text-left.align-items-center width="8%"
+            p.m-0.ml-1.font-weight-bold
+              |№#{order.id}
+          td.text-center.align-items-center width="12%"
+            p.m-0.font-weight-bold
+              | #{order.profile.company.name}
+          td.text-center.align-items-center width="15%"
+            p.m-0.font-weight-bold
+              | #{order.city}
+          td.text-center.align-items-center width="20%"
+            p.m-0
+              | #{order.place_of_work}
+          td.text-center.align-items-center width="25%"
+            p.m-0
+              | #{order.title}. #{order.skill}
+          td.text-center.align-items-center width="12%"
+            .bg-best-hr.text-right.z-depth-2.rounded.mb-0.position-relative
+              p.white-text.m-1.font-weight-bold
+                i.fas.fa-user-check
+                |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
+          td.text-center.align-items-center width="8%"
+            p.m-0
+              button.btn-floating.btn-sm.blue type="button" data-toggle="collapse" data-target="#order_collapse_#{order.id}" aria-expanded="false"
+                i.fas.fa-arrow-alt-circle-down
+  .col-12.p-0.collapse id="order_collapse_#{order.id}"
+    .card.testimonial-card.w-100.z-depth-0.border
+      .card-up.bg-best-hr.lighten-1.card-up-hr
+        .container
+          .row.m-card-up
+            .p-0.d-flex.align-self-stretch.w-100
+              .ava-m.d-none.d-lg-block
+              .w-100
+                table[width="100%" height="90px"]
+                  tbody
+                    tr
+                      td.align-bottom
+                        .d-none.d-md-block
+                          h4.card-title.white-text
+                            = order.profile.company.name
+                      td.align-bottom.text-center width="15%"
+                        = link_to edit_profile_order_path(order), class: 'btn-floating btn-sm green' do
+                          i.fas.fa-pen-alt
+                        p.card-title.white-text
+                          | Редактировать
+                      td.align-bottom.text-center width="15%"
+                        = link_to profile_order_path(order), class: 'btn-floating btn-sm blue' do
+                          i.fas.fa-eye
+                        p.card-title.white-text
+                          | Просмотреть
+      .d-flex.align-self-stretch
+        .text-center
+          .avatar.ml-2.white.mr-1.d-none.d-md-block
+            = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
+          .ml-2.mr-2
+            p.h4
+              br
+              |№ #{order.id}
 
-      .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
-        .row.m-0.p-0.pr-1.pl-1.pb-1
-          .col-md-9.pr-0.pl-0
-            / = render partial: 'orders/urgency', locals: { order: order }
-            .d-flex.justify-content-end
-              .bg-best-hr.text-right.z-depth-1.rounded.mb-0.position-relative
-                p.white-text.m-1.h4
-                  i.fas.fa-user-check
-                  |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
-                  i.fas.fa-users
-            .price.w-100.border.rounded.mb-0.p-1
-              p.h5.text-center.mt-1.mb-0
-                i.fas.fa-city
-                strong.ml-2 #{order.place_of_work}
-              p.h4.text-center.mt-1.mb-0
-                i.fas.fa-hammer.mr-2
-                strong #{order.title}. #{order.skill}
-              p.text-center.m-0
-                i.fas.fa-money-bill-alt.w-2.mr-2
-                i.fas.fa-ruble-sign.mr-2
-                strong #{order.salary}
-              p.m-0
-                i.fas.fa-map-marker.w-2
-                strong.ml-2 #{order.city}, #{order.district}
-              p.m-0
-                i.fas.fa-passport.w-2.mr-2
-                strong #{order.experience}
-              p.m-0
-                i.far.fa-calendar-alt.w-2.mr-2
-                strong #{order.work_period}. #{order.schedule}.
-              .d-none.d-md-block
-                p.h6.m-0
-                  i.fas.fa-clipboard-list.w-2.mr-2
-                  - unless order.description.nil? || order.description.empty?
-                    strong.mr-2 Виды выполняемых работ:
-                    strong == order.description
+        .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
+          .row.m-0.p-0.pr-1.pl-1.pb-1
+            .col-md-9.pr-0.pl-0
+              / = render partial: 'orders/urgency', locals: { order: order }
+              .d-flex.justify-content-end
+                .bg-best-hr.text-right.z-depth-1.rounded.mb-0.position-relative
+                  p.white-text.m-1.h4
+                    i.fas.fa-user-check
+                    |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
+                    i.fas.fa-users
+              .price.w-100.border.rounded.mb-0.p-1
+                p.h5.text-center.mt-1.mb-0
+                  i.fas.fa-city
+                  strong.ml-2 #{order.place_of_work}
+                p.h4.text-center.mt-1.mb-0
+                  i.fas.fa-hammer.mr-2
+                  strong #{order.title}. #{order.skill}
+                p.text-center.m-0
+                  i.fas.fa-money-bill-alt.w-2.mr-2
+                  i.fas.fa-ruble-sign.mr-2
+                  strong #{order.salary}
                 p.m-0
-                  i.fas.fa-plus.w-2.mr-2
-                  strong #{order.other_info['related_profession']}
-                p.h6.m-0
-                  i.fas.fa-bed.w-2.mr-2
-                  strong.mr-2 Предлагаемые условия:
-                  == order.other_info['terms']
-                hr.h6.mb-0
-                p.h6.m-0
-                  i.fas.fa-comment-alt.w-2.mr-2
-                  |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
-                  br
-                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-                    == order.other_info['remark']
-          .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
-            - if order.contact_person['name'] || order.contact_person['phone']
-              div
-                .text-center.border.rounded.mb-3
-                  p.p-0.m-0.font-weight-bold
-                    |  Контактное лицо:
-                  p.font-italic.m-1
-                    nobr
-                      = order.contact_person['name']
-                  p.font-italic.m-1
-                    nobr
-                      = order.contact_person['phone']
-              - if order.document.present?
+                  i.fas.fa-map-marker.w-2
+                  strong.ml-2 #{order.city}, #{order.district}
+                p.m-0
+                  i.fas.fa-passport.w-2.mr-2
+                  strong #{order.experience}
+                p.m-0
+                  i.far.fa-calendar-alt.w-2.mr-2
+                  strong #{order.work_period}. #{order.schedule}.
+                .d-none.d-md-block
+                  p.h6.m-0
+                    i.fas.fa-clipboard-list.w-2.mr-2
+                    - unless order.description.nil? || order.description.empty?
+                      strong.mr-2 Виды выполняемых работ:
+                      strong == order.description
+                  p.m-0
+                    i.fas.fa-plus.w-2.mr-2
+                    strong #{order.other_info['related_profession']}
+                  p.h6.m-0
+                    i.fas.fa-bed.w-2.mr-2
+                    strong.mr-2 Предлагаемые условия:
+                    == order.other_info['terms']
+                  hr.h6.mb-0
+                  p.h6.m-0
+                    i.fas.fa-comment-alt.w-2.mr-2
+                    |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
+                    br
+                    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                      == order.other_info['remark']
+            .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
+              - if order.contact_person['name'] || order.contact_person['phone']
                 div
-                  = link_to order.document.url, class: 'btn-floating btn-sm blue' do
-                    i.fas.fa-file-download
-                p.card-title.blue-text
-                  |Скачать
-                  br анкету
+                  .text-center.border.rounded.mb-3
+                    p.p-0.m-0.font-weight-bold
+                      |  Контактное лицо:
+                    p.font-italic.m-1
+                      nobr
+                        = order.contact_person['name']
+                    p.font-italic.m-1
+                      nobr
+                        = order.contact_person['phone']
+                - if order.document.present?
+                  div
+                    = link_to order.document.url, class: 'btn-floating btn-sm blue' do
+                      i.fas.fa-file-download
+                  p.card-title.blue-text
+                    |Скачать
+                    br анкету
 
