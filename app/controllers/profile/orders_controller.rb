@@ -39,6 +39,7 @@ class Profile::OrdersController < ApplicationController
 
   def update
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
+    @order = result.order
     if result.success?
       redirect_to profile_orders_path
     else
