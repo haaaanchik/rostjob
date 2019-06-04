@@ -2,7 +2,7 @@
   p.h6.text-center.font-italic
     | * Здесь расположены #{@orders_kind}
   .container.w-100.mt-2
-    .row
+    .row.m-1
       .col-8.p-0.mt-2
         = render partial: 'search_form', locals: { state: @state }
       .col-4.p-0.mt-3
@@ -14,7 +14,7 @@
             i.far.fa-eye-slash.w-10
             |  Скрыть
 
-    .row
+    .row.m-1
       .col-12.p-0
         table[width="100%" ]
           tbody
@@ -27,11 +27,11 @@
                 p.m-0.font-weight-bold
                   = sort_link(@q, :city) do
                     strong.text-dark Город
-              td.text-center.align-items-center width="20%"
+              td.text-center.align-items-center width="30%"
                 p.m-0.font-weight-bold
                   = sort_link(@q, :place_of_work) do
                     strong.text-dark Производственная площадка
-              td.text-center.align-items-center width="33%"
+              td.text-center.align-items-center width="35%"
                 p.m-0.font-weight-bold
                   = sort_link(@q, :title) do
                     strong.text-dark Вакансия
