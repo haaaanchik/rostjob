@@ -1,7 +1,5 @@
-= form_with  model: @order_search_form, url: orders_path, method: :get,
-  skip_enforcing_utf8: true, id: 'order_search_in_favorites_form' do |f|
-  = f.hidden_field :employee_cv_id, value: @employee_cv_id
-  .form-group.position-relative
-    = f.text_field :query, class: "form-control", placeholder:"Поиск по всем заявкам", aria_label: "Query", id: 'order_search_in_favorites'
-    span.form-clear.d-none
-      i.fas.fa-times
+- val =  params[:q] ? params[:q][:all_fields_cont] : nil
+= search_form_for @q, url: orders_path, remote: true do |f|
+  .input-group.flex.no-wrap
+    = f.hidden_field :employee_cv_id, value: @employee_cv_id
+    = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val

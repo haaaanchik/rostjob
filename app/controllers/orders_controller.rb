@@ -3,14 +3,14 @@ class OrdersController < ApplicationController
 
   def index
     @active_item = :orders
-    @employee_cv_id = order_search_form_params[:employee_cv_id] if order_search_form_params
-    @order_search_form = if @employee_cv_id
-                           osf_params = order_search_form_params.merge(profile: current_profile)
-                           OrderSearchForm2.new(osf_params)
-                         else
-                           OrderSearchForm.new(order_search_form_params)
-                         end
-    @orders = @order_search_form.submit
+    employee_cv_id
+    # @order_search_form = if @employee_cv_id
+    #                        osf_params = order_search_form_params.merge(profile: current_profile)
+    #                        OrderSearchForm2.new(osf_params)
+    #                      else
+    #                        OrderSearchForm.new(order_search_form_params)
+    #                      end
+    orders.decorate
   end
 
   def show
@@ -33,7 +33,12 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id]).decorate
   end
 
-  def order_search_form_params
-    params.permit(order_search_form: %i[query sort_by filter_by employee_cv_id])[:order_search_form]
+  def orders
+    @q = Order.published.with_customer_name.ransack(params[:q])
+    @orders ||= @q.result
+  end
+
+  def employee_cv_id
+    @employee_cv_id = params[:employee_cv_id] || params[:q][:employee_cv_id]
   end
 end

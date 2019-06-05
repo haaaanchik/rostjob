@@ -3,9 +3,9 @@ module OrderRepository
 
   included do
     scope :with_customer_name, -> {
-      select('orders.*, companies.name as customer_name')
-        .joins(:profile)
-        .joins('inner join companies on companies.profile_id = profiles.id')
+      select('orders.*, profiles.id as p_id, companies.name as customer_name')
+        .joins('inner join profiles on orders.profile_id = profiles.id')
+        .joins('inner join companies on (companies.companyable_id = profiles.id and companies.companyable_type = "Profile")')
     }
 
     scope :with_pe_counts, -> {
