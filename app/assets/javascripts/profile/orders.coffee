@@ -26,6 +26,52 @@ $('#order_form').on('submit', (event) ->
     return false
 )
 
+
+$(document).on('mouseenter', 'table.collapsable', (event) ->
+  $(this).css('cursor', 'pointer')
+)
+
+$(document).on('mouseenter', '.collapse_hide', (event) ->
+  $(this).css('cursor', 'pointer')
+)
+
+$(document).on('click', 'table.collapsable', (event) ->
+  order_id = $(this).data('order-id')
+  collapse_selector = '.collapse[data-order-id=' + order_id + ']'
+  $(this).fadeOut(400, ->
+    $(collapse_selector).fadeIn(400)
+  )
+)
+
+$(document).on('click', '.collapse_hide', (event) ->
+  order_id = $(this).data('order-id')
+  row_selector = 'table.collapsable[data-order-id=' + order_id + ']'
+  collapse_selector = '.collapse[data-order-id=' + order_id + ']'
+  $(collapse_selector).fadeOut(400, ->
+    $(row_selector).fadeIn(400)
+  )
+)
+
+$(document).on('click', '#show_all', (event) ->
+  $('#hide_all').removeClass('active')
+  $(this).addClass('active')
+  row_selector = 'table.collapsable'
+  collapse_selector = '.collapse'
+  $(row_selector).fadeOut(400, ->
+    $(collapse_selector).fadeIn(400)
+  )
+)
+
+$(document).on('click', '#hide_all', (event) ->
+  $('#show_all').removeClass('active')
+  $(this).addClass('active')
+  row_selector = 'table.collapsable'
+  collapse_selector = '.collapse'
+  $(collapse_selector).fadeOut(400, ->
+    $(row_selector).fadeIn(400)
+  )
+)
+
 $(document).on('change', '#order_template_number_of_employees', (event) ->
   price = $(this).parent().data('price')
   customer_price = $('#position_table').data('customer-price')

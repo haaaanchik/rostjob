@@ -1,5 +1,4 @@
-= form_with  model: @order_search_form, url: orders_path, method: :get, skip_enforcing_utf8: true, id: form_id, local: true do |f|
-  .form-group.m-2.mt-2
-    = f.text_field :query, class: "form-control", placeholder: 'Поиск по заявкам', aria_label: "Query"
-    span.form-clear.d-none
-      i.fas.fa-times
+- val =  params[:q] ? params[:q][:all_fields_cont] : nil
+= search_form_for @q, url: orders_path do |f|
+  .input-group.flex.no-wrap
+    = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val

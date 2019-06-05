@@ -1,2 +1,45 @@
-.col.order-1.order-sm-1.order-md-2.border.rounded.p-1.mt-4.mr-2
-  = render partial: 'orders/order', collection: @favorites, locals: { order_id: 'favorite_id_' }
+.col-md-9.order-md-2.order-1.p-2.pt-4
+  .container.w-100.border.rounded.mt-2
+    - search_form_id = 'order_search_form'
+    .row
+      .col-8.p-0.mt-2
+        = render partial: 'profile/favorites/search_form', locals: { form_id: search_form_id }
+      .col-4.p-0.mt-3
+        .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
+          button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center id='show_all' type="button"
+            i.far.fa-eye.w-10
+            |  Подробно
+          button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center.active id='hide_all' type="button"
+            i.far.fa-eye-slash.w-10
+            |  Скрыть
+    .row
+      .col-12.p-0
+        table[width="100%" ]
+          tbody
+            tr
+              td.text-left.align-items-center.m-0 width="8%"
+                p.m-0.ml-1.font-weight-bold
+                  = sort_link(@q, :id) do
+                    strong.text-dark Номер
+              td.text-center.align-items-center width="12%"
+                p.m-0.font-weight-bold
+                  = sort_link(@q, :customer_name) do
+                    strong.text-dark Заказчик
+              td.text-center.align-items-center width="15%"
+                p.m-0.font-weight-bold
+                  = sort_link(@q, :city) do
+                    strong.text-dark Город
+              td.text-center.align-items-center width="20%"
+                p.m-0.font-weight-bold
+                  = sort_link(@q, :place_of_work) do
+                    strong.text-dark Производственная площадка
+              td.text-center.align-items-center width="33%"
+                p.m-0.font-weight-bold
+                  = sort_link(@q, :title) do
+                    strong.text-dark Вакансия
+              td.text-center.align-items-center width="12%"
+                p.m-0.font-weight-bold
+                  = sort_link(@q, :contractor_price) do
+                    strong.text-dark Вознаграждение
+
+    = render partial: 'orders/order', collection: @favorites, locals: { order_id: 'favorite_id_' }

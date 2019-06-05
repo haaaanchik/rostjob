@@ -1,15 +1,14 @@
-.col-4
-  .card
-    .card-body
-      = form_with url: admin_login_path, local: true do |f|
-        p.h4.text-center.mb-4 Вход
-        .md-form
-          i class='fa fa-user prefix grey-text'
-          = f.text_field :login, class: 'from-control'
-          = f.label :login, 'Логин'
-        .md-form
-          i class='fa fa-lock prefix grey-text'
-          = f.password_field :password, class: 'form-control'
-          = f.label :password, 'Пароль'
-        .text-center.mt-4
-          = f.submit 'Войти', class: 'btn btn-indigo'
+.d-flex.justify-content-center.mt-4
+  .col-4.border.rounded
+    = form_with url: admin_login_path, local: true do |f|
+      p.h4.text-center.m-4 Вход
+      .md-form
+        i class='fa fa-user prefix grey-text'
+        = f.text_field :login, class: 'from-control'
+        = f.label :login, 'Логин'
+      .md-form
+        i class='fa fa-lock prefix grey-text'
+        = f.password_field :password, class: 'form-control'
+        = f.label :password, 'Пароль'
+      .d-flex.justify-content-center.m-4
+        = f.submit 'Войти', class: 'btn button-hr btn-rounded waves-effect m-4 pt-1 pb-1 text-center'
