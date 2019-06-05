@@ -1,4 +1,5 @@
 - val =  params[:q] ? params[:q][:all_fields_cont] : nil
-= search_form_for @q, url: profile_favorites_path do |f|
+= search_form_for @q, url: orders_path, remote: true do |f|
   .input-group.flex.no-wrap
+    = f.hidden_field :employee_cv_id, value: @employee_cv_id
     = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val

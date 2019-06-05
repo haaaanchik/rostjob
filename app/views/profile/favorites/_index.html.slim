@@ -3,7 +3,10 @@
     .modal-content
       .modal-header
         h4.modal-title#formModalMyOrdersLabel Мои заявки
-        = render partial: 'search_form'
+        - if @employee_cv_id
+          = render partial: 'remote_search_form'
+        - else
+          = render partial: 'search_form'
       .modal-body
         #orders_search_result
           = render partial: 'orders/order', collection: @favorites, locals: { order_id: 'order_id_' }
