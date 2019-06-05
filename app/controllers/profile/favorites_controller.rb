@@ -3,7 +3,6 @@ class Profile::FavoritesController < ApplicationController
     @active_item = :favorites
     employee_cv_id
     favorites.decorate
-    # @order_search_form = OrderSearchForm.new
   end
 
   private
