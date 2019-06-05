@@ -39,6 +39,6 @@ class OrdersController < ApplicationController
   end
 
   def employee_cv_id
-    @employee_cv_id = params[:employee_cv_id] || params[:q][:employee_cv_id]
+    @employee_cv_id = params[:employee_cv_id] || params[:q].try(:[], :employee_cv_id)
   end
 end
