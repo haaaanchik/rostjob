@@ -4,10 +4,10 @@
       tbody
         tr
           td.text-left.align-items-center width="8%"
-            p.m-0.ml-1
+            p.m-0.ml-1.font-weight-bold
               |№#{order.id}
           td.text-center.align-items-center width="12%"
-            p.m-0
+            p.m-0.font-weight-bold
               | #{order.customer_name}
           td.text-center.align-items-center width="13%"
             p.m-0
@@ -57,7 +57,7 @@
                                 i.fas.fa-minus
                               p.card-title.white-text
                                 | Убрать из избранного
-                      td.collapse_hide.align-top.text-right width='1%' title='Скрыть' data-order-id=order.id
+                      td.collapse_hide.align-top.text-right width='10%' title='Скрыть' data-order-id=order.id
                         span.font-weight-bold.text-white.fa-2x &times;
       .d-flex.align-self-stretch
         .text-center
