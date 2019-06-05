@@ -36,7 +36,7 @@
         = label :state, nil, class: 'form-check-label', for: 'candidate_filter_hired' do
           p.border.rounded.white-text.z-depth-1.green.m-0[style="width: 160px;"]
             i.fas.fa-bookmark.ml-2.mr-2
-            span.mr-2 Нанят
+            span.mr-2 Нанят Принят
     .col-sm-12.col-md-4.col-lg-12.d-flex.justify-content-center.mb-2
       .form-check.form-check-inline
         = check_box_tag 'q[state_in][]', 'disputed', filter&.include?('disputed'), { class: 'form-check-input', id: 'candidate_filter_disputed' }

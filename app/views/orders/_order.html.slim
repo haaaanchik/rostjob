@@ -1,6 +1,6 @@
-.row.rounded.hoverable
+.row.rounded.hoverable.m-1
   .col-12.p-0
-    table.collapsable width="100%" data-order-id=order.id
+    table.collapsable.mt-2.mb-2 width="100%" data-order-id=order.id
       tbody
         tr
           td.text-left.align-items-center width="8%"
@@ -9,16 +9,16 @@
           td.text-center.align-items-center width="12%"
             p.m-0
               | #{order.customer_name}
-          td.text-center.align-items-center width="15%"
+          td.text-center.align-items-center width="13%"
             p.m-0
               | #{order.city}
-          td.text-center.align-items-center width="20%"
+          td.text-center.align-items-center width="30%"
             p.m-0
               | #{order.place_of_work}
-          td.text-center.align-items-center width="33%"
+          td.text-center.align-items-center width="22%"
             p.m-0
               | #{order.title}. #{order.skill}
-          td.text-center.align-items-center width="12%"
+          td.text-center.align-items-center width="15%"
             .bg-best-hr.text-right.z-depth-2.rounded.mb-0.position-relative
               p.white-text.m-1.font-weight-bold
                 |#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
