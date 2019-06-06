@@ -1,5 +1,5 @@
 - val =  params[:q] ? params[:q][:pe_fields_cont] : nil
-- filter = params[:q] ? params[:q][:state_in] : %w[hired disputed]
+- filter = params[:q] ? params[:q][:state_in] : %w[]
 = search_form_for @q, url: profile_proposal_employees_path do |f|
   .row
     .col.d-none.d-lg-block
