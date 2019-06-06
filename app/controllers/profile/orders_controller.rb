@@ -10,6 +10,8 @@ class Profile::OrdersController < ApplicationController
                      :in_progress
                    when 'completed'
                      :completed
+                   when 'moderation'
+                     :moderation
                    end
   end
 
@@ -166,11 +168,15 @@ class Profile::OrdersController < ApplicationController
     @q = if params[:state] && !params[:state].empty?
            if params[:state] == 'completed'
              Order.where(profile: current_profile)
-                  .with_pe_counts.where(state: not_in_work_states)
+                  .with_pe_counts.where(state: completed_states)
                   .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
-           else
+           elsif params[:state] == 'moderation'
              Order.where(profile: current_profile)
-                  .with_pe_counts.where.not(state: not_in_work_states)
+                  .with_pe_counts.where(state: moderation_states)
+                  .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
+           elsif params[:state] == 'in_progress'
+             Order.where(profile: current_profile)
+                  .with_pe_counts.where.not(state: completed_states + moderation_states)
                   .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
            end
          else
@@ -181,8 +187,12 @@ class Profile::OrdersController < ApplicationController
     @orders ||= @q.result
   end
 
-  def not_in_work_states
-    %w[completed moderation draft]
+  def completed_states
+    %w[completed draft]
+  end
+
+  def moderation_states
+    %w[moderation rejected]
   end
 
   def description

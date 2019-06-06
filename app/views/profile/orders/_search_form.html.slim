@@ -1,4 +1,5 @@
 - url = state ? profile_orders_with_state_path(state) : profile_orders_path
+- val =  params[:q] ? params[:q][:all_fields_cont] : nil
 = search_form_for @q, url: url do |f|
   .input-group.flex.no-wrap
-    = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2'
+    = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val

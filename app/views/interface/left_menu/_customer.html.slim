@@ -30,6 +30,12 @@
         |Мои заявки
     / span.counter
     /   |0
+  .mb-3
+    .btn-group.group-menu role="group" aria-label="Basic example"
+      button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
+      = link_to profile_orders_with_state_path(:moderation), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :moderation}"
+        i.fas.fa-balance-scale.w-10.mr-2
+        |Модерация
 
   .mb-3
     .btn-group.group-menu role="group" aria-label="Basic example"
