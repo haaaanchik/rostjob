@@ -1,15 +1,11 @@
 = form_with model: [:profile, ProposalEmployee.new] do |f|
-  = f.hidden_field :order_id, value: @order&.id
-  = f.hidden_field :employee_cv_id, value: @employee_cv&.id
-  .border.rounded.white.mt-1
-    .modal-body.pt-1
-      .row
-        .col
-        .col-4
-          .md-form.mt-0.mt-4
-            = f.label :arrival_date, 'Дата прибытия', class: 'active'
-            = f.date_field :arrival_date, class: 'form-control'
-            .invalid-feedback
-        .col-4.d-flex.align-items-center
-          = f.submit 'Отправить', class: 'btn btn-success proposal-employee-cv-submit-button'
-        .col
+  = f.hidden_field :order_id, value: order_id
+  = f.hidden_field :employee_cv_id, value: employee_cv_id
+  .row.align-items-center.justify-content-center
+    .col-auto
+      .form-group
+        = f.label :interview_date, 'Дата прибытия кандидата'
+        = f.date_field :interview_date, class: 'form-control'
+        .invalid-feedback
+    .col-auto
+      = f.submit 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2'

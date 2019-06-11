@@ -6,7 +6,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :employee_cv
   has_many :complaints, dependent: :destroy
 
-  validates :arrival_date, :order_id, :employee_cv_id, presence: true
+  validates :interview_date, :order_id, :employee_cv_id, presence: true
 
   accepts_nested_attributes_for :employee_cv
 
@@ -32,7 +32,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_inbox do
-      transitions from: :reserved, to: :inbox
+      transitions from: %i[interview reserved], to: :inbox
     end
 
     event :to_reserved do
@@ -70,7 +70,7 @@ class ProposalEmployee < ApplicationRecord
 
   def initialize(attrs = nil)
     defaults = {
-      arrival_date: Date.today
+      interview_date: Date.today
     }
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults

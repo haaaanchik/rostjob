@@ -1,9 +1,0 @@
-= form_with model: [:profile, ProposalEmployee.new] do |f|
-  = f.hidden_field :order_id, value: order.id
-  = f.hidden_field :employee_cv_id, value: employee_cv_id
-  = f.label :arrival_date, 'Дата прибытия кандидата'
-  = f.date_field :arrival_date, class: 'form-control'
-  .invalid-feedback
-  .row
-    .col.text-center
-      = f.submit 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2'

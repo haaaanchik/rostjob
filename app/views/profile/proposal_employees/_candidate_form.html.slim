@@ -145,10 +145,15 @@
                           = text_area :employee_cv_passport, :reg_address, class: 'form-control disabled', value: employee_cv.passport['address']
                           = label :employee_cv_passport, :reg_address, 'Адрес регистрации', class: 'ml-2 disabled'
               .col-md-4.border.rounded.white.mt-1.pt-1
-                h4 Дата выхода на работу
-                - hd = candidate.hiring_date&.strftime('%d-%m-%Y') || Date.today.strftime('%d-%m-%Y')
+                - if candidate.inbox? || candidate.interview?
+                  h4 Дата собеседования
+                  - hd = candidate.interview_date.strftime('%d-%m-%Y')
+                - elsif candidate.hired?
+                  h4 Дата выхода на работу
+                  - hd = candidate.hiring_date.strftime('%d-%m-%Y')
                 #hiring_form_datepicker.d-flex.justify-content-center data-date=hd
-
+                - if candidate.inbox? || candidate.interview?
+                  = render partial: 'hidden_form', locals: { candidate: candidate }
                 .mt-3
                   - state = candidate.state
                   - case state
@@ -171,15 +176,36 @@ javascript:
   function init_datepicker() {
     $('#hiring_form_datepicker').datepicker({
       language: 'ru',
-      todayHighlight: true,
+      todayHighlight: false,
       beforeShowDay: function() {
-        return false;
+        if("#{candidate.inbox? || candidate.interview?}" == 'true') {
+          return true;
+        }
       }
     });
 
-    var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
-    $('#hiring_form_datepicker').datepicker(
-      'update', ...remained_warranty_days);
+    var prevDate = $('#hiring_form_datepicker').datepicker('getFormattedDate')
+    var element = $('#hiring_form_datepicker').datepicker();
+    element['prevDate'] = prevDate;
+
+    $('#hiring_form_datepicker').on('changeDate', function() {
+      currDate = $('#hiring_form_datepicker').datepicker('getFormattedDate')
+      $('#proposal_employee_interview_date').val(currDate);
+
+      var submit_button = $('#correct_interview_date_submit')
+
+      if(element['prevDate'] == currDate) {
+        submit_button.addClass('disabled');
+      } else {
+        submit_button.removeClass('disabled');
+      }
+    });
+
+    if("#{candidate.hired?}" == 'true') {
+      var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+      $('#hiring_form_datepicker').datepicker(
+        'update', ...remained_warranty_days);
+    }
   }
 
  function defer(method) {

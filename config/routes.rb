@@ -95,6 +95,7 @@ Rails.application.routes.draw do
       member do
         put :to_disput
         put :revoke
+        put :correct_interview_date
       end
     end
     # get 'proposal_employee/:id', to: 'proposal_employee#show'

@@ -1,11 +1,11 @@
 module ApplicationHelper
 
-  def question_help title
+  def question_help(title)
     content_tag :span, '', class: 'question-help', 'data-toggle': 'tooltip', title: title
   end
 
   def render_escape(name, locals, additional = {})
-    pt_hash = {partial: name, locals: locals}.merge(additional)
+    pt_hash = { partial: name, locals: locals }.merge(additional)
     j render(pt_hash)
   end
 

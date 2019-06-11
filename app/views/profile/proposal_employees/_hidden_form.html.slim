@@ -1,0 +1,6 @@
+- url = correct_interview_date_profile_proposal_employee_path(candidate)
+= form_with model: [:profile, candidate], url: url, method: :put do |f|
+  = f.hidden_field :interview_date
+  .row.align-items-center.justify-content-center
+    .col
+      = f.submit 'Скорректировать', class: 'btn btn-success btn-sm btn-rounded mt-2 disabled', id: 'correct_interview_date_submit'

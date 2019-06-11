@@ -9,8 +9,8 @@
 - url = hire_profile_order_candidate_path(candidate.order_id, candidate) if candidate.interview?
 #candidate_form_datepicker.d-flex.justify-content-center data-date=hd
 = form_with scope: :candidate, url: url, method: :put do |f|
-  = f.hidden_field :hiring_date, value: Date.today.strftime('%d-%m-%Y') if candidate.interview?
-  = f.hidden_field :interview_date, value: Date.today.strftime('%d-%m-%Y') if candidate.inbox?
+  = f.hidden_field :hiring_date, value: candidate.interview_date.strftime('%d.%m.%Y') if candidate.interview?
+  = f.hidden_field :interview_date, value: candidate.interview_date.strftime('%d.%m.%Y') if candidate.inbox?
   = f.submit 'НАЗНАЧИТЬ', class: 'btn green' if candidate.inbox?
   = f.submit 'НАНЯТЬ', class: 'btn green' if candidate.interview?
 
@@ -18,7 +18,7 @@ javascript:
   function init_datepicker() {
     $('#candidate_form_datepicker').datepicker({
       language: 'ru',
-      todayHighlight: true,
+      todayHighlight: false,
       beforeShowDay: function() {
         if("#{%w[inbox interview].include?(candidate.state)}" == 'false') {
           return false;
@@ -32,9 +32,11 @@ javascript:
       );
     });
 
-    var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
-    $('#candidate_form_datepicker').datepicker(
-      'update', ...remained_warranty_days);
+    if("#{candidate.hired?}" == 'true') {
+      var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+      $('#candidate_form_datepicker').datepicker(
+        'update', ...remained_warranty_days);
+    }
   }
 
  function defer(method) {

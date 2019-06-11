@@ -66,8 +66,11 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def to_inbox
-    candidate.to_inbox!
-    redirect_to profile_order_path(order)
+    result = Cmd::ProposalEmployee::ToInbox.call(candidate: candidate)
+
+    if result.success?
+      redirect_to profile_order_path(order)
+    end
   end
 
   def to_interview

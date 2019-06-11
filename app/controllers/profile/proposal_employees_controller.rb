@@ -32,6 +32,14 @@ class Profile::ProposalEmployeesController < ApplicationController
     end
   end
 
+  def correct_interview_date
+    result = Cmd::ProposalEmployee::CorrectInterviewDate.call(proposal_employee: proposal_employee,
+                                                              interview_date: proposal_employee_params[:interview_date])
+    if result.success?
+      redirect_to profile_proposal_employee_path(result.proposal_employee)
+    end
+  end
+
   def to_disput
     proposal_employee.to_disputed!
     ecv = proposal_employee.employee_cv
@@ -53,7 +61,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   private
 
   def proposal_employee_params
-    params.require(:proposal_employee).permit(:order_id, :employee_cv_id, :arrival_date, employee_cv_attributes: [])
+    params.require(:proposal_employee).permit(:order_id, :employee_cv_id, :interview_date, employee_cv_attributes: [])
   end
 
   def order
