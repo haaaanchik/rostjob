@@ -9,6 +9,11 @@
 #   $(customer_total_class).html(customer_total)
 # )
 
+$(document).on('change', '[id=order_template_filter_for_cis]', ->
+  form = document.getElementById('order_template_search')
+  form.submit()
+)
+
 $(document).on('show.bs.modal', '#formModalNewOrderTemplate', ->
   $('input[type=tel]').inputmask("+7(999)-999-99-99")
 )

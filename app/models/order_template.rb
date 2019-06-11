@@ -14,7 +14,6 @@ class OrderTemplate < ApplicationRecord
   validates :salary, presence: true
   validates :warranty_period, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: { message: 'must be abided' }
-  validates :for_cis, presence: true
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/

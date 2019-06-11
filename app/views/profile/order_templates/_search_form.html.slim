@@ -1,4 +1,10 @@
 - val =  params[:q] ? params[:q][:order_template_fields_cont] : nil
+- filter = params[:q] ? params[:q][:for_cis_true] : false
 = search_form_for @q, url: url, class: 'left-menu' do |f|
   .input-group.flex.no-wrap
     = f.search_field :order_template_fields_cont, placeholder: 'Поиск шаблонов заявок', class: 'form-control ml-3 mr-3', value: val
+    .form-check.form-check-inline
+      = check_box_tag 'q[for_cis_true]', true, filter, { class: 'form-check-input', id: 'order_template_filter_for_cis' }
+      = label :state, nil, class: 'form-check-label', for: 'order_template_filter_for_cis' do
+          span.mr-2 СНГ
+

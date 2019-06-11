@@ -94,7 +94,7 @@ class Profile::OrderTemplatesController < ApplicationController
 
   def order_template_params
     @order_template_params ||= params.require(:order_template)
-                                     .permit(:name, :title, :specialization, :city, :salary,
+                                     .permit(:name, :title, :specialization, :city, :salary, :for_cis,
                                              :position_id, :description, :state,
                                              :contractor_price, :skill, :accepted, :district,
                                              :experience, :visibility, :number_of_employees, :document,
