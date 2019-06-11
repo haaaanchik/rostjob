@@ -199,6 +199,11 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
   $('#order_contractor_price').prop('disabled', false)
   $('#order_number_of_employees').prop('disabled', false)
   $('#contractor_total').html(contractor_total)
+
+$(document).on('change', '[id=order_filter_for_cis]', ->
+  form = document.getElementById('order_search')
+  form.submit()
+)
 #  content = tinymce.get('order_description').getContent()
 #  if item.duties == null
 #    duties = ' '

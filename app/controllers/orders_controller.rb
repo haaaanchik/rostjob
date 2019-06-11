@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   private
 
   def order
-    @order = Order.find(params[:id]).decorate
+    @order = Order.with_customer_name.find(params[:id]).decorate
   end
 
   def orders
