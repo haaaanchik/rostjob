@@ -100,6 +100,11 @@
             = f.file_field :document
           .file-path-wrapper
             input class="file-path validate" type="text" placeholder="Загрузите анкету">
+  .row
+    .col
+      .form-check.mt-2
+        = f.check_box :for_cis, class: 'form-check-input'
+        = f.label :for_cis, 'Подходит для граждан стран СНГ', class: 'form-check-label'
 
   .form-group.mt-3
     .row

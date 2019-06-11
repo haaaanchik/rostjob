@@ -149,7 +149,7 @@ class Profile::OrdersController < ApplicationController
     @order_params ||= params.require(:order)
                             .permit(:title, :specialization, :city, :salary, :position_id,
                                     :description, :payment_type, :contractor_price,
-                                    :number_of_recruiters, :enterpreneurs_only,
+                                    :number_of_recruiters, :enterpreneurs_only, :for_cis,
                                     :skill, :accepted, :district, :experience,
                                     :visibility, :state, :number_of_employees, :document,
                                     :schedule, :work_period, :place_of_work, other_info: {},
