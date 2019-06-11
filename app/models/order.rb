@@ -26,6 +26,7 @@ class Order < ApplicationRecord
   validates :warranty_period, presence: true, numericality: {only_integer: true}
   # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
   validates :accepted, acceptance: {message: 'must be abided'}
+  validates :for_cis, presence: true
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
@@ -106,7 +107,8 @@ class Order < ApplicationRecord
       contact_person: {
         name: nil,
         phone: nil
-      }
+      },
+      for_cis: false
     }
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
