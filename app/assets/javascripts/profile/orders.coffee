@@ -56,7 +56,7 @@ $(document).on('click', '#show_all', (event) ->
   $('#hide_all').removeClass('active')
   $(this).addClass('active')
   row_selector = 'table.collapsable'
-  collapse_selector = '.collapse'
+  collapse_selector = '.collapsable_card'
   $(row_selector).fadeOut(400, ->
     $(collapse_selector).fadeIn(400)
   )
@@ -66,7 +66,7 @@ $(document).on('click', '#hide_all', (event) ->
   $('#show_all').removeClass('active')
   $(this).addClass('active')
   row_selector = 'table.collapsable'
-  collapse_selector = '.collapse'
+  collapse_selector = '.collapsable_card'
   $(collapse_selector).fadeOut(400, ->
     $(row_selector).fadeIn(400)
   )
