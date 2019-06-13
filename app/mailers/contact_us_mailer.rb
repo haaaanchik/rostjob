@@ -11,6 +11,6 @@ class ContactUsMailer < ApplicationMailer
     @email_address = message.email_address
     @text = message.text
 
-    mail to: Rails.configuration.email_to
+    mail to: Rails.application.config.email_to
   end
 end

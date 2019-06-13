@@ -1,4 +1,7 @@
 Rails.application.configure do
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_options = { from: 'from@example.com', charset: 'utf-8' }
+  config.email_to = 'to@example.org'
   # Settings specified here will take precedence over those in config/application.rb.
 
   # The test environment is used exclusively to run your application's
