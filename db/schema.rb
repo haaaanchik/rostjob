@@ -68,13 +68,6 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.index ["title"], name: "index_cities_on_title"
   end
 
-  create_table "city_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_city_references_on_term"
-  end
-
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.bigint "order_id"
@@ -126,7 +119,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.bigint "proposal_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -308,14 +301,6 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.index ["company_id"], name: "index_payment_orders_on_company_id"
   end
 
-  create_table "position_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.text "duties"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_position_references_on_term"
-  end
-
   create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "duties"
@@ -340,15 +325,15 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
-    t.text "description"
     t.string "city"
     t.string "rating"
     t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
     t.string "photo_content_type"
-    t.integer "photo_file_size"
+    t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "legal_form"
@@ -380,11 +365,11 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
+    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accepted"
     t.index ["order_id"], name: "index_proposals_on_order_id"
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
@@ -413,13 +398,6 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
-  end
-
-  create_table "specialization_references", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "term"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["term"], name: "index_specialization_references_on_term"
   end
 
   create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
