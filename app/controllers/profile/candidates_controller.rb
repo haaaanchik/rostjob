@@ -20,7 +20,7 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def candidates
-    @q = ProposalEmployee.candidates(current_profile).ransack(params[:q] ? params[:q] : { state_in: %w[hired disputed] })
+    @q = ProposalEmployee.candidates(current_profile).ransack(params[:q])
     @candidates ||= @q.result
   end
 end
