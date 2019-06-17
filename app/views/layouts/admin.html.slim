@@ -54,7 +54,7 @@ html
               li.nav-item.dropdown
                 = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete
 
-    .container
+    .container-fluid.w-100
       = yield
     = javascript_include_tag 'application', media: 'all',
             data: {'turbolinks-eval' => false,
