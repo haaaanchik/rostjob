@@ -1,0 +1,9 @@
+.custom-model{
+  .modal-header{
+    @extend .card-header;
+    @extend .bg-best-hr;
+    @extend .font-weight-bold;
+    @extend .white-text;
+    @extend .text-center;
+  }
+}

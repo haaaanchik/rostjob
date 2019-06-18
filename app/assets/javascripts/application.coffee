@@ -14,6 +14,7 @@
 #= require external/bootstrap-datepicker.ru.min
 #= require tinymce
 #= require jquery.inputmask
+#= require data-confirm-modal
 # require jquery.inputmask.extensions
 # require jquery.inputmask.numeric.extensions
 # require jquery.inputmask.date.extensions
