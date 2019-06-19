@@ -17,11 +17,13 @@
                 i.fas.fa-pen-alt
               p.card-title.white-text
                 | Редактировать
-            td.align-bottom.text-right
-              = link_to complete_profile_order_path(order), class: 'btn-floating btn-sm red', remote: true, method: :put do
-                i.fas.fa-times
-              p.card-title.white-text
-                | Завершить
+            - unless order.completed?
+              td.align-bottom.text-right
+                = link_to complete_profile_order_path(order), class: 'btn-floating btn-sm red',
+                  remote: true, method: :put, data: { confirm: 'Завершить заявку?' }, title: 'Завершение заявки' do
+                  i.fas.fa-times
+                p.card-title.white-text
+                  | Завершить
     .container.w-100.p-0
       .row.p-0.m-0.grey.lighten-4
         .col-md-6.p-1
