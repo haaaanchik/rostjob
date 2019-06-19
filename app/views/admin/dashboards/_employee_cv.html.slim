@@ -1,0 +1,15 @@
+.row
+  .col-1.p-0
+    = employee_cv.name
+  .col-11.md-calendar.white
+    ul.list-unstyled.days.days-30
+      - for i in (Date.today - 15) .. (Date.today + 14)
+        - class_li = ''
+        - class_li = class_li + 'font-weight-bold ' if Date.today == i
+        - if employee_cv.proposal_employees.last then class_li = class_li + 'active yellow rounded-left rounded-right ' if employee_cv.proposal_employees.last.interview_date.strftime("%Y-%m-%d") == i.strftime("%Y-%m-%d")
+        - if employee_cv.proposal_employees.last && employee_cv.proposal_employees.last.hiring_date then class_li = class_li + 'active rounded-left rounded-right ' if employee_cv.proposal_employees.last.hiring_date.strftime("%Y-%m-%d") == i.strftime("%Y-%m-%d")
+        li class = class_li
+          = i.day
+hr.mb-1.mt-1
+
+
