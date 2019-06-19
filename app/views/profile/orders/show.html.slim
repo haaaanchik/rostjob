@@ -35,23 +35,23 @@
                 | Очередь
                 | &nbsp;#{order.candidates.inbox.count}
               = link_to profile_order_candidates_path(order, term: :interview),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center interview",
                       data: {toggle: 'pill'}, remote: true  do
                 | Собеседование
                 | &nbsp;#{order.candidates.interview.count}
 
               = link_to profile_order_candidates_path(order, term: :hired),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center hired",
                       data: {toggle: 'pill'}, remote: true  do
                 | Нанято
                 | &nbsp;#{order.candidates.hired.count}
               = link_to profile_order_candidates_path(order, term: :reserved),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center reserved",
                       data: {toggle: 'pill'}, remote: true  do
                 | Резерв
                 | &nbsp;#{order.candidates.reserved.count}
               = link_to profile_order_candidates_path(order, term: :disputed),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center",
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center disputed",
                       data: {toggle: 'pill'}, remote: true  do
                 | Спор
                 | &nbsp;#{order.candidates.disputed.count}
@@ -128,3 +128,31 @@
                     p.card-title.blue-text.text-center
                       |Скачать
                       br анкету
+javascript:
+  function to_interview() {
+    if ("#{@redirection}" == 'to_interview'){
+      element = $('.interview')
+      element[0].click();
+    } else if ("#{@redirection}" == 'to_hired') {
+      element = $('.hired')
+      element[0].click();
+    } else if ("#{@redirection}" == 'to_reserved') {
+      element = $('.reserved')
+      element[0].click();
+    } else if ("#{@redirection}" == 'to_disputed') {
+      element = $('.disputed')
+      element[0].click();
+    }
+  }
+
+  function defer_to_interview(method) {
+    if(window.jQuery) {
+      method();
+    } else {
+      setTimeout(function () {
+       defer_to_interview(method);
+       }, 50);
+    }
+  }
+
+  defer_to_interview(to_interview);

@@ -16,6 +16,7 @@ class Profile::OrdersController < ApplicationController
   end
 
   def show
+    @redirection = flash[:redirection]
     order
     contractors
 

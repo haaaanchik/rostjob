@@ -28,6 +28,7 @@ class Profile::Orders::CandidatesController < ApplicationController
       if order.reload.selected_candidates.count == order.number_of_employees
         order.complete!
       end
+      flash[:redirection] = 'to_hired'
       redirect_to profile_order_path(order)
       # else
       #   redirect_to profile_order_proposal_path(order, proposal)
@@ -79,6 +80,7 @@ class Profile::Orders::CandidatesController < ApplicationController
     result = Cmd::ProposalEmployee::ToInterview.call(candidate: candidate,
                                                      interview_date: candidate_params[:interview_date])
     if result.success?
+      flash[:redirection] = 'to_interview'
       redirect_to profile_order_path(order)
     end
   end
