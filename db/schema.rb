@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_11_072804) do
+ActiveRecord::Schema.define(version: 2019_06_20_085325) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.bigint "proposal_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.bigint "file_file_size"
+    t.integer "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -325,15 +325,15 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
+    t.text "description"
     t.string "city"
     t.string "rating"
     t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
     t.string "photo_content_type"
-    t.bigint "photo_file_size"
+    t.integer "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "legal_form"
@@ -365,11 +365,11 @@ ActiveRecord::Schema.define(version: 2019_06_11_072804) do
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
-    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accepted"
     t.index ["order_id"], name: "index_proposals_on_order_id"
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
