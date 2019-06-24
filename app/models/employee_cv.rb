@@ -10,6 +10,8 @@ class EmployeeCv < ApplicationRecord
 
   include EmployeeCvRepository
 
+  strip_attributes only: :name
+
   validates :name, presence: true
   # validates :phone_number, presence: true, phone: true
   validates :contractor_terms_of_service, acceptance: true
