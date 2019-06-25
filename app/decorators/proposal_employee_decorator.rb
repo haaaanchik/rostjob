@@ -24,6 +24,7 @@ class ProposalEmployeeDecorator < ObjDecorator
     'contractor' => {
       'inbox' => %w[revoked disputed],
       'interview' => %w[revoked disputed],
+      'reserved' => %w[revoked],
       'hired' => %w[disputed],
       'disputed' => %w[disputed]
     },

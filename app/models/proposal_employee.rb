@@ -48,7 +48,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_revoked do
-      transitions from: %i[inbox interview], to: :revoked
+      transitions from: %i[inbox interview reserved], to: :revoked
     end
 
     event :to_viewed do
