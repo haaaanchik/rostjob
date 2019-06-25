@@ -6,4 +6,4 @@
       ul
         - orders.each do |order|
           li
-            = link_to order.employee_cv_name, profile_order_path(order)
+            = link_to order.employee_cv_name, profile_order_path(order, tab: :to_interview)
