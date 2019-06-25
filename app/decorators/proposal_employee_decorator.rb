@@ -23,7 +23,7 @@ class ProposalEmployeeDecorator < ObjDecorator
     },
     'contractor' => {
       'inbox' => %w[revoked disputed],
-      'interview' => %w[disputed],
+      'interview' => %w[revoked disputed],
       'hired' => %w[disputed],
       'disputed' => %w[disputed]
     },
