@@ -2,5 +2,5 @@
 = form_with model: [:profile, candidate], url: url, method: :put do |f|
   = f.hidden_field :interview_date
   .row.align-items-center.justify-content-center
-    .col
+    .col.correct-interview-date
       = f.submit 'Скорректировать', class: 'btn btn-success btn-sm btn-rounded mt-2 disabled', id: 'correct_interview_date_submit'
