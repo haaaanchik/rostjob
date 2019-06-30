@@ -4,12 +4,13 @@
       |Лицевой счет
     .card-body
       .row
-        .col
+        .col-9
+          br
           'Остаток:
           strong = @balance.amount
           i.fas.fa-ruble-sign.ml-1
         .col.text-right
-          = link_to 'Вывод средств', withdrawal_profile_balance_path, class: 'btn bg-success'
+          = link_to 'Вывод средств', withdrawal_profile_balance_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2'
   .card.border-light.mt-3
     .card-header
       'Операции с лицевым счётом
