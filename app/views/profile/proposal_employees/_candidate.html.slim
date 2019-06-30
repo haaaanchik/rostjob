@@ -1,11 +1,9 @@
 tr.rounded.mb-0.example.hoverable data-href=profile_proposal_employee_path(candidate)
   td.text-center.align-middle.clickable-row
-    .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
+    .border.rounded.white-text.z-depth-1.text-left class=candidate.status_background_class
+      | &nbsp;
       i.fas.fa-bookmark.mr-2
       = t("proposal_employee.state.#{candidate.state}")
   td.text-center.align-middle.clickable-row ##{candidate.employee_cv_id} #{candidate.name}
-  / td.text-center.align-middle.clickable-row = candidate.created_at.strftime('%H:%M %d.%m.%Y')
-  td.text-center.align-middle.clickable-row №#{candidate.order_id} #{candidate.title}
-  td.text-center.align-middle.clickable-row  #{candidate.order.city}, #{candidate.place_of_work}
-  td.text-center.align-middle.clickable-row = candidate.interview_date.strftime('%d.%m.%Y')
+  td.text-center.align-middle.clickable-row №#{candidate.order_id} #{candidate.title} <br /> #{candidate.order.salary} &#8381;
   td.text-center.align-middle.clickable-row = candidate.hiring_date.strftime('%d.%m.%Y') if candidate.state == 'hired'
