@@ -1,15 +1,15 @@
 - if candidate.interview_action_enabled?(current_profile)
-  td.text-center.align-middle
+  td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/interview.html.slim", locals: { candidate: candidate }
 - if candidate.reserve_action_enabled?(current_profile)
-  td.text-center.align-middle
+  td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/reserve.html.slim", locals: { candidate: candidate }
 - if candidate.revoke_action_enabled?(current_profile)
-  td.text-center.align-middle
+  td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/revoke.html.slim", locals: { candidate: candidate }
 - if candidate.disput_action_enabled?(current_profile)
-  td.text-center.align-middle
+  td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/disput.html.slim", locals: { candidate: candidate }
 - if candidate.to_inbox_action_enabled?(current_profile)
-  td.text-center.align-middle
+  td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/to_inbox.html.slim", locals: { candidate: candidate }
