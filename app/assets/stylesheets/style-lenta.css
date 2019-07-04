@@ -128,5 +128,7 @@ body {
   width: 15px;
 }
 
-
-
+.waves-input-wrapper {
+    padding: 1.2rem !important;
+    width: 100%;
+}
