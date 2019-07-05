@@ -4,6 +4,18 @@ tr.rounded.mb-0.example.hoverable data-href=profile_proposal_employee_path(candi
       | &nbsp;
       i.fas.fa-bookmark.mr-2
       = t("proposal_employee.state.#{candidate.state}")
-  td.text-center.align-middle.clickable-row ##{candidate.employee_cv_id} #{candidate.name}
+  td.text-center.align-middle.clickable-row
+    | ##{candidate.employee_cv_id} #{candidate.name} <br />
+    = candidate.employee_cv.phone_number if candidate.employee_cv.phone_number
   td.text-center.align-middle.clickable-row №#{candidate.order_id} #{candidate.title} <br /> #{candidate.order.salary} &#8381;
-  td.text-center.align-middle.clickable-row = candidate.hiring_date.strftime('%d.%m.%Y') if candidate.state == 'hired'
+  td.text-center.align-middle.clickable-row
+    - if candidate.hiring_date == 'krivetka'
+      p.red-text.h6
+        strike
+          = candidate.interview_date.strftime('%d.%m.%Y') if candidate.hiring_date.strftime('%d.%m.%Y') != candidate.interview_date.strftime('%d.%m.%Y')
+      p.green-text.h6
+        i.fas.fa-check
+        = candidate.hiring_date.strftime('%d.%m.%Y')
+    - else
+      p.h6
+        = candidate.interview_date.strftime('%d.%m.%Y')

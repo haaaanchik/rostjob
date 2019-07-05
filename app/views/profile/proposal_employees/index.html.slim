@@ -19,8 +19,8 @@
                     = sort_link(@q, :order_title) do
                       strong Заявка
                   th.text-center
-                    = sort_link(@q, :hiring_date) do
-                      strong Договор
+                    = sort_link(@q, :arrival_date) do
+                      strong Собеседование
                   / = render partial: "profile/proposal_employees/toolbars/header.html.slim"
                   = render partial: 'profile/proposal_employees/candidate', collection: @paginated_proposal_employees
               = paginate @paginated_proposal_employees
