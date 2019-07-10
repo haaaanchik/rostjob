@@ -4,6 +4,5 @@ FactoryBot.define do
     gender { "MyString" }
     birthdate { "2018-05-03" }
     proposal { nil }
-    file { "" }
   end
 end

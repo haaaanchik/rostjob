@@ -16,7 +16,7 @@ class Admin::PositionsController < Admin::ApplicationController
   def create
     @position = Position.create(position_params)
     if @position.errors.messages.any?
-      render json: {validate: true, data: errors_data(@position)}
+      render json: { validate: true, data: errors_data(@position) }, status: 422
     else
       redirect_to admin_positions_path
     end
@@ -25,7 +25,7 @@ class Admin::PositionsController < Admin::ApplicationController
   def update
     position.update(position_params)
     if position.errors.messages.any?
-      render json: {validate: true, data: errors_data(@position)}
+      render json: { validate: true, data: errors_data(@position) }, status: 422
     else
       redirect_to admin_positions_path
     end

@@ -1,0 +1,26 @@
+- url = profile_tickets_path
+- val =  params[:q] ? params[:q][:all_fields_cont] : nil
+- type = params[:q] ? params[:q].fetch(:type_in, %w[]) : %w[]
+- state = params[:q] ? params[:q][:state_cont] : 'opened'
+= search_form_for @q, url: url do |f|
+  .input-group.flex.no-wrap
+    = f.search_field :all_fields_cont, placeholder: 'Поиск тикетов', class: 'form-control m-2', value: val
+    = link_to 'Новое обращение', new_profile_tickets_appeal_path, class: 'btn button-hr btn-rounded waves-effect candidates-menu-button active', remote: true
+    .form-check.form-check-inline
+      = check_box_tag 'q[type_in][]', 'appeal', type.include?('appeal'), { class: 'form-check-input', id: 'tickets_filter_appeals' }
+      = label :type, nil, class: 'form-check-label', for: 'tickets_filter_appeals' do
+          span.mr-2 Обращения
+    .form-check.form-check-inline
+      = check_box_tag 'q[type_in][]', 'incident', type.include?('incident'), { class: 'form-check-input', id: 'tickets_filter_incidents' }
+      = label :type, nil, class: 'form-check-label', for: 'tickets_filter_incidents' do
+          span.mr-2 Споры
+
+    .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
+      = label :type, nil, class: "btn button-hr btn-rounded waves-effect candidates-menu-button.w-50 p-1 text-center #{'active' if state.include?('closed')}", for: 'closed_tickets' do
+        = radio_button_tag 'q[state_cont]', 'closed', state.include?('closed'), { id: 'closed_tickets' }
+        span.mr-2 Закрытые
+
+      = label :type, nil, class: "btn button-hr btn-rounded waves-effect candidates-menu-button.w-50 p-1 text-center #{'active' if state.include?('opened')}", for: 'opened_tickets' do
+        = radio_button_tag 'q[state_cont]', 'opened', state.include?('opened'), { id: 'opened_tickets' }
+        span.mr-2 Открытые
+

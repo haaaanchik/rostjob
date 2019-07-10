@@ -5,6 +5,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :profile
   belongs_to :employee_cv
   has_many :complaints, dependent: :destroy
+  has_many :incidents, dependent: :destroy
 
   validates :interview_date, :order_id, :employee_cv_id, presence: true
 
@@ -32,7 +33,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_inbox do
-      transitions from: %i[interview reserved], to: :inbox
+      transitions from: %i[interview reserved disputed], to: :inbox
     end
 
     event :to_reserved do
@@ -48,7 +49,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_revoked do
-      transitions from: %i[inbox interview reserved], to: :revoked
+      transitions from: %i[inbox interview reserved disputed], to: :revoked
     end
 
     event :to_viewed do

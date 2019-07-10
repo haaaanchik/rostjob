@@ -1,0 +1,12 @@
+.col-md-9.order-md-2.order-1.p-2.pt-2
+  = render partial: 'search_form'
+
+  table.table.table-hover
+    tr
+      th №
+      th Тип
+      th Дата
+      th Тема
+      th Статус
+    = render partial: 'ticket', collection: @paginated_tickets, as: :ticket
+  = paginate @paginated_tickets

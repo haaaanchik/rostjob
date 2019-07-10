@@ -1,0 +1,6 @@
+li.nav-item.mr-2
+  = link_to profile_tickets_path, class: 'nav-link waves-effect waves-light' do
+    = @opened_tickets_count
+    i.fas.fa-envelope
+
+= render partial: "interface/navbar/profile_menu/#{@current_profile&.profile_type || 'nil'}.html.slim"

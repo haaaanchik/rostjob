@@ -29,7 +29,27 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
+    resources :tickets, only: %i[index show] do
+      scope module: :tickets do
+        resources :proposal_employees, only: %i[] do
+          member do
+            put :revoke
+            patch :to_inbox
+            patch :hire
+          end
+        end
+      end
+      member do
+        put :close
+      end
+      scope module: :tickets do
+        resources :messages, only: %i[index create]
+      end
+    end
     resources :proposal_employees, only: %i[index show] do
+      member do
+        put :revoke
+      end
       scope module: :proposal_employees do
         resources :complaints, only: %i[] do
           member do
@@ -80,6 +100,15 @@ Rails.application.routes.draw do
   get 'profile/employee_cvs/new_full', to: 'profile/employee_cvs#new_full', as: :new_full_profile_employee_cv
   resource :profile, except: %i[show destroy]
   namespace :profile do
+    resources :tickets do
+      scope module: :tickets do
+        resources :messages, only: %i[index create]
+      end
+    end
+    namespace :tickets do
+      resources :appeals, only: %i[new create]
+      resources :incidents, only: %i[show new create]
+    end
     resources :candidates, only: %i[index show]
     resources :order_templates do
       member do

@@ -1,0 +1,20 @@
+- candidate = incident.proposal_employee
+= form_with model: incident, url: profile_tickets_incidents_path do |f|
+  = f.hidden_field :proposal_employee_id, value: candidate.id
+  h5 Анкета: #{candidate.employee_cv.name}
+  h5 Заявка: #{candidate.order.title}
+  = label_tag :title, 'Тема спора:', class: 'form-check-label'
+  - Incident.reason.values.each do |r|
+    .form-check
+      = radio_button_tag 'incident[title]', r, false, class: 'form-check-input'
+      = label_tag "incident[title]_#{r}", t("enumerize.incident.reason.#{r}"), class: 'form-check-label'
+  .form-group
+    = f.fields_for :messages do |m|
+      = m.label :text, 'Текст спора'
+      = m.text_area :text, class: 'form-control'
+      .invalid-feedback
+  .text-center
+    .container
+      .row.justify-content-center
+        .col-md-4
+          = f.submit 'Отправить', class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2'

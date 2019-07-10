@@ -28,7 +28,7 @@ class Profile::ProposalEmployeesController < ApplicationController
       # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
-      render json: { validate: true, data: errors_data(result.proposal_employee) }
+      render json: { validate: true, data: errors_data(result.proposal_employee) }, status: 422
     end
   end
 

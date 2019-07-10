@@ -1,0 +1,15 @@
+= form_with model: @appeal, url: profile_tickets_appeals_path do |f|
+  .form-group
+    = f.label :title, 'Тема'
+    = f.text_field :title, class: 'form-control'
+    .invalid-feedback
+  .form-group
+    = f.fields_for :messages do |m|
+      = m.label :text, 'Текст обращения'
+      = m.text_area :text, class: 'form-control'
+      .invalid-feedback
+  .text-center
+    .container
+      .row.justify-content-center
+        .col-md-4
+          = f.submit 'Отправить', class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2'

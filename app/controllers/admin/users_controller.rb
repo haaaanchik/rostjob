@@ -11,7 +11,7 @@ class Admin::UsersController < Admin::ApplicationController
     user.update_attribute(:full_name, user_params[:full_name])
     user.update_attribute(:is_active, user_params[:is_active])
     if user.errors.messages.any?
-      render json: { validate: true, data: errors_data(user) }
+      render json: { validate: true, data: errors_data(user) }, status: 422
     else
       redirect_to admin_clients_path
     end

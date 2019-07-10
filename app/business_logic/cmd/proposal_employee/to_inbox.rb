@@ -4,6 +4,7 @@ module Cmd
       include Interactor
 
       def call
+        candidate.update(interview_date: context.interview_date)
         context.fail! unless candidate.to_inbox!
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end

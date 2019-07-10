@@ -20,6 +20,10 @@
 # require jquery.inputmask.date.extensions
 #= require_tree .
 
+@scroll_to_bottom = (element) ->
+  if element
+    element.scrollTop = element.scrollHeight - element.getBoundingClientRect().height
+
 @bootstrapClearButton = () ->
   $('.position-relative :input').on('keydown focus', () ->
     if ($(this).val().length > 0)
@@ -99,6 +103,7 @@ bootstrapClearButton()
     return
 
 $(document).ready ->
+  scroll_to_bottom($('.ticket-messages')[0])
   init_mdb()
   tinyMCE.init({
     selector: 'textarea.tinymce'
@@ -129,7 +134,7 @@ $(document).ready ->
 
   $('[data-redirect_modal="open"]').modal()
 
-  $(document).on('ajax:success', '[data-remote=true]', (event) ->
+  $(document).on('ajax:error', '[data-remote=true]', (event) ->
     data = event.detail[0]
     if data.validate
       show_validation_errors(data.data)
@@ -141,3 +146,5 @@ $(document).ready ->
 
   $(document).on "turbolinks:load", ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
+
+  $('[data-toggle="popover"]').popover('enable')

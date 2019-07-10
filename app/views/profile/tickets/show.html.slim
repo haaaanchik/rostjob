@@ -1,0 +1,14 @@
+.col-md-9.order-md-2.order-1
+  .container-fluid style="margin-top: 10px; height: calc(100vh - 65px);"
+    .row.h-100
+      .col-9.h-100.d-flex.flex-column
+        .ticket-messages.border style='flex: 1 1 auto; overflow-y: auto; min-height: 0px;'
+          = render partial: 'profile/tickets/messages/message', collection: @ticket.messages
+        - if @ticket.opened?
+          .form-inline.w-100.p-2.border
+            = form_with model: Message.new, url: profile_ticket_messages_path(@ticket), class: 'd-flex flex-fill', id: 'ticket_message_form' do |f|
+              = f.text_field :text, class: 'form-control flex-fill align-self-center', placeholder: 'Наберите текст сообщения'
+              = f.submit 'Отправить', class: 'btn btn-success align-self-center'
+      .col-3.h-100.pt-3.border
+        = @ticket.header
+

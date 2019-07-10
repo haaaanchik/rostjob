@@ -1,0 +1,12 @@
+- if ticket.opened?
+  - if ticket.close_action_enabled?(current_staffer)
+    = link_to 'Закрыть', close_admin_ticket_path(ticket), class: 'btn btn-success align-self-center', method: :put
+
+  - if ticket.revoke_action_enabled?(current_staffer)
+    = render partial: "admin/tickets/toolbars/revoke.html.slim", locals: { ticket: ticket }
+
+  - if ticket.hire_action_enabled?(current_staffer)
+    = render partial: "admin/tickets/toolbars/hire.html.slim", locals: { ticket: ticket }
+
+  - if ticket.to_inbox_action_enabled?(current_staffer)
+    = render partial: "admin/tickets/toolbars/to_inbox.html.slim", locals: { ticket: ticket }

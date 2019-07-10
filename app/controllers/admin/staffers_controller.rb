@@ -14,7 +14,7 @@ class Admin::StaffersController < Admin::ApplicationController
   def create
     @staffer = Staffer.create(staffer_params)
     if @staffer.errors.messages.any?
-      render json: {validate: true, data: errors_data(@staffer)}
+      render json: { validate: true, data: errors_data(@staffer) }, status: 422
     else
       redirect_to admin_staffers_path
     end
@@ -23,7 +23,7 @@ class Admin::StaffersController < Admin::ApplicationController
   def update
     staffer.update(staffer_params)
     if staffer.errors.messages.any?
-      render json: {validate: true, data: errors_data(staffer)}
+      render json: { validate: true, data: errors_data(staffer) }, status: 422
     else
       redirect_to admin_staffers_path
     end

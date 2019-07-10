@@ -19,7 +19,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     @company = Company.new(company_params.merge(own_company: true))
     @company.save(context: :company)
     if @company.errors.messages.any?
-      render json: {validate: true, data: errors_data(@company)}
+      render json: { validate: true, data: errors_data(@company) }, status: 422
     else
       redirect_to admin_companies_path
     end
@@ -29,7 +29,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     company.assign_attributes(company_params)
     company.save(context: :company)
     if company.errors.messages.any?
-      render json: {validate: true, data: errors_data(@company)}
+      render json: { validate: true, data: errors_data(@company) }, status: 422
     else
       redirect_to admin_companies_path
     end
@@ -45,7 +45,7 @@ class Admin::CompaniesController < Admin::ApplicationController
     current_active&.update_attribute(:active, false)
     company.update_attribute(:active, true)
     if company.errors.messages.any?
-      render json: {validate: true, data: errors_data(@company)}
+      render json: { validate: true, data: errors_data(@company) }, status: 422
     else
       redirect_to admin_companies_path
     end

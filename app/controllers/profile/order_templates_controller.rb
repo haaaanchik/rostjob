@@ -21,7 +21,7 @@ class Profile::OrderTemplatesController < ApplicationController
     if result.success?
       redirect_to profile_order_templates_path
     else
-      render json: { validate: true, data: errors_data(result.order_template) }
+      render json: { validate: true, data: errors_data(result.order_template) }, status: 422
     end
   end
 
@@ -30,7 +30,7 @@ class Profile::OrderTemplatesController < ApplicationController
     if result.success?
       redirect_to profile_order_templates_path
     else
-      render json: { validate: true, data: errors_data(result.order_template) }
+      render json: { validate: true, data: errors_data(result.order_template) }, status: 422
     end
   end
 

@@ -4,11 +4,27 @@ module Cmd
       include Interactor
 
       def call
-        context.fail! unless candidate.hire!
+        if hiring_date.present?
+          hd = Date.parse(hiring_date)
+          candidate.update(hiring_date: hd, warranty_date: Holiday.warranty_date(hd))
+          candidate.hire!
+          order.complete! if order.reload.selected_candidates.count == order.number_of_employees
+        else
+          context.fail!
+        end
+
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end
 
       private
+
+      def order
+        candidate.order
+      end
+
+      def hiring_date
+        context.hiring_date
+      end
 
       def candidate
         context.candidate

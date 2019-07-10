@@ -60,7 +60,7 @@ class Profile::EmployeeCvsController < ApplicationController
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
-      render json: { validate: true, data: errors_data(result.employee_cv) }
+      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
 
@@ -75,7 +75,7 @@ class Profile::EmployeeCvsController < ApplicationController
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
-      render json: { validate: true, data: errors_data(result.employee_cv) }
+      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
 
     # ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
@@ -101,7 +101,7 @@ class Profile::EmployeeCvsController < ApplicationController
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
-      render json: { validate: true, data: errors_data(result.employee_cv) }
+      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
 

@@ -10,5 +10,3 @@ Style/Documentation:
   Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
-FactoryBot/AttributeDefinedStatically:
-  Enabled: true

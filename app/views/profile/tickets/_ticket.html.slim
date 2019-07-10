@@ -1,0 +1,12 @@
+tr.clickable-row data-href=profile_ticket_path(ticket)
+  td = ticket.id
+  td
+    - if ticket.appeal?
+      i.fas.fa-file-alt title='Обращение'
+    - elsif ticket.incident?
+      i.fas.fa-angry title='Спор'
+  td = ticket.created_at
+  td = ticket.incident? ? t("enumerize.incident.reason.#{ticket.title}") : ticket.title
+  td
+    .badge.badge-pill class="badge-#{ticket.opened? ? 'danger' : 'light'}"
+      = t("ticket.state.#{ticket.state}")

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_20_085325) do
+ActiveRecord::Schema.define(version: 2019_07_09_142333) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -190,11 +190,12 @@ ActiveRecord::Schema.define(version: 2019_06_20_085325) do
   create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.boolean "income"
-    t.bigint "proposal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sender_id"
-    t.index ["proposal_id"], name: "index_messages_on_proposal_id"
+    t.bigint "ticket_id"
+    t.string "sender_name"
+    t.index ["ticket_id"], name: "index_messages_on_ticket_id"
   end
 
   create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -440,6 +441,18 @@ ActiveRecord::Schema.define(version: 2019_06_20_085325) do
     t.index ["company_id"], name: "index_tax_offices_on_company_id"
   end
 
+  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "type"
+    t.string "state"
+    t.bigint "proposal_employee_id"
+    t.text "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reason"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
   create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "receiver_id"
     t.integer "subject_id"
@@ -506,7 +519,6 @@ ActiveRecord::Schema.define(version: 2019_06_20_085325) do
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"
   add_foreign_key "invoices", "profiles"
-  add_foreign_key "messages", "proposals"
   add_foreign_key "order_profiles", "orders"
   add_foreign_key "order_profiles", "profiles"
   add_foreign_key "order_templates", "profiles"
@@ -517,6 +529,7 @@ ActiveRecord::Schema.define(version: 2019_06_20_085325) do
   add_foreign_key "proposals", "profiles"
   add_foreign_key "tax_calculations", "profiles"
   add_foreign_key "tax_offices", "companies"
+  add_foreign_key "tickets", "users"
   add_foreign_key "users", "profiles"
   add_foreign_key "withdrawal_methods", "profiles"
 end

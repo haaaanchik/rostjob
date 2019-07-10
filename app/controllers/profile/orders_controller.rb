@@ -36,7 +36,7 @@ class Profile::OrdersController < ApplicationController
     if result.success?
       redirect_to profile_orders_with_state_path(:in_progress)
     else
-      render json: { validate: true, data: errors_data(result.order) }
+      render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
   end
 
@@ -61,7 +61,7 @@ class Profile::OrdersController < ApplicationController
     if result.success?
       redirect_to pre_publish_profile_order_path(result.order)
     else
-      render json: { validate: true, data: errors_data(result.order) }
+      render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
   end
 
@@ -70,7 +70,7 @@ class Profile::OrdersController < ApplicationController
     if result.success?
       redirect_to pre_publish_profile_order_path(result.order)
     else
-      render json: { validate: true, data: errors_data(context.order) }
+      render json: { validate: true, data: errors_data(context.order) }, status: 422
     end
   end
 

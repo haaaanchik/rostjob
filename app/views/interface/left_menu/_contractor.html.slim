@@ -1,5 +1,6 @@
 - collapse_0 = 'show' if %i[ready sent deleted].include? active_item
 - collapse_1 = 'show' if %i[orders favorites].include? active_item
+- collapse_2 = 'show' if %i[incidents appeals].include? active_item
 .col-md-3.order-2.order-sm-2.order-md-1
   #accordionEx194.accordion.md-accordion.accordion-3.menu-style[role="tablist" aria-multiselectable="true"]
     .mb-3.mt-4
@@ -11,6 +12,7 @@
           = current_user.full_name
       / span.counter
       /   |  0
+
     hr.mb-0.mt-0
     .card
       #heading4.card-header.menu-style[role="tab"]
@@ -81,3 +83,29 @@
                 = link_to profile_favorites_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :favorites}" do
                   i.fas.fa-star.w-10
                   |  Избранные заявки
+      / .card
+      /   #heading6.card-header.menu-style[role="tab"]
+      /     a.collapsed[data-toggle="collapse" data-parent="#accordionEx194" href="#collapse6" aria-expanded="false" aria-controls="collapse6"]
+      /       .mb-3.mt-3
+      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
+      /           button.btn.button-menu-l.btn-rounded.waves-effect[type="button"]
+      /             i.fas.fa-folder-open
+      /           button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
+      /             i.fas.fa-user-secret.w-10
+      /             |  Администрация
+      /   #collapse6.collapse role="tabpanel" aria-labelledby="heading5" data-parent="#accordionEx194" class=collapse_2
+      /     .card-body.pt-0.menu-style
+      /       .mb-3
+      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
+      /           button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
+
+      /           = link_to profile_tickets_with_type_path(:incidents), id: 'orders_catalog', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :incidents}" do
+      /             i.fas.fa-angry
+      /             |  Споры
+      /       .mb-3.mt-3
+      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
+      /           button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
+
+      /           = link_to profile_tickets_with_type_path(:appeals), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :appeals}" do
+      /             i.fas.fa-file-alt
+      /             |  Обращения
