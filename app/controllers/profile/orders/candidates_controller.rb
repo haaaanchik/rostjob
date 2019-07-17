@@ -21,13 +21,7 @@ class Profile::Orders::CandidatesController < ApplicationController
 
     if order.selected_candidates.count < order.number_of_employees
       hiring_date = Date.parse(candidate_params[:hiring_date])
-      candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
-      candidate.employee_cv.update(order_id: params[:order_id],
-                                   proposal_id: candidate_params[:proposal_id])
-      Cmd::ProposalEmployee::Hire.call(candidate: candidate)
-      if order.reload.selected_candidates.count == order.number_of_employees
-        order.complete!
-      end
+      Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
       flash[:redirection] = 'to_hired'
       redirect_to profile_order_path(order)
       # else

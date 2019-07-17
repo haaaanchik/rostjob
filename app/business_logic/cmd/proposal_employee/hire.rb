@@ -5,8 +5,7 @@ module Cmd
 
       def call
         if hiring_date.present?
-          hd = Date.parse(hiring_date)
-          candidate.update(hiring_date: hd, warranty_date: Holiday.warranty_date(hd))
+          candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
           candidate.hire!
           order.complete! if order.reload.selected_candidates.count == order.number_of_employees
         else
