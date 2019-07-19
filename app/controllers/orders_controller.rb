@@ -34,7 +34,7 @@ class OrdersController < ApplicationController
   end
 
   def orders
-    @q = Order.published.with_customer_name.ransack(params[:q])
+    @q = Order.published.with_customer_name.order(advertising: :desc).ransack(params[:q])
     @orders ||= @q.result
   end
 

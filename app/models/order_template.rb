@@ -46,7 +46,8 @@ class OrderTemplate < ApplicationRecord
         phone: nil
       },
       urgency_level: :middle,
-      for_cis: false
+      for_cis: false,
+      advertising: false
     }
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults

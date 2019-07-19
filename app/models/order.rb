@@ -107,7 +107,8 @@ class Order < ApplicationRecord
         name: nil,
         phone: nil
       },
-      for_cis: false
+      for_cis: false,
+      advertising: false
     }
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults

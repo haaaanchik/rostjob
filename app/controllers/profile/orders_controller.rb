@@ -178,7 +178,7 @@ class Profile::OrdersController < ApplicationController
            elsif params[:state] == 'in_progress'
              Order.where(profile: current_profile)
                   .with_pe_counts.where.not(state: completed_states + moderation_states)
-                  .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
+                  .order(advertising: :desc, urgency_level: :desc, created_at: :desc).ransack(params[:q])
            end
          else
            Order.where(profile: current_profile)

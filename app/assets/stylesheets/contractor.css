@@ -7,6 +7,10 @@ body {
 	background-color: #534741 !important;
 }
 
+.advertising {
+	background-color: #d00000 !important;
+}
+
 .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:active, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
 .dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
 .dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
@@ -17,7 +21,7 @@ body {
 .dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
 .dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
 .dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a.active {
-    background-color: #534741 !important;    
+    background-color: #534741 !important;
   }
 
 .button-menu-l, .button-menu-r {
@@ -25,12 +29,12 @@ body {
   text-align: left;
   border: 2px solid #fff !important;
   background-color: transparent !important;
-  color: #534741 !important; 
+  color: #534741 !important;
     -webkit-box-shadow: 0 0px 0px 0 rgba(0,0,0,.16), 0 0px 0px 0 rgba(0,0,0,.12);}
   .button-menu:hover, .button-menu:focus, .button-menu:active, .button-menu:active:focus, .button-menu.active  {
     border-color: #eeeeee !important;
     background-color: #eeeeee !important;
-    color: #000 !important; 
+    color: #000 !important;
   -webkit-box-shadow:  0 5px 11px 0 rgba(0, 0, 0, 0.18),  0 5px 11px 0 rgba(0, 0, 0, 0.18);}
   .button-menu:not([disabled]):not(.disabled):active, .button-menu:not([disabled]):not(.disabled).active,
   .show > .button-menu.dropdown-toggle {

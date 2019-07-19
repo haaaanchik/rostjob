@@ -1,6 +1,6 @@
 .row
   .card.testimonial-card.w-100.m-2
-    .card-up.bg-best-hr.lighten-1.card-up-hr
+    .card-up.lighten-1.card-up-hr class="#{order_template.advertising? ? 'advertising' : 'bg-best-hr'}"
       .container
         .row.m-card-up
           .p-0.d-flex.align-self-stretch.w-100
@@ -11,7 +11,7 @@
                   tr
                     td.align-bottom
                       .d-none.d-md-block
-                        h4.card-title.white-text #{order_template.name}
+                        h4.card-title.white-text #{order_template.name} #{' Срочно!' if order_template.advertising?}
                     td.align-bottom.text-center width="15%"
                       = link_to profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm red',
                         method: :delete, data: { confirm: 'Вы уверены?' } do
