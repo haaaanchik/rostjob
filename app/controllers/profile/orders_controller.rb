@@ -153,8 +153,8 @@ class Profile::OrdersController < ApplicationController
                                     :number_of_recruiters, :enterpreneurs_only, :for_cis,
                                     :skill, :accepted, :district, :experience, :advertising,
                                     :visibility, :state, :number_of_employees, :document,
-                                    :schedule, :work_period, :place_of_work, other_info: {},
-                                    contact_person: {})
+                                    :schedule, :work_period, :place_of_work, :adv_text,
+                                    other_info: {}, contact_person: {})
   end
 
   def balance

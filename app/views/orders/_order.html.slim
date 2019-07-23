@@ -38,7 +38,7 @@
                     tr
                       td.align-bottom
                         .d-none.d-md-block
-                          h4.card-title.white-text #{order.profile.company.name} #{'Срочно!' if order.advertising?}
+                          h4.card-title.white-text #{order.profile.company.name} #{order.adv_text if order.advertising?}
                       td.align-middle.text-right[width="200px"]
                         - unless @current_profile.profile_type == 'customer'
                           - unless @employee_cv_id

@@ -109,7 +109,10 @@
     .col
       .form-check.mt-2
         = f.check_box :advertising, class: 'form-check-input'
-        = f.label :advertising, 'Реклама', class: 'form-check-label'
+        = f.label :advertising, 'Включить рекламу', class: 'form-check-label'
+  .row
+    .col-12
+      = f.text_area :adv_text, class: 'from-control mt-3 w-100', rows: 4, placeholder: 'Рекламный текст'
 
   .form-group.mt-3
     .row
