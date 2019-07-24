@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   # post 'login', to: 'sessions#create'
   # delete 'logout', to: 'sessions#destroy'
 
-  get '/auth/:provider/callback' => 'sessions#callback'
+  # get '/auth/:provider/callback' => 'sessions#callback'
+  get '/oauth/callback/superjob' => 'oauth_callback#superjob'
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
     get 'secret_reg', to: 'users/registrations#secret_new'
@@ -29,6 +30,13 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
+    namespace :oauth do
+      resource :superjob, only: %i[show edit update] do
+        member do
+          get :download, to: 'superjobs#employee_cvs'
+        end
+      end
+    end
     resources :tickets, only: %i[index show] do
       scope module: :tickets do
         resources :proposal_employees, only: %i[] do

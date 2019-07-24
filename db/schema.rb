@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.text "education"
     t.text "remark"
     t.text "experience"
+    t.integer "super_job_id"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 
@@ -196,6 +197,20 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.bigint "ticket_id"
     t.string "sender_name"
     t.index ["ticket_id"], name: "index_messages_on_ticket_id"
+  end
+
+  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "type"
+    t.string "code"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.integer "ttl"
+    t.integer "expires_in"
+    t.string "token_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "query_params"
+    t.bigint "contractor_id"
   end
 
   create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -455,6 +470,16 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.datetime "updated_at", null: false
     t.string "reason"
     t.index ["user_id"], name: "index_tickets_on_user_id"
+  end
+
+  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "id_region"
+    t.integer "id_country"
+    t.string "title"
+    t.string "title_eng"
+    t.integer "super_job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

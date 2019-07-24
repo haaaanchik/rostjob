@@ -18,6 +18,7 @@ class EmployeeCv < ApplicationRecord
   # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true
+  validates :super_job_id, uniqueness: true
 
   ransack_alias :employee_cvs_fields, :id_or_name_or_phone_number
 

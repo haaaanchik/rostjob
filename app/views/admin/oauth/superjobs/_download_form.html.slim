@@ -1,0 +1,8 @@
+= form_with url: download_admin_oauth_superjob_path, method: :get, local: true do |f|
+  = f.hidden_field :format, value: 'xlsx'
+  = label :interval, 'Выберите интервал:'
+  br
+  = f.date_field :date_from, value: Date.current - 1.day
+  = f.date_field :date_to, value: Date.current
+  br
+  = f.submit 'Выгрузить анкеты', class: 'mt-3'

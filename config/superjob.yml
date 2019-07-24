@@ -1,0 +1,18 @@
+production:
+  api_url: 'https://api.superjob.ru/2.0'
+  base_url: 'https://www.superjob.ru'
+  client_id: 1305
+  client_secret: 'v3.h.3697411.9a535d14010e69b51f53cf59a9408d7e8ecfb47b.2597cf9fc02eb0f8b3808f3b9984ab17078ab2be'
+  redirect_uri: 'http://best-hr.pro/oauth/callback/superjob'
+development:
+  api_url: 'https://api.superjob.ru/2.0'
+  base_url: 'https://www.superjob.ru'
+  client_id: 1305
+  client_secret: 'v3.h.3697411.9a535d14010e69b51f53cf59a9408d7e8ecfb47b.2597cf9fc02eb0f8b3808f3b9984ab17078ab2be'
+  redirect_uri: 'http://localhost:3000/oauth/callback/superjob'
+staging:
+  api_url: 'https://api.superjob.ru/2.0'
+  base_url: 'https://www.superjob.ru'
+  client_id: 1305
+  client_secret: 'v3.h.3697411.9a535d14010e69b51f53cf59a9408d7e8ecfb47b.2597cf9fc02eb0f8b3808f3b9984ab17078ab2be'
+  redirect_uri: 'https://bhr.os72.ru/oauth/callback/superjob'

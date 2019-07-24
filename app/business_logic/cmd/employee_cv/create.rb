@@ -4,7 +4,8 @@ module Cmd
       include Interactor
 
       def call
-        @employee_cv = profile.employee_cvs.create params
+        @employee_cv = profile.employee_cvs.build params
+        @employee_cv.save
         context.employee_cv = @employee_cv
         context.fail! unless @employee_cv.persisted?
         Cmd::UserActionLogger::Log.call(params: logger_params)

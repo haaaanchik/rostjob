@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Анкеты для ботов') do |sheet|
+  sheet.add_row ['ID', 'Ссылка на анкету', 'Телефон', 'Профессия']
+  @employee_cvs.each do |employee_cv|
+    sheet.add_row [employee_cv.id, employee_cv.name, employee_cv.phone_number, employee_cv.experience]
+  end
+end

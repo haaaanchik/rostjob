@@ -13,7 +13,7 @@ html
       header
         nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top
           = link_to admin_path, class: 'navbar-brand' do
-            strong ADMIN BEST-HR
+            strong ADMIN
           button.navbar-toggler[type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation"]
             span.navbar-toggler-icon
           #navbarSupportedContent-7.collapse.navbar-collapse
@@ -40,9 +40,15 @@ html
                     = link_to 'Города', admin_cities_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Ценовые группы', admin_price_groups_path, class: 'dropdown-item', data: {offset: '60'}
                 li.nav-item.dropdown
-                  = link_to 'Настройки', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
+                  = link_to 'Настройки', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }
                   .dropdown-menu
-                    = link_to 'Наши юрлица', admin_companies_path, class: 'dropdown-item', data: {offset: '60'}
+                    = link_to 'Наши юрлица', admin_companies_path, class: 'dropdown-item', data: { offset: '60' }
+                li.nav-item.dropdown
+                  = link_to 'SuperJob', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }
+                  .dropdown-menu
+                    = link_to 'Авторизация на портале', admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
+                    / = link_to 'Конфигуратор поиска анкет', edit_admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
+                    = link_to 'Выгрузка для HR-ботов', download_admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
 
                 li.nav-item.dropdown
                   = link_to 'Аналитика', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
