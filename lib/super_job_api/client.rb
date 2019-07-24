@@ -26,7 +26,8 @@ module SuperJobApi
         {
           resume_id: res['id'],
           link: res['link'],
-          phone: res['phone1'] || res['phone2']
+          phone: res['phone1'] || res['phone2'],
+          gender: res['gender']['id'] == 2 ? 'М' : 'Ж'
         }
       end
       res.select { |r| r[:phone].present? }

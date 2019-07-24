@@ -15,6 +15,7 @@ module Cmd
               name: resume[:link],
               phone_number: resume[:phone],
               super_job_id: resume[:resume_id],
+              gender: resume[:gender],
               experience: query_params['keywords'][0]['keys'],
               remark: query_params.to_s
             }
