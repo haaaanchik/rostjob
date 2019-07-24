@@ -18,7 +18,7 @@ module Cmd
         end
 
         def user
-          User.find_by(email: 'bot@best-hr.pro')
+          ::User.find_by(email: 'bot@best-hr.pro')
         end
 
         def profile
