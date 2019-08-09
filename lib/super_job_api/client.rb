@@ -10,6 +10,21 @@ module SuperJobApi
       @query_params = config['query_params']
     end
 
+    def catalogues
+      endpoint = 'catalogues'
+      get(endpoint)
+    end
+
+    def regions_combined
+      endpoint = 'regions/combined'
+      get(endpoint)
+    end
+
+    def regions
+      endpoint = 'regions'
+      get(endpoint, all: 1)
+    end
+
     def towns
       endpoint = 'towns'
       get(endpoint, all: 1, id_country: 1)
@@ -51,7 +66,7 @@ module SuperJobApi
       if response
         resumes += response['objects']
 
-        while response['more'] && page < 12
+        while response['more'] && page < 20
           page += 1
           response = get(endpoint, @query_params.merge(count: 100, page: page))
           resumes += response['objects'] if response
