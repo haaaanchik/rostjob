@@ -82,7 +82,7 @@ javascript:
     data: towns
   });
 
-  var selected_towns = "#{query.query_params['t'].join(',')}".split(',');
+  var selected_towns = "#{query.query_params['t']&.join(',')}".split(',');
   console.log('towns: ', selected_towns);
   $('.towns').val(selected_towns);
   $('.towns').trigger('change');
