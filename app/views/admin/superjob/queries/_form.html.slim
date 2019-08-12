@@ -50,13 +50,14 @@
       .col
         = label_tag 'region', 'Область'
         = select_tag 'super_job_query[query_params][o][]', nil, class: 'form-control browser-default regions', prompt: 'Введите область', multiple: true
-      .col
         = label_tag 'town', 'Город'
         = select_tag 'super_job_query[query_params][t][]', nil, class: 'form-control browser-default towns', prompt: 'Введите город', multiple: true
-    .form-check.mt-3
-      = qp.check_box :moveable, class: 'form-check-input'
-      = qp.label :moveable, 'Готов к переезду', class: 'form-check-label'
-      = qp.hidden_field :experience
+        - opts = [OpenStruct.new(id: "1", text: "живет в регионе или готов к переезду куда-либо"),
+                  OpenStruct.new(id: "2", text: "живет в регионе или готов к переезду в него"),
+                  OpenStruct.new(id: "3", text: "не живет в регионе, но готов к переезду в него"),
+                  OpenStruct.new(id: "4", text: "живет в регионе")]
+        = qp.collection_select :moveable, opts, :id, :text, {}, class: 'form-control browser-default mt-3'
+        = qp.hidden_field :experience
 
     h5.mt-3 Отрасли:
     .form-row.mt-3
