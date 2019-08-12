@@ -8,6 +8,7 @@ module Cmd
           resumes = client.all_resumes_with_contacts
           config = ::SuperJob::Config.config
           query_params = config.active_query.query_params
+          title = config.active_query.title
           profile = ::User.find(config.contractor_id).profile
 
           resumes.each do |resume|
@@ -17,7 +18,7 @@ module Cmd
               super_job_id: resume[:resume_id],
               gender: resume[:gender],
               experience: query_params['keywords'][0]['keys'],
-              remark: query_params.to_s
+              remark: "#{title}\n#{query_params}"
             }
             Cmd::EmployeeCv::CreateAsReady.call(params: params, profile: profile)
           end
