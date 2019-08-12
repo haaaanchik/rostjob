@@ -4,7 +4,7 @@
       p.h4.text-center.m-4 Вход
       .md-form
         i class='fa fa-user prefix grey-text'
-        = f.text_field :login, class: 'from-control'
+        = f.text_field :login, class: 'from-control', autofocus: true
         = f.label :login, 'Логин'
       .md-form
         i class='fa fa-lock prefix grey-text'

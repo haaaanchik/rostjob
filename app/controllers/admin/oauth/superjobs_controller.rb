@@ -5,6 +5,10 @@ class Admin::Oauth::SuperjobsController < Admin::Oauth::ApplicationController
     super_job
   end
 
+  def update
+    super_job.update(super_job_params)
+  end
+
   def employee_cvs
     respond_to do |format|
       format.xlsx do
@@ -17,6 +21,16 @@ class Admin::Oauth::SuperjobsController < Admin::Oauth::ApplicationController
   end
 
   private
+
+  def super_job_params
+    params.require(:super_job).permit(query_params: [:period,
+                                                     :experience,
+                                                     :moveable,
+                                                     :exclude_words,
+                                                     :payment_from,
+                                                     :payment_to,
+                                                     keywords: %i[keys srws skwc]])
+  end
 
   def ecv_params
     params.permit(:date_from, :date_to)

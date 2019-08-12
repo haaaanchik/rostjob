@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_122930) do
+ActiveRecord::Schema.define(version: 2019_08_11_191035) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.index ["ticket_id"], name: "index_messages_on_ticket_id"
   end
 
-  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "type"
     t.string "code"
     t.string "access_token"
@@ -436,6 +436,29 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "code"
+    t.string "access_token"
+    t.string "refresh_token"
+    t.integer "ttl"
+    t.integer "expires_in"
+    t.string "token_type"
+    t.bigint "contractor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "references"
+  end
+
+  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.json "query_params"
+    t.boolean "active"
+    t.bigint "config_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["config_id"], name: "index_super_job_queries_on_config_id"
+  end
+
   create_table "tax_calculations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "tax_base", precision: 10, scale: 2
     t.decimal "tax_amount", precision: 10, scale: 2
@@ -472,7 +495,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
-  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.integer "id_region"
     t.integer "id_country"
     t.string "title"
@@ -556,6 +579,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_122930) do
   add_foreign_key "positions", "price_groups"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
+  add_foreign_key "super_job_queries", "super_job_configs", column: "config_id"
   add_foreign_key "tax_calculations", "profiles"
   add_foreign_key "tax_offices", "companies"
   add_foreign_key "tickets", "users"

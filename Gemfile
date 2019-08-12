@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'select2-rails', '~> 4.0', '>= 4.0.3'
 gem 'rest-client'
 gem 'strip_attributes', '~> 1.9'
 gem 'data-confirm-modal'

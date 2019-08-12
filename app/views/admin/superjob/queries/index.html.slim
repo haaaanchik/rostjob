@@ -1,0 +1,17 @@
+.col.order-1.order-sm-1.order-md-2.rounded.p-1.mt-4.mr-2
+  .mt-4
+    .container
+      .row.mt-4.mr-1.ml-0
+        .col-8
+        .col-4
+          = link_to new_admin_superjob_query_path, class: 'btn btn-success btn-rounded', remote: true do
+            i.fas.fa-plus.mr-2
+            |Добавить запрос
+  / table.table.table-hover.w-auto
+  table.table.table-sm.table-hover.mt-4
+    tr
+      th.text-center Активный
+      th.text-center Наименование запроса
+      th.text-center Действия
+    = render partial: 'admin/superjob/queries/query', collection: @paginated_queries
+  = paginate @paginated_queries

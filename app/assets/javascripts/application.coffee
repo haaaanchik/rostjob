@@ -15,6 +15,8 @@
 #= require tinymce
 #= require jquery.inputmask
 #= require data-confirm-modal
+#= require select2
+#= require select2_locale_ru
 # require jquery.inputmask.extensions
 # require jquery.inputmask.numeric.extensions
 # require jquery.inputmask.date.extensions

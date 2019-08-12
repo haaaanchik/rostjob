@@ -1,0 +1,30 @@
+tr
+  td.align-middle.text-center
+    - if query.active?
+      i.far.fa-check-circle.fa-2x.text-info
+  td.align-middle = query.title
+  td.align-middle
+    .d-flex.justify-content-center
+      .text-center.mr-2
+        = link_to admin_superjob_query_path(query), remote: true, class: 'btn-floating btn-sm red',
+          method: :delete, data: { confirm: 'Вы уверены?' } do
+          i.fas.fa-trash
+        p.card-title
+          | Удалить
+      .text-center.mr-2
+        = link_to copy_admin_superjob_query_path(query), remote: true, class: 'btn-floating btn-sm blue',
+          method: :post, data: { confirm: 'Точно хотите скопировать запрос?' } do
+          i.fas.fa-clone
+        p.card-title
+          | Копия
+      .text-center.mr-2
+        = link_to edit_admin_superjob_query_path(query), remote: true, class: 'btn-floating btn-sm green' do
+          i.fas.fa-pen-alt
+        p.card-title
+          | Изменить
+      .text-center
+        = link_to activate_admin_superjob_query_path(query), remote: true, class: "btn-floating btn-sm info-color #{'disabled' if query.active?}",
+          method: :put, data: { confirm: 'Точно хотите сделать запрос активным?' } do
+          i.fas.fa-check
+        p.card-title
+          | Активировать

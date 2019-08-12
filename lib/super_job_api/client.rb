@@ -7,7 +7,12 @@ module SuperJobApi
         'Authorization' => "Bearer #{config['access_token']}",
         'X-Api-App-Id' => Rails.configuration.superjob['client_secret']
       }
-      @query_params = config['query_params']
+      @query_params = config.active_query['query_params']
+    end
+
+    def references
+      endpoint = 'references'
+      get(endpoint)
     end
 
     def catalogues

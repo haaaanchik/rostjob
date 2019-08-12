@@ -6,8 +6,8 @@ module Cmd
 
         def call
           resumes = client.all_resumes_with_contacts
-          config = ::SuperJob.config
-          query_params = config.query_params
+          config = ::SuperJob::Config.config
+          query_params = config.active_query.query_params
           profile = ::User.find(config.contractor_id).profile
 
           resumes.each do |resume|
@@ -26,7 +26,7 @@ module Cmd
         private
 
         def client
-          @client = SuperJobApi::Client.new(::SuperJob.config)
+          @client = SuperJobApi::Client.new(::SuperJob::Config.config)
         end
       end
     end

@@ -1,32 +1,46 @@
 = form_with model: model, url: admin_oauth_superjob_path do |f|
-  .form-group
-    = f.label :keywords, 'Включая слова'
-    = f.text_field :keywords, class: 'form-control'
-  .form-group
-    = f.label :exclude_words, 'Исключая слова'
-    = f.text_field :exclude_words, class: 'form-control'
-    small.form-text.text-muted Пробел - условие И, запятая - условие ИЛИ
-  h5 Резюме опубликованные за:
-  .form-check.form-check-inline
-    = f.radio_button :period, 1, class: 'form-check-input'
-    = f.label :period, '24 часа', class: 'form-check-label', for: 'period_1'
-  .form-check.form-check-inline
-    = f.radio_button :period, 3, class: 'form-check-input'
-    = f.label :period, '3 дня', class: 'form-check-label', for: 'period_3'
-  .form-check.form-check-inline
-    = f.radio_button :period, 7, class: 'form-check-input'
-    = f.label :period, 'неделю', class: 'form-check-label', for: 'period_7'
-  .form-check.form-check-inline
-    = f.radio_button :period, 14, class: 'form-check-input'
-    = f.label :period, '2 недели', class: 'form-check-label', for: 'period_14'
-  .form-check.form-check-inline
-    = f.radio_button :period, 30, class: 'form-check-input'
-    = f.label :period, '1 месяц', class: 'form-check-label', for: 'period_30'
-  .form-check.form-check-inline
-    = f.radio_button :period, 60, class: 'form-check-input'
-    = f.label :period, '2 месяца', class: 'form-check-label', for: 'period_60'
-  .form-check.mt-3
-    = f.check_box :moveable, class: 'form-check-input'
-    = f.label :moveable, 'Готов к переезду', class: 'form-check-label'
-  br
-  = f.submit 'Сохранить'
+  = f.fields_for :query_params, OpenStruct.new(model.query_params) do |qp|
+    - model.query_params['keywords'].each do |kw|
+      .form-group
+        = hidden_field_tag 'super_job[query_params][keywords][][srws]', kw['srws'], class: 'form-control'
+        = hidden_field_tag 'super_job[query_params][keywords][][skwc]', kw['skwc'], class: 'form-control'
+        = label_tag 'super_job[query_params][keywords][][keys]', 'Включая слова'
+        = text_field_tag 'super_job[query_params][keywords][][keys]', kw['keys'], class: 'form-control'
+    .form-group
+      = qp.label :exclude_words, 'Исключая слова'
+      = qp.text_field :exclude_words, class: 'form-control'
+      small.form-text.text-muted Пробел - условие И, запятая - условие ИЛИ
+    h5 Резюме опубликованные за:
+    .form-check.form-check-inline
+      = qp.radio_button :period, 1, class: 'form-check-input'
+      = qp.label :period, '24 часа', class: 'form-check-label', for: 'super_job_query_params_period_1'
+    .form-check.form-check-inline
+      = qp.radio_button :period, 3, class: 'form-check-input'
+      = qp.label :period, '3 дня', class: 'form-check-label', for: 'super_job_query_params_period_3'
+    .form-check.form-check-inline
+      = qp.radio_button :period, 7, class: 'form-check-input'
+      = qp.label :period, 'неделю', class: 'form-check-label', for: 'super_job_query_params_period_7'
+    .form-check.form-check-inline
+      = qp.radio_button :period, 14, class: 'form-check-input'
+      = qp.label :period, '2 недели', class: 'form-check-label', for: 'super_job_query_params_period_14'
+    .form-check.form-check-inline
+      = qp.radio_button :period, 30, class: 'form-check-input'
+      = qp.label :period, '1 месяц', class: 'form-check-label', for: 'super_job_query_params_period_30'
+    .form-check.form-check-inline
+      = qp.radio_button :period, 60, class: 'form-check-input'
+      = qp.label :period, '2 месяца', class: 'form-check-label', for: 'super_job_query_params_period_60'
+    .form-row.mt-3
+      .col
+        .form-group
+          = qp.label :payment_from, 'Уровень дохода от:'
+          = qp.text_field :payment_from, class: 'form-control'
+      .col
+        .form-group
+          = qp.label :payment_to, 'Уровень дохода до:'
+          = qp.text_field :payment_to, class: 'form-control'
+    .form-check.mt-3
+      = qp.check_box :moveable, class: 'form-check-input'
+      = qp.label :moveable, 'Готов к переезду', class: 'form-check-label'
+      = qp.hidden_field :experience
+    br
+    = f.submit 'Сохранить'

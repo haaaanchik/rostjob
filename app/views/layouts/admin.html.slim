@@ -9,6 +9,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
   body
+    #modal_append
     - if staffer_signed_in?
       header
         nav.navbar.navbar-expand-lg.navbar-dark.indigo.fixed-top
@@ -47,7 +48,7 @@ html
                   = link_to 'SuperJob', '#', class: 'nav-link dropdown-toggle', data: { toggle: 'dropdown' }
                   .dropdown-menu
                     = link_to 'Авторизация на портале', admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
-                    / = link_to 'Конфигуратор поиска анкет', edit_admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
+                    = link_to 'Запросы на поиск анкет', admin_superjob_queries_path, class: 'dropdown-item', data: { offset: '60' }
                     = link_to 'Выгрузка для HR-ботов', download_admin_oauth_superjob_path, class: 'dropdown-item', data: { offset: '60' }
 
                 li.nav-item.dropdown

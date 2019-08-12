@@ -20,6 +20,8 @@
 @import "style-lenta";
 @import "profile/order_templates";
 @import "confirm_modal";
+@import "select2";
+@import "select2-bootstrap";
 
 @media (max-width: 1025px) {
   .stepper.colorful-timeline li {

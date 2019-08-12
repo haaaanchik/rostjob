@@ -30,6 +30,14 @@ Rails.application.routes.draw do
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
+    namespace :superjob do
+      resources :queries, except: %i[show] do
+        member do
+          post :copy
+          put :activate
+        end
+      end
+    end
     namespace :oauth do
       resource :superjob, only: %i[show edit update] do
         member do

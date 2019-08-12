@@ -1,7 +1,5 @@
-class SuperJob < Oauth
-  has_many :towns, dependent: :destroy
-
-  def self.config
-    first
+module SuperJob
+  def self.table_name_prefix
+    'super_job_'
   end
 end
