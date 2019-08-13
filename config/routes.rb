@@ -32,9 +32,14 @@ Rails.application.routes.draw do
     delete 'logout', to: 'sessions#destroy'
     namespace :superjob do
       resources :queries, except: %i[show] do
+        collection do
+          put :activate_all
+          put :deactivate_all
+        end
         member do
           post :copy
           put :activate
+          put :deactivate
         end
       end
     end

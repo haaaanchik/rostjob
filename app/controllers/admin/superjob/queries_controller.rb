@@ -40,8 +40,19 @@ class Admin::Superjob::QueriesController < Admin::Superjob::ApplicationControlle
   end
 
   def activate
-    result = Cmd::SuperJob::Query::Activate.call(query: query)
-    redirect_to admin_superjob_queries_path result.success?
+    Cmd::SuperJob::Query::Activate.call(query: query)
+  end
+
+  def deactivate
+    Cmd::SuperJob::Query::Deactivate.call(query: query)
+  end
+
+  def activate_all
+    Cmd::SuperJob::Query::ActivateAll.call
+  end
+
+  def deactivate_all
+    Cmd::SuperJob::Query::DeactivateAll.call
   end
 
   private

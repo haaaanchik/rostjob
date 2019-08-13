@@ -1,11 +1,11 @@
 module Cmd
   module SuperJob
     module Query
-      class Activate
+      class Deactivate
         include Interactor
 
         def call
-          query.update(active: true)
+          query.update(active: false)
           context.fail! unless query.persisted?
         end
 

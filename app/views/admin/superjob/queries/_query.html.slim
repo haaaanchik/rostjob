@@ -1,7 +1,10 @@
 tr
   td.align-middle.text-center
-    - if query.active?
-      i.far.fa-check-circle.fa-2x.text-info
+    .form-check.form-check-inline
+      = fields_for(query) do |c|
+        = c.check_box :active, class: 'form-check-input', id: "super_job_query_active_#{query.id}",
+          data: { activate_url: activate_admin_superjob_query_url(query), deactivate_url: deactivate_admin_superjob_query_url(query) }
+        = c.label :active, '.', class: 'form-check-label', for: "super_job_query_active_#{query.id}"
   td.align-middle = query.title
   td.align-middle
     .d-flex.justify-content-center
@@ -22,9 +25,3 @@ tr
           i.fas.fa-pen-alt
         p.card-title
           | Изменить
-      .text-center
-        = link_to activate_admin_superjob_query_path(query), remote: true, class: "btn-floating btn-sm info-color #{'disabled' if query.active?}",
-          method: :put, data: { confirm: 'Точно хотите сделать запрос активным?' } do
-          i.fas.fa-check
-        p.card-title
-          | Активировать
