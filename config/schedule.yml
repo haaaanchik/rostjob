@@ -5,7 +5,7 @@ warranty_period_processing:
   description: "Creates jobs for warranty period processing"
 
 fetch_resumes:
-  cron: "0 2 * * *"
+  cron: "30 0 * * *"
   class: "CreateFetchResumesJob"
   queue: critical
   description: "Fetch resumes from SuperJob"
