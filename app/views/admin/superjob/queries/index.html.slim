@@ -10,7 +10,11 @@
   / table.table.table-hover.w-auto
   table.table.table-sm.table-hover.mt-4
     tr
-      th.text-center Включить
+      th.text-center
+        .form-check.form-check-inline
+          = check_box_tag 'super_job_query_activeall', true, false, class: 'form-check-input',
+            data: { activate_url: activate_all_admin_superjob_queries_url, deactivate_url: deactivate_all_admin_superjob_queries_url }
+          = label_tag 'super_job_query_activeall', 'Включить', class: 'form-check-label'
       th.text-center Наименование запроса
       th.text-center Действия
     = render partial: 'admin/superjob/queries/query', collection: @paginated_queries
