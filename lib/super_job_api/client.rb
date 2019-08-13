@@ -1,13 +1,14 @@
 module SuperJobApi
   class Client
-    def initialize(config)
+    def initialize(config, query = nil)
       @api_url = Rails.configuration.superjob['api_url']
       @client_id = config['client_id']
       @base_headers = {
         'Authorization' => "Bearer #{config['access_token']}",
         'X-Api-App-Id' => Rails.configuration.superjob['client_secret']
       }
-      @query_params = config.active_query['query_params']
+      qp = query ? query['query_params'] : config.active_query['query_params']
+      @query_params = qp
     end
 
     def references
