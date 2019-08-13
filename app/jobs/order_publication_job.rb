@@ -1,5 +1,5 @@
 class OrderPublicationJob < ApplicationJob
-  queue_as :default
+  queue_as :critical
 
   def perform(invoice_id)
     invoice = Invoice.find(invoice_id)
