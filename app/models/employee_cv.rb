@@ -13,7 +13,7 @@ class EmployeeCv < ApplicationRecord
   strip_attributes only: :name
 
   validates :name, presence: true
-  # validates :phone_number, presence: true, phone: true
+  validates :phone_number, uniqueness: true, phone: true
   validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true

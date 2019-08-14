@@ -75,8 +75,9 @@
                             = f.label :birthdate, 'Дата рождения', class: 'active'
                         .col-8
                           .md-form.mt-1
-                            = f.phone_field :phone_number, class: 'form-control'
                             = f.label :phone_number, 'Номер телефона', class: 'active'
+                            = f.phone_field :phone_number, class: 'form-control'
+                            .invalid-feedback
                       .row
                         .col-4
                           .file-field

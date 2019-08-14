@@ -12,8 +12,9 @@
       .row
         .col-8
           .md-form.mt-0
+            = f.label :phone_number, 'Номер телефона main', class: 'active'
             = f.phone_field :phone_number, class: 'form-control'
-            = f.label :phone_number, 'Номер телефона', class: 'active'
+            .invalid-feedback
         .col-2
           .form-inline.mt-2.d-flex.justify-content-center
             .form-check
