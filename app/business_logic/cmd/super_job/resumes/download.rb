@@ -5,10 +5,11 @@ module Cmd
         include Interactor
 
         def call
-          context.employee_cvs = ready_employee_cvs.map do |ecv|
+          employee_cvs = ready_employee_cvs.map do |ecv|
             ecv.phone_number.delete!(' \-+').sub!(/^./, '8')
             ecv
           end
+          context.employee_cvs = employee_cvs.uniq { |i| i.phone_number }
         end
 
         private
