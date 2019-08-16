@@ -1,4 +1,4 @@
 = form_with model: @user, url: login_path, html: { class: 'form-inline my-2 my-lg-0' }, local: true, method: :post do |f|
-  = f.text_field :email, class: 'form-control form-control-sm form-box', placeholder: 'Логин'
+  = f.text_field :email, class: 'form-control form-control-sm form-box', placeholder: 'E-Mail'
   = f.password_field :password, class: 'form-control form-control-sm form-box', placeholder: 'Пароль'
   = f.submit 'Вход', class: 'btn btn-outline-success waves-effect btn-box'

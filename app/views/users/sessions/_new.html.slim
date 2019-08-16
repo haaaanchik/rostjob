@@ -2,7 +2,7 @@
   p.red-text #{@user.errors[:base].first}
 = form_with model: @user, url: login_path, class: 'text-center p-3 mb-2', local: true do |f|
   .md-form.mb-5
-    = f.text_field :email, class: 'form-control', placeholder: 'Логин'
+    = f.text_field :email, class: 'form-control', placeholder: 'E-Mail'
   .md-form.mb-5
     = f.password_field :password, class: 'form-control', placeholder: 'Пароль'
   .d-flex.justify-content-center
