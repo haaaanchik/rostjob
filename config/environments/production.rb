@@ -62,21 +62,26 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "best-hr_#{Rails.env}"
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.mail.ru',
-    port: 587,
-    user_name: 'noreply@best-hr.pro',
-    password: %(R@OYLwGPTLHmC{guja~#),
-    authentication: :plain,
-    enable_starttls_auto: true
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.mail.ru',
+  #   port: 587,
+  #   user_name: 'noreply@best-hr.pro',
+  #   password: %(R@OYLwGPTLHmC{guja~#),
+  #   authentication: :plain,
+  #   enable_starttls_auto: true
+  # }
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: '11d7b7e27023d3b56880f00170e97c15-898ca80e-44046bdf',
+    domain: 'mg.best-hr.pro',
+    region: 'eu'
+  }
   config.action_mailer.default_url_options = { host: '176.99.12.204' }
-  config.action_mailer.default_options = { from: 'noreply@best-hr.pro', charset: 'utf-8' }
+  config.action_mailer.default_options = { from: 'noreply@mg.best-hr.pro', charset: 'utf-8' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
