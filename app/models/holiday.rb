@@ -1,5 +1,5 @@
 class Holiday < ApplicationRecord
-  WARRANTY_PERIOD = 15
+  WARRANTY_PERIOD = 10
 
   validates :date, presence: true
 
