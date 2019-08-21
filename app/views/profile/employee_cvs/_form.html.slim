@@ -2,51 +2,52 @@
   = f.hidden_field :order_id, value: @order&.id
   .border.rounded.white.mt-1
     .modal-body.pt-1
-      .row
-        .col
-          .md-form
-            = f.label :name, 'Полное имя', class: 'active'
-            = f.text_field :name, class: 'form-control'
-            .invalid-feedback
-            = f.hidden_field :proposal_id, value: params[:proposal_id]
-      .row
-        .col-8
-          .md-form.mt-0
-            = f.label :phone_number, 'Номер телефона main', class: 'active'
-            = f.phone_field :phone_number, class: 'form-control'
-            .invalid-feedback
-        .col-2
-          .form-inline.mt-2.d-flex.justify-content-center
-            .form-check
-              = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
-              = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
-        .col-2
-          .form-inline.mt-2.d-flex.justify-content-center
-            .form-check
-              = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
-              = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+      .container-fluid
+        .row
+          .col
+            .md-form
+              = f.label :name, 'Полное имя', class: 'active'
+              = f.text_field :name, class: 'form-control'
+              .invalid-feedback
+              = f.hidden_field :proposal_id, value: params[:proposal_id]
+        .row
+          .col-8
+            .md-form.mt-0
+              = f.label :phone_number, 'Номер телефона', class: 'active'
+              = f.phone_field :phone_number, class: 'form-control'
+              .invalid-feedback
+          .col-2
+            .form-inline.mt-2.d-flex.justify-content-center
+              .form-check
+                = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
+                = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
+          .col-2
+            .form-inline.mt-2.d-flex.justify-content-center
+              .form-check
+                = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
+                = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
   .modal-body.pt-1.pb-0
-    .row
-      - if @employee_cv.new_record?
-        .col-md-8.border.rounded.white
-          .md-form.input-group.d-flex.justify-content-center
-            .input-group-prepend
-              .input-group-text.md-addon.pl-0
-                = f.check_box :contractor_terms_of_service, class: 'form-check-input', checked: false
-                = f.label :contractor_terms_of_service, t('employee_cv.contractor_terms_of_service'),
-                  class: 'from-check-label ml-2', data: { action: 'click->employee-cv#tosToggle' }
-                = render partial: 'utils/oferta'
-
-      .col-md-4.d-flex.align-items-center
+    .container-fluid
+      .row
         - if @employee_cv.new_record?
-          - if @order
-            = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save_as_sent
+          .col-md-8.border.rounded.white
+            .md-form.input-group.d-flex.justify-content-center
+              .input-group-prepend
+                .input-group-text.md-addon.pl-0
+                  = f.check_box :contractor_terms_of_service, class: 'form-check-input', checked: false
+                  = f.label :contractor_terms_of_service, t('employee_cv.contractor_terms_of_service'),
+                    class: 'from-check-label ml-2', data: { action: 'click->employee-cv#tosToggle' }
+                  = render partial: 'utils/oferta'
+
+        .col-md-4.d-flex.align-items-center
+          - if @employee_cv.new_record?
+            - if @order
+              = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save_as_sent
+            - else
+              = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save
+              / = f.submit 'Сохранить как черновик', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_draft
           - else
-            = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button disabled', name: :save
-            / = f.submit 'Сохранить как черновик', class: 'btn btn-indigo employee-cv-submit-button disabled', name: :save_as_draft
-        - else
-          = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button disabled'
-  / - unless @order || !@employee_cv.new_record?
-  .row
-    .col.mt-2.text-center
-      = f.submit 'Мне нужно ввести больше данных', name: :pre_new_full
+            = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button disabled'
+      .row
+        .col.mt-2.text-center
+          = f.submit 'Мне нужно ввести больше данных', name: :pre_new_full

@@ -7,24 +7,27 @@
             p.m-0.ml-1.font-weight-bold
               |№#{order.id}
           td.text-center.align-items-center width="12%"
-            p.m-0.font-weight-bold
-              | #{order.customer_name}
+            .d-none.d-md-block
+              p.m-0.font-weight-bold
+                | #{order.customer_name}
           td.text-center.align-items-center width="13%"
             p.m-0
               | #{order.city}
           td.text-center.align-items-center width="30%"
-            p.m-0
-              | #{order.place_of_work}
+            .d-none.d-md-block
+              p.m-0
+                | #{order.place_of_work}
           td.text-center.align-items-center width="22%"
             p.m-0
               | #{order.title}. #{order.skill} <br /> #{order.salary}
           td.text-center.align-items-center width="15%"
-            .bg-best-hr.text-right.z-depth-2.rounded.mb-0.position-relative
-              p.white-text.m-1.font-weight-bold
-                |#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
-                i.fas.fa-ruble-sign.ml-1.mr-1
-                |/ чел.
-            /     |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
+            .d-none.d-md-block
+              .bg-best-hr.text-right.z-depth-2.rounded.mb-0.position-relative
+                p.white-text.m-1.font-weight-bold
+                  |#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
+                  i.fas.fa-ruble-sign.ml-1.mr-1
+                  |/ чел.
+              /     |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
   .col-12.p-0.collapsable_card data-order-id=order.id class="#{'collapse' unless order.advertising?}"
     .card.testimonial-card.w-100.z-depth-0.border
       .card-up.lighten-1.card-up-hr class="#{order.advertising? ? 'advertising' : 'bg-best-hr'}"
@@ -39,6 +42,9 @@
                       td.align-bottom
                         .d-none.d-md-block
                           h4.card-title.white-text #{order.profile.company.name} #{order.adv_text if order.advertising?}
+                        .d-block.d-md-none
+                          h4.card-title.white-text
+                            |# #{order.id}
                       td.align-middle.text-right[width="200px"]
                         - unless @current_profile.profile_type == 'customer'
                           - unless @employee_cv_id
@@ -64,40 +70,80 @@
           .avatar.ml-2.white.mr-1.d-none.d-md-block
             = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
           .ml-2.mr-2
-            p.h4
-              br
-              |# #{order.id}
-
+            .d-none.d-md-block
+              p.h4
+                br
+                |# #{order.id}
         .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
           .row.m-0.p-0.pr-1.pl-1.pb-1
             .col-md-9.pr-0.pl-0
               = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
               .price.w-100.border.rounded.mb-0.p-1
-                p.h5.text-center.mt-1.mb-0
-                  i.fas.fa-city
-                  strong.ml-2 #{order.place_of_work}
-                p.h4.text-center.mt-1.mb-0
-                  i.fas.fa-hammer.mr-2
-                  strong #{order.title}. #{order.skill}
-                p.text-center.m-0
-                  i.fas.fa-money-bill-alt.w-2.mr-2
-                  i.fas.fa-ruble-sign.mr-2
-                  strong #{order.salary}
-                p.m-0
-                  i.fas.fa-map-marker.w-2
-                  strong.ml-2 #{order.city}, #{order.district}
-                p.m-0
-                  i.fas.fa-passport.w-2.mr-2
-                  strong #{order.experience}
-                p.m-0
-                  i.far.fa-calendar-alt.w-2.mr-2
-                  strong #{order.work_period}. #{order.schedule}.
                 .d-none.d-md-block
+                  p.h5.text-center.mt-1.mb-0
+                    i.fas.fa-city
+                    strong.ml-2 #{order.place_of_work}
+                  p.h4.text-center.mt-1.mb-0
+                    i.fas.fa-hammer.mr-2
+                    strong #{order.title}. #{order.skill}
+                  p.text-center.m-0
+                    i.fas.fa-money-bill-alt.w-2.mr-2
+                    i.fas.fa-ruble-sign.mr-2
+                    strong #{order.salary}
+                  p.m-0
+                    i.fas.fa-map-marker.w-2
+                    strong.ml-2 #{order.city}, #{order.district}
+                  p.m-0
+                    i.fas.fa-passport.w-2.mr-2
+                    strong #{order.experience}
+                  p.m-0
+                    i.far.fa-calendar-alt.w-2.mr-2
+                    strong #{order.work_period}. #{order.schedule}.
                   p.h6.m-0
                     i.fas.fa-clipboard-list.w-2.mr-2
                     - unless order.description.nil? || order.description.empty?
                       strong == order.description
                   p.m-0
+                    i.fas.fa-plus.w-2.mr-2
+                    strong #{order.other_info['related_profession']}
+                  p.h6.m-0
+                    i.fas.fa-bed.w-2.mr-2
+                    strong.mr-2 Предлагаемые условия:
+                    == order.other_info['terms']
+                  hr.h6.mb-0
+                  p.h6.m-0
+                    i.fas.fa-comment-alt.w-2.mr-2
+                    |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
+                    br
+                    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                      == order.other_info['remark']
+                    - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
+                      order.contact_person['phone'] && !order.contact_person['phone'].empty?
+                .d-block.d-md-none
+                  p.h6.text-center.mt-1.mb-0
+                    i.fas.fa-city
+                    strong.ml-2 #{order.place_of_work}
+                  p.h6.text-center.mt-1.mb-0
+                    i.fas.fa-hammer.mr-2
+                    strong #{order.title}. #{order.skill}
+                  p.h6.text-center.m-0
+                    i.fas.fa-money-bill-alt.w-2.mr-2
+                    i.fas.fa-ruble-sign.mr-2
+                    strong #{order.salary}
+                  p.h6.m-0
+                    i.fas.fa-map-marker.w-2
+                    strong.ml-2 #{order.city}, #{order.district}
+                  p.h6.m-0
+                    i.fas.fa-passport.w-2.mr-2
+                    strong #{order.experience}
+                  p.h6.m-0
+                    i.far.fa-calendar-alt.w-2.mr-2
+                    strong #{order.work_period}. #{order.schedule}.
+                  p.h6.m-0
+                    i.fas.fa-clipboard-list.w-2.mr-2
+                    - unless order.description.nil? || order.description.empty?
+                      strong == order.description
+                  p.h6.m-0
                     i.fas.fa-plus.w-2.mr-2
                     strong #{order.other_info['related_profession']}
                   p.h6.m-0
@@ -125,7 +171,6 @@
                       p.font-italic.m-1
                         nobr
                           = order.contact_person['phone']
-
               - if order.document.present?
                 div
                   .d-flex.justify-content-center

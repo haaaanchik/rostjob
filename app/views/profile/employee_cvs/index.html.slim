@@ -3,10 +3,10 @@
   .mt-4
     .container
       .row.mt-4.mr-1.ml-0
-        .col-8
+        .col-md-8
           = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
-        .col-4
-          = link_to new_profile_employee_cv_path, class: 'btn btn-success btn-rounded', remote: true do
+        .col-md-4
+          = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
             i.fas.fa-plus.mr-2
             |Добавить анкету
   / table.table.table-hover.w-auto
