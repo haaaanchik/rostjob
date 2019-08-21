@@ -121,9 +121,9 @@
                       order.contact_person['phone'] && !order.contact_person['phone'].empty?
                 .d-block.d-md-none
                   p.h6.text-center.mt-1.mb-0
-                    | #{order.city} <br> #{order.place_of_work} <br> #{order.title} #{order.skill} <br> #{order.salary} рублей.
+                    | #{order.city} #{order.district} <br> #{order.place_of_work} <br> #{order.title} #{order.skill} <br> #{order.salary} рублей.
                   p.h6.mt-1.mb-0
-                    | #{order.district} <br> #{order.experience} <br> #{order.work_period}. #{order.schedule}. <br>
+                    | #{order.experience} <br> #{order.work_period}. #{order.schedule}. <br>
                     - unless order.description.nil? || order.description.empty?
                       == order.description
                       | <br>
