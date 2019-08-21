@@ -6,4 +6,6 @@
       ul
         - orders.each do |order|
           li
+            = Time.zone.parse(order.interview_date.to_s).strftime('%d.%m.%Y')
+            '
             = link_to order.employee_cv_name, profile_order_path(order, tab: :to_interview)

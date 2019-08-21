@@ -52,7 +52,7 @@ module OrderRepository
     }
 
     scope :with_interviewed_candidates, -> {
-      select('orders.*, proposal_employees.id as pe_id, proposal_employees.state as pe_state, proposal_employees.updated_at as pe_updated_at, employee_cvs.id as employee_cv_id, employee_cvs.name as employee_cv_name')
+      select('orders.*, proposal_employees.id as pe_id, proposal_employees.state as pe_state, proposal_employees.updated_at as pe_updated_at, proposal_employees.interview_date as interview_date, employee_cvs.id as employee_cv_id, employee_cvs.name as employee_cv_name')
         .joins('join proposal_employees on proposal_employees.order_id = orders.id')
         .where('proposal_employees.state = ? and proposal_employees.interview_date <= ? and proposal_employees.hiring_date_corrected is ?', 'interview', Date.current, nil)
         .joins('left join employee_cvs on proposal_employees.employee_cv_id = employee_cvs.id')
