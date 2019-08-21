@@ -9,7 +9,7 @@ tr.rounded.mb-0.example.hoverable.clickable-row id="candidate_#{candidate.id}" d
         = candidate.created_at.strftime('%d.%m.%Y')
   td.text-center
     p.font-weight-bold
-      |##{candidate.employee_cv_id} #{candidate.name}
+      |##{candidate.employee_cv_id} #{candidate.name} #{candidate.phone_number}
   td.text-center
     .d-none.d-lg-block
       p
@@ -17,7 +17,7 @@ tr.rounded.mb-0.example.hoverable.clickable-row id="candidate_#{candidate.id}" d
   td.text-center
     .d-none.d-xl-block
       p
-        = candidate.place_of_work
+        |#{candidate.place_of_work} #{candidate.city}
   td.text-center
     .d-none.d-sm-block
       p

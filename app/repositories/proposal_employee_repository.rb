@@ -6,7 +6,7 @@ module ProposalEmployeeRepository
     scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
     scope :candidates, lambda { |profile_id|
       where.not(state: 'revoked').joins(:order).joins(:employee_cv).where('orders.profile_id = ?', profile_id)
-           .select('proposal_employees.*', 'orders.title, orders.place_of_work', 'employee_cvs.name')
+        .select('proposal_employees.*', 'orders.title, orders.place_of_work', 'orders.city', 'employee_cvs.name', 'employee_cvs.phone_number')
     }
     scope :candidates_ids_for, lambda { |profile_id|
       joins(:order).where('orders.profile_id = ?', profile_id).pluck(:id)
