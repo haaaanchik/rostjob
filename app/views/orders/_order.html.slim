@@ -148,9 +148,7 @@
                           #{order.work_period}. #{order.schedule}.\n\
                           #{order.description}\n\
                           #{order.other_info['related_profession']}\n\
-                          #{order.other_info['terms']}\n\
-                          #{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}\n\
-                          Контактное лицо: #{order.contact_person['name']} #{order.contact_person['phone']}").text
+                          #{order.other_info['terms']}").text
 
               button.btn.button-hr.pt-2.pb-2.m-0.btn-rounded.w-100.waves-effect.active.text-center.blue-text[id="copy-to-clipboard-#{order.id}" data-order="#{order_text}"]
                 i.far.fa-copy.mr-2
