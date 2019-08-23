@@ -8,16 +8,17 @@ class ProposalEmployeeDecorator < ObjDecorator
     'disputed' => 'red',
     'paid' => 'grey',
     'deleted' => 'brown',
-    'reserved' => 'blue'
+    'reserved' => 'blue',
+    'transfer' => 'default-color'
   }
 
   STATUS_BACKGROUND_COLORS.default = 'blue'
 
   ACTIONS = {
     'customer' => {
-      'inbox' => %w[reserved interview],
-      'reserved' => %w[inbox interview],
-      'interview' => %w[hired disputed],
+      'inbox' => %w[reserved interview transfer],
+      'reserved' => %w[inbox interview transfer],
+      'interview' => %w[hired disputed transfer],
       'hired' => %w[disputed],
       'disputed' => %w[disputed]
     },
@@ -26,7 +27,8 @@ class ProposalEmployeeDecorator < ObjDecorator
       'interview' => %w[revoked disputed],
       'reserved' => %w[revoked],
       'hired' => %w[disputed],
-      'disputed' => %w[disputed]
+      'disputed' => %w[disputed],
+      'transfer' => %w[approve]
     },
     'staffer' => {
       'disputed' => %w[inbox interview hired reserved]
@@ -91,5 +93,13 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   def disput_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('disputed')
+  end
+
+  def transfer_action_enabled?(subject)
+    ACTIONS[subject.subject_type][model.state]&.include?('transfer')
+  end
+
+  def approve_transfer_action_enabled?(subject)
+    ACTIONS[subject.subject_type][model.state]&.include?('approve')
   end
 end

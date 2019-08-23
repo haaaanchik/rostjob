@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_11_191035) do
+ActiveRecord::Schema.define(version: 2019_08_22_113952) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -376,6 +376,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_191035) do
     t.date "arrival_date"
     t.boolean "hiring_date_corrected"
     t.timestamp "interview_date"
+    t.bigint "dst_order_id"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"
@@ -436,7 +437,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_191035) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "code"
     t.string "access_token"
     t.string "refresh_token"
@@ -449,7 +450,7 @@ ActiveRecord::Schema.define(version: 2019_08_11_191035) do
     t.json "references"
   end
 
-  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "title"
     t.json "query_params"
     t.boolean "active"

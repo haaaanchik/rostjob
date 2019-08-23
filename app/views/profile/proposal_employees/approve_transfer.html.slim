@@ -1,0 +1,15 @@
+javascript:
+  var redirect_func = function() {
+    var url = "#{profile_proposal_employee_path(@proposal_employee)}"
+    location.replace(url);
+  }
+
+  var status = "#{@status}";
+  console.log('status: ', status);
+
+  if(status == 'true') {
+    setTimeout(redirect_func, 2000);
+    toastr.success('Перенос анкеты успешно завершён');
+  } else {
+    toastr.error('Ошибка!');
+  }

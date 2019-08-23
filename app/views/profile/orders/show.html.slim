@@ -37,7 +37,7 @@
               = link_to profile_order_candidates_path(order, term: :interview),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center interview",
                       data: {toggle: 'pill'}, remote: true  do
-                | Собеседование
+                | Собес.
                 | &nbsp;#{order.candidates.interview.count}
 
               = link_to profile_order_candidates_path(order, term: :hired),
@@ -51,10 +51,15 @@
                 | Резерв
                 | &nbsp;#{order.candidates.reserved.count}
               = link_to profile_order_candidates_path(order, term: :disputed),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center disputed",
+                      class: "button btn button-hr waves-effect candidates-menu-button w-20 p-1 text-center disputed",
                       data: {toggle: 'pill'}, remote: true  do
                 | Спор
                 | &nbsp;#{order.candidates.disputed.count}
+              = link_to profile_order_candidates_path(order, term: :transfer),
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center disputed",
+                      data: {toggle: 'pill'}, remote: true  do
+                | Перенос
+                | &nbsp;#{order.candidates.transfer.count}
             #order_candidates
               = render partial: 'profile/orders/contractors/contractor_card' , collection: @contractors
             .container.w-100

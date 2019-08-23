@@ -27,10 +27,15 @@ class WelcomeController < ApplicationController
       customer_deals_count
       orders_with_interviewed_candidates
     elsif current_profile.contractor?
+      orders_with_transfering_employee_cvs
       orders_with_disputed_employee_cvs
       orders_with_deleted_employee_cvs
       contractor_deals_count
     end
+  end
+
+  def orders_with_transfering_employee_cvs
+    @orders_with_transfering_employee_cvs ||= current_profile.answered_orders.with_transfering_employee_cvs_contractor
   end
 
   def orders_with_interviewed_candidates

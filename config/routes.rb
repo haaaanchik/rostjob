@@ -146,6 +146,7 @@ Rails.application.routes.draw do
         put :to_disput
         put :revoke
         put :correct_interview_date
+        get :approve_transfer
       end
     end
     # get 'proposal_employee/:id', to: 'proposal_employee#show'
@@ -182,6 +183,7 @@ Rails.application.routes.draw do
             put :reserve
             put :to_inbox
             put :to_interview
+            put :transfer
           end
         end
         # put 'candidates/:id/hire', to: 'candidates#hire'

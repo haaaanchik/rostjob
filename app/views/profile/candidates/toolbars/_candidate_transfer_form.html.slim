@@ -1,0 +1,4 @@
+= form_with scope: :proposal_employee_decorator, url: transfer_profile_order_candidate_path(candidate.order_id, candidate), method: :put do |f|
+  = f.collection_select :dst_order_id, @current_profile.orders, :id, :title_with_id, { prompt: 'Выберите заявку' }, class: 'mdb-select'
+  .invalid-feedback
+  = f.submit 'Перенести', class: 'btn btn-success'

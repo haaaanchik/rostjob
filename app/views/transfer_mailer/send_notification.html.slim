@@ -1,0 +1,5 @@
+'Перенос анкеты ##{@employee_cv.id} #{@employee_cv.name} в заявку №#{@candidate.dst_order_id} требует вашего подтверждения.
+'Пожалуйста,
+= link_to approve_transfer_profile_proposal_employee_url(@candidate) do
+  'подтвердите
+|перенос анкеты.

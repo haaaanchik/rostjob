@@ -1,6 +1,9 @@
 - if user_signed_in?
   .col-md-6.order-1.order-sm-1.order-md-2.mt-4
     .container-fluid
+      - if @orders_with_transfering_employee_cvs.any?
+        .row.mt-4.img-thumbnail
+          = render partial: 'welcome/orders/with_transfering_employee_cvs', locals: { profile: profile, orders: @orders_with_transfering_employee_cvs }
       - if @orders_with_deleted_employee_cvs.any?
         .row.mt-4.img-thumbnail
           = render partial: 'welcome/orders/with_deleted_employee_cvs2', locals: { profile: profile, orders: @orders_with_deleted_employee_cvs }

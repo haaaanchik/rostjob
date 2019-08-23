@@ -1,3 +1,9 @@
+- if candidate.approve_transfer_action_enabled?(current_profile)
+  td.text-right.align-middle
+    = render partial: "profile/candidates/toolbars/approve.html.slim", locals: { candidate: candidate }
+- if candidate.transfer_action_enabled?(current_profile)
+  td.text-right.align-middle
+    = render partial: "profile/candidates/toolbars/transfer.html.slim", locals: { candidate: candidate }
 - if candidate.interview_action_enabled?(current_profile)
   td.text-right.align-middle
     = render partial: "profile/candidates/toolbars/interview.html.slim", locals: { candidate: candidate }

@@ -58,6 +58,13 @@
           p.border.rounded.white-text.z-depth-1.blue.m-0[style="width: 160px;"]
             i.fas.fa-bookmark.ml-2.mr-2
             span.mr-2 В резерве
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
+      .form-check.form-check-inline
+        = check_box_tag 'q[state_in][]', 'transfer', filter&.include?('transfer'), { class: 'form-check-input', id: 'candidate_filter_transfer' }
+        = label :state, nil, class: 'form-check-label', for: 'candidate_filter_transfer' do
+          p.border.rounded.white-text.z-depth-1.default-color.m-0[style="width: 160px;"]
+            i.fas.fa-bookmark.ml-2.mr-2
+            span.mr-2 Перенос
   .row
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mt-4
       = f.search_field :candidate_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val

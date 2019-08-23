@@ -56,6 +56,11 @@ class Profile::ProposalEmployeesController < ApplicationController
               end
   end
 
+  def approve_transfer
+    result = Cmd::ProposalEmployee::ApproveTransfer.call(candidate: proposal_employee)
+    @status = result.success? ? true : false
+  end
+
   private
 
   def proposal_employee_params

@@ -173,4 +173,8 @@ class Order < ApplicationRecord
   def proposal_by_profile_id(profile_id)
     Proposal.find_by(order_id: id, profile_id: profile_id)
   end
+
+  def title_with_id
+    "#{id} #{title}"
+  end
 end

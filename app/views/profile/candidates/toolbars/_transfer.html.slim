@@ -1,0 +1,15 @@
+.modal.fade#candidate_transfer_modal tabindex="-1" role="dialog" aria-labelledby="candidate_transfer_modal_label" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#candidate_transfer_modal_label Перенос анкеты
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        h5.w-100.text-left Анкета ##{candidate.employee_cv.id} #{candidate.employee_cv.name} переносится в заявку:
+        br
+        = render partial: 'profile/candidates/toolbars/candidate_transfer_form', locals: { candidate: candidate }
+a type="button" class="btn-floating default-color btn-sm" data-toggle="modal" data-target="#candidate_transfer_modal" title='Перенос'
+  i.fas.fa-exchange-alt
+p.card-title.white-text
+  |Перенести

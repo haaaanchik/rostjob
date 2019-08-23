@@ -27,13 +27,18 @@ class ProposalEmployee < ApplicationRecord
     state :rejected
     state :paid
     state :reserved
+    state :transfer
+
+    event :to_transfer do
+      transitions to: :transfer
+    end
 
     event :to_interview do
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
     event :to_inbox do
-      transitions from: %i[interview reserved disputed], to: :inbox
+      transitions from: %i[transfer interview reserved disputed], to: :inbox
     end
 
     event :to_reserved do

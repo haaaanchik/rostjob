@@ -17,6 +17,9 @@
                     tbody
                       tr
                         td.align-bottom
+                          - if candidate.transfer?
+                            h5.card-title.white-text
+                              |Ожидает подтверждения исполнителем
                           h4.card-title.white-text
                             |##{employee_cv.id} #{employee_cv.name}
                         = render partial: 'profile/candidates/toolbars/actions', locals: { candidate: candidate }

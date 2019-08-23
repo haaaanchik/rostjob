@@ -79,7 +79,21 @@ class Profile::Orders::CandidatesController < ApplicationController
     end
   end
 
+  def transfer
+    result = Cmd::ProposalEmployee::Transfer.call(candidate: candidate, dst_order_id: transfer_params[:dst_order_id])
+
+    if result.success?
+      redirect_to profile_candidate_path(candidate)
+    else
+      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
+    end
+  end
+
   private
+
+  def transfer_params
+    params.require(:proposal_employee_decorator).permit(:dst_order_id)
+  end
 
   def contractors
     @contractors ||= order.profiles.map do |profile|
@@ -124,9 +138,7 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def term
     term = params[:term]
-    @term = if !term
-              %w[inbox]
-            elsif term.empty?
+    @term = if term.blank?
               %w[inbox]
             elsif EmployeeCv.customer_menu_items.include?(term)
               term == 'hired' ? %w[hired paid] : [term]
@@ -134,6 +146,8 @@ class Profile::Orders::CandidatesController < ApplicationController
               %w[reserved]
             elsif term == 'interview'
               %w[interview]
+            elsif term == 'transfer'
+              %w[transfer]
             else
               %w[inbox]
             end
