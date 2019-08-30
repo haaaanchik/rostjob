@@ -44,7 +44,7 @@ class Profile::OrdersController < ApplicationController
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
     @order = result.order
     if result.success?
-      redirect_to profile_orders_path
+      redirect_to profile_orders_with_state_path(:in_progress)
     else
       render 'edit'
     end
