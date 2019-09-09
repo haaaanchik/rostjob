@@ -20,6 +20,7 @@
 # require jquery.inputmask.extensions
 # require jquery.inputmask.numeric.extensions
 # require jquery.inputmask.date.extensions
+#= require action_cable
 #= require_tree .
 
 @scroll_to_bottom = (element) ->

@@ -1,0 +1,2 @@
+class BotCallback < ApplicationRecord
+end

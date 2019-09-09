@@ -5,6 +5,9 @@ li.nav-item.avatar.dropdown
     = link_to profile_balance_path, class: 'dropdown-item bg-best-hr-a' do
       i.fas.fa-money-bill-alt.w-25
       |Счёт
+    = link_to edit_profile_path, class: 'dropdown-item bg-best-hr-a' do
+      i.fas.fa-edit.w-25
+      |Профиль
     = link_to logout_path, class: 'dropdown-item bg-best-hr-a', method: :delete do
       i.fas.fa-sign-out-alt.w-25
       |Выход

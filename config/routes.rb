@@ -23,6 +23,13 @@ Rails.application.routes.draw do
 
   resource :price, only: :show
 
+  namespace :api do
+    namespace :v1 do
+      resource :free_manager, only: :show
+      resources :candidates, only: :create
+    end
+  end
+
   namespace :admin do
     get 'analytics/export_to_excel'
     get 'analytics/user_action_log'
@@ -119,7 +126,15 @@ Rails.application.routes.draw do
   end
 
   get 'profile/employee_cvs/new_full', to: 'profile/employee_cvs#new_full', as: :new_full_profile_employee_cv
-  resource :profile, except: %i[show destroy]
+  resource :profile, except: %i[show destroy] do
+    member do
+      put :set_free
+      put :unset_free
+    end
+  end
+  namespace :bots do
+    resources :employee_cvs, only: :show
+  end
   namespace :profile do
     resources :tickets do
       scope module: :tickets do

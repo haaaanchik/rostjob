@@ -1,3 +1,33 @@
+$(document).on('change', '#free_manager', (event) ->
+  element = $(event.target)
+  set_free_url = element.data('set-free-url')
+  unset_free_url = element.data('unset-free-url')
+  url = ''
+  checked = element.prop('checked')
+  if checked == true
+    url = set_free_url
+  else
+    url = unset_free_url
+
+  $.ajax({
+    url: url
+    method: 'PUT'
+    indexValue: { checked: checked },
+    success: success,
+    error: error
+  })
+)
+
+success = ->
+  if this.indexValue.checked == true
+    toastr.success('Принимаем звонки от бота')
+  else
+    toastr.warning('Не принимаем звонки от бота')
+
+error = ->
+  toastr.error('Ошибка! Не удалось выполнить действие')
+
+
 @withdrawal_method_ip_dadata = (items) ->
   $('#withdrawal_method_ip_account_company_attributes_name').val items.name
   $('#withdrawal_method_ip_account_company_attributes_short_name').val items.short_name

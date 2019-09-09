@@ -41,6 +41,19 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def set_free
+    @status = if profile.phone.present?
+                Cmd::FreeManager::Add.call(user: current_user, phone: profile.phone)
+                true
+              else
+                false
+              end
+  end
+
+  def unset_free
+    Cmd::FreeManager::Remove.call(user_id: current_user.id)
+  end
+
   private
 
   def redirect_if_already_created

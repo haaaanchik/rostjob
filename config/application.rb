@@ -56,5 +56,6 @@ module BestHr
     config.moderation_email_to = 'manager@best-hr.pro'
     config.user_action_log = true
     config.superjob = config_for(:superjob)
+    config.vocamate = config_for(:vocamate)
   end
 end

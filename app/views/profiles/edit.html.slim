@@ -1,1 +1,4 @@
-= render partial: 'form'
+- if @profile.contractor?
+  = render partial: 'contractor_form'
+- else
+  = render partial: 'form'

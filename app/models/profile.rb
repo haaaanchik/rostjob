@@ -60,6 +60,21 @@ class Profile < ApplicationRecord
     end
   end
 
+  def free_manager?
+    manager? && free?
+  end
+
+  def free?
+    result = Cmd::FreeManager::Get.call(user_id: user.id)
+    return true if result.manager
+
+    result.manager
+  end
+
+  def manager?
+    contractor? && manager
+  end
+
   def private_person?
     legal_form == 'private_person'
   end
