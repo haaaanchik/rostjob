@@ -4,7 +4,8 @@ module Cmd
       include Interactor
 
       def call
-        context.manager = free_managers.sample
+        sample = free_managers.sample
+        context.manager = sample ? JSON.parse(sample) : sample
       end
 
       private

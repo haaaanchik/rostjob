@@ -4,7 +4,7 @@ module Cmd
       include Interactor
 
       def call
-        free_managers[user.id] = { phone: normalized_phone, guid: guid }
+        free_managers[user.id] = { phone: normalized_phone, guid: guid }.to_json
       end
 
       private
