@@ -5,7 +5,7 @@
     .form-group.row.private-person-field
       = f.label :phone, t(:phone), class: 'col-3 col-form-label require_field'
       .col-9
-        = f.phone_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
+        = f.text_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
         .invalid-feedback #{errors[:phone].first}
     = f.submit t('buttons.save'), class: 'btn btn-success mt-5'
 

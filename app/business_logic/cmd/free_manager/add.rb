@@ -18,7 +18,8 @@ module Cmd
       end
 
       def normalized_phone
-        phone.delete!(' \-+()').sub!(/^./, '8')
+        phone.delete!(' \-+()')
+        # phone.delete!(' \-+()').sub!(/^./, '8')
       end
 
       def phone
