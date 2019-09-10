@@ -242,6 +242,7 @@ Rails.application.routes.draw do
     put :balance, to: 'balances#deposit'
   end
 
+  get '/orders/:customer', to: 'orders#index', as: :orders_by_customer, constraints: { state: /[_A-Za-z]+/ }
   resources :orders, only: %i[index show] do
     member do
       put :manage_fav

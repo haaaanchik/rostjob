@@ -8,6 +8,10 @@ module OrderRepository
         .joins('inner join companies on (companies.companyable_id = profiles.id and companies.companyable_type = "Profile")')
     }
 
+    scope :with_customer_name_by_customer, ->(customer) {
+      with_customer_name.where('companies.label = ?', customer)
+    }
+
     scope :with_pe_counts, -> {
       select('orders.*, total_pe_count, unviewed_pe_count')
         .joins('left join (select order_id, count(*) as total_pe_count from proposal_employees group by order_id) tpe on tpe.order_id = orders.id')

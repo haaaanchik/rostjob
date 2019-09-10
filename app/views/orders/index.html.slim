@@ -3,7 +3,8 @@
     - search_form_id = 'order_search_form'
     .row.m-1.mb-3
       .col-md-8.p-0.mt-2
-        = render partial: 'search_form', locals: { form_id: search_form_id }
+        - url = @term ? orders_by_customer_path(@term) : orders_path
+        = render partial: 'search_form', locals: { form_id: search_form_id, url: url }
       .col-md-4.p-0.mt-3
         .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
           button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center id='show_all' type="button"

@@ -2,14 +2,17 @@ class OrdersController < ApplicationController
   before_action :order, except: :index
 
   def index
-    @active_item = :orders
+    @term = params[:customer]
+    @active_item = case params[:customer]
+                   when nil
+                     :orders
+                   when 'rost'
+                     :rost
+                   when 'avangard'
+                     :avangard
+                   end
+
     employee_cv_id
-    # @order_search_form = if @employee_cv_id
-    #                        osf_params = order_search_form_params.merge(profile: current_profile)
-    #                        OrderSearchForm2.new(osf_params)
-    #                      else
-    #                        OrderSearchForm.new(order_search_form_params)
-    #                      end
     orders.decorate
   end
 
@@ -34,7 +37,11 @@ class OrdersController < ApplicationController
   end
 
   def orders
-    @q = Order.published.with_customer_name.order(advertising: :desc).ransack(params[:q])
+    @q = if params[:customer].present?
+           Order.published.with_customer_name_by_customer(params[:customer]).order(advertising: :desc).ransack(params[:q])
+         else
+           Order.published.with_customer_name.order(advertising: :desc).ransack(params[:q])
+         end
     @orders ||= @q.result
   end
 

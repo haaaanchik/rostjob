@@ -1,6 +1,6 @@
 - val =  params[:q] ? params[:q][:all_fields_cont] : nil
 - filter = params[:q] ? params[:q][:for_cis_true] : false
-= search_form_for @q, url: orders_path do |f|
+= search_form_for @q, url: url do |f|
   .input-group.flex.no-wrap
     = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val
     .form-check.form-check-inline
