@@ -1,0 +1,7 @@
+.mb-3
+  .btn-group.group-menu[role="group" aria-label="Basic example"]
+    button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
+
+    = link_to orders_by_customer_path(label.to_sym), id: label, class: "btn button-menu-r btn-rounded waves-effect #{'active' if @active_item == label.to_sym}" do
+      i.fas.fa-align-justify.w-10
+      = t("left_menu.#{label}")

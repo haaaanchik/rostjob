@@ -10,7 +10,7 @@ module Cmd
         else
           profile.save
         end
-        context.failed! if profile.errors.messages.any?
+        context.fail! if profile.errors.messages.any?
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end
 
@@ -34,7 +34,11 @@ module Cmd
       end
 
       def company?
-        profile_params[:legal_form] == 'company'
+        if profile.persisted?
+          profile.legal_form == 'company'
+        else
+          profile_params[:legal_form] == 'company'
+        end
       end
 
       def logger_params

@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
     if result.success?
       redirect_to root_path
     else
-      render json: { validate: true, data: errors_data(profile) }
+      render json: { validate: true, data: errors_data(profile) }, status: 422
     end
   end
 
@@ -72,7 +72,7 @@ class ProfilesController < ApplicationController
     params.require(:profile)
           .permit(:photo, :contact_person, :phone, :company_name, :email, :profile_type, :legal_form,
                   company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
-                                       :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
+                                       :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on, :legal_form,
                                        accounts_attributes: %i[id account_number corr_account bic
                                                                bank bank_address inn kpp]])
   end

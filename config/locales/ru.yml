@@ -73,3 +73,9 @@ ru:
         save: 'Сохранить'
         save_and_publish: 'Сохранить и опубликовать'
         publish: 'Опубликовать'
+  left_menu:
+    rost: 'Рост'
+    avangard: 'Авангард'
+    apis_media: 'ЭйписМедиа'
+    best_hr: 'БэстЭйчар'
+    little_country: 'М.П. Маленькая страна'

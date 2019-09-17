@@ -6,10 +6,8 @@ class OrdersController < ApplicationController
     @active_item = case params[:customer]
                    when nil
                      :orders
-                   when 'rost'
-                     :rost
-                   when 'avangard'
-                     :avangard
+                   else
+                     params[:customer].to_sym
                    end
 
     employee_cv_id

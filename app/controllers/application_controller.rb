@@ -5,6 +5,7 @@ class ApplicationController < BaseController
   protect_from_forgery prepend: true
   before_action :set_raven_context
   # before_action :authenticate_user!
+  before_action :left_menu_items
   before_action :auth_user
   before_action :create_profile, if: :user_signed_in_without_profile
   before_action :opened_tickets_count, if: :user_signed_in?
@@ -38,5 +39,9 @@ class ApplicationController < BaseController
 
   def opened_tickets_count
     @opened_tickets_count ||= Ticket.with_other_tickets_for(current_user).opened.count
+  end
+
+  def left_menu_items
+    @left_menu_items ||= Company.where.not(label: nil).pluck(:label).map(&:to_sym)
   end
 end
