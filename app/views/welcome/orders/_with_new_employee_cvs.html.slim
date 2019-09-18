@@ -7,4 +7,4 @@
         - orders.each do |order|
           li
             |Поступило #{order.unviewed_pe_count} анкет(ы) в заявку
-            u.ml-2 = link_to order.title, profile_order_path(order)
+            u.ml-2 = link_to order.title, profile_production_site_order_path(order.production_site, order)

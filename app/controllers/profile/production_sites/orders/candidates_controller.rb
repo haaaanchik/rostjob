@@ -1,6 +1,6 @@
-class Profile::Orders::CandidatesController < ApplicationController
+class Profile::ProductionSites::Orders::CandidatesController < Profile::ProductionSites::Orders::ApplicationController
   def index
-    render partial: 'profile/orders/contractors/contractor_card', collection: contractors, layout: false
+    render partial: 'profile/production_sites/orders/contractors/contractor_card', collection: contractors, layout: false
   end
 
   def show
@@ -23,7 +23,10 @@ class Profile::Orders::CandidatesController < ApplicationController
       hiring_date = Date.parse(candidate_params[:hiring_date])
       Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
       flash[:redirection] = 'to_hired'
-      redirect_to profile_production_site_order_path(order.production_site, order)
+      redirect_to profile_order_path(order)
+      # else
+      #   redirect_to profile_order_proposal_path(order, proposal)
+      # end
     else
       render plain: 'all employees has been hired', status: 422
     end
@@ -54,14 +57,14 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def reserve
     candidate.to_reserved!
-    redirect_to profile_production_site_order_path(order.prodution_site, order)
+    redirect_to profile_order_path(order)
   end
 
   def to_inbox
     result = Cmd::ProposalEmployee::ToInbox.call(candidate: candidate)
 
     if result.success?
-      redirect_to profile_production_site_order_path(order.production_site, order)
+      redirect_to profile_order_path(order)
     end
   end
 
@@ -72,7 +75,7 @@ class Profile::Orders::CandidatesController < ApplicationController
                                                      interview_date: candidate_params[:interview_date])
     if result.success?
       flash[:redirection] = 'to_interview'
-      redirect_to profile_production_site_order_path(order.production_site, order)
+      redirect_to profile_order_path(order)
     end
   end
 
@@ -112,26 +115,26 @@ class Profile::Orders::CandidatesController < ApplicationController
     # @candidate ||= EmployeeCv.find(candidate_params[:id])
   end
 
-  def proposal
-    @proposal ||= Proposal.find(candidate_params[:proposal_id])
-  end
+  # def proposal
+  #   @proposal ||= Proposal.find(candidate_params[:proposal_id])
+  # end
 
-  def proposals
-    @proposals ||= order.proposals
-  end
+  # def proposals
+  #   @proposals ||= order.proposals
+  # end
 
-  def order
-    @order ||= orders.find(params[:order_id])
-  end
+  # def order
+  #   @order ||= orders.find(params[:order_id])
+  # end
 
-  def orders
-    @orders ||= current_profile.orders
-  end
+  # def orders
+  #   @orders ||= current_profile.orders
+  # end
 
   # Меню кандидатов и постраничный вывод
-  def states_by_term
-    EmployeeCv.customer_menu_items[term]
-  end
+  # def states_by_term
+  #   EmployeeCv.customer_menu_items[term]
+  # end
 
   def term
     term = params[:term]

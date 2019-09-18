@@ -1,0 +1,9 @@
+= form_with model: [:profile, production_site], id: 'production_site_form' do |f|
+  .form-group
+    = f.label :title, 'Название производственной площадки'
+    = f.text_field :title, class: 'form-control'
+    .invalid-feedback
+  .form-group.mt-3
+    .row
+      .col-3
+        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-success"

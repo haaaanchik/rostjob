@@ -1,12 +1,21 @@
-- errors = order.errors.messages
-= form_with model: [:profile, order], id: 'order_form', local: true do |f|
+- url = order_template.persisted? ? profile_production_site_order_template_path(production_site, order_template) : profile_production_site_order_templates_path(production_site)
+= form_with model: [:profile, order_template], url: url, id: 'order_template_form' do |f|
   = f.hidden_field :position_id
+  = f.label :name, 'Название шаблона'
+  = f.text_field :name, class: 'form-control'
+  .invalid-feedback
+  .form-group.mt-3
+    = f.label :place_of_work, "Производственная площадка: #{production_site.title}"
+    / = f.text_field :place_of_work, class: 'form-control'
+    .invalid-feedback
+  .input-group.mb-3
+    = f.text_field :position_search, class: "form-control",
+            placeholder: 'Начните набирать название профессии',
+            data: {'auto-url' => '/search_position', 'auto-select' => 'apply_position2',
+                    'auto-add-text' => false, 'autocomplete-on' => 'order_title'}
+    .invalid-feedback
   .form-group
-    = f.label :place_of_work, 'Место работы (производственная площадка)'
-    = f.text_field :place_of_work, class: "form-control #{'is-invalid' unless errors[:place_of_work].empty?}"
-    .invalid-feedback = errors[:place_of_work].first
-  .form-group
-    table#position_table.table.table-border_templateed data-base-customer-price=order.base_customer_price data-base-contractor-price=order.base_contractor_price data-customer-price=order.customer_price data-contractor-price=order.contractor_price data-customer-total=order.customer_total data-contractor-total=order.contractor_total
+    table#position_table.table.table-border_templateed data-base-customer-price=order_template.base_customer_price data-base-contractor-price=order_template.base_contractor_price data-customer-price=order_template.customer_price data-contractor-price=order_template.contractor_price data-customer-total=order_template.customer_total data-contractor-total=order_template.contractor_total
       tr.text-center
         th Профессия
         th
@@ -16,12 +25,13 @@
         th Вознаграждение исполнителя
         th Стоимость заявки
       tr
-        td#position_title.align-middle = order.title
-        td#num_of_employees.align-middle.text-center style="width: 10%" data-price="#{order.customer_price}"
-          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control disabled"
+        - disabled = order_template.position_id ? false : true
+        td#position_title.align-middle #{order_template.title}
+        td#num_of_employees.align-middle style="width: 10%" data-price="#{order_template.customer_price}"
+          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control", disabled: disabled
         td#contractor_price.align-middle.text-right style="width: 10%"
-          = f.text_field :contractor_price, class: 'form-control disabled'
-        td#customer_total.align-middle.text-right style="width: 10%" = order.customer_total
+          = f.text_field :contractor_price, class: 'form-control', disabled: disabled
+        td#customer_total.align-middle.text-right style="width: 10%" #{order_template.customer_total}
   .row
     .col
       = f.label :specialization, 'Специализация'
@@ -36,34 +46,34 @@
   .row
     .col
       = f.label :city, 'Город'
-      = f.text_field :city, class: "form-control #{'is-invalid' unless errors[:city].empty?}", placeholder: 'Начните набирать название города',
+      = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
               data: {'auto-url' => '/search_city', 'auto-add-text' => true, 'autocomplete-on' => 'order_template_city'}
-      .invalid-feedback = errors[:city].first
+      .invalid-feedback
     .col
       = f.label :district, 'Район'
       = f.text_field :district, class: "form-control"
       .invalid-feedback
   .form-group
     = f.label :salary, 'Зарплата:'
-    = f.text_field :salary, class: "form-control #{'is-invalid' unless errors[:salary].empty?}"
-    .invalid-feedback = errors[:salary].first
+    = f.text_field :salary, class: "form-control"
+    .invalid-feedback
   .form-group
     = f.label :experience, 'Наличие документа, подтверждающего стаж работы'
-    = f.text_field :experience, class: "form-control #{'is-invalid' unless errors[:experience].empty?}"
-    .invalid-feedback = errors[:experience].first
+    = f.text_field :experience, class: 'form-control'
+    .invalid-feedback
   .form-group.mt-3
     = f.label :description, 'Виды выполняемых работ'
-    = f.text_area :description, rows: 5, class: "form-control tinymce #{'is-invalid' unless errors[:description].empty?}"
-    .invalid-feedback = errors[:description].first
+    = f.text_area :description, rows: 5, class: 'form-control tinymce'
+    .invalid-feedback
   .row
     .col
       = f.label :schedule, 'График работы'
-      = f.text_field :schedule, class: "form-control #{'is-invalid' unless errors[:schedule].empty?}"
-      .invalid-feedback = errors[:schedule].first
+      = f.text_field :schedule, class: "form-control"
+      .invalid-feedback
     .col
       = f.label :work_period, 'Период, на который требуются рабочие'
-      = f.text_field :work_period, class: "form-control #{'is-invalid' unless errors[:work_period].empty?}"
-      .invalid-feedback = errors[:work_period].first
+      = f.text_field :work_period, class: "form-control"
+      .invalid-feedback
   = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
     .row
       .col-4

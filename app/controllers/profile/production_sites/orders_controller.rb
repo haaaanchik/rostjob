@@ -1,4 +1,4 @@
-class Profile::OrdersController < ApplicationController
+class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
   def index
     @state = params[:state]
     orders
@@ -44,7 +44,7 @@ class Profile::OrdersController < ApplicationController
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
     @order = result.order
     if result.success?
-      redirect_to profile_orders_with_state_path(:in_progress)
+      redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)
     else
       render 'edit'
     end
@@ -83,26 +83,25 @@ class Profile::OrdersController < ApplicationController
     result = Cmd::Order::ToModeration.call(order: order)
     if result.success?
       SendModerationMailJob.perform_later(order: result.order)
-      redirect_to profile_orders_with_state_path(:in_progress)
+      redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)
     else
-      redirect_to pre_publish_profile_order_path(result.order)
-      # redirect_to profile_invoices_path
+      redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     end
   end
 
   def hide
     order.to_hidden
-    redirect_to profile_orders_with_state_path(:in_progress)
+    redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)
   end
 
   def complete
     Cmd::Order::Complete.call(order: order)
-    redirect_to profile_orders_with_state_path(:in_progress)
+    redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)
   end
 
   def cancel
     order.to_draft
-    redirect_to profile_orders_with_state_path(:in_progress)
+    redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)
   end
 
   def add_position
@@ -166,22 +165,22 @@ class Profile::OrdersController < ApplicationController
   end
 
   def orders
-    @q = if params[:state] && !params[:state].empty?
+    @q = if params[:state].present?
            if params[:state] == 'completed'
-             Order.where(profile: current_profile)
+             Order.where(profile: current_profile, production_site_id: production_site)
                   .with_pe_counts.where(state: completed_states)
                   .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
            elsif params[:state] == 'moderation'
-             Order.where(profile: current_profile)
+             Order.where(profile: current_profile, production_site_id: production_site)
                   .with_pe_counts.where(state: moderation_states)
                   .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
            elsif params[:state] == 'in_progress'
-             Order.where(profile: current_profile)
+             Order.where(profile: current_profile, production_site_id: production_site)
                   .with_pe_counts.where.not(state: completed_states + moderation_states)
                   .order(advertising: :desc, urgency_level: :desc, created_at: :desc).ransack(params[:q])
            end
          else
-           Order.where(profile: current_profile)
+           Order.where(profile: current_profile, production_site_id: production_site)
                 .with_pe_counts.order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
          end
 

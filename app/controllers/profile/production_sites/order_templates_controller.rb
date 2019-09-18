@@ -1,4 +1,4 @@
-class Profile::OrderTemplatesController < ApplicationController
+class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSites::ApplicationController
   def index
     order_templates
     @active_item = :order_templates
@@ -9,7 +9,7 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def new
-    @order_template = OrderTemplate.new
+    @order_template = OrderTemplate.new(production_site: production_site)
   end
 
   def edit
@@ -17,9 +17,10 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def create
-    result = Cmd::OrderTemplate::Create.call(profile: current_profile, params: params_with_price, position: position)
+    result = Cmd::OrderTemplate::Create.call(profile: current_profile, params: params_with_price,
+                                             position: position, production_site: production_site)
     if result.success?
-      redirect_to profile_order_templates_path
+      redirect_to profile_production_site_order_templates_path(production_site)
     else
       render json: { validate: true, data: errors_data(result.order_template) }, status: 422
     end
@@ -28,7 +29,7 @@ class Profile::OrderTemplatesController < ApplicationController
   def update
     result = Cmd::OrderTemplate::Update.call(order_template: order_template, params: params_with_price)
     if result.success?
-      redirect_to profile_order_templates_path
+      redirect_to profile_production_site_order_templates_path(production_site)
     else
       render json: { validate: true, data: errors_data(result.order_template) }, status: 422
     end
@@ -36,12 +37,12 @@ class Profile::OrderTemplatesController < ApplicationController
 
   def destroy
     order_template.destroy
-    redirect_to profile_order_templates_path
+    redirect_to profile_production_site_order_templates_path(production_site)
   end
 
   def copy
     result = Cmd::OrderTemplate::Copy.call(order_template: order_template)
-    redirect_to profile_order_templates_path result.success?
+    redirect_to profile_production_site_order_templates_path(production_site) if result.success?
   end
 
   def create_order
@@ -49,9 +50,9 @@ class Profile::OrderTemplatesController < ApplicationController
     result = Cmd::OrderTemplate::CreateOrder.call(order_template: order_template, number_of_employees: number_of_employees)
 
     if result.success?
-      redirect_to pre_publish_profile_order_path(result.order)
+      redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     else
-      redirect_to edit_profile_order_path(result.order)
+      redirect_to edit_profile_production_site_order_path(production_site, result.order)
     end
   end
 
@@ -106,7 +107,12 @@ class Profile::OrderTemplatesController < ApplicationController
   end
 
   def order_templates
-    @q = current_profile.order_templates.order(id: :desc).ransack(params[:q])
+    @q = if production_site
+           current_profile.production_sites.find(production_site.id)
+                          .order_templates.order(id: :desc).ransack(params[:q])
+         else
+           current_profile.order_templates.order(id: :desc).ransack(params[:q])
+         end
     @order_templates ||= @q.result
   end
 end

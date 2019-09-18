@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true
 
   belongs_to :profile
+  belongs_to :production_site
   has_many :invites
   has_many :candidates, class_name: 'ProposalEmployee'
   has_many :comments, dependent: :destroy
@@ -19,7 +20,7 @@ class Order < ApplicationRecord
             presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :number_of_employees, presence: true, numericality: {only_integer: true}
   validates :title, :city, :experience, :description,
-            :schedule, :work_period, :place_of_work, presence: true
+            :schedule, :work_period, presence: true
   validates :salary, presence: true
   # validates :commission, presence: true, numericality: { only_integer: true }
   # validates :payment_type, presence: true

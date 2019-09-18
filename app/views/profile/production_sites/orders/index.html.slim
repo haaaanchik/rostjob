@@ -4,7 +4,7 @@
   .container.w-100.mt-2
     .row.m-1
       .col-8.p-0.mt-2
-        = render partial: 'search_form', locals: { state: @state }
+        = render partial: 'search_form', locals: { production_site: @production_site, state: @state }
       .col-4.p-0.mt-3
         .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
           button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center id='show_all' type="button"
@@ -29,8 +29,8 @@
                     strong.text-dark Город
               td.text-center.align-items-center width="30%"
                 p.m-0.font-weight-bold
-                  = sort_link(@q, :place_of_work) do
-                    strong.text-dark Производственная площадка
+                  / = sort_link(@q, :place_of_work) do
+                  strong.text-dark Производственная площадка
               td.text-center.align-items-center width="35%"
                 p.m-0.font-weight-bold
                   = sort_link(@q, :title) do
@@ -41,4 +41,4 @@
               / td.text-center.align-items-center.p-0 width="8%"
               /   p.m-0
               /     i.far.fa-eye.w-10
-    = render @orders
+    = render partial: 'order', collection: @orders, locals: { production_site: @production_site }

@@ -14,7 +14,7 @@
                         h4.card-title.white-text Публикация заявки №#{order.id}
 
                     td.align-bottom.text-right[width="50%"]
-                      = link_to cancel_profile_order_path(order), method: :put, class: 'btn-floating btn-sm red', remote: true do
+                      = link_to cancel_profile_production_site_order_path(@production_site, order), method: :put, class: 'btn-floating btn-sm red', remote: true do
                         i.fas.fa-times
                       p.card-title.white-text
                         | Отменить публикацию
@@ -104,4 +104,4 @@
               - if !order.can_be_paid?
                 = link_to 'Пополнить баланс', profile_invoices_path(params: {amount: order.customer_total - order.balance.amount}), class: 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
               - else
-                = link_to 'Опубликовать заявку', publish_profile_order_path(order), method: :put, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
+                = link_to 'Опубликовать заявку', publish_profile_production_site_order_path(@production_site, order), method: :put, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'

@@ -8,4 +8,4 @@
           li
             = Time.zone.parse(order.interview_date.to_s).strftime('%d.%m.%Y')
             '
-            = link_to order.employee_cv_name, profile_order_path(order, tab: :to_interview)
+            = link_to order.employee_cv_name, profile_production_site_order_path(order.production_site, order, tab: :to_interview)

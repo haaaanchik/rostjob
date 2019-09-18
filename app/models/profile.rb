@@ -17,6 +17,7 @@ class Profile < ApplicationRecord
   has_many :order_templates, dependent: :destroy
   has_many :withdrawal_methods, dependent: :destroy
   has_many :complaints, dependent: :destroy
+  has_many :production_sites, dependent: :destroy
 
   attr_accessor :sent_proposal_employees
 

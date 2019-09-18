@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_122811) do
+ActiveRecord::Schema.define(version: 2019_09_11_073503) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -270,6 +270,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_122811) do
     t.boolean "for_cis"
     t.boolean "advertising"
     t.text "adv_text"
+    t.bigint "production_site_id"
+    t.index ["production_site_id"], name: "index_order_templates_on_production_site_id"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
 
@@ -318,6 +320,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_122811) do
     t.boolean "for_cis"
     t.boolean "advertising"
     t.text "adv_text"
+    t.bigint "production_site_id"
+    t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
@@ -346,6 +350,14 @@ ActiveRecord::Schema.define(version: 2019_09_10_122811) do
     t.datetime "updated_at", null: false
     t.decimal "customer_price", precision: 10, scale: 2
     t.decimal "contractor_price", precision: 10, scale: 2
+  end
+
+  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "title"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -584,10 +596,13 @@ ActiveRecord::Schema.define(version: 2019_09_10_122811) do
   add_foreign_key "invoices", "profiles"
   add_foreign_key "order_profiles", "orders"
   add_foreign_key "order_profiles", "profiles"
+  add_foreign_key "order_templates", "production_sites"
   add_foreign_key "order_templates", "profiles"
+  add_foreign_key "orders", "production_sites"
   add_foreign_key "orders", "profiles"
   add_foreign_key "payment_orders", "companies"
   add_foreign_key "positions", "price_groups"
+  add_foreign_key "production_sites", "profiles"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
   add_foreign_key "super_job_queries", "super_job_configs", column: "config_id"

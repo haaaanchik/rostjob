@@ -13,19 +13,19 @@
                       .d-none.d-md-block
                         h4.card-title.white-text #{order_template.name} #{order_template.adv_text if order_template.advertising?}
                     td.align-bottom.text-center width="15%"
-                      = link_to profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm red',
+                      = link_to profile_production_site_order_template_path(production_site, order_template), remote: true, class: 'btn-floating btn-sm red',
                         method: :delete, data: { confirm: 'Вы уверены?' } do
                         i.fas.fa-trash
                       p.card-title.white-text
                         | Удалить
                     td.align-bottom.text-center width="15%"
-                      = link_to copy_profile_order_template_path(order_template), remote: true, class: 'btn-floating btn-sm blue',
+                      = link_to copy_profile_production_site_order_template_path(production_site, order_template), remote: true, class: 'btn-floating btn-sm blue',
                         method: :post, data: { confirm: 'Точно хотите скопировать шаблон?' } do
                         i.fas.fa-clone
                       p.card-title.white-text
                         | Копия
                     td.align-bottom.text-center[width="15%"]
-                      = link_to edit_profile_order_template_path(order_template), class: 'btn-floating btn-sm green', remote: true do
+                      = link_to edit_profile_production_site_order_template_path(production_site, order_template), class: 'btn-floating btn-sm green', remote: true do
                         i.fas.fa-pen-alt
                       p.card-title.white-text
                         | Изменить
@@ -101,7 +101,7 @@
             div
               hr
               - form_id = "create_order_form_#{order_template.id}"
-              = render partial: 'create_order_form', locals: { order_template: order_template, form_id: form_id }
+              = render partial: 'create_order_form', locals: { production_site: production_site, order_template: order_template, form_id: form_id }
               p.h4.text-center
                 |  Итого:
               p.h4.text-center class="customer-total-#{order_template.id}"

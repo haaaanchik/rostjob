@@ -11,7 +11,7 @@
               | #{order.city}
           td.text-center.align-items-center width="30%"
             p.m-0
-              | #{order.place_of_work}
+              | #{order.production_site.title}
           td.text-center.align-items-center width="35%"
             p.m-0
               | #{order.title}. #{order.skill}
@@ -39,12 +39,12 @@
                         .d-none.d-md-block
                           h4.card-title.white-text #{order.profile.company.name} #{order.adv_text if order.advertising?}
                       td.align-bottom.text-center width="15%"
-                        = link_to edit_profile_order_path(order), class: 'btn-floating btn-sm green' do
+                        = link_to edit_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm green' do
                           i.fas.fa-pen-alt
                         p.card-title.white-text
                           | Редактировать
                       td.align-bottom.text-center width="15%"
-                        = link_to profile_order_path(order), class: 'btn-floating btn-sm blue' do
+                        = link_to profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm blue' do
                           i.fas.fa-eye
                         p.card-title.white-text
                           | Просмотреть

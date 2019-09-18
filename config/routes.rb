@@ -136,6 +136,44 @@ Rails.application.routes.draw do
     resources :employee_cvs, only: :show
   end
   namespace :profile do
+    scope module: :production_sites do
+      resources :production_sites do
+        resources :order_templates do
+          member do
+            post :copy
+            post :create_order
+          end
+        end
+        get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
+        resources :orders, except: %i[create] do
+          member do
+            put :hide
+            get :pre_publish
+            put :publish
+            put :complete
+            put :cancel
+          end
+          collection do
+            post :add_position
+          end
+          scope module: :orders do
+            resources :candidates, only: %i[index show update destroy] do
+              member do
+                get :hd_correction
+                put :hire
+                put :fire
+                put :disput
+                put :reserve
+                put :to_inbox
+                put :to_interview
+                put :transfer
+              end
+            end
+          end
+        end
+      end
+    end
+
     resources :tickets do
       scope module: :tickets do
         resources :messages, only: %i[index create]

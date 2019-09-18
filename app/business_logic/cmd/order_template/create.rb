@@ -5,7 +5,8 @@ module Cmd
 
       def call
         result = Cmd::Order::CalculateUrgency.call(params: params)
-        @order_template = profile.order_templates.create(params.merge(urgency: result.urgency))
+        @order_template = profile.order_templates.create(params.merge(urgency: result.urgency,
+                                                                      production_site: production_site))
         @order_template.errors.add(:position_search, 'Выберите профессию') unless position
         context.order_template = @order_template
         context.fail! unless @order_template.persisted?
@@ -13,6 +14,10 @@ module Cmd
       end
 
       private
+
+      def production_site
+        context.production_site
+      end
 
       def params
         context.params

@@ -1,4 +1,5 @@
 - order = @order
+- production_site = @production_site
 .col-md-9.order-md-2.mt-4
   .card.testimonial-card.card-hr.w-100
     .card-up.bg-best-hr.lighten-1.card-up-hr.pr-1
@@ -13,13 +14,13 @@
                 p.h5.card-title.white-text
                   | #{order.title} #{order.skill} - #{order.place_of_work}
             td.align-bottom.text-center width="15%"
-              = link_to edit_profile_order_path(order), class: 'btn-floating btn-sm green' do
+              = link_to edit_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm green' do
                 i.fas.fa-pen-alt
               p.card-title.white-text
                 | Редактировать
             - unless order.completed?
               td.align-bottom.text-right
-                = link_to complete_profile_order_path(order), class: 'btn-floating btn-sm red',
+                = link_to complete_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm red',
                   remote: true, method: :put, data: { confirm: 'Завершить заявку?' }, title: 'Завершение заявки' do
                   i.fas.fa-times
                 p.card-title.white-text
@@ -29,39 +30,39 @@
         .col-md-6.p-1
           .price.p-1
             .btn-group.group-menu.w-100.mt-4[role="group" aria-label="Basic example"]
-              = link_to profile_order_candidates_path(order, term: :inbox),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center active",
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :inbox),
+                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center inbox active",
                       data: {toggle: 'pill'}, remote: true  do
                 | Очередь
                 | &nbsp;#{order.candidates.inbox.count}
-              = link_to profile_order_candidates_path(order, term: :interview),
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :interview),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center interview",
                       data: {toggle: 'pill'}, remote: true  do
                 | Собес.
                 | &nbsp;#{order.candidates.interview.count}
 
-              = link_to profile_order_candidates_path(order, term: :hired),
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :hired),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center hired",
                       data: {toggle: 'pill'}, remote: true  do
                 | Нанято
                 | &nbsp;#{order.candidates.hired.count}
-              = link_to profile_order_candidates_path(order, term: :reserved),
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :reserved),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center reserved",
                       data: {toggle: 'pill'}, remote: true  do
                 | Резерв
                 | &nbsp;#{order.candidates.reserved.count}
-              = link_to profile_order_candidates_path(order, term: :disputed),
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :disputed),
                       class: "button btn button-hr waves-effect candidates-menu-button w-20 p-1 text-center disputed",
                       data: {toggle: 'pill'}, remote: true  do
                 | Спор
                 | &nbsp;#{order.candidates.disputed.count}
-              = link_to profile_order_candidates_path(order, term: :transfer),
+              = link_to profile_production_site_order_candidates_path(production_site, order, term: :transfer),
                       class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center disputed",
                       data: {toggle: 'pill'}, remote: true  do
                 | Перенос
                 | &nbsp;#{order.candidates.transfer.count}
             #order_candidates
-              = render partial: 'profile/orders/contractors/contractor_card' , collection: @contractors
+              = render partial: 'profile/production_sites/orders/contractors/contractor_card' , collection: @contractors
             .container.w-100
               .row
                 .col-6.p-0
