@@ -136,8 +136,8 @@ Rails.application.routes.draw do
     resources :employee_cvs, only: :show
   end
   namespace :profile do
-    scope module: :production_sites do
-      resources :production_sites do
+    resources :production_sites do
+      scope module: :production_sites do
         resources :order_templates do
           member do
             post :copy
