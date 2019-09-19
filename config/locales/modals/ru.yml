@@ -12,8 +12,8 @@ ru:
         full_name: Имя
         password: Пароль
         submit: Зарегистрироваться
-        customer: Нанять персонал
-        contractor: Заработать денег
+        customer: Регистрация заказчика
+        contractor: Регистрация
         password_confirmation: Подтверждение пароля
       resetlogin:
         form: Сбросить пароль

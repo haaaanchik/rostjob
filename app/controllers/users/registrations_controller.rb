@@ -23,7 +23,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @status = if result.success?
                 'success'
               else
-                render 'users/registrations/new'
+                render 'users/registrations/new' if params.key?(:contractor)
+                render 'users/registrations/secret_new' if params.key?(:customer)
                 # render json: { validate: true, data: errors_data(result.user) }
               end
   end
