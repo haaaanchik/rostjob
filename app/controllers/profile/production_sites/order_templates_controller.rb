@@ -56,7 +56,26 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
     end
   end
 
+  def move
+    result = Cmd::OrderTemplate::Move.call(order_template: order_template,
+                                           dst_production_site_id: dst_production_site_id)
+
+    if result.success?
+      redirect_to profile_production_site_order_templates_path(production_site)
+    else
+      render json: { validate: true, data: errors_data(result.order_template) }, status: 422
+    end
+  end
+
   private
+
+  def dst_production_site_id
+    move_order_template_params[:production_site_id]
+  end
+
+  def move_order_template_params
+    params.require(:order_template).permit(:production_site_id)
+  end
 
   def create_order_params
     params.require(:order_template).permit(:number_of_employees)

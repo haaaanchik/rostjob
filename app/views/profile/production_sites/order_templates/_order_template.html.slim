@@ -29,6 +29,9 @@
                         i.fas.fa-pen-alt
                       p.card-title.white-text
                         | Изменить
+                    td.align-bottom.text-center[width="15%"]
+                      = render partial: 'move', locals: { production_site: production_site, order_template: order_template }
+
     .d-flex.align-self-stretch
       div
         .avatar.ml-1.white.mr-0.d-none.d-lg-block

@@ -142,6 +142,7 @@ Rails.application.routes.draw do
           member do
             post :copy
             post :create_order
+            put :move
           end
         end
         get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
