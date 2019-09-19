@@ -153,6 +153,7 @@ Rails.application.routes.draw do
             put :publish
             put :complete
             put :cancel
+            put :move
           end
           collection do
             post :add_position

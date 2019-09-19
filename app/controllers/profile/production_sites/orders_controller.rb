@@ -109,7 +109,26 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     @position = Position.create(position_params)
   end
 
+  def move
+    result = Cmd::Order::Move.call(order: order,
+                                   dst_production_site_id: dst_production_site_id)
+
+    if result.success?
+      redirect_to profile_production_site_order_templates_path(production_site)
+    else
+      render json: { validate: true, data: errors_data(result.order) }, status: 422
+    end
+  end
+
   private
+
+  def dst_production_site_id
+    move_order_params[:production_site_id]
+  end
+
+  def move_order_params
+    params.require(:order).permit(:production_site_id)
+  end
 
   def contractors
     @contractors ||= order.profiles.map do |profile|
