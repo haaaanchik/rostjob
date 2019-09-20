@@ -3,6 +3,9 @@ header
     .container-fluid
       = link_to root_path, class: 'navbar-brand' do
         = image_tag('/img/besthr.jpg', height: '20px')
+        - if Rails.env.staging?
+          span.counter.red
+            b stage
       = render partial: 'interface/navbar'
   #home
 main
