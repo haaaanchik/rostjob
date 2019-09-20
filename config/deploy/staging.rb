@@ -6,8 +6,8 @@
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
-server '138.197.184.93', user: 'zerro', roles: %w[app db web]
-set :deploy_to, '/webhome/best-hr'
+server '176.99.12.204:50022', user: 'zerro', roles: %w[app db web]
+set :deploy_to, '/webhome/best-hr-stage'
 set :branch, 'staging'
 
 # role-based syntax
