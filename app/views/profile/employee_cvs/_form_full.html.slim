@@ -90,6 +90,11 @@
                           .md-form.mt-1
                             = f.phone_field :phone_number_alt, class: 'form-control'
                             = f.label :phone_number_alt, 'Дополнительный номер телефона'
+                      .row
+                        .col
+                          .md-form
+                            = f.text_field :email, class: 'form-control'
+                            = f.label :email, 'E-Mail', calss: 'active'
                   .border.rounded.white.mt-1
                     .modal-body.pt-1
                       .row
