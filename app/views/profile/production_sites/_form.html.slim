@@ -1,9 +1,17 @@
 = form_with model: [:profile, production_site], id: 'production_site_form' do |f|
   .form-group
+    = f.label :image, 'Фоновое изображение производственной площадки'
+    = f.file_field :image, class: 'form-control'
     = f.label :title, 'Название производственной площадки'
     = f.text_field :title, class: 'form-control'
+    = f.label :city, 'Город'
+    = f.text_field :city, class: 'form-control'
+    = f.label :info, 'Общая информация'
+    = f.text_area :info, class: 'form-control'
+    = f.label :phones, 'Контактные номера'
+    = f.text_area :phones, class: 'form-control'
     .invalid-feedback
   .form-group.mt-3
     .row
       .col-3
-        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-success"
+        = f.submit t('profile.order_templates.commit.save'), class: 'btn btn-success'

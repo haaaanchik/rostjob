@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_065313) do
+ActiveRecord::Schema.define(version: 2019_09_23_114253) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -358,6 +358,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "city"
+    t.text "info"
+    t.text "phones"
     t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
