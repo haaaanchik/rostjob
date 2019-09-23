@@ -19,7 +19,8 @@ module Cmd
               super_job_id: resume[:resume_id],
               gender: resume[:gender],
               experience: query_params['keywords'][0]['keys'],
-              remark: "#{title}\n#{query_params}"
+              remark: "#{title}\n#{query_params}",
+              email: resume[:email]
             }
             Cmd::EmployeeCv::CreateAsReady.call(params: params, profile: profile)
           end
