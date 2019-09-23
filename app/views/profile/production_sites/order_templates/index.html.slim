@@ -1,7 +1,7 @@
-.col-md-9.order-md-2.order-1.p-2.pt-4
+.col-md-10.order-md-2.order-1.pt-4
   p.h6.text-center.font-italic
     | * Здесь расположены шаблоны ваших заявок
-  .container.border.rounded
+  .container
     .row.justify-content-center
       .col-md-9.p-2.pt-3.order-2.order-md-1
         = render partial: 'search_form', locals: { url: profile_production_site_order_templates_path(@production_site) }
