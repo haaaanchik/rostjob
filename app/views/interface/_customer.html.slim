@@ -1,6 +1,7 @@
 header
   nav.navbar.fixed-top.navbar-dark.bg-best-hr
     .container-fluid
+      = render partial: 'interface/left_menu/customer_md', locals: { active_item: @active_item }
       = link_to root_path, class: 'navbar-brand' do
         = image_tag('/img/besthr.jpg', height: '20px')
         - if Rails.env.staging?

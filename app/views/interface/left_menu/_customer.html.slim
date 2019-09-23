@@ -2,12 +2,12 @@
   .position-fixed.border.rounded.mt-4.pl-2.pr-2.col-md-2
     ul.list-unstyled.mt-3
       li
-        = link_to root_path, class: "text-body #{'active' if active_item == :root}" do
+        = link_to root_path, class: "text-body #{'font-weight-bold' if active_item == :root}" do
           i.fas.fa-user-circle.mr-2
           = current_user.full_name
         hr.mb-2.mt-2
       li
-          = link_to profile_production_sites_path, class: "text-body #{'active' if active_item == :production_sites}" do
+          = link_to profile_production_sites_path, class: "text-body #{'font-weight-bold' if active_item == :production_sites}" do
             i.fas.fa-user-circle.mr-2
             |Площадки
           hr.mb-2.mt-2
@@ -17,9 +17,9 @@
           hr.mb-2.mt-2
 
           li
-               = link_to profile_production_site_order_templates_path(@production_site), class: "text-body #{'active' if active_item == :order_templates}" do
-                 i.far.fa-handshake.mr-2
-                 |Мои шаблоны
+            = link_to profile_production_site_order_templates_path(@production_site), class: "text-body #{'font-weight-bold' if active_item == :order_templates}" do
+              i.far.fa-handshake.mr-2
+              |Мои шаблоны
 
           li
             hr.mb-2.mt-2
@@ -27,90 +27,20 @@
               |Мои заявки
               ul.list-unstyled.ml-3
                 li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :moderation), class: "text-body #{'active' if active_item == :moderation}"
+                  = link_to profile_production_site_orders_with_state_path(@production_site, :moderation), class: "text-body #{'font-weight-bold' if active_item == :moderation}"
                     i.fas.fa-balance-scale.mr-2
                     |Модерация
                 li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :in_progress), class: "text-body #{'active' if active_item == :in_progress}"
+                  = link_to profile_production_site_orders_with_state_path(@production_site, :in_progress), class: "text-body #{'font-weight-bold' if active_item == :in_progress}"
                     i.fas.fa-user-plus.mr-2
                     |В работе
 
                 li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :completed), class: "text-body #{'active' if active_item == :completed}"
+                  = link_to profile_production_site_orders_with_state_path(@production_site, :completed), class: "text-body #{'font-weight-bold' if active_item == :completed}"
                     i.fas.fa-user-check.mr-2
                     |Завершённые
             hr.mb-2.mt-2
       li
-        = link_to profile_candidates_path, class: "text-body #{'active' if active_item == :candidates}" do
+        = link_to profile_candidates_path, class: "text-body #{'font-weight-bold' if active_item == :candidates}" do
           i.fas.fa-address-card.mr-2
           |Анкеты
-    / .mb-3.mt-4
-    /   .btn-group.group-menu role="group" aria-label="Basic example"
-    /     = link_to root_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :root}" do
-    /       i.fas.fa-user-circle.w-10.mr-2
-    /       = current_user.full_name
-
-    / hr.mb-0.mt-0
-
-    /   .mb-3.mt-4
-    /     .btn-group.group-menu role="group" aria-label="Basic example"
-    /       = link_to profile_production_sites_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :production_sites}" do
-    /         i.fas.fa-user-circle.w-10.mr-2
-    /         |Площадки
-
-    / hr.mb-0.mt-0
-
-    / - if @production_site
-    /   hr.mb-2.mt-0
-    /   h5.text-center = @production_site.title
-    /   hr.mb-0.mt-0
-
-    /    .mb-3.mt-3
-    /      .btn-group.group-menu  role="group" aria-label="Basic example"
-    /        = link_to new_profile_production_site_order_template_path(@production_site), class: 'btn button-menu-l btn-rounded waves-effect', remote: true, title: 'Создать шаблон' do
-    /          i.fas.fa-plus
-    /        = link_to profile_production_site_order_templates_path(@production_site), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :order_templates}" do
-    /          i.far.fa-handshake.w-10.mr-2
-    /          |Мои шаблоны
-
-    /    hr.mb-0.mt-0
-
-    /    .mb-3.mt-3
-    /      .btn-group.group-menu  role="group" aria-label="Basic example"
-    /        button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-    /          i.fas.fa-folder-open
-    /        = link_to profile_production_site_orders_path(@production_site), class: "btn button-menu-r btn-rounded waves-effect disabled" do
-    /          i.fas.fa-users.w-10.mr-2
-    /          |Мои заявки
-    /      / span.counter
-    /      /   |0
-    /    .mb-3
-    /      .btn-group.group-menu role="group" aria-label="Basic example"
-    /        button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-    /        = link_to profile_production_site_orders_with_state_path(@production_site, :moderation), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :moderation}"
-    /          i.fas.fa-balance-scale.w-10.mr-2
-    /          |Модерация
-
-    /    .mb-3
-    /      .btn-group.group-menu role="group" aria-label="Basic example"
-    /        button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-    /        = link_to profile_production_site_orders_with_state_path(@production_site, :in_progress), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :in_progress}"
-    /          i.fas.fa-user-plus.w-10.mr-2
-    /          |В работе
-    /      / span.counter
-    /      /   |0
-
-    /    .mb-3.mt-3
-    /      .btn-group.group-menu role="group" aria-label="Basic example"
-    /        button type="button" class="btn button-menu-l btn-rounded waves-effect disabled"
-    /        = link_to profile_production_site_orders_with_state_path(@production_site, :completed), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :completed}"
-    /          i.fas.fa-user-check.w-10.mr-2
-    /          |Завершённые
-
-    / hr.mb-0.mt-0
-
-    / .mb-3.mt-3
-    /   .btn-group.group-menu  role="group" aria-label="Basic example"
-    /     = link_to profile_candidates_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :candidates}" do
-    /       i.fas.fa-address-card.w-10.mr-2
-    /       |Анкеты

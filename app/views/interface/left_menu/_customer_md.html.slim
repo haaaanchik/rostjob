@@ -1,0 +1,32 @@
+.d-md-none
+  button.navbar-toggler.bg-best-hr type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    i.fas.fa-bars
+
+  .dropdown-menu
+    = link_to profile_production_sites_path, class: "dropdown-item #{'active' if active_item == :production_sites}" do
+      i.fas.fa-user-circle.mr-2
+      |Площадки
+    .dropdown-divider
+    - if @production_site
+      .text-center = @production_site.title
+       hr.mb-2.mt-2
+
+      .dropdown-divider
+      = link_to profile_production_site_order_templates_path(@production_site), class: "dropdown-item #{'active' if active_item == :order_templates}" do
+        i.far.fa-handshake.mr-2
+        |Мои шаблоны
+      h6.dropdown-header Мои заявки
+      = link_to profile_production_site_orders_with_state_path(@production_site, :moderation), class: "dropdown-item #{'active' if active_item == :moderation}"
+        i.fas.fa-balance-scale.mr-2
+        |Модерация
+      = link_to profile_production_site_orders_with_state_path(@production_site, :in_progress), class: "dropdown-item #{'active' if active_item == :in_progress}"
+        i.fas.fa-user-plus.mr-2
+        |В работе
+
+      = link_to profile_production_site_orders_with_state_path(@production_site, :completed), class: "dropdown-item #{'active' if active_item == :completed}"
+        i.fas.fa-user-check.mr-2
+        |Завершённые
+    .dropdown-divider
+    = link_to profile_candidates_path, class: "dropdown-item #{'active' if active_item == :candidates}" do
+      i.fas.fa-address-card.mr-2
+      |Анкеты

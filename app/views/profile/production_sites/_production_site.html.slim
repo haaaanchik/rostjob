@@ -10,8 +10,7 @@
                 tbody
                   tr
                     td.align-bottom
-                      .d-none.d-md-block
-                        h3.card-title.white-text = link_to production_site.title, root_path(prod_site_id: production_site)
+                      h3.card-title.white-text = link_to production_site.title, root_path(prod_site_id: production_site)
                     td.align-bottom.text-center[width="15%"]
                       = link_to edit_profile_production_site_path(production_site), class: 'btn-floating btn-sm green', remote: true do
                         i.fas.fa-pen-alt
