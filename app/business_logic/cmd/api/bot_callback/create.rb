@@ -8,6 +8,7 @@ module Cmd
           cb = ::BotCallback.create(bot_callback_params)
           context.callback = cb
           context.fail!(code: 422, message: cb.errors.messages) if cb.invalid?
+          Cmd::FreeManager::Remove.call(user_id: user.id)
           ActionCable.server.broadcast("bot_channel_#{profile.id}",
                                        employee_cv_url: "/bots/employee_cvs/#{candidate_id}")
         end
