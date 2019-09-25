@@ -1,9 +1,15 @@
 class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
+  expose :order_templates,    -> { production_site.order_templates.order(id: :desc) }
+  expose :production_sites,   -> { current_profile.production_sites }
+  expose :completed_orders,   -> { fetch_completed_orders }
+  expose :moderation_orders,  -> { fetch_moderation_orders }
+  expose :in_progress_orders, -> { fetch_in_progress_orders }
+
   def index
-    @state = params[:state]
+    @state = state
     orders
     orders_kind
-    @active_item = case params[:state]
+    @active_item = case state
                    when nil
                      :my_orders
                    when 'in_progress'
@@ -183,27 +189,27 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     @order ||= orders.find(params[:id])
   end
 
-  def orders
-    @q = if params[:state].present?
-           if params[:state] == 'completed'
-             Order.where(profile: current_profile, production_site_id: production_site)
-                  .with_pe_counts.where(state: completed_states)
-                  .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
-           elsif params[:state] == 'moderation'
-             Order.where(profile: current_profile, production_site_id: production_site)
-                  .with_pe_counts.where(state: moderation_states)
-                  .order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
-           elsif params[:state] == 'in_progress'
-             Order.where(profile: current_profile, production_site_id: production_site)
-                  .with_pe_counts.where.not(state: completed_states + moderation_states)
-                  .order(advertising: :desc, urgency_level: :desc, created_at: :desc).ransack(params[:q])
-           end
-         else
-           Order.where(profile: current_profile, production_site_id: production_site)
-                .with_pe_counts.order(urgency_level: :desc, created_at: :desc).ransack(params[:q])
-         end
+  def fetch_completed_orders
+    orders.where(state: completed_states)
+  end
 
-    @orders ||= @q.result
+  def fetch_moderation_orders
+    orders.where(state: moderation_states)
+  end
+
+  def fetch_in_progress_orders
+    orders.where.not(state: completed_states + moderation_states).order(advertising: :desc)
+  end
+
+  def orders
+    @orders ||= Order.where(profile: current_profile, production_site_id: production_site)
+                     .with_pe_counts
+                     .order(urgency_level: :desc, created_at: :desc)
+                     .includes(profile: :company)
+  end
+
+  def local_prefixes
+    [controller_path]
   end
 
   def completed_states
