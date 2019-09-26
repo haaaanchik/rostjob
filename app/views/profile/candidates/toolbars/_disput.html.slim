@@ -1,5 +1,5 @@
 - if candidate.disputed?
-  = link_to profile_tickets_path, class: 'btn-floating btn-red btn-sm', title: 'Спор' do
+  = link_to candidate.ticket_path, class: 'btn-floating btn-red btn-sm', title: 'Спор' do
     i.fas.fa-angry
 - else
   = link_to new_profile_tickets_incident_path(candidate_id: candidate.id), remote: true, class: 'btn-floating btn-red btn-sm', title: 'Создать спор' do

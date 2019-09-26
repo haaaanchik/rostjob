@@ -71,6 +71,12 @@ class ProposalEmployeeDecorator < ObjDecorator
     STATUS_BACKGROUND_COLORS[model.state]
   end
 
+  def ticket_path
+    tickets = Ticket.with_other_tickets_for(h.current_user).ransack(state_cont: 'opened').result
+    ticket = tickets.find_by(proposal_employee_id: id)
+    ticket ? h.profile_ticket_path(ticket) : h.profile_tickets_path
+  end
+
   def interview_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end
