@@ -34,7 +34,9 @@
         - order_templates.each do |order_t|
           .hoverable.rounded.border.white.mb-2
             .d-flex.justify-content-between
-              p.m-2.p-2 #{order_t.name} #{order_t.adv_text if order_t.advertising?}
+              p.m-2.p-2
+                = link_to "#{order_t.name} #{order_t.adv_text if order_t.advertising?}",
+                          edit_profile_production_site_order_template_path(@production_site, order_t)
             .d-flex.justify-content-around
               = link_to profile_production_site_order_template_path(@production_site, order_t),
                       remote: true,
@@ -54,64 +56,70 @@
                 i.fas.fa-pen-alt
               = render partial: 'profile/production_sites/order_templates/move',
                       locals: { production_site: @production_site, order_template: order_t }
-        - [{title: 'Заявки на модерации', data: moderation_orders}].each do |ord|
-          p.h6.font-weight-bold.text-center.mt-2.text-white = ord[:title]
-          hr
-            - ord[:data].each do |order|
-              .hoverable.rounded.border.white.mb-2
-                .d-flex.justify-content-between
-                  div
-                    p.m-2.p-2 #{order.title}. #{order.skill}
-                .d-flex.justify-content-around
+        p.h6.font-weight-bold.text-center.mt-2.text-white Заявки на модерации
+        hr
+          - moderation_orders.each do |order|
+            .hoverable.rounded.border.white.mb-2
+              .d-flex.justify-content-between
+                div
+                  p.m-2.p-2
+                    = link_to "#{order.title}. #{order.skill}",
+                              profile_production_site_order_path(@production_site, order)
+              .d-flex.justify-content-around
+                = link_to edit_profile_production_site_order_path(@production_site, order),
+                        class: 'btn-floating btn-sm green' do
+                  i.fas.fa-pen-alt
+                = link_to profile_production_site_order_path(@production_site, order),
+                        class: 'btn-floating btn-sm blue' do
+                  i.fas.fa-eye
+                = render partial: 'move', locals: {production_site: @production_site, order: order}
+      .col-md-4
+        p.h6.font-weight-bold.text-center.text-white Опубликованные заявки
+        hr
+          - in_progress_orders.each do |order|
+            .hoverable.rounded.border.white.mb-2
+              .d-flex.justify-content-between
+                div
+                  p.m-2.p-2
+                    = link_to "#{order.title}. #{order.skill}",
+                              profile_production_site_order_path(@production_site, order),
+                              edit: true
+              .d-flex.justify-content-around
                   = link_to edit_profile_production_site_order_path(@production_site, order),
-                          class: 'btn-floating btn-sm green' do
+                            class: 'btn-floating btn-sm green' do
                     i.fas.fa-pen-alt
                   = link_to profile_production_site_order_path(@production_site, order),
-                          class: 'btn-floating btn-sm blue' do
+                            class: 'btn-floating btn-sm blue',
+                            remote: true do
                     i.fas.fa-eye
-                  = render partial: 'move', locals: {production_site: @production_site, order: order}
-      .col-md-4
-        - [{ title: 'Опубликованные заявки', data: in_progress_orders }].each do |ord|
-          p.h6.font-weight-bold.text-center.text-white = ord[:title]
-          hr
-            - ord[:data].each do |order|
-              .hoverable.rounded.border.white.mb-2
-                .d-flex.justify-content-between
-                  div
-                    p.m-2.p-2 #{order.title}. #{order.skill}
-                .d-flex.justify-content-around
-                    = link_to edit_profile_production_site_order_path(@production_site, order),
-                              class: 'btn-floating btn-sm green' do
-                      i.fas.fa-pen-alt
-                    = link_to profile_production_site_order_path(@production_site, order),
-                              class: 'btn-floating btn-sm blue' do
-                      i.fas.fa-eye
-                    = render partial: 'move', locals: { production_site: @production_site, order: order }
-                hr
-                .d-flex.justify-content-around
-                  div
-                    p.text-center
-                      i.fas.fa-door-open
-                      | 1
-                  div
-                    p.text-center
-                      i.far.fa-clock
-                      | 2
-                  div
-                    p.text-center
-                      i.fas.fa-clipboard-check
-                      | 3
-                  div
-                    p.text-center.red-text
-                      i.fas.fa-angry
-                      | 0
+                  = render partial: 'move', locals: { production_site: @production_site, order: order }
+              hr
+              .d-flex.justify-content-around
+                div
+                  p.text-center
+                    i.fas.fa-door-open
+                    | 1
+                div
+                  p.text-center
+                    i.far.fa-clock
+                    | 2
+                div
+                  p.text-center
+                    i.fas.fa-clipboard-check
+                    | 3
+                div
+                  p.text-center.red-text
+                    i.fas.fa-angry
+                    | 0
         p.h6.font-weight-bold.text-center.mt-2.text-white Завершенные заявки
         hr
         - completed_orders.each do |order|
           .hoverable.rounded.border.white.mb-2
             .d-flex.justify-content-between
               div
-                p.m-2.p-2 #{order.title}. #{order.skill}
+                p.m-2.p-2
+                  = link_to "#{order.title}. #{order.skill}",
+                            profile_production_site_order_path(@production_site, order)
             .d-flex.justify-content-around
               = link_to edit_profile_production_site_order_path(@production_site, order),
                       class: 'btn-floating btn-sm green' do
