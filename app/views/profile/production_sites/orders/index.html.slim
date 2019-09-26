@@ -1,75 +1,123 @@
-.col-md-10.order-md-2.order-1.p-2.pt-4.p-site-orders
-  .container.w-100.mt-2
-    .row.m-1
+.col.pt-4.grey.lighten-3
+  .container-fluid
+    .row
       .col-md-4
-        .row
-          .col-md-12
-            .card
-              .view.overlay
-                h4.text-center Производственные площадки
-              .card-body
-                - production_sites.each do |p_site|
-                  .item= link_to p_site.title, profile_production_site_orders_path(p_site)
-          .col-md-12
-            .card
-              .view.overlay
-                h4.text-center Шаблоны
-              .card-body
-                - order_templates.each do |order_t|
-                  .item
-                    p #{order_t.name} #{order_t.adv_text if order_t.advertising?}
-                    = link_to profile_production_site_order_template_path(@production_site, order_t),
-                            remote: true,
-                            class: 'btn-floating btn-sm red',
-                            method: :delete,
-                            data: { confirm: 'Вы уверены?' } do
-                      i.fas.fa-trash
-                    = link_to copy_profile_production_site_order_template_path(@production_site, order_t),
-                            remote: true,
-                            class: 'btn-floating btn-sm blue',
-                            method: :post,
-                            data: {confirm: 'Точно хотите скопировать шаблон?'} do
-                      i.fas.fa-clone
-                    = link_to edit_profile_production_site_order_template_path(@production_site, order_t),
-                            class: 'btn-floating btn-sm green',
-                            remote: true do
-                      i.fas.fa-pen-alt
-                    = render partial: 'profile/production_sites/order_templates/move',
-                            locals: { production_site: @production_site, order_template: order_t }
+        p.h6.font-weight-bold.text-center Производственные площадки
+        hr
+        - production_sites.each do |p_site|
+          .hoverable.rounded.border.white.mb-2
+            .d-flex.justify-content-between
+              .m-2.p-2.item = link_to p_site.title, profile_production_site_orders_path(p_site)
+              div.m-2.p-2
+                = p_site.city
+            hr
+            .d-flex.justify-content-around
+              div
+                p.text-center
+                  i.fas.fa-door-open
+                  | 1
+              div
+                p.text-center
+                  i.far.fa-clock
+                  | 2
+              div
+                p.text-center
+                  i.fas.fa-clipboard-check
+                  | 3
+              div
+                p.text-center.red-text
+                  i.fas.fa-angry
+                  | 0
 
       .col-md-4
-        .row
-          - [{ title: 'Заявки на модерации',   data: moderation_orders },
-             { title: 'Опубликованные заявки', data: in_progress_orders }].each do |ord|
-            .col-md-12
-              .card
-                .view.overlay
-                  h4.text-center = ord[:title]
-                .card-body
-                  - ord[:data].each do |order|
-                    .item
-                      strong #{order.profile.company.name} #{order.adv_text if order.advertising?}
-                      p #{order.title}. #{order.skill}
-                      = link_to edit_profile_production_site_order_path(@production_site, order),
-                                class: 'btn-floating btn-sm green' do
-                        i.fas.fa-pen-alt
-                      = link_to profile_production_site_order_path(@production_site, order),
-                                class: 'btn-floating btn-sm blue' do
-                        i.fas.fa-eye
-                      = render partial: 'move', locals: { production_site: @production_site, order: order }
+        p.h6.font-weight-bold.text-center Шаблоны
+        hr
+        - order_templates.each do |order_t|
+          .hoverable.rounded.border.white.mb-2
+            .d-flex.justify-content-between
+              p.m-2.p-2 #{order_t.name} #{order_t.adv_text if order_t.advertising?}
+            .d-flex.justify-content-around
+              = link_to profile_production_site_order_template_path(@production_site, order_t),
+                      remote: true,
+                      class: 'btn-floating btn-sm red',
+                      method: :delete,
+                      data: { confirm: 'Вы уверены?' } do
+                i.fas.fa-trash
+              = link_to copy_profile_production_site_order_template_path(@production_site, order_t),
+                      remote: true,
+                      class: 'btn-floating btn-sm blue',
+                      method: :post,
+                      data: {confirm: 'Точно хотите скопировать шаблон?'} do
+                i.fas.fa-clone
+              = link_to edit_profile_production_site_order_template_path(@production_site, order_t),
+                      class: 'btn-floating btn-sm green',
+                      remote: true do
+                i.fas.fa-pen-alt
+              = render partial: 'profile/production_sites/order_templates/move',
+                      locals: { production_site: @production_site, order_template: order_t }
+        - [{title: 'Заявки на модерации', data: moderation_orders}].each do |ord|
+          p.h6.font-weight-bold.text-center.mt-2 = ord[:title]
+          hr
+            - ord[:data].each do |order|
+              .hoverable.rounded.border.white.mb-2
+                .d-flex.justify-content-between
+                  div
+                    p.m-2.p-2 #{order.title}. #{order.skill}
+                .d-flex.justify-content-around
+                  = link_to edit_profile_production_site_order_path(@production_site, order),
+                          class: 'btn-floating btn-sm green' do
+                    i.fas.fa-pen-alt
+                  = link_to profile_production_site_order_path(@production_site, order),
+                          class: 'btn-floating btn-sm blue' do
+                    i.fas.fa-eye
+                  = render partial: 'move', locals: {production_site: @production_site, order: order}
       .col-md-4
-        .card
-          .view.overlay
-            h4.text-center Завершенные заявки
-          .card-body
-            - completed_orders.each do |order|
-              .item
-                strong #{order.profile.company.name} #{order.adv_text if order.advertising?}
-                p #{order.title}. #{order.skill}
-                = link_to edit_profile_production_site_order_path(@production_site, order),
-                        class: 'btn-floating btn-sm green' do
-                  i.fas.fa-pen-alt
-                = link_to profile_production_site_order_path(@production_site, order),
-                        class: 'btn-floating btn-sm blue' do
-                  i.fas.fa-eye
-                = render partial: 'move', locals: { production_site: @production_site, order: order }
+        - [{ title: 'Опубликованные заявки', data: in_progress_orders }].each do |ord|
+          p.h6.font-weight-bold.text-center.mt-2 = ord[:title]
+          hr
+            - ord[:data].each do |order|
+              .hoverable.rounded.border.white.mb-2
+                .d-flex.justify-content-between
+                  div
+                    p.m-2.p-2 #{order.title}. #{order.skill}
+                .d-flex.justify-content-around
+                    = link_to edit_profile_production_site_order_path(@production_site, order),
+                              class: 'btn-floating btn-sm green' do
+                      i.fas.fa-pen-alt
+                    = link_to profile_production_site_order_path(@production_site, order),
+                              class: 'btn-floating btn-sm blue' do
+                      i.fas.fa-eye
+                    = render partial: 'move', locals: { production_site: @production_site, order: order }
+                hr
+                .d-flex.justify-content-around
+                  div
+                    p.text-center
+                      i.fas.fa-door-open
+                      | 1
+                  div
+                    p.text-center
+                      i.far.fa-clock
+                      | 2
+                  div
+                    p.text-center
+                      i.fas.fa-clipboard-check
+                      | 3
+                  div
+                    p.text-center.red-text
+                      i.fas.fa-angry
+                      | 0
+        p.h6.font-weight-bold.text-center.mt-2 Завершенные заявки
+        hr
+        - completed_orders.each do |order|
+          .hoverable.rounded.border.white.mb-2
+            .d-flex.justify-content-between
+              div
+                p.m-2.p-2 #{order.title}. #{order.skill}
+            .d-flex.justify-content-around
+              = link_to edit_profile_production_site_order_path(@production_site, order),
+                      class: 'btn-floating btn-sm green' do
+                i.fas.fa-pen-alt
+              = link_to profile_production_site_order_path(@production_site, order),
+                      class: 'btn-floating btn-sm blue' do
+                i.fas.fa-eye
+              = render partial: 'move', locals: { production_site: @production_site, order: order }
