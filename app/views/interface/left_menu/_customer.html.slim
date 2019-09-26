@@ -1,46 +1,26 @@
-.col-md-2.order-md-1.order-2.d-none.d-md-block
-  .position-fixed.border.rounded.mt-4.pl-2.pr-2.col-md-2
+.col-1.d-none.d-md-block.border.rounded.p-0.deep-purple.accent-4.z-depth-1
+  .position-fixed.w-100.col-1.h-100
     ul.list-unstyled.mt-3
       li
-        = link_to root_path, class: "text-body #{'font-weight-bold' if active_item == :root}" do
-          i.fas.fa-user-circle.mr-2
-          = current_user.full_name
+        .d-flex.justify-content-center
+          = link_to root_path, class: "text-body text-light #{'font-weight-bold' if active_item == :root}" do
+            i.fas.fa-home
+        .d-flex.justify-content-center
+          = link_to root_path, class: "text-body text-light #{'font-weight-bold' if active_item == :root}" do
+            | Главная
         hr.mb-2.mt-2
       li
-          = link_to profile_production_sites_path, class: "text-body #{'font-weight-bold' if active_item == :production_sites}" do
-            i.fas.fa-user-circle.mr-2
-            |Площадки
-          hr.mb-2.mt-2
-      - if @production_site
-        li
-          .text-center = @production_site.title
-          hr.mb-2.mt-2
-
-          li
-            = link_to profile_production_site_order_templates_path(@production_site), class: "text-body #{'font-weight-bold' if active_item == :order_templates}" do
-              i.far.fa-handshake.mr-2
-              |Мои шаблоны
-
-          li
-            hr.mb-2.mt-2
-              i.fas.fa-users.mr-2
-              |Мои заявки
-              ul.list-unstyled.ml-3
-                li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :moderation), class: "text-body #{'font-weight-bold' if active_item == :moderation}"
-                    i.fas.fa-balance-scale.mr-2
-                    |Модерация
-                li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :in_progress), class: "text-body #{'font-weight-bold' if active_item == :in_progress}"
-                    i.fas.fa-user-plus.mr-2
-                    |В работе
-
-                li
-                  = link_to profile_production_site_orders_with_state_path(@production_site, :completed), class: "text-body #{'font-weight-bold' if active_item == :completed}"
-                    i.fas.fa-user-check.mr-2
-                    |Завершённые
-            hr.mb-2.mt-2
+        .d-flex.justify-content-center
+          = link_to profile_production_sites_path, class: "text-body text-light #{'font-weight-bold' if active_item == :production_sites}" do
+            i.fas.fa-city
+        .d-flex.justify-content-center
+          = link_to profile_production_sites_path, class: "text-body text-light #{'font-weight-bold' if active_item == :production_sites}" do
+            |Заявки
+        hr.mb-2.mt-2
       li
-        = link_to profile_candidates_path, class: "text-body #{'font-weight-bold' if active_item == :candidates}" do
-          i.fas.fa-address-card.mr-2
-          |Анкеты
+        .d-flex.justify-content-center
+          = link_to profile_candidates_path, class: "text-body text-light #{'font-weight-bold' if active_item == :candidates}" do
+            i.fas.fa-address-card.mr-2
+        .d-flex.justify-content-center
+          = link_to profile_candidates_path, class: "text-body text-light #{'font-weight-bold' if active_item == :candidates}" do
+            |Анкеты

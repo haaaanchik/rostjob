@@ -1,8 +1,8 @@
-.col.pt-4.grey.lighten-3
+.col.pt-4.blue-gradient
   .container-fluid
     .row
       .col-md-4
-        p.h6.font-weight-bold.text-center Производственные площадки
+        p.h6.font-weight-bold.text-center.text-white Производственные площадки
         hr
         - production_sites.each do |p_site|
           .hoverable.rounded.border.white.mb-2
@@ -28,9 +28,8 @@
                 p.text-center.red-text
                   i.fas.fa-angry
                   | 0
-
       .col-md-4
-        p.h6.font-weight-bold.text-center Шаблоны
+        p.h6.font-weight-bold.text-center.text-white Шаблоны
         hr
         - order_templates.each do |order_t|
           .hoverable.rounded.border.white.mb-2
@@ -56,7 +55,7 @@
               = render partial: 'profile/production_sites/order_templates/move',
                       locals: { production_site: @production_site, order_template: order_t }
         - [{title: 'Заявки на модерации', data: moderation_orders}].each do |ord|
-          p.h6.font-weight-bold.text-center.mt-2 = ord[:title]
+          p.h6.font-weight-bold.text-center.mt-2.text-white = ord[:title]
           hr
             - ord[:data].each do |order|
               .hoverable.rounded.border.white.mb-2
@@ -73,7 +72,7 @@
                   = render partial: 'move', locals: {production_site: @production_site, order: order}
       .col-md-4
         - [{ title: 'Опубликованные заявки', data: in_progress_orders }].each do |ord|
-          p.h6.font-weight-bold.text-center.mt-2 = ord[:title]
+          p.h6.font-weight-bold.text-center.text-white = ord[:title]
           hr
             - ord[:data].each do |order|
               .hoverable.rounded.border.white.mb-2
@@ -106,7 +105,7 @@
                     p.text-center.red-text
                       i.fas.fa-angry
                       | 0
-        p.h6.font-weight-bold.text-center.mt-2 Завершенные заявки
+        p.h6.font-weight-bold.text-center.mt-2.text-white Завершенные заявки
         hr
         - completed_orders.each do |order|
           .hoverable.rounded.border.white.mb-2
