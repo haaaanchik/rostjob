@@ -36,7 +36,8 @@
             .d-flex.justify-content-between
               p.m-2.p-2
                 = link_to "#{order_t.name} #{order_t.adv_text if order_t.advertising?}",
-                          edit_profile_production_site_order_template_path(@production_site, order_t)
+                          edit_profile_production_site_order_template_path(@production_site, order_t),
+                          remote: true
             .d-flex.justify-content-around
               = link_to profile_production_site_order_template_path(@production_site, order_t),
                       remote: true,
