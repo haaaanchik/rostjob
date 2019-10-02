@@ -20,4 +20,8 @@ class OrderDecorator < ObjDecorator
   def urgency_high_class
     model.urgency.high? ? 'text-danger' : 'invisible'
   end
+
+  def title_with_skill
+    "№#{id} #{title}. #{skill}"
+  end
 end

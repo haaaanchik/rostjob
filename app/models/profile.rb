@@ -61,6 +61,13 @@ class Profile < ApplicationRecord
     end
   end
 
+  def orders_with_paid_employees(current_date, prev_date)
+    answered_orders.where('proposal_employees.state = ? and
+                           proposal_employees.payment_date < ? and
+                           proposal_employees.payment_date > ? ',
+                          'paid', current_date, prev_date)
+  end
+
   def free_manager?
     manager? && free?
   end

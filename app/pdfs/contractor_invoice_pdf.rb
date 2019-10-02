@@ -8,6 +8,8 @@ class ContractorInvoicePdf < Prawn::Document
     @buyer = invoice.buyer
     @goods = invoice.goods
     @total = invoice.amount
+    @profile = invoice.profile
+    @total_price = 0
     @view = view
     font_families.update(
       'Arial' => {
@@ -21,6 +23,7 @@ class ContractorInvoicePdf < Prawn::Document
     receiver_requisites
     total_by_words
     goods
+    proposals
   end
 
   def header
@@ -62,5 +65,74 @@ class ContractorInvoicePdf < Prawn::Document
   def total_by_words
     move_down 3.mm
     text "Сумма: #{@total} (#{RuPropisju.rublej(@total).capitalize} 00 копеек)", size: 12
+  end
+
+  def proposals
+    move_down 5.mm
+    order_data = services || []
+    table(order_data, position: :center, column_widths: [15.mm, 90.mm, 20.mm, 15.mm, 20.mm, 30.mm],
+          cell_style: { font: 'Arial', size: 8, align: :center })
+  end
+
+  def services
+    prev_invoice = @profile.invoices.prev_invoice(@invoice.created_at).first
+    if prev_invoice.nil?
+      orders = @profile.answered_orders.where("proposal_employees.state = 'paid'")
+    else
+      current_date = @invoice.created_at
+      prev_date = prev_invoice.created_at
+      orders = @profile.orders_with_paid_employees(current_date, prev_date)
+    end
+
+    data = [table_head]
+    orders.includes(:proposal_employees).decorate.each_with_index do |order, i|
+      employees = prev_invoice.nil? ? (order.proposal_employees.paid.where('proposal_employees.profile_id = ?', @profile.id)) :
+                                      (order.proposal_employees.paid_employees_during(@profile.id, current_date, prev_date))
+      quantity = employees.count
+      total = quantity * order.contractor_price
+      @total_price += total
+
+      data << [
+        { content: (i + 1).to_s }, { content: order.title_with_skill },
+        { content: quantity.to_s }, { content: 'шт' },
+        { content: order.contractor_price.to_s },
+        { content: total.to_s }
+      ]
+      employees.includes(:employee_cv).each do |employee|
+        data << [{}, { content: employee_row(employee) }, {}, {}, {}, {}]
+      end
+    end
+    data << [{ content: total_text('Итого:'), colspan: 5, border_width: 0 }, { content: @total_price.to_s }]
+    data << [{ content: total_text('В том числе НДС (18%)'), colspan: 5, border_width: 0 }, {}]
+    data << [{ content: total_text('Всего (с учетом НДС)'), colspan: 5, border_width: 0 }, { content: @total_price.to_s }]
+    data
+  end
+
+  def table_head
+    [
+      { content: '№' }, { content: 'Наименование работы (услуги)' },
+      { content: 'Количество' }, { content: 'Ед. изм.' },
+      { content: 'Цена' }, { content: 'Сумма' }
+    ]
+  end
+
+  def employee_row(employee)
+    make_table([
+                 [employee.id.to_s,
+                 employee.employee_cv.name,
+                 'Нанят',
+                 employee.hiring_date.strftime('%d/%m/%Y')]
+               ],
+               column_widths: [10.mm, 50.mm, 12.mm, 18.mm],
+               cell_style:    { font: 'Arial', size: 8, borders: [:top] })
+  end
+
+  def total_text(str)
+    make_table([[str]],
+               column_widths: [160.mm],
+               cell_style:    { size:         10,
+                                border_width: 0,
+                                align:        :right,
+                                style:        :bold })
   end
 end
