@@ -1,0 +1,21 @@
+div id="order_id_#{order.id}"
+  .col-12.p-0
+    table.collapsable.mt-2.mb-2 data-order-id=order.id width="100%"
+      tbody
+        tr.row.rounded.hoverable.m-1
+          td.text-left.align-items-center width="10%"
+            p.m-0.ml-1.font-weight-bold
+              | №#{order.id}
+
+          td.text-center.align-items-center width="70%"
+            p.m-0
+              | #{order.title}. #{order.skill} <br /> #{order.salary}
+
+          td.text-center.align-items-center width="20%"
+            .d-none.d-md-block
+              .bg-best-hr.text-right.z-depth-2.rounded.mb-0.position-relative
+                p.white-text.m-1.font-weight-bold
+                  |#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
+                  i.fas.fa-ruble-sign.ml-1.mr-1
+                  |/ чел.
+  = render partial: 'orders/show_card', locals: { order: order, order_advertising: false }

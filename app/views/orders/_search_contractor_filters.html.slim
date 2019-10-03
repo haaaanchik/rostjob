@@ -1,0 +1,45 @@
+- titles = order_filters.map(&:title).uniq
+- cities = order_filters.map { |order| order.production_site.city }.uniq
+- cities.delete(nil)
+- titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
+- cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
+- val = params[:q] ? params[:q][:all_fields_cont] : nil
+= search_form_for @q, url: orders_path do |f|
+  .row
+    .col
+      hr
+  .row.mt-1
+    .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center
+      = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
+  .row.mt-4
+    .col-sm-12.col-md-6.col-lg-12.d-flex.text-center.mb-2
+      | Профессии
+    - titles.each_with_index do |title, i|
+      .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
+        .form-check.form-check-inline
+          = check_box_tag 'q[title_fields_in][]',
+                          title,
+                          titles_val&.include?(title),
+                          class: 'form-check-input',
+                          id:     "title_filter_#{i}"
+          = label :title_fields, nil, class: 'form-check-label', for: "title_filter_#{i}" do
+            p.border.rounded.z-depth-1.m-0[style="width: 180px;"]
+              i.mr-2
+              span.mr-2 = truncate(title, length: 17, separator: '.')
+    .col-sm-12.col-md-6.col-lg-12.d-flex.text-center.mb-2
+      | Города
+    - cities.each_with_index do |city, i|
+      .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
+        .form-check.form-check-inline
+          = check_box_tag 'q[city_fields_in][]',
+                          city,
+                          cities_val&.include?(city),
+                          class: 'form-check-input',
+                          id:    "city_filter_#{i}"
+          = label :city_fields, nil, class: 'form-check-label', for: "city_filter_#{i}" do
+            p.border.rounded.z-depth-1.m-0[style="width: 180px;"]
+              i.mr-2
+              span.mr-2 = city
+  .row
+    .col
+      hr

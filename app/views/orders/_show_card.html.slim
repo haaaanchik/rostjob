@@ -1,0 +1,154 @@
+.col-12.p-0.collapsable_card data-order-id=order.id class="#{'collapse' unless order_advertising}"
+  .card.testimonial-card.w-100.z-depth-0.border
+    .card-up.lighten-1.card-up-hr class="#{order_advertising ? 'advertising' : 'bg-best-hr'}"
+      .container
+        .row.m-card-up
+          .p-0.d-flex.align-self-stretch.w-100
+            .ava-m.d-none.d-lg-block
+            .w-100
+              table[width="100%" height="90px"]
+                tbody
+                  tr
+                    td.align-bottom
+                      .d-none.d-md-block
+                        h4.card-title.white-text #{order.profile.company.name} #{order.adv_text if order_advertising}
+                      .d-block.d-md-none
+                        h4.card-title.white-text
+                          |# #{order.id}
+                    td.align-middle.text-right[width="200px"]
+                      - unless @current_profile.profile_type == 'customer'
+                        - unless @employee_cv_id
+                          - if !@current_profile.favorites.find_by(id: order.id)
+                            = link_to add_to_favorites_order_path(order), class: 'btn-floating btn-sm blue', method: :put, remote: true do
+                              i.fas.fa-star
+                            span.counter
+                              i.fas.fa-plus
+                            p.card-title.white-text
+                              | В избранное
+                          - else
+                            = link_to remove_from_favorites_order_path(order), class: 'btn-floating btn-sm grey', method: :put, remote: true do
+                              i.fas.fa-star
+                            span.counter.mt-1.grey
+                              i.fas.fa-minus
+                            p.card-title.white-text
+                              | Убрать из избранного
+                    - unless order_advertising
+                      td.collapse_hide.align-top.text-right width='10%' title='Скрыть' data-order-id=order.id
+                        span.font-weight-bold.text-white.fa-2x &times;
+    .d-flex.align-self-stretch
+      .text-center
+        .avatar.ml-2.white.mr-1.d-none.d-md-block
+          = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'no avatar')
+        .ml-2.mr-2
+          .d-none.d-md-block
+            p.h4
+              br
+              |# #{order.id}
+      .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
+        .row.m-0.p-0.pr-1.pl-1.pb-1
+          .col-md-9.pr-0.pl-0
+            = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
+            .price.w-100.border.rounded.mb-0.p-1
+              .d-none.d-md-block
+                p.h5.text-center.mt-1.mb-0
+                  i.fas.fa-city
+                  strong.ml-2 #{order.place_of_work}
+                p.h4.text-center.mt-1.mb-0
+                  i.fas.fa-hammer.mr-2
+                  strong #{order.title}. #{order.skill}
+                p.text-center.m-0
+                  i.fas.fa-money-bill-alt.w-2.mr-2
+                  i.fas.fa-ruble-sign.mr-2
+                  strong #{order.salary}
+                p.m-0
+                  i.fas.fa-map-marker.w-2
+                  strong.ml-2 #{order.city}, #{order.district}
+                p.m-0
+                  i.fas.fa-passport.w-2.mr-2
+                  strong #{order.experience}
+                p.m-0
+                  i.far.fa-calendar-alt.w-2.mr-2
+                  strong #{order.work_period}. #{order.schedule}.
+                p.h6.m-0
+                  i.fas.fa-clipboard-list.w-2.mr-2
+                  - unless order.description.nil? || order.description.empty?
+                    strong == order.description
+                p.m-0
+                  i.fas.fa-plus.w-2.mr-2
+                  strong #{order.other_info['related_profession']}
+                p.h6.m-0
+                  i.fas.fa-bed.w-2.mr-2
+                  strong.mr-2 Предлагаемые условия:
+                  == order.other_info['terms']
+                hr.h6.mb-0
+                p.h6.m-0
+                  i.fas.fa-comment-alt.w-2.mr-2
+                  |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
+                  br
+                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                    == order.other_info['remark']
+                    - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
+                        order.contact_person['phone'] && !order.contact_person['phone'].empty?
+              .d-block.d-md-none
+                p.h6.text-center.mt-1.mb-0
+                  | #{order.city} #{order.district} <br> #{order.place_of_work} <br> #{order.title} #{order.skill} <br> #{order.salary} рублей.
+                p.h6.mt-1.mb-0
+                  | #{order.experience} <br> #{order.work_period}. #{order.schedule}. <br>
+                  - unless order.description.nil? || order.description.empty?
+                    == order.description
+                    | <br>
+                  /| #{order.other_info['related_profession']} <br>
+                  | Предлагаемые условия: <br>
+                  == order.other_info['terms']
+                hr.h6.mb-0
+                p.h6.m-0
+                  i.fas.fa-comment-alt.w-2.mr-2
+                  |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
+                  br
+                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+                    == order.other_info['remark']
+                    - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
+                        order.contact_person['phone'] && !order.contact_person['phone'].empty?
+          .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
+            - order_text = Nokogiri::HTML("#{order.place_of_work}\n\
+                        #{order.title}. #{order.skill}\n\
+                        #{order.salary}\n\
+                        #{order.city}, #{order.district}\n\
+                        #{order.experience}\n\
+                        #{order.work_period}. #{order.schedule}.\n\
+                        #{order.description}\n\
+                        #{order.other_info['related_profession']}\n\
+                        #{order.other_info['terms']}").text
+
+            button.btn.button-hr.pt-2.pb-2.m-0.btn-rounded.w-100.waves-effect.active.text-center.blue-text[id="copy-to-clipboard-#{order.id}" data-order="#{order_text}"]
+              i.far.fa-copy.mr-2
+              |Скопировать в буфер обмена
+            - if order.contact_person['name'] || order.contact_person['phone']
+              div
+                .text-center.border.rounded.mb-3
+                  p.p-0.m-0.font-weight-bold
+                    |  Контактное лицо:
+                  p.font-italic.m-1
+                    span
+                      = order.contact_person['name']
+                  p.font-italic.m-1
+                    span
+                      = order.contact_person['phone']
+            - if order.document.present?
+              div
+                .d-flex.justify-content-center
+                  = link_to order.document.url, class: 'btn-floating btn-sm blue' do
+                    i.fas.fa-file-download
+                p.card-title.blue-text.text-center
+                  |Скачать
+                  br анкету
+            - if @current_profile.contractor?
+              .m-2
+                p.m-0.green-text.text-center
+                  - if @employee_cv_id
+                    - pe_form = "#{render partial: 'profile/proposal_employees/form', locals: { order_id: order.id, employee_cv_id: @employee_cv_id }}"
+                    button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
+                  - else
+                    = link_to new_profile_employee_cv_path(order_id: order.id), class: 'button btn button-hr pt-2 pb-2 m-0 btn-rounded w-100 waves-effect active text-center blue-text', remote: true do
+                      i.far.fa-paper-plane.mr-2
+                      |Отправить анкету
