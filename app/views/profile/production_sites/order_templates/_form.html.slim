@@ -25,12 +25,11 @@
         th Вознаграждение исполнителя
         th Стоимость заявки
       tr
-        - disabled = order_template.position_id ? false : true
         td#position_title.align-middle #{order_template.title}
         td#num_of_employees.align-middle style="width: 10%" data-price="#{order_template.customer_price}"
-          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control", disabled: disabled
+          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control"
         td#contractor_price.align-middle.text-right style="width: 10%"
-          = f.text_field :contractor_price, class: 'form-control', disabled: disabled
+          = f.text_field :contractor_price, class: 'form-control'
         td#customer_total.align-middle.text-right style="width: 10%" #{order_template.customer_total}
   .row
     .col
@@ -127,4 +126,9 @@
   .form-group.mt-3
     .row
       .col-3
-        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-info"
+        = f.submit t('profile.order_templates.commit.save'), class: 'btn btn-info'
+      - if f.object.new_record?
+        .col-4
+          = f.button class: 'btn btn-white' do
+            i.fas.fa-plus
+            |  Опубликовать
