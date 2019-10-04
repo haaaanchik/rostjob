@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_121129) do
+ActiveRecord::Schema.define(version: 2019_10_04_083919) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -58,7 +58,9 @@ ActiveRecord::Schema.define(version: 2019_10_01_121129) do
     t.bigint "balance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "invoice_id"
     t.index ["balance_id"], name: "index_bill_transactions_on_balance_id"
+    t.index ["invoice_id"], name: "index_bill_transactions_on_invoice_id"
   end
 
   create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|

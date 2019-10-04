@@ -21,4 +21,5 @@
           th Описание операции
           th Приход
           th Расход
-        = render @balance.bill_transactions
+          th PDF
+        = render @balance.bill_transactions.decorate

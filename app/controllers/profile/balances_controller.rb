@@ -25,6 +25,19 @@ class Profile::BalancesController < ApplicationController
     end
   end
 
+  def contractor_invoice
+    invoice = Invoice.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ContractorInvoicePdf.new(invoice, view_context)
+        send_data pdf.render, filename: "Счёт #{invoice.invoice_number} от #{l(invoice.created_at, format: :short)}.pdf",
+                  type: 'application/pdf',
+                  disposition: 'inline'
+      end
+    end
+  end
+
   private
 
   def profile

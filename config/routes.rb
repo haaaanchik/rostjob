@@ -277,6 +277,7 @@ Rails.application.routes.draw do
       member do
         get :withdrawal, to: 'balances#withdrawal_methods'
         put :withdrawal, to: 'balances#withdrawal'
+        get 'contractor_invoice/:id', to: 'balances#contractor_invoice', as: :contractor_invoice
       end
     end
     put :balance, to: 'balances#deposit'
