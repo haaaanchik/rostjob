@@ -29,7 +29,8 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   def update
     result = Cmd::OrderTemplate::Update.call(order_template: @order_template, params: params_with_price)
     if result.success?
-      redirect_to profile_production_site_order_templates_path(production_site)
+      params[:commit].nil? ? publish_order(result.order_template, result.order_template.number_of_employees.to_s) :
+                             (redirect_to profile_production_site_order_templates_path(production_site))
     else
       render json: { validate: true, data: errors_data(result.order_template) }, status: 422
     end

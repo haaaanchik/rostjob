@@ -127,8 +127,7 @@
     .row
       .col-3
         = f.submit t('profile.order_templates.commit.save'), class: 'btn btn-info'
-      - if f.object.new_record?
-        .col-4
-          = f.button class: 'btn btn-white' do
-            i.fas.fa-plus
-            |  Опубликовать
+      .col-4
+        = f.button class: 'btn btn-white' do
+          i.fas.fa-plus
+          |  Опубликовать
