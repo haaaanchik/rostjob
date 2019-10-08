@@ -1,3 +1,22 @@
+- ids_titles = @orders.pluck(:id, :title).sort_by { |arr| arr.last }
+
+.col-md-2.mt-4
+  .cointainer.w-100.p-0
+    .row
+      .col
+        | Список Заявок
+
+    .row.mt-4
+      - ids_titles.each do |id_title|
+        .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
+          = label nil,
+                  nil,
+                  class: 'form-check-label clickable-order-row hoverable',
+                  data: { href: id_title.first } do
+            p.border.rounded.z-depth-1.m-0[style="width: 220px;"]
+              = order.decorate.icon_bookmark(id_title.first)
+              span.mr-2 = truncate(id_title.last, length: 22, separator: '.')
+
 .order-md-2.mt-4[class=col_class]
   .card.testimonial-card.card-hr.w-100
     .card-up.bg-best-hr.lighten-1.card-up-hr.pr-1
@@ -23,140 +42,32 @@
                   i.fas.fa-times
                 p.card-title.white-text
                   | Завершить
-    .container.w-100.p-0
-      .row.p-0.m-0.grey.lighten-4
-        .col-md-6.p-1
-          .price.p-1
-            .btn-group.group-menu.w-100.mt-4[role="group" aria-label="Basic example"]
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :inbox),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center inbox active",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Очередь
-                | &nbsp;#{order.candidates.inbox.count}
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :interview),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center interview",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Собес.
-                | &nbsp;#{order.candidates.interview.count}
+    .w-100.p-0
+      .row.p-0.m-0.grey.lighten-4.text-center
+        .col-md-3.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.yellow-text
+          u.font-weight-bold
+            | В очереди
+          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                     state: ['inbox', 'reserved'] }
 
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :hired),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center hired",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Нанято
-                | &nbsp;#{order.candidates.hired.count}
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :reserved),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center reserved",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Резерв
-                | &nbsp;#{order.candidates.reserved.count}
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :disputed),
-                      class: "button btn button-hr waves-effect candidates-menu-button w-20 p-1 text-center disputed",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Спор
-                | &nbsp;#{order.candidates.disputed.count}
-              = link_to profile_production_site_order_candidates_path(production_site, order, term: :transfer),
-                      class: "button btn button-hr btn-rounded waves-effect candidates-menu-button w-20 p-1 text-center disputed",
-                      data: {toggle: 'pill'}, remote: true  do
-                | Перенос
-                | &nbsp;#{order.candidates.transfer.count}
-            #order_candidates
-              = render partial: 'profile/production_sites/orders/contractors/contractor_card' , collection: @contractors
-            .container.w-100
-              .row
-                .col-6.p-0
-                .col-6.p-0
-                  button.btn.button-hr.btn-rounded.waves-effect.active.w-100.text-center.blue-text.m-0.mt-1.mb-2[ type="button" ]
-                    i.fas.fa-plus
-                    | добавить
-        .col-md-6.p-1
-          = render partial: 'orders/urgency', locals: { order: order, current_profile: @current_profile }
-          .price.container-fluid.border.rounded.mb-0.white
-            p.h5.text-center.mt-1.mb-0
-              i.fas.fa-city.mr-2
-              strong = order.place_of_work
-            p.h4.text-center.mt-1.mb-0
-              i.fas.fa-hammer
-              strong
-                |  #{order.title} #{order.skill}
-            p.text-center.m-0
-              i.fas.fa-money-bill-alt.w-2
-              i.fas.fa-ruble-sign.mx-2
-              strong = order.salary
-            p.m-0
-              i.fas.fa-map-marker.w-2
-              strong
-                |#{order.city} #{order.district}
-            p.m-0
-              i.fas.fa-passport.w-2.mr-2
-              strong = order.experience
+        .col-md-3.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.orange-text
+          u.font-weight-bold
+            | Собеседование
+          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                     state: 'interview' }
 
-            p.m-0
-              i.far.fa-calendar-alt.w-2.mr-2
-              strong = order.work_period
-            p.m-0
-              i.fas.fa-clipboard-list.w-2.mr-2
-              strong.mr-2 Виды выполняемых работ:
-              strong == order.description
-            p.m-0
-              i.fas.fa-plus.w-2.mr-2
-              strong
-                = order.other_info['related_profession']
-            p.m-0
-              i.fas.fa-bed.w-2.mr-2
-              strong Предлагаемые условия:
-              strong == order.other_info['terms']
-            hr.mb-0
-              div
-                p.mt-0
-                  i.fas.fa-comment-alt.w-2.mr-2
-                  |#{order.other_info['age_from']} - #{order.other_info['age_to']} (#{order.other_info['sex']})
-                  br
-                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-                    == order.other_info['remark']
-              .d-flex.justify-content-between
-                - if order.contact_person['name'] || order.contact_person['phone']
-                  div
-                    .text-center.border.rounded.mb-3
-                      p.p-0.m-0.font-weight-bold
-                        |  Контактное лицо:
-                      p.font-italic.m-1
-                        nobr
-                          = order.contact_person['name']
-                      p.font-italic.m-1
-                        nobr
-                          = order.contact_person['phone']
-                - if order.document.present?
-                  div
-                    = link_to order.document.url, class: 'btn-floating btn-sm blue' do
-                      i.fas.fa-file-download
-                    p.card-title.blue-text.text-center
-                      |Скачать
-                      br анкету
-javascript:
-  function to_interview() {
-    if ("#{@redirection}" == 'to_interview'){
-      element = $('.interview')
-      element[0].click();
-    } else if ("#{@redirection}" == 'to_hired') {
-      element = $('.hired')
-      element[0].click();
-    } else if ("#{@redirection}" == 'to_reserved') {
-      element = $('.reserved')
-      element[0].click();
-    } else if ("#{@redirection}" == 'to_disputed') {
-      element = $('.disputed')
-      element[0].click();
-    }
-  }
+        .col-md-3.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.green-text
+          u.font-weight-bold
+            | Нанят
+          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                     state: 'hired'}
 
-  function defer_to_interview(method) {
-    if(window.jQuery) {
-      method();
-    } else {
-      setTimeout(function () {
-       defer_to_interview(method);
-       }, 50);
-    }
-  }
-
-  defer_to_interview(to_interview);
+        .col-md-3.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.grey-text
+          u.font-weight-bold
+            | Оплачен
+          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                     state: 'paid' }

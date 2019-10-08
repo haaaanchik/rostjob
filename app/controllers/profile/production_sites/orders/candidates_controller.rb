@@ -1,7 +1,4 @@
 class Profile::ProductionSites::Orders::CandidatesController < Profile::ProductionSites::Orders::ApplicationController
-  def index
-    render partial: 'profile/production_sites/orders/contractors/contractor_card', collection: contractors, layout: false
-  end
 
   def show
     @pecv = candidate

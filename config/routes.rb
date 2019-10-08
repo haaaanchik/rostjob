@@ -159,7 +159,7 @@ Rails.application.routes.draw do
             post :add_position
           end
           scope module: :orders do
-            resources :candidates, only: %i[index show update destroy] do
+            resources :candidates, only: %i[show update destroy] do
               member do
                 get :hd_correction
                 put :hire

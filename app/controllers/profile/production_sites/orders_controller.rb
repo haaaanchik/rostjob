@@ -22,9 +22,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   end
 
   def show
-    @redirection = flash[:redirection] || params[:tab]
     order
-    contractors
 
     order.proposal_employees.map(&:mark_as_read)
   end
@@ -134,13 +132,6 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def move_order_params
     params.require(:order).permit(:production_site_id)
-  end
-
-  def contractors
-    @contractors ||= order.profiles.map do |profile|
-      profile.sent_proposal_employees = profile.sent_proposal_employees_by_order(order).inbox
-      profile
-    end
   end
 
   def params_with_price
