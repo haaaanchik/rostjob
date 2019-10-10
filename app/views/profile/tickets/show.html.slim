@@ -12,6 +12,6 @@
       .col-3.h-100.pt-3.border.text-center
         = @ticket.header
         hr
-        - unless @ticket&.proposal_employee.revoked?
+        - if @ticket.proposal_employee && !@ticket.proposal_employee.revoked?
           = link_to revoke_profile_proposal_employee_path(@ticket.proposal_employee), class: 'btn btn-success', method: :put, remote: true do
             |Отозвать анкету

@@ -8,6 +8,7 @@ module Cmd
           appeal = ::Appeal.new(appeal_params)
           context.appeal = appeal
           context.fail! unless context.appeal.save
+          context.appeal.to_contractor! if user.profile.contractor?
         end
 
         private

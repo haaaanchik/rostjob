@@ -27,5 +27,7 @@ module TicketRepository
         .group('proposal_employees.id')
         .order('last_complaint_time desc')
     }
+
+    scope :without_waiting, ->(profile) { where.not(waiting: profile.profile_type) }
   end
 end

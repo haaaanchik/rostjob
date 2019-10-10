@@ -1,20 +1,29 @@
 class Ticket < ApplicationRecord
+  include AASM
+  include TicketRepository
+
   belongs_to :user
+  belongs_to :proposal_employee
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :messages
 
-  include AASM
-
   validates :title, presence: true
 
-  include TicketRepository
-
-  aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
+  aasm :state, column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :opened, initial: true
     state :closed
 
     event :to_closed do
       transitions from: :opened, to: :closed
+    end
+  end
+
+  aasm :waiting, column: :waiting, skip_validation_on_save: true, no_direct_assignment: false do
+    state :customer, initial: true
+    state :contractor
+
+    event :to_contractor do
+      transitions from: :customer, to: :contractor
     end
   end
 
