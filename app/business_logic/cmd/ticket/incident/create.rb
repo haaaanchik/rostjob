@@ -8,6 +8,7 @@ module Cmd
           incident = ::Incident.new(incident_params)
           context.incident = incident
           context.fail! unless context.incident.save
+          context.incident.to_contractor! if user.profile.contractor?
           Cmd::UserActionLogger::Log.call(params: logger_params)
         end
 

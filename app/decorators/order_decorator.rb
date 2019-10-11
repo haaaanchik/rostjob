@@ -20,4 +20,16 @@ class OrderDecorator < ObjDecorator
   def urgency_high_class
     model.urgency.high? ? 'text-danger' : 'invisible'
   end
+
+  def title_with_skill
+    "№#{id} #{title}. #{skill}"
+  end
+
+  def icon_bookmark(active_id)
+    h.content_tag(:i, class: "ml-2 mr-1 #{'fas fa-bookmark' if id == active_id}") {}
+  end
+
+  def proposal_employees_by_status(state)
+    proposal_employees.includes(:employee_cv, profile: :user).where(state: state).order(interview_date: :desc)
+  end
 end

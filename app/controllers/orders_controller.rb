@@ -35,10 +35,15 @@ class OrdersController < ApplicationController
   end
 
   def orders
+    @order_filters = Order.published
+                          .with_customer_name
+                          .includes(:production_site, profile: :company)
+                          .order(advertising: :desc)
+
     @q = if params[:customer].present?
            Order.published.with_customer_name_by_customer(params[:customer]).order(advertising: :desc).ransack(params[:q])
          else
-           Order.published.with_customer_name.order(advertising: :desc).ransack(params[:q])
+           @order_filters.ransack(params[:q])
          end
     @orders ||= @q.result
   end

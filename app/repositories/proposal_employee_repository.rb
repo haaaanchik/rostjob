@@ -19,5 +19,10 @@ module ProposalEmployeeRepository
         .group('proposal_employees.id')
         .order('last_complaint_time desc')
     }
+    scope :paid_employees_during, ->(profile_id, current_date, prev_date) { where('proposal_employees.state = ? and
+                                                                                   proposal_employees.profile_id = ? and
+                                                                                   proposal_employees.payment_date < ? and
+                                                                                   proposal_employees.payment_date > ? ',
+                                                                                  'paid', profile_id, current_date, prev_date) }
   end
 end

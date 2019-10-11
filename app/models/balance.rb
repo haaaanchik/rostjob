@@ -20,10 +20,13 @@ class Balance < ApplicationRecord
     nil
   end
 
-  def withdraw(amount, description)
+  def withdraw(amount, description, invoice_id = nil)
     return if self.amount < amount.to_i
     ActiveRecord::Base.transaction do
-      bt = self.bill_transactions.build(amount: amount, description: description, transaction_type: 'withdrawal')
+      bt = self.bill_transactions.build(amount:           amount,
+                                        invoice_id:       invoice_id,
+                                        description:      description,
+                                        transaction_type: 'withdrawal')
       if bt.save
         self.amount -= amount.to_i
       else

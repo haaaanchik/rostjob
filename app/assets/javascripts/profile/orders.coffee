@@ -27,7 +27,7 @@ $('#order_form').on('submit', (event) ->
 )
 
 
-$(document).on('mouseenter', 'table.collapsable', (event) ->
+$(document).on('mouseenter', 'table.collapsable, .clickable-order-row, .clickable-pe', (event) ->
   $(this).css('cursor', 'pointer')
 )
 
@@ -203,6 +203,10 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
 $(document).on('change', '[id=order_filter_for_cis]', ->
   form = document.getElementById('order_search')
   form.submit()
+)
+
+$(document).on('click', '.clickable-order-row, .clickable-pe', (event) ->
+  window.location = $(event.currentTarget).data('href')
 )
 #  content = tinymce.get('order_description').getContent()
 #  if item.duties == null

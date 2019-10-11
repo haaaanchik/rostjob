@@ -1,0 +1,14 @@
+- order.decorate.proposal_employees_by_status(state).each do |proposal_employee|
+  .container.w-100.border.mt-4.mb-4.white
+    .row
+      .col-md-3.text-right.m-0.p-0.align-self-center
+        p
+          = image_tag('/img/no-avatar.jpg', class: 'rounded-circle z-depth-zero', size: 40)
+      .col-md-9.p-0.m-0.mt-3
+        h6.font-weight-bold
+          = proposal_employee.profile.user.full_name.delete('\n')
+    .w-100.border.rounded.mt-2.mb-2.mb-0
+      .hoverable.clickable-pe data-href="#{profile_candidate_path(proposal_employee)}"
+        | #{proposal_employee.employee_cv.name}
+        p.m-0 = proposal_employee.employee_cv.phone_number
+        p.m-0 = proposal_employee.interview_date.strftime('%d.%m.%Y')

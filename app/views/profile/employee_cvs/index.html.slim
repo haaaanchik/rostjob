@@ -1,29 +1,28 @@
-/ .border.rounded.p-1.mt-4
-.col.order-1.order-sm-1.order-md-2.border.rounded.p-1.mt-4.mr-2
-  .mt-4
-    .container
-      .row.mt-4.mr-1.ml-0
-        .col-md-8
-          = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
-        .col-md-4
-          = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
-            i.fas.fa-plus.mr-2
-            |Добавить анкету
-  / table.table.table-hover.w-auto
-  table.table.table-sm.table-hover.table-borderless.mt-4
-    thead
-      tr
-        th.text-center style="width: 10%"
-          = sort_link(@q, :state) do
-            strong Статус
-        th.text-center style="width: 30%"
-          = sort_link(@q, :name) do
-            strong Анкета
-        th.text-center style="width: 15%"
-          = sort_link(@q, :phone_number) do
-            strong Телефон
-        - filename = @term.to_s
-        = render partial: "profile/employee_cvs/toolbars/#{filename}.header.html.slim"
-    tbody#candidates_list
-      = render @paginated_employee_cvs
-  = paginate @paginated_employee_cvs
+.col-md-10.order-1.order-sm-1.order-md-2.mt-4
+  .border.rounded
+    .mt-4
+      .container
+        .row.mt-4
+          .col-md-8
+            = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
+          .col-md-4
+            = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
+              i.fas.fa-plus.mr-2
+              |Добавить анкету
+    table.table.table-sm.table-hover.table-borderless.mt-4
+      thead
+        tr
+          th.text-center style="width: 10%"
+            = sort_link(@q, :state) do
+              strong Статус
+          th.text-center style="width: 30%"
+            = sort_link(@q, :name) do
+              strong Анкета
+          th.text-center style="width: 15%"
+            = sort_link(@q, :phone_number) do
+              strong Телефон
+          - filename = @term.to_s
+          = render partial: "profile/employee_cvs/toolbars/#{filename}.header.html.slim"
+      tbody#candidates_list
+        = render @paginated_employee_cvs
+    = paginate @paginated_employee_cvs

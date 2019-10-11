@@ -1,0 +1,14 @@
+.modal.fade#move_order_modal tabindex="-1" role="dialog" aria-labelledby="move_order_modal_label" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#move_order_modal_label Перемещение заявки
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+      .modal-body
+        h5.w-100.text-left Заявка #{order.title} перемещается на площадку:
+        br
+        = render partial: 'profile/production_sites/orders/move_order_form',
+          locals: { production_site: production_site, order: order }
+a type="button" class="btn-floating unique-color btn-sm" data-toggle="modal" data-target="#move_order_modal" title='Переместить заявку на другую площадку'
+  i.fas.fa-arrows-alt

@@ -1,0 +1,30 @@
+.d-md-none
+  button.navbar-toggler.bg-best-hr type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+    i.fas.fa-bars
+
+  .dropdown-menu
+    = link_to root_path, class: "dropdown-item #{'active' if active_item == :root}"  do
+      i.fas.fa-user-circle.mr-2
+      = current_user.full_name
+    .dropdown-divider
+    h6.dropdown-header Мои анкеты
+    = link_to profile_employee_cvs_with_state_path(:ready), id: 'employee_cvs_ready', class: "dropdown-item #{'active' if active_item == :ready}" do
+      i.fas.fa-address-card.mr-2
+      |  Готовые
+    = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: "dropdown-item #{'active' if active_item == :sent}" do
+      i.fas.fa-briefcase.mr-2
+      |  Отправленные
+    = link_to profile_employee_cvs_with_state_path(:deleted), id: 'employee_cvs_deleted', class: "dropdown-item #{'active' if active_item == :deleted}" do
+      i.fas.fa-trash.mr-2
+      |  Удаленные
+    .dropdown-divider
+    h6.dropdown-header Заявки
+    .dropdown-divider
+    = link_to orders_path, id: 'orders_catalog', class: "dropdown-item #{'active' if active_item == :orders}" do
+      i.fas.fa-align-justify.mr-2
+      |  Каталог заявок
+    - @left_menu_items.each do |item|
+      = render partial: 'interface/left_menu/menu_item', locals: { label: item }
+    = link_to profile_favorites_path, class: "dropdown-item #{'active' if active_item == :favorites}" do
+      i.fas.fa-star.mr-2
+      |  Избранные заявки

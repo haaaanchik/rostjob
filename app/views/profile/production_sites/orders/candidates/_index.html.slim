@@ -1,0 +1,3 @@
+#order_candidates
+  / = render partial: 'profile/orders/proposals/employee_cv', collection: items, as: :proposed
+  = render partial: 'profile/production_sites/orders/candidates/contractor_card', collection: order.profiles, locals: { order: order }

@@ -1,0 +1,121 @@
+- url = order.persisted? ? profile_production_site_order_path(production_site, order) : profile_production_site_orders_path(production_site)
+- errors = order.errors.messages
+= form_with model: [:profile, order], url: url, id: 'order_form', local: true do |f|
+  = f.hidden_field :position_id
+  .form-group
+    = f.label :place_of_work, 'Место работы (производственная площадка)'
+    = f.text_field :place_of_work, class: "form-control #{'is-invalid' unless errors[:place_of_work].empty?}"
+    .invalid-feedback = errors[:place_of_work].first
+  .form-group
+    table#position_table.table.table-border_templateed data-base-customer-price=order.base_customer_price data-base-contractor-price=order.base_contractor_price data-customer-price=order.customer_price data-contractor-price=order.contractor_price data-customer-total=order.customer_total data-contractor-total=order.contractor_total
+      tr.text-center
+        th Профессия
+        th
+          span
+            |количество
+            = question_help 'Требуемое количество сотрудников'
+        th Вознаграждение исполнителя
+        th Стоимость заявки
+      tr
+        td#position_title.align-middle = order.title
+        td#num_of_employees.align-middle.text-center style="width: 10%" data-price="#{order.customer_price}"
+          = f.number_field :number_of_employees, in: 1..1000, step: 1, class: "form-control disabled"
+        td#contractor_price.align-middle.text-right style="width: 10%"
+          = f.text_field :contractor_price, class: 'form-control disabled'
+        td#customer_total.align-middle.text-right style="width: 10%" = order.customer_total
+  .row
+    .col
+      = f.label :specialization, 'Специализация'
+      = f.text_field :specialization, class: "form-control",
+              placeholder: 'Начните набирать название специализации',
+              data: {'auto-url' => '/search_specialization', 'auto-add-text' => true, 'autocomplete-on' => 'order_template_specialization'}
+    .invalid-feedback
+    .col
+      = f.label :skill, 'Квалификация'
+      = f.text_field :skill, class: "form-control"
+      .invalid-feedback
+  .row
+    .col
+      = f.label :city, 'Город'
+      = f.text_field :city, class: "form-control #{'is-invalid' unless errors[:city].empty?}", placeholder: 'Начните набирать название города',
+              data: {'auto-url' => '/search_city', 'auto-add-text' => true, 'autocomplete-on' => 'order_template_city'}
+      .invalid-feedback = errors[:city].first
+    .col
+      = f.label :district, 'Район'
+      = f.text_field :district, class: "form-control"
+      .invalid-feedback
+  .form-group
+    = f.label :salary, 'Зарплата:'
+    = f.text_field :salary, class: "form-control #{'is-invalid' unless errors[:salary].empty?}"
+    .invalid-feedback = errors[:salary].first
+  .form-group
+    = f.label :experience, 'Наличие документа, подтверждающего стаж работы'
+    = f.text_field :experience, class: "form-control #{'is-invalid' unless errors[:experience].empty?}"
+    .invalid-feedback = errors[:experience].first
+  .form-group.mt-3
+    = f.label :description, 'Виды выполняемых работ'
+    = f.text_area :description, rows: 5, class: "form-control tinymce #{'is-invalid' unless errors[:description].empty?}"
+    .invalid-feedback = errors[:description].first
+  .row
+    .col
+      = f.label :schedule, 'График работы'
+      = f.text_field :schedule, class: "form-control #{'is-invalid' unless errors[:schedule].empty?}"
+      .invalid-feedback = errors[:schedule].first
+    .col
+      = f.label :work_period, 'Период, на который требуются рабочие'
+      = f.text_field :work_period, class: "form-control #{'is-invalid' unless errors[:work_period].empty?}"
+      .invalid-feedback = errors[:work_period].first
+  = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+    .row
+      .col-4
+        = oi_f.label :age_from, 'Возраст от'
+        = oi_f.text_field :age_from, class: "form-control"
+      .col-4
+        = oi_f.label :age_to, 'Возраст до'
+        = oi_f.text_field :age_to, class: "form-control"
+      .col-4
+        = oi_f.label :sex, 'Пол'
+        = oi_f.text_field :sex, class: "form-control"
+      .col-4
+        = oi_f.label :related_profession, 'Смежная профессия'
+        = oi_f.text_field :related_profession, class: "form-control"
+      .col-8
+        = oi_f.label :terms, 'Предлагаемые условия'
+        = oi_f.text_area :terms, class: "form-control tinymce"
+    .form-group.mt-3
+      = oi_f.label :remark, 'Комментарий'
+      = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
+  = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+    .row
+      .col
+        = cp_f.label :name, 'Контактное лицо'
+        = cp_f.text_field :name, class: 'form-control'
+      .col
+        = cp_f.label :phone, 'Телефон'
+        = cp_f.phone_field :phone, class: 'form-control'
+  .row.mt-4
+      .col
+        .file-field
+          .btn.btn-success.btn-sm.float-left
+            span Выберите анкету
+            = f.file_field :document
+          .file-path-wrapper
+            input class="file-path validate" type="text" placeholder="Загрузите анкету">
+  .row
+    .col
+      .form-check.mt-2
+        = f.check_box :for_cis, class: 'form-check-input'
+        = f.label :for_cis, 'Подходит для граждан стран СНГ', class: 'form-check-label'
+  .row
+    .col
+      .form-check.mt-2
+        = f.check_box :advertising, class: 'form-check-input'
+        = f.label :advertising, 'Включить рекламу', class: 'form-check-label'
+  .row
+    .col-12
+      = f.text_area :adv_text, class: 'from-control mt-3 w-100', rows: 4, placeholder: 'Рекламный текст'
+
+  .form-group.mt-3
+    .row
+      .col-3
+        = f.submit t('profile.order_templates.commit.save'), class: "btn btn-info"

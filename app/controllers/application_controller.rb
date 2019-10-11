@@ -38,7 +38,10 @@ class ApplicationController < BaseController
   end
 
   def opened_tickets_count
-    @opened_tickets_count ||= Ticket.with_other_tickets_for(current_user).opened.count
+    @opened_tickets_count = Ticket.with_other_tickets_for(current_user)
+                                .opened
+                                .without_waiting(current_profile)
+                                .count
   end
 
   def left_menu_items

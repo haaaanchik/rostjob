@@ -1,0 +1,49 @@
+.col-md-4
+  .card
+    .view.overlay.production-image
+      = image_tag production_site.image.url(:thumb), class: 'card-img-top'
+    = link_to edit_profile_production_site_path(production_site),
+              class: 'btn-floating btn-action ml-auto mr-4 btn-sm green',
+              remote: true do
+      i.fas.fa-pen-alt
+
+    .card-body
+      h3.card-title.white-text = link_to production_site.title, profile_production_site_orders_path(production_site)
+      p= production_site.city
+      hr
+
+
+      ul.nav.tabs-white.nav-fill role='tablist'
+        li.nav-item.ml-0
+          a.nav-link.waves-light.active data-toggle='tab' href="#info-#{production_site.id}" role='tab'
+            |Информация
+        li.nav-item
+          a.nav-link.waves-light data-toggle='tab' href="#vacancies-#{production_site.id}" role='tab'
+            |Вакансии
+        li.nav-item
+          a.nav-link.waves-light data-toggle='tab' href="#contacts-#{production_site.id}" role='tab'
+            |Контакты
+
+      .tab-content.rounded-bottom
+        .tab-pane.fade.in.show.active id="info-#{production_site.id}" role='tabpanel'
+          p.font-small.text-muted.mx-1 align='justify'
+            = production_site.info
+
+        .tab-pane.fade id="vacancies-#{production_site.id}" role='tabpanel'
+          ul
+            - production_site.orders.each do |order|
+              li #{order.title} #{order.number_of_employees}
+
+        .tab-pane.fade id="contacts-#{production_site.id}" role='tabpanel'
+          = production_site.phones
+
+    .rounded-bottom.mdb-color.lighten-3.text-center.pt-3
+      ul.list-unstyled.list-inline.font-small
+        li.list-inline-item.pr-2
+          a.white-text href='#'
+            |Открытых заявок:
+            |12
+        li.list-inline-item.pr-2
+          a.white-text href='#'
+            |Количество персонала:
+            |12

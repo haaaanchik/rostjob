@@ -1,111 +1,40 @@
-- collapse_0 = 'show' if %i[ready sent deleted].include? active_item
-- collapse_1 = 'show' if (%i[orders favorites] + @left_menu_items).include? active_item
-- collapse_2 = 'show' if %i[incidents appeals].include? active_item
-.col-md-3.order-2.order-sm-2.order-md-1
-  #accordionEx194.accordion.md-accordion.accordion-3.menu-style[role="tablist" aria-multiselectable="true"]
-    .mb-3.mt-4
-      .btn-group.group-menu[role="group" aria-label="Basic example"]
-        = link_to new_profile_employee_cv_path, class: 'btn button-menu-l btn-rounded waves-effect', remote: true do
-          i.fas.fa-plus
-        = link_to root_path, class: "btn button-menu-r btn-rounded waves-effect left-menu #{'active' if active_item == :root}"  do
-          i.fas.fa-user-circle.w-10
+.col-md-2.order-md-1.order-2.d-none.d-md-block
+  .col-md-2.position-fixed.border.rounded.mt-4.pl-2.pr-2
+    ul.list-unstyled.mt-3
+      li
+        = link_to root_path, class: "text-body #{'font-weight-bold' if active_item == :root}"  do
+          i.fas.fa-user-circle.mr-2
           = current_user.full_name
-      / span.counter
-      /   |  0
-
-    hr.mb-0.mt-0
-    .card
-      #heading4.card-header.menu-style[role="tab"]
-        a[data-toggle="collapse" data-parent="#accordionEx194" href="#collapse4" aria-expanded="true" aria-controls="collapse4"]
-          .mb-3.mt-3
-            .btn-group.group-menu[role="group" aria-label="Basic example"]
-              button.btn.button-menu-l.btn-rounded.waves-effect[type="button"]
-                i.fas.fa-folder-open
-              button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
-                i.fas.fa-users.w-10
-                |  Мои анкеты
-            / span.counter
-            /   |  0
-      .card
-        #collapse4.collapse role="tabpanel" aria-labelledby="heading4" data-parent="#accordionEx194" class=collapse_0
-          .card-body.pt-0.menu-style
-            .mb-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-                = link_to profile_employee_cvs_with_state_path(:ready), id: 'employee_cvs_ready', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :ready}" do
-                  i.fas.fa-address-card.w-10
-                  |  Готовые
-            .mb-3.mt-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-                / = link_to profile_employee_cvs_path(term: :sent), id: 'employee_cvs_sent', class: 'btn button-menu-r btn-rounded waves-effect left-menu', remote: true do
-                = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :sent}" do
-                  i.fas.fa-briefcase.w-10
-                  |  Отправленные
-              / span.counter
-              /   |  0
-            .mb-3.mt-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button" style="width: 20%"]
-
-                = link_to profile_employee_cvs_with_state_path(:deleted), id: 'employee_cvs_deleted', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :deleted}" do
-                  i.fas.fa-trash.w-10
-                  |  Удаленные
-      .card
-        #heading5.card-header.menu-style[role="tab"]
-          a.collapsed[data-toggle="collapse" data-parent="#accordionEx194" href="#collapse5" aria-expanded="false" aria-controls="collapse5"]
-            .mb-3.mt-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect[type="button"]
-                  i.fas.fa-folder-open
-                button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
-                  i.far.fa-handshake.w-10
-                  |  Заявки
-              / span.counter.blue
-              /   |  new
-        #collapse5.collapse role="tabpanel" aria-labelledby="heading5" data-parent="#accordionEx194" class=collapse_1
-          .card-body.pt-0.menu-style
-            .mb-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-                = link_to orders_path, id: 'orders_catalog', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :orders}" do
-                  i.fas.fa-align-justify.w-10
-                  |  Каталог заявок
+      li
+        hr.mb-2.mt-2
+        i.fas.fa-users.mr-2
+        |Мои анкеты
+        ul.list-unstyled.ml-3
+          li
+            = link_to profile_employee_cvs_with_state_path(:ready), id: 'employee_cvs_ready', class: "text-body #{'font-weight-bold' if active_item == :ready}" do
+              i.fas.fa-address-card.mr-2
+              |  Готовые
+          li
+            = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: "text-body #{'font-weight-bold' if active_item == :sent}" do
+              i.fas.fa-briefcase.mr-2
+              |  Отправленные
+          li
+            = link_to profile_employee_cvs_with_state_path(:deleted), id: 'employee_cvs_deleted', class: "text-body #{'font-weight-bold' if active_item == :deleted}" do
+              i.fas.fa-trash.mr-2
+              |  Удаленные
+      li
+        hr.mb-2.mt-2
+        i.far.fa-handshake.mr-2
+        |Заявки
+        ul.list-unstyled.ml-3
+          li
+            = link_to orders_path, id: 'orders_catalog', class: "text-body #{'font-weight-bold' if active_item == :orders}" do
+              i.fas.fa-align-justify.mr-2
+              |  Каталог заявок
+          - if current_profile.customer?
             - @left_menu_items.each do |item|
               = render partial: 'interface/left_menu/menu_item', locals: { label: item }
-            .mb-3.mt-3
-              .btn-group.group-menu[role="group" aria-label="Basic example"]
-                button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-                = link_to profile_favorites_path, class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :favorites}" do
-                  i.fas.fa-star.w-10
-                  |  Избранные заявки
-      / .card
-      /   #heading6.card-header.menu-style[role="tab"]
-      /     a.collapsed[data-toggle="collapse" data-parent="#accordionEx194" href="#collapse6" aria-expanded="false" aria-controls="collapse6"]
-      /       .mb-3.mt-3
-      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
-      /           button.btn.button-menu-l.btn-rounded.waves-effect[type="button"]
-      /             i.fas.fa-folder-open
-      /           button.btn.button-menu-r.btn-rounded.waves-effect[type="button"]
-      /             i.fas.fa-user-secret.w-10
-      /             |  Администрация
-      /   #collapse6.collapse role="tabpanel" aria-labelledby="heading5" data-parent="#accordionEx194" class=collapse_2
-      /     .card-body.pt-0.menu-style
-      /       .mb-3
-      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
-      /           button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-      /           = link_to profile_tickets_with_type_path(:incidents), id: 'orders_catalog', class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :incidents}" do
-      /             i.fas.fa-angry
-      /             |  Споры
-      /       .mb-3.mt-3
-      /         .btn-group.group-menu[role="group" aria-label="Basic example"]
-      /           button.btn.button-menu-l.btn-rounded.waves-effect.disabled[type="button"]
-
-      /           = link_to profile_tickets_with_type_path(:appeals), class: "btn button-menu-r btn-rounded waves-effect #{'active' if active_item == :appeals}" do
-      /             i.fas.fa-file-alt
-      /             |  Обращения
+          li
+            = link_to profile_favorites_path, class: "text-body #{'font-weight-bold' if active_item == :favorites}" do
+              i.fas.fa-star.mr-2
+              |  Избранные заявки

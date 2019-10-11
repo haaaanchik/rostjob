@@ -9,6 +9,7 @@ class WelcomeController < ApplicationController
       user_action_log_records
     end
     @active_item = :root
+    production_site
   end
 
   private
@@ -64,5 +65,9 @@ class WelcomeController < ApplicationController
 
   def orders_with_deleted_employee_cvs
     @orders_with_deleted_employee_cvs ||= current_profile.answered_orders.with_deleted_employee_cvs_contractor
+  end
+
+  def production_site
+    @production_site ||= current_profile.production_sites.find(params[:prod_site_id]) if params[:prod_site_id].present?
   end
 end

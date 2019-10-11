@@ -49,7 +49,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :nbox, to: :rejected
     end
 
-    event :to_paid do
+    event :to_paid, after: :set_payment_date do
       transitions from: :hired, to: :paid
     end
 
@@ -81,6 +81,10 @@ class ProposalEmployee < ApplicationRecord
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
+  end
+
+  def set_payment_date
+    self.update(payment_date: DateTime.current)
   end
 
   def mark_as_read

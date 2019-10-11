@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_065313) do
+ActiveRecord::Schema.define(version: 2019_10_09_121105) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -58,7 +58,9 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.bigint "balance_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "invoice_id"
     t.index ["balance_id"], name: "index_bill_transactions_on_balance_id"
+    t.index ["invoice_id"], name: "index_bill_transactions_on_invoice_id"
   end
 
   create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
@@ -271,6 +273,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.boolean "for_cis"
     t.boolean "advertising"
     t.text "adv_text"
+    t.bigint "production_site_id"
+    t.index ["production_site_id"], name: "index_order_templates_on_production_site_id"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
 
@@ -319,6 +323,8 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.boolean "for_cis"
     t.boolean "advertising"
     t.text "adv_text"
+    t.bigint "production_site_id"
+    t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
@@ -347,6 +353,21 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.datetime "updated_at", null: false
     t.decimal "customer_price", precision: 10, scale: 2
     t.decimal "contractor_price", precision: 10, scale: 2
+  end
+
+  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "title"
+    t.bigint "profile_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.bigint "image_file_size"
+    t.datetime "image_updated_at"
+    t.string "city"
+    t.text "info"
+    t.text "phones"
+    t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
   create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -388,6 +409,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.boolean "hiring_date_corrected"
     t.timestamp "interview_date"
     t.bigint "dst_order_id"
+    t.datetime "payment_date"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"
@@ -504,6 +526,7 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reason"
+    t.string "waiting"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
@@ -585,10 +608,13 @@ ActiveRecord::Schema.define(version: 2019_09_23_065313) do
   add_foreign_key "invoices", "profiles"
   add_foreign_key "order_profiles", "orders"
   add_foreign_key "order_profiles", "profiles"
+  add_foreign_key "order_templates", "production_sites"
   add_foreign_key "order_templates", "profiles"
+  add_foreign_key "orders", "production_sites"
   add_foreign_key "orders", "profiles"
   add_foreign_key "payment_orders", "companies"
   add_foreign_key "positions", "price_groups"
+  add_foreign_key "production_sites", "profiles"
   add_foreign_key "proposals", "orders"
   add_foreign_key "proposals", "profiles"
   add_foreign_key "super_job_queries", "super_job_configs", column: "config_id"

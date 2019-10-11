@@ -95,6 +95,7 @@ gem 'enumerize'
 gem "interactor"
 gem 'aasm'
 gem 'faker'
+gem 'decent_exposure', '3.0.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

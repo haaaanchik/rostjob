@@ -1,0 +1,5 @@
+- url = move_profile_production_site_order_path(production_site, order)
+= form_with scope: :order, url: url, method: :put do |f|
+  = f.collection_select :production_site_id, @current_profile.production_sites, :id, :title, { prompt: 'Выберите производственную площадку' }, class: 'mdb-select'
+  .invalid-feedback
+  = f.submit 'Переместить', class: 'btn btn-success'

@@ -1,0 +1,11 @@
+- url = state ? profile_production_site_orders_with_state_path(production_site, state) : profile_production_site_orders_path(production_site)
+- val =  params[:q] ? params[:q][:all_fields_cont] : nil
+- filter = params[:q] ? params[:q][:for_cis_true] : false
+= search_form_for @q, url: url do |f|
+  .input-group.flex.no-wrap
+    = f.search_field :all_fields_cont, placeholder: 'Поиск заявок', class: 'form-control m-2', value: val
+    .form-check.form-check-inline
+      = check_box_tag 'q[for_cis_true]', true, filter, { class: 'form-check-input', id: 'order_filter_for_cis' }
+      = label :state, nil, class: 'form-check-label', for: 'order_filter_for_cis' do
+          span.mr-2 СНГ
+

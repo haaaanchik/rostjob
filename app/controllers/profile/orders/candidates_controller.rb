@@ -23,10 +23,7 @@ class Profile::Orders::CandidatesController < ApplicationController
       hiring_date = Date.parse(candidate_params[:hiring_date])
       Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
       flash[:redirection] = 'to_hired'
-      redirect_to profile_order_path(order)
-      # else
-      #   redirect_to profile_order_proposal_path(order, proposal)
-      # end
+      redirect_to profile_production_site_order_path(order.production_site, order)
     else
       render plain: 'all employees has been hired', status: 422
     end
@@ -57,14 +54,14 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def reserve
     candidate.to_reserved!
-    redirect_to profile_order_path(order)
+    redirect_to profile_production_site_order_path(order.prodution_site, order)
   end
 
   def to_inbox
     result = Cmd::ProposalEmployee::ToInbox.call(candidate: candidate)
 
     if result.success?
-      redirect_to profile_order_path(order)
+      redirect_to profile_production_site_order_path(order.production_site, order)
     end
   end
 
@@ -75,7 +72,7 @@ class Profile::Orders::CandidatesController < ApplicationController
                                                      interview_date: candidate_params[:interview_date])
     if result.success?
       flash[:redirection] = 'to_interview'
-      redirect_to profile_order_path(order)
+      redirect_to profile_production_site_order_path(order.production_site, order)
     end
   end
 

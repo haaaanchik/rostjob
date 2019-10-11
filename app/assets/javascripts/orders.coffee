@@ -38,3 +38,8 @@ $ ->
     textarea.remove()
     if successful
       toastr.success('Заявка скопирована!')
+
+  $(document).on('click', '[id^=title_filter_], [id^=city_filter_]', ->
+    form = $('#order_search')[0]
+    form.submit()
+  )

@@ -11,6 +11,7 @@ class Invoice < ApplicationRecord
 
   scope :customers, -> { joins(:profile).where('profiles.profile_type = ?', 'customer') }
   scope :contractors, -> { joins(:profile).where('profiles.profile_type = ?', 'contractor') }
+  scope :prev_invoice, ->(created_at) { where('created_at < ?', created_at).order(id: :desc).limit(1) }
 
   aasm column: :state do
     state :created, initial: true
