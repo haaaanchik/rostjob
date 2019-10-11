@@ -1,4 +1,4 @@
-w-100.collapsable_card data-order-id=order.id class="#{'collapse' unless order_advertising}"
+.w-100.collapsable_card data-order-id=order.id class="#{'collapse' unless order_advertising}"
   .card.testimonial-card.w-100.z-depth-0.border
     .card-up.lighten-1.card-up-hr class="#{order_advertising ? 'advertising' : 'bg-best-hr'}"
       .container
@@ -110,6 +110,16 @@ w-100.collapsable_card data-order-id=order.id class="#{'collapse' unless order_a
                     == order.other_info['remark']
                     - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
                         order.contact_person['phone'] && !order.contact_person['phone'].empty?
+            - if order.contact_person['name'] || order.contact_person['phone']
+              .text-center.border.rounded.mb-3 style="bold"
+                p.p-0.m-0.font-weight-bold
+                  |  Контактное лицо:
+                p.font-italic.m-1
+                  span
+                    = order.contact_person['name']
+                p.font-italic.m-1
+                  span
+                    = order.contact_person['phone']
           .col.d-md-none.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
             - order_text = Nokogiri::HTML("#{order.place_of_work}\n\
                         #{order.title}. #{order.skill}\n\

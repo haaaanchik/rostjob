@@ -1,4 +1,4 @@
-.modal.fade#move_order_modal tabindex="-1" role="dialog" aria-labelledby="move_order_modal_label" aria-hidden="true"
+.modal.fade id="move_order_modal_#{order.id}" tabindex="-1" role="dialog" aria-labelledby="move_order_modal_label" aria-hidden="true"
   .modal-dialog.modal-lg role="document"
     .modal-content
       .modal-header
@@ -10,5 +10,5 @@
         br
         = render partial: 'profile/production_sites/orders/move_order_form',
           locals: { production_site: production_site, order: order }
-a type="button" class="btn-floating unique-color btn-sm" data-toggle="modal" data-target="#move_order_modal" title='Переместить заявку на другую площадку'
+a type="button" class="btn-floating unique-color btn-sm" data-toggle="modal" data-target="#move_order_modal_#{order.id}" title='Переместить заявку на другую площадку'
   i.fas.fa-arrows-alt
