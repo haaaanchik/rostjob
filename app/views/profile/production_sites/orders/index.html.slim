@@ -73,7 +73,7 @@
                 = link_to profile_production_site_order_path(@production_site, order),
                         class: 'btn-floating btn-sm blue' do
                   i.fas.fa-eye
-                = render partial: 'move', locals: {production_site: @production_site, order: order}
+                = render partial: 'move', locals: { production_site: @production_site, order: order }
       .col-md-4
         p.h6.font-weight-bold.text-center.text-white Опубликованные заявки
         hr
@@ -86,14 +86,14 @@
                               profile_production_site_order_path(@production_site, order),
                               edit: true
               .d-flex.justify-content-around
-                  = link_to edit_profile_production_site_order_path(@production_site, order),
-                            class: 'btn-floating btn-sm green' do
-                    i.fas.fa-pen-alt
-                  = link_to profile_production_site_order_path(@production_site, order),
-                            class: 'btn-floating btn-sm blue',
-                            remote: true do
-                    i.fas.fa-eye
-                  = render partial: 'move', locals: { production_site: @production_site, order: order }
+                = link_to edit_profile_production_site_order_path(@production_site, order),
+                          class: 'btn-floating btn-sm green' do
+                  i.fas.fa-pen-alt
+                = link_to profile_production_site_order_path(@production_site, order),
+                          class: 'btn-floating btn-sm blue',
+                          remote: true do
+                  i.fas.fa-eye
+                = render partial: 'move', locals: { production_site: @production_site, order: order }
               hr
               .d-flex.justify-content-around
                 div
