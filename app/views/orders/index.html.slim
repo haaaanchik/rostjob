@@ -1,5 +1,5 @@
 .col-md-10.order-md-2.order-1.p-2.pt-2
-  .container.w-100.mt-0
+  .container.mt-0
     - if current_profile.customer?
       - search_form_id = 'order_search_form'
       .row.m-1.mb-3
@@ -46,19 +46,44 @@
                     .d-none.d-md-block
                       = sort_link(@q, :contractor_price) do
                         strong.text-dark Награда
-
       = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
     - else
       .row
-        .col-lg-2.order-lg-2.mt-3
-          = render partial: 'orders/search_contractor_filters', locals: { orders: @orders, order_filters: @order_filters }
-        .col-lg-9.order-lg-1.mt-3
-          - @orders.group_by(&:customer_name).each do |customer_name, items|
-            - production_sites = items.group_by{ |it| it.production_site.title }
-            .col-md-12
-              u = customer_name
-            - production_sites.each do |place_of_work, items|
-              .offset-md-1.col-md-11
-                u = place_of_work
-              .offset-md-2.col-md-10
-                = render partial: 'orders/contractor_order', collection: items, as: :order
+        .col-md-3.order-md-2.mt-3
+          = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}
+        .col-md-9.order-md-1.mt-3
+          .conteiner
+            - @orders.group_by(&:customer_name).each do |customer_name, items|
+              - production_sites = items.group_by{ |it| it.production_site.title }
+              .row
+                .col-md-12
+                  u = customer_name
+              - production_sites.each do |place_of_work, items, i|
+                .row.border.rounded.m-1
+                  .col-md-2
+                    = image_tag items.first.production_site.image.url(:thumb), class: 'card-img-top'
+                    u = place_of_work
+                    p
+                      = items.first.production_site.phones
+                  .col-md-10
+                    /ul.nav.nav-tabs role='tablist'
+                    /  li.nav-item
+                    /    a.nav-link.waves-light data-toggle='tab' href="#vacancies-#{i}" role='tab' aria-controls="vacancies"
+                    /      |Вакансии
+                    /  li.nav-item.ml-0
+                    /    a.nav-link.waves-light.active data-toggle='tab' href="#info" role='tab' aria-controls="info"
+                    /      |Информация
+                    /  li.nav-item
+                    /    a.nav-link.waves-light data-toggle='tab' href="#contacts" role='tab' aria-controls="contacts"
+                    /      |Контакты
+
+                    .tab-pane.fade.in.show.active id="vacancies" role='tabpanel' aria-labelledby="vacancies-tab"
+                      = render partial: 'orders/contractor_order', collection: items, as: :order
+
+                    /.tab-content.rounded-bottom
+                    /  .tab-pane.fade id="info" role='tabpanel' aria-labelledby="info-tab"
+                    /    p.font-small.text-muted.mx-1 align='justify'
+                    /      = items.first.production_site.info
+                    /
+                    /  .tab-pane.fade id="contacts" role='tabpanel' aria-labelledby="contacts-tab"
+                    /    = items.first.production_site.phones

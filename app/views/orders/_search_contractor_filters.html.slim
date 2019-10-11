@@ -11,7 +11,7 @@
   .row.mt-1
     .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center
       = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
-  .row.mt-4
+  .row.mt-4.d-none.d-md-block
     .col-sm-12.col-md-6.col-lg-12.d-flex.text-center.mb-2
       | Профессии
     - titles.each_with_index do |title, i|
