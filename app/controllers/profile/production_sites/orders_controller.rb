@@ -118,7 +118,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
                                    dst_production_site_id: dst_production_site_id)
 
     if result.success?
-      redirect_to profile_production_site_order_templates_path(production_site)
+      redirect_to profile_production_site_orders_path(production_site)
     else
       render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
