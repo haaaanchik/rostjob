@@ -30,6 +30,6 @@ class OrderDecorator < ObjDecorator
   end
 
   def proposal_employees_by_status(state)
-    proposal_employees.includes(:employee_cv, profile: :user).where(state: state).order(interview_date: :desc)
+    proposal_employees.includes(:employee_cv, profile: :user).where(state: state).order(:interview_date)
   end
 end

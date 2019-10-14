@@ -3,7 +3,7 @@ class Ticket < ApplicationRecord
   include TicketRepository
 
   belongs_to :user
-  belongs_to :proposal_employee
+  belongs_to :proposal_employee, required: false
   has_many :messages, dependent: :destroy
   accepts_nested_attributes_for :messages
 
