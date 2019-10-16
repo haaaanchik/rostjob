@@ -40,7 +40,7 @@ class WelcomeController < ApplicationController
   end
 
   def orders_with_interviewed_candidates
-    @orders_with_interviewed_candidates ||= current_profile.orders.with_interviewed_candidates
+    @orders_with_interviewed_candidates = current_profile.orders.with_interviewed_candidates.order('interview_date')
   end
 
   def contractor_deals_count
