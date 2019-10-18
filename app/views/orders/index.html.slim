@@ -58,32 +58,32 @@
               .row
                 .col-md-12
                   u = customer_name
-              - production_sites.each do |place_of_work, items, i|
+              - production_sites.each_with_index do |(place_of_work, items), i|
                 .row.border.rounded.m-1
                   .col-md-2
                     = image_tag items.first.production_site.image.url(:thumb), class: 'card-img-top'
                     u = place_of_work
-                    p
-                      = items.first.production_site.phones
+
                   .col-md-10
-                    /ul.nav.nav-tabs role='tablist'
-                    /  li.nav-item
-                    /    a.nav-link.waves-light data-toggle='tab' href="#vacancies-#{i}" role='tab' aria-controls="vacancies"
-                    /      |Вакансии
-                    /  li.nav-item.ml-0
-                    /    a.nav-link.waves-light.active data-toggle='tab' href="#info" role='tab' aria-controls="info"
-                    /      |Информация
-                    /  li.nav-item
-                    /    a.nav-link.waves-light data-toggle='tab' href="#contacts" role='tab' aria-controls="contacts"
-                    /      |Контакты
+                    ul.nav.nav-tabs.nav-fill role='tablist'
+                      li.nav-item
+                        a.nav-link.waves-light.active data-toggle='tab' href="#vacancies-#{i}" role='tab' aria-controls="vacancies"
+                          |Вакансии
+                      li.nav-item.ml-0
+                        a.nav-link.waves-light data-toggle='tab' href="#info-#{i}" role='tab' aria-controls="info"
+                          |Информация
+                      li.nav-item
+                        a.nav-link.waves-light data-toggle='tab' href="#contacts-#{i}" role='tab' aria-controls="contacts"
+                          |Контакты
 
-                    .tab-pane.fade.in.show.active id="vacancies" role='tabpanel' aria-labelledby="vacancies-tab"
-                      = render partial: 'orders/contractor_order', collection: items, as: :order
+                    .tab-content
+                      .tab-pane.fade.show.active id="vacancies-#{i}" role='tabpanel' aria-labelledby="vacancies-tab"
+                        = render partial: 'orders/contractor_order', collection: items, as: :order
 
-                    /.tab-content.rounded-bottom
-                    /  .tab-pane.fade id="info" role='tabpanel' aria-labelledby="info-tab"
-                    /    p.font-small.text-muted.mx-1 align='justify'
-                    /      = items.first.production_site.info
-                    /
-                    /  .tab-pane.fade id="contacts" role='tabpanel' aria-labelledby="contacts-tab"
-                    /    = items.first.production_site.phones
+                      .tab-pane.fade id="info-#{i}" role='tabpanel' aria-labelledby="info-tab"
+                        p.font-small.text-muted.mx-1 align='justify'
+                          = items.first.production_site.info
+
+                      .tab-pane.fade id="contacts-#{i}" role='tabpanel' aria-labelledby="contacts-tab"
+                        p.text-center
+                          = items.first.production_site.phones
