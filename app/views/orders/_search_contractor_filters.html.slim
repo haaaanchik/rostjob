@@ -23,9 +23,9 @@
                           class: 'form-check-input',
                           id:     "title_filter_#{i}"
           = label :title_fields, nil, class: 'form-check-label', for: "title_filter_#{i}" do
-            p.border.rounded.z-depth-1.m-0[style="width: 180px;"]
+            p.border.rounded.z-depth-1.m-0.truncate[style="width: 180px;"]
               i.mr-2
-              span.mr-2 = truncate(title, length: 17, separator: '.')
+              span.mr-2 = title
     .col-sm-12.col-md-6.col-lg-12.d-flex.text-center.mb-2
       | Города
     - cities.each_with_index do |city, i|
@@ -37,7 +37,7 @@
                           class: 'form-check-input',
                           id:    "city_filter_#{i}"
           = label :city_fields, nil, class: 'form-check-label', for: "city_filter_#{i}" do
-            p.border.rounded.z-depth-1.m-0[style="width: 180px;"]
+            p.border.rounded.z-depth-1.m-0.truncate[style="width: 180px;"]
               i.mr-2
               span.mr-2 = city
   .row

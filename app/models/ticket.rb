@@ -36,6 +36,7 @@ class Ticket < ApplicationRecord
   end
 
   ransack_alias :all_fields, :id_or_title
+  ransack_alias :state_waiting_fields, :state_or_waiting
 
   ransacker :id do
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")

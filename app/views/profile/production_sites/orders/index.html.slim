@@ -28,6 +28,8 @@
       .col-md-4
         p.h6.font-weight-bold.text-center.text-white Шаблоны
         hr
+        .p-2.order-1.order-md-2.mb-3.text-center
+          = link_to '+ Создать шаблон', new_profile_production_site_order_template_path(@production_site), class: 'btn button-hr btn-rounded pt-2 pb-2 m-0', remote: true
         - order_templates.each do |order_t|
           .hoverable.rounded.border.white.mb-2
             .d-flex.justify-content-between

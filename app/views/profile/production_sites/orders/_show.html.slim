@@ -13,7 +13,7 @@
                   nil,
                   class: 'form-check-label clickable-order-row hoverable',
                   data: { href: id_title.first } do
-            p.border.rounded.z-depth-1.m-0[style="width: 220px;"]
+            p.border.rounded.z-depth-1.m-0.truncate[style="width: 220px;"]
               = order.decorate.icon_bookmark(id_title.first)
               span.mr-2 = truncate(id_title.last, length: 22, separator: '.')
 
@@ -49,8 +49,17 @@
           u.font-weight-bold
             | В очереди
           = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                     state: ['inbox', 'reserved'] }
+                                                                                                     state: 'inbox' }
 
+          hr
+          .reserve-block
+            i.fas.fa-bookmark.ml-2.mr-2.blue-text
+            u.font-weight-bold.fas
+              | Резер
+            = order.decorate.icon_chevron_or_minus
+          .reserve-items
+            = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                       state: 'reserved'}
         .col-md-3.p-1
           i.fas.fa-bookmark.ml-2.mr-2.orange-text
           u.font-weight-bold

@@ -29,7 +29,12 @@ class OrderDecorator < ObjDecorator
     h.content_tag(:i, class: "ml-2 mr-1 #{'fas fa-bookmark' if id == active_id}") {}
   end
 
+  def icon_chevron_or_minus
+    reversed = proposal_employees.reserved.count
+    h.content_tag(:i, class: "ml-2 mr-1 blue-text fas #{ reversed.zero? ? 'fa-minus' : 'fa-chevron-up'}") {}
+  end
+
   def proposal_employees_by_status(state)
-    proposal_employees.includes(:employee_cv, profile: :user).where(state: state).order(:interview_date)
+    proposal_employees.includes(:employee_cv, profile: :user).send(state).order(:interview_date)
   end
 end

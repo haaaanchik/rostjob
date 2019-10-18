@@ -208,6 +208,11 @@ $(document).on('change', '[id=order_filter_for_cis]', ->
 $(document).on('click', '.clickable-order-row, .clickable-pe', (event) ->
   window.location = $(event.currentTarget).data('href')
 )
+
+$(document).on('click', '.reserve-block', ->
+  $(this).children().last().toggleClass('fa-chevron-up fa-chevron-down')
+  $('.reserve-items').fadeToggle(500)
+)
 #  content = tinymce.get('order_description').getContent()
 #  if item.duties == null
 #    duties = ' '
