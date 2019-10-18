@@ -13,7 +13,7 @@
                   nil,
                   class: 'form-check-label clickable-order-row hoverable',
                   data: { href: id_title.first } do
-            p.border.rounded.z-depth-1.m-0[style="width: 220px;"]
+            p.border.rounded.z-depth-1.m-0.truncate[style="width: 220px;"]
               = order.decorate.icon_bookmark(id_title.first)
               span.mr-2 = truncate(id_title.last, length: 22, separator: '.')
 
