@@ -17,7 +17,7 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def hire
-    render(plain: 'order completed', status: 422) and return if order.completed?
+    render(plain: 'order completed', status: 422) and return if order.completed? && !candidate.interview?
 
     if order.selected_candidates.count < order.number_of_employees
       hiring_date = Date.parse(candidate_params[:hiring_date])
