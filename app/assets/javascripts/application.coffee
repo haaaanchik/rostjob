@@ -86,7 +86,7 @@ bootstrapClearButton()
     $('[data-toggle="popover"]').popover('enable')
     $('#' + id).modal()
     # $('body').css('overflow', 'hidden')
-  ), 100
+  ), 400
   return
 
 @init_mdb = () ->

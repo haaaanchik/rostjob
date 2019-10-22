@@ -1,3 +1,7 @@
-td.text-center.align-middle
-  = link_to to_ready_profile_employee_cv_path(employee_cv), class: 'btn-floating btn-sm black', method: :put, data: { confirm: 'Переместить анкету в готовые?' }, title: 'В готовые', remote: true do
+= link_to to_ready_profile_employee_cv_path(employee_cv),
+          method: :put,
+          data: { confirm: 'Переместить анкету в готовые?' },
+          remote: true do
+  .btn-floating.btn-sm.black
     i.fas.fa-undo-alt
+  | В готовые

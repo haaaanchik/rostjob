@@ -2,27 +2,29 @@
   .border.rounded
     .mt-4
       .container
-        .row.mt-4
+        .row
           .col-md-8
             = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
           .col-md-4
             = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
               i.fas.fa-plus.mr-2
-              |Добавить анкету
-    table.table.table-sm.table-hover.table-borderless.mt-4
-      thead
-        tr
-          th.text-center style="width: 10%"
-            = sort_link(@q, :state) do
-              strong Статус
-          th.text-center style="width: 30%"
-            = sort_link(@q, :name) do
-              strong Анкета
-          th.text-center style="width: 15%"
-            = sort_link(@q, :phone_number) do
-              strong Телефон
-          - filename = @term.to_s
-          = render partial: "profile/employee_cvs/toolbars/#{filename}.header.html.slim"
-      tbody#candidates_list
-        = render @paginated_employee_cvs
-    = paginate @paginated_employee_cvs
+              | Добавить анкету
+
+    .grey.lighten-4.text-center
+      .row.ml-0.mr-0
+        .col-md-4.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.blue-text
+          u.font-weight-bold
+            | Готовые
+          = render @paginated_employee_cvs.ready
+
+        .col-md-4.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.red-text
+          u.font-weight-bold
+            | Удаленные
+          = render @paginated_employee_cvs.deleted
+
+        .col-md-4.p-1
+          i.fas.fa-bookmark.ml-2.mr-2.black-text
+          u.font-weight-bold
+            | Избранные

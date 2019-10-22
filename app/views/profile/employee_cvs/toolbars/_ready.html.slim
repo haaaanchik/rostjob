@@ -1,9 +1,19 @@
-td.text-center.align-middle
-  = link_to edit_profile_employee_cv_path(employee_cv), class: 'btn-floating btn-sm green', title: 'Изменить' do
+= link_to edit_profile_employee_cv_path(employee_cv) do
+  .btn-floating.btn-sm.green
     i.fas.fa-edit
-td.text-center.align-middle
-  = link_to profile_favorites_path(employee_cv_id: employee_cv), class: 'btn-floating btn-sm blue', data: { type: :script }, title: 'Отправить', remote: true do
+  | Изменить
+
+= link_to profile_favorites_path(employee_cv_id: employee_cv),
+          data: { type: :script },
+          remote: true do
+  .btn-floating.btn-sm.blue
     i.fas.fa-paper-plane
-td.text-center.align-middle
-  = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-sm red', data: { confirm: 'Удалить анкету?' }, title: 'Удалить', method: :delete, remote: true do
+  | Отправить
+
+= link_to profile_employee_cv_path(employee_cv),
+          data: { confirm: 'Удалить анкету?' },
+          method: :delete,
+          remote: true do
+  .btn-floating.btn-sm.red
     i.fas.fa-trash
+  | Удалить

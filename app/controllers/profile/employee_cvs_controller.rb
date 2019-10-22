@@ -1,14 +1,8 @@
 class Profile::EmployeeCvsController < ApplicationController
-  # layout false, only: :index
+  before_action :employee_cvs, only: :index
 
   def index
-    if term == :sent
-      paginated_sent_employee_cvs
-      render 'profile/employee_cvs/sent_index'
-    else
-      paginated_employee_cvs
-      @active_item = term.to_sym
-    end
+    @active_item = term.to_sym
   end
 
   def show
@@ -77,21 +71,6 @@ class Profile::EmployeeCvsController < ApplicationController
       # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
-
-    # ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
-    # order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    # result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: { employee_cv_id: ecv_result.employee_cv.id, order_id: order_result.order.id, arrival_date: arrival_date })
-    # @employee_cv = ecv_result.employee_cv
-    # @employee_pr = result.employee_pr
-    # if result.success?
-    #   Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
-    #   @status = 'success'
-    #   # redirect_to profile_employee_cvs_path(term: :sent)
-    # else
-    #   @status = 'error'
-    #   render json: { validate: true, data: errors_data(result.employee_cv) }
-    #   # @text = error_msg_handler ecv_result.employee_cv
-    # end
   end
 
   def update
@@ -142,7 +121,7 @@ class Profile::EmployeeCvsController < ApplicationController
   private
 
   def employee_cv
-    @employee_cv ||= EmployeeCv.find(params[:id])
+    @employee_cv = EmployeeCv.find(params[:id])
   end
 
   def employee_cvs_params
@@ -152,50 +131,21 @@ class Profile::EmployeeCvsController < ApplicationController
                   :education, :phone_number_alt, :experience, ext_data: {}, passport: {})
   end
 
-  def states_by_term
-    EmployeeCv.contractor_menu_items[term]
-  end
-
   def term
-    # term = params[:term]
-    # @term = if !term
-    #           :ready
-    #         elsif term.empty?
-    #           :ready
-    #         else
-    #           EmployeeCv.contractor_menu_items.include?(term.to_sym) ? term.to_sym : :ready
-    #         end
     @term = params[:employee_cv_state]
   end
 
-  def paginated_employee_cvs
-    @paginated_employee_cvs ||= scoped_employee_cvs.page(params[:page])
-  end
-
-  def paginated_sent_employee_cvs
-    @paginated_sent_employee_cvs ||= sent_employee_cvs.page(params[:page])
-  end
-
-  def scoped_employee_cvs
-    # @scoped_employee_cvs ||= employee_cvs.where(state: term)
-    @scoped_employee_cvs ||= employee_cvs.where(state: params[:employee_cv_state])
-  end
-
-  def sent_employee_cvs
-    @sent_employee_cvs = ProposalEmployee.where(profile_id: current_profile.id).where.not(state: 'revoked').order(id: :desc)
-  end
-
   def employee_cvs
-    @q = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc).ransack(params[:q])
-    @employee_cvs ||= @q.result
+    @q = EmployeeCv.where(profile_id: current_profile.id, state: %w(ready deleted)).order(id: :desc).ransack(params[:q])
+    @paginated_employee_cvs = @q.result
   end
 
   def order
-    @order ||= Order.find(params[:order_id])
+    @order = Order.find(params[:order_id])
   end
 
   def order2
-    @order ||= Order.find_by(id: employee_cvs_params[:order_id])
+    @order = Order.find_by(id: employee_cvs_params[:order_id])
   end
 
   def arrival_date

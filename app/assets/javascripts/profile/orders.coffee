@@ -27,7 +27,7 @@ $('#order_form').on('submit', (event) ->
 )
 
 
-$(document).on('mouseenter', 'table.collapsable, .clickable-order-row, .clickable-pe', (event) ->
+$(document).on('mouseenter', 'table.collapsable, .clickable-order-row, .clickable-pe, .clickable-employee-cv', (event) ->
   $(this).css('cursor', 'pointer')
 )
 
