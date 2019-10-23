@@ -37,4 +37,8 @@ class OrderDecorator < ObjDecorator
   def proposal_employees_by_status(state)
     proposal_employees.includes(:employee_cv, profile: :user).send(state).order(:interview_date)
   end
+
+  def without_paid_employees
+    employee_cvs.where.not('proposal_employees.state': 'paid')
+  end
 end

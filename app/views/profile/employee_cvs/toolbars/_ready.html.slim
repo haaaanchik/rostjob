@@ -1,19 +1,22 @@
 = link_to edit_profile_employee_cv_path(employee_cv) do
+  .green-text.d-inline-block
+    | Изменить
   .btn-floating.btn-sm.green
     i.fas.fa-edit
-  | Изменить
 
 = link_to profile_favorites_path(employee_cv_id: employee_cv),
           data: { type: :script },
           remote: true do
+  .blue-text.d-inline-block
+    | Отправить
   .btn-floating.btn-sm.blue
     i.fas.fa-paper-plane
-  | Отправить
 
 = link_to profile_employee_cv_path(employee_cv),
           data: { confirm: 'Удалить анкету?' },
           method: :delete,
           remote: true do
+  .red-text.d-inline-block
+    | Удалить
   .btn-floating.btn-sm.red
     i.fas.fa-trash
-  | Удалить

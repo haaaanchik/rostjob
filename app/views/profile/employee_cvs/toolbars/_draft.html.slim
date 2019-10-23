@@ -1,11 +1,23 @@
+= link_to edit_profile_employee_cv_path(employee_cv) do
+  .green-text.d-inline-block
+    | Изменить
+  .btn-floating.btn-sm.green
+    i.fas.fa-edit
+
+= link_to to_ready_profile_employee_cv_path(employee_cv),
+          method: :put,
+          data: { confirm: 'Переместить анкету в готовые?' },
+          remote: true do
+  .black-text.d-inline-block
+    | В готовые
+  .btn-floating.btn-sm.black
+    i.fas.fa-undo-alt
+
 = link_to profile_employee_cv_path(employee_cv),
-  data: { confirm: 'Удалить анкету?' }, title: 'Удалить анкету', method: :delete, remote: true do
-  i.fas.fa-trash.fa-2x.ml-2.text-danger
-
-= link_to edit_profile_employee_cv_path(employee_cv),
-  data: { type: :script }, title: 'Редактировать анкету', remote: true do
-  i.fa.fa-edit.fa-2x.ml-2.text-info
-
-= link_to to_ready_profile_employee_cv_path(employee_cv), method: :put,
-  data: { confirm: 'Переместить анкету в готовые?' }, title: 'В готовые', remote: true do
-  i.fas.fa-undo-alt.fa-2x.ml-2
+          data: { confirm: 'Удалить анкету?' },
+          method: :delete,
+          remote: true do
+  .red-text.d-inline-block
+    | Удалить
+  .btn-floating.btn-sm.red
+    i.fas.fa-trash

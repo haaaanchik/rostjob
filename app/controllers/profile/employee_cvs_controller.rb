@@ -2,7 +2,8 @@ class Profile::EmployeeCvsController < ApplicationController
   before_action :employee_cvs, only: :index
 
   def index
-    @active_item = term.to_sym
+    @order_profiles = current_profile.order_profiles.includes(order: :employee_cvs)
+    @active_item = term
   end
 
   def show
@@ -50,7 +51,7 @@ class Profile::EmployeeCvsController < ApplicationController
     if result.success?
       @status = 'success'
       # redirect_to profile_employee_cvs_path(term: :ready)
-      redirect_to profile_employee_cvs_with_state_path(:ready)
+      redirect_to profile_employee_cvs_path
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
@@ -132,7 +133,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def term
-    @term = params[:employee_cv_state]
+    @term = :employee_lists
   end
 
   def employee_cvs

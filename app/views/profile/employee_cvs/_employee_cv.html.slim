@@ -1,22 +1,31 @@
-ruby:
-  filename = employee_cv.state
+- employee_cvs.each do |emp_cv|
+  - filename = emp_cv.state
 
-.border.mt-2.mb-2.p-2.white.rounded
-  .hoverable.clickable-employee-cv data-toggle="modal" data-target="#employee_cv_modal_#{employee_cv.id}"
-    | #{employee_cv.name}
-    p.m-0 = employee_cv.phone_number
+  .border.mt-2.mb-2.p-2.white.rounded
+    .hoverable.clickable-employee-cv data-toggle="modal" data-target="#employee_cv_modal_#{emp_cv.id}"
+      | #{emp_cv.name}
+      p.m-0 = emp_cv.phone_number
 
-  .modal.fade id="employee_cv_modal_#{employee_cv.id}" tabindex="-1" role="dialog" aria-labelledby="employee_cv_modal_label" aria-hidden="true"
-    .modal-dialog.modal-lg role="document"
-      .modal-content
-        .modal-header.text-center.bg-best-hr
-          .container-fluid
-            .row
-              .col-10.offset-1
-                p.h4.modal-title.w-100.font-weight-bold.white-text Анкета
-              .col-1
-                button.close.white-text type="button" data-dismiss="modal" aria-label="Close"
-                  span aria-hidden="true" &times;
-        .modal-body
-          p ##{employee_cv.id}&nbsp;&nbsp; #{employee_cv.name}&nbsp;&nbsp; #{employee_cv.phone_number}
-          = render partial: "profile/employee_cvs/toolbars/#{filename}.html.slim", locals: { employee_cv: employee_cv }
+    .modal.fade id="employee_cv_modal_#{emp_cv.id}" tabindex="-1" role="dialog" aria-labelledby="employee_cv_modal_label" aria-hidden="true"
+      .modal-dialog.modal-lg role="document"
+        .modal-content
+          .modal-header.text-center.bg-best-hr
+            .container-fluid
+              .row
+                .col-10.offset-1
+                  p.h4.modal-title.w-100.font-weight-bold.white-text Анкета
+                .col-1
+                  button.close.white-text type="button" data-dismiss="modal" aria-label="Close"
+                    span aria-hidden="true" &times;
+          .modal-body
+            table.table.table-sm.table-hover.table-borderless.mt-4
+              tbody
+                tr.rounded.mb-0.example.hoverable
+                  td
+                    .border.rounded.white-text.z-depth-1 class='#{state_color}'
+                      i.fas.fa-bookmark.mr-2
+                      = t("employee_cv.state.#{filename}")
+                  td ##{emp_cv.id}&nbsp; #{emp_cv.name}
+                  td = emp_cv.phone_number
+            hr
+            = render partial: "profile/employee_cvs/toolbars/#{filename}", locals: { employee_cv: emp_cv }

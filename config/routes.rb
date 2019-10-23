@@ -250,14 +250,13 @@ Rails.application.routes.draw do
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:create)}, to: 'orders#update'
 
-    resources :employee_cvs, except: %i[index create] do
+    resources :employee_cvs, except: %i[create] do
       member do
         put :to_ready
         put :to_disput
         put :change_status
       end
     end
-    get 'employee_cvs/state/:employee_cv_state', as: :employee_cvs_with_state, to: 'employee_cvs#index', constraints: { employee_cv_state: /[_A-Za-z]+/ }
     post :employee_cvs, constraints: ->(req) { req.params.key?(:pre_new_full) }, to: 'employee_cvs#pre_new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'

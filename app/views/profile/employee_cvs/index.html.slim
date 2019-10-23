@@ -4,7 +4,7 @@
       .container
         .row
           .col-md-8
-            = render partial: 'search_form', locals: { url: profile_employee_cvs_with_state_path(@term) }
+            = render partial: 'search_form', locals: { url: profile_employee_cvs_path(@term) }
           .col-md-4
             = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
               i.fas.fa-plus.mr-2
@@ -16,15 +16,21 @@
           i.fas.fa-bookmark.ml-2.mr-2.blue-text
           u.font-weight-bold
             | Готовые
-          = render @paginated_employee_cvs.ready
+          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready, state_color: 'blue' }
 
         .col-md-4.p-1
           i.fas.fa-bookmark.ml-2.mr-2.red-text
           u.font-weight-bold
             | Удаленные
-          = render @paginated_employee_cvs.deleted
+          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.deleted, state_color: 'red' }
 
         .col-md-4.p-1
           i.fas.fa-bookmark.ml-2.mr-2.black-text
           u.font-weight-bold
             | Избранные
+          - @order_profiles.each do |op|
+            - order = op.order.decorate
+            - next unless order.without_paid_employees.present?
+            .border.mt-2.mb-2.p-2.white.rounded
+              h5 ##{order.id}&nbsp; #{order.title}
+              = render partial: 'employee_cv', locals: { employee_cvs: order.without_paid_employees, state_color: 'black' }
