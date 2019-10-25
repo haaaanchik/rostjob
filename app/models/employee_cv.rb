@@ -14,7 +14,7 @@ class EmployeeCv < ApplicationRecord
 
   validates :name, presence: true
   validates :phone_number, phone: true
-  validates :contractor_terms_of_service, acceptance: true
+  # validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true

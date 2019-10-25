@@ -93,6 +93,14 @@ $ ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
   )
 
+  $('#employee_cv_reminder').datepicker
+    language: 'ru'
+    todayHighlight: true
+    
+  $('.remote-block').on('click', ->
+    $(this).children().last().toggleClass('fa-chevron-up fa-chevron-down')
+    $('.remote-empl_cvs').fadeToggle(500)
+  )
 #modal_hide = ->
 #  $('#newCandidateModal').modal('hide')
 #

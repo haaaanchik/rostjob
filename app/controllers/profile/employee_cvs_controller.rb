@@ -127,9 +127,8 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def employee_cvs_params
     params.require(:employee_cv)
-          .permit(:email, :phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
-                  :name, :gender, :mark_ready, :birthdate, :photo, :document, :remark, :arrival_date,
-                  :education, :phone_number_alt, :experience, ext_data: {}, passport: {})
+          .permit(:email, :phone_number, :proposal_id, :order_id, :name, :gender, :mark_ready,
+                  :photo, :document, :remark, :education, :experience, :reminder)
   end
 
   def term

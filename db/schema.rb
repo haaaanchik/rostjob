@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_09_121105) do
+ActiveRecord::Schema.define(version: 2019_10_25_093828) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_121105) do
     t.text "experience"
     t.integer "super_job_id"
     t.string "email"
+    t.datetime "reminder"
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 

@@ -16,13 +16,25 @@
           i.fas.fa-bookmark.ml-2.mr-2.blue-text
           u.font-weight-bold
             | Готовые
-          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready, state_color: 'blue' }
+          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready.without_reminders,
+                                                     state_color: 'blue', reminder: false }
+
+          hr
+          .remote-block
+            i.fas.fa-bookmark.ml-2.mr-2.red-text
+            u.font-weight-bold
+              | Удаленные
+            = @paginated_employee_cvs.first.decorate.icon_chevron_or_minus(@paginated_employee_cvs.deleted.without_reminders)
+          .remote-empl_cvs
+            = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.deleted.without_reminders,
+                                                       state_color: 'red', reminder: false }
 
         .col-md-4.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.red-text
+          i.fas.fa-bookmark.ml-2.mr-2.yellow-text
           u.font-weight-bold
-            | Удаленные
-          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.deleted, state_color: 'red' }
+            | С напоминанием
+          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.with_reminders,
+                                                     state_color: 'blue', reminder: true }
 
         .col-md-4.p-1
           i.fas.fa-bookmark.ml-2.mr-2.black-text
@@ -33,4 +45,5 @@
             - next unless order.without_paid_employees.present?
             .border.mt-2.mb-2.p-2.white.rounded
               h5 ##{order.id}&nbsp; #{order.title}
-              = render partial: 'employee_cv', locals: { employee_cvs: order.without_paid_employees, state_color: 'black' }
+              = render partial: 'employee_cv', locals: { employee_cvs: order.without_paid_employees,
+                                                         state_color: 'black', reminder: false }
