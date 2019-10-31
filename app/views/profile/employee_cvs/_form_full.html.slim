@@ -28,5 +28,7 @@
       .card.card-form.md-calendar.white.z-depth-0.grey.lighten-4
         .card-body.rounded-top
           .container
-            .row
-              = render partial: 'form_fields', locals: { employee_cv: @employee_cv, url: url, mth: mth }
+            = render partial: 'form_fields', locals: { employee_cv: @employee_cv,
+                                                       url:         url,
+                                                       mth:         mth,
+                                                       col_md:      'col-md-11' }

@@ -29,8 +29,10 @@ ruby:
                   button.close.white-text type="button" data-dismiss="modal" aria-label="Close"
                     span aria-hidden="true" &times;
           .modal-body
-            .row
-              = render partial: 'form_fields', locals: { employee_cv: emp_cv, url: profile_employee_cvs_path, mth: :post }
+            = render partial: 'form_fields', locals: { employee_cv: emp_cv,
+                                                       url:         profile_employee_cvs_path,
+                                                       mth:         :post,
+                                                       col_md:      'col-md-8' }
             - if statuses.include?(state)
               hr
               = render partial: "profile/employee_cvs/toolbars/#{state}", locals: { employee_cv: emp_cv }

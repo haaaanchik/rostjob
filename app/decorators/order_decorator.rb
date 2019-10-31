@@ -38,7 +38,7 @@ class OrderDecorator < ObjDecorator
     proposal_employees.includes(:employee_cv, profile: :user).send(state).order(:interview_date)
   end
 
-  def without_paid_employees
-    employee_cvs.where.not('proposal_employees.state': 'paid')
+  def without_paid_revoked_employees
+    employee_cvs.where.not('proposal_employees.state': %w(paid revoked)).where(profile: h.current_profile )
   end
 end

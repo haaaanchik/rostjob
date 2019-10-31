@@ -70,15 +70,6 @@ $ ->
     return
   )
 
-  $(document).on('click', 'label[for=employee_cv_contractor_terms_of_service]', (event) ->
-    element = $('#employee_cv_contractor_terms_of_service')
-    checked = element.prop('checked')
-    if checked == false
-      $('.employee-cv-submit-button').removeClass('disabled')
-    else
-      $('.employee-cv-submit-button').addClass('disabled')
-  )
-
   $(document).on('click', 'label[for=proposal_employee_employee_cv_attributes_contractor_terms_of_service]', (event) ->
     console.log 'aaa'
     element = $('#proposal_employee_employee_cv_attributes_contractor_terms_of_service')
@@ -93,10 +84,25 @@ $ ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
   )
 
-  $('#employee_cv_reminder').datepicker
+  $('.reminder_date_datepicker').datepicker
     language: 'ru'
     todayHighlight: true
-    
+
+  $('.reminder_date_datepicker').on 'changeDate', ->
+    form = $(this).parents('form')
+    form.find('.remove-reminder').fadeIn 500
+    form.find('#employee_cv_reminder').val(
+      $(this).datepicker('getFormattedDate') + ' 0:00:00 UTC'
+    )
+
+  $('.remove-reminder').on('click', (event) ->
+    event.preventDefault()
+    form = $(this).parents('form')
+    form.find('#employee_cv_reminder').val('')
+    form.find('.remove-reminder').fadeOut 500, ->
+      $(this).prev().find('tr td.active').removeClass('active')
+  )
+
   $('.remote-block').on('click', ->
     $(this).children().last().toggleClass('fa-chevron-up fa-chevron-down')
     $('.remote-empl_cvs').fadeToggle(500)

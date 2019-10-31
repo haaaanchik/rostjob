@@ -136,7 +136,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def employee_cvs
-    @q = EmployeeCv.where(profile_id: current_profile.id, state: %w(ready deleted)).order(id: :desc).ransack(params[:q])
+    @q = EmployeeCv.where(profile_id: current_profile.id, state: %w(ready deleted)).ransack(params[:q])
     @paginated_employee_cvs = @q.result
   end
 
