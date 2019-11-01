@@ -14,6 +14,7 @@ class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationC
     result = Cmd::ProposalEmployee::Hire.call(candidate: proposal_employee,
                                               hiring_date: candidate_params[:hiring_date])
     if result.success?
+      ticket.to_closed!
       redirect_to admin_tickets_path
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422
@@ -24,6 +25,7 @@ class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationC
     result = Cmd::ProposalEmployee::ToInbox.call(candidate: proposal_employee,
                                                  interview_date: candidate_params[:interview_date])
     if result.success?
+      ticket.to_closed!
       redirect_to admin_tickets_path
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422
