@@ -25,13 +25,16 @@ class TicketDecorator < ApplicationDecorator
     false
   end
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def user_full_name
+    full_name = object.user_id == h.current_user.id ? proposal_employee_user_name :
+                                                      subject_name
+    h.content_tag(:td) { full_name }
+  end
 
+  private
+
+  def proposal_employee_user_name
+    return if object.proposal_employee.nil?
+    object.proposal_employee.profile.user.full_name
+  end
 end

@@ -2,7 +2,7 @@ class Profile::TicketsController < ApplicationController
   include RolesHelper
 
   def index
-    paginated_tickets
+    @paginated_tickets = tickets.includes(:user).page(params[:page])
   end
 
   def show
@@ -17,10 +17,6 @@ class Profile::TicketsController < ApplicationController
 
   def ticket
     @ticket ||= all_tickets.find(params[:id])
-  end
-
-  def paginated_tickets
-    @paginated_tickets ||= tickets.page(params[:page])
   end
 
   def all_tickets
