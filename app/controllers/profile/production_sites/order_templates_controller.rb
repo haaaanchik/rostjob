@@ -112,11 +112,12 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def order_template_params
-    params.require(:order_template).permit(:name, :title, :specialization, :city, :salary, :for_cis,
-                                           :position_id, :description, :state, :advertising, :adv_text,
-                                           :contractor_price, :skill, :accepted, :district,
-                                           :experience, :visibility, :number_of_employees, :document,
-                                           :schedule, :work_period, :place_of_work, contact_person: {}, other_info: {})
+    @order_template_params ||= params.require(:order_template)
+                                     .permit(:name, :title, :specialization, :city, :salary, :for_cis,
+                                             :position_id, :description, :state, :advertising, :adv_text,
+                                             :contractor_price, :skill, :accepted, :district,
+                                             :experience, :visibility, :number_of_employees, :document,
+                                             :schedule, :work_period, :place_of_work, contact_person: {}, other_info: {})
   end
 
   def publish_order(o_template, number_of_employees)
