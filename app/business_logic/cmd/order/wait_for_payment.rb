@@ -4,7 +4,7 @@ module Cmd
       include Interactor
 
       def call
-        context.fail! unless order.to_waiting_for_payment
+        context.fail! if !order.number_additional_employees.nil? || !order.to_waiting_for_payment
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

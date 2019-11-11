@@ -100,8 +100,5 @@
             div.p-0
               hr
               p.text-center Баланс: #{order.balance.amount}
-              p.h3.text-center К оплате: #{order.customer_total}
-              - if !order.can_be_paid?
-                = link_to 'Пополнить баланс', profile_invoices_path(params: {amount: order.customer_total - order.balance.amount}), class: 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
-              - else
-                = link_to 'Опубликовать заявку', publish_profile_production_site_order_path(@production_site, order), method: :put, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
+              p.h3.text-center К оплате: #{order.total_price}
+              = order.link_button

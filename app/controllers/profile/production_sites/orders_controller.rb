@@ -72,7 +72,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   def update_pre_publish
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
     if result.success?
-      redirect_to pre_publish_profile_order_path(result.order)
+      redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     else
       render json: { validate: true, data: errors_data(context.order) }, status: 422
     end
@@ -80,7 +80,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def pre_publish
     Cmd::Order::WaitForPayment.call(order: order)
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
+    render 'pre_publish', locals: { order: order.decorate, balance: order.profile.balance.amount }
   end
 
   def publish
@@ -122,6 +122,11 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     else
       render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
+  end
+
+  def add_additional_employees
+    Cmd::Order::AddToNumberOfEmployees.call(order: order)
+    redirect_to profile_production_site_order_path(production_site, order)
   end
 
   private
@@ -169,7 +174,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
                                     :skill, :accepted, :district, :experience, :advertising,
                                     :visibility, :state, :number_of_employees, :document,
                                     :schedule, :work_period, :place_of_work, :adv_text,
-                                    other_info: {}, contact_person: {})
+                                    :number_additional_employees, other_info: {}, contact_person: {})
   end
 
   def balance

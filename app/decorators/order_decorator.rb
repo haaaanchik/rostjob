@@ -41,4 +41,29 @@ class OrderDecorator < ObjDecorator
   def without_paid_revoked_employees
     employee_cvs.where.not('proposal_employees.state': %w(paid revoked)).where(profile: h.current_profile )
   end
+
+  def total_price
+    return customer_total if number_additional_employees.nil?
+    number_additional_employees.to_i * customer_price
+  end
+
+  def link_button
+    classes = 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
+    case
+    when !can_be_paid?
+      h.content_tag(:a,
+                    href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
+                    class: classes) { 'Пополнить баланс' }
+    when !number_additional_employees.nil?
+      h.content_tag(:a,
+                    href: h.add_additional_employees_profile_production_site_order_path(production_site, object),
+                    class: classes,
+                    data: { method: :put }) { 'Оплатить' }
+    else
+      h.content_tag(:a,
+                    href: h.publish_profile_production_site_order_path(production_site, object),
+                    class: classes,
+                    data: { method: :put }) { 'Опубликовать заявку' }
+    end
+  end
 end

@@ -154,6 +154,8 @@ Rails.application.routes.draw do
             put :complete
             put :cancel
             put :move
+            put :update_pre_publish
+            put :add_additional_employees
           end
           collection do
             post :add_position
@@ -208,6 +210,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create destroy]
     resources :answered_orders
     get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
+    # FIXME: refactor this asap
     resources :orders, except: %i[create] do
       member do
         put :hide
@@ -245,6 +248,7 @@ Rails.application.routes.draw do
         # put 'candidates/:id/fire', to: 'candidates#fire'
       end
     end
+    # FIXME: refactor this asap
     post :orders, constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#create_pre_publish'
     post :orders, constraints: ->(req) {req.params.key?(:create)}, to: 'orders#create'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'

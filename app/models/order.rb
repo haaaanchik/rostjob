@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   include AASM
+  include OrderRepository
   extend Enumerize
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
@@ -47,9 +48,6 @@ class Order < ApplicationRecord
   ransacker :salary_to do
     Arel.sql("CONVERT(#{table_name}.salary_to, CHAR(8))")
   end
-
-
-  include OrderRepository
 
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true
@@ -179,5 +177,15 @@ class Order < ApplicationRecord
 
   def title_with_id
     "#{id} #{title}"
+  end
+
+  def number_free_places
+    number_of_employees - without_inbox_candidate_count
+  end
+
+  private
+
+  def without_inbox_candidate_count
+    proposal_employees.where.not('proposal_employees.state': 'inbox').count
   end
 end
