@@ -9,6 +9,15 @@ class Profile::CandidatesController < ApplicationController
     @remained_warranty_days = Holiday.remained_warranty_days(candidate.hiring_date, candidate.warranty_date)
   end
 
+  # FIXME: refactor this asap
+  def revoke
+    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: candidate, log: true)
+    result.success? ? (redirect_to profile_candidates_path) :
+                      (render json: { validate: true,
+                                      data:     errors_data(result.proposal_employee) },
+                              status: 422)
+  end
+
   private
 
   def candidate

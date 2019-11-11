@@ -187,7 +187,11 @@ Rails.application.routes.draw do
       resources :appeals, only: %i[new create]
       resources :incidents, only: %i[show new create]
     end
-    resources :candidates, only: %i[index show]
+    resources :candidates, only: %i[index show] do
+      member do
+        put :revoke
+      end
+    end
     resources :order_templates do
       member do
         post :copy

@@ -16,7 +16,7 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   ACTIONS = {
     'customer' => {
-      'inbox' => %w[reserved interview transfer],
+      'inbox' => %w[revoked interview transfer],
       'reserved' => %w[inbox interview transfer],
       'interview' => %w[hired disputed transfer],
       'hired' => %w[disputed],
