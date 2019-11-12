@@ -13,6 +13,7 @@ module Cmd
                      customer_total:              customer_total,
                      contractor_total:            contractor_total)
         order.balance.withdraw(order.customer_total, "Увеличение количества сотрудников для заявки №#{order.id}")
+        order.public_send(:to_open?)
       end
 
       private

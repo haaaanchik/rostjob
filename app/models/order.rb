@@ -16,6 +16,7 @@ class Order < ApplicationRecord
   has_many :profiles, -> { distinct }, through: :proposal_employees
   has_many :order_profiles
   has_many :employee_cvs, through: :proposal_employees, source: :employee_cv
+  has_one  :user, through: :profile
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
@@ -71,7 +72,7 @@ class Order < ApplicationRecord
     end
 
     event :publish do
-      transitions from: :moderation, to: :published
+      transitions from: %i[moderation completed], to: :published
     end
 
     event :reject do
@@ -183,7 +184,35 @@ class Order < ApplicationRecord
     number_of_employees - without_inbox_candidate_count
   end
 
+  def to_close?
+    return if number_free_places > 0
+    to_completed
+    Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} завершена"))
+    OrderMailJob.perform_later(order: self, method: 'completed')
+  end
+
+  def to_open?
+    return if number_free_places <= 0
+    to_published
+    Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
+    OrderMailJob.perform_later(order: self, method: 'published')
+  end
+
   private
+
+  def logger_params(action_title)
+    {
+      login: user.email,
+      receiver_ids: [user.id],
+      subject_id: user.id,
+      subject_type: 'User',
+      subject_role: profile.profile_type,
+      action: action_title,
+      object_id: id,
+      object_type: 'Order',
+      order_id: id
+    }
+  end
 
   def without_inbox_candidate_count
     proposal_employees.where.not('proposal_employees.state': 'inbox').count
