@@ -22,5 +22,6 @@ class BaseController < ActionController::Base
       errors_data["#{prefix}#{err_path}#{field_name}"] = err.last
     end
     errors_data
+    render js
   end
 end

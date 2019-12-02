@@ -1,17 +1,28 @@
-header
-  nav.navbar.fixed-top.navbar-dark.bg-best-hr
-    .container-fluid
-      = render partial: 'interface/left_menu/contractor_md', locals: { active_item: @active_item }
-      = link_to root_path, class: 'navbar-brand' do
-        = image_tag('/img/besthr.jpg', height: '20px')
-        - if Rails.env.staging?
-          span.counter.red
-            b stage
-      = render partial: 'interface/navbar'
-  #home
-main
-  #modal_container
-  .container-fluid#right_window
-    .row
-      = render partial: 'interface/left_menu/contractor', locals: { active_item: @active_item }
-      = yield
+ul.side-bar-ul
+  li.nav-item
+    = link_to profile_employee_cvs_path,
+              id: 'employee_cvs_list',
+              title: 'Список Анкет',
+              class: "nav-link #{'nav-link__active' if active_item == :employee_lists}" do
+      i.fas.fa-address-card.svg-sidebar
+      p.icon-text Список Анкет
+  li.nav-item
+    = link_to profile_proposal_employees_path,
+              id: 'employee_cvs_sent',
+              title: 'Отправленные',
+              class: "nav-link #{'nav-link__active' if active_item == :sent}" do
+      i.fas.fa-briefcase.svg-sidebar
+      p.icon-text Отправленные
+  li.nav-item
+    = link_to orders_path,
+            id: 'orders_catalog',
+            title: 'Каталог заявок',
+            class: "nav-link #{'nav-link__active' if active_item == :orders}" do
+      i.fas.fa-align-justify.svg-sidebar
+      p.icon-text Каталог заявок
+  li.nav-item
+    = link_to profile_favorites_path,
+              title: 'Избранные заявки',
+              class: "nav-link #{'nav-link__active' if active_item == :favorites}" do
+      i.fas.fa-star.svg-sidebar
+      p.icon-text Избранные заявки

@@ -3,6 +3,6 @@
 $('#orders_search_result').html("<%= j orders %>")
 <% else %>
 <% orders = render partial: 'index_with_search.html.slim' %>
-$('#right_window').html("<%= j orders %>")
+$('#main_row').html("<%= j orders %>")
 <% end %>
 $('[data-toggle="popover"]').popover()
