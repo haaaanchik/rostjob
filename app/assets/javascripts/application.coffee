@@ -12,6 +12,7 @@
 #= require external/jquery.raty
 #= require external/bootstrap-datepicker
 #= require external/bootstrap-datepicker.ru.min
+#= require external/sortable
 #= require tinymce
 #= require jquery.inputmask
 #= require data-confirm-modal

@@ -1,53 +1,96 @@
-.col-md-10.order-1.order-sm-1.order-md-2.mt-4
-  .border.rounded
-    .mt-4
-      .container
-        .row
-          .col-md-8
-            = render partial: 'search_form', locals: { url: profile_employee_cvs_path(@term) }
-          .col-md-4
-            = link_to new_profile_employee_cv_path, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true do
-              i.fas.fa-plus.mr-2
-              | Добавить анкету
+.grey.lighten-4.text-center.main-workspace.scrollbar-near-moon.thin
+  .row.ml-0.mr-0.scrollbar-near-moon.thin
+    .popup
+      h4 Напоминание
+      .popup__header#reminder_popup
+        = text_field_tag :reminder_date, nil, placeholder: '01.01.2001', class: 'popup-input'
+        = time_field_tag :reminder_time, nil, placeholder: '23:59', class: 'popup-input'
+      .popup__body
+        .reminder_date_datepicker.d-flex.justify-content-center
+      .popup__footer
+        button class="btn btn-sm btn-primary add-reminder" Добавить
+        button class="btn btn-sm btn-default close-reminder" Закрыть
 
-    .grey.lighten-4.text-center
-      .row.ml-0.mr-0
-        .col-md-4.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.blue-text
-          u.font-weight-bold
-            | Готовые
-          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready.without_reminders,
-                                                     state_color:  'blue',
-                                                     reminder:     false }
+    // добавить
+    #add.card.card-primary.custom-column.p-1
+      .card-header.p-1 style="background-color: transparent;"
+        h3.card-title.m-auto
+          button.btn.btn-block.btn-success type='button' id='add_column'
+            i.fas.fa-plus.mr-1
+            | Добавить
 
-          hr
-          .remote-block
-            i.fas.fa-bookmark.ml-2.mr-2.red-text
-            u.font-weight-bold
-              | Удаленные
-            = @paginated_employee_cvs.first.decorate.icon_chevron_or_minus(@paginated_employee_cvs.deleted.without_reminders)
-          .remote-empl_cvs
-            = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.deleted.without_reminders,
-                                                       state_color:  'red',
-                                                       reminder:     false }
+    // Готовые
+    .card.card-primary.custom-column.mb-2.mb-sm-0.p-1
+      .card-header.mb-2.underline-style
+        h3.card-title.js-title.mb-0 Готовые
+        input.js-clicked-input type='text' value=''
 
-        .col-md-4.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.yellow-text
-          u.font-weight-bold
-            | С напоминанием
-          = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.with_reminders,
-                                                     state_color:  'blue',
-                                                     reminder:     true }
+      = link_to new_profile_employee_cv_path,
+                class: 'btn btn-block btn-primary add-card m-auto',
+                remote: true do
+        i.fas.fa-plus.mr-1
+        | Добавить
+      = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready.without_reminders,
+                                                 state:        'ready' }
 
-        .col-md-4.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.black-text
-          u.font-weight-bold
-            | Избранные
-          - @order_profiles.each do |op|
-            - order = op.order.decorate
-            - next unless order.without_paid_revoked_employees.present?
-            .border.mt-2.mb-2.p-2.white.rounded
-              h5 ##{order.id}&nbsp; #{order.title}
-              = render partial: 'employee_cv', locals: { employee_cvs: order.without_paid_revoked_employees,
-                                                         state_color:  'black',
-                                                         reminder:     false }
+    // С напоминанием
+    .card.card-primary.custom-column.mb-2.mb-sm-0.p-1
+      .card-header.mb-2.underline-style
+        h3.card-title.js-title.mb-0 C напоминанием
+        input.js-clicked-input type="text" value=""
+      = link_to new_profile_employee_cv_path(state: 'reminder'),
+              class: 'btn btn-block btn-primary add-card m-auto',
+              remote: true do
+        i.fas.fa-plus.mr-1
+        | Добавить
+      = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.with_reminders,
+                                                 state:        'reminder' }
+
+  // Избранные
+  .card.card-primary.custom-column.p-1.chosen
+    .card-header.bg-primary
+      h3.card-title.mb-0.text-white Избранное
+    .card-body.card-scroll-window
+      - @order_profiles.each do |op|
+        - order = op.order.decorate
+        - emp_cv_exist =  order.without_paid_revoked_employees.present?
+        .moveable.card.card-primary.card-list data-order-id="#{order.id}"
+          .card-header.bg-primary
+            h3.card-title.text-left.text-white.mb-0 №#{order.id}&nbsp; #{order.title}. #{order.skill}
+            p.salary.text-left.text-white = order.salary
+            .number_of_people
+              span.number_of_people_span #{order.number_of_employees} / чел
+            p.work_area.text-left.text-white = order.production_site.title
+
+          .card-body
+            .card-scroll-window.js-card-scroll-window data-state="favorite" style="#{ 'height: auto' unless emp_cv_exist }"
+              - order.without_paid_revoked_employees.each do |pr_emp|
+                - employee_cv = pr_emp.employee_cv.decorate
+                - pe_form = "#{render partial: 'profile/favorites/interview_date'}"
+                .card.card-success.card-in-list.collapsed-card.moveable data-emp-cv-id="#{employee_cv.id}" data-proposal-emp-id="#{pr_emp.id}"
+                  span type="button" class="interview-date-show" data-toggle="popover" data-html='true' data-content=pe_form
+                  .card-header.card-header-in-list
+                    p.initials.text-white data-card-widget="collapse"
+                      = link_to employee_cv.name, edit_profile_employee_cv_path(employee_cv), class: 'white-text', remote: true
+                    .card-tools.d-none
+                      button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                        i.fas.fa-ellipsis-h
+                      .dropdown-menu x-placement="bottom-start" style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;"
+                        a.dropdown-item href="#"  Отправить
+                        a.dropdown-item href="#"  Изменить
+                        a.dropdown-item href="#"  Комментарий
+                        .dropdown-divider
+                        a.dropdown-item href="#"  Удалить
+
+                  .card-body
+                    p.card_phone_number = employee_cv.phone_number
+                    .card_bottom
+                      = text_area_tag :comment,
+                                      employee_cv.comment,
+                                      class: 'card_textarea js-call-popup default-scroll',
+                                      placeholder: 'Напишите комментарий…',
+                                      style: 'overflow-y: scroll; overflow-wrap: break-word;',
+                                      dir: 'auto',
+                                      data: { date: employee_cv.reminder_date,
+                                              time: employee_cv.reminder_time }
+                      = employee_cv.decorate.display_reminders

@@ -1,5 +1,6 @@
 = form_with model: @employee_cv, url: url, method: mth, class: 'new-employee_cv-form' do |f|
   = f.hidden_field :order_id, value: @order&.id
+  = hidden_field_tag :state, params[:state]
   .border.rounded.white.mt-1
     .modal-body.pt-1
       .container-fluid
@@ -23,6 +24,19 @@
               .form-check
                 = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
                 = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+
+        - if params[:state] == 'reminder'
+          .row
+            .col-4
+              .text-left.mt-1
+                = f.label :reminder, 'Дата и Время', class: 'active'
+                = f.datetime_field :reminder, class: 'form-control'
+          .row
+            .col-8
+              .text-left.mt-1
+                = f.label :comemnt, 'Комментарий', class: 'active'
+                = f.text_area :comment, class: 'form-control'
+
   .modal-body.pt-1.pb-0
     .container-fluid
       .row

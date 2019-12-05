@@ -39,7 +39,9 @@ class OrderDecorator < ObjDecorator
   end
 
   def without_paid_revoked_employees
-    employee_cvs.where.not('proposal_employees.state': %w(paid revoked)).where(profile: h.current_profile )
+    proposal_employees.where.not(state: %w(paid revoked))
+                      .where(profile: h.current_profile )
+                      .includes(:employee_cv)
   end
 
   def total_price

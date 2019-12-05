@@ -1,0 +1,44 @@
+/*     Scroll       */
+
+.scrollbar-near-moon::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-color: #F5F5F5 !important;
+    border-radius: 10px !important;
+}
+
+.scrollbar-near-moon::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5 !important;
+}
+
+.scrollbar-near-moon::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#5ee7df), to(#b490ca)) !important;
+    background-image: -webkit-linear-gradient(bottom, #5ee7df 0%, #b490ca 100%) !important;
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%) !important;
+}
+
+.thin::-webkit-scrollbar {
+    width: 6px !important;
+    height: 8px !important;
+}
+
+.card-scroll-window::-webkit-scrollbar-track, .default-scroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-color: #F5F5F5 !important;
+    border-radius: 10px !important;
+}
+
+.card-scroll-window::-webkit-scrollbar, .default-scroll::-webkit-scrollbar {
+    width: 6px;
+    background-color: #F5F5F5 !important;
+}
+
+.card-scroll-window::-webkit-scrollbar-thumb, .default-scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px !important;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1) !important;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#5ee7df), to(#b490ca)) !important;
+    background-image: -webkit-linear-gradient(bottom, #5ee7df 0%, #b490ca 100%) !important;
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%) !important;
+}

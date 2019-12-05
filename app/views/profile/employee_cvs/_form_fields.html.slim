@@ -2,13 +2,13 @@
   .row
     .ml-0.pl-0.m-auto class="#{col_md}"
       = f.hidden_field :order_id, value: @order&.id
-      = f.hidden_field :reminder, value: f.object.reminder
       .border.rounded.white.mt-1
         .modal-body.pt-1
-          .row
-            .col
-              h4
-                | Анкета
+          - if show_title
+            .row
+              .col
+                h4
+                  | Анкета
           .row
             .col-8.text-left.mt-1
               = f.label :name, 'Полное имя', class: 'active'
@@ -53,14 +53,21 @@
             .col.text-left.mt-2
               = f.label :remark, 'Дополнительные сведения', class: 'active'
               = f.text_area :remark, rows: 3, class: 'form-control'
-    - unless f.object.new_record?
-      .col-md-4.border.rounded.white.mt-1.ml-0.mb-auto
-        .modal-body.pt-1.none
-          h4 Напоминание
-          .reminder_date_datepicker.d-flex.justify-content-center data-date="#{f.object.reminder_date}"
-          = f.object.remove_reminder
-    .align-items-center.m-auto
-      - if @order
-        = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button', name: :save_as_sent
-      - else
-        = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button', name: :save
+
+          - if params[:state] == 'reminder'
+            .row
+              .col-4
+                .text-left.mt-2
+                  = f.label :reminder, 'Дата и Время', class: 'active'
+                  = f.datetime_field :reminder, class: 'form-control'
+            .row
+              .col
+                .text-left.mt-2
+                  = f.label :comemnt, 'Комментарий', class: 'active'
+                  = f.text_area :comment, class: 'form-control'
+
+  .align-items-center.text-center
+    - if @order
+      = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button', name: :save_as_sent
+    - else
+      = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button', name: :save

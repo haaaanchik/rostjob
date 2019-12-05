@@ -1,0 +1,9 @@
+.align-items-center.justify-content-center
+  .col-auto
+    .form-group
+      = label_tag :interview_date, 'Дата прибытия кандидата'
+      = date_field_tag :interview_date, nil, class: 'form-control'
+      .invalid-feedback
+  .col-auto.d-flex
+    = submit_tag 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2 btn-interview'
+    = submit_tag 'Отменить', class: 'btn btn-default btn-sm btn-rounded mt-2 btn-interview-cancel'

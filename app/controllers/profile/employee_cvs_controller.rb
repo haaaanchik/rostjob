@@ -19,7 +19,7 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def pre_new_full
     flash['params'] = employee_cvs_params
-    redirect_to new_full_profile_employee_cv_path
+    redirect_to new_full_profile_employee_cv_path(state: params[:state])
   end
 
   def new_full
@@ -78,9 +78,9 @@ class Profile::EmployeeCvsController < ApplicationController
     result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
     if result.success?
       @status = 'success'
+      render json: { reminder_date: result.employee_cv.decorate.display_reminders } if params[:draggable]
     else
       @status = 'error'
-      # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
@@ -98,13 +98,14 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def to_ready
-    result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv)
+    result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv, draggable: eval(params[:draggable]))
     if result.success?
       @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :ready)
+      render json: { data: @status } if eval(params[:draggable])
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv
+      render json: { validate: true, data: @text }, status: 422 if eval(params[:draggable])
     end
   end
 
@@ -128,7 +129,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def employee_cvs_params
     params.require(:employee_cv)
           .permit(:email, :phone_number, :proposal_id, :order_id, :name, :gender, :mark_ready,
-                  :photo, :document, :remark, :education, :experience, :reminder)
+                  :photo, :document, :remark, :education, :experience, :reminder, :comment)
   end
 
   def term

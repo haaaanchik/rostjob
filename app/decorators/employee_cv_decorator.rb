@@ -10,19 +10,17 @@ class EmployeeCvDecorator < ApplicationDecorator
     h.content_tag(:i, class: "ml-2 mr-1 blue-text fas #{ deleted.zero? ? 'fa-minus' : 'fa-chevron-up'}") {}
   end
 
-  def display_reminders(reminder_status)
-    return unless reminder_status
-
-    h.content_tag(:p, class: "m-0 #{color_reminder}") { format_reminder }
+  def display_reminders
+    return if object.reminder.nil?
+    h.content_tag(:span, class: "data #{color_reminder}") { "#{reminder_date} #{reminder_time}" }
   end
 
   def reminder_date
     object.reminder&.strftime('%d.%m.%Y')
   end
 
-  def remove_reminder
-    d_none = object.reminder.nil? ? 'display: none' : ''
-    h.content_tag(:button, class: 'btn btn-sm btn-danger remove-reminder', style: d_none) { 'Удалить' }
+  def reminder_time
+    object.reminder&.strftime('%H:%M')
   end
 
   private
@@ -30,15 +28,11 @@ class EmployeeCvDecorator < ApplicationDecorator
   def color_reminder
     case
     when object.reminder < Date.today
-      'red'
+      'red text-body'
     when (object.reminder >= Date.today) && (object.reminder <= Date.today + 1.days)
       'yellow'
     else
       return
     end
-  end
-
-  def format_reminder
-    l(object.reminder, format: '%d %B')
   end
 end
