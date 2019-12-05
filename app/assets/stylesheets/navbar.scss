@@ -62,6 +62,7 @@
   background-color: blueviolet;
   z-index: 1040;
 }
+
 .side-bar-ul {
   padding-left: 0;
 }
@@ -99,6 +100,10 @@
     align-items: center;
     padding-left: 0.5rem;
   }
+}
+
+.navbar{
+  background-color: white;
 }
 
 @media (max-width: 400px) {

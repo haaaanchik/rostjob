@@ -2,7 +2,7 @@
   - employee_cvs.decorate.each do |emp_cv|
     - pe_form = "#{render partial: 'profile/favorites/interview_date'}"
     .moveable.card.card-success data-emp-cv-id="#{emp_cv.id}"
-      span.d-flex class="interview-date-show" data-toggle="popover" data-html='true' data-content=pe_form
+      span.d-flex class="interview-date-show" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
       .card-header.d-flex
         p.initials.text-white
           = link_to emp_cv.name, edit_profile_employee_cv_path(emp_cv), class: 'white-text', remote: true

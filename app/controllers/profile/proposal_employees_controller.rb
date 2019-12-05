@@ -50,13 +50,13 @@ class Profile::ProposalEmployeesController < ApplicationController
 
   def revoke
     result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: true)
-    @status = if result.success?
-                'success'
-                render json: { revoke: 'success' }
-              else
-                'error'
-                render json: {validate: true, revoke: 'error' }, status: 422
-              end
+    if result.success?
+      @status = 'success'
+      render json: { revoke: 'success' } if params[:draggable]
+    else
+      @status = 'error'
+      render json: {validate: true, revoke: 'error' }, status: 422 if params[:draggable]
+    end
   end
 
   def approve_transfer

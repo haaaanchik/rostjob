@@ -2,7 +2,7 @@ class Profile::EmployeeCvsController < ApplicationController
   before_action :employee_cvs, only: :index
 
   def index
-    @order_profiles = current_profile.order_profiles.includes(order: :employee_cvs)
+    @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
     @active_item = term
   end
 
@@ -101,11 +101,11 @@ class Profile::EmployeeCvsController < ApplicationController
     result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv, draggable: eval(params[:draggable]))
     if result.success?
       @status = 'success'
-      render json: { data: @status } if eval(params[:draggable])
+      render json: { data: @status } if params[:draggable]
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv
-      render json: { validate: true, data: @text }, status: 422 if eval(params[:draggable])
+      render json: { validate: true, data: @text }, status: 422 if params[:draggable]
     end
   end
 

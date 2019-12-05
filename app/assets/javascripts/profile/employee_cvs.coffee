@@ -17,8 +17,8 @@ class EmployeeCvs
     $('.reminder_date_datepicker').on 'changeDate', @reminderChangeDate
 #    $('.remote-block').on 'click', @remoteBlock
     $('.comment-emp-cv').on 'click', @activateСomment
-    $(document).on 'click', '.btn-interview', @sentEmployeeCv
-    $(document).on 'click', '.btn-interview-cancel', @cancelInterview
+    $('body').on 'click', '.btn-interview', @sentEmployeeCv
+    $('body').on 'click', '.btn-interview-cancel', @cancelInterview
     $('.js-call-popup').on 'click', @getCoord
     $('.close-reminder').on 'click', @closeReminder
     $('.add-reminder').on 'click', @addReminder
@@ -217,6 +217,7 @@ class EmployeeCvs
     if prevState == 'favorite'
       prEmpId = $(itemEl).data('proposal-emp-id')
       url = '/profile/proposal_employees/' + prEmpId + '/revoke'
+      draggable = true
 
     if currentState == 'ready' && prevState != 'favorite'
       url = '/profile/employee_cvs/' + empCvId + '/to_ready'
