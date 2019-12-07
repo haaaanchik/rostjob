@@ -1,9 +1,10 @@
 class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
   expose :order_templates,    -> { production_site.order_templates.order(id: :desc) }
   expose :production_sites,   -> { current_profile.production_sites }
+  expose :waiting_pay_orders, -> { fetch_waiting_pay_orders }
   expose :completed_orders,   -> { fetch_completed_orders }
   expose :moderation_orders,  -> { fetch_moderation_orders }
-  expose :in_progress_orders, -> { fetch_in_progress_orders }
+  expose :published_orders,   -> { fetch_published_orders }
 
   def index
     @state = state
@@ -185,16 +186,20 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     @order ||= orders.find(params[:id])
   end
 
+  def fetch_waiting_pay_orders
+    orders.waiting_for_payment
+  end
+
   def fetch_completed_orders
-    orders.where(state: completed_states)
+    orders.completed
   end
 
   def fetch_moderation_orders
-    orders.where(state: moderation_states)
+    orders.moderation
   end
 
-  def fetch_in_progress_orders
-    orders.where.not(state: completed_states + moderation_states).order(advertising: :desc)
+  def fetch_published_orders
+    orders.published.order(advertising: :desc)
   end
 
   def orders
@@ -206,14 +211,6 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def local_prefixes
     [controller_path]
-  end
-
-  def completed_states
-    %w[completed draft]
-  end
-
-  def moderation_states
-    %w[moderation rejected]
   end
 
   def description

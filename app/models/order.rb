@@ -184,6 +184,10 @@ class Order < ApplicationRecord
     number_of_employees - without_inbox_candidate_count
   end
 
+  def without_inbox_candidate_count
+    proposal_employees.where.not('proposal_employees.state': 'inbox').count
+  end
+
   def to_close?
     return if number_free_places > 0
     to_completed
@@ -212,9 +216,5 @@ class Order < ApplicationRecord
       object_type: 'Order',
       order_id: id
     }
-  end
-
-  def without_inbox_candidate_count
-    proposal_employees.where.not('proposal_employees.state': 'inbox').count
   end
 end
