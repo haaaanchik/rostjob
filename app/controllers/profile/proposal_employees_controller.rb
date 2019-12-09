@@ -25,6 +25,7 @@ class Profile::ProposalEmployeesController < ApplicationController
     if result.success?
       Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
       @status = 'success'
+      render json: { pr_employee_id: result.proposal_employee.id } if params[:draggable]
       # redirect_to profile_employee_cvs_path(term: :ready)
     else
       @status = 'error'
@@ -49,11 +50,13 @@ class Profile::ProposalEmployeesController < ApplicationController
 
   def revoke
     result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: true)
-    @status = if result.success?
-                'success'
-              else
-                'error'
-              end
+    if result.success?
+      @status = 'success'
+      render json: { revoke: 'success' } if params[:draggable]
+    else
+      @status = 'error'
+      render json: {validate: true, revoke: 'error' }, status: 422 if params[:draggable]
+    end
   end
 
   def approve_transfer

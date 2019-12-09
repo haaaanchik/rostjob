@@ -1,14 +1,9 @@
 class Profile::EmployeeCvsController < ApplicationController
-  # layout false, only: :index
+  before_action :employee_cvs, only: :index
 
   def index
-    if term == :sent
-      paginated_sent_employee_cvs
-      render 'profile/employee_cvs/sent_index'
-    else
-      paginated_employee_cvs
-      @active_item = term.to_sym
-    end
+    @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
+    @active_item = term
   end
 
   def show
@@ -24,7 +19,7 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def pre_new_full
     flash['params'] = employee_cvs_params
-    redirect_to new_full_profile_employee_cv_path
+    redirect_to new_full_profile_employee_cv_path(state: params[:state])
   end
 
   def new_full
@@ -56,7 +51,7 @@ class Profile::EmployeeCvsController < ApplicationController
     if result.success?
       @status = 'success'
       # redirect_to profile_employee_cvs_path(term: :ready)
-      redirect_to profile_employee_cvs_with_state_path(:ready)
+      redirect_to profile_employee_cvs_path
     else
       @status = 'error'
       # @text = error_msg_handler result.employee_cv
@@ -77,30 +72,15 @@ class Profile::EmployeeCvsController < ApplicationController
       # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
-
-    # ecv_result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
-    # order_result = Cmd::Order::AddToFavorites.call(order: order2, profile: current_profile)
-    # result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: { employee_cv_id: ecv_result.employee_cv.id, order_id: order_result.order.id, arrival_date: arrival_date })
-    # @employee_cv = ecv_result.employee_cv
-    # @employee_pr = result.employee_pr
-    # if result.success?
-    #   Cmd::EmployeeCv::ToSent.call(employee_cv: ecv_result.employee_cv, log: false)
-    #   @status = 'success'
-    #   # redirect_to profile_employee_cvs_path(term: :sent)
-    # else
-    #   @status = 'error'
-    #   render json: { validate: true, data: errors_data(result.employee_cv) }
-    #   # @text = error_msg_handler ecv_result.employee_cv
-    # end
   end
 
   def update
     result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
     if result.success?
       @status = 'success'
+      render json: { reminder_date: result.employee_cv.decorate.display_reminders } if params[:draggable]
     else
       @status = 'error'
-      # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
@@ -118,13 +98,14 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def to_ready
-    result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv)
+    result = Cmd::EmployeeCv::ToReady.call(employee_cv: employee_cv, draggable: eval(params[:draggable]))
     if result.success?
       @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :ready)
+      render json: { data: @status } if params[:draggable]
     else
       @status = 'error'
       @text = error_msg_handler result.employee_cv
+      render json: { validate: true, data: @text }, status: 422 if params[:draggable]
     end
   end
 
@@ -142,60 +123,30 @@ class Profile::EmployeeCvsController < ApplicationController
   private
 
   def employee_cv
-    @employee_cv ||= EmployeeCv.find(params[:id])
+    @employee_cv = EmployeeCv.find(params[:id])
   end
 
   def employee_cvs_params
     params.require(:employee_cv)
-          .permit(:email, :phone_number, :contractor_terms_of_service, :proposal_id, :order_id,
-                  :name, :gender, :mark_ready, :birthdate, :photo, :document, :remark, :arrival_date,
-                  :education, :phone_number_alt, :experience, ext_data: {}, passport: {})
-  end
-
-  def states_by_term
-    EmployeeCv.contractor_menu_items[term]
+          .permit(:email, :phone_number, :proposal_id, :order_id, :name, :gender, :mark_ready,
+                  :photo, :document, :remark, :education, :experience, :reminder, :comment)
   end
 
   def term
-    # term = params[:term]
-    # @term = if !term
-    #           :ready
-    #         elsif term.empty?
-    #           :ready
-    #         else
-    #           EmployeeCv.contractor_menu_items.include?(term.to_sym) ? term.to_sym : :ready
-    #         end
-    @term = params[:employee_cv_state]
-  end
-
-  def paginated_employee_cvs
-    @paginated_employee_cvs ||= scoped_employee_cvs.page(params[:page])
-  end
-
-  def paginated_sent_employee_cvs
-    @paginated_sent_employee_cvs ||= sent_employee_cvs.page(params[:page])
-  end
-
-  def scoped_employee_cvs
-    # @scoped_employee_cvs ||= employee_cvs.where(state: term)
-    @scoped_employee_cvs ||= employee_cvs.where(state: params[:employee_cv_state])
-  end
-
-  def sent_employee_cvs
-    @sent_employee_cvs = ProposalEmployee.where(profile_id: current_profile.id).where.not(state: 'revoked').order(id: :desc)
+    @term = :employee_lists
   end
 
   def employee_cvs
-    @q = EmployeeCv.where(profile_id: current_profile.id).order(id: :desc).ransack(params[:q])
-    @employee_cvs ||= @q.result
+    @q = EmployeeCv.where(profile_id: current_profile.id, state: %w(ready deleted)).ransack(params[:q])
+    @paginated_employee_cvs = @q.result
   end
 
   def order
-    @order ||= Order.find(params[:order_id])
+    @order = Order.find(params[:order_id])
   end
 
   def order2
-    @order ||= Order.find_by(id: employee_cvs_params[:order_id])
+    @order = Order.find_by(id: employee_cvs_params[:order_id])
   end
 
   def arrival_date

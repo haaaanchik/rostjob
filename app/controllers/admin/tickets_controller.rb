@@ -19,7 +19,7 @@ class Admin::TicketsController < Admin::ApplicationController
   end
 
   def paginated_tickets
-    @paginated_tickets ||= tickets.page(params[:page])
+    @paginated_tickets ||= tickets.includes(:user).page(params[:page])
   end
 
   def tickets

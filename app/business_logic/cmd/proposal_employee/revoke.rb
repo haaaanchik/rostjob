@@ -4,13 +4,10 @@ module Cmd
       include Interactor
 
       def call
-        if proposal_employee.to_revoked!
-          Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
-          proposal_employee.incidents.opened.map(&:to_closed!) if proposal_employee.incidents.opened.any?
-          Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv)
-        else
-          context.fail!
-        end
+        context.fail! unless proposal_employee.to_revoked!
+        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+        proposal_employee.incidents.opened.map(&:to_closed!) if proposal_employee.incidents.opened.any?
+        Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv)
       end
 
       private

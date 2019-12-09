@@ -11,17 +11,13 @@
         |Мои анкеты
         ul.list-unstyled.ml-3
           li
-            = link_to profile_employee_cvs_with_state_path(:ready), id: 'employee_cvs_ready', class: "text-body #{'font-weight-bold' if active_item == :ready}" do
+            = link_to profile_employee_cvs_path, id: 'employee_cvs_ready', class: "text-body #{'font-weight-bold' if active_item == :employee_lists}" do
               i.fas.fa-address-card.mr-2
-              |  Готовые
+              |  Список анкет
           li
             = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: "text-body #{'font-weight-bold' if active_item == :sent}" do
               i.fas.fa-briefcase.mr-2
               |  Отправленные
-          li
-            = link_to profile_employee_cvs_with_state_path(:deleted), id: 'employee_cvs_deleted', class: "text-body #{'font-weight-bold' if active_item == :deleted}" do
-              i.fas.fa-trash.mr-2
-              |  Удаленные
       li
         hr.mb-2.mt-2
         i.far.fa-handshake.mr-2

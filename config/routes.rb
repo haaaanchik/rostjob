@@ -154,6 +154,8 @@ Rails.application.routes.draw do
             put :complete
             put :cancel
             put :move
+            put :update_pre_publish
+            put :add_additional_employees
           end
           collection do
             post :add_position
@@ -185,7 +187,11 @@ Rails.application.routes.draw do
       resources :appeals, only: %i[new create]
       resources :incidents, only: %i[show new create]
     end
-    resources :candidates, only: %i[index show]
+    resources :candidates, only: %i[index show] do
+      member do
+        put :revoke
+      end
+    end
     resources :order_templates do
       member do
         post :copy
@@ -208,6 +214,7 @@ Rails.application.routes.draw do
     resources :invoices, only: %i[index show create destroy]
     resources :answered_orders
     get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
+    # FIXME: refactor this asap
     resources :orders, except: %i[create] do
       member do
         put :hide
@@ -245,19 +252,19 @@ Rails.application.routes.draw do
         # put 'candidates/:id/fire', to: 'candidates#fire'
       end
     end
+    # FIXME: refactor this asap
     post :orders, constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#create_pre_publish'
     post :orders, constraints: ->(req) {req.params.key?(:create)}, to: 'orders#create'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:create)}, to: 'orders#update'
 
-    resources :employee_cvs, except: %i[index create] do
+    resources :employee_cvs, except: %i[create] do
       member do
         put :to_ready
         put :to_disput
         put :change_status
       end
     end
-    get 'employee_cvs/state/:employee_cv_state', as: :employee_cvs_with_state, to: 'employee_cvs#index', constraints: { employee_cv_state: /[_A-Za-z]+/ }
     post :employee_cvs, constraints: ->(req) { req.params.key?(:pre_new_full) }, to: 'employee_cvs#pre_new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'

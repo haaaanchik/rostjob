@@ -1,5 +1,8 @@
 class ProposalEmployee < ApplicationRecord
   include AASM
+  include ProposalEmployeeRepository
+
+  delegate :to_close?, :to_open?, to: :order
 
   belongs_to :order
   belongs_to :profile
@@ -13,8 +16,6 @@ class ProposalEmployee < ApplicationRecord
 
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
   ransack_alias :pe_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
-
-  include ProposalEmployeeRepository
 
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
@@ -33,11 +34,11 @@ class ProposalEmployee < ApplicationRecord
       transitions to: :transfer
     end
 
-    event :to_interview do
+    event :to_interview, after: :to_close? do
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
-    event :to_inbox do
+    event :to_inbox, after: :to_open? do
       transitions from: %i[transfer interview reserved disputed], to: :inbox
     end
 

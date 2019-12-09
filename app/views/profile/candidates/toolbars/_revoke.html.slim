@@ -1,4 +1,8 @@
-= link_to revoke_profile_proposal_employee_path(candidate), method: :put, data: { confirm: 'Отозвать анкету?' }, remote: true, class: 'btn-floating btn-green btn-sm', title: 'Отозвать' do
+ruby:
+  url = customer? ? revoke_profile_candidate_path(candidate) :
+                    revoke_profile_proposal_employee_path(candidate)
+
+= link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, remote: true, class: 'btn-floating btn-green btn-sm', title: 'Отозвать' do
   i.fas.fa-undo-alt
 p.card-title.white-text
   | Отозвать

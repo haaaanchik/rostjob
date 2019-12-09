@@ -1,9 +1,0 @@
-td.text-center.align-middle
-  = link_to edit_profile_employee_cv_path(employee_cv), class: 'btn-floating btn-sm green', title: 'Изменить' do
-    i.fas.fa-edit
-td.text-center.align-middle
-  = link_to profile_favorites_path(employee_cv_id: employee_cv), class: 'btn-floating btn-sm blue', data: { type: :script }, title: 'Отправить', remote: true do
-    i.fas.fa-paper-plane
-td.text-center.align-middle
-  = link_to profile_employee_cv_path(employee_cv), class: 'btn-floating btn-sm red', data: { confirm: 'Удалить анкету?' }, title: 'Удалить', method: :delete, remote: true do
-    i.fas.fa-trash

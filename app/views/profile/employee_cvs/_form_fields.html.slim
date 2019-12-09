@@ -1,0 +1,73 @@
+= form_with model: [:profile, employee_cv], class: 'new-employee_cv-form' do |f|
+  .row
+    .ml-0.pl-0.m-auto class="#{col_md}"
+      = f.hidden_field :order_id, value: @order&.id
+      .border.rounded.white.mt-1
+        .modal-body.pt-1
+          - if show_title
+            .row
+              .col
+                h4
+                  | Анкета
+          .row
+            .col-8.text-left.mt-1
+              = f.label :name, 'Полное имя', class: 'active'
+              = f.text_field :name, class: 'form-control'
+                .invalid-feedback
+            .col-4.d-flex.justify-content-center
+              .form-inline
+                .form-check.mr-2
+                  = f.radio_button :gender, 'М', id: 'gender_male', class: 'form-check-input', checked: true
+                  = f.label :gender, 'М', for: 'gender_male', class: 'form-check-label'
+                .form-check
+                  = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
+                  = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
+          .row
+            .col-8.text-left.mt-1
+              = f.label :phone_number, 'Номер телефона', class: 'active'
+              = f.phone_field :phone_number, class: 'form-control'
+              .invalid-feedback
+          .row
+            .col-6
+              .file-field.mt-3
+                a.btn-floating.btn-sm.red.m-0.float-left
+                  i.fas.fa-paperclip[aria-hidden="true"]
+                  = f.file_field :document
+                .file-path-wrapper.m-0.mt-1
+                  = text_field :doc, :path, placeholder: 'Анкета для СБ', class: 'file-path'
+      .border.rounded.white.mt-1
+        .modal-body.pt-1
+          .row
+            .col
+              p.h5.text-center
+                |  Дополнительные сведения
+          .row
+            .col.text-left.mt-2
+              = f.label :experience, 'Опыт работы', class: 'active'
+              = f.text_area :experience, rows: 3, class: 'form-control'
+          .row
+            .col.text-left.mt-2
+              = f.label :education, 'Образование', class: 'active'
+              = f.text_area :education, rows: 3, class: 'form-control'
+          .row
+            .col.text-left.mt-2
+              = f.label :remark, 'Дополнительные сведения', class: 'active'
+              = f.text_area :remark, rows: 3, class: 'form-control'
+
+          - if params[:state] == 'reminder'
+            .row
+              .col-4
+                .text-left.mt-2
+                  = f.label :reminder, 'Дата и Время', class: 'active'
+                  = f.datetime_field :reminder, class: 'form-control'
+            .row
+              .col
+                .text-left.mt-2
+                  = f.label :comemnt, 'Комментарий', class: 'active'
+                  = f.text_area :comment, class: 'form-control'
+
+  .align-items-center.text-center
+    - if @order
+      = f.submit 'Отправить', class: 'btn btn-success employee-cv-submit-button', name: :save_as_sent
+    - else
+      = f.submit 'Сохранить', class: 'btn btn-success employee-cv-submit-button', name: :save

@@ -1,5 +1,6 @@
 class EmployeeCv < ApplicationRecord
   include AASM
+  include EmployeeCvRepository
 
   has_many :proposal_employees
   has_many :orders, through: :proposal_employees
@@ -8,13 +9,9 @@ class EmployeeCv < ApplicationRecord
   belongs_to :order, optional: true
   belongs_to :profile, optional: true
 
-  include EmployeeCvRepository
-
-  strip_attributes only: :name
-
   validates :name, presence: true
   validates :phone_number, phone: true
-  validates :contractor_terms_of_service, acceptance: true
+  # validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true
@@ -45,6 +42,8 @@ class EmployeeCv < ApplicationRecord
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
   end
+
+  strip_attributes only: :name
 
   aasm column: :state, skip_validation_on_save: true,
        no_direct_assignment: false, whiny_transitions: false do
@@ -142,34 +141,15 @@ class EmployeeCv < ApplicationRecord
 
   def self.customer_menu_items
     %w[inbox hired disputed deleted]
-    # {
-    #   inbox: %w[applyed],
-    #   hired: %w[hired],
-    #   disputed: %w[fired],
-    #   deleted: %w[deleted]
-    # }
   end
 
   def self.contractor_menu_items
     EmployeeCv.aasm.states.map(&:name)
-    # {
-    #   all: %w[],
-    #   draft: %w[draft],
-    #   ready: %w[ready],
-    #   sent: %w[applyed viewed hired],
-    #   disputed: %w[disputed fired],
-    #   deleted: %w[deleted]
-    # }
   end
-
-  # def self.contractor_menu_item_by_state(state)
-  #   self.contractor_menu_items.find { |_key, values| values.include? state }.first
-  # end
 
   def self.customer_menu_item_by_state(state)
     self.customer_menu_items.find { |_key, values| values.include? state }.first
   end
-
 
   ransacker :id do
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")

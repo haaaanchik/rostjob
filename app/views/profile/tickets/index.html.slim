@@ -5,8 +5,9 @@
     tr
       th №
       th Тип
+      th Имя
       th Дата
       th Тема
       th Статус
-    = render partial: 'ticket', collection: @paginated_tickets, as: :ticket
+    = render partial: 'ticket', collection: @paginated_tickets.decorate, as: :ticket
   = paginate @paginated_tickets

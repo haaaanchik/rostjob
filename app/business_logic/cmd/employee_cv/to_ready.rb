@@ -4,7 +4,9 @@ module Cmd
       include Interactor
 
       def call
+        return reset_reminder if draggable
         context.fail! unless employee_cv.to_ready!
+        reset_reminder
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
@@ -16,6 +18,14 @@ module Cmd
 
       def current_user
         employee_cv.profile.user
+      end
+
+      def draggable
+        context.draggable
+      end
+
+      def reset_reminder
+        employee_cv.update_attributes(reminder: nil, comment: nil)
       end
 
       def logger_params

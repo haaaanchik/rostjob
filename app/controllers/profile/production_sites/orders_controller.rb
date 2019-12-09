@@ -1,9 +1,10 @@
 class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
   expose :order_templates,    -> { production_site.order_templates.order(id: :desc) }
   expose :production_sites,   -> { current_profile.production_sites }
+  expose :waiting_pay_orders, -> { fetch_waiting_pay_orders }
   expose :completed_orders,   -> { fetch_completed_orders }
   expose :moderation_orders,  -> { fetch_moderation_orders }
-  expose :in_progress_orders, -> { fetch_in_progress_orders }
+  expose :published_orders,   -> { fetch_published_orders }
 
   def index
     @state = state
@@ -72,7 +73,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   def update_pre_publish
     result = Cmd::Order::Update.call(order: order, params: params_with_price)
     if result.success?
-      redirect_to pre_publish_profile_order_path(result.order)
+      redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     else
       render json: { validate: true, data: errors_data(context.order) }, status: 422
     end
@@ -80,7 +81,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def pre_publish
     Cmd::Order::WaitForPayment.call(order: order)
-    render 'pre_publish', locals: { order: order, balance: order.profile.balance.amount }
+    render 'pre_publish', locals: { order: order.decorate, balance: order.profile.balance.amount }
   end
 
   def publish
@@ -122,6 +123,11 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     else
       render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
+  end
+
+  def add_additional_employees
+    Cmd::Order::AddToNumberOfEmployees.call(order: order)
+    redirect_to profile_production_site_order_path(production_site, order)
   end
 
   private
@@ -169,7 +175,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
                                     :skill, :accepted, :district, :experience, :advertising,
                                     :visibility, :state, :number_of_employees, :document,
                                     :schedule, :work_period, :place_of_work, :adv_text,
-                                    other_info: {}, contact_person: {})
+                                    :number_additional_employees, other_info: {}, contact_person: {})
   end
 
   def balance
@@ -180,16 +186,20 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     @order ||= orders.find(params[:id])
   end
 
+  def fetch_waiting_pay_orders
+    orders.waiting_for_payment
+  end
+
   def fetch_completed_orders
-    orders.where(state: completed_states)
+    orders.completed
   end
 
   def fetch_moderation_orders
-    orders.where(state: moderation_states)
+    orders.moderation
   end
 
-  def fetch_in_progress_orders
-    orders.where.not(state: completed_states + moderation_states).order(advertising: :desc)
+  def fetch_published_orders
+    orders.published.order(advertising: :desc)
   end
 
   def orders
@@ -201,14 +211,6 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def local_prefixes
     [controller_path]
-  end
-
-  def completed_states
-    %w[completed draft]
-  end
-
-  def moderation_states
-    %w[moderation rejected]
   end
 
   def description

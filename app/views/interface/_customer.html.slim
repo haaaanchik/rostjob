@@ -1,17 +1,19 @@
-header
-  nav.navbar.fixed-top.navbar-dark.mdb-color.darken-4
-    .container-fluid
-      = render partial: 'interface/left_menu/customer_md', locals: { active_item: @active_item }
-      = link_to root_path, class: 'navbar-brand' do
-        = image_tag('/img/galka.png', height: '30px')
-        - if Rails.env.staging?
-          span.counter.red
-            b stage
-      = render partial: 'interface/navbar'
-  #home
-main
-  #modal_container
-  .container-fluid#right_window
-    .row
-      = render partial: 'interface/left_menu/customer', locals: { active_item: @active_item }
-      = yield
+ul.side-bar-ul
+  li.nav-item
+    = link_to root_path,
+              title: 'Главная',
+              class: "nav-link #{'nav-link__active' if active_item == :root}" do
+      i.fas.fa-home.svg-sidebar
+      p.icon-text Главная
+  li.nav-item
+    = link_to profile_production_sites_path,
+              title: 'Заявки',
+              class: "nav-link #{'nav-link__active' if active_item == :production_sites}" do
+      i.fas.fa-city.svg-sidebar
+      p.icon-text Заявки
+  li.nav-item
+    = link_to profile_candidates_path,
+              title: 'Анкеты',
+              class: "nav-link #{'nav-link__active' if active_item == :candidates}" do
+      i.fas.fa-address-card.svg-sidebar
+      p.icon-text Анкеты

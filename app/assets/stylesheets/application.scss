@@ -9,6 +9,7 @@
 @import "production_sites";
 @import "profile/orders";
 @import "profile/employee_cvs";
+@import "profile/production_sites";
 @import "profile/orders/proposals";
 @import "profile/invoices";
 @import "admin/positions";
@@ -18,6 +19,8 @@
 @import "welcome";
 @import "style";
 @import "contractor";
+@import "navbar";
+@import "custom_scroll";
 @import "style-lenta";
 @import "profile/order_templates";
 @import "confirm_modal";
@@ -38,6 +41,61 @@ body,
 header,
 .jarallax {
   height: 50px;
+}
+
+.content-wrapper{
+  background-color: white;
+  min-height: 471px;
+  padding-top: 65px;
+  max-height: 100vh;
+}
+
+#main_row{
+  overflow: auto;
+  /*width: 80%;*/
+  //width: calc(100% - 313px);
+  height: 91.5vh;
+  padding-left: 4rem;
+}
+
+@media (max-width: 1400px) {
+  #main_row:not(*:root) {
+    height: 89vh;
+  }
+  .custom-column:not(*:root) {
+    height: 88.4vh;
+  }
+}
+
+@media (max-width: 900px) {
+  #add {
+    display: none;
+  }
+  #main_row {
+    width: calc(100% - 300px);
+  }
+}
+
+@media (max-width: 600px) {
+  #main_row {
+    width: 100%;
+  }
+  .chosen {
+    display: none;
+  }
+}
+
+@media (max-width: 400px) {
+  #main_row {
+    padding-left: 0;
+  }
+  .custom-side-nav {
+    display: none;
+  }
+  .mobile-menu {
+    width: 100%;
+    margin-left: -16px;
+  }
 }
 
 .question-help {

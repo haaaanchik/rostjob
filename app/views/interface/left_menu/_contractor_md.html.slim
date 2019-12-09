@@ -8,15 +8,12 @@
       = current_user.full_name
     .dropdown-divider
     h6.dropdown-header Мои анкеты
-    = link_to profile_employee_cvs_with_state_path(:ready), id: 'employee_cvs_ready', class: "dropdown-item #{'active' if active_item == :ready}" do
+    = link_to profile_employee_cvs_path, id: 'employee_cvs_ready', class: "dropdown-item #{'active' if active_item == :employee_lists}" do
       i.fas.fa-address-card.mr-2
-      |  Готовые
+      |  Список анкет
     = link_to profile_proposal_employees_path, id: 'employee_cvs_sent', class: "dropdown-item #{'active' if active_item == :sent}" do
       i.fas.fa-briefcase.mr-2
       |  Отправленные
-    = link_to profile_employee_cvs_with_state_path(:deleted), id: 'employee_cvs_deleted', class: "dropdown-item #{'active' if active_item == :deleted}" do
-      i.fas.fa-trash.mr-2
-      |  Удаленные
     .dropdown-divider
     h6.dropdown-header Заявки
     .dropdown-divider
