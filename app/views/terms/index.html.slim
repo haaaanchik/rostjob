@@ -1,0 +1,21 @@
+.grey.lighten-4.main-workspace.scrollbar-near-moon.thin
+  .row.ml-0.mr-0.scrollbar-near-moon.thin
+    .col-md-10.offset-md-1.white
+      .border#privacy_policy
+        h5.p-2.text-center
+          | Оферта
+          br
+          | на заключение договора на оказание услуг по поиску и подбору персонала
+          br
+          |  посредством веб-сервиса «Best HR»
+        = render current_profile.profile_type.to_s
+        - unless current_profile.user.terms_of_service
+          = form_for @terms,
+                  url: terms_accept_path,
+                  html: { class: 'mt-5 text-center' } do |f|
+            .form-group.mt-4
+              = f.check_box :accepted, checked: current_user.terms_of_service, class: 'form-check-input'
+              = f.label :accepted, class: 'from-check-label blue-text' do
+                | Принять условия и положения
+            .form-group
+              = f.submit 'Отправить', class: 'btn btn-primary'

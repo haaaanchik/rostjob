@@ -301,6 +301,9 @@ Rails.application.routes.draw do
   resources :recruiters, only: %i[index show]
   resources :support_messages, only: %i[new create]
 
+  get :terms,          to: 'terms#index'
+  post 'terms/accept', to: 'terms#accept'
+
   mount ActionCable.server => '/cable'
   root to: 'welcome#index'
 end

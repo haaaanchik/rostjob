@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # skip_before_action :authenticate_user!
   skip_before_action :auth_user
+  before_action :configure_update_params, only: :update
 
   # GET /resource/sign_up
   def new
@@ -55,15 +56,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name])
+  end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
@@ -76,8 +71,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
            status: 401
   end
 
+  def after_update_path_for(resource)
+    resource.update(password_changed_at: DateTime.now) if resource.password_changed_at.nil?
+    sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+  end
+
   def user_params
-    params.require(:user).permit(:password_confirmation, :password,
-                                 :full_name, :email)
+    params.require(:user).permit(:email)
+  end
+
+  def update_resource(resource, params)
+    if resource.password_changed_at.nil?
+      resource.update_without_curr_password(params)
+    else
+      resource.update_with_password(params)
+    end
   end
 end

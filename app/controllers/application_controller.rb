@@ -7,6 +7,7 @@ class ApplicationController < BaseController
   # before_action :authenticate_user!
   before_action :left_menu_items
   before_action :auth_user
+  before_action :ensure_create_order, if: :user_signed_in?
   before_action :create_profile, if: :user_signed_in_without_profile
   before_action :opened_tickets_count, if: :user_signed_in?
 
@@ -22,6 +23,33 @@ class ApplicationController < BaseController
 
   def auth_user
     redirect_to root_path unless user_signed_in?
+  end
+
+  def ensure_create_order
+    return if session_destroy_action?
+    ensure_terms_acceptance &&
+      ensure_password_changed
+  end
+
+  def ensure_terms_acceptance
+    redirect_to(terms_path) if !current_user.terms_of_service && params[:controller] != 'terms'
+    current_user.terms_of_service
+  end
+
+  def ensure_password_changed
+    if current_user.password_changed_at.nil? && not_password_edit_action?
+      flash[:alert] = 'Пожалуйста установите имя и пароль'
+      redirect_to edit_user_registration_path
+    end
+    current_user.password_changed_at
+  end
+
+  def session_destroy_action?
+    params[:controller] == 'users/sessions' && action_name == 'destroy'
+  end
+
+  def not_password_edit_action?
+    !(params[:controller] == 'users/registrations' && %w(edit update).include?(params[:action]))
   end
 
   def error_msg_handler(object)

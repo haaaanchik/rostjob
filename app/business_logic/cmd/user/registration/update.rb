@@ -8,7 +8,6 @@ module Cmd
           user_params.each do |k, v|
             user.update_attribute(k, v)
           end
-          context.failed! unless user.save
           Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
         end
 

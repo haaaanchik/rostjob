@@ -1,42 +1,46 @@
-h2
-  | Edit 
-  = resource_name.to_s.humanize
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-    div
-      | Currently waiting confirmation for: 
-      = resource.unconfirmed_email
-  .field
-    = f.label :password
-    i
-      | (leave blank if you don't want to change it)
-    br
-    = f.password_field :password, autocomplete: "off"
-    - if @minimum_password_length
-      br
-      em
-        = @minimum_password_length
-        |  characters minimum
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .field
-    = f.label :current_password
-    i
-      | (we need your current password to confirm your changes)
-    br
-    = f.password_field :current_password, autocomplete: "off"
-  .actions
-    = f.submit "Update"
-h3
-  | Cancel my account
-p
-  | Unhappy? 
-  = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "Back", :back
+.container
+  h2.text-center
+    | Редактировать Профиль
+  hr
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+    .row
+      .col-md-3
+        .card.card-cascade
+          .view.view-cascade.overlay
+            = image_tag '/img/no-avatar.jpg', class: 'img-fluid'
+      .col-md-9.personal-info
+        = devise_error_messages!
+        .form-group
+          .row
+            .col-lg-3.control-label
+              = f.label :full_name
+            .col-lg-8
+              = f.text_field :full_name, class: 'form-control'
+
+        .form-group
+          .row
+            .col-lg-3.control-label
+              = f.label :password
+            .col-lg-8
+              = f.password_field :password, class: 'form-control', autocomplete: 'off'
+              em
+                | минимум 8 символов
+        .form-group
+          .row
+            .col-lg-3.control-label
+              = f.label :password_confirmation
+            .col-lg-8
+              = f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off'
+        - unless f.object.password_changed_at.nil?
+          .form-group
+            .row
+              .col-lg-3.control-label
+                = f.label :current_password
+              .col-lg-8
+                = f.password_field :current_password, class: 'form-control', autocomplete: 'off'
+        .form-group
+          .row
+            .col-lg-3.control-label
+              label
+            .col-lg-3
+              = f.submit 'Сохранить', class: 'btn btn-primary'

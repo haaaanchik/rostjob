@@ -18,7 +18,8 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   def show
     user = User.find_by_confirmation_token params[:confirmation_token]
     user.confirm
-    redirect_to root_path, notice: 'Электронная почта успешно подтверждена!'
+    sign_in(user)
+    redirect_to edit_user_registration_path, notice: 'Электронная почта успешно подтверждена!'
   end
 
   # protected
