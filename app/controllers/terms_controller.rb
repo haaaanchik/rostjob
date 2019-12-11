@@ -9,6 +9,7 @@ class TermsController < ApplicationController
     @terms = Terms.new(terms_params)
 
     if @terms.valid? && current_user.accept_terms
+      set_cookies_params(current_user)
       flash[:alert] = nil
       flash[:notice] = 'Условия оферты приняты!'
       redirect_to edit_user_registration_path

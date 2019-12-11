@@ -40,12 +40,13 @@
           .card-header.blue-title
             h3.card-title.mb-0.text-white Шаблоны
             .card-tools
-              button.btn-tool.mybtn data-card-widget="collapse" type="button"
+              button.btn-tool.mybtn#order-templates data-card-widget="collapse" type="button"
                 i.fas.fa-plus
           .card-body.js-table style="display: none;"
             .card-header.without_bc.elem_in_list
               = link_to new_profile_production_site_order_template_path(@production_site),
                         class: 'btn btn-primary btn-sm m-auto',
+                        id: 'new-o_template',
                         remote: true do
                 i.fa.fa-plus.mr-2
                 | Создать шаблон

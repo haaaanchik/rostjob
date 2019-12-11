@@ -24,6 +24,7 @@ class Users::SessionsController < Devise::SessionsController
     if user&.valid_password?(usr[:password])
       if user.confirmed?
         sign_in :user, user
+        set_cookies_params(user)
         redirect_to root_path
       else
         render js: "toastr.error('Необходимо подтвердить адрес электронной почты! Если письма долго нет, проверьте папку СПАМ вашей почты.', 'Неудача!')",
@@ -36,9 +37,12 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    unless user_signed_in?
+      delete_cookies_params
+    end
+  end
 
   protected
 

@@ -1,3 +1,39 @@
+class Users
+  @init: ->
+    @enjoyHintProccess()
+
+  @enjoyHintProccess: ->
+    enjoyhint_instance = new EnjoyHint({})
+    skipButton = { text: 'Понял!' }
+    locPath = location.pathname.match(/\d/)
+    id = if locPath == null then locPath else locPath[0]
+    return if $.cookie('profile_type') == 'contractor' or $.cookie('profile_type') == null or
+      $.cookie('terms_of_service') == false or $.cookie('password_changed_at') == null or
+      $.cookie('updated_by_self_at') == null or $.cookie('first_order_template_created') == true
+
+    if location.pathname == '/profile/production_sites'
+      script_steps = [{ '#main_row #new-production-site': 'Кнопка создания новых площадок', 'skipButton': skipButton }]
+      enjoyHintRun(enjoyhint_instance, script_steps)
+      return
+
+    if location.pathname == '/profile/production_sites/' + id + '/orders'
+      script_steps = [{ 'click #order-templates': 'Пожалуйста кликните по кнопке', 'skipButton': skipButton },
+        { 'click #new-o_template': 'Кнопка создания нового шаблона', 'skipButton': skipButton } ]
+      enjoyHintRun(enjoyhint_instance, script_steps)
+      return
+
+    script_steps = [{ '#main_row #production-site-list': 'Страница площадок', 'skipButton': skipButton }]
+    enjoyHintRun(enjoyhint_instance, script_steps)
+
+  enjoyHintRun = (enjoyhint_instance, script_steps) ->
+    enjoyhint_script_steps = script_steps
+    enjoyhint_instance.set enjoyhint_script_steps
+    enjoyhint_instance.run()
+
+
+$(document).on 'turbolinks:load', ->
+  Users.init()
+
 $ ->
   $('.clients').on('click', (event) ->
     element = event.target

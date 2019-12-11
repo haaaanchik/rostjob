@@ -8,6 +8,7 @@ ul.side-bar-ul
   li.nav-item
     = link_to profile_production_sites_path,
               title: 'Заявки',
+              id: 'production-site-list',
               class: "nav-link #{'nav-link__active' if active_item == :production_sites}" do
       i.fas.fa-city.svg-sidebar
       p.icon-text Заявки

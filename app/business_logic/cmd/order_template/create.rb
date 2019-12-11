@@ -10,6 +10,7 @@ module Cmd
         @order_template.errors.add(:position_search, 'Выберите профессию') unless position
         context.order_template = @order_template
         context.fail! unless @order_template.persisted?
+        current_user.udpate_attribute(:first_order_template_created, true) unless current_user.first_order_template_created
         # Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

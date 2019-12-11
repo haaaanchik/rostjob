@@ -1,5 +1,5 @@
 - errors = @user.errors.messages
-- p errors
+
 = form_for @user, method: :post, url: user_registration_path, html: {class: 'text-center p-3 mb-2'} do |f|
   .md-form.mb-5
     = f.label :email, t("views.modals.signin.email")

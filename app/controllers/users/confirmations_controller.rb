@@ -19,6 +19,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     user = User.find_by_confirmation_token params[:confirmation_token]
     user.confirm
     sign_in(user)
+    set_cookies_params(user)
     redirect_to edit_user_registration_path, notice: 'Электронная почта успешно подтверждена!'
   end
 

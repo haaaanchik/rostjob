@@ -28,7 +28,8 @@ class ApplicationController < BaseController
   def ensure_create_order
     return if session_destroy_action?
     ensure_terms_acceptance &&
-      ensure_password_changed
+      ensure_password_changed &&
+      ensure_profile_changed
   end
 
   def ensure_terms_acceptance
@@ -44,12 +45,24 @@ class ApplicationController < BaseController
     current_user.password_changed_at
   end
 
+  def ensure_profile_changed
+    if current_profile.customer? && current_profile.updated_by_self_at.nil? && not_profile_edit_action?
+      flash[:alert] = 'Пожалуйста заполните следующую информацию'
+      redirect_to edit_profile_path
+    end
+  end
+
   def session_destroy_action?
     params[:controller] == 'users/sessions' && action_name == 'destroy'
   end
 
   def not_password_edit_action?
     !(params[:controller] == 'users/registrations' && %w(edit update).include?(params[:action]))
+  end
+
+  def not_profile_edit_action?
+    p params[:action]
+    !(params[:controller] == 'profiles' && %w(edit update).include?(params[:action]))
   end
 
   def error_msg_handler(object)
