@@ -83,7 +83,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     if resource.password_changed_at.nil?
       resource.update_without_curr_password(params)
-      set_cookies_params(resource)
       resource
     else
       resource.update_with_password(params)

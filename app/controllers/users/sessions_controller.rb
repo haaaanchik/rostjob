@@ -24,7 +24,6 @@ class Users::SessionsController < Devise::SessionsController
     if user&.valid_password?(usr[:password])
       if user.confirmed?
         sign_in :user, user
-        set_cookies_params(user)
         redirect_to root_path
       else
         render js: "toastr.error('Необходимо подтвердить адрес электронной почты! Если письма долго нет, проверьте папку СПАМ вашей почты.', 'Неудача!')",

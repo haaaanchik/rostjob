@@ -36,7 +36,6 @@ class ProfilesController < ApplicationController
     profile = result.profile
     if result.success?
       current_profile.update_attribute(:updated_by_self_at, DateTime.now)
-      set_cookies_params(current_profile.user)
       redirect_to root_path
     else
       render json: { validate: true, data: errors_data(profile) }, status: 422

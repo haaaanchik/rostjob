@@ -8,7 +8,9 @@
       i.fas.fa-pen-alt
 
     .card-body
-      h3.card-title.white-text = link_to production_site.title, profile_production_site_orders_path(production_site)
+      h3.card-title.white-text = link_to production_site.title,
+                                         profile_production_site_orders_path(production_site),
+                                         id: "#{'first_pr_site' if production_site_counter.zero? }"
       p= production_site.city
       hr
 

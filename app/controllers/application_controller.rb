@@ -7,9 +7,10 @@ class ApplicationController < BaseController
   # before_action :authenticate_user!
   before_action :left_menu_items
   before_action :auth_user
-  before_action :ensure_create_order, if: :user_signed_in?
+  before_action :ensure_cr_order_and_activate, if: :user_signed_in?
   before_action :create_profile, if: :user_signed_in_without_profile
   before_action :opened_tickets_count, if: :user_signed_in?
+  before_action :set_user_info_to_cookies
 
   def create_profile
     redirect_to new_profile_path
@@ -25,7 +26,11 @@ class ApplicationController < BaseController
     redirect_to root_path unless user_signed_in?
   end
 
-  def ensure_create_order
+  def set_user_info_to_cookies
+    user_signed_in? ? set_cookies_params(current_user) : delete_cookies_params
+  end
+
+  def ensure_cr_order_and_activate
     return if session_destroy_action?
     ensure_terms_acceptance &&
       ensure_password_changed &&
@@ -61,7 +66,6 @@ class ApplicationController < BaseController
   end
 
   def not_profile_edit_action?
-    p params[:action]
     !(params[:controller] == 'profiles' && %w(edit update).include?(params[:action]))
   end
 
