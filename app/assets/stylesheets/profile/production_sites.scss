@@ -12,9 +12,19 @@
     box-shadow: none;
   }
 
+  .main-workspace {
+    overflow-x: auto;
+    width: 100%;
+    max-height: calc(100vh - 65px);
+  }
+
+  .main-workspace .row {
+    display: flex;
+    flex-wrap: nowrap;
+
+  }
+
   .card-header {
-    min-height: 45px;
-    padding: 0.2rem;
     background-color: #28a745;
   }
 
@@ -28,8 +38,20 @@
     top: 10px;
   }
 
+  .card-header {
+    min-height: 45px;
+    padding: 0.2rem;
+  }
+
+  .card-header p {
+    margin-bottom: 0;
+  }
+
   .card-title {
     font-size: 1.25rem;
+  }
+
+  .card-title {
     width: 90%;
   }
 
@@ -87,28 +109,17 @@
     display: flex;
     align-items: center;
     padding: 0 1%;
-
-    .card-title {
-      cursor: pointer;
-    }
   }
 
-  .content {
-    &__header {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      margin-top: 10px;
-    }
+  .content__header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10px;
+  }
 
-    &__title {
-      text-align: left;
-      margin-bottom: 0;
-    }
-
-    //.content__title {
-    //  margin-bottom: 0;
-    //}
+  .content__title {
+    text-align: left;
   }
 
   .content__town p, .content__email p, .content__phone_number p {
@@ -129,6 +140,10 @@
     text-align: left;
   }
 
+  .content__title {
+    margin-bottom: 0;
+  }
+
   .card-icons {
     width: auto;
     padding-right: 10px;
@@ -143,8 +158,15 @@
 
     span {
       margin-right: 2px;
-      color: black;
     }
+  }
+
+  .elem_in_list .card-title {
+    cursor: pointer;
+  }
+
+  .card-icons-link span {
+    color: black;
   }
 
   .blue-title {
@@ -155,7 +177,7 @@
     background-color: #d0c71b !important;
   }
 
-  .orange-title {
+  .orange-title{
     background-color: #FF6840 !important;
   }
 
@@ -163,7 +185,7 @@
     background-color: #22884F !important;
   }
 
-  .gray-title {
+  .gray-title{
     background-color: gray;
   }
 
@@ -192,14 +214,24 @@
     background-color: transparent;
     border: none;
     color: white;
+  }
 
-    &:hover{
-      cursor: pointer;
-    }
+  .mybtn:hover{
+    cursor: pointer;
+  }
+
+  #main_row{
+    padding-left: 0.5rem;
   }
 
   .card-tools.town{
     top: 15px;
+  }
+
+  /* Chrome */
+
+  .flex-center:not(*:root) {
+    height: auto !important;
   }
 
   @media (max-width: 1000px) {
@@ -211,14 +243,12 @@
       width: 100%;
     }
 
-    .content {
-      &__title {
-        font-size: 1.5rem;
-      }
+    .content__title {
+      font-size: 1.5rem;
+    }
 
-      &__header-left {
-        width: 50%;
-      }
+    .content__header-left {
+      width: 50%;
     }
   }
 
@@ -255,10 +285,9 @@
       display: none;
     }
   }
-}
+  /* Chrome */
 
-/* Chrome */
-
-.flex-center:not(*:root) {
-  height: auto !important;
+  .flex-center:not(*:root) {
+    height: auto !important;
+  }
 }

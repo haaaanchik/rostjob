@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def body_controller
+    params[:controller].split('/').push(params[:action]).join('_')
+    #controller.class.to_s.gsub('::', '').gsub('Controller', '')
+  end
+
   def question_help(title)
     content_tag :span, '', class: 'question-help', 'data-toggle': 'tooltip', title: title
   end

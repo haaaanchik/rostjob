@@ -13,7 +13,7 @@ class Users
 
     if location.pathname == '/profile/production_sites'
       productionSiteExist = $('#first_pr_site').length
-      $selector = if productionSiteExist then '#main_row #first_pr_site' else '#main_row #new-production-site'
+      $selector = if productionSiteExist then '#right_window #first_pr_site' else '#right_window #new-production-site'
       script_steps = [{ "#{$selector}": 'Кнопка создания новых площадок', 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
       return
@@ -25,7 +25,7 @@ class Users
       return
 
     if $('#production-site-list').length
-      script_steps = [{ '#main_row #production-site-list': 'Страница площадок', 'skipButton': skipButton }]
+      script_steps = [{ '#right_window #production-site-list': 'Страница площадок', 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
 
   enjoyHintRun = (enjoyhint_instance, script_steps) ->

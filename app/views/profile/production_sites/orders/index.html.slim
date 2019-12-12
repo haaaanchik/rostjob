@@ -1,195 +1,196 @@
-.grey.lighten-4.text-center.main-workspace.scrollbar-near-moon.thin
-  .row.ml-0.mr-0.scrollbar-near-moon.thin.production-site-show
-    .card.card-primary.working_platform.scrollbar-near-moon.thin.p-1
-      .card-header style="background-color: white"
-        .input-group.input-group-sm
-          input.form-control.form-control-navbar aria-label="Search" placeholder="Search" type="search" /
-          .input-group-append
-            button.btn.btn-navbar type="submit"
-              i.fas.fa-search
-      .card-body
-        - production_sites.each do |production_site|
-          .custom-list.card.mb-2.card-success.card-list
-            .card-header
-              h2.card-title.mb-0.text-left.text-white = production_site.title
-              .card-tools.town
-                span.number_of_people_span
-                  | #{ production_site.city }
-            .card-body
-              .card-scroll-window.js-table
-                - production_site.orders.includes(:proposal_employees).published.each do |p_order|
-                  .card-header.without_bc.elem_in_list
-                    h3.card-title.mb-0
-                      = link_to profile_production_site_order_path(@production_site, p_order),
-                                class: 'color-black' do
-                        | №#{p_order.id}
-                        |  #{p_order.title}
-                    .card-icons
-                      .card-icons-link
-                        span = p_order.proposal_employees.inbox.count
-                        i.far.color-black.fa-envelope
-                      .card-icons-link
-                        span = p_order.number_free_places
-                        i.fas.color-black.fa-users
-                      .card-icons-link
-                        span = p_order.without_inbox_candidate_count
-                        i.far.color-black.fa-bookmark
-    .custom-container
-      .tables
-        .card.card-primary.collapsed-card.mb-3
-          .card-header.blue-title
-            h3.card-title.mb-0.text-white Шаблоны
-            .card-tools
-              button.btn-tool.mybtn#order-templates data-card-widget="collapse" type="button"
-                i.fas.fa-plus
-          .card-body.js-table style="display: none;"
-            .card-header.without_bc.elem_in_list
-              = link_to new_profile_production_site_order_template_path(@production_site),
-                        class: 'btn btn-primary btn-sm m-auto',
-                        id: 'new-o_template',
-                        remote: true do
-                i.fa.fa-plus.mr-2
-                | Создать шаблон
-            - order_templates.each do |order_t|
+.production-site-show
+  .grey.lighten-4.text-center.main-workspace.scrollbar-near-moon.thin
+    .row.ml-0.mr-0#main_row
+      .card.card-primary.working_platform.p-1.scrollbar-near-moon.thin
+        .card-header style="background-color: white"
+          .input-group.input-group-sm
+            input.form-control.form-control-navbar aria-label="Search" placeholder="Search" type="search" /
+            .input-group-append
+              button.btn.btn-navbar type="submit"
+                i.fas.fa-search
+        .card-body
+          - production_sites.each do |production_site|
+            .custom-list.card.mb-2.card-success.card-list
+              .card-header
+                h2.card-title.mb-0.text-left.text-white = production_site.title
+                .card-tools.town
+                  span.number_of_people_span
+                    | #{ production_site.city }
+              .card-body
+                .card-scroll-window.js-table
+                  - production_site.orders.includes(:proposal_employees).published.each do |p_order|
+                    .card-header.without_bc.elem_in_list
+                      h3.card-title.mb-0
+                        = link_to profile_production_site_order_path(@production_site, p_order),
+                                  class: 'color-black' do
+                          | №#{p_order.id}
+                          |  #{p_order.title}
+                      .card-icons
+                        .card-icons-link
+                          span = p_order.proposal_employees.inbox.count
+                          i.far.color-black.fa-envelope
+                        .card-icons-link
+                          span = p_order.number_free_places
+                          i.fas.color-black.fa-users
+                        .card-icons-link
+                          span = p_order.without_inbox_candidate_count
+                          i.far.color-black.fa-bookmark
+      .custom-container
+        .tables
+          .card.card-primary.collapsed-card.mb-3
+            .card-header.blue-title
+              h3.card-title.mb-0.text-white Шаблоны
+              .card-tools
+                button.btn-tool.mybtn#order-templates data-card-widget="collapse" type="button"
+                  i.fas.fa-plus
+            .card-body.js-table style="display: none;"
               .card-header.without_bc.elem_in_list
-                h3.card-title.mb-0
-                  = link_to edit_profile_production_site_order_template_path(@production_site, order_t),
-                            class: 'color-black',
-                            remote: true do
-                    | №#{order_t.id}
-                    |  #{order_t.title}
+                = link_to new_profile_production_site_order_template_path(@production_site),
+                          class: 'btn btn-primary btn-sm m-auto',
+                          id: 'new-o_template',
+                          remote: true do
+                  i.fa.fa-plus.mr-2
+                  | Создать шаблон
+              - order_templates.each do |order_t|
+                .card-header.without_bc.elem_in_list
+                  h3.card-title.mb-0
+                    = link_to edit_profile_production_site_order_template_path(@production_site, order_t),
+                              class: 'color-black',
+                              remote: true do
+                      | №#{order_t.id}
+                      |  #{order_t.title}
 
-        .card.card-primary.collapsed-card.mb-3
-          .card-header.yellow-title
-            h3.card-title.mb-0.text-white Ожидающие оплаты
-            .card-tools
-              button.btn-tool.mybtn data-card-widget="collapse" type="button"
-                i.fas.fa-plus
+          .card.card-primary.collapsed-card.mb-3
+            .card-header.yellow-title
+              h3.card-title.mb-0.text-white Ожидающие оплаты
+              .card-tools
+                button.btn-tool.mybtn data-card-widget="collapse" type="button"
+                  i.fas.fa-plus
 
-          .card-body.js-table style="display: none;"
-            - waiting_pay_orders.each do |order|
-              .card-header.without_bc.elem_in_list
-                h3.card-title.mb-0
-                  = link_to profile_production_site_order_path(@production_site, order), class: 'color-black' do
-                    | №#{order.id}
-                    |  #{order.title}
-                .card-icons
-                  .card-icons-link
-                    span = order.proposal_employees.inbox.count
-                    i.far.color-black.fa-envelope
-                  .card-icons-link
-                    span = order.number_free_places
-                    i.fas.color-black.fa-users
-                  .card-icons-link
-                    span = order.without_inbox_candidate_count
-                    i.far.color-black.fa-bookmark
+            .card-body.js-table style="display: none;"
+              - waiting_pay_orders.each do |order|
+                .card-header.without_bc.elem_in_list
+                  h3.card-title.mb-0
+                    = link_to profile_production_site_order_path(@production_site, order), class: 'color-black' do
+                      | №#{order.id}
+                      |  #{order.title}
+                  .card-icons
+                    .card-icons-link
+                      span = order.proposal_employees.inbox.count
+                      i.far.color-black.fa-envelope
+                    .card-icons-link
+                      span = order.number_free_places
+                      i.fas.color-black.fa-users
+                    .card-icons-link
+                      span = order.without_inbox_candidate_count
+                      i.far.color-black.fa-bookmark
 
-        .card.card-primary.collapsed-card.mb-3
-          .card-header.orange-title
-            h3.card-title.mb-0.text-white На модерации
-            .card-tools
-              button.btn-tool.mybtn data-card-widget="collapse" type="button"
-                i.fas.fa-plus
+          .card.card-primary.collapsed-card.mb-3
+            .card-header.orange-title
+              h3.card-title.mb-0.text-white На модерации
+              .card-tools
+                button.btn-tool.mybtn data-card-widget="collapse" type="button"
+                  i.fas.fa-plus
 
-          .card-body.js-table style="display: none;"
-            - moderation_orders.each do |order|
-              .card-header.without_bc.elem_in_list
-                h3.card-title.mb-0
-                  = link_to profile_production_site_order_path(@production_site, order),
-                            class: 'color-black' do
-                    | №#{order.id}
-                    |  #{order.title}
-                .card-icons
-                  .card-icons-link
-                    span = order.proposal_employees.inbox.count
-                    i.far.color-black.fa-envelope
-                  .card-icons-link
-                    span = order.number_free_places
-                    i.fas.color-black.fa-users
-                  .card-icons-link
-                    span = order.without_inbox_candidate_count
-                    i.far.color-black.fa-bookmark
+            .card-body.js-table style="display: none;"
+              - moderation_orders.each do |order|
+                .card-header.without_bc.elem_in_list
+                  h3.card-title.mb-0
+                    = link_to profile_production_site_order_path(@production_site, order),
+                              class: 'color-black' do
+                      | №#{order.id}
+                      |  #{order.title}
+                  .card-icons
+                    .card-icons-link
+                      span = order.proposal_employees.inbox.count
+                      i.far.color-black.fa-envelope
+                    .card-icons-link
+                      span = order.number_free_places
+                      i.fas.color-black.fa-users
+                    .card-icons-link
+                      span = order.without_inbox_candidate_count
+                      i.far.color-black.fa-bookmark
 
-        .card.card-primary.collapsed-card.mb-3
-          .card-header.green-title
-            h3.card-title.mb-0.text-white Опубликованные
-            .card-tools
-              button.btn-tool.mybtn data-card-widget="collapse" type="button"
-                i.fas.fa-minus
+          .card.card-primary.collapsed-card.mb-3
+            .card-header.green-title
+              h3.card-title.mb-0.text-white Опубликованные
+              .card-tools
+                button.btn-tool.mybtn data-card-widget="collapse" type="button"
+                  i.fas.fa-minus
 
-          .card-body.js-table
-            - published_orders.each do |order|
-              .card-header.without_bc.elem_in_list
-                h3.card-title.mb-0
-                  = link_to profile_production_site_order_path(@production_site, order),
-                            class: 'color-black' do
-                    | №#{order.id}
-                    |  #{order.title}
-                .card-icons
-                  .card-icons-link
-                    span = order.proposal_employees.inbox.count
-                    i.far.color-black.fa-envelope
-                  .card-icons-link
-                    span = order.number_free_places
-                    i.fas.color-black.fa-users
-                  .card-icons-link
-                    span = order.without_inbox_candidate_count
-                    i.far.color-black.fa-bookmark
+            .card-body.js-table
+              - published_orders.each do |order|
+                .card-header.without_bc.elem_in_list
+                  h3.card-title.mb-0
+                    = link_to profile_production_site_order_path(@production_site, order),
+                              class: 'color-black' do
+                      | №#{order.id}
+                      |  #{order.title}
+                  .card-icons
+                    .card-icons-link
+                      span = order.proposal_employees.inbox.count
+                      i.far.color-black.fa-envelope
+                    .card-icons-link
+                      span = order.number_free_places
+                      i.fas.color-black.fa-users
+                    .card-icons-link
+                      span = order.without_inbox_candidate_count
+                      i.far.color-black.fa-bookmark
 
-        .card.card-primary.collapsed-card.mb-3
-          .card-header.gray-title
-            h3.card-title.mb-0.text-white Завершенные
-            .card-tools
-              button.btn-tool.mybtn data-card-widget="collapse" type="button"
-                i.fas.fa-plus
+          .card.card-primary.collapsed-card.mb-3
+            .card-header.gray-title
+              h3.card-title.mb-0.text-white Завершенные
+              .card-tools
+                button.btn-tool.mybtn data-card-widget="collapse" type="button"
+                  i.fas.fa-plus
 
-          .card-body.js-table style="display: none;"
-            - completed_orders.each do |order|
-              .card-header.without_bc.elem_in_list
-                h3.card-title.mb-0
-                  = link_to profile_production_site_order_path(@production_site, order),
-                            class: 'color-black' do
-                    | №#{order.id}
-                    |  #{order.title}
-                .card-icons
-                  .card-icons-link
-                    span = order.proposal_employees.inbox.count
-                    i.far.color-black.fa-envelope
-                  .card-icons-link
-                    span = order.number_free_places
-                    i.fas.color-black.fa-users
-                  .card-icons-link
-                    span = order.without_inbox_candidate_count
-                    i.far.color-black.fa-bookmark
+            .card-body.js-table style="display: none;"
+              - completed_orders.each do |order|
+                .card-header.without_bc.elem_in_list
+                  h3.card-title.mb-0
+                    = link_to profile_production_site_order_path(@production_site, order),
+                              class: 'color-black' do
+                      | №#{order.id}
+                      |  #{order.title}
+                  .card-icons
+                    .card-icons-link
+                      span = order.proposal_employees.inbox.count
+                      i.far.color-black.fa-envelope
+                    .card-icons-link
+                      span = order.number_free_places
+                      i.fas.color-black.fa-users
+                    .card-icons-link
+                      span = order.without_inbox_candidate_count
+                      i.far.color-black.fa-bookmark
 
-      .content.container-fluid
-        .content__header.row
-          .content__header-left.col-8
-            h2.content__title.pl-3 = @production_site.title
-            p.town.pl-3 = @production_site.city
-          .content__contacts.col-4
-            .content__phone_number
-              p = raw @production_site.phones
-        .content__description
-          | #{ @production_site.info }
-        / #carouselExampleIndicators.carousel.slide data-ride="carousel"
-        /   ol.carousel-indicators
-        /     li.active data-slide-to="0" data-target="#carouselExampleIndicators"
-        /     li data-slide-to="1" data-target="#carouselExampleIndicators"
-        /     li data-slide-to="2" data-target="#carouselExampleIndicators"
-        /   .carousel-inner
-        /     .carousel-item.active
-        /       a data-fancybox="gallery" href="https://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap"
-        /         img.d-block.w-100 alt=("First slide") src="https://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" /
-        /     .carousel-item
-        /       a data-fancybox="gallery" href="https://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap"
-        /         img.d-block.w-100 alt=("Second slide") src="https://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" /
-        /     .carousel-item
-        /       a data-fancybox="gallery" href="https://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap"
-        /         img.d-block.w-100 alt=("Third slide") src="https://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" /
-        /   a.carousel-control-prev data-slide="prev" href="#carouselExampleIndicators" role="button"
-        /     span.carousel-control-prev-icon aria-hidden="true"
-        /     span.sr-only Previous
-        /   a.carousel-control-next data-slide="next" href="#carouselExampleIndicators" role="button"
-        /     span.carousel-control-next-icon aria-hidden="true"
-        /     span.sr-only Next
+        .content.container-fluid
+          .content__header.row
+            .content__header-left.col-8
+              h2.content__title.pl-3 = @production_site.title
+              p.town.pl-3 = @production_site.city
+            .content__contacts.col-4
+              .content__phone_number
+                p = raw @production_site.phones
+          .content__description
+            | #{ @production_site.info }
+          / #carouselExampleIndicators.carousel.slide data-ride="carousel"
+          /   ol.carousel-indicators
+          /     li.active data-slide-to="0" data-target="#carouselExampleIndicators"
+          /     li data-slide-to="1" data-target="#carouselExampleIndicators"
+          /     li data-slide-to="2" data-target="#carouselExampleIndicators"
+          /   .carousel-inner
+          /     .carousel-item.active
+          /       a data-fancybox="gallery" href="https://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap"
+          /         img.d-block.w-100 alt=("First slide") src="https://placehold.it/900x500/39CCCC/ffffff&amp;text=I+Love+Bootstrap" /
+          /     .carousel-item
+          /       a data-fancybox="gallery" href="https://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap"
+          /         img.d-block.w-100 alt=("Second slide") src="https://placehold.it/900x500/3c8dbc/ffffff&amp;text=I+Love+Bootstrap" /
+          /     .carousel-item
+          /       a data-fancybox="gallery" href="https://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap"
+          /         img.d-block.w-100 alt=("Third slide") src="https://placehold.it/900x500/f39c12/ffffff&amp;text=I+Love+Bootstrap" /
+          /   a.carousel-control-prev data-slide="prev" href="#carouselExampleIndicators" role="button"
+          /     span.carousel-control-prev-icon aria-hidden="true"
+          /     span.sr-only Previous
+          /   a.carousel-control-next data-slide="next" href="#carouselExampleIndicators" role="button"
+          /     span.carousel-control-next-icon aria-hidden="true"
+          /     span.sr-only Next

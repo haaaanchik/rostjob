@@ -51,51 +51,33 @@ header,
   max-height: 100vh;
 }
 
-#main_row{
+#right_window {
   overflow: auto;
-  /*width: 80%;*/
-  //width: calc(100% - 313px);
   height: 91.5vh;
   padding-left: 4rem;
 }
 
 @media (max-width: 1400px) {
-  #main_row:not(*:root) {
+  #right_window:not(*:root) {
     height: 89vh;
-  }
-  .custom-column:not(*:root) {
-    height: 88.4vh;
   }
 }
 
 @media (max-width: 900px) {
-  #add {
-    display: none;
-  }
-  #main_row {
+  #right_window {
     width: calc(100% - 300px);
   }
 }
 
 @media (max-width: 600px) {
-  #main_row {
+  #right_window {
     width: 100%;
-  }
-  .chosen {
-    display: none;
   }
 }
 
 @media (max-width: 400px) {
-  #main_row {
+  #right_window {
     padding-left: 0;
-  }
-  .custom-side-nav {
-    display: none;
-  }
-  .mobile-menu {
-    width: 100%;
-    margin-left: -16px;
   }
 }
 
