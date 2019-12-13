@@ -17,10 +17,15 @@
           h4.card-title
             strong
               = current_user.full_name
+          - if @current_profile.manager?
+            p
+              .form-check.mr-2.font-weight-normal
+                = check_box_tag :free_manager, true, @current_profile.free_manager?, class: 'form-check-input',
+                        data: {set_free_url: set_free_profile_path, unset_free_url: unset_free_profile_path}
+                = label :free_manager, 'Свободен', class: 'form-check-label', for: 'free_manager'
           h5
-            |  #{@contractor_deals_count} Сделок
-            br
-            |  10/10
+            |  #{@contractor_deals_count} Сделок&nbsp;
+            | 10/10
           p.card-text
             = @current_profile.balance.amount
             span.ml-3 рублей
