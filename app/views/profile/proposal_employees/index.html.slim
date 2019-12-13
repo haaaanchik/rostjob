@@ -1,26 +1,25 @@
-.col-md-10.order-md-2.order-1
-  .container
-    .row
-      .col-lg-3.order-lg-2.mt-4
-        = render partial: 'search_form'
-      .col-lg-9.order-lg-1.mt-4
-            p.text-center.font-italic
-              |*Здесь расположены все отправленные анкеты.
-            .border.rounded.p-1
-              table.table.table-sm.table-borderless.table-hover
-                tr
-                  th.text-center style="width: 130px"
-                    = sort_link(@q, :state) do
-                      strong Статус
-                  th.text-center
-                    = sort_link(@q, :employee_cv_name) do
-                      strong Анкета
-                  th.text-center
-                    = sort_link(@q, :order_title) do
-                      strong Заявка
-                  th.text-center
-                    = sort_link(@q, :arrival_date) do
-                      strong Собеседование
-                  / = render partial: "profile/proposal_employees/toolbars/header.html.slim"
-                  = render partial: 'profile/proposal_employees/candidate', collection: @paginated_proposal_employees
-              = paginate @paginated_proposal_employees
+.grey.lighten-4.d-flex.w-100#proposal_employees
+  .col-lg-3.order-lg-2.mt-4
+    = render partial: 'search_form'
+  .col-lg-9.order-lg-1.mt-4
+        p.text-left.font-italic
+          |*Здесь расположены все отправленные анкеты.
+        .border.rounded
+          table.table.table-sm.table-borderless.scrollbar-near-moon.thin
+            tr style='height: 50px; background-color: #d8d5d5;'
+              th.text-left
+                = sort_link(@q, :state) do
+                  strong Статус
+              th.text-left.pl-3
+                = sort_link(@q, :employee_cv_name) do
+                  strong Анкета
+              th.text-left
+                = sort_link(@q, :order_title) do
+                  strong Заявка
+              th.text-left
+                = sort_link(@q, :arrival_date) do
+                  strong Собеседование
+              / = render partial: "profile/proposal_employees/toolbars/header.html.slim"
+              = render partial: 'profile/proposal_employees/candidate', collection: @paginated_proposal_employees
+
+        = paginate @paginated_proposal_employees

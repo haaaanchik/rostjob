@@ -1,0 +1,30 @@
+#proposal_employees {
+  .filters-elem, .status {
+    padding: 5px;
+  }
+  tr.hoverable:hover {
+    background-color: white;
+  }
+  .filters__title {
+    padding-left: 11%;
+  }
+  .form-check-inline {
+    width: 70%;
+  }
+  
+  .profession {
+    color: black;
+    font-weight: bolder;
+  }
+  @media (max-width: 1200px) {
+    .profession {
+      font-size: 0.9rem;
+    }
+  }
+  
+  #personal_position {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
