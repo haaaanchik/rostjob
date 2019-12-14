@@ -1,6 +1,9 @@
-.col-md-10.order-md-2.order-1.p-2.pt-2
-  .container.mt-0
-    - if current_profile.customer?
+ruby: 
+  iteration = 0
+  val = params[:q] ? params[:q][:all_fields_cont] : nil
+
+.grey.lighten-4.d-flex.w-100#order_page
+  - if current_profile.customer?
       - search_form_id = 'order_search_form'
       .row.m-1.mb-3
         .col-md-8.p-0.mt-2
@@ -10,10 +13,10 @@
           .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
             button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center id='show_all' type="button"
               i.far.fa-eye.w-10
-              |  Подробно
+              |  Подробно
             button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center.active id='hide_all' type="button"
               i.far.fa-eye-slash.w-10
-              |  Скрыть
+              |  Скрыть
       .row.m-1
         .col-12.p-0
           table[width="100%"]
@@ -47,43 +50,49 @@
                       = sort_link(@q, :contractor_price) do
                         strong.text-dark Награда
       = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
-    - else
-      .row
-        .col-md-3.order-md-2.mt-3
-          = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}
-        .col-md-9.order-md-1.mt-3
-          .conteiner
-            - @orders.group_by(&:customer_name).each do |customer_name, items|
-              - production_sites = items.group_by{ |it| it.production_site.title }
-              .row
-                .col-md-12
-                  u = customer_name
-              - production_sites.each_with_index do |(place_of_work, items), i|
-                .row.border.rounded.m-1
-                  .col-md-2
-                    = image_tag items.first.production_site.image.url(:thumb), class: 'card-img-top'
-                    u = place_of_work
+  - else
+    .col.col-sm-12.col-md-7.col-lg-9
+      .conteiner#orders_block
+        - @orders.group_by(&:customer_name).each do |customer_name, items|
+          - production_sites = items.group_by{ |it| it.production_site.title }
 
-                  .col-md-10
-                    ul.nav.nav-tabs.nav-fill role='tablist'
-                      li.nav-item
-                        a.nav-link.waves-light.active data-toggle='tab' href="#vacancies-#{i}" role='tab' aria-controls="vacancies"
-                          |Вакансии
-                      li.nav-item.ml-0
-                        a.nav-link.waves-light data-toggle='tab' href="#info-#{i}" role='tab' aria-controls="info"
-                          |Информация
-                      li.nav-item
-                        a.nav-link.waves-light data-toggle='tab' href="#contacts-#{i}" role='tab' aria-controls="contacts"
-                          |Контакты
-
-                    .tab-content
-                      .tab-pane.fade.show.active id="vacancies-#{i}" role='tabpanel' aria-labelledby="vacancies-tab"
-                        = render partial: 'orders/contractor_order', collection: items, as: :order
-
-                      .tab-pane.fade id="info-#{i}" role='tabpanel' aria-labelledby="info-tab"
-                        p.font-small.text-muted.mx-1 align='justify'
-                          = items.first.production_site.info
-
-                      .tab-pane.fade id="contacts-#{i}" role='tabpanel' aria-labelledby="contacts-tab"
-                        p.text-center
-                          = items.first.production_site.phones
+          .d-flex
+            = image_tag('/img/no-avatar.jpg', class: 'img-fluid mt-md-2 mr-md-3', style: "border-radius: 50%; max-height: 99px;")
+            .title-block__text.ml-2.d-flex.flex-column.align-items-start.w-75
+              p.title-text.mt-2 = customer_name
+              p.work_place__name.text-left
+                | Рейтинг: 10 из 10
+            .d-flex.align-items-end
+              = search_form_for @q, url: orders_path do |f|
+                .row.mt-1
+                  .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
+                    = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
+          - production_sites.each_with_index do |(place_of_work, items), i|
+            .row.border.rounded.m-1.border-top-0
+              .col-md-12
+                .work_place_name.d-flex.justify-content-between.mb-2
+                  = place_of_work
+                  span.city_span_button.pt-1.pr-md-4.pl-md-4.pb-1
+                    = items.first.city
+                ul.nav.nav-tabs.nav-fill.border-bottom-0 role='tablist'
+                  li.nav-item
+                    a.nav-link.waves-light.active data-toggle='tab' href="#vacancies-#{iteration}" role='tab' aria-controls="vacancies"
+                      |Вакансии
+                  li.nav-item.ml-0
+                    a.nav-link.waves-light.text-dark data-toggle='tab' href="#info-#{iteration}" role='tab' aria-controls="info"
+                      |Информация
+                  li.nav-item
+                    a.nav-link.waves-light.text-dark data-toggle='tab' href="#contacts-#{iteration}" role='tab' aria-controls="contacts"
+                      |Контакты
+                .tab-content
+                  .tab-pane.fade.show.active id="vacancies-#{iteration}" role='tabpanel' aria-labelledby="vacancies-tab"
+                    = render partial: 'orders/contractor_order', collection: items, as: :order
+                  .tab-pane.fade id="info-#{iteration}" role='tabpanel' aria-labelledby="info-tab"
+                    p.font-small.text-muted.mx-1 align='justify'
+                      = items.first.production_site.info
+                  .tab-pane.fade id="contacts-#{iteration}" role='tabpanel' aria-labelledby="contacts-tab"
+                    p.text-center
+                      = items.first.production_site.phones
+              - iteration +=1
+    .col.col-sm-12.col-md-5.col-lg-3.pt-md-4
+      = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}
