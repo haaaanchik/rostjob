@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def secret_new
     @user = User.new
+    render layout: 'secret_reg'
   end
 
   def create
@@ -25,7 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                 'success'
               else
                 render 'users/registrations/new' if params.key?(:contractor)
-                render 'users/registrations/secret_new' if params.key?(:customer)
+                render 'users/registrations/secret_new', layout: 'secret_reg' if params.key?(:customer)
                 # render json: { validate: true, data: errors_data(result.user) }
               end
   end

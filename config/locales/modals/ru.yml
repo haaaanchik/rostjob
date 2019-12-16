@@ -12,7 +12,7 @@ ru:
         full_name: Имя
         password: Пароль
         submit: Зарегистрироваться
-        customer: Регистрация заказчика
+        customer: Нанять персонал
         contractor: Регистрация
         password_confirmation: Подтверждение пароля
       resetlogin:
