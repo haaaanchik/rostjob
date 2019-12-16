@@ -8,7 +8,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 8 }, presence: true, on: :update
 
   devise :database_authenticatable, :registerable, :recoverable, :trackable,
-         :validatable, :omniauthable, :confirmable,
+         :validatable, :omniauthable, :confirmable, :rememberable,
          omniauth_providers: %i[vkontakte facebook]
 
   scope :clients, -> {

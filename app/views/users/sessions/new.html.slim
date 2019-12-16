@@ -1,5 +1,28 @@
-.row.justify-content-center
-  .card.mt-4
-    h5.card-header.bg-best-hr.font-weight-bold.white-text.text-center.py-4 Вход
-    .card-body.px-lg-5.pt-0
-      = render partial: 'users/sessions/new'
+#sign_in_page_wrapper
+  .header
+    .header_logo
+      | Best
+      span
+        |  HR
+  .d-flex.flex-column.justify-content-center.align-items-center style=('height: 100%')
+    .text-center.border.border-light.p-5
+      - if @user.errors.messages.any?
+        p.red-text #{@user.errors[:base].first}
+
+      p.h4.mb-4 Вход
+      = form_with model: @user, url: login_path, class: 'm-2', local: true do |f|
+        = f.text_field :email, id: 'defaultLoginFormEmail', class: 'form-control mb-4 placeholder', placeholder: 'E-Mail'
+        = f.password_field :password, id: 'defaultLoginFormPassword', class: 'form-control mb-4', placeholder: 'Пароль'
+        .d-flex.justify-content-around
+          -if devise_mapping.rememberable?
+            .custom-control.custom-checkbox
+              = f.check_box :remember_me, id: 'defaultLoginFormRemember', class: 'custom-control-input'
+              label.custom-control-label for="defaultLoginFormRemember"  Запомнить меня
+          -if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+            = link_to "Забыл пароль?", new_password_path(resource_name)
+
+        = f.submit 'Вход', class: 'btn btn-info btn-block my-4'
+
+      p
+        | Не участник?
+        = link_to "Зарегистрироваться", new_registration_path(resource_name), class: 'ml-2'
