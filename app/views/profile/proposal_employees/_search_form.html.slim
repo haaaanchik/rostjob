@@ -1,12 +1,10 @@
 - val =  params[:q] ? params[:q][:pe_fields_cont] : nil
 - filter = params[:q] ? params[:q][:state_in] : %w[]
-= search_form_for @q, url: profile_proposal_employees_path, class: 'd-flex flex-column mt-5' do |f|
-  .col-sm-12.col-md-6.col-lg-12
-    = f.search_field :pe_fields_cont, placeholder: 'Поиск анкет', class: 'form-control w-75', value: val
-  .col-sm-12.col-md-6.col-lg-12
-    button class='btn my-2 btn-block btn-primary add-card w-75 waves-effect waves-light' type='submit'
-      |Применить
-  p.h4.text-left.filters__title
+= search_form_for @q, url: profile_proposal_employees_path, class: 'mt-5 d-flex flex-column align-items-center' do |f|
+  = f.search_field :pe_fields_cont, placeholder: 'Поиск анкет', class: 'form-control w-75', value: val
+  button class='btn my-2 btn-block btn-primary add-card w-75 waves-effect waves-light' type='submit'
+    |Применить
+  p.h4.align-self-start.filters__title
     |Фильтры
   .form-check.form-check-inline.my-2
     = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { class: 'form-check-input', id: 'candidate_filter_inbox' }
