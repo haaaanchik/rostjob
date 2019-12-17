@@ -35,12 +35,52 @@
       font-size: 27px;
       font-family: "Open Sans", sans-serif;
       font-weight: 700;
-      color: #000000;
       text-transform: uppercase;
+      a {
+        color: #000000;
+      }
     }
     
     span {
       color: #1970ff;
     }
+  }
+}
+
+#sign_up_page_wraper {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 1111;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .header {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    
+    .header_logo {
+      margin-top: auto;
+      margin-bottom: auto;
+      display: block;
+      font-size: 27px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      a {
+        color: #000000;
+      }
+    }
+    
+    span {
+      color: #1970ff;
+    }
+  }
+  
+  .invalid-feedback {
+    display: block;
+    font-size: 100%;
   }
 }

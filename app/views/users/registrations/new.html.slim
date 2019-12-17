@@ -1,5 +1,18 @@
-.row.justify-content-center
-  .card.mt-4
-    h5.card-header.bg-best-hr.font-weight-bold.white-text.text-center.py-4 Регистрация
-    .card-body.px-lg-5.pt-0
-      = render partial: 'users/registrations/new'
+- errors = @user.errors.messages
+
+#sign_up_page_wraper
+  .header
+    .header_logo
+      = link_to 'Best <span>HR</span>'.html_safe, root_path
+
+  .d-flex.flex-column.justify-content-center.align-items-center.h-100
+    .text-center.border.border-light.p-5
+      p.h4.mb-4 Регистрация
+      - if errors.any?
+        .invalid-feedback.mb-2 Такой email  #{errors[:email].first}
+
+      = form_for @user, method: :post, url: user_registration_path, html: {class: 'text-center'} do |f|
+        = f.email_field :email, id: 'defaultLoginFormEmail', class: 'form-control mb-4 placeholder', placeholder: 'E-Mail'
+        .d-flex.justify-content-center
+          = f.submit t("views.modals.signin.submit"), name: :contractor, class: 'btn btn-info btn-block'
+      - t("views.modals.signin.password_confirmation")
