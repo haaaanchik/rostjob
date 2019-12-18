@@ -17,13 +17,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     result = if params.key? :customer
-               ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)
-             elsif params.key? :contractor
-               ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
-             end
+      ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)
+    elsif params.key? :contractor
+      ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
+    end
     @user = result.user
     @status = if result.success?
-                'success'
+                @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
+                  для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
+                render 'users/inform_page'
               else
                 render 'users/registrations/new' if params.key?(:contractor)
                 render 'users/registrations/secret_new', layout: 'secret_reg' if params.key?(:customer)
