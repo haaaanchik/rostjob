@@ -1,31 +1,31 @@
 #= require external/jquery-3.3.1.min
 #= require rails-ujs
 
-valid = ->
+valid = (form_submit) ->
   email = $("input[name='user[email]']")
-  submit = $("button[name='customer']")
-  regEx =/^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
+  $submit = $("button[name='customer']")
+  regEx = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
   email.on 'change keyup input click', ->
-    if email.val().search(regEx) == 0
-      submit.prop 'disabled', false
+    if form_submit.subm == true
+      $submit.prop 'disabled', true # Если отправлено - выключено
+    else if email.val().search(regEx) == 0
+      $submit.prop 'disabled', false # Не отправлено, прошло валидацию
     else
-      submit.prop 'disabled', true
+      $submit.prop 'disabled', true # Не отправлено, не прошло валидацию
     return
   return
 
-submit = ->
+submit = (form_submit) ->
   email = $("input[name='user[email]']")
-  submit = $("button[name='customer']")
-  regEx =/^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
-  submit.click (event) ->
-    cosnole.log('-1111111')
+  $submit = $("button[name='customer']")
+  regEx = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
+  $submit.click ->
     if email.val().search(regEx) == 0
-      alert 'Ваш email был отправлен, ожидайте ответа'
-      submit.prop 'disabled', true
+      $submit.prop 'disabled', true
+      form_submit.subm = true
     else
-      event.preventDefault()
       email.parent().addClass 'alert'
-      submit.prop 'disabled', true
+      $submit.prop 'disabled', true
     return
   return
 
