@@ -50,7 +50,7 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
-  config.action_cable.allowed_request_origins = ['http://bhr.os72.ru']
+  config.action_cable.allowed_request_origins = ['http://stage.best-hr.pro']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
@@ -89,7 +89,7 @@ Rails.application.configure do
     domain: 'mg.best-hr.pro',
     region: 'eu'
   }
-  config.action_mailer.default_url_options = { host: 'bhr.os72.ru' }
+  config.action_mailer.default_url_options = { host: 'stage.best-hr.pro' }
   config.action_mailer.default_options = { from: 'noreply@best-hr.pro', charset: 'utf-8' }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

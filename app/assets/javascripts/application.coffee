@@ -54,13 +54,11 @@ bootstrapClearButton()
   return
 
 @add_autocomplete = (operand) ->
-  console.log('----2222222---')
   if !operand.data('auto-active')
     operand.autocomplete(
       source: operand.data('auto-url')
       minLength: 1
       select: (event, ui) ->
-        console.log('----44444---', ui)
         if operand.data('auto-select')
           window[operand.data('auto-select')].call null, ui.item
         operand[0].value = null
