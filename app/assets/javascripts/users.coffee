@@ -5,8 +5,8 @@ class Users
   @enjoyHintProccess: ->
     enjoyhint_instance = new EnjoyHint({})
     skipButton = { text: 'Понял!' }
-    locPath = location.pathname.match(/\d/)
-    id = if locPath == null then locPath else locPath[0]
+    locPath = location.pathname.match(/\d+/g)
+    id = if locPath == null then locPath else locPath.join()
     return if $('#order_template_form').length or $.cookie('profile_type') == 'contractor' or $.cookie('profile_type') == null or
       $.cookie('terms_of_service') == 'false' or $.cookie('password_changed_at') == null or
       $.cookie('updated_by_self_at') == null or $.cookie('first_order_template_created') == 'true'
