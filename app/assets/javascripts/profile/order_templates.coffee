@@ -1,13 +1,54 @@
-# $(document).on('change', '.order-template-number-of-employees-short', (event) ->
-#   element = $(this)
-#   order_template_id = element.data('order-template-id')
-#   customer_price = element.data('customer-price')
-#   number_of_employees = element.val()
-#   customer_total = customer_price * number_of_employees
-#   customer_total_class = '.customer-total-' + order_template_id
-#   console.log order_template_id, customer_price, number_of_employees, customer_total, customer_total_class
-#   $(customer_total_class).html(customer_total)
-# )
+class OrderTemplates
+  @init: ->
+    @bind()
+
+  @bind: ->
+    $('#order_template_position_search').on 'focusin', @addProfessionAutocomplete
+
+
+  @addProfessionAutocomplete: ->
+    $this = $(this)
+    autocomplete = $this.autocomplete(
+      source: $this.data('auto-url')
+      focus: _doFocusStuff
+    )
+
+    autocomplete_handle = autocomplete.data('ui-autocomplete')
+    autocomplete_handle._renderMenu = _renderMenu
+    autocomplete_handle._renderItemData = _renderItemData
+    autocomplete_handle._renderItem = _renderItem
+
+  _renderMenu = (ul, items) ->
+    $self = this;
+    $t = $('<table>').appendTo(ul)
+    $t.append($('<thead>'))
+    $t.find('thead').append($('<tr>'))
+    $row = $t.find('tr')
+    $('<th>').html('Профессия').appendTo($row)
+    $('<th>').html('Цена').appendTo($row)
+    $('<tbody>').appendTo($t);
+    $.each items, (index, item) ->
+      $self._renderItemData(ul, $t.find('tbody'), item)
+
+  _renderItemData = (ul, table, item) ->
+    return this._renderItem(table, item).data('ui-autocomplete-item', item)
+
+  _renderItem = (table, item) ->
+    $row = $('<tr>', { class: 'ui-menu-item', role: 'presentation' })
+    $('<td>').html(item.label).appendTo($row)
+    $('<td>').html(item.price).appendTo($row)
+    return $row.appendTo(table)
+
+  _doFocusStuff = (event, ui) ->
+    if ui.item
+      $item = ui.item
+      $('#order_template_position_search').val($item.label)
+      $('#profession_price').val($item.price)
+      $('#order_template_position_id').val($item.id)
+    return false
+
+$(document).on 'turbolinks:load', ->
+  OrderTemplates.init()
 
 $(document).on('change', '[id=order_template_filter_for_cis]', ->
   form = document.getElementById('order_template_search')

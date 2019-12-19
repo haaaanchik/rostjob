@@ -3,19 +3,17 @@ class OrderTemplate < ApplicationRecord
 
   belongs_to :profile
   belongs_to :production_site
+  belongs_to :position
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
   enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true
 
+  attr_accessor :template_creation_step
+
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :number_of_employees, presence: true, numericality: { only_integer: true }
-  validates :name, :title, :city, :experience, :description,
-            :schedule, :work_period, presence: true
-  validates :salary, presence: true
-  validates :warranty_period, presence: true, numericality: { only_integer: true }
-  validates :accepted, acceptance: { message: 'must be abided' }
-  validates :production_site_id, presence: true
+  validates :city, :salary, presence: true, if: -> { template_creation_step == 2 }
+  validates :name, :title, :production_site_id, presence: true, if: -> { template_creation_step == 1 }
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
@@ -40,7 +38,8 @@ class OrderTemplate < ApplicationRecord
         age_to: nil,
         remark: nil,
         sex: nil,
-        terms: nil,
+        terms: "<b>Обязанности:</b>\n<ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Требования:</strong>\n
+<ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Условия:</strong>\n<ul>\n<li></li><li></li>\n</ul>",
         related_profession: nil
       },
       contact_person: {

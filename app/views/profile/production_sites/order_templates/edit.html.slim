@@ -1,0 +1,24 @@
+.container
+  h2.text-center
+    | Редактрование шаблона
+  hr
+  .row
+    .col-lg-2.offset-lg-2.text-right
+      = link_to profile_production_site_orders_path(@production_site) do
+        i.far.fa-arrow-alt-circle-left.fa-2x
+    .col-lg-6
+      p.text-center.font-italic
+        | *шаг 1 из 3
+        br
+        | *Производственная площадка: #{@production_site.title}
+        br
+        |  *Шаблон: #{ @order_template.title }
+  = form_with model: [:profile, @order_template],
+          url: profile_production_site_order_template_path(@production_site, @order_template),
+          id: 'order_template_form' do |f|
+    = render partial: 'form', locals: { f: f }
+    hr
+    .form-group
+      .row
+        .col-lg-2.offset-lg-5
+          = f.submit 'Далее', class: 'btn btn-primary'

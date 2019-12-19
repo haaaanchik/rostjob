@@ -21,14 +21,13 @@ class Order < ApplicationRecord
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :number_of_employees, presence: true, numericality: {only_integer: true}
-  validates :title, :city, :experience, :description,
-            :schedule, :work_period, presence: true
+  validates :title, :city, presence: true
   validates :salary, presence: true
   # validates :commission, presence: true, numericality: { only_integer: true }
   # validates :payment_type, presence: true
-  validates :warranty_period, presence: true, numericality: {only_integer: true}
+  # validates :warranty_period, presence: true, numericality: {only_integer: true}
   # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
-  validates :accepted, acceptance: {message: 'must be abided'}
+  # validates :accepted, acceptance: {message: 'must be abided'}
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/

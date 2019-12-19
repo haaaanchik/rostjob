@@ -143,6 +143,8 @@ Rails.application.routes.draw do
             post :copy
             post :create_order
             put :move
+            get :description_info
+            get :additional_info
           end
         end
         get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }

@@ -47,16 +47,14 @@
               .card-header.without_bc.elem_in_list
                 = link_to new_profile_production_site_order_template_path(@production_site),
                           class: 'btn btn-primary btn-sm m-auto',
-                          id: 'new-o_template',
-                          remote: true do
+                          id: 'new-o_template' do
                   i.fa.fa-plus.mr-2
                   | Создать шаблон
               - order_templates.each do |order_t|
                 .card-header.without_bc.elem_in_list
                   h3.card-title.mb-0
                     = link_to edit_profile_production_site_order_template_path(@production_site, order_t),
-                              class: 'color-black',
-                              remote: true do
+                              class: 'color-black' do
                       | №#{order_t.id}
                       |  #{order_t.title}
 

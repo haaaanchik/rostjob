@@ -162,6 +162,7 @@ $(document).on('click', '[data-order-position="new"]', (event) ->
     return
 )
 
+# FIXME: refactor this asap
 @apply_position2 = (item) ->
   customer_price = item.price
   contractor_price = item.contractor_price

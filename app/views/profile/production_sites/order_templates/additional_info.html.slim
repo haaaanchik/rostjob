@@ -1,0 +1,61 @@
+.container
+  h2.text-center
+    | Информация для Рекрутера
+  hr
+  .row
+    .col-lg-2.offset-lg-2.text-right
+      = link_to description_info_profile_production_site_order_template_path(@production_site) do
+        i.far.fa-arrow-alt-circle-left.fa-2x
+    .col-lg-6
+      p.text-center.font-italic
+        | *шаг 3 из 3
+        br
+        | *Производственная площадка: #{@production_site.title}
+        br
+        |  *Шаблон: #{ @order_template.title }
+
+  = form_with model: [:profile, @order_template],
+          url: profile_production_site_order_template_path(@production_site, @order_template),
+          id: 'order_template_form' do |f|
+
+    = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+      .form-group
+        .row
+          .col-lg-3.control-label.offset-lg-1
+            = oi_f.label :remark, 'Напишите сюда информацию, которую должен знать рекрутер'
+          .col-lg-6
+            = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
+    = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+      .form-group
+        .row
+          .col-lg-3.control-label.offset-lg-1
+            = cp_f.label :name, 'Контактное лицо'
+          .col-lg-3
+            = cp_f.text_field :name, class: 'form-control', placeholder: 'имя'
+          .col-lg-3
+            = cp_f.phone_field :phone, class: 'form-control', placeholder: '+7(  ) ---'
+    .form-group
+      .row
+        .col-lg-3.control-label.offset-lg-1
+          label
+            | Вы можете добавить анкету для соискателей
+        .col-lg-5
+          .file-field
+            .btn.btn-success.btn-sm.float-left
+              span Выберите анкету
+              = f.file_field :document
+            .file-path-wrapper
+              input class="file-path validate" type="text" placeholder="Загрузите анкету"
+    hr
+    .form-group
+      .row
+        .col-lg-2.offset-lg-4
+          = f.submit 'Сохранить', class: 'btn btn-primary'
+        .col-lg-6
+          = f.button 'Сохранить и опубликовать', class: 'btn btn-white'
+
+javascript:
+    function ready() {
+        $('input.btn').unwrap();
+    }
+    document.addEventListener('DOMContentLoaded', ready);
