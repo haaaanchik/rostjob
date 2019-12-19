@@ -13,19 +13,29 @@ class Users
 
     if location.pathname == '/profile/production_sites'
       productionSiteExist = $('#first_pr_site').length
-      $selector = if productionSiteExist then '#right_window #first_pr_site' else '#right_window #new-production-site'
-      script_steps = [{ "#{$selector}": 'Кнопка создания новых площадок', 'skipButton': skipButton }]
+      if productionSiteExist
+        $selector = '#right_window #first_pr_site'
+        message = 'Готово! Теперь рекрутеры смогут найти Вас! Перейдите по ссылке, чтобы опубликовать Вашу первую заявку.'
+      else
+        $selector = '#right_window #new-production-site'
+        message = 'Чтобы опубликовать Заявку Вам следует создать Площадку. Чтобы рекрутеры смогли найти ' +
+          'Вас заполните данные о месте работы в окне по этой кнопке.'
+      script_steps = [{ "#{$selector}": message, 'skipButton': skipButton, 'radius': 'circle' }]
       enjoyHintRun(enjoyhint_instance, script_steps)
       return
 
     if location.pathname == '/profile/production_sites/' + id + '/orders'
-      script_steps = [{ 'click #order-templates': 'Пожалуйста кликните по кнопке', 'skipButton': skipButton },
-        { 'click #new-o_template': 'Кнопка создания нового шаблона', 'skipButton': skipButton } ]
+      messageFirst = 'Это окно где расположены все Ваши заявки. Чтобы их посмотреть используйте "+" рядом с вкладкой.'
+      messageSecond = 'Чтобы не создавать каждый раз одни и те же заявки в Best HR используют Шаблоны. ' +
+        'Шаблон - это неопубликованная Заявка. Создайте его с помощью 3 шагов, а затем опубликуйте.'
+      script_steps = [{ 'click #order-templates': messageFirst, 'skipButton': skipButton },
+        { 'click #new-o_template': messageSecond, 'skipButton': skipButton } ]
       enjoyHintRun(enjoyhint_instance, script_steps)
       return
 
     if $('#production-site-list').length
-      script_steps = [{ '#right_window #production-site-list': 'Страница площадок', 'skipButton': skipButton }]
+      message = 'Добро пожаловать на портал для поиска персонала Best-HR. Ваши заявки будут находиться здесь.'
+      script_steps = [{ '#right_window #production-site-list': message, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
 
   enjoyHintRun = (enjoyhint_instance, script_steps) ->

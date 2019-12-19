@@ -79,7 +79,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    resource.update(password_changed_at: DateTime.now) if resource.password_changed_at.nil?
+    p sign_in_after_change_password?
+    p "----------------------66666666666666-------------------------"
     sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
   end
 
@@ -90,7 +91,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     if resource.password_changed_at.nil?
       resource.update_without_curr_password(params)
-      resource
     else
       resource.update_with_password(params)
     end

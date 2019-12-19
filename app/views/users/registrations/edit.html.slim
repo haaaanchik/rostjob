@@ -1,6 +1,6 @@
 .container
   h2.text-center
-    | Редактировать Профиль
+    | Введите данные для профиля
   hr
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     .row
@@ -13,7 +13,7 @@
         .form-group
           .row
             .col-lg-3.control-label
-              = f.label :full_name
+              = f.label :full_name, 'Название организации'
             .col-lg-8
               = f.text_field :full_name, class: 'form-control'
 

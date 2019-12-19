@@ -10,6 +10,7 @@ module Cmd
                                                                        only_base:             false)
           context.params = params_with_price.order_template_params
         end
+        set_other_info
         result = Cmd::Order::CalculateUrgency.call(params: params)
         context.fail! unless order_template.update(params.merge(urgency_level: result.urgency))
       end
@@ -30,6 +31,17 @@ module Cmd
 
       def current_user
         order.profile.user
+      end
+
+      def set_other_info
+        case order_template.template_creation_step
+        when 2
+          params[:other_info]['remark'] = order_template.other_info['remark']
+        when 3
+          params[:other_info]['terms'] = order_template.other_info['terms']
+        else
+          order_template
+        end
       end
     end
   end

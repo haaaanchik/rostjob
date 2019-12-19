@@ -34,13 +34,9 @@ class OrderTemplate < ApplicationRecord
       warranty_period: 10,
       number_of_employees: 1,
       other_info: {
-        age_from: nil,
-        age_to: nil,
         remark: nil,
-        sex: nil,
         terms: "<b>Обязанности:</b>\n<ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Требования:</strong>\n
 <ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Условия:</strong>\n<ul>\n<li></li><li></li>\n</ul>",
-        related_profession: nil
       },
       contact_person: {
         name: nil,

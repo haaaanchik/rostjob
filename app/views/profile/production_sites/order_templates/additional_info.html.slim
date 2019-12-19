@@ -17,7 +17,7 @@
   = form_with model: [:profile, @order_template],
           url: profile_production_site_order_template_path(@production_site, @order_template),
           id: 'order_template_form' do |f|
-
+    = hidden_field_tag :template_creation_step, 3
     = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
       .form-group
         .row
