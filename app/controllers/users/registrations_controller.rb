@@ -10,6 +10,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new
   end
 
+  def new_for_customer
+    @user = User.new
+  end
+
   def secret_new
     @user = User.new
     render layout: 'secret_reg'

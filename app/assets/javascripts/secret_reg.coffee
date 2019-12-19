@@ -21,8 +21,7 @@ submit = (form_submit) ->
   regEx = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
   $submit.click ->
     if email.val().search(regEx) == 0
-      $submit.prop 'disabled', true
-      form_submit.subm = true
+      $submit.prop 'disabled', false
     else
       email.parent().addClass 'alert'
       $submit.prop 'disabled', true
@@ -160,7 +159,8 @@ slider_navbar = (slider) ->
   return
 
 $(document).ready ->
-  form_submit = subm: false
+  form_submit = 
+    subm: false
   slider = 
     slides: 0
     slide_width: 0
