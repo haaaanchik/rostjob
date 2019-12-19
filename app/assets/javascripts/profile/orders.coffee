@@ -214,10 +214,22 @@ $(document).on('click', '.reserve-block', ->
   $(this).children().last().toggleClass('fa-chevron-up fa-chevron-down')
   $('.reserve-items').fadeToggle(500)
 )
-#  content = tinymce.get('order_description').getContent()
-#  if item.duties == null
-#    duties = ' '
-#  else
-#    duties = item.duties
-#  html = "#<p><strong>Должностные обязанности:</strong><br />#{duties}</p>"
-#  tinymce.get('order_description').setContent(html + content)
+
+$(document).on('click', '[id^=order_number_of_employees_step_down]', (event) ->
+  numberOfEmployeesElement = $('#order_number_of_employees')
+  customerPrice = numberOfEmployeesElement.data('customer-price')
+  numberOfEmployeesElement[0].stepDown()
+  numberOfEmployees = numberOfEmployeesElement.val()
+  customerTotal = parseFloat(customerPrice * numberOfEmployees)
+  $('#customer-total').html(customerTotal)
+)
+
+$(document).on('click', '[id^=order_number_of_employees_step_up]', (event) ->
+  numberOfEmployeesElement = $('#order_number_of_employees')
+  customerPrice = numberOfEmployeesElement.data('customer-price')
+  numberOfEmployeesElement[0].stepUp()
+  numberOfEmployees = numberOfEmployeesElement.val()
+  customerTotal = parseFloat(customerPrice * numberOfEmployees)
+  console.log(customerTotal)
+  $('#customer-total').html(customerTotal)
+)

@@ -85,7 +85,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   end
 
   def publish
-    result = Cmd::Order::ToModeration.call(order: order)
+    result = Cmd::Order::ToModeration.call(order: order, params: order_params)
     if result.success?
       SendModerationMailJob.perform_later(order: result.order)
       redirect_to profile_production_site_orders_with_state_path(production_site, :in_progress)

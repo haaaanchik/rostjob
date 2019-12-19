@@ -1,4 +1,4 @@
-.col-md-9.order-md-2.order-1
+.col-md-10.order-md-2.order-1.offset-md-1
   .card.testimonial-card.w-100.m-2.mt-4.mb-4
     .card-up.bg-best-hr.lighten-1.card-up-hr
       .container
@@ -99,6 +99,22 @@
                     |анкету
             div.p-0
               hr
+              - if order.number_additional_employees.nil?
+                = render partial: 'number_of_employees',
+                                  locals: {production_site: @production_site, order: order, form_id: 'form_id'}
               p.text-center Баланс: #{order.balance.amount}
-              p.h3.text-center К оплате: #{order.total_price}
+              p.h3.text-center К оплате:
+              p.h3.text-center#customer-total = order.total_price
               = order.link_button
+
+javascript:
+  function ready() {
+    $('#order_publish').on('click', function (event) {
+      var $form = $(this).parent().find('form.edit_order');
+      $form.submit();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', ready);
+
+
