@@ -1,5 +1,5 @@
 tr.rounded.mb-0.example.hoverable.clickable-row id="candidate_#{candidate.id}" data-href=profile_candidate_path(candidate)
-  td.text-center.align-middle
+  td.text-left.align-middle
     .border.rounded.white-text.z-depth-1 class=candidate.status_background_class
       i.fas.fa-bookmark.mr-2
       = t("proposal_employee.state.#{candidate.state}")
@@ -7,18 +7,18 @@ tr.rounded.mb-0.example.hoverable.clickable-row id="candidate_#{candidate.id}" d
       nobr
         |с &nbsp;
         = candidate.created_at.strftime('%d.%m.%Y')
-  td.text-center
+  td.text-left
     p.font-weight-bold
       |##{candidate.employee_cv_id} #{candidate.name} #{candidate.phone_number}
-  td.text-center
+  td.text-left
     .d-none.d-lg-block
       p
         |№#{candidate.order_id} #{candidate.title}
-  td.text-center
+  td.text-left
     .d-none.d-xl-block
       p
         |#{candidate.place_of_work} #{candidate.city}
-  td.text-center
+  td.text-left
     .d-none.d-sm-block
       p
         - if candidate.state == 'hired'

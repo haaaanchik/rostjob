@@ -1,21 +1,21 @@
-#proposal_employees {
+#proposal_employees, #candidates {
   .filters-elem, .status {
     padding: 5px;
   }
+
   tr.hoverable:hover {
     background-color: white;
   }
+
   .filters__title {
     padding-left: 15%;
-  }
-  .form-check-inline {
-    width: 70%;
   }
   
   .profession {
     color: black;
     font-weight: bolder;
   }
+
   @media (max-width: 1200px) {
     .profession {
       font-size: 0.9rem;
@@ -30,4 +30,12 @@
   .form-check-inline {
     margin-right: 0;
   }
+}
+
+#proposal_employees .form-check-inline {
+  width: 70%;
+}
+
+#candidates .form-check-inline {
+  width: 90%;
 }
