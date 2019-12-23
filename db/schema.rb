@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_09_035941) do
+ActiveRecord::Schema.define(version: 2019_12_23_124626) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 2019_12_09_035941) do
     t.bigint "candidate_id"
     t.string "guid"
     t.json "call_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "careerists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.json "query_params"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -156,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_12_09_035941) do
     t.string "email"
     t.datetime "reminder"
     t.text "comment"
+    t.boolean "careerist_job", default: false
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 
