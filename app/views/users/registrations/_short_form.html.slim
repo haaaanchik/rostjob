@@ -1,0 +1,16 @@
+- errors = user.errors.messages
+#sign_up_page_wraper
+  .header
+    = render 'users/header_logo.html'
+
+  .d-flex.flex-column.justify-content-center.align-items-center.h-100
+      .text-center
+        p.h4.mb-4 #{title}
+        - if errors.any?
+          .invalid-feedback.mb-2 Такой email  #{errors[:email].first}
+
+        = form_for @user, method: :post, url: user_registration_path, html: {class: 'text-center'} do |f|
+          = f.email_field :email, id: 'defaultLoginFormEmail', class: 'form-control mb-4 placeholder', placeholder: 'E-Mail'
+          .d-flex.justify-content-center
+            = f.submit button_text, name: type, class: 'btn btn-info btn-block'
+        - t("views.modals.signin.password_confirmation")

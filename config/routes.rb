@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   get '/oauth/callback/superjob' => 'oauth_callback#superjob'
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
-    get 'secret_reg', to: 'users/registrations#secret_new'
-    get 'new_for_customer', to: 'users/registrations#new_for_customer'
+    get 'landing_for_contractor', to: 'users/registrations#landing_for_contractor'
+    get 'landing_for_customer', to: 'users/registrations#landing_for_customer'
+    get :new_contractor, to: 'users/registrations#new_contractor'
+    get :new_customer, to: 'users/registrations#new_customer'
+    get :contractor_info, to: 'users/registrations#contractor_info'
     post 'login', to: 'users/sessions#create'
     delete 'logout', to: 'users/sessions#destroy'
   end

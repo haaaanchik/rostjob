@@ -1,7 +1,13 @@
 #sign_up_page_wraper
   .header
     .header_logo
-      = link_to 'Best <span>HR</span>'.html_safe, root_path
+      = link_to root_path do
+        | Best
+        span
+          |  HR
+      - if Rails.env.staging?
+        span#stage
+          b stage
   
-  .d-flex.justify-content-center.align-items-center.h-100.text-center
+  .d-flex.justify-content-center.align-items-center.h-100.text-center.p-4
     h3 = @message

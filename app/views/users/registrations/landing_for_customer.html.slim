@@ -1,0 +1,37 @@
+- errors = @user.errors.messages
+
+header.header
+  = render 'users/header_logo.html'
+
+  .header_registration
+    = link_to 'Вход&nbsp;'.html_safe, login_path
+    span
+      | /
+    = link_to '&nbsp;Регистрация'.html_safe, new_customer_path
+  .header_scroll
+    button.header_scroll_down
+      img alt="down" src="#{asset_path('svg/arrow_2.svg')}" 
+    button.header_scroll_top
+      img alt="top" src="#{asset_path('svg/arrow_2.svg')}"
+
+main
+  section#main
+    .main
+      .main_info-header
+        h2 Зарегестрируйтесь в Best-HR, чтобы нанять персонал
+      .main_info-text
+        p На портале работают 200 фрилансеров по всему миру и рекрутеры с автоматическим голосовым помощником
+      .main_input
+        = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: { name: 'form-email', novalidate: '' } do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'e-mail для регистрации'
+          = f.button t("views.modals.signin.customer"), name: :customer
+      .main_freelance
+        = link_to 'Зарегистрироваться как фрилансер', new_contractor_path
+      .main_img
+        img alt="" src="#{asset_path('main_customer.png')}"
+
+  = render partial: "landing", locals: { video_poster: 'main_customer.png', video_name: 'example_video.mp4' }     
