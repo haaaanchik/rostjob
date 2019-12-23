@@ -12,8 +12,10 @@ class OrderTemplate < ApplicationRecord
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: { greater_than_or_equal_to: 0 }
-  validates :city, :salary, presence: true, if: -> { template_creation_step == 2 }
   validates :name, :title, :production_site_id, presence: true, if: -> { template_creation_step == 1 }
+  validates :city, :salary, presence: true, if: -> { template_creation_step == 2 }
+  validates :document, presence: true, if: -> { template_creation_step == 3 }
+  validate  :check_for_emptiness
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
@@ -50,5 +52,24 @@ class OrderTemplate < ApplicationRecord
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
+  end
+
+  private
+
+  def check_for_emptiness
+    case template_creation_step
+    when 2
+      errors.add(:other_info_terms.to_sym,
+                 I18n.t('activerecord.errors.models.order_template.attributes.error.other_info.terms')) if other_info['terms'].blank?
+    when 3
+      errors.add(:contact_person_name.to_sym,
+                 I18n.t('activerecord.errors.models.order_template.attributes.error.contact_person.name')) if contact_person['name'].blank?
+      errors.add(:contact_person_phone.to_sym,
+                 I18n.t('activerecord.errors.models.order_template.attributes.error.contact_person.phone')) if contact_person['phone'].blank?
+      errors.add(:other_info_remark.to_sym,
+                 I18n.t('activerecord.errors.models.order_template.attributes.error.other_info.remark')) if other_info['remark'].blank?
+    else
+      true
+    end
   end
 end

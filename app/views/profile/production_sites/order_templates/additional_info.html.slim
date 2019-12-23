@@ -25,6 +25,7 @@
             = oi_f.label :remark, 'Напишите сюда информацию, которую должен знать рекрутер'
           .col-lg-6
             = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
+            .invalid-feedback
     = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
       .form-group
         .row
@@ -32,8 +33,10 @@
             = cp_f.label :name, 'Контактное лицо'
           .col-lg-3
             = cp_f.text_field :name, class: 'form-control', placeholder: 'имя'
+            .invalid-feedback
           .col-lg-3
             = cp_f.phone_field :phone, class: 'form-control', placeholder: '+7(  ) ---'
+            .invalid-feedback
     .form-group
       .row
         .col-lg-3.control-label.offset-lg-1
@@ -43,9 +46,10 @@
           .file-field
             .btn.btn-success.btn-sm.float-left
               span Выберите анкету
-              = f.file_field :document
+              = f.file_field :document, id: 'order_template_document_file'
             .file-path-wrapper
-              input class="file-path validate" type="text" placeholder="Загрузите анкету"
+              input id='order_template_document' class='form-control file-path validate' type="text" placeholder="Загрузите анкету"
+              .invalid-feedback
     hr
     .form-group
       .row
