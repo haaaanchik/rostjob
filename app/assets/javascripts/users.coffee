@@ -28,9 +28,17 @@ class Users
       messageFirst = 'Это окно где расположены все Ваши заявки. Чтобы их посмотреть используйте "+" рядом с вкладкой.'
       messageSecond = 'Чтобы не создавать каждый раз одни и те же заявки в Best HR используют Шаблоны. ' +
         'Шаблон - это неопубликованная Заявка. Создайте его с помощью 3 шагов, а затем опубликуйте.'
-      script_steps = [{ 'click #order-templates': messageFirst, 'skipButton': skipButton },
-        { 'click #new-o_template': messageSecond, 'skipButton': skipButton } ]
+      script_steps = [{ 'click #order-templates': messageFirst, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
+      $('.mybtn').on 'click', (evt) ->
+        button = evt.target
+        card = button.closest('.card-primary')
+        card_body = card.querySelector('.js-table')
+        if card_body.style.display == 'block'
+          enjoyhint_instance = new EnjoyHint({})
+          script_steps = [{ 'click #new-o_template': messageSecond, 'skipButton': skipButton }]
+          enjoyHintRun(enjoyhint_instance, script_steps)
+        return
       return
 
     if $('#production-site-list').length
