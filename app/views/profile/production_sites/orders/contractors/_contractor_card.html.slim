@@ -6,7 +6,7 @@
           = image_tag('/img/no-avatar.jpg', class: 'rounded-circle z-depth-zero', size: 40)
       .col-md-9.p-0.m-0.mt-3
         h6.font-weight-bold
-          = proposal_employee.profile.user.full_name.delete('\n')
+          = proposal_employee.profile.user&.full_name&.delete('\n')
     .w-100.border.rounded.mt-2.mb-2.mb-0
       .hoverable.clickable-pe data-href="#{profile_candidate_path(proposal_employee)}"
         | #{proposal_employee.employee_cv.name}
