@@ -1,12 +1,17 @@
-= form_for :user, method: :post, url: user_password_path, html: {class: 'text-center p-3 mb-2'} do |f|
-  .md-form.mb-5
-    = f.text_field :email, class: 'form-control', autofocus: true, autocomplete: "email", value: flash['user_email']
-    = f.label :email, t("views.modals.login.email")
-  .d-flex.justify-content-center
-    = f.submit 'Отправить инструкции',
-            class: 'btn btn-deep-orange z-depth-1'
-.row.d-flex.align-items-center.pb-3
-  .col-md-12
-    .font-small.d-flex.justify-content-end
+#sign_up_page_wraper
+  .header
+    = render 'users/header_logo.html'
+
+  .d-flex.flex-column.justify-content-center.align-items-center.h-100
+    .text-center
+      p.h4.mb-4
+        | Восстановление пароля
+    = form_for :user, method: :post, url: user_password_path, html: {class: 'text-center'} do |f|
+      = f.email_field :email, id: 'defaultLoginFormEmail', autofocus: true, autocomplete: "email",
+        class: 'form-control mb-4 placeholder', placeholder: 'E-Mail', value: flash['user_email']
+      .d-flex.justify-content-center
+        = f.submit 'Отправить инструкции', class: 'btn btn-info btn-block'
+    p.mt-3
       | Не зарегистрированны?
-      = link_to 'Пройти регистрацию', new_user_registration_path, class: 'blue-text ml-1'
+      = link_to 'Пройти регистрацию', new_contractor_path, class: 'ml-2'
+

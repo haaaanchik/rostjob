@@ -1,7 +1,7 @@
 - errors = @user.errors.messages
 
 header.header
-  = render 'users/header_logo.html'
+  = render 'users/header_logo'
 
   .header_registration
     = link_to 'Вход&nbsp;'.html_safe, login_path
@@ -18,7 +18,7 @@ main
   section#main
     .main
       .main_info-header
-        h2 Best-HR - платформа для людей, занимающихся набором персонала
+        h2 JOBNYRU - платформа для людей, занимающихся набором персонала
       .main_info-text
         p Зарегестрируйтесь, чтобы получить доступ к заявкам с гарантированными выплатами
       .main_input
@@ -33,6 +33,73 @@ main
         = link_to 'хочу нанять персонал', contractor_info_path
       .main_img
         img alt="" src="#{asset_path('main_contactor.png')}"
+
+  section.request
+    .request_header
+      h3 Заголовок
+    .request_block
+      .request_block_nav
+        .arrow.arrow_left
+          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+        .arrow.arrow_right
+          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+        .navbar
+      
+      .request_block_viewbox
+        .request_block_wrapper
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_6.jpg')}"
+            .request_block_wrapper_item_info
+              header 
+                | 1
+              h4
+                | Дополнительный или <br> постоянный доход.
+              p
+                | Зарегистрируйся чтобы стать фрилансером по подбору персонала.
+          
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_7.png')}"
+            .request_block_wrapper_item_info
+              header
+                | 2
+              h4
+                | Еженедельные выплаты.
+              p
+                | Официальные выплаты на расчетный счет для физических и юридических лиц.
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_8.jpg')}"
+            .request_block_wrapper_item_info
+              header
+                | 3
+              h4 
+                | Постоянные заявки, <br> большие объемы.
+              p
+                | На платформе всегда есть выбор на открытые заявки.
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_9.jpg')}"
+            .request_block_wrapper_item_info
+              header
+                | 4
+              h4 
+                | Поддержка доступна <br> по телефону и WhatsApp.
+              p
+                | Оперативный ответ от саппорта в течении 24 часов после обращения.
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_10.jpg')}"
+            .request_block_wrapper_item_info
+              header
+                | 5
+              h4
+                | Доступна мобильная версия сайта.
+              p
+                | Возможность выполнения заявки с помощью применения гаджета.
+          
+
 
   = render partial: "landing", locals: { video_poster: 'main_contactor.png', video_name: 'example_video.mp4' } 
   

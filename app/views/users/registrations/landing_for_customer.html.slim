@@ -1,7 +1,7 @@
 - errors = @user.errors.messages
 
 header.header
-  = render 'users/header_logo.html'
+  = render 'users/header_logo'
 
   .header_registration
     = link_to 'Вход&nbsp;'.html_safe, login_path
@@ -18,7 +18,7 @@ main
   section#main
     .main
       .main_info-header
-        h2 Зарегестрируйтесь в Best-HR, чтобы нанять персонал
+        h2 Зарегестрируйтесь в JOBNYRU, чтобы нанять персонал
       .main_info-text
         p На портале работают 200 фрилансеров по всему миру и рекрутеры с автоматическим голосовым помощником
       .main_input
@@ -30,8 +30,73 @@ main
           = f.email_field :email, class: 'form-control', placeholder: 'e-mail для регистрации'
           = f.button t("views.modals.signin.customer"), name: :customer
       .main_freelance
-        = link_to 'Зарегистрироваться как фрилансер', new_contractor_path
+        = link_to 'Зарегистрироваться как фрилансер', landing_for_contractor_path
       .main_img
         img alt="" src="#{asset_path('main_customer.png')}"
 
+  section.request
+    .request_header
+      h3 Заголовок
+    .request_block
+      .request_block_nav
+        .arrow.arrow_left
+          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+        .arrow.arrow_right
+          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+        .navbar
+      
+      .request_block_viewbox
+        .request_block_wrapper
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_1.png')}"
+            .request_block_wrapper_item_info
+              header 
+                | 1
+              h4
+                | Выполнение заявок сразу <br> после публикации
+              p
+                | Публикация заявки может занять 15 минут.
+          
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_2.png')}"
+            .request_block_wrapper_item_info
+              header
+                | 2
+              h4
+                | Заявки закрывают <br> фрилансеры по всему миру
+              p
+                | Опубликованную заявку выполняют все зарегистрированные пользователи
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_3.png')}"
+            .request_block_wrapper_item_info
+              header
+                | 3
+              h4
+                | Автоматический звонки <br> соискателям от голосовых ботов
+              p
+                | Самые современные технологии сбора и обработки баз соискателей
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_4.jpg')}"
+            .request_block_wrapper_item_info
+              header
+                | 4
+              h4
+                | Выберите лучшего <br> из предоставленных кандидатов
+              p
+                | Интерфейс отказа и приглашения соискателя проверен в работе
+          .request_block_wrapper_item
+            .request_block_wrapper_item_img
+              img alt="" src="#{asset_path('item_5.jpg')}"
+            .request_block_wrapper_item_info
+              header
+                | 5
+              h4
+                | Гарантия <br> 10 отработанных смен.
+              p
+                | Не устроил кандидат - откажитесь от него и выберете другого.
+  
   = render partial: "landing", locals: { video_poster: 'main_customer.png', video_name: 'example_video.mp4' }     

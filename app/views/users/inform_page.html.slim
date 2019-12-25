@@ -1,13 +1,6 @@
 #sign_up_page_wraper
   .header
-    .header_logo
-      = link_to root_path do
-        | Best
-        span
-          |  HR
-      - if Rails.env.staging?
-        span#stage
-          b stage
+    = render 'users/header_logo'
   
-  .d-flex.justify-content-center.align-items-center.h-100.text-center.p-4
+  .d-flex.justify-content-center.align-items-center.h-100.text-center.container
     h3 = @message

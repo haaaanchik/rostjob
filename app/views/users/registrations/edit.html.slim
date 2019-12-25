@@ -11,14 +11,14 @@
       .col-md-9.personal-info
         = devise_error_messages!
         .form-group
-          .row
+          .d-flex.align-items-center
             .col-lg-3.control-label
-              = f.label :full_name, 'Название организации'
+              = f.label :full_name, label_full_name(resource)
             .col-lg-8
               = f.text_field :full_name, class: 'form-control'
 
         .form-group
-          .row
+          .d-flex
             .col-lg-3.control-label
               = f.label :password
             .col-lg-8
@@ -26,7 +26,7 @@
               em
                 | минимум 8 символов
         .form-group
-          .row
+          .d-flex.align-items-center
             .col-lg-3.control-label
               = f.label :password_confirmation
             .col-lg-8

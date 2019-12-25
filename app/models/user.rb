@@ -3,7 +3,7 @@ class User < ApplicationRecord
   belongs_to :profile, optional: true
   has_one :balance, through: :profile
 
-  validates :full_name, presence: true, length: {minimum: 8}, on: :update
+  validates :full_name, presence: true, length: { minimum: 8 }, on: :update
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, presence: true, on: :update
 

@@ -31,15 +31,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     elsif params.key? :contractor
       ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
     end
+
     @user = result.user
     @status = if result.success?
                 @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
                   для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
                 render 'users/inform_page'
               else
-                set_secret_landing
-                render 'users/registrations/landing_for_contractor' if params.key?(:contractor)
-                render 'users/registrations/landing_for_customer' if params.key?(:customer)
+                render 'users/registrations/new_contractor' if params.key?(:contractor)
+                render 'users/registrations/new_customer' if params.key?(:customer)
                 # render json: { validate: true, data: errors_data(result.user) }
               end
   end
