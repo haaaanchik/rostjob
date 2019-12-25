@@ -1,0 +1,26 @@
+.col.order-1.order-sm-1.order-md-2.rounded.p-1.mt-4.mr-2
+  .mt-4
+    .container
+      h1.careerist-title
+        | Карьерист.ру
+      .row.mt-4.mr-1.ml-0
+        .col-6
+        .col-3
+          = link_to run_job_admin_careerists_path, class: 'btn btn-success btn-rounded', remote: true do
+            i.fas.fa-running.mr-2
+            | Запустить Job
+        .col-3
+          = link_to new_admin_careerist_path, class: 'btn btn-success btn-rounded', remote: true do
+            i.fas.fa-plus.mr-2
+            |Добавить запрос
+  table.table.table-sm.table-hover.mt-4
+    tr
+      th.text-center
+        .form-check.form-check-inline
+          = check_box_tag 'careerist_activeall', true, false, class: 'form-check-input',
+            data: { activate_url: activate_all_admin_careerists_url, deactivate_url: deactivate_all_admin_careerists_url }
+          = label_tag 'careerist_activeall', 'Включить', class: 'form-check-label'
+      th.text-center Наименование запроса
+      th.text-center Действия
+    = render partial: 'careerist', collection: @careerists
+  = paginate @careerists

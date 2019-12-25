@@ -10,12 +10,13 @@ class EmployeeCv < ApplicationRecord
   belongs_to :profile, optional: true
 
   validates :name, presence: true
-  validates :phone_number, phone: true
+  validates :phone_number, phone: true, unless: :careerist_job
   # validates :contractor_terms_of_service, acceptance: true
   # validate :ext_data_phone
   # validates :gender, presence: true
   # validates :birthdate, presence: true
   validates :super_job_id, uniqueness: true, if: :super_job_id
+  validates :name, uniqueness: true, if: :careerist_job
 
   ransack_alias :employee_cvs_fields, :id_or_name_or_phone_number
 

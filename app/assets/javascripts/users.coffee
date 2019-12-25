@@ -1,6 +1,7 @@
 class Users
   @init: ->
-    @enjoyHintProccess()
+    admin_path = location.pathname.match(/\/admin\//g)
+    @enjoyHintProccess() if admin_path == null
 
   @enjoyHintProccess: ->
     enjoyhint_instance = new EnjoyHint({})

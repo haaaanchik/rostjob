@@ -4,11 +4,17 @@ warranty_period_processing:
   queue: critical
   description: "Creates jobs for warranty period processing"
 
-fetch_resumes:
+super_job_fetch_resumes:
   cron: "30 0 * * *"
-  class: "CreateFetchResumesJob"
+  class: "CreateFetchResumesFromSuperJob"
   queue: critical
   description: "Fetch resumes from SuperJob"
+
+careerist_job_fetch_resumes:
+  cron: "30 0 * * *"
+  class: "CreateFetchResumesFromCareeristJob"
+  queue: critical
+  description: "Fetch resumes from CareeristJob"
 
 #generate_payment_orders_for_companies:
 #  cron: "15 1 * * *"

@@ -12,20 +12,21 @@ class Admin::Superjob::QueriesController < Admin::Superjob::ApplicationControlle
   end
 
   def create
-    result = Cmd::SuperJob::Query::Create.call(params: superjob_query_params)
+    result = Cmd::Service::Create.call(params:        superjob_query_params,
+                                       service_klass: ::SuperJob::Query)
     if result.success?
       redirect_to admin_superjob_queries_path
     else
-      render json: { validate: true, data: errors_data(result.query) }, status: 422
+      render json: { validate: true, data: errors_data(result.service) }, status: 422
     end
   end
 
   def update
-    result = Cmd::SuperJob::Query::Update.call(query: query, params: superjob_query_params)
+    result = Cmd::Service::Update.call(service: query, params: superjob_query_params)
     if result.success?
       redirect_to admin_superjob_queries_path
     else
-      render json: { validate: true, data: errors_data(result.query) }, status: 422
+      render json: { validate: true, data: errors_data(result.service) }, status: 422
     end
   end
 
@@ -35,24 +36,25 @@ class Admin::Superjob::QueriesController < Admin::Superjob::ApplicationControlle
   end
 
   def copy
-    result = Cmd::SuperJob::Query::Copy.call(query: query)
+    result = Cmd::Service::Copy.call(service:        query,
+                                     service_klass:  ::SuperJob::Query)
     redirect_to admin_superjob_queries_path result.success?
   end
 
   def activate
-    Cmd::SuperJob::Query::Activate.call(query: query)
+    Cmd::Service::Activate.call(service: query)
   end
 
   def deactivate
-    Cmd::SuperJob::Query::Deactivate.call(query: query)
+    Cmd::Service::Deactivate.call(service: query)
   end
 
   def activate_all
-    Cmd::SuperJob::Query::ActivateAll.call
+    Cmd::Service::ActivateAll.call(service: ::SuperJob::Query)
   end
 
   def deactivate_all
-    Cmd::SuperJob::Query::DeactivateAll.call
+    Cmd::Service::DeactivateAll.call(service: ::SuperJob::Query)
   end
 
   private

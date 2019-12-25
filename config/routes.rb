@@ -61,6 +61,18 @@ Rails.application.routes.draw do
         end
       end
     end
+    resources :careerists, except: %i[show] do
+      collection do
+        put :activate_all
+        put :deactivate_all
+        get :run_job
+      end
+      member do
+        post :copy
+        put :activate
+        put :deactivate
+      end
+    end
     resources :tickets, only: %i[index show] do
       scope module: :tickets do
         resources :proposal_employees, only: %i[] do

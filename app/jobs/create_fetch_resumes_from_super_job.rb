@@ -1,4 +1,4 @@
-class CreateFetchResumesJob < ApplicationJob
+class CreateFetchResumesFromSuperJob < ApplicationJob
   queue_as :critical
 
   def perform
