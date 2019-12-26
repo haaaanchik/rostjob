@@ -1,3 +1,78 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.control-label {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 7px;
+  text-align: right;
+}
+
+.enjoyhint {
+  z-index: 1040 !important;
+
+  #enjoyhint_label {
+    width: 40%;
+  }
+}
+
+#sign_in_page_wrapper, #sign_up_page_wraper, #edit_password_page {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  z-index: 1111;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .header {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    
+    .header_logo {
+      margin-top: auto;
+      margin-bottom: auto;
+      display: block;
+      font-size: 27px;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      a {
+        color: #1970ff;
+      }
+
+      .counter {
+        margin-left: 0px;
+        color: #fff;
+      }
+    }
+    
+    span {
+      color: #000000;
+    }
+  }
+}
+
+#sign_in_page_wrapper {
+  form {
+    width: 350px;
+    height: 250px;
+  }
+}
+
+#sign_up_page_wraper {
+  .invalid-feedback {
+    display: block;
+    font-size: 100%;
+  }
+
+  form {
+    span.waves-input-wrapper {
+      width: 100%;
+    }
+  }
+}
+
+#edit_password_page {
+  form {
+    width: 400px;
+  }
+}

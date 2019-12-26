@@ -1,25 +1,15 @@
 class User < ApplicationRecord
   before_validation :set_guid, on: :create
-  # before_validation :fill_from_profile, on: :create
   belongs_to :profile, optional: true
-  # accepts_nested_attributes_for :profile, reject_if: :all_blank
   has_one :balance, through: :profile
 
-  validates :full_name, presence: true, length: {minimum: 8}
+  validates :full_name, presence: true, length: { minimum: 8 }, on: :update
   validates :email, presence: true, uniqueness: true
-  validates :password, length: { minimum: 8 }, presence: true
-  validates :terms_of_service, acceptance: true
-
-  # devise :registerable, :confirmable, :recoverable, :trackable, :validatable,
-  #        :omniauthable, omniauth_providers: [:vkontakte, :facebook]
+  validates :password, length: { minimum: 8 }, presence: true, on: :update
 
   devise :database_authenticatable, :registerable, :recoverable, :trackable,
-         :validatable, :omniauthable, :confirmable,
+         :validatable, :omniauthable, :confirmable, :rememberable,
          omniauth_providers: %i[vkontakte facebook]
-
-  # devise :database_authenticatable, :registerable, :recoverable, :trackable,
-  #        :validatable, :omniauthable,
-  #        omniauth_providers: [:vkontakte, :facebook]
 
   scope :clients, -> {
     select(:id, :full_name, :amount, :profile_type, :employee_cvs_count, :orders_count)
@@ -99,6 +89,21 @@ class User < ApplicationRecord
 
   def inactive_message
     'Ваша учётная запись заблокирована. Для восстановления доступа обратитесь к менеджеру по email: manager@best-hr.pro'
+  end
+
+  def password_required?
+    super if confirmed?
+  end
+
+  def update_without_curr_password(params)
+    result = update(params)
+    update_attribute(:password_changed_at, DateTime.now) if result
+    clean_up_passwords
+    result
+  end
+
+  def accept_terms
+    update_attribute(:terms_of_service, true)
   end
 
   private

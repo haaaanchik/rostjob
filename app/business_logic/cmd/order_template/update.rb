@@ -4,15 +4,25 @@ module Cmd
       include Interactor
 
       def call
+        if [1, 2].include?(order_template.template_creation_step.to_i)
+          params_with_price = Cmd::OrderTemplate::ParamsWithPrice.call(order_template_params: params,
+                                                                       position:              position,
+                                                                       only_base:             false)
+          context.params = params_with_price.order_template_params
+        end
+        set_other_info
         result = Cmd::Order::CalculateUrgency.call(params: params)
         context.fail! unless order_template.update(params.merge(urgency_level: result.urgency))
-        # Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
       private
 
       def order_template
         context.order_template
+      end
+
+      def position
+        context.position
       end
 
       def params
@@ -23,16 +33,15 @@ module Cmd
         order.profile.user
       end
 
-      def logger_params
-        {
-          receiver_id: current_user.id,
-          subject_id: current_user.id,
-          subject_type: 'User',
-          subject_role: current_user.profile.profile_type,
-          action: 'Заявка отредактирована',
-          object_id: order.id,
-          object_type: 'Order'
-        }
+      def set_other_info
+        case order_template.template_creation_step
+        when 2
+          params[:other_info]['remark'] = order_template.other_info['remark']
+        when 3
+          params[:other_info]['terms'] = order_template.other_info['terms']
+        else
+          order_template
+        end
       end
     end
   end

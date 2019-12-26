@@ -1,15 +1,6 @@
-
-
 body {
   font-family: Verdana, Geneva, sans-serif!important;
 }
-
-
-
-
-
-
-
 
 .bg-best-hr {
 	background-color: #534741 !important;
@@ -19,11 +10,6 @@ body {
     margin: .375rem;
     border-radius: 0;
 }
-
-
-
-
-
 
 .btn-box {
   border-radius: 0;
@@ -47,7 +33,6 @@ body {
 
 }
 
-
 .btn-box:focus {
   border-radius: 0;
 	line-height: 0.4;
@@ -58,7 +43,6 @@ body {
     text-transform: inherit;
 
 }
-
 
 .btn-box:visited {
   border-radius: 0;
@@ -71,17 +55,28 @@ body {
 
 }
 
-
-
-
-
-
-
 .button-menu {
   width: 100%;
 }
 
+#privacy_policy p {
+  text-indent: 40px;
+  margin-bottom: 0;
+  text-align: justify;
+}
 
+#privacy_policy .list-item {
+  margin-top: 1rem;
+}
 
+#privacy_policy b {
+  font-weight: bold;
+}
 
-
+#privacy_policy {
+    padding: 30px;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}

@@ -3,28 +3,43 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   # skip_before_action :authenticate_user!
   skip_before_action :auth_user
+  before_action :configure_update_params, only: :update
+  before_action :set_user_new, only: %i[new new_contractor new_customer landing_for_contractor landing_for_customer]
+  before_action :set_secret_landing, only: %i[landing_for_contractor landing_for_customer]
 
   # GET /resource/sign_up
   def new
     @user = User.new
   end
 
-  def secret_new
-    @user = User.new
+  def new_contractor; end
+
+  def new_customer; end
+
+  def landing_for_contractor; end
+
+  def landing_for_customer; end
+
+  def contractor_info
+    @message = 'Для регистрации для найма персонала обратитесь по адресу manager@best-hr.pro или по номеру +7 960 079 06 41'
+    render 'users/inform_page'
   end
 
   def create
     result = if params.key? :customer
-               ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)
-             elsif params.key? :contractor
-               ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
-             end
+      ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)
+    elsif params.key? :contractor
+      ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
+    end
+
     @user = result.user
     @status = if result.success?
-                'success'
+                @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
+                  для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
+                render 'users/inform_page'
               else
-                render 'users/registrations/new' if params.key?(:contractor)
-                render 'users/registrations/secret_new' if params.key?(:customer)
+                render 'users/registrations/new_contractor' if params.key?(:contractor)
+                render 'users/registrations/new_customer' if params.key?(:customer)
                 # render json: { validate: true, data: errors_data(result.user) }
               end
   end
@@ -55,15 +70,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name])
+  end
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
@@ -76,8 +85,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
            status: 401
   end
 
+  def after_update_path_for(resource)
+    p sign_in_after_change_password?
+    p "----------------------66666666666666-------------------------"
+    sign_in_after_change_password? ? signed_in_root_path(resource) : new_session_path(resource_name)
+  end
+
   def user_params
-    params.require(:user).permit(:password_confirmation, :password,
-                                 :full_name, :email)
+    params.require(:user).permit(:email)
+  end
+
+  def update_resource(resource, params)
+    if resource.password_changed_at.nil?
+      resource.update_without_curr_password(params)
+    else
+      resource.update_with_password(params)
+    end
+  end
+
+  def set_user_new
+    @user = User.new
+  end
+
+  def set_secret_landing
+    render layout: 'secret_landing'
   end
 end

@@ -8,7 +8,9 @@
       i.fas.fa-pen-alt
 
     .card-body
-      h3.card-title.white-text = link_to production_site.title, profile_production_site_orders_path(production_site)
+      h3.card-title.white-text = link_to production_site.title,
+                                         profile_production_site_orders_path(production_site),
+                                         id: "#{'first_pr_site' if production_site_counter.zero? }"
       p= production_site.city
       hr
 
@@ -37,7 +39,7 @@
         .tab-pane.fade id="contacts-#{production_site.id}" role='tabpanel'
           = production_site.phones
 
-    .rounded-bottom.mdb-color.lighten-3.text-center.pt-3
+    .rounded-bottom.mdb-color.lighten-3.text-center.pt-3 style='display: none'
       ul.list-unstyled.list-inline.font-small
         li.list-inline-item.pr-2
           a.white-text href='#'

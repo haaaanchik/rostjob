@@ -1,4 +1,4 @@
-.col-md-9.order-md-2.order-1
+.col-md-10.order-md-2.order-1.offset-md-1
   .card.testimonial-card.w-100.m-2.mt-4.mb-4
     .card-up.bg-best-hr.lighten-1.card-up-hr
       .container
@@ -37,9 +37,6 @@
                     b
                       | Публикация заявки
             .price.w-100.border.rounded.mb-0.p-1
-              p.h5.text-center.mt-1.mb-0
-                i.fas.fa-city.mr-2
-                strong #{order.place_of_work}
               p.h4.text-center.mt-1.mb-0
                 i.fas.fa-hammer.mr-1
                 strong #{order.title} #{order.skill}
@@ -49,25 +46,10 @@
                 strong #{order.salary}
               p.m-0
                 i.fas.fa-map-marker.w-2
-                strong.ml-2 #{order.city} #{order.district}
-              p.m-0
-                i.fas.fa-passport.w-2.mr-2
-                strong #{order.experience}
-              p.m-0
-                i.far.fa-calendar-alt.w-2.mr-2
-                strong #{order.work_period}. #{order.schedule}.
+                strong.ml-2 #{order.city}
               .d-none.d-md-block
                 p.h6.m-0
-                  i.fas.fa-clipboard-list.w-2.mr-2
-                  - unless order.description.nil? || order.description.empty?
-                    strong.mr-2 Виды выполняемых работ:
-                    strong == order.description
-                p.m-0
-                  i.fas.fa-plus.w-2.mr-2
-                  strong #{order.other_info['related_profession']}
-                p.h6.m-0
                   i.fas.fa-bed.w-2.mr-2
-                  strong.mr-2 Предлагаемые условия:
                   == order.other_info['terms']
                 hr.h6.m-0
                 p.h6.m-0
@@ -99,6 +81,22 @@
                     |анкету
             div.p-0
               hr
+              - if order.number_additional_employees.nil?
+                = render partial: 'number_of_employees',
+                                  locals: {production_site: @production_site, order: order, form_id: 'form_id'}
               p.text-center Баланс: #{order.balance.amount}
-              p.h3.text-center К оплате: #{order.total_price}
+              p.h3.text-center К оплате:
+              p.h3.text-center#customer-total = order.total_price
               = order.link_button
+
+javascript:
+  function ready() {
+    $('#order_publish').on('click', function (event) {
+      var $form = $(this).parent().find('form.edit_order');
+      $form.submit();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', ready);
+
+

@@ -1,7 +1,13 @@
 = form_with model: [:profile, production_site], id: 'production_site_form' do |f|
   .form-group
     = f.label :image, 'Фоновое изображение производственной площадки'
-    = f.file_field :image, class: 'form-control'
+    .file-field
+      .btn.btn-success.btn-sm.float-left
+        span Выберете логотип
+        = f.file_field :image
+      .file-path-wrapper
+        input class='file-path validate form-control' type="text" placeholder='Загрузите логотип'
+    br
     = f.label :title, 'Название производственной площадки'
     = f.text_field :title, class: 'form-control'
     = f.label :city, 'Город'
@@ -14,4 +20,4 @@
   .form-group.mt-3
     .row
       .col-3
-        = f.submit t('profile.order_templates.commit.save'), class: 'btn btn-success'
+        = f.submit t('profile.production_sites.commit.save'), class: 'btn btn-success'

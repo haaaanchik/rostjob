@@ -11,8 +11,11 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    @user = User.find_by_email params[:user][:email]
-    @user.send_reset_password_instructions if @user
+    @user = User.find_by_email(params[:user][:email])
+    if @user
+      @user.send_reset_password_instructions
+      after_sending_reset_password_instructions_path_for(@user)
+    end
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef
@@ -38,8 +41,7 @@ class Users::PasswordsController < Devise::PasswordsController
   # end
 
   # The path used after sending reset password instructions
-  # def after_sending_reset_password_instructions_path_for(resource_name)
-  #   super(resource_name)
-  # end
-  #
+  def after_sending_reset_password_instructions_path_for(user)
+    redirect_to root_path
+  end
 end

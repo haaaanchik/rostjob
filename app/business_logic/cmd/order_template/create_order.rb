@@ -5,8 +5,8 @@ module Cmd
 
       def call
         profession = Position.find(order_template.position_id)
-        customer_total = order_template.customer_price * number_of_employees
-        contractor_total = order_template.contractor_price * number_of_employees
+        customer_total = order_template.customer_price
+        contractor_total = order_template.contractor_price
         attributes = order_template.attributes
         order_attributes = attributes.merge('id' => nil, 'number_of_employees' => number_of_employees,
                                             'customer_total' => customer_total, 'contractor_total' => contractor_total)

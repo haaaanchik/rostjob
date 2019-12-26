@@ -1,4 +1,4 @@
-- header = profile.private_person? ? 'Карточка физического лица' : 'Карточка предприятия'
+- header = profile.private_person? ? 'Карточка физического лица' : 'Чтобы опубликовать заявку введите данные Вашей организации'
 
 h4.h4-responsive.mb-3 data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
 - unless profile.private_person?

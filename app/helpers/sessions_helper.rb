@@ -1,24 +1,21 @@
 module SessionsHelper
-  # def current_user
-  #   @current_user ||= User.find_by(guid: session[:user_guid]) if session[:user_guid]
-  # end
 
-  # def authenticate_user!
-  #   redirect_to login_path unless current_user
-  # end
+  def set_cookies_params(user)
+    cookies[:profile_type] = user.profile.profile_type
+    cookies[:terms_of_service] = user.terms_of_service
+    cookies[:updated_by_self_at] = user.profile.updated_by_self_at
+    cookies[:password_changed_at] = user.password_changed_at
+    cookies[:first_order_template_created] = user.first_order_template_created
+  end
 
-  # def sign_in(user)
-  #   session[:user_guid] = user.guid
-  #   user.update_attribute(:last_sign_in_at, Time.now)
-  # end
-  #
-  # def user_signed_in?
-  #   session[:user_guid] && User.find_by(guid: session[:user_guid]) ? true : false
-  # end
-  #
-  # def sign_out
-  #   session[:user_guid] = nil
-  # end
+  def delete_cookies_params
+    cookies.delete(:profile_type)
+    cookies.delete(:terms_of_service)
+    cookies.delete(:updated_by_self_at)
+    cookies.delete(:password_changed_at)
+    cookies.delete(:first_order_template_created)
+  end
+
   def current_profile
     @current_profile ||= current_user.profile
   end

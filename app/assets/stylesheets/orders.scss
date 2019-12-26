@@ -51,3 +51,79 @@
     }
   }
 }
+
+#order_page {
+  .people_salary {
+    font-weight: bolder;
+    background-color: blue;
+    color: white;
+  }
+
+  .nav-link.active {
+    background-color:  #c7dcfd !important;
+  }
+
+  .nav-tabs > .nav-item:hover {
+    background-color:  #c7dcfd !important;
+  }
+
+  .city_span_button {
+    border-radius: 5px;
+    background-color:
+    #385e9b;
+    color:
+    white;
+    font-weight: bolder;
+    font-size: 17px;
+  }
+
+  .title-text {
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: 1.2rem;
+  }
+
+  .professions, .cities {
+      font-weight: bolder;
+  }
+
+  .zayavka {
+    display: flex;
+    border-bottom: 1px solid  silver;
+    transition: 0.55s;
+    cursor: pointer;
+  }
+  
+  .zayavka-oplata, .people_salary {
+    font-size: 0.9rem;
+  }
+}
+
+.show_card {
+  .zayavka__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    font-size: 30px;
+    background-color: 
+    white !important;
+    width: 45px;
+    height: 45px;
+    z-index: 1;
+  }
+  
+  .people_salary_left {
+    font-weight: bolder;
+    background-color: blue;
+    color: white;
+    position: absolute;
+    top: -32px;
+    left: 100px;
+  }
+  
+  .contacts {
+    border: 1px solid black;
+    position: relative;
+  }
+}

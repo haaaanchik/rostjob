@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_05_012005) do
+ActiveRecord::Schema.define(version: 2019_12_23_124626) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 2019_12_05_012005) do
     t.bigint "candidate_id"
     t.string "guid"
     t.json "call_data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "careerists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.json "query_params"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -156,6 +164,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_012005) do
     t.string "email"
     t.datetime "reminder"
     t.text "comment"
+    t.boolean "careerist_job", default: false
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 
@@ -392,6 +401,7 @@ ActiveRecord::Schema.define(version: 2019_12_05_012005) do
     t.datetime "updated_at", null: false
     t.string "legal_form"
     t.boolean "manager"
+    t.datetime "updated_by_self_at"
   end
 
   create_table "proposal_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -584,6 +594,9 @@ ActiveRecord::Schema.define(version: 2019_12_05_012005) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "is_active"
+    t.datetime "password_changed_at"
+    t.boolean "terms_of_service", default: false
+    t.boolean "first_order_template_created", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

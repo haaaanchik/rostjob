@@ -35,6 +35,7 @@ class ProfilesController < ApplicationController
     result = Cmd::Profile::Update.call(profile: current_profile, params: profile_params)
     profile = result.profile
     if result.success?
+      current_profile.update_attribute(:updated_by_self_at, DateTime.now)
       redirect_to root_path
     else
       render json: { validate: true, data: errors_data(profile) }, status: 422

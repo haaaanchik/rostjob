@@ -4,6 +4,7 @@ module Cmd
       include Interactor
 
       def call
+        order.update_attributes(params)
         context.fail! unless order.to_moderation
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end

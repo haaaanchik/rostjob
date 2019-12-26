@@ -7,6 +7,8 @@ class WelcomeController < ApplicationController
     if user_signed_in?
       prepare_data
       user_action_log_records
+    else
+      redirect_to landing_for_contractor_path
     end
     @active_item = :root
     production_site

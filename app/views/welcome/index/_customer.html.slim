@@ -1,5 +1,5 @@
 - if user_signed_in?
-  .col-md-11.blue-gradient
+  .col-md-12.blue-gradient
     .container-fluid
       .row
         .col-md-8
@@ -19,7 +19,8 @@
                 strong
                   = current_user.full_name
               h5
-                |  #{@customer_deals_count} Сделок
+                / #{@customer_deals_count}
+                | -  Сделок
                 br
                 |  10/10
               p.card-text

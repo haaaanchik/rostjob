@@ -1,5 +1,8 @@
 ru:
   profile:
+    production_sites:
+      commit:
+        save: 'Создать'
     order_templates:
       commit:
         save: 'Сохранить'

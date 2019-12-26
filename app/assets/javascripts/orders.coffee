@@ -40,6 +40,17 @@ $ ->
       toastr.success('Заявка скопирована!')
 
   $(document).on('click', '[id^=title_filter_], [id^=city_filter_]', ->
-    form = $('#order_search')[0]
+    form = $('#profesion-city-form')
     form.submit()
+  )
+
+
+  $(document).on('click', '.js-zayavka', ->
+    $(this).slideUp();
+    $(this).next().slideDown();
+  )
+
+  $(document).on('click', '.js-zayavka-close', ->
+    $(this).parents('.collapse').slideUp()
+    $(this).parents('.collapse').parent().find('.collapsable').slideDown()
   )

@@ -1,4 +1,5 @@
 #= require external/jquery-3.3.1.min
+#= require jquery
 #= require external/popper.min
 #= require external/bootstrap
 #= require external/jquery-ui.min

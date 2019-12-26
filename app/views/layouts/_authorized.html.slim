@@ -1,20 +1,21 @@
-= render 'interface/navbar'
-.custom-side-nav.bg-primary
-  .side-nav-logo
-    = link_to root_path, class: 'brand-link' do
-      = image_tag asset_path('logo.png'), id: 'main_logo', alt: 'Main logo', class: 'img-fluid flex-center'
-      - if Rails.env.staging?
-        span.counter
-          b stage
-        br
-  hr
-  .side-bar-avatar
-    .side-nav-img-container
-      = link_to edit_profile_path do
-        =image_tag '/img/no-avatar.jpg', class: 'img-circle elevation-2', alt: 'User Image'
-  hr
-  = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }
+#interface-navbar
+  = render 'interface/navbar'
+  .custom-side-nav.bg-primary
+    .side-nav-logo
+      = link_to root_path, class: 'brand-link' do
+        = image_tag asset_path('logo.png'), id: 'main_logo', alt: 'Main logo', class: 'img-fluid flex-center'
+        - if Rails.env.staging?
+          span.counter
+            b stage
+          br
+    hr
+    .side-bar-avatar
+      .side-nav-img-container
+        = link_to edit_profile_path do
+          =image_tag '/img/no-avatar.jpg', class: 'img-circle elevation-2', alt: 'User Image'
+    hr
+    = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }
 
 .content-wrapper
-  .row.ml-0.mr-0#main_row
+  .row.ml-0.mr-0.scrollbar-near-moon.thin#right_window style="#{'display: block' if body_controller == 'profile_production_sites_orders_index' || body_controller == 'profile_employee_cvs_index' }"
     = yield

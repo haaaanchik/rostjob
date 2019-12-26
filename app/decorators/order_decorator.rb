@@ -62,10 +62,8 @@ class OrderDecorator < ObjDecorator
                     class: classes,
                     data: { method: :put }) { 'Оплатить' }
     else
-      h.content_tag(:a,
-                    href: h.publish_profile_production_site_order_path(production_site, object),
-                    class: classes,
-                    data: { method: :put }) { 'Опубликовать заявку' }
+      h.content_tag(:button, id: 'order_publish',
+                    class: classes) { 'Опубликовать заявку' }
     end
   end
 end

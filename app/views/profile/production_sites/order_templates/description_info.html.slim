@@ -1,0 +1,50 @@
+.container
+  h2.text-center
+    | Информация для Cоискателя
+  hr
+  .row
+    .col-lg-2.offset-lg-2.text-right
+      = link_to edit_profile_production_site_order_template_path(@production_site) do
+        i.far.fa-arrow-alt-circle-left.fa-2x
+    .col-lg-6
+      p.text-center.font-italic
+        | *шаг 2 из 3
+        br
+        | *Производственная площадка: #{@production_site.title}
+        br
+        |  *Шаблон: #{ @order_template.title }
+
+  = form_with model: [:profile, @order_template],
+          url: profile_production_site_order_template_path(@production_site, @order_template),
+          id: 'order_template_form' do |f|
+    = f.hidden_field :position_id
+    = hidden_field_tag :template_creation_step, 2
+    .form-group
+      .row
+        .col-lg-3.control-label.offset-lg-1
+          = f.label :city, 'Город'
+        .col-lg-4
+          = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
+                  data: { 'auto-url' => '/search_city', 'auto-add-text' => true,
+                          'autocomplete-on' => 'order_template_city' }
+    .form-group
+      .row
+        .col-lg-3.control-label.offset-lg-1
+          = f.label :salary, 'Зарплата'
+        .col-lg-4
+          = f.text_field :salary, class: 'form-control'
+          .invalid-feedback
+    = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+      .form-group
+        .row
+          .col-lg-3.control-label.offset-lg-1
+            = oi_f.label :terms, 'Предлагаемые условия'
+          .col-lg-6
+            = oi_f.text_area :terms, class: 'form-control p-4 tinymce', rows: 10
+            .invalid-feedback
+    hr
+    .form-group
+      .row
+        .col-lg-2.offset-lg-5
+          = f.submit 'Далее', class: 'btn btn-primary'
+

@@ -4,10 +4,11 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
     = favicon_link_tag 'icon.ico'
-    title Best-HR
+    title JOBNY.RU
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/enjoyhint/3.1.0/enjoyhint.css', 'data-turbolinks-track': 'reload'
     = stylesheet_link_tag 'not_authorized', media: 'all', 'data-turbolinks-track': 'reload' if !user_signed_in?
     - if user_signed_in?
       = action_cable_meta_tag if @current_profile.manager?
@@ -18,6 +19,9 @@ html
             data: {'turbolinks-eval' => false,
                     'turbolinks-suppress-warning' => true,
                     'turbolinks-track': 'reload'}
+
+    = javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/enjoyhint/3.1.0/enjoyhint.min.js'
+
     - if notice
       javascript:
           toastr.info("#{notice}", 'Внимание!', { "positionClass": "custom-toast-top-right", timeOut: 5000});
