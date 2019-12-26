@@ -4,7 +4,7 @@ module Cmd
       include Interactor
 
       def call
-        output_file_path = '/tmp/from-best-hr.txt'
+        output_file_path = '/tmp/from-jobny-ru.txt'
         payment_orders = context.payment_orders
         date_from = context.date_from
         date_to = context.date_to

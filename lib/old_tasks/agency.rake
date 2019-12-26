@@ -1,4 +1,4 @@
-namespace :best_hr do
+namespace :jobny_ru do
   namespace :seed do
     desc 'Creates agency.'
     task agency: :environment do

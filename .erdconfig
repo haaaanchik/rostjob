@@ -3,7 +3,7 @@ attributes:
   - foreign_key
   - inheritance
 disconnected: true
-filename: best-hr-db
+filename: jobny-ru-db
 filetype: pdf
 indirect: true
 inheritance: false

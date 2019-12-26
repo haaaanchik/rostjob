@@ -3,20 +3,20 @@ body {
 
 }
 
-.bg-best-hr {
+.bg-jobny-ru {
 	background-color: #534741 !important;
 }
 
-.dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a:active, .dropdown .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
-.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
-.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
-.dropup .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
-.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
-.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
-.dropleft .dropdown-menu.dropdown-secondary .bg-best-hr-a.active,
-.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:hover,
-.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a:active,
-.dropright .dropdown-menu.dropdown-secondary .bg-best-hr-a.active {
+.dropdown .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:hover, .dropdown .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:active, .dropdown .dropdown-menu.dropdown-secondary .bg-jobny-ru-a.active,
+.dropup .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:hover,
+.dropup .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:active,
+.dropup .dropdown-menu.dropdown-secondary .bg-jobny-ru-a.active,
+.dropleft .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:hover,
+.dropleft .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:active,
+.dropleft .dropdown-menu.dropdown-secondary .bg-jobny-ru-a.active,
+.dropright .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:hover,
+.dropright .dropdown-menu.dropdown-secondary .bg-jobny-ru-a:active,
+.dropright .dropdown-menu.dropdown-secondary .bg-jobny-ru-a.active {
     background-color: #534741 !important;    
   }
 

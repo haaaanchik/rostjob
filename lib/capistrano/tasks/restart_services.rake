@@ -6,9 +6,9 @@ namespace :deploy do
       execute "sudo systemctl restart stage-best-hr_unicorn"
       execute "sudo systemctl restart stage-best-hr_job_scheduler"
       execute "sudo systemctl restart stage-best-hr_job_worker"
-      execute "sudo systemctl restart best-hr_unicorn"
-      execute "sudo systemctl restart best-hr_job_scheduler"
-      execute "sudo systemctl restart best-hr_job_worker"
+      execute "sudo systemctl restart jobny-ru_unicorn"
+      execute "sudo systemctl restart jobny-ru_job_scheduler"
+      execute "sudo systemctl restart jobny-ru_job_worker"
       execute "sudo systemctl restart nginx"
     end
   end

@@ -4,4 +4,4 @@ h2.mt-3 Авторизация на портале SuperJob
   h5 Токен действителен до: #{l(Time.at(SuperJob::Config.config.ttl.to_i), format: :long)}
 - else
   h5 Статус: авторизация не пройдена
-  = link_to 'Авторизовать BEST-HR на SuperJob', superjob_authorize_url, class: 'btn btn-success'
+  = link_to 'Авторизовать JOBNY-RU на SuperJob', superjob_authorize_url, class: 'btn btn-success'

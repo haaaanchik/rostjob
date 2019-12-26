@@ -5,11 +5,11 @@ default: &default
 
 production:
   <<: *default
-  channel_prefix: besthr_cable
+  channel_prefix: jobnyru_cable
 
 development:
   <<: *default
-  channel_prefix: besthr_cable_dev
+  channel_prefix: jobnyru_cable_dev
 
 test:
   adapter: async

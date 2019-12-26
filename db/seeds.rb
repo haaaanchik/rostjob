@@ -1,1 +1,1 @@
-Rake::Task['best_hr:seed:all'].invoke
+Rake::Task['jobny_ru:seed:all'].invoke

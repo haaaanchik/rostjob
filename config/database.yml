@@ -21,14 +21,14 @@ default: &default
 
 development:
   <<: *default
-  database: best-hr_development
+  database: jobny-ru_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: best-hr_test
+  database: jobny-ru_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -51,7 +51,7 @@ test:
 #
 production:
   <<: *default
-  database: best-hr_production
+  database: jobny-ru_production
   reconnect: true
   reaping_frequency: 5
   dead_connection_timeout: 15
@@ -59,13 +59,6 @@ production:
 staging:
   <<: *default
   database: best-hr_staging
-  reconnect: true
-  reaping_frequency: 5
-  dead_connection_timeout: 15
-
-demo:
-  <<: *default
-  database: best-hr_demo
   reconnect: true
   reaping_frequency: 5
   dead_connection_timeout: 15

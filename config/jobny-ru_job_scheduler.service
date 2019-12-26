@@ -1,0 +1,13 @@
+[Unit]
+Description=JOBNY-RU Job Scheduler
+
+[Service]
+Type=simple
+User=zerro
+WorkingDirectory=/webhome/jobny-ru
+ExecStart=/bin/bash -lc 'bundle exec rake production resque:scheduler 2>&1'
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

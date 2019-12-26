@@ -1,8 +1,8 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "best-hr"
-set :repo_url, "git@bitbucket.org:Dyos/best-hr.git"
+set :application, 'jobny-ru'
+set :repo_url, "git@bitbucket.org:Factory-Rushers/jobny.ru.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

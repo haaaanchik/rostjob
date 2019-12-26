@@ -2,12 +2,12 @@ li.nav-item.avatar.dropdown
   = link_to '#', class: 'nav-link dropdown-toggle', role: 'button', id: 'dropdownMenuLink', data: { toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } do
     = image_tag('/img/no-avatar.jpg', class: 'rounded-circle z-depth-zero', alt: 'avatar image')
   .dropdown-menu.dropdown-menu-right.dropdown-secondary aria-labelledby="#dropdownMenuLink"
-    = link_to edit_profile_path, class: 'dropdown-item bg-best-hr-a' do
+    = link_to edit_profile_path, class: 'dropdown-item bg-jobny-ru-a' do
       i.fas.fa-edit.w-25
       |Профиль
-    = link_to profile_invoices_path, class: 'dropdown-item bg-best-hr-a' do
+    = link_to profile_invoices_path, class: 'dropdown-item bg-jobny-ru-a' do
       i.fas.fa-money-bill-alt.w-25
       |Счёт
-    = link_to logout_path, class: 'dropdown-item bg-best-hr-a', method: :delete do
+    = link_to logout_path, class: 'dropdown-item bg-jobny-ru-a', method: :delete do
       i.fas.fa-sign-out-alt.w-25
       |Выход

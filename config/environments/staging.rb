@@ -67,13 +67,13 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "best-hr_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "jobny-ru_#{Rails.env}"
   # config.action_mailer.smtp_settings = {
   #   address: 'smtp.mail.ru',
   #   port: 587,
-  #   user_name: 'noreply@best-hr.pro',
+  #   user_name: 'noreply@jobny-ru.pro',
   #   password: %(R@OYLwGPTLHmC{guja~#),
-  #   # user_name: 'best-hr@bk.ru',
+  #   # user_name: 'jobny-ru@bk.ru',
   #   # password: %(Gjxnf<'cn"qxfh1),
   #   authentication: :plain,
   #   enable_starttls_auto: true
@@ -86,11 +86,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: '11d7b7e27023d3b56880f00170e97c15-898ca80e-44046bdf',
-    domain: 'mg.best-hr.pro',
+    domain: 'mg.jobny.ru',
     region: 'eu'
   }
   config.action_mailer.default_url_options = { host: 'stage.best-hr.pro' }
-  config.action_mailer.default_options = { from: 'noreply@best-hr.pro', charset: 'utf-8' }
+  config.action_mailer.default_options = { from: 'noreply@jobny.ru', charset: 'utf-8' }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

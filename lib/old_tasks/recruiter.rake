@@ -1,4 +1,4 @@
-namespace :best_hr do
+namespace :jobny_ru do
   namespace :seed do
     desc 'Creates recruiter.'
     task recruiter: :environment do
