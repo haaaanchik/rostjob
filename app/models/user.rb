@@ -1,9 +1,11 @@
 class User < ApplicationRecord
+  attr_accessor :skip_validation_full_name
+
   before_validation :set_guid, on: :create
   belongs_to :profile, optional: true
   has_one :balance, through: :profile
 
-  validates :full_name, presence: true, length: { minimum: 8 }, on: :update
+  validates :full_name, presence: true, length: { minimum: 8 }, if: -> { !skip_validation_full_name }
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, presence: true, on: :update
 
@@ -96,6 +98,7 @@ class User < ApplicationRecord
   end
 
   def update_without_curr_password(params)
+    self.skip_validation_full_name = false
     result = update(params)
     update_attribute(:password_changed_at, DateTime.now) if result
     clean_up_passwords
@@ -104,6 +107,11 @@ class User < ApplicationRecord
 
   def accept_terms
     update_attribute(:terms_of_service, true)
+  end
+
+  def reset_password(new_password, new_password_confirmation)
+    self.skip_validation_full_name = true
+    super
   end
 
   private

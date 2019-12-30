@@ -14,7 +14,6 @@ class OrderTemplate < ApplicationRecord
             presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :name, :title, :production_site_id, presence: true, if: -> { template_creation_step == 1 }
   validates :city, :salary, presence: true, if: -> { template_creation_step == 2 }
-  validates :document, presence: true, if: -> { template_creation_step == 3 }
   validate  :check_for_emptiness
 
   has_attached_file :document

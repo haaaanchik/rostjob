@@ -1,3 +1,6 @@
+ruby:
+  errors = resource.errors.messages
+
 #edit_password_page
   .header
     = render 'users/header_logo'
@@ -7,9 +10,18 @@
       p.h4.mb-4
         | Восстановление пароля
     = form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :put, class: 'text-center'} ) do |f|
-      = f.password_field :password, id: 'defaultLoginFormPassword', autofocus: true, autocomplete: "new-password",
-        class: 'form-control mb-4 placeholder', placeholder: 'Новый пароль. Минимально 8 символов.'
-      = f.password_field :password_confirmation, id: 'defaultLoginFormPassword', autocomplete: "off", placeholder: 'Подтверждение пароля',
-        class: 'form-control mb-4 placeholder'
-      .d-flex.justify-content-center
+      = f.hidden_field :reset_password_token
+      = f.password_field :password,
+                         id: 'defaultLoginFormPassword',
+                         autocomplete: "new-password",
+                         class: "form-control placeholder #{'is-invalid' unless errors[:password].empty?}",
+                         placeholder: 'Новый пароль. Минимально 8 символов.'
+      .invalid-feedback = errors[:password].first
+      = f.password_field :password_confirmation,
+                         id: 'defaultLoginFormPasswordConfirmation',
+                         autocomplete: 'off',
+                         placeholder: 'Подтверждение пароля',
+                         class: "form-control mt-4 placeholder #{'is-invalid' unless errors[:password_confirmation].empty?}"
+      .invalid-feedback = errors[:password_confirmation].first
+      .d-flex.justify-content-center.mt-4
         = f.submit 'Изменить', class: 'btn btn-info btn-block'
