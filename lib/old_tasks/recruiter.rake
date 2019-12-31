@@ -1,4 +1,4 @@
-namespace :jobny_ru do
+namespace :rostjob do
   namespace :seed do
     desc 'Creates recruiter.'
     task recruiter: :environment do

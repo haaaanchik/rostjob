@@ -1,1 +1,1 @@
-Rake::Task['jobny_ru:seed:all'].invoke
+Rake::Task['rostjob:seed:all'].invoke

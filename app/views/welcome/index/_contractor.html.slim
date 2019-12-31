@@ -29,10 +29,10 @@
           p.card-text
             = @current_profile.balance.amount
             span.ml-3 рублей
-          / = link_to '#', class: 'btn-floating btn-small bg-jobny-ru tmp-unavailable' do
-          span.btn-floating.btn-small.bg-jobny-ru.tmp-unavailable
+          / = link_to '#', class: 'btn-floating btn-small bg-rostjob tmp-unavailable' do
+          span.btn-floating.btn-small.bg-rostjob.tmp-unavailable
             i.fas.fa-envelope
           / span.counter.mt-2
           /   |  1
-          = link_to profile_balance_path, class: 'btn-floating btn-small bg-jobny-ru' do
+          = link_to profile_balance_path, class: 'btn-floating btn-small bg-rostjob' do
             i.fas.fa-money-bill-alt

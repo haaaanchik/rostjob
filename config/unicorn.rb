@@ -56,5 +56,5 @@ after_fork do |server, worker|
     Rails.logger.info('Connected to Redis')
   end
 
-  worker.user('zerro', 'zerro')
+  worker.user('deploy', 'deploy')
 end

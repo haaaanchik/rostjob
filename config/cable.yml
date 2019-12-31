@@ -5,11 +5,11 @@ default: &default
 
 production:
   <<: *default
-  channel_prefix: jobnyru_cable
+  channel_prefix: rostjob_cable
 
 development:
   <<: *default
-  channel_prefix: jobnyru_cable_dev
+  channel_prefix: rostjob_cable_dev
 
 test:
   adapter: async

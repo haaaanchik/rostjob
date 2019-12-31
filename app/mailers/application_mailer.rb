@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  # default from: 'noreply@jobny.ru'
+  # default from: 'noreply@rostjob.com'
   layout 'mailer'
 end

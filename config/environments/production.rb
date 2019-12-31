@@ -44,8 +44,8 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://89.108.99.141/cable'
-  # config.action_cable.url = 'wss://jobny.ru/cable'
-  config.action_cable.allowed_request_origins = ['https://jobny.ru']
+  # config.action_cable.url = 'wss://rostjob.com/cable'
+  config.action_cable.allowed_request_origins = ['https://rostjob.com']
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = false
@@ -62,11 +62,11 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "jobny-ru_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "rostjob_#{Rails.env}"
   # config.action_mailer.smtp_settings = {
   #   address: 'smtp.mail.ru',
   #   port: 587,
-  #   user_name: 'noreply@jobny-ru.pro',
+  #   user_name: 'noreply@rostjob.com',
   #   password: %(R@OYLwGPTLHmC{guja~#),
   #   authentication: :plain,
   #   enable_starttls_auto: true
@@ -78,11 +78,11 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: '11d7b7e27023d3b56880f00170e97c15-898ca80e-44046bdf',
-    domain: 'mg.jobny.ru',
+    domain: 'mg.rostjob.com',
     region: 'eu'
   }
-  config.action_mailer.default_url_options = { host: 'jobny.ru' }
-  config.action_mailer.default_options = { from: 'noreply@jobny.ru', charset: 'utf-8' }
+  config.action_mailer.default_url_options = { host: 'rostjob.com' }
+  config.action_mailer.default_options = { from: 'noreply@rostjob.com', charset: 'utf-8' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

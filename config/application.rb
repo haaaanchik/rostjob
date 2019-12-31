@@ -17,7 +17,7 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module JobnyRu
+module RostJob
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
@@ -52,7 +52,7 @@ module JobnyRu
       g.helper       true
     end
     config.active_job.queue_adapter = :resque
-    config.email_to = 'alkos.network@gmail.com, yusupov_ilshat@mail.ru'
+    config.email_to = 'abrakad55@gmail.com, talipich@mail.ru'
     config.moderation_email_to = 'manager@best-hr.pro'
     config.user_action_log = true
     config.superjob = config_for(:superjob)

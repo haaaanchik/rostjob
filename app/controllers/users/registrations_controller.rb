@@ -21,7 +21,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def landing_for_customer; end
 
   def contractor_info
-    @message = 'Для регистрации для найма персонала обратитесь по адресу manager@best-hr.pro или по номеру +7 960 079 06 41'
+    @message = 'Для регистрации или найма персонала обратитесь по адресу manager@best-hr.pro или по номеру +7 960 079 06 41'
     render 'users/inform_page'
   end
 

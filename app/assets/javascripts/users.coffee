@@ -27,7 +27,7 @@ class Users
 
     if location.pathname == '/profile/production_sites/' + id + '/orders'
       messageFirst = 'Это окно где расположены все Ваши заявки. Чтобы их посмотреть используйте "+" рядом с вкладкой.'
-      messageSecond = 'Чтобы не создавать каждый раз одни и те же заявки в Jobny RU используют Шаблоны. ' +
+      messageSecond = 'Чтобы не создавать каждый раз одни и те же заявки в ROSTJOB используют Шаблоны. ' +
         'Шаблон - это неопубликованная Заявка. Создайте его с помощью 3 шагов, а затем опубликуйте.'
       script_steps = [{ 'click #order-templates': messageFirst, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
@@ -43,7 +43,7 @@ class Users
       return
 
     if $('#production-site-list').length
-      message = 'Добро пожаловать на портал для поиска персонала Jobny-RU. Ваши заявки будут находиться здесь.'
+      message = 'Добро пожаловать на портал для поиска персонала ROSTJOB. Ваши заявки будут находиться здесь.'
       script_steps = [{ '#right_window #production-site-list': message, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
 

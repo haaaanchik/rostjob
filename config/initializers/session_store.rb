@@ -1,2 +1,2 @@
 Rails.application.config.session_store :active_record_store,
-                                       key: '_jobnyru_session'
+                                       key: '_rostjob_session'

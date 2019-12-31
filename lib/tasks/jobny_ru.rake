@@ -1,11 +1,11 @@
-namespace :jobny_ru do
+namespace :rostjob do
   namespace :seed do
     desc 'Populate database. All entities.'
     task all: :environment do
       p 'Зполняем базу данными'
-      Rake::Task['jobny_ru:seed:clients'].invoke
-      Rake::Task['jobny_ru:seed:staff'].invoke
-      Rake::Task['jobny_ru:seed:references'].invoke
+      Rake::Task['rostjob:seed:clients'].invoke
+      Rake::Task['rostjob:seed:staff'].invoke
+      Rake::Task['rostjob:seed:references'].invoke
     end
   end
 end

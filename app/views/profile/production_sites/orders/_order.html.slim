@@ -16,7 +16,7 @@
             p.m-0
               | #{order.title}. #{order.skill}
           td.text-center.align-items-center.pr-1 width="12%"
-            .bg-jobny-ru.text-right.z-depth-2.rounded.mb-0.position-relative
+            .bg-rostjob.text-right.z-depth-2.rounded.mb-0.position-relative
               p.white-text.m-1.font-weight-bold
                 i.fas.fa-user-check
                 |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}
@@ -26,7 +26,7 @@
           /       i.fas.fa-arrow-alt-circle-down
   .col-12.p-0.collapsable_card data-order-id=order.id class="#{'collapse' unless order.advertising?}"
     .card.testimonial-card.w-100.z-depth-0.border
-      .card-up.lighten-1.card-up-hr class="#{order.advertising? ? 'advertising' : 'bg-jobny-ru'}"
+      .card-up.lighten-1.card-up-hr class="#{order.advertising? ? 'advertising' : 'bg-rostjob'}"
         .container
           .row.m-card-up
             .p-0.d-flex.align-self-stretch.w-100
@@ -74,7 +74,7 @@
             .col-md-9.pr-0.pl-0
               / = render partial: 'orders/urgency', locals: { order: order }
               .d-flex.justify-content-end
-                .bg-jobny-ru.text-right.z-depth-1.rounded.mb-0.position-relative
+                .bg-rostjob.text-right.z-depth-1.rounded.mb-0.position-relative
                   p.white-text.m-1.h4
                     i.fas.fa-user-check
                     |  #{order.candidates.hired.count + order.candidates.disputed.count} / #{order.number_of_employees}

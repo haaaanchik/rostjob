@@ -1,0 +1,13 @@
+[Unit]
+Description=ROSTJOB Job Scheduler
+
+[Service]
+Type=simple
+User=deploy
+WorkingDirectory=/webhome/rostjob/current
+ExecStart=/bin/bash -lc 'RAILS_ENV=production bundle exec rake resque:scheduler 2>&1'
+TimeoutSec=15
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
