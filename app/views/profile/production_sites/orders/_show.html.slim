@@ -31,10 +31,6 @@
                 p.h5.card-title.white-text
                   | #{order.title} #{order.skill} - #{order.place_of_work}
             td.align-bottom.text-center width="15%"
-              = link_to edit_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm green' do
-                i.fas.fa-pen-alt
-              p.card-title.white-text
-                | Редактировать
             - unless order.completed?
               td.align-bottom.text-right
                 = link_to complete_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm red',
