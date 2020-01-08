@@ -1,6 +1,6 @@
 class Users
   @init: ->
-    admin_path = location.pathname.match(/\/admin\//g)
+    admin_path = location.pathname.match(/\/admin/g)
     @enjoyHintProccess() if admin_path == null
 
   @enjoyHintProccess: ->
@@ -31,7 +31,7 @@ class Users
         'Шаблон - это неопубликованная Заявка. Создайте его с помощью 3 шагов, а затем опубликуйте.'
       script_steps = [{ 'click #order-templates': messageFirst, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
-      $('.mybtn').on 'click', (evt) ->
+      $('.mybtn#order-templates').on 'click', (evt) ->
         button = evt.target
         card = button.closest('.card-primary')
         card_body = card.querySelector('.js-table')
