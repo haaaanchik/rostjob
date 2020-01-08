@@ -1,17 +1,69 @@
-.col-md-9.order-md-2.order-1
-  .container-fluid style="margin-top: 10px; height: calc(100vh - 65px);"
-    .row.h-100
-      .col-9.h-100.d-flex.flex-column
-        .ticket-messages.border style='flex: 1 1 auto; overflow-y: auto; min-height: 0px;'
-          = render partial: 'profile/tickets/messages/message', collection: @ticket.messages
-        - if @ticket.opened?
-          .form-inline.w-100.p-2.border
-            = form_with model: Message.new, url: profile_ticket_messages_path(@ticket), class: 'd-flex flex-fill', id: 'ticket_message_form' do |f|
-              = f.text_field :text, class: 'form-control flex-fill align-self-center', placeholder: 'Наберите текст сообщения'
-              = f.submit 'Отправить', class: 'btn btn-success align-self-center'
-      .col-3.h-100.pt-3.border.text-center
-        = @ticket.header
-        hr
-        - if @ticket.proposal_employee && !@ticket.proposal_employee.revoked?
-          = link_to revoke_profile_proposal_employee_path(@ticket.proposal_employee), class: 'btn btn-success', method: :put, remote: true do
-            |Отозвать анкету
+#ticket_page.d-flex.flex-column.w-100
+  h2.text-center Тикет № #{@ticket.id}
+  - if @ticket.proposal_employee.present?
+    .d-flex.h-100
+      .col-9
+        .d-flex.flex-column.justify-content-end.border.p-2.h-100
+          #ticket-messages.mb-2.card-scroll-window.scrollbar-near-moon.thin
+            = render partial: 'profile/tickets/messages/message', collection: @ticket.messages.decorate
+            - if !@ticket.proposal_employee.revoked?
+              .d-flex.ticker-message.py-1.my-2.mx-1
+                - if @ticket.proposal_employee
+                  .answers.w-100.d-flex.justify-content-center.align-items-center
+                    = link_to revoke_profile_proposal_employee_path(@ticket.proposal_employee), method: :put, remote: true do
+                      | Я хочу отозвать Анкету
+
+          - if @ticket.opened?
+            .form-inline.w-100.p-2
+              = form_with model: Message.new, url: profile_ticket_messages_path(@ticket), class: 'd-flex flex-fill', id: 'ticket_message_form' do |f|
+                = f.text_area :text, rows: 2, class: 'form-control flex-fill w-100', placeholder: 'Наберите текст сообщения'
+                = f.submit 'Отправить', class: 'btn btn-success'
+      .col-3.p-2#right-part
+        .custom-list.card.card-success.card-list.h-100
+          .card-header.d-flex.justify-content-between
+            .card-title.mb-0.text-white.font-weight-bold.text-left.mr-1
+              = @ticket.proposal_employee.order.production_site.title
+            .card-tools#production-site
+              = @ticket.proposal_employee.order.city
+
+          .card-body.js-custom-column-body.card-scroll-window
+            .card-wrapper
+              .cart-wrapper__title.p-2
+                = @ticket.proposal_employee.order.title
+              .cart-wrapper__body.m-2
+                .moveable.card.card-success data-emp-cv-id="#{@ticket.proposal_employee.id}"
+                  span.d-flex class="interview-date-show" data-toggle="popover" data-placement="top" data-html='true'
+                  .card-header.d-flex.justify-content-around.align-items-center
+                    p.initials.text-white
+                      = link_to @ticket.proposal_employee.employee_cv.name, edit_profile_employee_cv_path(@ticket.proposal_employee.employee_cv), class: 'white-text', remote: true
+                    .card-tools
+                      button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                        i.fas.fa-ellipsis-h
+                      .dropdown-menu x-placement="bottom-start" style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;"
+                        = link_to 'Отправить',
+                                  profile_favorites_path(employee_cv_id: @ticket.proposal_employee.employee_cv),
+                                  class: 'dropdown-item',
+                                  data: { type: :script },
+                                  remote: true
+                        = link_to 'Изменить', edit_profile_employee_cv_path(@ticket.proposal_employee.employee_cv), class: 'dropdown-item', remote: true
+                        a.comment-emp-cv.dropdown-item href="#"  Комментарий
+                        .dropdown-divider
+                        = link_to 'Удалить',
+                                  profile_employee_cv_path(@ticket.proposal_employee.employee_cv),
+                                  data: {confirm: 'Удалить анкету?'},
+                                  class: 'dropdown-item',
+                                  method: :delete,
+                                  remote: true
+
+                  .card-body
+                    p.card_phone_number = @ticket.proposal_employee.employee_cv.phone_number
+                    .card_bottom
+                      = text_area_tag :comment,
+                                      @ticket.proposal_employee.employee_cv.comment,
+                                      class: 'card_textarea js-call-popup default-scroll w-100',
+                                      placeholder: 'Напишите комментарий…',
+                                      style: 'overflow-y: scroll; overflow-wrap: break-word;',
+                                      dir: 'auto'
+                    .d-flex.justify-content-around.align-items-center.mt-2
+                      = image_tag  "/img/no-avatar.jpg", size: '30'
+                      = @ticket.user_full_name

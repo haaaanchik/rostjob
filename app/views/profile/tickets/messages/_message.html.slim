@@ -1,6 +1,12 @@
-.row.m-0
-  .col-3
-    = message.created_at
-    = message.sender_name
-  .col-9
-    = message.text
+.d-flex.ticker-message.py-1.my-2.mx-1
+  .col-2
+    .h-100.d-flex.flex-column.justify-content-center.align-items-center
+      = image_tag  "/img/no-avatar.jpg", size: '85'
+      .message-sender-name
+        = message.sender_name
+  .col-10
+    .h-100.d-flex.flex-column.justify-content-between
+      .message-text
+        = message.text
+      .message-date.text-right
+        = message.message_ctreated_at
