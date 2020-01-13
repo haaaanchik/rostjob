@@ -1,101 +1,114 @@
-- ids_titles = @orders.pluck(:id, :title).sort_by { |arr| arr.last }
+.pr-site-order-show
+  .grey.lighten-4.text-center.main-workspace
+    .row.ml-0.mr-0.scrollbar-near-moon.thin#main_row
+      // левый блок
+      .card.card-primary.working_platform.p-1
+        .card-header.p-0 style="background-color: white"
+          .input-group.input-group-sm
+            input.form-control.form-control-navbar type="search" placeholder="Search" aria-label="Search"
+            .input-group-append
+              button.btn.btn-navbar type="submit"
+                i.fas.fa-search
 
-.col-md-2.mt-4
-  .cointainer.w-100.p-0
-    .row
-      .col
-        | Список Заявок
+        .card-body.card-scroll-window style="display: block;"
+          - production_sites.includes(:orders).each do |pr_site|
+            .custom-list.card.card-success.card-list.mb-2
+              .card-header
+                h2.card-title.text-left.mb-0.text-white = pr_site.title
+                .card-tools.town
+                  span.number_of_people_span = pr_site.city
+              .card-body
+                .card-scroll-window
+                  - pr_site.orders.each do |pr_site_order|
+                    .card-header.without_bc.elem_in_list.js-elem-in-list.clickable-order-row.hoverable data-href="#{profile_production_site_order_path(pr_site, pr_site_order)}"
+                      h3.card-title.left.mb-0
+                        | ##{pr_site_order.id}
+                        |  #{pr_site_order.title}
+                      .card-icons
+                        .card-icons-link
+                          span.message = pr_site_order.proposal_employees.inbox.count
+                          i.far.color-black.fa-envelope
+                        .card-icons-link
+                          span = pr_site_order.number_free_places
+                          i.fas.color-black.fa-users
+                        .card-icons-link
+                          span = pr_site_order.without_inbox_candidate_count
+                          i.far.color-black.fa-flag
 
-    .row.mt-4
-      - ids_titles.each do |id_title|
-        .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
-          = label nil,
-                  nil,
-                  class: 'form-check-label clickable-order-row hoverable',
-                  data: { href: id_title.first } do
-            p.border.rounded.z-depth-1.m-0.truncate[style="width: 220px;"]
-              = order.decorate.icon_bookmark(id_title.first)
-              span.mr-2 = truncate(id_title.last, length: 22, separator: '.')
+      //правый блок
+      .application
+        .application__header.d-flex.align-items-center.justify-content-around.my-2.bg-rostjob.text-white
+          p.pl-2.my-1
+            | №#{ order.id }
+          h5.my-1.application__title
+            | #{order.title} #{order.skill} - #{order.place_of_work}
+          - unless order.completed?
+            .align-bottom.text-right
+              = link_to complete_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm red',
+                      remote: true, method: :put, data: {confirm: 'Завершить заявку?'}, title: 'Завершение заявки' do
+                i.fas.fa-times
+              | Завершить
 
-.order-md-2.mt-4[class=col_class]
-  .card.testimonial-card.card-hr.w-100
-    .card-up.bg-rostjob.lighten-1.card-up-hr.pr-1
-      table[width="100%" height="90px"]
-        tbody
-          tr
-            td.align-bottom.w-10
-              p.h5.card-title.white-text.text-center
-                | №#{order.id}
-            td.align-bottom
-              .d-none.d-sm-block
-                p.h5.card-title.white-text
-                  | #{order.title} #{order.skill} - #{order.place_of_work}
-            td.align-bottom.text-center width="15%"
-            - unless order.completed?
-              td.align-bottom.text-right
-                = link_to complete_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm red',
-                  remote: true, method: :put, data: { confirm: 'Завершить заявку?' }, title: 'Завершение заявки' do
-                  i.fas.fa-times
-                p.card-title.white-text
-                  | Завершить
-    .w-100.p-0
-      .row.p-0.m-0.grey.lighten-4.text-center
-        .col-md-3.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.yellow-text
-          u.font-weight-bold
-            | В очереди
-          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                     state: 'inbox' }
-          hr
-          .reserve-block
-            i.fas.fa-bookmark.ml-2.mr-2.blue-text
-            u.font-weight-bold.fas
-              | Резер
-            = order.decorate.icon_chevron_or_minus
-          .reserve-items
-            = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                       state: 'reserved'}
-          hr
-          .border.rounded.white.p-3
-            p
-              | Осталось #{ order.number_free_places } человека
-            .hoverable.clickable-employee-cv data-toggle="modal" data-target='#addNewQuantityEmployeeModal'
-              i.fas.fa-plus.blue-text.mr-2
-              | Добавить персонал
-        .col-md-3.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.orange-text
-          u.font-weight-bold
-            | Собеседование
-          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                     state: 'interview' }
+        .application__body#app__body
+          .card.testimonial-card.card-hr.w-100
+            .w-100.p-0
+              .row.p-0.m-0.grey.lighten-4.text-center
+                .col-md-3.p-1
+                  i.fas.fa-bookmark.ml-2.mr-2.yellow-text
+                  u.font-weight-bold
+                    | В очереди
+                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                             state: 'inbox' }
+                  hr
+                  .reserve-block
+                    i.fas.fa-bookmark.ml-2.mr-2.blue-text
+                    u.font-weight-bold.fas
+                      | Резер
+                    = order.decorate.icon_chevron_or_minus
+                  .reserve-items
+                    = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                               state: 'reserved'}
+                  hr
+                  .border.rounded.white.p-3
+                    p
+                      | Осталось #{ order.number_free_places } человека
+                    .hoverable.clickable-employee-cv data-toggle="modal" data-target='#addNewQuantityEmployeeModal'
+                      i.fas.fa-plus.blue-text.mr-2
+                      | Добавить персонал
+                .col-md-3.p-1
+                  i.fas.fa-bookmark.ml-2.mr-2.orange-text
+                  u.font-weight-bold
+                    | Собеседование
+                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                             state: 'interview' }
 
-        .col-md-3.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.green-text
-          u.font-weight-bold
-            | Нанят
-          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                     state: 'hired'}
+                .col-md-3.p-1
+                  i.fas.fa-bookmark.ml-2.mr-2.green-text
+                  u.font-weight-bold
+                    | Нанят
+                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                             state: 'hired'}
 
-        .col-md-3.p-1
-          i.fas.fa-bookmark.ml-2.mr-2.grey-text
-          u.font-weight-bold
-            | Оплачен
-          = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                     state: 'paid' }
+                .col-md-3.p-1
+                  i.fas.fa-bookmark.ml-2.mr-2.grey-text
+                  u.font-weight-bold
+                    | Оплачен
+                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
+                                                                                                             state: 'paid' }
 
-.modal.fade.left id="addNewQuantityEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addNewQuantityEmployeeModalLabel" aria-hidden="true"
-  .modal-dialog.modal-lg role="document"
-    .modal-content
-      = form_for order,
-                 url: update_pre_publish_profile_production_site_order_path(production_site),
-                 remote: true,
-                 method: :put do |f|
-        .modal-header
-          h4.modal-title Добавить персонал
-          button.close type="button" data-dismiss="modal" aria-label="Close"
-            span aria-hidden="true" &times;
-        .modal-body
-          .offset-2.col-8
-            = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников', class: 'form-control'
-        .modal-footer
-          = f.submit 'Добавить', class: 'btn btn-success'
+      .modal.fade.left id="addNewQuantityEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addNewQuantityEmployeeModalLabel" aria-hidden="true"
+        .modal-dialog.modal-lg role="document"
+          .modal-content
+            = form_for order,
+                       url: update_pre_publish_profile_production_site_order_path(production_site),
+                       remote: true,
+                       method: :put do |f|
+              .modal-header
+                h4.modal-title Добавить персонал
+                button.close type="button" data-dismiss="modal" aria-label="Close"
+                  span aria-hidden="true" &times;
+              .modal-body
+                .offset-2.col-8
+                  = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников', class: 'form-control'
+              .modal-footer
+                = f.submit 'Добавить', class: 'btn btn-success'

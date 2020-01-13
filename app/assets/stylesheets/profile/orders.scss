@@ -10,3 +10,256 @@
 .reserve-items {
   display: none;
 }
+
+.pr-site-order-show {
+  .card-scroll-window {
+    height: 242px;
+    overflow-y: scroll;
+  }
+
+  .card {
+    box-shadow: none;
+  }
+
+  .main-workspace {
+    overflow-x: auto;
+    top: 65px;
+    max-height: calc(100vh - 65px);
+  }
+
+  .main-workspace .row {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .card-body {
+    padding: 0.5rem ;
+  }
+
+  .card-header{
+    min-height: 40px;
+    padding: 0.5rem;
+    background-color: #28a745;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .card-title{
+    width: 100%;
+    float: none !important;
+  }
+
+  .number_of_people_span{
+    border-radius: 5px;
+    background-color: white;
+    padding: 4px;
+    color: black;
+  }
+
+  #main_row{
+    overflow: auto;
+    width: 100%;
+    height: 91.5vh;
+    //padding-left: 4.5rem;
+  }
+
+  .application {
+    width: calc(100% - 340px);
+    /*margin-left: 24%;*/
+    margin-left: 365px;
+  }
+
+  .application__body{
+    display: flex;
+    overflow: inherit;
+  }
+
+  /*   From customer.css    */
+
+  .working_platform {
+    position: fixed;
+    width: 342px;
+    overflow-y: auto;
+    height: 90vh;
+    min-width: 340px;
+    z-index: 100;
+    box-shadow: none;
+  }
+
+  .btn {
+    box-shadow: none;
+  }
+
+  .elem_in_list {
+    margin-bottom: 5px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 1%;
+  }
+
+  .without_bc {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  .card-icons {
+    width: auto;
+    padding-right: 10px;
+    display: inline-flex;
+    justify-content: flex-end;
+  }
+
+  .card-icons-link{
+    display: flex;
+    align-items: baseline;
+    margin-left: 5px;
+  }
+
+  .card-icons-link span{
+    margin-right: 2px;
+  }
+
+  .custom-list .card-title {
+    padding: 0.5rem;
+    text-align: left;
+  }
+
+  .card-title.left, .card-title.text-left {
+    width: 90%;
+  }
+
+  .card-title.text-left{
+    width: 80%;
+  }
+
+  .card-tools.town {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+
+  .number_of_people_span {
+    border: 2px solid silver;
+    border-radius: 5px;
+    background-color: silver;
+    padding: 2px;
+    color: black;
+    font-weight: bold;
+  }
+
+  .card-icons-link span {
+    color: black;
+  }
+
+
+  .input-group{
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+  }
+
+  .btn-navbar{
+    color: rgba(0,0,0,.6);
+    background-color: white;
+    border-radius: 5px !important;
+    box-shadow: none;
+  }
+
+  .color-black{
+    color: black;
+  }
+
+  #app__body{
+    position: relative;
+  }
+
+  /*Media*/
+
+  @media (max-width: 1400px) {
+    .application{
+      /*margin-left: 27%;*/
+      margin-left: 335px;
+    }
+
+    .application__header{
+      justify-content: space-evenly !important;
+    }
+
+    .application__title{
+      font-size: 1rem;
+    }
+
+    #main_row:not(*:root) {
+      height: 89vh;
+    }
+  }
+
+  @media (max-width: 1300px){
+
+    .application{
+      /*margin-left: 13px;*/
+      margin-left: 300px;
+      width: calc(100% - 300px);
+    }
+
+    .custom-list .card-title {
+      padding: 0.2rem;
+    }
+
+    .working_platform{
+      min-width: 300px;
+      width: 300px;
+    }
+
+  }
+
+  @media (max-width: 1150px){
+    .working_platform{
+      display: none;
+    }
+
+    .application {
+      margin-left: 13px;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 1000px){
+    .working_platform{
+      display: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    #add{
+      display: none;
+    }
+
+    #app__body{
+      flex-wrap: wrap;
+    }
+
+  }
+
+  @media (max-width: 600px){
+    #main_row{
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 400px){
+    .application{
+      margin-left: 0;
+      width: 100%;
+    }
+
+    #main_row{
+      flex-direction: column;
+      padding-left: 0;
+    }
+  }
+}

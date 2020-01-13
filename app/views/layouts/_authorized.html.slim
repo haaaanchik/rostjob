@@ -17,5 +17,5 @@
     = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }
 
 .content-wrapper
-  .row.ml-0.mr-0.scrollbar-near-moon.thin#right_window style="#{'display: block' if body_controller == 'profile_production_sites_orders_index' || body_controller == 'profile_employee_cvs_index' }"
+  .row.ml-0.mr-0.scrollbar-near-moon.thin#right_window style="#{ add_display_block }"
     = yield

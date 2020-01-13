@@ -2,7 +2,13 @@ module ApplicationHelper
 
   def body_controller
     params[:controller].split('/').push(params[:action]).join('_')
-    #controller.class.to_s.gsub('::', '').gsub('Controller', '')
+  end
+
+  def add_display_block
+    controller_list = ['profile_production_sites_orders_index',
+                       'profile_employee_cvs_index',
+                       'profile_production_sites_orders_show']
+    'display: block' if controller_list.include?(body_controller)
   end
 
   def question_help(title)

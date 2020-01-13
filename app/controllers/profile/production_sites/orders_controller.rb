@@ -24,7 +24,6 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def show
     order
-
     order.proposal_employees.map(&:mark_as_read)
   end
 
