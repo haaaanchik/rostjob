@@ -1,0 +1,38 @@
+.profile-mobile
+  .mobile-list class="#{'mobile-list__active' if active_item == :root}"
+    = link_to root_path,
+            title: 'Главная',
+            class: 'mobile-menu-text' do
+      i.fas.fa-home.svg-sidebar
+      span.ml-3.icon-text Главная
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :employee_lists}"
+    = link_to profile_employee_cvs_path,
+            id: 'employee_cvs_list',
+            title: 'Список Анкет',
+            class: 'mobile-menu-text' do
+      i.fas.fa-address-card.svg-sidebar
+      span.ml-3.icon-text Список Анкет
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :sent}"
+    = link_to profile_proposal_employees_path,
+            id: 'employee_cvs_sent',
+            title: 'Фильтры',
+            class: 'mobile-menu-text' do
+      i.fas.fa-filter.svg-sidebar
+      span.ml-3.icon-text Фильтры
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :orders}"
+    = link_to orders_path,
+            id: 'orders_catalog',
+            title: 'Каталог заявок',
+            class: 'mobile-menu-text' do
+      i.fas.fa-align-justify.svg-sidebar
+      span.ml-3.icon-text Каталог заявок
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :favorites}"
+    = link_to profile_favorites_path,
+            title: 'Избранные заявки',
+            class: 'mobile-menu-text' do
+      i.fas.fa-star.svg-sidebar
+      span.ml-3.icon-text Избранные заявки

@@ -1,32 +1,10 @@
 nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
-  a.p-2.button-collapse.ml-2 href='#'
+  .p-2.button-collapse.ml-2
     i.fas.fa-bars
 
-  .mobile-menu
-    .customer-mobile
-      .mobile-list
-        a.mobile-menu-text href='#' title='Главная'
-          | Главная
-      .mobile-list
-        a.mobile-menu-text href='#' title='Каталог заявок'
-          | Каталог заявок
-      .mobile-list
-        a.mobile-menu-text href='#' title='Список анкет'
-          | Список анкет
-    hr
-    .profile-mobile
-      .mobile-list
-        a.mobile-menu-text href='#' title='Главная'
-          | Главная
-      .mobile-list
-        a.mobile-menu-text href='#' title='Каталог заявок'
-          | Анкеты
-      .mobile-list
-        a.mobile-menu-text href='#' title='Список анкет'
-          | Фильтр
-      .mobile-list
-        a.mobile-menu-text href='#' title='Список анкет'
-          | Заявки
+  .mobile-menu.bg-primary
+    = render partial: "interface/navbar/mobile/#{@current_profile&.profile_type }",
+            locals: { active_item: @active_item }
 
   form.form-inline.ml-3
     .input-group.input-group-sm

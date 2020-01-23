@@ -1,0 +1,22 @@
+.customer-mobile
+  .mobile-list class="#{'mobile-list__active' if active_item == :root}"
+    = link_to root_path,
+            title: 'Главная',
+            class: 'mobile-menu-text' do
+      i.fas.fa-home.svg-sidebar
+      span.ml-3.icon-text Главная
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :production_sites}"
+    = link_to profile_production_sites_path,
+            title: 'Заявки',
+            id: 'production-site-list',
+            class: 'mobile-menu-text' do
+      i.fas.fa-city.svg-sidebar
+      span.ml-3.icon-text Заявки
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :candidates}"
+    = link_to profile_candidates_path,
+            title: 'Анкеты',
+            class: 'mobile-menu-text' do
+      i.fas.fa-address-card.svg-sidebar
+      span.ml-3.icon-text Анкеты

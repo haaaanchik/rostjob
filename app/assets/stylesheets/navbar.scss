@@ -143,6 +143,9 @@
     }
   }
 
+  .button-collapse {
+    cursor: pointer;
+  }
   /*    Mobile menu    */
 
   .mobile-menu {
@@ -155,18 +158,19 @@
 
 
     .mobile-menu-text {
-      color: black;
+      //color: black;
       font-size: 15px;
       margin-bottom: 0;
       font-weight: bold;
     }
 
-    .mobile-menu-text:hover {
-      color: black;
-    }
-
     .mobile-list {
       padding: 0.5rem 1.9rem;
+
+      &:hover, &__active {
+        background-color: rgba(255, 255, 255, .1);
+        color: #fff;
+      }
     }
   }
 }
