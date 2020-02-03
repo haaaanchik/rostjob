@@ -10,7 +10,7 @@ class Users
     id = if locPath == null then locPath else locPath.join()
     return if $('#order_template_form').length or $.cookie('profile_type') == 'contractor' or $.cookie('profile_type') == null or
       $.cookie('terms_of_service') == 'false' or $.cookie('password_changed_at') == null or
-      $.cookie('updated_by_self_at') == null or $.cookie('first_order_template_created') == 'true'
+      $.cookie('updated_by_self_at') == null or $.cookie('first_order_template_created') == 'true' or window.innerWidth < 401
 
     if location.pathname == '/profile/production_sites'
       productionSiteExist = $('#first_pr_site').length
