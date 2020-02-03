@@ -6,21 +6,25 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
     = render partial: "interface/navbar/mobile/#{@current_profile&.profile_type }",
             locals: { active_item: @active_item }
 
-  form.form-inline.ml-3
-    .input-group.input-group-sm
-      input.form-control.form-control-navbar type='search' placeholder='Search' aria-label='Search'
-      .input-group-append
-        button.btn.btn-navbar type='submit'
-          i.fas.fa-search
+  a href="#" class="main-logo"
+    = image_tag '/img/new/JOB_ME_logo.png'
 
-  ul.navbar-nav.ml-auto
-    li.nav-item
-      = link_to profile_tickets_path, class: 'nav-link waves-effect waves-light' do
-        i.far.fa-comments
-        span.badge.badge-danger.navbar-badge
-          = @opened_tickets_count
 
-    li.nav-item
-      = link_to logout_path, class: 'dropdown-item bg-rostjob-a', method: :delete do
-        i.fas.fa-sign-out-alt.mr-2
-        | Выход
+  .navbar__icons
+    .search
+        button type="button" class="button"
+        input type="search" class="search-input" placeholder="Поиск"
+
+    a href="#" class="icon-link"
+        = image_tag '/img/new/bell.png'
+        = image_tag('/img/new/Rounded_Rectangle_red.png', class: 'number-of-messages-bg')
+        span class="number-of-messages" 1
+
+    a href="#" class="icon-link"
+        = image_tag '/img/new/communications.png'
+        = image_tag('/img/new/Rounded_Rectangle_blue.png', class: 'number-of-messages-bg')
+        span class="number-of-messages" 2
+
+    a href="" class="icon-link"
+        = image_tag '/img/new/exit.png'
+

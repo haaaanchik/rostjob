@@ -1,21 +1,18 @@
 #interface-navbar
   = render 'interface/navbar'
-  .custom-side-nav.bg-primary
-    .side-nav-logo
-      = link_to root_path, class: 'brand-link' do
-        = image_tag asset_path('logo.png'), id: 'main_logo', alt: 'Main logo', class: 'img-fluid flex-center'
-        - if Rails.env.staging?
-          span.counter
-            b stage
-          br
-    hr
-    .side-bar-avatar
-      .side-nav-img-container
-        = link_to edit_profile_path do
-          =image_tag '/img/no-avatar.jpg', class: 'img-circle elevation-2', alt: 'User Image'
-    hr
-    = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }
 
-.content-wrapper
-  .row.ml-0.mr-0.scrollbar-near-moon.thin#right_window style="#{ add_display_block }"
-    = yield
+
+.navside
+    a href="#" class="user-logo"
+     = image_tag '/img/new/user-logo.png'
+
+    .navside__menu
+       a href="#" class="navside__menu-item"
+           = image_tag '/img/new/home.png'
+           p Главная
+       a href="#" class="navside__menu-item"
+           = image_tag '/img/new/question.png'
+           p class="" Заявки
+       a href="#" class="navside__menu-item"
+           = image_tag '/img/new/ancets.png'
+           p class=""Анкеты
