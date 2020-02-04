@@ -1,19 +1,14 @@
 .container
-  h2.text-center
-    | Введите данные для профиля
-  hr
+  h2.users-edit-title
+    | Настройки профиля
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     .row
-      .col-md-3
-        .card.card-cascade
-          .view.view-cascade.overlay
-            = image_tag '/img/no-avatar.jpg', class: 'img-fluid'
-      .col-md-9.personal-info
+      .col-md-10.offset-md-1.personal-info
         = devise_error_messages!
         .form-group
           .d-flex.align-items-center
             .col-lg-3.control-label
-              = f.label :full_name, label_full_name(resource)
+              = f.label :full_name, 'Наименование организации'
             .col-lg-8
               = f.text_field :full_name, class: 'form-control'
 
@@ -23,24 +18,33 @@
               = f.label :password
             .col-lg-8
               = f.password_field :password, class: 'form-control', autocomplete: 'off'
-              em
-                | минимум 8 символов
         .form-group
           .d-flex.align-items-center
             .col-lg-3.control-label
-              = f.label :password_confirmation
+              = f.label :password_confirmation, 'Повтор пароля'
             .col-lg-8
               = f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off'
         - unless f.object.password_changed_at.nil?
-          .form-group
+          /.form-group
             .row
               .col-lg-3.control-label
                 = f.label :current_password
               .col-lg-8
                 = f.password_field :current_password, class: 'form-control', autocomplete: 'off'
+          .form-group
+            .row
+              .col-md-3.control-label
+                p Логотип компании
+              .col-md-2.avatar
+                = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
+              .col-md-7.d-flex.flex-column
+                #choose-file
+                  | Выберите файл
+                  input type="file"
+                div
+                    input type="radio" id="radio-for-logo"
+                    label for="radio-for-logo" class="without-logo" Без логотипа
         .form-group
           .row
-            .col-lg-3.control-label
-              label
-            .col-lg-3
-              = f.submit 'Сохранить', class: 'btn btn-primary'
+            .col-12
+              = f.submit 'Сохранить', class: ' submit'
