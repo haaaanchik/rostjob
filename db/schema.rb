@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_23_124626) do
+ActiveRecord::Schema.define(version: 2020_02_04_123722) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -423,6 +423,7 @@ ActiveRecord::Schema.define(version: 2019_12_23_124626) do
     t.timestamp "interview_date"
     t.bigint "dst_order_id"
     t.datetime "payment_date"
+    t.boolean "approved_by_admin", default: false
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"

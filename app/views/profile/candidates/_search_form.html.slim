@@ -50,4 +50,9 @@
       p.rounded.default-color.m-0.filters-elem.w-100
         i.fas.fa-bookmark.ml-2.mr-2
         span.mr-2.profession Перенос
-
+  .form-check.form-check-inline.my-2
+    = check_box_tag 'q[state_in][]', 'approved', filter&.include?('approved'), {class: 'form-check-input', id: 'candidate_filter_approved'}
+    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_approved' do
+      p.rounded.yellow.m-0.filters-elem.w-100
+        i.fas.fa-bookmark.ml-2.mr-2
+        span.mr-2.profession Ждет акта

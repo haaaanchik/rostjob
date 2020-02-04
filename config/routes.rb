@@ -93,6 +93,10 @@ Rails.application.routes.draw do
     resources :proposal_employees, only: %i[index show] do
       member do
         put :revoke
+        put :approve_act
+      end
+      collection do
+        get :approval_list
       end
       scope module: :proposal_employees do
         resources :complaints, only: %i[] do
@@ -208,6 +212,10 @@ Rails.application.routes.draw do
     resources :candidates, only: %i[index show] do
       member do
         put :revoke
+        put :approve_act
+      end
+      collection do
+        get :approval_list
       end
     end
     resources :order_templates do

@@ -3,6 +3,7 @@ module ProposalEmployeeRepository
 
   included do
     scope :available, ->(profile_id) { where(state: %w[applyed], profile_id: profile_id) }
+    scope :approved_by_admin, -> { where(approved_by_admin: false, state: 'paid') }
     scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
     scope :candidates, lambda { |profile_id|
       where.not(state: 'revoked').joins(:order).joins(:employee_cv).where('orders.profile_id = ?', profile_id)

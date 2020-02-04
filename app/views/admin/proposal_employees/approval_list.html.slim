@@ -1,0 +1,25 @@
+table.table
+  thead
+    tr
+      th
+        strong №
+      th
+        strong Анкета
+      th
+        strong Заявка
+      th
+        strong Действие
+  tbody
+    - @approval_list.each do |p_employee|
+      tr data-pr-employee-id="#{ p_employee.id }"
+        td = p_employee.id
+        td = p_employee.employee_cv.name
+        td = p_employee.order.title
+        td
+          = link_to approve_act_admin_proposal_employee_path(p_employee),
+                    class: 'green-text btn btn-sm',
+                    remote: true,
+                    method: :put do
+            i.fas.fa-check-circle.mr-2
+            | одобрить акт
+= paginate @approval_list

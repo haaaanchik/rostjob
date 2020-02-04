@@ -5,6 +5,7 @@ class Admin::ApplicationController < BaseController
 
   before_action :authenticate_staffer!
   before_action :opened_tickets_count, if: :staffer_signed_in?
+  before_action :approved_admin_count, if: :staffer_signed_in?
 
   layout 'admin'
 
@@ -12,5 +13,9 @@ class Admin::ApplicationController < BaseController
 
   def opened_tickets_count
     @opened_tickets_count ||= Ticket.opened.count
+  end
+
+  def approved_admin_count
+    @approved_admin_count = ProposalEmployee.approved_by_admin.count
   end
 end

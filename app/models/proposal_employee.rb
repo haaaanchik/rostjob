@@ -26,6 +26,7 @@ class ProposalEmployee < ApplicationRecord
     state :viewed
     state :revoked
     state :rejected
+    state :approved
     state :paid
     state :reserved
     state :transfer
@@ -50,8 +51,12 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :nbox, to: :rejected
     end
 
+    event :to_approved do
+      transitions from: :hired, to: :approved
+    end
+
     event :to_paid, after: :set_payment_date do
-      transitions from: :hired, to: :paid
+      transitions from: :approved, to: :paid
     end
 
     event :to_revoked do

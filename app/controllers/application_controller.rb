@@ -10,6 +10,7 @@ class ApplicationController < BaseController
   before_action :ensure_cr_order_and_activate, if: :user_signed_in?
   before_action :create_profile, if: :user_signed_in_without_profile
   before_action :opened_tickets_count, if: :user_signed_in?
+  before_action :p_employees_approved_count, if: :user_signed_in?
   before_action :set_user_info_to_cookies
 
   def create_profile
@@ -87,6 +88,10 @@ class ApplicationController < BaseController
                                 .opened
                                 .without_waiting(current_profile)
                                 .count
+  end
+
+  def p_employees_approved_count
+    @p_employees_approved_count = ProposalEmployee.candidates(current_profile).approved.size
   end
 
   def left_menu_items

@@ -1,0 +1,30 @@
+.d-flex.justify-content-center.w-100#proposal_employees
+  .col-lg-11.order-lg-1.mt-4
+    p.text-center.font-italic
+      |*Список анкет на подтверждение оплаты.
+    .rounded.white
+      table.table.table-sm.table-borderless.scrollbar-near-moon.thin
+        thead
+          tr
+            th
+              strong №
+            th
+              strong Анкета
+            th
+              strong Заявка
+            th
+              strong Действие
+        tbody
+          - @approval_list.each do |p_employee|
+            tr data-pr-employee-id="#{ p_employee.id }"
+              td = p_employee.id
+              td = p_employee.employee_cv.name
+              td = p_employee.order.title
+              td
+                = link_to approve_act_profile_candidate_path(p_employee),
+                          class: 'green-text btn btn-sm',
+                          remote: true,
+                          method: :put do
+                  i.fas.fa-check-circle.mr-2
+                  | одобрить акт
+    = paginate @approval_list

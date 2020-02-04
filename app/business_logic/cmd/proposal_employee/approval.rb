@@ -1,21 +1,17 @@
 module Cmd
   module ProposalEmployee
-    class Pay
+    class Approval
       include Interactor
 
       def call
-        context.fail! unless candidate.to_paid!
-        Cmd::UserActionLogger::Log.call(params: customer_params) unless context.log == false
+        context.fail! unless candidate.to_approved!
+        Cmd::UserActionLogger::Log.call(params: customer_params)
       end
 
       private
 
       def candidate
         context.candidate
-      end
-
-      def proposal_employee
-        candidate
       end
 
       def customer
@@ -29,11 +25,11 @@ module Cmd
           subject_id: customer.id,
           subject_type: 'User',
           subject_role: customer.profile.profile_type,
-          action: "Акт по анкете №#{proposal_employee.employee_cv_id} #{proposal_employee.employee_cv.name} подтвержден",
-          object_id: proposal_employee.id,
+          action: "Условие по анкете №#{proposal_employee.employee_cv_id} #{proposal_employee.employee_cv.name} выполнено",
+          object_id: candidate.id,
           object_type: 'ProposalEmployee',
-          employee_cv_id: proposal_employee.employee_cv_id,
-          order_id: proposal_employee.order_id
+          employee_cv_id: candidate.employee_cv_id,
+          order_id: candidate.order_id
         }
       end
     end

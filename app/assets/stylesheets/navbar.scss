@@ -67,10 +67,16 @@
 
   .side-bar-ul {
     padding-left: 0;
-  }
 
-  .side-bar-ul li {
-    list-style-type: none;
+    .counter {
+      margin-top: -7px;
+      margin-left: 23px;
+      padding: 1px 6px;
+    }
+
+    li {
+      list-style-type: none;
+    }
   }
 
   .side-nav-img-container {

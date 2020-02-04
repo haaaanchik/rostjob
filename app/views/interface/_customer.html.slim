@@ -18,3 +18,13 @@ ul.side-bar-ul
               class: "nav-link #{'nav-link__active' if active_item == :candidates}" do
       i.fas.fa-address-card.svg-sidebar
       p.icon-text Анкеты
+
+  li.nav-item
+    = link_to approval_list_profile_candidates_path,
+            title: 'Анкеты',
+            class: "nav-link payment-employee #{'nav-link__active' if active_item == :approve_pay}" do
+      i.fas.fa-money-bill-wave.svg-sidebar
+      p.icon-text Акты
+      span.counter
+        b = @p_employees_approved_count
+

@@ -18,6 +18,17 @@ class Profile::CandidatesController < ApplicationController
                               status: 422)
   end
 
+  def approve_act
+    @result = Cmd::ProposalEmployee::Pay.call(candidate: candidate)
+  end
+
+  def approval_list
+    @approval_list = candidates.includes(:order, :employee_cv)
+                         .approved
+                         .page(params[:page]).per(10)
+    @active_item = :approve_pay
+  end
+
   private
 
   def candidate
