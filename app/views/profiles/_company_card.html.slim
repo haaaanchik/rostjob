@@ -1,26 +1,26 @@
-- header = profile.private_person? ? 'Карточка физического лица' : 'Чтобы опубликовать заявку введите данные Вашей организации'
+- header = profile.private_person? ? 'Карточка физического лица' : 'Карточка предприятия'
 
-h4.h4-responsive.mb-3 data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
+h4.h4-responsive data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица' #{header}
 - unless profile.private_person?
   .company-search
     .form-group.row
-      = label :dadata, 'Поиск предприятия или ИП', class: 'col-3 col-form-label'
-      .col-9
+      = label :dadata, 'Поиск предприятия или ИП', class: 'col-lg-3 col-auto col-form-label'
+      .col-lg-5.col-auto
         = text_field :dadata, :search, class: 'form-control',
                 'data-auto-select' => "profile_company_dadata",
                 'data-auto-url' => "/search_company_dadata",
                 'data-autocomplete-on' => "dadata_search",
-                placeholder: 'Введите ИНН, ОГРН, наименование юридического лица или ИП'
+                placeholder: 'Введите ИНН, ОГРН, наименование юр. лица или ИП'
 = f.fields_for :company do |c|
   = c.hidden_field :legal_form, value: 'company'
   = render partial: 'companies/fields', locals: {f: c, errors: errors, profile: profile}
-  h4.h4-responsive.mt-3.pt-3 Платёжные реквизиты
+  h4.h4-responsive.pt-3 Платёжные реквизиты
   .form-group.row
-    = label :dadata, 'Поиск банка. Введите БИК', class: 'col-3 col-form-label'
-    .col-9
+    = label :dadata, 'Поиск банка ', class: 'col-lg-3 col-auto col-form-label search-bank'
+    .col-lg-5.col-auto
       = text_field :dadata, :search, class: 'form-control',
               'data-auto-select' => "profile_company_bank_dadata",
               'data-auto-url' => "/search_bank_dadata",
               'data-autocomplete-on' => "dadata_search",
-              placeholder: 'Поиск банка. Введите БИК'
+              placeholder: ' Введите БИК'
   = render partial: 'accounts/fields', locals: {f: c, errors: errors, profile: profile}

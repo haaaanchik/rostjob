@@ -8,3 +8,69 @@
 .hide-me {
     display: none !important;
 }
+
+.col-md-9{
+  max-width: 1250px;
+  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
+  border-radius: 4px;
+  background-color: #ffffff;
+  margin-left: 20px;
+}
+
+#dadata_search{
+  border: 0;
+  border-bottom: 1px solid #d7d7d7;
+  border-radius: 0;
+}
+
+.h4-responsive{
+  color: #000000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 30px 0 50px 0;
+}
+
+.h4-responsive.pt-3{
+  margin-top: 50px;
+}
+
+.col-form-label{
+  color: #000000;
+  font-family: "Open Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-group .require_field:after{
+  content: '';
+}
+
+.company-search .col-form-label{
+  font-weight: bold;
+}
+.search-bank{
+  font-weight: bold;
+}
+.new-profile-form{
+  padding-left: 15px;
+}
+
+.submit-left{
+  display: block;
+  width: 170px;
+  height: 32px;
+  border-radius: 16px;
+  border: none;
+  margin-top: 80px;
+  margin-bottom: 40px;
+  margin-left: 25.545%;
+  color: #fff;
+  background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+}
+.submit-left:hover{
+  cursor: pointer;
+}
+.form-control{
+  font-size: 14px;
+}
