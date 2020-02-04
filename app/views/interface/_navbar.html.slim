@@ -7,24 +7,19 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
             locals: { active_item: @active_item }
 
   a href="#" class="main-logo"
-    = image_tag '/img/new/JOB_ME_logo.png'
-
+    | Rost
+    span Job
 
   .navbar__icons
     .search
-        button type="button" class="button"
-        input type="search" class="search-input" placeholder="Поиск"
+      button type="button" class="button"
+      input type="search" class="search-input" placeholder="Поиск"
 
     a href="#" class="icon-link"
-        = image_tag '/img/new/bell.png'
-        = image_tag('/img/new/Rounded_Rectangle_red.png', class: 'number-of-messages-bg')
-        span class="number-of-messages" 1
+      = image_tag '/img/new/communications.png'
+      = image_tag('/img/new/Rounded_Rectangle_blue.png', class: 'number-of-messages-bg')
+      span class="number-of-messages" 2
 
     a href="#" class="icon-link"
-        = image_tag '/img/new/communications.png'
-        = image_tag('/img/new/Rounded_Rectangle_blue.png', class: 'number-of-messages-bg')
-        span class="number-of-messages" 2
-
-    a href="" class="icon-link"
-        = image_tag '/img/new/exit.png'
+      = image_tag '/img/new/exit.png'
 

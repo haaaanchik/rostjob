@@ -112,7 +112,6 @@
 
   .navbar {
     background-color: white;
-    //display: flex;
   }
 
   @media (max-width: 400px) {
@@ -160,12 +159,12 @@
     background-color: white;
     z-index: 1001;
     top: 59px;
+    left: 0;
     display: none;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
 
     .mobile-menu-text {
-      //color: black;
       font-size: 15px;
       margin-bottom: 0;
       font-weight: bold;
@@ -193,7 +192,14 @@
 }
 
 .main-logo{
-  margin-left: 0.9516%;
+  font-size: 20px;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.main-logo span{
+  color: #0f0f0f;
 }
 
 .icon-link{
@@ -302,6 +308,10 @@
 .user-logo{
   margin-top: 20px;
   margin-bottom: 30px;
+}
+
+.navside__menu-item .svg-sidebar{
+  font-size: 21px;
 }
 
 /*    Media     */
