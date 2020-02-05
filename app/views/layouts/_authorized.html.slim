@@ -1,21 +1,12 @@
 #interface-navbar
   = render 'interface/navbar'
 
+  .navside
+    = link_to edit_profile_path, class: 'user-logo' do
+      = image_tag asset_path('navside/user-logo.png')
 
-.navside
-    a href="#" class="user-logo"
-     = image_tag '/img/new/user-logo.png'
+    = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }
 
-    .navside__menu
-       a href="#" class="navside__menu-item"
-         i class="fas fa-home svg-sidebar" style="color:#fff;"
-         p Главная
-       a href="#" class="navside__menu-item"
-         i class="fas fa-city svg-sidebar" style="color:#fff;"
-         p class="" Заявки
-       a href="#" class="navside__menu-item"
-         i class="fas fa-address-card svg-sidebar" style="color:#fff;"
-         p class=""Анкеты
 .content-wrapper
   .row.ml-0.mr-0.scrollbar-near-moon.thin#right_window style="#{'display: block' if body_controller == 'profile_production_sites_orders_index' || body_controller == 'profile_employee_cvs_index' }"
     = yield

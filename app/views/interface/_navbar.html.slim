@@ -6,20 +6,22 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
     = render partial: "interface/navbar/mobile/#{@current_profile&.profile_type }",
             locals: { active_item: @active_item }
 
-  a href="#" class="main-logo"
+  = link_to root_path, class: 'main-logo' do
     | Rost
     span Job
+    - if Rails.env.staging?
+      span.counter
+        b stage
 
   .navbar__icons
     .search
       button type="button" class="button"
       input type="search" class="search-input" placeholder="Поиск"
 
-    a href="#" class="icon-link"
-      = image_tag '/img/new/communications.png'
-      = image_tag('/img/new/Rounded_Rectangle_blue.png', class: 'number-of-messages-bg')
-      span class="number-of-messages" 2
+    = link_to profile_tickets_path, class: 'icon-link ' do
+      = image_tag asset_path('navbar/communications.png')
+      = image_tag asset_path('navbar/Rounded_Rectangle_blue.png'), class: 'number-of-messages-bg'
+      span.number-of-messages = @opened_tickets_count
 
-    a href="#" class="icon-link"
-      = image_tag '/img/new/exit.png'
-
+    = link_to logout_path, class: 'icon-link', method: :delete do
+      = image_tag asset_path('navbar/exit.png')

@@ -26,7 +26,7 @@ class Profile::CandidatesController < ApplicationController
     @approval_list = candidates.includes(:order, :employee_cv)
                          .approved
                          .page(params[:page]).per(10)
-    @active_item = :approve_pay
+    @active_item = :approve_act_list
   end
 
   private

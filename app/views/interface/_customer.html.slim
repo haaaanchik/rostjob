@@ -1,30 +1,27 @@
-ul.side-bar-ul
-  li.nav-item
-    = link_to root_path,
-              title: 'Главная',
-              class: "nav-link #{'nav-link__active' if active_item == :root}" do
-      i.fas.fa-home.svg-sidebar
-      p.icon-text Главная
-  li.nav-item
-    = link_to profile_production_sites_path,
-              title: 'Заявки',
-              id: 'production-site-list',
-              class: "nav-link #{'nav-link__active' if active_item == :production_sites}" do
-      i.fas.fa-city.svg-sidebar
-      p.icon-text Заявки
-  li.nav-item
-    = link_to profile_candidates_path,
-              title: 'Анкеты',
-              class: "nav-link #{'nav-link__active' if active_item == :candidates}" do
-      i.fas.fa-address-card.svg-sidebar
-      p.icon-text Анкеты
+.navside__menu
+  = link_to root_path,
+          title: 'Главная',
+          class: "navside__menu-item #{'navside__menu-item__active' if active_item == :root}" do
+    i.fas.fa-home.svg-sidebar
+    p Главная
 
-  li.nav-item
-    = link_to approval_list_profile_candidates_path,
-            title: 'Анкеты',
-            class: "nav-link payment-employee #{'nav-link__active' if active_item == :approve_pay}" do
-      i.fas.fa-money-bill-wave.svg-sidebar
-      p.icon-text Акты
-      span.counter
-        b = @p_employees_approved_count
+  = link_to profile_production_sites_path,
+          title: 'Заявки',
+          id: 'production-site-list',
+          class: "navside__menu-item #{'navside__menu-item__active' if active_item == :production_sites}" do
+    i.fas.fa-city.svg-sidebar
+    p Заявки
 
+  = link_to profile_candidates_path,
+          title: 'Анкеты',
+          class: "navside__menu-item #{'navside__menu-item__active' if active_item == :candidates}" do
+    i.fas.fa-address-card.svg-sidebar
+    p Анкеты
+
+  = link_to approval_list_profile_candidates_path,
+          title: 'Акты',
+          class: "navside__menu-item #{'navside__menu-item__active' if active_item == :approve_act_list}" do
+    i.fas.fa-money-bill-wave.svg-sidebar
+    p.icon-text Акты
+    span.counter
+      b = @p_employees_approved_count
