@@ -93,7 +93,7 @@ class ContractorInvoicePdf < Prawn::Document
       @total_price += total
 
       data << [
-        { content: (i + 1).to_s }, { content: order.title_with_skill },
+        { content: (i + 1).to_s }, { content: "#{ order.title_with_skill }. #{ order.production_site.title }" },
         { content: quantity.to_s }, { content: 'шт' },
         { content: order.contractor_price.to_s },
         { content: total.to_s }
@@ -118,12 +118,12 @@ class ContractorInvoicePdf < Prawn::Document
 
   def employee_row(employee)
     make_table([
-                 [employee.id.to_s,
+                 [employee.employee_cv.id.to_s,
                  employee.employee_cv.name,
                  'Нанят',
                  employee.hiring_date.strftime('%d/%m/%Y')]
                ],
-               column_widths: [10.mm, 50.mm, 12.mm, 18.mm],
+               column_widths: [12.mm, 48.mm, 12.mm, 18.mm],
                cell_style:    { font: 'Arial', size: 8, borders: [:top] })
   end
 
