@@ -1,7 +1,7 @@
 = form_with model: @profle, url: withdrawal_profile_balance_path, method: :put do |f|
   - messages = @balance.errors.messages
   .md-form
-    = f.text_field :amount, class: 'form-control', value: @balance.amount
+    = f.text_field :amount, class: 'form-control', value: @balance.amount, disabled: true
     = f.label :amount, 'Будет выведено:', class: 'active'
   .row
     .col

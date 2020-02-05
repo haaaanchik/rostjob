@@ -17,7 +17,7 @@ class Profile::BalancesController < ApplicationController
   end
 
   def withdrawal
-    result = Cmd::Profile::Balance::Withdrawal.call(profile: profile, amount: balance_params[:amount],
+    result = Cmd::Profile::Balance::Withdrawal.call(profile: profile, amount: balance.amount,
                                                     withdrawal_method_id: balance_params[:withdrawal_method_id])
     if result.success?
       @status = 'success'
