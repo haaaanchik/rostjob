@@ -14,5 +14,7 @@ table.table.table-striped
         - elsif @client_type.include?('all')
           'Количество заявок / анкет'
       th Открытые споры
+      - unless @client_type.include?('customer')
+        th Выписка счетов
   tbody
     = render partial: 'client', collection: @clients

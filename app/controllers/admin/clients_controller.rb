@@ -14,9 +14,19 @@ class Admin::ClientsController < Admin::ApplicationController
     @client_type = client_type
   end
 
+  def withdrawal
+    @contractor = user.profile
+    @result = Cmd::Profile::Balance::Withdrawal.call(profile: @contractor, amount: @contractor.balance.amount,
+                                                     withdrawal_method_id: @contractor.withdrawal_methods.first.id)
+  end
+
   private
 
   def client_type
     CLIENT_TYPES.include?(params.try(:[], :clients_type)) ? params[:clients_type] : 'all'
+  end
+
+  def user
+    User.find(params[:id])
   end
 end
