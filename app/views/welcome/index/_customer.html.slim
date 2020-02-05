@@ -1,35 +1,38 @@
 - if user_signed_in?
-  .col-md-12.blue-gradient
-    .container-fluid
-      .row
-        .col-md-8
-          - if @orders_with_unviewed_pe_count.any?
-            .row.mt-4.img-thumbnail
+main
+  section class="user"
+  			h3.title Краткая информация профиля
+  			.user_info
+  				.user_info_avatar
+  					= image_tag('/img/new/no-avatar.png', class: 'img-user')
+  					p = current_user.full_name
+  					button
+  						= image_tag('/img/new/pen.png', id:"pen")
+  						| Редактировать
+
+  				.user_info_rating
+  					p Рейтинг: <span> 249
+  					p Сделки:  <span> 10/10
+
+  				.user_info_balance
+  					p
+  					  | Баланс:
+  					  span = @current_profile.balance.amount
+  					  |  руб.
+  					button class="user-btn" Пополнить
+  					i class="fa fa-pencil fa-lg" aria-hidden="true"
+
+
+
+  section class="profiles"
+  			- if @orders_with_unviewed_pe_count.any?
               = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count } if @orders_with_unviewed_pe_count.any?
-          - if @orders_with_interviewed_candidates.any?
-            .row.mt-4.img-thumbnail
+
+  section class="events"
+            = render partial: 'user_action_log', locals: { profile: @current_profile }
+
+  section class="seekers"
+            - if @orders_with_interviewed_candidates.any?
               = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: profile, orders: @orders_with_interviewed_candidates } if @orders_with_interviewed_candidates.any?
-          = render partial: 'user_action_log', locals: { profile: @current_profile }
-        .col-md-4.d-none.d-md-block
-          .card.card-cascade.mt-4
-            .view.view-cascade.overlay
-              = image_tag('/img/no-avatar.jpg', class: 'img-fluid')
-            .card-body.card-body-cascade.text-center
-              h4.card-title
-                strong
-                  = current_user.full_name
-              h5
-                / #{@customer_deals_count}
-                | -  Сделок
-                br
-                |  10/10
-              p.card-text
-                = @current_profile.balance.amount
-                span.ml-3 рублей
-              / = link_to '#', class: 'btn-floating btn-small bg-rostjob tmp-unavailable' do
-              span.btn-floating.btn-small.bg-rostjob.tmp-unavailable
-                i.fas.fa-envelope
-              / span.counter.mt-2
-              /   |  1
-              = link_to profile_invoices_path, class: 'btn-floating btn-small bg-rostjob' do
-                i.fas.fa-money-bill-alt
+
+

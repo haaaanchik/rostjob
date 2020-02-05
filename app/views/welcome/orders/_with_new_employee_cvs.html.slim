@@ -1,10 +1,7 @@
 - if profile.customer?
-  .row
-    .col
-      p.h4.pl-2
-        strong Анкеты ждущие назначения собеседования:
-      ul
-        - orders.each do |order|
-          li
-            |Поступило #{order.unviewed_pe_count} анкет(ы) в заявку
-            u.ml-2 = link_to order.title, profile_production_site_order_path(order.production_site, order)
+  h3.title Анкеты ждущие собеседования
+  .profiles_list id="scroll"
+  	- orders.each do |order|
+      .profiles_list_elem
+        span Поступило #{order.unviewed_pe_count} анкет(ы) в заявку
+        = link_to order.title, profile_production_site_order_path(order.production_site, order)
