@@ -1,51 +1,54 @@
-.col-md-4
-  .card
-    .view.overlay.production-image
-      = image_tag production_site.image.url(:thumb), class: 'card-img-top'
-    = link_to edit_profile_production_site_path(production_site),
-              class: 'btn-floating btn-action ml-auto mr-4 btn-sm green',
-              remote: true do
-      i.fas.fa-pen-alt
 
-    .card-body
-      h3.card-title.white-text = link_to production_site.title,
-                                         profile_production_site_orders_path(production_site),
-                                         id: "#{'first_pr_site' if production_site_counter.zero? }"
-      p= production_site.city
-      hr
+.platforms_list_platform
+        header = link_to production_site.title,
+                                                        profile_production_site_orders_path(production_site),
+                                                        id: "#{'first_pr_site' if production_site_counter.zero? }"
+        .platforms_list_platform_top
+            .platforms_list_platform_top_logo
+                a href="#" class="platforms_list_platform_top_logo_empty"
+                  = image_tag production_site.image.url(:thumb)
+
+            .platforms_list_platform_top_info
+                ul.fa-ul
+                    li
+                      i class="fa fa-flag"
+                      | В найме: 120
+                    li
+                      i class="fa fa-users"
+                      | Заявки: 140
+                    li
+                      i class="fa fa-envelope"
+                      | В очереди: 250
 
 
-      ul.nav.tabs-white.nav-fill role='tablist'
-        li.nav-item.ml-0
-          a.nav-link.waves-light.active data-toggle='tab' href="#info-#{production_site.id}" role='tab'
-            |Информация
-        li.nav-item
-          a.nav-link.waves-light data-toggle='tab' href="#vacancies-#{production_site.id}" role='tab'
-            |Вакансии
-        li.nav-item
-          a.nav-link.waves-light data-toggle='tab' href="#contacts-#{production_site.id}" role='tab'
-            |Контакты
+        .platforms_list_platform_bottom
+            .platforms_list_platform_bottom_nav
+              button class="platforms_list_platform_bottom_nav_info show"
+                | Информация
+              button class="platforms_list_platform_bottom_nav_vacancies"
+                | Вакансии
+              button class="platforms_list_platform_bottom_nav_contacts"
+                |  Контакты
 
-      .tab-content.rounded-bottom
-        .tab-pane.fade.in.show.active id="info-#{production_site.id}" role='tabpanel'
-          p.font-small.text-muted.mx-1 align='justify'
-            = production_site.info
 
-        .tab-pane.fade id="vacancies-#{production_site.id}" role='tabpanel'
-          ul
-            - production_site.orders.each do |order|
-              li #{order.title} #{order.number_of_employees}
+            .platforms_list_platform_bottom_text
+              div class= "platforms_list_platform_bottom_text_info show"
+                p = production_site.info
 
-        .tab-pane.fade id="contacts-#{production_site.id}" role='tabpanel'
-          = production_site.phones
+              .platforms_list_platform_bottom_text_vacancies
+                p
+                  - production_site.orders.each do |order|
+                    p #{order.title} #{order.number_of_employees}
 
-    .rounded-bottom.mdb-color.lighten-3.text-center.pt-3 style='display: none'
-      ul.list-unstyled.list-inline.font-small
-        li.list-inline-item.pr-2
-          a.white-text href='#'
-            |Открытых заявок:
-            |12
-        li.list-inline-item.pr-2
-          a.white-text href='#'
-            |Количество персонала:
-            |12
+              .platforms_list_platform_bottom_text_contacts
+                p = production_site.phones
+
+        footer
+            button.add Добавить заявку
+            = link_to edit_profile_production_site_path(production_site),
+                          class: 'btn-edit',
+                          remote: true do
+              = image_tag('/img/new/pen.png', id:"pen")
+              | Редактировать
+
+

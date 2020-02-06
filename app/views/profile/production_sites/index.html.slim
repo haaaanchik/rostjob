@@ -1,10 +1,70 @@
-.col.pt-4.blue-gradient
-  .container-fluid
-    .row.justify-content-end
-      .col-md-4.d-flex.justify-content-center.mb-2
-        = link_to '+ Создать площадку', new_profile_production_site_path,
-                  id: 'new-production-site',
-                  class: 'btn button-hr btn-rounded waves-effect text-center active pt-2 pb-2 m-0',
-                  remote: true
-    #production_site_list.row
-      = render @production_sites
+.modal.fade.bd-example-modal-lg.show tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        h4.modal-title#myLargeModalLabel Укажите данные о производственной площадке
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" ×
+
+      .modal-body
+            .row
+              .col-md-12.personal-info
+                .form-group
+                  .d-flex.align-items-center
+                    .col-lg-4.control-label
+                      label Наименование производ. площадки
+                    .col-lg-7
+                      input.form-control type="text" value="ООО «Спектр»"
+
+
+                .form-group
+                  .d-flex
+                    .col-lg-4.control-label
+                      label Город
+                    .col-lg-7
+                      input.form-control type="text" value="г. Москва"
+
+                .form-group
+                  .d-flex.align-items-center
+                    .col-lg-4.control-label style="align-self: flex-start"
+                      label Общая информация
+                    .col-lg-7
+                      textarea.form-control type="text" «Пискаревский молзавод» производит и продает молоко и молочные продукты оптом для рынка Санкт-Петербурга и Северо-Западного региона.
+
+                        Основной объём молока поставляется с одиннадцати ферм в Ленинградской области, связанных с Пискаревским молзаводом. Таким образом, “Пискаревский” является вертикально-интегрированной компанией, использующей молоко собственного производства в переработке.
+                .form-group
+                  .d-flex
+                    .col-lg-4.control-label
+                      label Обратная связь
+                    .col-lg-7
+                      textarea.form-control type="text" rows="3" +79999999999
+                        +78888888888
+                        +77777777777
+
+                .form-group
+                  .row style="margin: 0"
+                    .col-md-4.control-label
+                      p Логотип площадки
+                    .col-md-2.avatar
+                      = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
+                    .col-md-6.d-flex.flex-column
+                      #choose-file
+                        | Выберите файл
+                        input type="file"
+                      div
+                        input type="radio" id="radio-for-logo"
+                        label for="radio-for-logo" class="without-logo" Без логотипа
+                .form-group
+                  .row
+                    .col-12
+                      button.submit Сохранить
+
+.main_platforms
+  section class="platforms"
+			header Ваши площадки для заявок
+			.platforms_list
+			  = render @production_sites
+			  .platforms_list_platform.empty
+                .add-platform data-toggle="modal" data-target=".bd-example-modal-lg"
+                  = image_tag('/img/new/target.png')
+                  p Добавить площадку

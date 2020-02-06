@@ -23,6 +23,7 @@
 # require jquery.inputmask.date.extensions
 #= require action_cable
 #= require_tree .
+#= require order
 
 @scroll_to_bottom = (element) ->
   if element
