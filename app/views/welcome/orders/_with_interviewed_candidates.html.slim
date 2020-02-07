@@ -1,8 +1,9 @@
-- if profile.customer?
-  h3.title Соискатели на собеседовании
-  - orders.each do |order|
-    .seekers_list
-      .seekers_list_seeker
-        p
-          span = Time.zone.parse(order.interview_date.to_s).strftime('%d.%m.%Y')
-          = link_to order.employee_cv_name, profile_production_site_order_path(order.production_site, order, tab: :to_interview)
+h3.title Соискатели на собеседовании
+- orders.each do |order|
+  .seekers_list
+    .seekers_list_seeker
+      p
+        span = Time.zone.parse(order.interview_date.to_s).strftime('%d.%m.%Y')
+        = link_to order.employee_cv_name, profile_production_site_order_path(order.production_site, order, tab: :to_interview)
+- unless orders.present?
+  p Список пуст

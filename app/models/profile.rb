@@ -72,6 +72,16 @@ class Profile < ApplicationRecord
                           'paid', current_date, prev_date)
   end
 
+  def amount_of_deals
+    proposal_employees.paid.count
+  end
+
+  def calculate_hiring_percent
+    ((amount_of_deals)/(amount_of_deals + proposal_employees.revoked.count))*100
+  rescue ZeroDivisionError
+    0.0
+  end
+
   def free_manager?
     manager? && free?
   end

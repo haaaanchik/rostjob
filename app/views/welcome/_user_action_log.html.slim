@@ -4,3 +4,6 @@ h3.title Последние события
     .events_list_event
       header #{record.time} #{record.date}
       p #{record.action}
+  - unless @user_action_log_records.present?
+    p
+      | Список пуст

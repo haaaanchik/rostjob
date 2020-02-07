@@ -1,38 +1,35 @@
-- if user_signed_in?
 main
-  section class="user"
-  			h3.title Краткая информация профиля
-  			.user_info
-  				.user_info_avatar
-  					= image_tag('/img/new/no-avatar.png', class: 'img-user')
-  					p = current_user.full_name
-  					button
-  						= image_tag('/img/new/pen.png', id:"pen")
-  						| Редактировать
+  section.user
+    h3.title Краткая информация профиля
+    .user_info
+      .user_info_avatar
+        = image_tag(current_profile.image_url, class: 'img-user')
+        p = current_user.full_name
+        button
+          = link_to edit_user_registration_path(current_user), class: 'black-text' do
+            = image_tag('/img/new/pen.png', id:"pen")
+            | Редактировать
 
-  				.user_info_rating
-  					p Рейтинг: <span> 249
-  					p Сделки:  <span> 10/10
+      .user_info_rating
+        p Найм: <span> #{ current_profile.calculate_hiring_percent }%
+        p Сделки:  <span> #{ current_profile.amount_of_deals }
 
-  				.user_info_balance
-  					p
-  					  | Баланс:
-  					  span = @current_profile.balance.amount
-  					  |  руб.
-  					button class="user-btn" Пополнить
-  					i class="fa fa-pencil fa-lg" aria-hidden="true"
+      .user_info_balance
+        p
+          | Баланс:
+          span.ml-2 = @current_profile.balance.amount
+          |  руб.
+        button.user-btn
+          = link_to profile_invoices_path, class: 'text-white' do
+            | Пополнить
 
+  section.profiles
+    = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count }
 
+  section.events
+    = render partial: 'welcome/user_action_log', locals: { profile: @current_profile }
 
-  section class="profiles"
-  			- if @orders_with_unviewed_pe_count.any?
-              = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count } if @orders_with_unviewed_pe_count.any?
-
-  section class="events"
-            = render partial: 'user_action_log', locals: { profile: @current_profile }
-
-  section class="seekers"
-            - if @orders_with_interviewed_candidates.any?
-              = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: profile, orders: @orders_with_interviewed_candidates } if @orders_with_interviewed_candidates.any?
+  section.seekers
+    = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: profile, orders: @orders_with_interviewed_candidates }
 
 
