@@ -3,6 +3,6 @@ ru:
     attributes:
       user:
         full_name: Имя
-        password: Пароль
-        password_confirmation: Подтверждение пароля
+        password: Новый пароль
+        password_confirmation: Повтор пароля
         current_password: Текущий пароль

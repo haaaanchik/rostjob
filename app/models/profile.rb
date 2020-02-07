@@ -61,6 +61,10 @@ class Profile < ApplicationRecord
     end
   end
 
+  def image_url
+    photo? ? photo.url : '/img/new/no-avatar.png'
+  end
+
   def orders_with_paid_employees(current_date, prev_date)
     answered_orders.where('proposal_employees.state = ? and
                            proposal_employees.payment_date < ? and

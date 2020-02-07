@@ -1,49 +1,58 @@
+ruby:
+  errors = resource.errors.messages
+  full_name = errors[:full_name].first
+  password = errors[:password].first
+  password_confirmation = errors[:password_confirmation].first ? 'не совпадает с новым паролем' : nil
+  current_password =  errors[:current_password].first
+
 .container
   h2.users-edit-title
     | Настройки профиля
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
     .row
       .col-md-10.offset-md-1.personal-info
-        = devise_error_messages!
         .form-group
           .d-flex.align-items-center
             .col-lg-3.control-label
               = f.label :full_name, 'Наименование организации'
             .col-lg-8
-              = f.text_field :full_name, class: 'form-control'
+              .invalid-feedback.d-inline #{ full_name }
+              = f.text_field :full_name, class: "form-control #{'is-invalid' if full_name }"
 
         .form-group
           .d-flex
             .col-lg-3.control-label
               = f.label :password
             .col-lg-8
-              = f.password_field :password, class: 'form-control', autocomplete: 'off'
+              .invalid-feedback.d-inline #{ password }
+              = f.password_field :password, class: "form-control #{'is-invalid' if password }", autocomplete: 'off'
         .form-group
           .d-flex.align-items-center
             .col-lg-3.control-label
-              = f.label :password_confirmation, 'Повтор пароля'
+              = f.label :password_confirmation
             .col-lg-8
-              = f.password_field :password_confirmation, class: 'form-control', autocomplete: 'off'
+              .invalid-feedback.d-inline #{ password_confirmation }
+              = f.password_field :password_confirmation, class: "form-control #{'is-invalid' if password_confirmation }", autocomplete: 'off'
         - unless f.object.password_changed_at.nil?
-          /.form-group
-            .row
+          .form-group
+            .d-flex.align-items-center
               .col-lg-3.control-label
                 = f.label :current_password
               .col-lg-8
-                = f.password_field :current_password, class: 'form-control', autocomplete: 'off'
+                .invalid-feedback.d-inline #{ current_password }
+                = f.password_field :current_password, class: "form-control #{'is-invalid' if current_password }", autocomplete: 'off'
           .form-group
-            .row
-              .col-md-3.control-label
-                p Логотип компании
-              .col-md-2.avatar
-                = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
-              .col-md-7.d-flex.flex-column
-                #choose-file
-                  | Выберите файл
-                  input type="file"
-                div
-                    input type="radio" id="radio-for-logo"
-                    label for="radio-for-logo" class="without-logo" Без логотипа
+            = f.fields_for :profile, current_profile do |ff|
+              .row
+                .col-md-3.control-label
+                  p Логотип компании
+                .col-md-2.avatar
+                  = image_tag(current_profile.image_url, class: 'img-fluid')
+                .col-md-7.d-flex.flex-column
+                  #choose-file
+                    | Выберите файл
+                    = ff.file_field :photo
+
         .form-group
           .row
             .col-12

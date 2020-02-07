@@ -71,7 +71,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: %i[full_name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:full_name, profile_attributes: [:id, :photo]])
   end
 
   # The path used after sign up.
@@ -97,6 +97,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     if resource.password_changed_at.nil?
       resource.update_without_curr_password(params)
     else
+      resource.skip_validation_password = params[:password].blank?
       resource.update_with_password(params)
     end
   end
