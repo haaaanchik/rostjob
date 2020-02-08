@@ -1,4 +1,4 @@
-.production-site-show
+/.production-site-show
   .grey.lighten-4.text-center.main-workspace.scrollbar-near-moon.thin
     .row.ml-0.mr-0#main_row
       .card.card-primary.working_platform.p-1.scrollbar-near-moon.thin
@@ -192,3 +192,250 @@
           /   a.carousel-control-next data-slide="next" href="#carouselExampleIndicators" role="button"
           /     span.carousel-control-next-icon aria-hidden="true"
           /     span.sr-only Next
+
+.company-page
+    .company-page__platforms
+        .search
+          input type="text" placeholder="Поиск площадок"
+          = image_tag('/img/new/search.png', id:'search')
+
+        .platforms__list
+
+            .platform
+                .platform__header.js-platform__header
+                    p.platform__title Пискаревский молзавод
+                    img src="img/arrow-down.png" class="js-arrow rotated" alt=""
+                    = image_tag('/img/new/arrow-down.png', class:'js-arrow rotated')
+
+                .platform__body.js-platform__body
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                                p.order__title Опрератор-сборщик схемных жгутов Опрератор-сборщик схемных жгутов
+                                span.order__price
+                                  | 10000 руб. / чел.
+
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope "
+                                    span 120
+
+
+            .platform
+                .platform__header.js-platform__header
+                   p.platform__title Концерн «Детскосельский»
+                   = image_tag('/img/new/arrow-down.png', class:'js-arrow rotated')
+
+                .platform__body.js-platform__body
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                                p.order__title Опрератор-сборщик схемных жгутов
+                                span.order__price 10000 руб. / чел.
+
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope "
+                                    span 120
+
+
+
+
+
+    .company-page__tabs
+
+        .header
+            .item-type.js-input-type.active data-target="templates"
+              span Шаблоны
+
+            .item-type.js-input-type data-target="pending_payments"
+              span Ожидающие оплаты
+
+            .item-type.js-input-type data-target="on_moderation"
+              span На модерации
+
+            .item-type.js-input-type data-target="published"
+              span Опубликованные
+
+            .item-type.js-input-type data-target="finished"
+              span Завершенные
+
+
+
+        .orders-list
+            .orders-list__header
+                .activities
+                  input type="checkbox" id="check_all"
+                    #delete
+                      = image_tag('/img/new/delete.png')
+                      span Удалить
+
+                    #copy
+                      = image_tag('/img/new/copy.png')
+                      span Копировать
+
+                #activities
+                    #publish
+                      span Опубликовать заявку
+
+
+            .order-list__body.show data-tab="templates"
+
+                .order
+                  input type="checkbox"
+                  .content
+                    .order__number №198
+
+                    .order__description
+                        p.order__title Опрератор-сборщик схемных жгутов
+                        .order__bottom
+                          span.order__price 10000 руб. / чел.
+
+                          .order__statistic
+
+                            .element
+                              i class="fa fa-flag"
+                              span 120
+
+                            .element
+                              i class="fa fa-users"
+                              span 120
+
+                            .element
+                              i class="fa fa-envelope"
+                              span 120
+
+
+
+
+
+
+            .order-list__body data-tab="pending_payments"
+                .order
+                    input type="checkbox"
+                    .content
+                        .order__number №198
+
+                        .order__description
+                            p class="order__title" Ожидающие оплаты
+                            .order__bottom
+                                span class="order__price" 10000 руб. / чел.
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope"
+                                    span 120
+
+
+            .order-list__body data-tab="on_moderation"
+                .order
+                    input type="checkbox"
+                    .content
+                        .order__number №198
+
+                        .order__description
+                            p class="order__title" На модерации
+                            .order__bottom
+                                span class="order__price" 10000 руб. / чел.
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope"
+                                    span 120
+
+
+
+            .order-list__body data-tab="published"
+                .order
+                    input type="checkbox"
+                    .content
+                        .order__number №198
+
+                        .order__description
+                            p class="order__title" Опубликованные
+                            .order__bottom
+                                span class="order__price" 10000 руб. / чел.
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope"
+                                    span 120
+
+
+
+            .order-list__body data-tab="finished"
+                .order
+                    input type="checkbox"
+                    .content
+                        .order__number №198
+
+                        .order__description
+                            p class="order__title" Завершенные
+                            .order__bottom
+                                span class="order__price" 10000 руб. / чел.
+                                .order__statistic
+
+                                  .element
+                                    i class="fa fa-flag"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-users"
+                                    span 120
+
+                                  .element
+                                    i class="fa fa-envelope"
+                                    span 120
+
+
+

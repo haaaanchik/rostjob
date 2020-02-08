@@ -28,11 +28,11 @@ h3.title{
 }
 
 #right_window.row{
-  height: calc(100vh - 58px) ;
+  height: 100vh;
 }
 
 #right_window.row:not(*:root) {
-  height: calc(100vh - 58px) ;
+  height: 100vh;
 }
 
 .user-btn{

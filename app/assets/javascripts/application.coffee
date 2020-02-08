@@ -24,6 +24,7 @@
 #= require action_cable
 #= require_tree .
 #= require order
+#= require company_page
 
 @scroll_to_bottom = (element) ->
   if element
