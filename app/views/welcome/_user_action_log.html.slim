@@ -5,5 +5,5 @@ h3.title Последние события
       header #{record.time} #{record.date}
       p #{record.action}
   - unless @user_action_log_records.present?
-    p
+    p.empty
       | Список пуст

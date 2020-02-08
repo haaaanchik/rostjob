@@ -17,6 +17,8 @@ section{
   border-radius: 4px;
   width: 100%;
   background-color: $secondaryColor;
+  position: relative;
+  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
 }
 h3.title{
   height: 40px;
@@ -376,4 +378,14 @@ main{
   main{
     height: auto;
   }
+}
+
+.empty{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  color: #9b9b9b;
 }
