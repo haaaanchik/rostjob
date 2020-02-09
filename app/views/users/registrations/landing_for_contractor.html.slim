@@ -10,9 +10,9 @@ header.header
     = link_to '&nbsp;Регистрация'.html_safe, new_contractor_path
   .header_scroll
     button.header_scroll_down
-      img alt="down" src="#{asset_path('svg/arrow_2.svg')}" 
+      = image_tag 'svg/arrow_2.svg', alt: 'down'
     button.header_scroll_top
-      img alt="top" src="#{asset_path('svg/arrow_2.svg')}"
+      = image_tag 'svg/arrow_2.svg', alt: 'top'
 
 main
   section#main
@@ -32,7 +32,7 @@ main
       .main_freelance
         = link_to 'хочу нанять персонал', contractor_info_path
       .main_img
-        img alt="" src="#{asset_path('main_contactor.png')}"
+        = image_tag 'main_contactor.png'
 
   section.request
     .request_header
@@ -40,16 +40,16 @@ main
     .request_block
       .request_block_nav
         .arrow.arrow_left
-          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+          = image_tag 'svg/arrow_2.svg', alt: 'left'
         .arrow.arrow_right
-          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+          = image_tag 'svg/arrow_2.svg', alt: 'left'
         .navbar
       
       .request_block_viewbox
         .request_block_wrapper
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_6.jpg')}"
+              = image_tag 'rostjob_02.jpg'
             .request_block_wrapper_item_info
               header 
                 | 1
@@ -60,7 +60,7 @@ main
           
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_7.png')}"
+              = image_tag 'rostjob_04.jpg'
             .request_block_wrapper_item_info
               header
                 | 2
@@ -70,7 +70,7 @@ main
                 | Официальные выплаты на расчетный счет для физических и юридических лиц.
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_8.jpg')}"
+              = image_tag 'rostjob_03.jpg'
             .request_block_wrapper_item_info
               header
                 | 3
@@ -80,7 +80,7 @@ main
                 | На платформе всегда есть выбор на открытые заявки.
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_9.jpg')}"
+              = image_tag 'rostjob_06.jpg'
             .request_block_wrapper_item_info
               header
                 | 4
@@ -90,7 +90,7 @@ main
                 | Оперативный ответ от саппорта в течении 24 часов после обращения.
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_10.jpg')}"
+              = image_tag 'rostjob_10.jpg'
             .request_block_wrapper_item_info
               header
                 | 5

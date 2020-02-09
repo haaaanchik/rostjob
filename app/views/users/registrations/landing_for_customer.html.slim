@@ -10,9 +10,9 @@ header.header
     = link_to '&nbsp;Регистрация'.html_safe, new_customer_path
   .header_scroll
     button.header_scroll_down
-      img alt="down" src="#{asset_path('svg/arrow_2.svg')}" 
+      = image_tag 'svg/arrow_2.svg', alt: 'down'
     button.header_scroll_top
-      img alt="top" src="#{asset_path('svg/arrow_2.svg')}"
+      = image_tag 'svg/arrow_2.svg', alt: 'top'
 
 main
   section#main
@@ -32,7 +32,7 @@ main
       .main_freelance
         = link_to 'Зарегистрироваться как фрилансер', landing_for_contractor_path
       .main_img
-        img alt="" src="#{asset_path('main_customer.png')}"
+        = image_tag 'main_customer.png'
 
   section.request
     .request_header
@@ -40,16 +40,16 @@ main
     .request_block
       .request_block_nav
         .arrow.arrow_left
-          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+          = image_tag 'svg/arrow_2.svg', alt: 'left'
         .arrow.arrow_right
-          img alt="left" src="#{asset_path('svg/arrow_2.svg')}"
+          = image_tag 'svg/arrow_2.svg', alt: 'left'
         .navbar
       
       .request_block_viewbox
         .request_block_wrapper
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_1.png')}"
+              = image_tag 'rostjob_05.jpg'
             .request_block_wrapper_item_info
               header 
                 | 1
@@ -60,7 +60,7 @@ main
           
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_2.png')}"
+              = image_tag 'rostjob_01.jpg'
             .request_block_wrapper_item_info
               header
                 | 2
@@ -70,17 +70,17 @@ main
                 | Опубликованную заявку выполняют все зарегистрированные пользователи
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_3.png')}"
+              = image_tag 'rostjob_07.jpg'
             .request_block_wrapper_item_info
               header
                 | 3
               h4
-                | Автоматический звонки <br> соискателям от голосовых ботов
+                | Автоматические звонки <br> соискателям от голосовых ботов
               p
                 | Самые современные технологии сбора и обработки баз соискателей
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_4.jpg')}"
+              = image_tag 'rostjob_09.jpg'
             .request_block_wrapper_item_info
               header
                 | 4
@@ -90,7 +90,7 @@ main
                 | Интерфейс отказа и приглашения соискателя проверен в работе
           .request_block_wrapper_item
             .request_block_wrapper_item_img
-              img alt="" src="#{asset_path('item_5.jpg')}"
+              = image_tag 'rostjob_08.jpg'
             .request_block_wrapper_item_info
               header
                 | 5
