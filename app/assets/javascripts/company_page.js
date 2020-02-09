@@ -20,12 +20,12 @@ function changeActive(e) {
         e.target.parentElement.classList.add('active');
         data_tab = e.target.parentElement.getAttribute('data-target');
     }
-    document.querySelector(`[data-tab="${data_tab}"]`).classList.toggle('show');
+    document.querySelector(`[data-tab="${data_tab}"]`).classList.toggle('show-tab');
 }
 
 function clearShown(){
-    if(document.querySelector('.show')){
-        document.querySelector('.show').classList.remove('show');
+    if(document.querySelector('.show-tab')){
+        document.querySelector('.show-tab').classList.remove('show-tab');
     }
 }
 
@@ -50,13 +50,13 @@ checkbox.addEventListener('click', checkAll);
 
 function checkAll() {
     if(checkbox.checked === true){
-        let checkbox_arr = document.querySelector('.show').querySelectorAll('input[type="checkbox"]');
+        let checkbox_arr = document.querySelector('.show-tab').querySelectorAll('input[type="checkbox"]');
         for (let i =0; i < checkbox_arr.length; i++){
             checkbox_arr[i].checked = true;
         }
     }
     if(checkbox.checked === false){
-        let checkbox_arr = document.querySelector('.show').querySelectorAll('input[type="checkbox"]');
+        let checkbox_arr = document.querySelector('.show-tab').querySelectorAll('input[type="checkbox"]');
         for (let i =0; i < checkbox_arr.length; i++){
             checkbox_arr[i].checked = false;
         }

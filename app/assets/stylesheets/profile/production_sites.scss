@@ -523,7 +523,7 @@ $phone: "max-width: 768px";
   margin-top: 30px;
 }
 
-.platforms_list_platform.empty{
+.platforms_list_platform.empty-platform{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -650,15 +650,14 @@ $phone: "max-width: 768px";
   padding: 15px 15px 0 15px;
   height: 100vh;
   overflow: auto;
-  /*background-color: #e9ecef;*/
 }
 
-.search{
+.company-page__platforms .search{
   margin-bottom: 30px;
   position: relative;
 }
 
-.company-page .search input{
+.company-page__platforms .search input{
 
   width: 100%;
   border-radius: 4px;
@@ -920,7 +919,7 @@ $phone: "max-width: 768px";
   font-weight: 400;
 }
 
-.show{
+.show-tab{
   display: block !important;
 }
 
@@ -936,6 +935,81 @@ $phone: "max-width: 768px";
 
 .platforms__list .platform:last-child{
   margin-bottom: 0;
+}
+
+.platform__body{
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    background-color: $secondaryColor;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.7);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $secondaryColorDark;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+  }
+}
+
+.company-page__platforms{
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    background-color: $secondaryColor;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.7);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $secondaryColorDark;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+  }
+}
+
+.order-list__body{
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    background-color: $secondaryColor;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.7);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $secondaryColorDark;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+  }
 }
 
 @media (max-width: 1255px){
@@ -959,7 +1033,7 @@ $phone: "max-width: 768px";
   .order__number{
     padding: 0 5px 0;
   }
-  .search{
+  .company-page__platforms .search{
     margin-bottom: 5px;
   }
   .company-page__tabs{
