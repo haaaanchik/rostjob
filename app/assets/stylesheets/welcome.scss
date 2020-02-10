@@ -380,12 +380,14 @@ main{
   }
 }
 
-.empty{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  text-align: center;
-  color: #9b9b9b;
+.profiles, .events, .seekers {
+  .empty{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    color: #9b9b9b;
+  }
 }

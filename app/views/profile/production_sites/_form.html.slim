@@ -1,23 +1,45 @@
 = form_with model: [:profile, production_site], id: 'production_site_form' do |f|
-  .form-group
-    = f.label :image, 'Фоновое изображение производственной площадки'
-    .file-field
-      .btn.btn-success.btn-sm.float-left
-        span Выберете логотип
-        = f.file_field :image
-      .file-path-wrapper
-        input class='file-path validate form-control' type="text" placeholder='Загрузите логотип'
-    br
-    = f.label :title, 'Название производственной площадки'
-    = f.text_field :title, class: 'form-control'
-    = f.label :city, 'Город'
-    = f.text_field :city, class: 'form-control'
-    = f.label :info, 'Общая информация'
-    = f.text_area :info, class: 'form-control'
-    = f.label :phones, 'Контактные номера'
-    = f.text_area :phones, class: 'form-control'
-    .invalid-feedback
-  .form-group.mt-3
-    .row
-      .col-3
-        = f.submit t('profile.production_sites.commit.save'), class: 'btn btn-success'
+  .row
+    .col-md-12.personal-info
+      .form-group
+        .d-flex.align-items-center
+          .col-lg-4.control-label
+            label Наименование производ. площадки
+          .col-lg-7
+            = f.text_field :title, class: 'form-control', placeholder: 'ООО «Спектр»'
+
+      .form-group
+        .d-flex
+          .col-lg-4.control-label
+            label Город
+          .col-lg-7
+            = f.text_field :city, class: 'form-control', placeholder: 'г. Москва'
+
+      .form-group
+        .d-flex.align-items-center
+          .col-lg-4.control-label style="align-self: flex-start"
+            label Общая информация
+          .col-lg-7
+            = f.text_area :info, class: 'form-control', placeholder: '«Пискаревский молзавод» производит и продает молоко и молочные продукты оптом ...'
+
+      .form-group
+        .d-flex
+          .col-lg-4.control-label
+            label Обратная связь
+          .col-lg-7
+            = f.text_area :phones, class: 'form-control', rows: 3, placeholder: '+79999999999 ...'
+
+      .form-group
+        .row.m-0
+          .col-md-4.control-label
+            p Логотип площадки
+          .col-md-2.avatar
+            = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
+          .col-md-6.d-flex.flex-column
+            #choose-file
+              | Выберите файл
+              = f.file_field :image
+      .form-group
+        .row
+          .col-12
+            button.submit Сохранить

@@ -1,54 +1,56 @@
-
 .platforms_list_platform
-        header = link_to production_site.title,
-                                                        profile_production_site_orders_path(production_site),
-                                                        id: "#{'first_pr_site' if production_site_counter.zero? }"
-        .platforms_list_platform_top
-            .platforms_list_platform_top_logo
-                a href="#" class="platforms_list_platform_top_logo_empty"
-                  = image_tag production_site.image.url(:thumb)
+  header = link_to production_site.title,
+                   profile_production_site_orders_path(production_site),
+                   id: "#{'first_pr_site' if production_site_counter.zero? }"
+  .platforms_list_platform_top
+    .platforms_list_platform_top_logo
+      a href="#" class="platforms_list_platform_top_logo_empty"
+        = image_tag production_site.image.url(:thumb)
 
-            .platforms_list_platform_top_info
-                ul.fa-ul
-                    li
-                      i class="fa fa-flag"
-                      | В найме: 120
-                    li
-                      i class="fa fa-users"
-                      | Заявки: 140
-                    li
-                      i class="fa fa-envelope"
-                      | В очереди: 250
+    .platforms_list_platform_top_info
+      ul.fa-ul
+        li
+          i.fa.fa-envelope
+          | В очереди: #{ production_site.inbox_candidate_count }
+        li
+          i.fa.fa-users
+          | Заявки: #{ production_site.order_count }
+        li
+          i.fa.fa-flag
+          | В найме: #{ production_site.without_inbox_candidate_count }
+
+  .platforms_list_platform_bottom
+    .platforms_list_platform_bottom_nav
+      button.platforms_list_platform_bottom_nav_info.show
+        | Информация
+      button.platforms_list_platform_bottom_nav_vacancies
+        | Вакансии
+      button.platforms_list_platform_bottom_nav_contacts
+        |  Контакты
 
 
-        .platforms_list_platform_bottom
-            .platforms_list_platform_bottom_nav
-              button class="platforms_list_platform_bottom_nav_info show"
-                | Информация
-              button class="platforms_list_platform_bottom_nav_vacancies"
-                | Вакансии
-              button class="platforms_list_platform_bottom_nav_contacts"
-                |  Контакты
+    .platforms_list_platform_bottom_text
+      .platforms_list_platform_bottom_text_info.show
+        p = production_site.info
 
+      .platforms_list_platform_bottom_text_vacancies
+        p
+          - production_site.orders.published.each do |order|
+            = link_to profile_production_site_order_path(production_site, order) do
+              p #{order.title} - #{order.number_of_employees}чел.
 
-            .platforms_list_platform_bottom_text
-              div class= "platforms_list_platform_bottom_text_info show"
-                p = production_site.info
+          - unless production_site.orders.published.present?
+            p Отсутствуют опубликованные заявки.
 
-              .platforms_list_platform_bottom_text_vacancies
-                p
-                  - production_site.orders.each do |order|
-                    p #{order.title} #{order.number_of_employees}
+      .platforms_list_platform_bottom_text_contacts
+        p = production_site.phones
 
-              .platforms_list_platform_bottom_text_contacts
-                p = production_site.phones
-
-        footer
-            button.add Добавить заявку
-            = link_to edit_profile_production_site_path(production_site),
-                          class: 'btn-edit',
-                          remote: true do
-              = image_tag('/img/new/pen.png', id:"pen")
-              | Редактировать
+  footer
+    button.add.button_order_new Добавить заявку
+    = link_to edit_profile_production_site_path(production_site),
+                  class: 'btn-edit',
+                  remote: true do
+      = image_tag('/img/new/pen.png', id:"pen")
+      | Редактировать
 
 
