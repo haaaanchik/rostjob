@@ -4,37 +4,7 @@
       input type="text" placeholder="Поиск площадок"
       = image_tag('/img/new/search.png', id:'search')
 
-    .platforms__list
-      - production_sites.each do |production_site|
-        .platform
-          .platform__header.js-platform__header.clickable
-            p.platform__title = production_site.title
-            = image_tag('/img/new/arrow-down.png', class:'js-arrow')
-
-          .platform__body.js-platform__body style="display: none"
-            - production_site.orders.includes(:proposal_employees).published.each do |p_order|
-              .order
-                .content
-                  .order__number №#{ p_order.id }
-                  .order__description
-                    p.order__title
-                      = link_to p_order.title,
-                              profile_production_site_order_path(production_site, p_order),
-                              class: 'black-text'
-                    span.order__price
-                      | #{ p_order.contractor_price } руб. / чел.
-                    .order__statistic
-                      .element
-                        i.fa.fa-flag.mr-2
-                        span = p_order.without_inbox_candidate_count
-
-                      .element
-                        i.fa.fa-users.mr-2
-                        span = p_order.number_free_places
-
-                      .element
-                        i.fa.fa-envelope.mr-2
-                        span = p_order.proposal_employees.inbox.count
+    = render 'profile/production_sites/left_order_list'
 
   .company-page__tabs
     .header

@@ -1,0 +1,14 @@
+- if candidate.approve_transfer_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/approve", locals: { candidate: candidate }
+- if candidate.transfer_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/transfer", locals: { candidate: candidate }
+- if candidate.interview_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/interview", locals: { candidate: candidate }
+- if candidate.reserve_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/reserve", locals: { candidate: candidate }
+- if candidate.revoke_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/revoke", locals: { candidate: candidate }
+- if candidate.disput_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/disput", locals: { candidate: candidate }
+- if candidate.to_inbox_action_enabled?(current_profile)
+    = render partial: "profile/candidates/toolbars/to_inbox", locals: { candidate: candidate }

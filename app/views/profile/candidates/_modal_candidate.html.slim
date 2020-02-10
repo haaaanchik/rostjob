@@ -1,0 +1,70 @@
+- employee_cv = candidate.employee_cv
+.modal.fade.show#candidate-show tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        .modal-header-top
+          a href="#" class="modal-title" ##{ candidate.name } #{employee_cv.name}
+          .modal-activities
+            = render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
+        p.modal-request-type
+          i.fa.fa-bookmark class=candidate.status_background_class
+          |  #{ t("proposal_employee.state.#{candidate.state}") }
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" ×
+
+      .modal-body
+        .modal-ancete
+          h4.modal-ancete__title Анкета
+          .ancete-rows.must-have
+            .ancete-row
+              p.ancete-row__title Полное имя
+              .ancete-row__content
+                = text_field :employee_cv, :name, class: 'disabled', value: employee_cv.name
+            .ancete-row
+              p.ancete-row__title Номер телефона
+              .ancete-row__contentactions
+                = phone_field :employee_cv, :phone_number, class: 'disabled', value: employee_cv.phone_number
+            .ancete-row
+              p.ancete-row__title Анкета для СБ
+              .ancete-row__content
+                a href="#"
+                  | Скачать анкету
+
+                .sex
+                  label for="man" М
+                  = radio_button_tag 'employee_cv[gender]',
+                          employee_cv.gender,
+                          employee_cv.gender.include?('М'),
+                          id: 'man'
+                  label for="woman" Ж
+                  = radio_button_tag 'employee_cv[gender]',
+                          employee_cv.gender,
+                          employee_cv.gender.include?('Ж'),
+                          id: 'woman'
+
+
+          h4.modal-ancete__title Дополнительные сведения
+          .ancete-rows.more-info
+            .ancete-row
+              p.ancete-row__title Опыт работы
+              .ancete-row__content
+                = text_area :employee_cv, :experience, cols: 30, rows: 3, readonly: true, value: employee_cv.experience
+            .ancete-row
+              p.ancete-row__title Образование
+              .ancete-row__content
+                = text_area :employee_cv, :education, cols: 30, rows: 3, readonly: true, value: employee_cv.education
+            .ancete-row
+              p.ancete-row__title Доп. информация
+              .ancete-row__content
+                = text_area :employee_cv, :remark, cols: 30, rows: 3, readonly: true, value: employee_cv.remark
+          .modal-ancete__sidebar
+            .date-start-work
+              h3.modal-ancete__title Дата выхода на работу
+              = render partial: 'calendar', locals: {candidate: candidate}
+              button id="get-recruter" Нанять
+            .footer
+              p Рекрутер
+              .ancete-recruter
+                img class="request-logo" alt=""
+                p.request-user-name = candidate.profile.user.full_name
