@@ -46,7 +46,8 @@
         p = production_site.phones
 
   footer
-    button.add.button_order_new Добавить заявку
+    = link_to new_profile_production_site_order_template_path(production_site) do
+      button.add Добавить заявку
     = link_to edit_profile_production_site_path(production_site),
                   class: 'btn-edit',
                   remote: true do

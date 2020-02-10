@@ -9,3 +9,7 @@ $ ->
   $("ul").on('mouseenter', '.clickable', (event) ->
     $(this).css('cursor', 'pointer')
   )
+
+  $(document).on('mouseenter', '.clickable', (event) ->
+    $(this).css('cursor', 'pointer')
+  )

@@ -18,13 +18,13 @@
 #= require data-confirm-modal
 #= require select2
 #= require select2_locale_ru
+#= require order
+#= require production_sites
 # require jquery.inputmask.extensions
 # require jquery.inputmask.numeric.extensions
 # require jquery.inputmask.date.extensions
 #= require action_cable
 #= require_tree .
-#= require order
-#= require company_page
 
 @scroll_to_bottom = (element) ->
   if element

@@ -4,7 +4,7 @@ class ProductionSites
     @bind()
 
   @bind: ->
-    $('.mybtn').on 'click', @openAndCloseBlock
+    $('.search-production-site').on 'keyup', @searchProductinSite
     $('.button-collapse').on 'click', @mobileMenuSlideToggle
 
   @draggableInit: ->
@@ -24,16 +24,9 @@ class ProductionSites
         console.log 'не вышло создание движущихся элементов'
       i++
 
-  @openAndCloseBlock: (evt) ->
-    button = evt.target
-    card = button.closest('.card-primary')
-    card_body = card.querySelector('.js-table')
-    if card_body.style.display == 'none'
-      card_body.style.display = 'block'
-    else
-      card_body.style.display = 'none'
-    $(this).children().toggleClass('fa-plus fa-minus')
-    return
+  @searchProductinSite: (e) ->
+    e.preventDefault()
+    toastr.info('Поиск временно недоступен!')
 
   @mobileMenuSlideToggle: ->
     $('.mobile-menu').slideToggle()
