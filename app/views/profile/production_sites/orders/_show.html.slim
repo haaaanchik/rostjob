@@ -1,114 +1,581 @@
-.pr-site-order-show
-  .grey.lighten-4.text-center.main-workspace
-    .row.ml-0.mr-0.scrollbar-near-moon.thin#main_row
-      // левый блок
-      .card.card-primary.working_platform.p-1
-        .card-header.p-0 style="background-color: white"
-          .input-group.input-group-sm
-            input.form-control.form-control-navbar type="search" placeholder="Search" aria-label="Search"
-            .input-group-append
-              button.btn.btn-navbar type="submit"
-                i.fas.fa-search
+.company-page.orders
 
-        .card-body.card-scroll-window style="display: block;"
-          - production_sites.includes(:orders).each do |pr_site|
-            .custom-list.card.card-success.card-list.mb-2
-              .card-header
-                h2.card-title.text-left.mb-0.text-white = pr_site.title
-                .card-tools.town
-                  span.number_of_people_span = pr_site.city
-              .card-body
-                .card-scroll-window
-                  - pr_site.orders.each do |pr_site_order|
-                    .card-header.without_bc.elem_in_list.js-elem-in-list.clickable-order-row.hoverable data-href="#{profile_production_site_order_path(pr_site, pr_site_order)}"
-                      h3.card-title.left.mb-0
-                        | ##{pr_site_order.id}
-                        |  #{pr_site_order.title}
-                      .card-icons
-                        .card-icons-link
-                          span.message = pr_site_order.proposal_employees.inbox.count
-                          i.far.color-black.fa-envelope
-                        .card-icons-link
-                          span = pr_site_order.number_free_places
-                          i.fas.color-black.fa-users
-                        .card-icons-link
-                          span = pr_site_order.without_inbox_candidate_count
-                          i.far.color-black.fa-flag
+    .company-page__platforms
+        .search
+          input type="text" placeholder="Поиск площадок"
+          img src="img/search.png" id="search" alt=""
 
-      //правый блок
-      .application
-        .application__header.d-flex.align-items-center.justify-content-around.my-2.bg-rostjob.text-white
-          p.pl-2.my-1
-            | №#{ order.id }
-          h5.my-1.application__title
-            | #{order.title} #{order.skill} - #{order.place_of_work}
-          - unless order.completed?
-            .align-bottom.text-right
-              = link_to complete_profile_production_site_order_path(production_site, order), class: 'btn-floating btn-sm red',
-                      remote: true, method: :put, data: {confirm: 'Завершить заявку?'}, title: 'Завершение заявки' do
-                i.fas.fa-times
-              | Завершить
+        .platforms__list
 
-        .application__body#app__body
-          .card.testimonial-card.card-hr.w-100
-            .w-100.p-0
-              .row.p-0.m-0.grey.lighten-4.text-center
-                .col-md-3.p-1
-                  i.fas.fa-bookmark.ml-2.mr-2.yellow-text
-                  u.font-weight-bold
-                    | В очереди
-                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                             state: 'inbox' }
-                  hr
-                  .reserve-block
-                    i.fas.fa-bookmark.ml-2.mr-2.blue-text
-                    u.font-weight-bold.fas
-                      | Резер
-                    = order.decorate.icon_chevron_or_minus
-                  .reserve-items
-                    = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                               state: 'reserved'}
-                  hr
-                  .border.rounded.white.p-3
+            .platform
+                .platform__header.js-platform__header
+                  p.platform__title Пискаревский молзавод
+                  img src="img/arrow-down.png" class="js-arrow rotated" alt=""
+
+                .platform__body.js-platform__body
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+
+            .platform
+                .platform__header.js-platform__header
+                  p.platform__title Концерн «Детскосельский»
+                  img src="img/arrow-down.png" class="js-arrow rotated" alt=""
+
+                .platform__body.js-platform__body
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                    .order
+                        .content
+                            .order__number №198
+
+
+                            .order__description
+                              p class="order__title" Опрератор-сборщик схемных жгутов
+                              span class="order__price" 10000 руб. / чел.
+
+                              .order__statistic
+
+                                .element
+                                  i class="fas fa flag"
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+                                .element
+                                  i class="fas fa "
+                                  span 120
+
+    .requests-part
+
+        .modal.fade.bd-example-modal-lg.show tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            .modal-dialog.modal-lg
+                .modal-content
+                    .modal-header
+
+                        .modal-header-top
+                            a href="#" class="modal-title" #3 Бестужев Лев Викторович
+                            .modal-activities
+                                a href="#"
+                                  img src="img/row-left-rounded.png" alt=""
+                                  | Перенести
+
+                                a href="#"
+                                  img src="img/smile-sow.png" alt=""
+                                  | Спор
+
+
+                        p.modal-request-type
+                          i class="fa fa-flag" style="color: #ffd800"
+                          |  Собеседование
+
+                        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                          span aria-hidden="true" ×
+
+
+
+                    .modal-body
+
+                        .modal-ancete
+
+                            h4.modal-ancete__title Анкета
+
+                            .ancete-rows.must-have
+
+                                .ancete-row
+                                    p.ancete-row__title Полное имя
+
+
+                                    .ancete-row__content
+                                       input type="text"
+
+
+                                .ancete-row
+                                    p.ancete-row__title Номер телефона
+
+
+                                    .ancete-row__content
+                                       input type="text"
+
+
+                                .ancete-row
+                                    p.ancete-row__title Анкета для СБ
+
+
+                                    .ancete-row__content
+                                        a href="#"
+                                          img src="img/down.png" alt=""
+                                          | Скачать анкету
+
+                                        .sex
+                                          label for="man" М
+                                          input id="man" name="sex" type="radio"
+                                          label for="woman" Ж
+                                          input id="woman" name="sex" type="radio"
+
+
+                            h4.modal-ancete__title Дополнительные сведения
+
+                            .ancete-rows.more-info
+
+                                .ancete-row
+                                    p.ancete-row__title Опыт работы
+
+
+                                    .ancete-row__content
+                                       textarea cols="30" rows="3"
+
+
+                                .ancete-row
+                                    p.ancete-row__title Образование
+
+
+                                    .ancete-row__content
+                                       textarea cols="30" rows="3"
+
+
+                                .ancete-row
+                                    p.ancete-row__title Доп. информация
+
+
+                                    .ancete-row__content
+                                       textarea cols="30" rows="3"
+
+
+                        .modal-ancete__sidebar
+                            .date-start-work
+                               h3.modal-ancete__title Дата выхода на работу
+                               textarea cols="30" rows="6"
+                               button id="get-recruter" Нанять
+
+
+                            .footer
+                              p Рекрутер
+                              .ancete-recruter
+                                img src="img/girl.png" class="request-logo" alt=""
+                                p.request-user-name Nataja-2019
+
+
+
+        .header
+
+          p id="request-part-title" №169 Укладчик-упаковщик Без опыта работы - Производственая площадка АО «Татпроф»
+          span 12000 руб. / чел.
+
+
+        .requests-part__body
+
+            .column
+                .column__title
+                  p
+                    i class="fa fa-flag" style="color: #ffd800"
+                    |  В очереди
+
+                p class="peoples-left" Осталось 12 человек
+                p class="add-personal" data-toggle="modal" data-target=".bd-example-modal-lg" + Добавить персонал
+
+                .column__body
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                        .card-dropdown.show
+                          a class="card-dropdown__btn" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" ...
+
+                          .dropdown-menu aria-labelledby="dropdownMenuLink"
+                            a class="dropdown-item" href="#" Action
+                            a class="dropdown-item" href="#" Another action
+                            a class="dropdown-item" href="#" Something else here
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+
+
+
+            .column
+                .column__title
                     p
-                      | Осталось #{ order.number_free_places } человека
-                    .hoverable.clickable-employee-cv data-toggle="modal" data-target='#addNewQuantityEmployeeModal'
-                      i.fas.fa-plus.blue-text.mr-2
-                      | Добавить персонал
-                .col-md-3.p-1
-                  i.fas.fa-bookmark.ml-2.mr-2.orange-text
-                  u.font-weight-bold
-                    | Собеседование
-                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                             state: 'interview' }
+                      i class="fa fa-flag" style="color: #ff9000"
+                      |  Собеседование
 
-                .col-md-3.p-1
-                  i.fas.fa-bookmark.ml-2.mr-2.green-text
-                  u.font-weight-bold
-                    | Нанят
-                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                             state: 'hired'}
 
-                .col-md-3.p-1
-                  i.fas.fa-bookmark.ml-2.mr-2.grey-text
-                  u.font-weight-bold
-                    | Оплачен
-                  = render partial: 'profile/production_sites/orders/contractors/contractor_card', locals: { order: order,
-                                                                                                             state: 'paid' }
+                .column__body
 
-      .modal.fade.left id="addNewQuantityEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addNewQuantityEmployeeModalLabel" aria-hidden="true"
-        .modal-dialog.modal-lg role="document"
-          .modal-content
-            = form_for order,
-                       url: update_pre_publish_profile_production_site_order_path(production_site),
-                       remote: true,
-                       method: :put do |f|
-              .modal-header
-                h4.modal-title Добавить персонал
-                button.close type="button" data-dismiss="modal" aria-label="Close"
-                  span aria-hidden="true" &times;
-              .modal-body
-                .offset-2.col-8
-                  = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников', class: 'form-control'
-              .modal-footer
-                = f.submit 'Добавить', class: 'btn btn-success'
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+
+            .column
+                .column__title
+                    p
+                      i class="fa fa-flag" style="color: #00ca5f"
+                      |  Нанят
+
+
+                .column__body
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+
+            .column
+                .column__title
+                   p
+                     i class="fa fa-flag" style="color: #b7b7b7"
+                     |  Оплачен
+
+                .column__body
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+
+                        .request__footer
+                           img src="img/girl.png" class="request-logo" alt=""
+                           p class="request-user-name" Nataja-2019
+
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+                    .request
+                        p.request__title № 3 Бестужев Лев Викторович
+
+                        p.phone-number +7025648125
+
+                        textarea cols="30" rows="4" placeholder="Напишите комментарий"
+
+                        .request__footer
+                          img src="img/girl.png" class="request-logo" alt=""
+                          p class="request-user-name" Nataja-2019
+
+
+            .buttons
+
+              a id="redact" href="#"
+                 img src="img/redact.png" alt=""
+                 | Редактировать
+
+              a id="info" href="#"
+                 img src="img/info.png" alt=""
+                 | Инфо
+
+              a id="close-request" href="#"
+                 img src="img/close.png" alt=""
+                 | Закрыть
