@@ -25,7 +25,7 @@ module Cmd
           subject_id: customer.id,
           subject_type: 'User',
           subject_role: customer.profile.profile_type,
-          action: "Условие по анкете №#{proposal_employee.employee_cv_id} #{proposal_employee.employee_cv.name} выполнено",
+          action: "Условие по анкете №#{candidate.employee_cv_id} #{candidate.employee_cv.name} выполнено",
           object_id: candidate.id,
           object_type: 'ProposalEmployee',
           employee_cv_id: candidate.employee_cv_id,
