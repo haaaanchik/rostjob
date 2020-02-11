@@ -23,7 +23,7 @@
       .item-type.js-input-type data-target="finished"
         span Завершенные
 
-    .orders-list
+    .orders-list data-production_sites-id=params[:production_site_id]
       .order-list__body data-tab="templates"
         .orders-list__header
           .activities
@@ -41,7 +41,7 @@
               span Опубликовать заявку
         - order_templates.each do |order_t|
           .order
-            input type="checkbox"
+            input type="checkbox" value=order_t.id
             .content
               .order__number №#{ order_t.id }
               .order__description

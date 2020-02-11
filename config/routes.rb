@@ -162,13 +162,16 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :production_sites do
       scope module: :production_sites do
-        resources :order_templates do
+        resources :order_templates, except: %i[destroy] do
           member do
-            post :copy
             post :create_order
             put :move
             get :description_info
             get :additional_info
+          end
+          collection do
+            delete :destroy
+            post :copy
           end
         end
         get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }

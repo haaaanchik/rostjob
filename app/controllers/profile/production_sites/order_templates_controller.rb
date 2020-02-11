@@ -1,5 +1,5 @@
 class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSites::ApplicationController
-  before_action :set_order_template, except: %i[index new create]
+  before_action :set_order_template, except: %i[index new create destroy copy]
   before_action :set_position, only: %i[create update]
 
   def index
@@ -42,13 +42,17 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def destroy
-    @order_template.destroy
-    redirect_to profile_production_site_order_templates_path(production_site)
+    if current_profile.order_templates.where(id: params[:order_ids]).destroy_all
+      render json: { message: 'удаленны' }, status: 201
+    else
+      render json: { message: 'не удалось удалить' }, status: 422
+    end
   end
 
   def copy
-    result = Cmd::OrderTemplate::Copy.call(order_template: @order_template)
-    redirect_to profile_production_site_order_templates_path(production_site) if result.success?
+    OrderTemplate.where(id: params[:order_ids]).find_each(batch_size: 50).each do |order_template|
+      Cmd::OrderTemplate::Copy.call(order_template: order_template)
+    end
   end
 
   def create_order
