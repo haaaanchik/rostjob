@@ -1,3 +1,14 @@
+class Orders
+  @init: ->
+    @clickProposalEmployee()
+
+  @clickProposalEmployee: ->
+    if $('#click_proposal_employee').length
+      $('#click_proposal_employee')[0].click()
+
+$(document).on 'turbolinks:load', ->
+  Orders.init()
+
 $ ->
   $('label[for=order_accepted]').on('click', (event) ->
     element = $('#order_accepted')

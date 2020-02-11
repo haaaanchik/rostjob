@@ -25,6 +25,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   def show
     order
     order.proposal_employees.map(&:mark_as_read)
+    @proposal_employee = ProposalEmployee.find(params[:proposal_employee_id]) if params[:proposal_employee_id].present?
   end
 
   def new

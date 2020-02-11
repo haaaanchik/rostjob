@@ -71,6 +71,10 @@ class ProposalEmployeeDecorator < ObjDecorator
     STATUS_BACKGROUND_COLORS[model.state]
   end
 
+  def link_to_candidate_or_ticket
+    object.disputed? ? ticket_path : order_path
+  end
+
   def ticket_path
     tickets = Ticket.with_other_tickets_for(h.current_user).ransack(state_cont: 'opened').result
     ticket = tickets.find_by(proposal_employee_id: id)
@@ -107,5 +111,13 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   def approve_transfer_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('approve')
+  end
+
+  private
+
+  def order_path
+    h.profile_production_site_order_path(order.production_site,
+                                         order,
+                                         proposal_employee_id: id)
   end
 end
