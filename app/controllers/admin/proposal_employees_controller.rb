@@ -12,7 +12,7 @@ class Admin::ProposalEmployeesController < Admin::ApplicationController
   end
 
   def approval_list
-    @approval_list = ProposalEmployee.includes(:order, :employee_cv)
+    @approval_list = ProposalEmployee.includes(:employee_cv, order: :production_site)
                          .approved_by_admin
                          .page(params[:page]).per(10)
   end

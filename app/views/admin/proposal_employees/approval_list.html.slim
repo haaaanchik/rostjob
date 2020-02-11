@@ -8,6 +8,8 @@ table.table
       th
         strong Заявка
       th
+        strong Производственная площадка
+      th
         strong Действие
   tbody
     - @approval_list.each do |p_employee|
@@ -15,6 +17,7 @@ table.table
         td = p_employee.id
         td = p_employee.employee_cv.name
         td = p_employee.order.title
+        td = p_employee.order.production_site.title
         td
           = link_to approve_act_admin_proposal_employee_path(p_employee),
                     class: 'green-text btn btn-sm',

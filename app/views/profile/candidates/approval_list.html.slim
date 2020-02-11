@@ -13,6 +13,8 @@
             th
               strong Заявка
             th
+              strong Производственная площадка
+            th
               strong Действие
         tbody
           - @approval_list.each do |p_employee|
@@ -20,6 +22,7 @@
               td = p_employee.id
               td = p_employee.employee_cv.name
               td = p_employee.order.title
+              td = p_employee.order.production_site.title
               td
                 = link_to approve_act_profile_candidate_path(p_employee),
                           class: 'green-text btn btn-sm',

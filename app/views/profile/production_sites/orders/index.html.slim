@@ -8,7 +8,7 @@
 
   .company-page__tabs
     .header
-      .item-type.js-input-type.active data-target="templates"
+      .item-type.js-input-type data-target="templates"
         span Шаблоны
 
       .item-type.js-input-type data-target="pending_payments"
@@ -17,14 +17,14 @@
       .item-type.js-input-type data-target="on_moderation"
         span На модерации
 
-      .item-type.js-input-type data-target="published"
+      .item-type.js-input-type.active data-target="published"
         span Опубликованные
 
       .item-type.js-input-type data-target="finished"
         span Завершенные
 
     .orders-list
-      .order-list__body.show-tab data-tab="templates"
+      .order-list__body data-tab="templates"
         .orders-list__header
           .activities
             input type="checkbox" id="check_all"
@@ -113,7 +113,7 @@
                       i.fa.fa-envelope.mr-2
                       span = order.proposal_employees.inbox.count
 
-      .order-list__body data-tab="published"
+      .order-list__body.show-tab data-tab="published"
         .orders-list__header
           .activities
           .publish
