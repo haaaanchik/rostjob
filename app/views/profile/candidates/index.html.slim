@@ -1,31 +1,80 @@
-.grey.lighten-4.d-flex.justify-content-center.w-100#candidates
-  .col-lg-2.order-lg-2.mt-4
-    = render partial: 'search_form'
-  .col-lg-10.order-lg-1.mt-4
-        p.text-center.font-italic
-          |*Здесь расположены все отправленные анкеты.
-        .border.rounded
-          table.table.table-sm.table-borderless.scrollbar-near-moon.thin
-            thead
-              tr style='height: 50px; background-color: #d8d5d5;'
-                th.text-left
-                  = sort_link(@q, :created_at) do
-                    strong Статус
-                th.text-left.pl-3
-                  = sort_link(@q, :employee_cv_name) do
-                    strong Анкета
-                th.text-left
-                  = sort_link(@q, :order_title) do
-                    strong Заявка
-                th.text-left
-                  .d-none.d-xl-block
-                    = sort_link(@q, :order_place_of_work) do
-                      strong Площадка
-                th.text-left style="width: 130px"
-                  .d-none.d-sm-block
-                    = sort_link(@q, :hiring_date) do
-                      strong Договор
-            tbody
-              = render partial: 'profile/candidates/candidate', collection: @paginated_candidates
+.worksheet#worksheet
 
-        = paginate @paginated_candidates
+        .header
+            .filters.js-filters
+               #filters Фильтры
+               = image_tag('/img/new/arrow-down.png')
+
+            .search
+               input type="text" placeholder="Поиск анкет"
+               = image_tag('/img/new/search.png')
+
+            .filters-dropdown.js-filters-dropdown
+                p
+                  input type="checkbox" id="chbx1"
+                  i class="fa fa-flag"
+                  label for="chbx1" В очереди
+                p
+                  input type="checkbox" id="chbx2"
+                  i class="fa fa-flag"
+                  label for="chbx2" Собеседование
+
+                p
+                  input type="checkbox" id="chbx3"
+                  i class="fa fa-flag"
+                  label for="chbx3" Нанят
+
+                p
+                  input type="checkbox" id="chbx4"
+                  i class="fa fa-flag"
+                  label for="chbx4" Спор
+
+                p
+                  input type="checkbox" id="chbx5"
+                  i class="fa fa-flag"
+                  label for="chbx5" Оплачен
+
+                p
+                  input type="checkbox" id="chbx6"
+                  i class="fa fa-flag"
+                  label for="chbx6" В резерве
+
+                p
+                  input type="checkbox" id="chbx7"
+                  i class="fa fa-flag"
+                  label for="chbx7" Перенос
+
+        .worksheets
+
+            .worksheets__titles
+
+                .worksheets__title
+                   p Статус
+
+                .worksheets__title
+                   p Анкета
+
+                .worksheets__title
+                   p Заявка
+
+                .worksheets__title
+                   p Площадка
+
+            .worksheets__body
+
+                = render partial: 'profile/candidates/candidate', collection: @paginated_candidates
+
+        .page-number
+          a href="#" Назад
+          a href="#" 1
+          a href="#" class="active-page" 2
+          a href="#" 3
+          a href="#" 4
+          a href="#" 5
+          a href="#" 6
+          a href="#" 7
+          a href="#" 8
+          a href="#" Вперед
+
+
+

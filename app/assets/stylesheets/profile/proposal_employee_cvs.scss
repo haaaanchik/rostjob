@@ -51,3 +51,261 @@
     }
   }
 }
+
+#worksheet{
+  width: 100%;
+  padding: 15px 15px 0 15px;
+  background-color: #f2f2f2;
+  height: calc(100vh - 43px);
+  position: relative;
+  font-family: "Open Sans", sans-serif;
+
+
+  .header{
+    position: relative;
+    border-radius: 4px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    padding: 0;
+  }
+
+  .filters{
+    display: flex;
+    align-items: center;
+    padding: 10px 0 10px 10px;
+  }
+
+  .filters > p{
+    margin: 0 10px 0 0;
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .search{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 35px;
+  }
+
+  .search input{
+    border: 0;
+    border-bottom: 1px solid #a2a2a2;
+    color: #999999;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    width: 274px;
+  }
+
+  .search img{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+
+  .worksheets__titles{
+    display: flex;
+    border-radius: 4px 4px 0 0;
+    background-color: #e6e6e6;
+    margin-top: 12px;
+  }
+
+  .worksheets__title p{
+    margin: 0;
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .worksheets__title{
+    padding: 10px;
+  }
+
+  .worksheets__title{
+    width: 25%;
+  }
+
+  .worksheets__title:first-child{
+    width: 12.5%;
+  }
+
+  .worksheets__title:last-child{
+    width: 37.5%;
+  }
+
+  .worksheets{
+    height: 86%;
+  }
+
+  .worksheets__body{
+    background-color: #fff;
+    height: calc(100% - 38px);
+    overflow: auto;
+  }
+
+  .worksheets__item{
+    display: flex;
+  }
+
+  .worksheets__item .info{
+    width: calc(25% ) ;
+    padding: 10px;
+  }
+
+  .worksheets__item .info:first-child{
+    width: calc(12.5% ) ;
+  }
+
+  .worksheets__item .info:last-child{
+    width: calc(37.5% );
+  }
+
+
+  .page-number{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .page-number a{
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .page-number a:first-child{
+    margin-right: 30px;
+  }
+
+  .page-number a:last-child{
+    margin-left: 30px;
+  }
+
+  .filters{
+    position: relative;
+  }
+
+  .filters-dropdown{
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    display: none;
+    background-color: white;
+    padding: 5px;
+  }
+
+  .filters-dropdown input {
+    opacity: 1;
+    position: static;
+    pointer-events: auto;
+  }
+
+  .filters-dropdown p:hover{
+    color: blue;
+    cursor: pointer;
+  }
+
+  .filters-show{
+    display: flex;
+    max-width: 100%;
+  }
+
+  .filters-dropdown > p{
+    margin: 4px 15px;
+    display: flex;
+    white-space: nowrap;
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .filters-dropdown > p i{
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+  .page-number .active-page{
+    color: blue;
+  }
+
+  .page-number a{
+    margin: 0 5px;
+  }
+
+  .info{
+    font-size: 14px;
+  }
+
+  .info i {
+    margin-right: 10px;
+  }
+
+  .worksheets__item .info:first-child{
+    > span{
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .date {
+      font-weight: normal;
+    }
+  }
+
+  #filters{
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 10px 0 0;
+  }
+
+  .worksheets__body{
+    padding-left: 10px;
+  }
+
+  .worksheets__titles{
+    padding-left: 10px;
+  }
+
+  .filters-dropdown p label{
+    margin-bottom: 0;
+  }
+
+  .worksheets__body{
+    &::-webkit-scrollbar {
+      width: 6px;
+
+      background-color: $secondaryColor;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 6px;
+      background: transparentize($secondaryColorDark, 0.7);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: transparentize($secondaryColorDark, 0.4);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $secondaryColorDark;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background: linear-gradient(left, #22ADD4, #1E98BA);
+    }
+  }
+
+  .worksheets__item:hover{
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: all 0.55s ease-in-out;
+    cursor: pointer;
+  }
+
+}
