@@ -1,4 +1,4 @@
-.container
+/.container
   h2.text-center
     | Информация для Рекрутера
   hr
@@ -58,8 +58,65 @@
         .col-lg-6
           = f.button 'Сохранить и опубликовать', class: 'btn btn-white'
 
-javascript:
+/javascript:
     function ready() {
         $('input.btn').unwrap();
     }
     document.addEventListener('DOMContentLoaded', ready);
+
+.main_patternRequest
+		section.pattern
+			header
+		      .pattern_back
+			    button
+			      i class="fa fa-angle-left fa-2x"
+			      span Назад
+
+
+
+			  p Новый шаблон к Заявке
+
+			.pattern_body
+				header
+				  | Производственная площадка: #{@production_site.title}
+
+
+				.pattern_body_steps_nav
+					.pattern_body_steps_nav_step.check
+					  |	1
+
+					hr
+					.pattern_body_steps_nav_step.check
+					  |	2
+
+					hr
+					.pattern_body_steps_nav_step.check
+					  |	3
+
+				.pattern_body_steps_form
+
+                .pattern_body_steps_form_step.show
+
+                    .pattern_body_steps_form_step_input.textArea
+                        p Дополнительная информация для рекрутера
+                        #summernote1
+
+
+                    .pattern_body_steps_form_step_input.contact-face
+                        label for="contact-face" Контактное лицо
+                        input type="text" id="contact-face" placeholder="Имя"
+                        input type="text" id="contact-face-number" placeholder="+7"
+
+                    .pattern_body_steps_form_step_input.add_ancete
+                        p Вы можете добавить свою анкету для соискателей
+                        a href="#" id="add_ancete" Загрузите анкету
+
+                    .pattern_body_steps_form_step_input.save_as_template
+                        p Сохранить как шаблон
+                        a href="#" id="save_as_template" Нажмите, чтобы сохранить как шаблон
+
+                    footer class="pattern_body_steps_form_step_next"
+                      a href="#" id="send"
+                        | Опубликовать
+
+            a.pattern_close href="#" Закрыть

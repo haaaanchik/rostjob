@@ -1,4 +1,4 @@
-.container
+/.container
   h2.text-center
     | Новый шаблон к Заявке
   hr
@@ -20,3 +20,59 @@
       .row
         .col-lg-2.offset-lg-5
           = f.submit 'Далее', class: 'btn btn-primary'
+
+.main_patternRequest
+		section.pattern
+			header
+		      .pattern_back
+			    button
+			      i class="fa fa-angle-left fa-2x"
+			      span Назад
+
+			  p Новый шаблон к Заявке
+
+			.pattern_body
+				header
+				  | Производственная площадка: #{@production_site.title}
+
+
+				.pattern_body_steps_nav
+					.pattern_body_steps_nav_step.check
+					  |	1
+
+					hr
+					.pattern_body_steps_nav_step
+					  |	2
+
+					hr
+					.pattern_body_steps_nav_step
+					  |	3
+
+				.pattern_body_steps_form
+
+				  .pattern_body_steps_form_step.show
+                    .pattern_body_steps_form_step_input
+                      label for="patternName" Название шаблона
+                      input type="text" id="patternName" placeholder="Введите название шаблона"
+
+                    .pattern_body_steps_form_step_input
+                      label for="profession" Профессия
+                      input type="text" id="profession" placeholder="Начните набирать"
+
+                    .pattern_body_steps_form_step_input
+                      label for="priceInRubles" Цена в рублях
+                      input type="text" id="priceInRubles" placeholder="Цена появится после ввода профессии"
+
+                    .pattern_body_steps_form_step_input
+                       label for="qualification" Квалификация
+                       input type="text" id="qualification" placeholder="Укажите квалификацию"
+
+                    footer class="pattern_body_steps_form_step_next"
+                      a href="#"
+                        p
+                          | Далее
+                        i class="fa fa-angle-right fa-2x"
+
+
+
+

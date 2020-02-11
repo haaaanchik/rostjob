@@ -29,3 +29,415 @@ table.ui-menu-item {
     cursor: pointer;
   }
 }
+
+.main_patternRequest{
+  position: relative;
+  padding-top: 20px;
+  width: 100%;
+  background-color: #f2f2f2;
+  @media(max-width: 600px){
+    height: calc(100vh - 58px);
+  }
+  .pattern{
+    margin: 58px auto 0;
+    padding: 20px;
+    position: relative;
+    display: block;
+    width: 98%;
+    max-width: 785px;
+    max-height: calc(100vh - 20px*2 - 58px);
+    overflow-y: auto;
+    background-color: $secondaryColor;
+    border-radius: 4px;
+    box-shadow: 0px 0px 15px 0px rgba(77, 77, 77, 0.15);
+    @media(max-width: 600px){
+      max-width: 90vw;
+    }
+    >header{
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      width: 560px;
+      max-width: 90%;
+      p{
+        margin: auto;
+        font-family: $primaryFont;
+        font-weight: 700;
+        font-size: 17px;
+        color: $primaryColor;
+      }
+      .pattern_back{
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+        button{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          font-family: $primaryFont;
+          font-weight: 600;
+          font-size: 15px;
+          color: $secondaryColorDark;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          span{
+            margin: auto 0;
+          }
+          i{
+            margin: auto 4px auto 0;
+          }
+        }
+        @media(max-width: 500px){
+          position: relative;
+          top: 0;
+          transform: translate(0, 0);
+        }
+      }
+    }
+    &_body{
+      margin: 0 auto;
+      width: 560px;
+      max-width: 94%;
+      >header{
+        padding: 10px 0;
+        text-align: center;
+        font-family: $primaryFont;
+        font-weight: 400;
+        font-size: 14px;
+        color: $primaryColor;
+      }
+      &_steps{
+        &_nav{
+          margin: 0 auto;
+          position: relative;
+          display: flex;
+          width: 300px;
+          padding: 20px 0;
+          flex-direction: row;
+          justify-content: space-between;
+          hr{
+            z-index: 1;
+            top: 50%;
+            position: absolute;
+            display: block;
+            width: calc(50% - 13px);
+            margin: 0;
+            height: 1px;
+            border: none;
+            background-color: $secondaryColorDark;
+            &:nth-of-type(1){
+              left: 13px;
+            }
+            &:nth-of-type(2){
+              right: 13px;
+            }
+          }
+          &_step{
+            z-index: 2;
+            position: relative;
+            display: block;
+            width: 26px;
+            height: 26px;
+            text-align: center;
+            line-height: 24px;
+            font-family: $primaryFont;
+            font-weight: 400;
+            font-size: 13px;
+            color: $secondaryColorDark;
+            border: 1px solid $secondaryColorDark;
+            border-radius: 50%;
+            background-color: $secondaryColor;
+            transition-duration: 1s;
+            cursor: default;
+            &:after{
+              content: "шаг";
+              position: absolute;
+              display: block;
+              top: calc(100% - 5px);
+              left: 50%;
+              transform: translate(-50%, 0);
+              transition-duration: 1s;
+            }
+            &.check{
+              border: 1px solid $alterColor;
+              color: $alterColor;
+            }
+          }
+          @media(max-width: 400px){
+            width: 200px;
+          }
+        }
+
+        &_form{
+          padding: 20px 0;
+          position: relative;
+          &_step{
+            position: absolute;
+            top: -200px;
+            left: 0;
+            visibility: hidden;
+            opacity: 0;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 15px;
+            gap: 15px;
+            transition-duration: 1s;
+            &_input{
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              flex-wrap: wrap;
+              align-items: flex-start;
+              p{
+                max-width: 170px;
+                font-family: "Open Sans", sans-serif;
+                font-weight: 600;
+                font-size: 14px;
+                color: #000;
+              }
+              label{
+                min-width: 170px;
+                padding: 5px 0;
+                margin: auto 0;
+                font-family: $primaryFont;
+                font-weight: 600;
+                font-size: 14px;
+                color: $primaryColor;
+                &.pseudoInput{
+                  color: $alterColor;
+                  text-decoration: underline;
+                  cursor: pointer;
+                }
+              }
+              input[type="text"], input[type="tel"]{
+                width: 100%;
+                max-width: 370px;
+                padding-left: 15px;
+                padding-right: 15px;
+                height: 38px;
+                font-family: $primaryFont;
+                font-weight: 400;
+                font-size: 14px;
+                color: $primaryColor;
+                border-radius: 4px;
+                border: 1px solid $secondaryColorDark;
+              }
+              &_wrapper{
+                display: grid;
+                grid-template-columns: minmax(auto, 220px) minmax(auto, 146px);
+                width: 370px;
+                grid-gap: 10px;
+                gap: 10px;
+                input[type="text"],input[type="tel"]{
+                  width: 100%;
+                }
+                @media(max-width: 600px){
+                  width: 100%;
+                  grid-template-columns: 1fr;
+                  input{
+                    max-width: 100%;
+                    width: 100%;
+                  }
+                }
+              }
+              &.textArea{
+                >p{
+                  margin-top: 5px;
+                  min-width: 170px;
+                  max-width: 170px;
+                  font-family: $primaryFont;
+                  font-weight: 600;
+                  font-size: 14px;
+                  color: $primaryColor;
+                  @media(max-width: 600px){
+                    max-width: 100%;
+                  }
+                }
+                >div{
+                  width: 100%;
+                  max-width: 370px;
+                }
+                .note-editor{
+                  margin-top: 5px;
+                  padding: 1px;
+                }
+                .note-editable{
+                  ul, ol{
+                    /*Откат к изначальному значению,
+                    без этого маркеры вылезают за край*/
+                    padding: revert;
+                  }
+
+                }
+                .note-resizebar{
+                  display: none;
+                }
+                .note-btn{
+                  &.active{
+                    background-color: lighten($primaryColor, 40%);
+                    color: $secondaryColor;
+                  }
+                }
+              }
+              &.file{
+                justify-content: flex-start;
+                input[type="file"]{
+                  display: none;
+                }
+                label{
+                  &:first-child{
+                    max-width: 170px;
+                    margin-right: 25px;
+                  }
+                  @media(max-width: 600px){
+                    &:first-child{
+                      max-width: 100%;
+                    }
+                  }
+                }
+              }
+            }
+            &_next{
+              position: relative;
+              margin-right: 0;
+              margin-left: auto;
+              a{
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                font-family: $primaryFont;
+                font-weight: 600;
+                font-size: 15px;
+                color: $alterColor;
+                border: none;
+                background-color: transparent;
+                cursor: pointer;
+                p{
+                  margin: auto 0;
+                }
+                i{
+                  margin: auto 0;
+                  margin-left: 4px;
+                }
+              }
+            }
+            &_save{
+              display: flex;
+              flex-direction: row;
+              justify-content: flex-end;
+              flex-wrap: wrap;
+              align-items: flex-start;
+              @media(max-width: 600px){
+                justify-content: flex-start;
+              }
+              .btn{
+                margin-right: 15px;
+                margin-bottom: 5px;
+                width: 132px;
+                height: 32px;
+                border-radius: 16px;
+              }
+              .btn-empty{
+                margin-bottom: 5px;
+                width: 230px;
+                height: 32px;
+                border-radius: 16px;
+                line-height: 30px;
+              }
+            }
+            &.show{
+              position: relative;
+              visibility: visible;
+              opacity: 1;
+              top: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#mceu_22, #mceu_23, #mceu_34-body, #mceu_5, #mceu_26{
+  display: none;
+}
+
+#mceu_33{
+  max-height: 200px;
+  overflow: auto;
+}
+
+.mce-content-body  p{
+  color: #000000;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.mce-content-body  ul{
+  padding-left: 0;
+}
+
+.contact-face{
+  flex-wrap: nowrap;
+}
+
+#contact-face{
+  width: 210px;
+}
+
+#contact-face-number{
+  width: 146px;
+}
+
+#add_ancete,{
+  padding-left: 18px;
+  text-decoration: underline;
+  color: #1970ff;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#save_as_template{
+  padding-left: 30px;
+  text-decoration: underline;
+  color: #1970ff;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pattern_body_steps_form_step_input.add_ancete,
+.pattern_body_steps_form_step_input.save_as_template{
+  justify-content: left;
+}
+
+#send{
+  border-radius: 16px;
+  background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+  color: #ffffff;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+  padding: 3px 25px;
+}
+
+.pattern_close{
+  position: absolute;
+  right: 25px;
+  top: 25px;
+  color: #999999;
+  font-family: "Open Sans";
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.pattern_close:after{
+  content: "X";
+  font-weight: normal;
+  font-family: "Arial";
+  margin-left: 5px;
+}
