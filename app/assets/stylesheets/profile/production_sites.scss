@@ -7,10 +7,11 @@ $primaryFont: 'Open Sans', sans-serif;
 $tablet: "max-width: 1000px";
 $phone: "max-width: 768px";
 
-.main_platforms{
+.main_platforms {
   width: 100%;
   background-color: #f2f2f2;
-  .platforms{
+
+  .platforms {
     background-color: #f2f2f2;
     padding: 30px 20px 10px 20px;
     position: relative;
@@ -19,14 +20,16 @@ $phone: "max-width: 768px";
     grid-template-rows: 50px minmax(1fr, 580px);
     grid-gap: 20px;
     gap: 20px;
-    >header{
+
+    > header {
       font-family: $primaryFont;
       font-weight: 700;
       font-size: 17px;
       color: $secondaryColorDark;
       height: auto;
     }
-    &_list{
+
+    &_list {
       position: relative;
       overflow-y: auto;
       display: grid;
@@ -35,7 +38,8 @@ $phone: "max-width: 768px";
       max-height: calc(100vh - (30px + 10px) - 58px - 50px);
       grid-gap: 20px;
       gap: 20px;
-      &_platform{
+
+      &_platform {
         margin-right: 10px;
         //margin-bottom: 20px;
         height: 580px;
@@ -47,22 +51,25 @@ $phone: "max-width: 768px";
         border-radius: 8px;
         background-color: $secondaryColor;
         box-shadow: 0px 0px 15px 0px rgba(77, 77, 77, 0.15);
-        header{
+
+        header {
           font-family: $primaryFont;
           font-weight: 700;
           font-size: 16px;
           color: $primaryColor;
           //height: auto ;
-          a{
+          a {
             color: $primaryColor;
           }
         }
-        footer{
+
+        footer {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           align-items: center;
-          .add{
+
+          .add {
             margin-left: 0;
             width: 149px;
             height: 27px;
@@ -73,11 +80,13 @@ $phone: "max-width: 768px";
             font-family: "Open Sans", sans-serif;
             font-size: 13px;
             font-weight: 400;
-            &:hover{
+
+            &:hover {
               cursor: pointer;
             }
           }
-          .btn-edit{
+
+          .btn-edit {
             padding: 0;
             margin: 0;
             font-family: $primaryFont;
@@ -89,16 +98,19 @@ $phone: "max-width: 768px";
             cursor: pointer;
             border: 0;
             border-bottom: 1px solid transparent;
-            &:hover{
-              color:$primaryColor;
+
+            &:hover {
+              color: $primaryColor;
               border-bottom: 1px solid black;
             }
           }
         }
-        &_top{
+
+        &_top {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          &_logo{
+
+          &_logo {
             margin: auto;
             overflow: hidden;
             display: flex;
@@ -109,31 +121,36 @@ $phone: "max-width: 768px";
             border: 2px solid $secondaryColorDark;
             border-radius: 50%;
             text-align: center;
-            a{
+
+            a {
               display: flex;
               width: 100%;
               height: 100%;
               color: $secondaryColorDark;
               text-decoration: underline;
-              p{
+
+              p {
                 margin: auto;
               }
             }
           }
-          &_info{
-            ul{
+
+          &_info {
+            ul {
               height: 100%;
               display: flex;
               flex-direction: column;
               justify-content: center;
               margin-bottom: 0;
-              li{
+
+              li {
                 font-family: $primaryFont;
                 font-weight: 400;
                 font-size: 13px;
                 color: $primaryColor;
                 margin-bottom: 15px;
-                i{
+
+                i {
                   margin-right: 10px;
                   color: $secondaryColorDark;
                 }
@@ -141,13 +158,15 @@ $phone: "max-width: 768px";
             }
           }
         }
-        &_bottom{
-          &_nav{
+
+        &_bottom {
+          &_nav {
             margin-bottom: 10px;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
-            button{
+
+            button {
               font-family: $primaryFont;
               font-weight: 600;
               font-size: 14px;
@@ -156,12 +175,14 @@ $phone: "max-width: 768px";
               border-bottom: 1px solid transparent;
               background-color: transparent;
               cursor: pointer;
-              &.show{
+
+              &.show {
                 border-bottom: 1px solid $secondaryColorDark;
               }
             }
           }
-          &_text{
+
+          &_text {
             position: relative;
             height: 210px;
             overflow: auto;
@@ -175,6 +196,7 @@ $phone: "max-width: 768px";
 
               background-color: $secondaryColor;
             }
+
             &::-webkit-scrollbar-track {
               border-radius: 6px;
               background: transparentize($secondaryColorDark, 0.7);
@@ -193,12 +215,13 @@ $phone: "max-width: 768px";
               background: linear-gradient(left, #22ADD4, #1E98BA);
             }
 
-            &>div{
+            & > div {
               position: absolute;
               display: none;
               top: 0;
               left: 0;
-              &.show{
+
+              &.show {
                 display: block;
               }
             }
@@ -207,120 +230,67 @@ $phone: "max-width: 768px";
       }
     }
   }
-}
 
-#pen{
-  width: 13px;
-}
 
-.tab-content{
-  height: 250px;
-  overflow: auto;
-  padding: 15px 5px 0 5px;
-  p{
-    color: #000000;
-    font-family: "Open Sans", sans-serif;
-    font-size: 13px;
-    font-weight: 400;
-  }
-}
-
-.bd-example-tabs{
-  margin-top: 30px;
-}
-
-.platforms_list_platform.empty-platform{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.add-platform{
-  text-align: center;
-  p{
-    color: #cccccc;
-    font-family: "Open Sans", sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    margin-top: 17px;
-  }
-}
-
-.add-platform:hover{
-  cursor: pointer;
-}
-
-.platforms_list_platform_bottom_text_vacancies{
-  width: 100%;
-}
-
-.platforms_list_platform_bottom_text_vacancies p{
- width: 90%;
-}
-
-.platforms_list{
-  &::-webkit-scrollbar {
-    width: 6px;
-
-    background-color: $secondaryColor;
-  }
-  &::-webkit-scrollbar-track {
-    border-radius: 6px;
-    background: transparentize($secondaryColorDark, 0.7);
+  #pen {
+    width: 13px;
   }
 
-  &::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background: transparentize($secondaryColorDark, 0.4);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: $secondaryColorDark;
-  }
-
-  &::-webkit-scrollbar-thumb:active {
-    background: linear-gradient(left, #22ADD4, #1E98BA);
-  }
-}
-
-.personal-info{
-  padding: 15px;
-}
-
-.modal-header{
-  border: 0;
-}
-
-.modal-title{
-  color: #000000;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.modal-body{
-  padding-left: 60px;
-  .form-group{
-    margin-bottom: 25px;
-  }
-  .form-group:nth-child(3) .form-control{
+  .tab-content {
     height: 250px;
     overflow: auto;
+    padding: 15px 5px 0 5px;
+
+    p {
+      color: #000000;
+      font-family: "Open Sans", sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+    }
   }
-  .form-control{
-    padding: 15px;
+
+  .bd-example-tabs {
+    margin-top: 30px;
   }
-  textarea{
-    resize: none;
-    color: #000000;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
+
+  .platforms_list_platform.empty-platform {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .add-platform {
+    text-align: center;
+
+    p {
+      color: #cccccc;
+      font-family: "Open Sans", sans-serif;
+      font-size: 15px;
+      font-weight: 400;
+      margin-top: 17px;
+    }
+  }
+
+  .add-platform:hover {
+    cursor: pointer;
+  }
+
+  .platforms_list_platform_bottom_text_vacancies {
+    width: 100%;
+  }
+
+  .platforms_list_platform_bottom_text_vacancies p {
+    width: 90%;
+  }
+
+  .platforms_list {
     &::-webkit-scrollbar {
       width: 6px;
 
       background-color: $secondaryColor;
     }
+
     &::-webkit-scrollbar-track {
       border-radius: 6px;
       background: transparentize($secondaryColorDark, 0.7);
@@ -340,12 +310,6 @@ $phone: "max-width: 768px";
     }
   }
 }
-
-#myLargeModalLabel{
-  padding-top: 43px;
-  padding-left: 55px;
-}
-
 
 .company-page{
   display: flex;
@@ -1011,33 +975,10 @@ $phone: "max-width: 768px";
 
 /*    Modal      */
 
-.modal-header-top{
-  display: flex;
-  justify-content: space-between;
-  padding-right: 34px;
-  width: 100%;
-}
-
-.modal-header{
-  flex-direction: column;
-}
-
-.modal-activities{
-  display: flex;
-}
-
 .close{
   position: absolute;
   top: 2px;
   right: 8px;
-}
-
-.modal-request-type{
-  margin: 0;
-}
-
-.modal-ancete{
-  width: 60%;
 }
 
 .ancete-rows{
@@ -1117,10 +1058,6 @@ $phone: "max-width: 768px";
 
 .ancete-row{
   margin-bottom: 15px;
-}
-
-.modal-body{
-  display: flex;
 }
 
 .modal-ancete__sidebar{
@@ -1325,3 +1262,87 @@ $phone: "max-width: 768px";
   }
 }
 
+#modal-production-site, #candidate-show  {
+  .modal-header{
+    flex-direction: column;
+    border: 0;
+  }
+
+  .modal-title{
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .modal-body{
+    display: flex;
+    padding-left: 60px;
+    .form-group{
+      margin-bottom: 25px;
+    }
+    .form-group:nth-child(3) .form-control{
+      height: 250px;
+      overflow: auto;
+    }
+    .form-control{
+      padding: 15px;
+    }
+    textarea{
+      resize: none;
+      color: #000000;
+      font-family: "Open Sans", sans-serif;
+      font-size: 14px;
+      &::-webkit-scrollbar {
+        width: 6px;
+
+        background-color: $secondaryColor;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 6px;
+        background: transparentize($secondaryColorDark, 0.7);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background: transparentize($secondaryColorDark, 0.4);
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $secondaryColorDark;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        background: linear-gradient(left, #22ADD4, #1E98BA);
+      }
+    }
+  }
+
+  .personal-info {
+    padding: 15px;
+  }
+
+  #myLargeModalLabel {
+    padding-top: 43px;
+    padding-left: 55px;
+  }
+
+  .modal-header-top{
+    display: flex;
+    justify-content: space-between;
+    padding-right: 34px;
+    width: 100%;
+  }
+
+  .modal-activities{
+    display: flex;
+  }
+
+  .modal-request-type{
+    margin: 0;
+  }
+
+  .modal-ancete{
+    width: 60%;
+  }
+}
