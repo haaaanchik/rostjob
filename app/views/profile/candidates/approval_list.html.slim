@@ -20,7 +20,9 @@
           - @approval_list.each do |p_employee|
             tr data-pr-employee-id="#{ p_employee.id }"
               td = p_employee.id
-              td = p_employee.employee_cv.name
+              td = link_to p_employee.employee_cv.name, profile_production_site_order_path(p_employee.order.production_site,
+                                                                                           p_employee.order,
+                                                                                           proposal_employee_id: p_employee.id)
               td = p_employee.order.title
               td = p_employee.order.production_site.title
               td
