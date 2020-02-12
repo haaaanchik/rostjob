@@ -84,3 +84,14 @@ let filters_list = document.querySelector('.js-filters-dropdown');
 function openFilters() {
     filters_list.classList.toggle('filters-show');
 }
+
+/*            invoices                              */
+
+$(".personalAccount_operations button").click(function(){
+    document.querySelector('.personalAccount_open').classList.toggle('close');
+});
+
+$(".allAccounts_button button").click(function(){
+    document.querySelector('.allAccounts_open').classList.toggle('close');
+});
+

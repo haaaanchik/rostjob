@@ -1,6 +1,4 @@
-= form_with model: [:profile, @invoice], url: profile_invoices_path, local: true, class: 'form-inline' do |f|
-  - errors = @invoice.errors.messages
-  = f.label :amount, t(:amount)
-  = f.text_field :amount, class: "form-control mr-2 ml-2 #{'is-invalid' unless errors[:amount].empty?}"
-  = f.submit 'Выписать', class: 'btn btn-success mb-2'
-  .invalid-feedback #{errors[:amount].first}
+.replenishAccount_input
+  label for="replenishAccountSumm" Сумма
+  input type="text" id="replenishAccountSumm"
+button class="btn" Выставить счет

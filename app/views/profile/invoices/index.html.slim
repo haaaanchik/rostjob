@@ -1,36 +1,53 @@
-.col-md-9.order-md-2.mt-4
-  .card.border.rounded
-    .card-body
-      h2 Лицевой счет
-      'Остаток:
-      strong #{@current_profile.balance.amount}
-      i.fa.fa-ruble-sign.ml-1
-      = link_to 'Подробно', '#collapseExample', class: 'ml-3', data: {toggle: "collapse"},
-              aria: {expanded: false, controls: "collapseExample"}
-      .collapse.mt-3#collapseExample
-        hr
-        h4 Операции с лицевым счётом
-        table.table
-          tr
-            th Дата
-            th Описание операции
-            th Приход
-            th Расход
-          = render @current_profile.balance.bill_transactions.order(id: :desc).first(10)
-  br
-  .card.border.rounded
-    .card-body
-      h2 Выписать счет для пополнения
-      = render partial: 'new'
-  br
-  .card.border.rounded
-    .card-body
-      h2 Мои счета
-      table.table
-        tr
-          th Номер
-          th Дата
-          th Сумма
-          th Статус
-          th Действия
-        = render @invoices.persisted
+#main_personalAccount
+
+    section.personalAccount
+        header Лицевой счет
+
+        .personalAccount_balance
+           p
+             | Баланс:
+             span 2450 руб.
+
+        .personalAccount_operations
+           button class="btn-open" id="operations"
+             span Операции
+             i class="fa fa-angle-right fa-rotate-90 fa-2x"
+
+    section.personalAccount_open.close
+        .personalAccount_open_table
+            table
+                thead
+                    tr
+                      th Дата
+                      th Описание операции
+                      th Приход
+                      th Расход
+
+                tbody
+                    = render @current_profile.balance.bill_transactions.order(id: :desc).first(10)
+
+    section.allAccounts
+        header Все счета
+
+        .allAccounts_button
+            button class="btn-open"
+              span Подробнее
+              i class="fa fa-angle-right fa-rotate-90 fa-2x"
+
+    section.allAccounts_open.close
+        .allAccounts_open_table
+            table
+                thead
+                    tr
+                      th Номер
+                      th Дата
+                      th Баланс
+                      th Статус
+                      th Действия
+
+                tbody
+                    = render @invoices.persisted
+
+    section.replenishAccount
+        header Пополнить счет
+        = render partial: 'new'

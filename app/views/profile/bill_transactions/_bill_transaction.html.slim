@@ -3,7 +3,7 @@ tr
   td = bill_transaction.description
   td #{bill_transaction.amount if bill_transaction.transaction_type == 'deposit'}
   td #{bill_transaction.amount if bill_transaction.transaction_type == 'withdrawal'}
-  td
+  /td
     - if current_profile.contractor? && bill_transaction.show_invoice?
       = link_to contractor_invoice_profile_balance_path(bill_transaction.invoice_id, format: :pdf),
                 data: {toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF'},
