@@ -10,6 +10,6 @@ $ ->
     $(this).css('cursor', 'pointer')
   )
 
-  $(document).on('mouseenter', '.clickable', (event) ->
+  $(document).on('mouseenter', '.clickable, .js-arrow', (event) ->
     $(this).css('cursor', 'pointer')
   )

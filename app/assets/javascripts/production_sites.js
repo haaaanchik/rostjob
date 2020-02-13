@@ -6,7 +6,7 @@ window.addEventListener('turbolinks:load', function() {
         elem.addEventListener('click', changeActive);
     }
 
-    let platform__header_arr = document.querySelectorAll('.js-platform__header');
+    let platform__header_arr = document.querySelectorAll('.js-arrow');
 
     for(let i = 0; i < platform__header_arr.length; i++){
         let elem = platform__header_arr[i];

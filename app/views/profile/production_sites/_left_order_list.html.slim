@@ -1,8 +1,10 @@
 .platforms__list
   - production_sites.each do |production_site|
     .platform
-      .platform__header.js-platform__header.clickable
-        p.platform__title = production_site.title
+      .platform__header.js-platform__header
+        p.platform__title = link_to production_site.title,
+                                    profile_production_site_orders_path(production_site),
+                                    class: 'clickable'
         = image_tag('/img/new/arrow-down.png', class:'js-arrow')
 
       .platform__body.js-platform__body style="display: none"
