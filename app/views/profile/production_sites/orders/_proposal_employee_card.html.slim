@@ -3,7 +3,7 @@
     = link_to profile_candidate_path(proposal_employee), remote: true do
       p.request__title № #{ proposal_employee.id } #{ proposal_employee.employee_cv.name }
     p.phone-number = proposal_employee.employee_cv.phone_number
-    textarea cols="30" rows="4" placeholder="Напишите комментарий"
+    textarea.candidate-comment cols="30" rows="4" placeholder="Напишите комментарий"
     .request__footer
       = image_tag proposal_employee.profile.image_url, class: 'request-logo'
       p.request-user-name = proposal_employee.profile.user.full_name

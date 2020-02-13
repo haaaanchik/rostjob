@@ -1,14 +1,27 @@
-- if candidate.approve_transfer_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/approve", locals: { candidate: candidate }
+ruby:
+  url = customer? ? revoke_profile_candidate_path(candidate) :
+                    revoke_profile_proposal_employee_path(candidate)
+
 - if candidate.transfer_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/transfer", locals: { candidate: candidate }
-- if candidate.interview_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/interview", locals: { candidate: candidate }
-- if candidate.reserve_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/reserve", locals: { candidate: candidate }
+  .modal.fade#candidate_transfer_modal tabindex="-1" role="dialog" aria-labelledby="candidate_transfer_modal_label" aria-hidden="true"
+    .modal-dialog.modal-lg role="document"
+      .modal-content
+        .modal-header
+          h5.modal-title#candidate_transfer_modal_label Перенос анкеты
+        .modal-body
+          h5.w-100.text-left Анкета ##{candidate.employee_cv.id} #{candidate.employee_cv.name} переносится в заявку:
+          br
+          = render partial: 'profile/candidates/toolbars/candidate_transfer_form', locals: {candidate: candidate}
+  = link_to nil, 'data-toggle': 'modal', 'data-target': '#candidate_transfer_modal' do
+    = image_tag '/img/new/row-left-rounded.png'
+    | Перенести
 - if candidate.revoke_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/revoke", locals: { candidate: candidate }
+  = link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, remote: true do
+    i.fas.fa-undo.fa-sm.mr-2
+    | Отозвать
 - if candidate.disput_action_enabled?(current_profile)
-    = render partial: "profile/candidates/toolbars/disput", locals: { candidate: candidate }
+  = link_to new_profile_tickets_incident_path(candidate_id: candidate.id), remote: true do
+    = image_tag '/img/new/smile-sow.png'
+    | Спор
 - if candidate.to_inbox_action_enabled?(current_profile)
     = render partial: "profile/candidates/toolbars/to_inbox", locals: { candidate: candidate }

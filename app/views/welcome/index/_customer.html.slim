@@ -6,7 +6,7 @@ main
         = image_tag(current_profile.image_url, class: 'img-user')
         p = current_user.full_name
         button
-          = link_to edit_user_registration_path(current_user), class: 'black-text' do
+          = link_to edit_user_registration_path, class: 'black-text' do
             = image_tag('/img/new/pen.png', id:"pen")
             | Редактировать
 

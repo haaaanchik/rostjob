@@ -6,9 +6,9 @@
         .modal-header-top
           .modal-title ##{ candidate.id } #{employee_cv.name}
           .modal-activities
-            /= render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
+            = render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
         p.modal-request-type
-          i.fa.fa-bookmark
+          i.fa.fa-bookmark style="color: #{candidate.status_color_class}"
           |  #{ t("proposal_employee.state.#{candidate.state}") }
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" ×
@@ -29,7 +29,7 @@
             .ancete-row
               p.ancete-row__title Анкета для СБ
               .ancete-row__content
-                a href="#"
+                a.download-empl-cv href="#"
                   = image_tag('/img/new/down.png')
                   |  Скачать анкету
 
@@ -38,12 +38,15 @@
                   = radio_button_tag 'employee_cv[gender]',
                           employee_cv.gender,
                           employee_cv.gender.include?('М'),
-                          id: 'man'
+                          id: 'man',
+                          class: 'disabled'
+
                   label for="woman" Ж
                   = radio_button_tag 'employee_cv[gender]',
                           employee_cv.gender,
                           employee_cv.gender.include?('Ж'),
-                          id: 'woman'
+                          id: 'woman',
+                          class: 'disabled'
 
 
           h4.modal-ancete__title Дополнительные сведения
@@ -66,6 +69,5 @@
           .footer
             p Рекрутер
             .ancete-recruter
-              = image_tag('/img/new/girl.png', class: 'request-logo')
-              /img class="request-logo" alt=""
+              = image_tag candidate.profile.image_url, class: 'request-logo'
               p.request-user-name = candidate.profile.user.full_name

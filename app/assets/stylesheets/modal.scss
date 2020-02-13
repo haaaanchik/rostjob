@@ -2,6 +2,7 @@
   .modal-header{
     flex-direction: column;
     border: 0;
+    padding-bottom: 4px;
   }
 
   .modal-title{
@@ -71,7 +72,16 @@
   }
 
   .modal-request-type{
+    color: #000000;
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: bold;
     margin: 0;
+    margin-left: 10px;
+    margin-top: 15px;
+    i{
+      margin-right: 10px;
+    }
   }
 
   .modal-ancete{
@@ -140,6 +150,7 @@
   }
 
   #man, #woman{
+    pointer-events: auto;
     position: static;
     opacity: 1;
   }
@@ -155,9 +166,12 @@
     margin: 0;
   }
 
-  .must-have .ancete-row{
+  .must-have .ancete-row {
     align-items: center;
+  }
 
+  .must-have {
+    margin-bottom: 30px;
   }
 
   .ancete-row{
@@ -246,6 +260,7 @@
 
   .modal-activities img{
     margin-right: 8px;
+    margin-bottom: 4px;
   }
 
   .request-user-name{
@@ -253,6 +268,49 @@
     font-family: "Open Sans";
     font-size: 13px;
     font-weight: bold;
+  }
+
+  .request-logo{
+    max-width: 37px;
+  }
+
+  input[type="text"], textarea {
+    padding: 10px 10px 10px 20px;
+    resize: none;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  input[type="tel"] {
+    padding: 10px 10px 10px 20px;
+    resize: none;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  hr {
+    background-color: #e1e1e1;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .ancete-row__contentactions{
+    width: 60%;
+  }
+
+  @media (min-width: 1000px) {
+    .modal-dialog{
+      max-width: 957px;
+    }
   }
 
   @media (max-width: 992px){
@@ -280,67 +338,15 @@
   }
 }
 
-#modal-production-site, #candidate-show{
-  .request-logo{
-    max-width: 37px;
-  }
-  input[type="text"], textarea{
-    padding: 10px 10px 10px 20px;
-    resize: none;
-    width: 100%;
-    border-radius: 4px;
-    border: 1px solid #d7d7d7;
-    color: #000000;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  input[type="tel"]{
-    padding: 10px 10px 10px 20px;
-    resize: none;
-    border-radius: 4px;
-    border: 1px solid #d7d7d7;
-    width: 100%;
-    font-family: "Open Sans", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-  }
-  hr{
-    background-color: #e1e1e1;
-    width: 100%;
-    margin-bottom: 0;
-  }
-  #man, #woman{
-    pointer-events: auto;
-  }
-  .modal-header{
-    padding-bottom: 4px;
-  }
-  .ancete-row__contentactions{
-    width: 60%;
-  }
-  .modal-request-type{
-    color: #000000;
-    font-family: "Open Sans";
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 10px;
-    margin-top: 15px;
-    i{
-      margin-right: 10px;
-    }
-  }
+#candidate-show{
   .modal-title{
     color: #1970ff;
     margin-left: 10px;
   }
-  .must-have{
-    margin-bottom: 30px;
-  }
-  @media (min-width: 1000px) {
-    .modal-dialog{
-      max-width: 957px;
-    }
+
+  .border-solid {
+    border: 1px solid #d7d7d7;
+    padding: 10px;
   }
 }
 

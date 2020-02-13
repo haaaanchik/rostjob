@@ -14,6 +14,13 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   STATUS_BACKGROUND_COLORS.default = 'blue'
 
+  STATUS_ICON_COLORS = {
+    inbox: '#ffd800',
+    interview: '#ff9000',
+    hired: '#00ca5f',
+    paid: '#b7b7b7'
+  }
+
   ACTIONS = {
     'customer' => {
       'inbox' => %w[revoked interview transfer],
@@ -71,6 +78,10 @@ class ProposalEmployeeDecorator < ObjDecorator
     STATUS_BACKGROUND_COLORS[model.state]
   end
 
+  def status_color_class
+    STATUS_ICON_COLORS[object.state.to_sym]
+  end
+
   def link_to_candidate_or_ticket
     object.disputed? ? ticket_path : order_path
   end
@@ -108,7 +119,7 @@ class ProposalEmployeeDecorator < ObjDecorator
                   type: 'hidden',
                   name: "candidate[#{attr[:name]}]",
                   value: value,
-                  id: "candidate_#{attr[:name]}"){}
+                  id: "candidate_#{attr[:name]}"){} if attr[:name].present?
   end
 
   def calendar_submit
@@ -119,7 +130,7 @@ class ProposalEmployeeDecorator < ObjDecorator
                   name: 'commit',
                   value: attr[:text],
                   data: { 'disable-with': attr[:text] },
-                  id: 'get-recruter'){}
+                  id: 'get-recruter'){} if attr[:text].present?
   end
 
   def interview_action_enabled?(subject)
