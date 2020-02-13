@@ -25,6 +25,8 @@ class Invoice < ApplicationRecord
     event :delete_invoice do
       transitions from: :created, to: :deleted
     end
+
+    event :created, after: :send_mail_wait_for_payment
   end
 
   def set_invoice_number
@@ -46,5 +48,11 @@ class Invoice < ApplicationRecord
     ActiveRecord::Base.connection
                       .execute("update invoice_number_seqs set invoice_number = #{start_value}")
     ActiveRecord::Base.connection.execute('unlock tables')
+  end
+
+  private
+
+  def send_mail_wait_for_payment
+    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'invoce_wait_payment')
   end
 end

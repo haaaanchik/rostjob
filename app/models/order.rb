@@ -62,7 +62,7 @@ class Order < ApplicationRecord
       transitions from: %i[waiting_for_payment moderation rejected], to: :draft
     end
 
-    event :wait_for_payment do
+    event :wait_for_payment, after: :send_mail_wait_for_payment do
       transitions from: :draft, to: :waiting_for_payment
     end
 
@@ -215,5 +215,9 @@ class Order < ApplicationRecord
       object_type: 'Order',
       order_id: id
     }
+  end
+
+  def send_mail_wait_for_payment
+    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment')
   end
 end

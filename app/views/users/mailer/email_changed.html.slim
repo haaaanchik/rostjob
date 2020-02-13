@@ -1,0 +1,10 @@
+p 
+  = "Hello #{@email}"
+
+- if @resource.try(:unconfirmed_email?)
+  p
+    = "Мы хотим вас уведомить что была попытка сменить почтывый адресс на #{@resource.unconfirmed_email}"
+-else
+  p
+    = "Мы хотим сообщить вам что ваш почтовый адресс был изменён на  #{@resource.email}."
+

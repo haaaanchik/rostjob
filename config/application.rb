@@ -57,5 +57,8 @@ module RostJob
     config.user_action_log = true
     config.superjob = config_for(:superjob)
     config.vocamate = config_for(:vocamate)
+    config.to_prepare do
+      Devise::Mailer.layout "mailer" # email.haml or email.erb
+    end
   end
 end

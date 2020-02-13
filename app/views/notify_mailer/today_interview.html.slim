@@ -1,0 +1,4 @@
+= "На пазицию #{@prop_emps.first.order.title} у вас сегодня запланнировано интервью с "
+- @prop_emps.each do |emp|
+  p
+    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number}"

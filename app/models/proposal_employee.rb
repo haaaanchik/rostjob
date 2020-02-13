@@ -39,7 +39,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
-    event :to_inbox, after: :to_open? do
+    event :to_inbox, after: [:to_open?, :mail_inbox] do
       transitions from: %i[transfer interview reserved disputed], to: :inbox
     end
 
@@ -112,5 +112,11 @@ class ProposalEmployee < ApplicationRecord
 
   ransacker :employee_cv_id do
     Arel.sql("CONVERT(#{table_name}.employee_cv_id, CHAR(8))")
+  end
+
+  private
+
+  def mail_inbox
+    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'candidates_inbox')
   end
 end
