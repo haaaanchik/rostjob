@@ -81,6 +81,47 @@ class ProposalEmployeeDecorator < ObjDecorator
     ticket ? h.profile_ticket_path(ticket) : h.profile_tickets_path
   end
 
+  def calendar_title
+    case object.state
+    when 'interview'
+      'Дата выхода на работу'
+    when 'inbox'
+      'Дата собеседования'
+    when 'hired'
+      'Гарантийный период'
+    else
+      nil
+    end
+  end
+
+  def calendar_form_url
+    if object.inbox?
+      h.to_interview_profile_order_candidate_path(object.order_id, object)
+    elsif object.interview?
+      h.hire_profile_order_candidate_path(object.order_id, object)
+    end
+  end
+
+  def calendar_hidden_field(value)
+    attr = interview_or_inbox
+    h.content_tag(:input,
+                  type: 'hidden',
+                  name: "candidate[#{attr[:name]}]",
+                  value: value,
+                  id: "candidate_#{attr[:name]}"){}
+  end
+
+  def calendar_submit
+    attr = interview_or_inbox
+
+    h.content_tag(:input,
+                  type: 'submit',
+                  name: 'commit',
+                  value: attr[:text],
+                  data: { 'disable-with': attr[:text] },
+                  id: 'get-recruter'){}
+  end
+
   def interview_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end
@@ -119,5 +160,18 @@ class ProposalEmployeeDecorator < ObjDecorator
     h.profile_production_site_order_path(order.production_site,
                                          order,
                                          proposal_employee_id: id)
+  end
+
+  def interview_or_inbox
+    name = nil
+    text = nil
+    if object.interview?
+      name = 'hiring_date'
+      text = 'Нанять'
+    elsif object.inbox?
+      name = 'interview_date'
+      text = 'Назначить'
+    end
+    { name: name, text: text }
   end
 end

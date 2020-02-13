@@ -1,0 +1,45 @@
+h3.modal-ancete__title = candidate.calendar_title
+- hd = candidate.interview_date&.strftime('%d-%m-%Y') || Date.today.strftime('%d-%m-%Y')
+- url = candidate.calendar_form_url
+#candidate_form_datepicker.d-flex.justify-content-center data-date=hd
+= form_with scope: :candidate, url: url, method: :put do |f|
+  = candidate.calendar_hidden_field(candidate.interview_date.strftime('%d.%m.%Y'))
+  = candidate.calendar_submit
+
+javascript:
+  function init_datepicker() {
+    $('#candidate_form_datepicker').datepicker({
+      language: 'ru',
+      todayHighlight: false,
+      beforeShowDay: function() {
+        if("#{%w[inbox interview].include?(candidate.state)}" == 'false') {
+          return false;
+        }
+      }
+    });
+    $('#candidate_form_datepicker').on('changeDate', function() {
+      var field_id = "#{candidate.inbox? ? '#candidate_interview_date' : '#candidate_hiring_date'}"
+      $(field_id).val(
+        $('#candidate_form_datepicker').datepicker('getFormattedDate')
+      );
+    });
+
+    if("#{candidate.hired?}" == 'true') {
+      var remained_warranty_days = "#{@remained_warranty_days.join(', ')}".split(',');
+      $('#candidate_form_datepicker').datepicker(
+        'update', ...remained_warranty_days
+      );
+    }
+  }
+
+  function defer(method) {
+    if(window.jQuery && $.fn.datepicker) {
+      method();
+    } else {
+      setTimeout(function () {
+        defer(method);
+      }, 50);
+    }
+  }
+
+  defer(init_datepicker);

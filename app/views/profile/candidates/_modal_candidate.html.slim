@@ -4,11 +4,11 @@
     .modal-content
       .modal-header
         .modal-header-top
-          a href="#" class="modal-title" ##{ candidate.name } #{employee_cv.name}
+          .modal-title ##{ candidate.id } #{employee_cv.name}
           .modal-activities
             = render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
         p.modal-request-type
-          i.fa.fa-bookmark class=candidate.status_background_class
+          i.fa.fa-bookmark
           |  #{ t("proposal_employee.state.#{candidate.state}") }
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" ×
@@ -58,13 +58,12 @@
               p.ancete-row__title Доп. информация
               .ancete-row__content
                 = text_area :employee_cv, :remark, cols: 30, rows: 3, readonly: true, value: employee_cv.remark
-          .modal-ancete__sidebar
-            .date-start-work
-              h3.modal-ancete__title Дата выхода на работу
-              = render partial: 'calendar', locals: {candidate: candidate}
-              button id="get-recruter" Нанять
-            .footer
-              p Рекрутер
-              .ancete-recruter
-                img class="request-logo" alt=""
-                p.request-user-name = candidate.profile.user.full_name
+        .modal-ancete__sidebar
+          .date-start-work
+            = render partial: 'candidate_calendar', locals: { candidate: candidate }
+          .footer
+            p Рекрутер
+            .ancete-recruter
+              = image_tag candidate.profile.image_url, class: 'request-logo'
+              img class="request-logo" alt=""
+              p.request-user-name = candidate.profile.user.full_name
