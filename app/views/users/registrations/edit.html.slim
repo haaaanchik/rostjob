@@ -14,7 +14,10 @@ ruby:
         .form-group
           .d-flex.align-items-center
             .col-lg-3.control-label
-              = f.label :full_name, 'Наименование организации'
+              - if resource.profile.customer?
+                = f.label :full_name, 'Фамилия Имя'
+              - else
+                = f.label :full_name, 'Наименование организации'
             .col-lg-8
               .invalid-feedback.d-inline #{ full_name }
               = f.text_field :full_name, class: "form-control #{'is-invalid' if full_name }"
