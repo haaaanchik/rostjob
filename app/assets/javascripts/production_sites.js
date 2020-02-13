@@ -15,7 +15,9 @@ window.addEventListener('turbolinks:load', function() {
 
     // Check all
     let checkbox = document.getElementById('check_all');
-    checkbox.addEventListener('click', checkAll);
+    if(checkbox){
+        checkbox.addEventListener('click', checkAll);
+    }
 });
 
 function changeActive(e) {

@@ -121,6 +121,28 @@ main{
       grid-gap: 1px;
       gap: 1px;
       background-color: $bgColor;
+      &::-webkit-scrollbar {
+        width: 6px;
+
+        background-color: $secondaryColor;
+      }
+      &::-webkit-scrollbar-track {
+        border-radius: 6px;
+        background: transparentize($secondaryColorDark, 0.7);
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border-radius: 6px;
+        background: transparentize($secondaryColorDark, 0.4);
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $secondaryColorDark;
+      }
+
+      &::-webkit-scrollbar-thumb:active {
+        background: linear-gradient(left, #22ADD4, #1E98BA);
+      }
       >div{
         background-color: $secondaryColor;
       }
@@ -184,6 +206,7 @@ main{
           font-weight: 400;
           font-size: 15px;
           color: $primaryColor;
+          margin-bottom: 0;
           span{
             font-weight: 700;
             color: $alterColor;

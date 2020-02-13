@@ -279,3 +279,68 @@
     }
   }
 }
+
+#modal-production-site, #candidate-show{
+  .request-logo{
+    max-width: 37px;
+  }
+  input[type="text"], textarea{
+    padding: 10px 10px 10px 20px;
+    resize: none;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+    color: #000000;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  input[type="tel"]{
+    padding: 10px 10px 10px 20px;
+    resize: none;
+    border-radius: 4px;
+    border: 1px solid #d7d7d7;
+    width: 100%;
+    font-family: "Open Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  hr{
+    background-color: #e1e1e1;
+    width: 100%;
+    margin-bottom: 0;
+  }
+  #man, #woman{
+    pointer-events: auto;
+  }
+  .modal-header{
+    padding-bottom: 4px;
+  }
+  .ancete-row__contentactions{
+    width: 60%;
+  }
+  .modal-request-type{
+    color: #000000;
+    font-family: "Open Sans";
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 15px;
+    i{
+      margin-right: 10px;
+    }
+  }
+  .modal-title{
+    color: #1970ff;
+    margin-left: 10px;
+  }
+  .must-have{
+    margin-bottom: 30px;
+  }
+  @media (min-width: 1000px) {
+    .modal-dialog{
+      max-width: 957px;
+    }
+  }
+}
+
