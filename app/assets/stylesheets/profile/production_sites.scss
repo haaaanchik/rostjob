@@ -381,6 +381,7 @@ $phone: "max-width: 768px";
   margin: 0;
   border-radius: 4px;
   background-color: #ffffff;
+  border-left: 5px solid #00ca5f;
 }
 
 .platform__body .order__statistic{
@@ -436,7 +437,26 @@ $phone: "max-width: 768px";
   width: 100%;
   height: 2px;
   border-radius: 1px;
-  background-color: #00ca5f;
+}
+
+.template.active::after{
+  background-color: #ff2400;
+}
+
+.pending_payment.active::after {
+  background-color: #FFA500;
+}
+
+.modernization.active::after{
+  background-color: #FFFF00;
+}
+
+.published.active::after{
+  background-color: #7CFC00;
+}
+
+.completed.active::after{
+  background-color: #C0C0C0;
 }
 
 .item-type:hover{
@@ -529,8 +549,27 @@ $phone: "max-width: 768px";
   display: flex;
   border-radius: 4px;
   background-color: #ffffff;
-  border-left: 5px solid #00ca5f;
   padding: 10px;
+
+  &__template{
+    border-left: 5px solid #ff2400;
+  }
+
+  &__pending_payment {
+    border-left: 5px solid #FFA500;
+  }
+
+  &__modernization{
+    border-left: 5px solid #FFFF00;
+  }
+
+  &__published{
+    border-left: 5px solid #7CFC00;
+  }
+
+  &__completed{
+    border-left: 5px solid #C0C0C0;
+  }
 }
 
 .order__description{
