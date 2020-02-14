@@ -60,12 +60,6 @@ header,
   padding-left: 80px;
 }
 
-@media (max-width: 1400px) {
-  #right_window:not(*:root) {
-    height: 89vh;
-  }
-}
-
 @media (max-width: 900px) {
   #right_window {
     width: calc(100% - 300px);

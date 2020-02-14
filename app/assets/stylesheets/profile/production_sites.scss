@@ -77,7 +77,7 @@ $phone: "max-width: 768px";
             background-image: linear-gradient(to top, #1d72ff 0%, #66a1ff 100%);
             border: 0;
             color: #ffffff;
-            font-family: "Open Sans", sans-serif;
+            font-family: $primaryFont;
             font-size: 13px;
             font-weight: 400;
 
@@ -128,7 +128,9 @@ $phone: "max-width: 768px";
               height: 100%;
               color: $secondaryColorDark;
               text-decoration: underline;
-
+              img{
+                max-width: 100%;
+              }
               p {
                 margin: auto;
               }
@@ -243,7 +245,7 @@ $phone: "max-width: 768px";
 
     p {
       color: #000000;
-      font-family: "Open Sans", sans-serif;
+      font-family: $primaryFont;
       font-size: 13px;
       font-weight: 400;
     }
@@ -265,7 +267,7 @@ $phone: "max-width: 768px";
 
     p {
       color: #cccccc;
-      font-family: "Open Sans", sans-serif;
+      font-family: $primaryFont;
       font-size: 15px;
       font-weight: 400;
       margin-top: 17px;
@@ -336,7 +338,7 @@ $phone: "max-width: 768px";
   height: 32px;
   padding: 7px 10px;
   color: #999999;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: 400;
 }
@@ -363,7 +365,7 @@ $phone: "max-width: 768px";
 .platform__title{
   margin: 0;
   color: #525252;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: bold;
 }
@@ -419,7 +421,7 @@ $phone: "max-width: 768px";
   border-radius: 8px;
   background-color: #ffffff;
   color: #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 16px;
   font-weight: bold;
   max-height: 78px;
@@ -480,7 +482,7 @@ $phone: "max-width: 768px";
 #copy span, #delete span{
   margin-left: 10px;
   color: #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: 400;
 }
@@ -491,7 +493,7 @@ $phone: "max-width: 768px";
   border-radius: 4px;
   border: 1px solid #1970ff;
   color: #1970ff;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: bold;
   display: flex;
@@ -538,7 +540,7 @@ $phone: "max-width: 768px";
 .order__title{
   margin-top: 0;
   margin-bottom: 15px;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 15px;
   font-weight: bold;
 }
@@ -546,7 +548,7 @@ $phone: "max-width: 768px";
 .order__number{
   padding: 0 20px 0 10px;
   color: #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
 }
@@ -555,7 +557,7 @@ $phone: "max-width: 768px";
   border-radius: 4px;
   background-color: #1970ff;
   color: #ffffff;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
   padding: 5px 8px;
@@ -584,7 +586,7 @@ $phone: "max-width: 768px";
 
 .element span{
   color: #000000;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: 400;
 }
@@ -788,7 +790,7 @@ $phone: "max-width: 768px";
   border-radius: 4px;
   background-color: #1970ff;
   color: #ffffff;
-  font-family: "Open Sans", sans-serif;
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
   padding: 5px 8px;
@@ -825,6 +827,7 @@ $phone: "max-width: 768px";
   min-width: 225px;
   height: calc(100vh - 148px);
   padding-bottom: 5px;
+  z-index: 0;
 }
 
 .requests-part__body .column:last-child{
@@ -843,7 +846,7 @@ $phone: "max-width: 768px";
   margin: 0;
   text-align: center;
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 15px;
   font-weight: 800;
 }
@@ -870,7 +873,7 @@ $phone: "max-width: 768px";
 .request__title{
   margin: 0;
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: 700;
   width: 90%;
@@ -884,7 +887,7 @@ $phone: "max-width: 768px";
   resize: none;
   height: 61px;
   color: #c2c2c2;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 13px;
   font-style: italic;
 }
@@ -892,11 +895,12 @@ $phone: "max-width: 768px";
 .request__footer{
   display: flex;
   align-items: center;
+  .request-logo{
+    margin-right: 5.7971%;
+    max-width: 27px;
+  }
 }
 
-.request-logo{
-  margin-right: 5.7971%;
-}
 
 .request-user-name{
   margin: 0;
@@ -904,14 +908,14 @@ $phone: "max-width: 768px";
 
 .phone-number{
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: 400;
 }
 
 .add-personal{
   color: #8d8d8d;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: 700;
 }
@@ -922,7 +926,7 @@ $phone: "max-width: 768px";
 
 .peoples-left{
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 12px;
   font-weight: 400;
   margin-top: 8px;
@@ -968,7 +972,7 @@ $phone: "max-width: 768px";
 
 #request-part-number, #request-part-title{
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 14px;
   font-weight: bold;
 }
@@ -1022,7 +1026,7 @@ $phone: "max-width: 768px";
 
 .card-dropdown .dropdown-item{
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 14px;
 }
 
@@ -1032,7 +1036,7 @@ $phone: "max-width: 768px";
 
 .request-user-name{
   color: #000000;
-  font-family: "Open Sans";
+  font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
 }

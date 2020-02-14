@@ -30,11 +30,7 @@ h3.title{
 }
 
 #right_window.row{
-  height: 100vh;
-}
-
-#right_window.row:not(*:root) {
-  height: 100vh;
+  height: calc(100vh - 58px);
 }
 
 .user-btn{
@@ -102,6 +98,7 @@ main{
   grid-template-rows: 332px 1fr;
   grid-gap: 15px;
   gap: 15px;
+  font-family: $primaryFont;
   background-color: $bgColor;
   .user{
     z-index: 1;

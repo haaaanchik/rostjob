@@ -1,40 +1,48 @@
-#modal-production-site, #candidate-show  {
-  .modal-header{
+#modal-production-site, #candidate-show {
+  font-family: "Open Sans", sans-serif;
+
+  .modal-header {
     flex-direction: column;
     border: 0;
     padding-bottom: 4px;
   }
 
-  .modal-title{
+  .modal-title {
     color: #000000;
     font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: 700;
   }
 
-  .modal-body{
+  .modal-body {
     display: flex;
     padding-left: 60px;
-    .form-group{
+
+    .form-group {
       margin-bottom: 25px;
     }
-    .form-group:nth-child(3) .form-control{
+
+    .form-group:nth-child(3) .form-control {
       height: 250px;
       overflow: auto;
     }
-    .form-control{
+
+    .form-control {
       padding: 15px;
     }
-    textarea{
+
+    textarea {
       resize: none;
       color: #000000;
       font-family: "Open Sans", sans-serif;
       font-size: 14px;
+
       &::-webkit-scrollbar {
         width: 6px;
 
         background-color: $secondaryColor;
       }
+
       &::-webkit-scrollbar-track {
         border-radius: 6px;
         background: transparentize($secondaryColorDark, 0.7);
@@ -60,109 +68,108 @@
     padding-left: 55px;
   }
 
-  .modal-header-top{
+  .modal-header-top {
     display: flex;
     justify-content: space-between;
     padding-right: 34px;
     width: 100%;
   }
 
-  .modal-activities{
+  .modal-activities {
     display: flex;
   }
 
-  .modal-request-type{
+  .modal-request-type {
     color: #000000;
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-size: 15px;
     font-weight: bold;
     margin: 0;
     margin-left: 10px;
     margin-top: 15px;
-    i{
+
+    i {
       margin-right: 10px;
     }
   }
 
-  .modal-ancete{
+  .modal-ancete {
     width: 60%;
   }
 
-  .close{
+  .close {
     position: absolute;
     top: 2px;
     right: 8px;
   }
 
-  .ancete-rows{
+  .ancete-rows {
     display: flex;
     flex-direction: column;
   }
 
 
-  .ancete-row{
+  .ancete-row {
     display: flex;
   }
 
-  .ancete-row__title{
+  .ancete-row__title {
     width: 30%;
     color: #000000;
-    font-family: "Open Sans ";
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: bold;
   }
 
-  .ancete-row__content{
+  .ancete-row__content {
     width: 60%;
   }
 
-  .ancete-row__content input
-  {
+  .ancete-row__content input {
     width: 100%;
     border-radius: 4px;
     border: 1px solid #d7d7d7;
     height: 38px;
   }
 
-  .ancete-row:nth-child(3) .ancete-row__content{
+  .ancete-row:nth-child(3) .ancete-row__content {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
-  .sex{
+  .sex {
     display: flex;
     align-items: center;
   }
 
-  .sex input{
+  .sex input {
     width: auto;
-    margin-top: 4px;
   }
 
-  .sex label{
+  .sex label {
     margin-bottom: 0;
     margin-right: 2px;
   }
 
-  #man{
+  #man {
     margin-right: 10px;
   }
 
-  #man, #woman{
+  #man, #woman {
     pointer-events: auto;
     position: static;
     opacity: 1;
   }
 
-  .ancete-row__content textarea{
+  .ancete-row__content textarea {
     resize: none;
     width: 100%;
     border-radius: 4px;
     border: 1px solid #d7d7d7;
   }
 
-  .must-have .ancete-row__title{
+  .must-have .ancete-row__title {
     margin: 0;
   }
 
@@ -174,28 +181,28 @@
     margin-bottom: 30px;
   }
 
-  .ancete-row{
+  .ancete-row {
     margin-bottom: 15px;
   }
 
-  .modal-ancete__sidebar{
+  .modal-ancete__sidebar {
     width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
-  .date-start-work{
+  .date-start-work {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  .date-start-work h3{
+  .date-start-work h3 {
     text-align: center;
   }
 
-  .date-start-work textarea{
+  .date-start-work textarea {
     width: 262px;
     height: 196px;
     border-radius: 4px;
@@ -203,7 +210,7 @@
     resize: none;
   }
 
-  #get-recruter{
+  #get-recruter {
     width: 170px;
     height: 32px;
     border: 0;
@@ -214,11 +221,11 @@
   }
 
 
-  #get-recruter:hover{
+  #get-recruter:hover {
     cursor: pointer;
   }
 
-  .ancete-recruter{
+  .ancete-recruter {
     display: flex;
     align-items: center;
     border-radius: 4px;
@@ -226,30 +233,30 @@
     padding: 10px;
   }
 
-  .modal-ancete__sidebar .footer > p{
+  .modal-ancete__sidebar .footer > p {
     margin: 0 0 5px 13px;
     color: #000000;
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-size: 14px;
     font-weight: bold;
   }
 
-  .modal-ancete__title{
+  .modal-ancete__title {
     color: #000000;
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-size: 16px;
     font-weight: bold;
   }
 
-  .more-info .ancete-row:last-child{
+  .more-info .ancete-row:last-child {
     margin-bottom: 0;
   }
 
-  .more-info{
+  .more-info {
     margin-top: 15px;
   }
 
-  .modal-activities a:last-child{
+  .modal-activities a:last-child {
     margin-left: 30px;
   }
 
@@ -258,20 +265,21 @@
     align-items: center;
   }
 
-  .modal-activities img{
+  .modal-activities img {
     margin-right: 8px;
     margin-bottom: 4px;
   }
 
-  .request-user-name{
+  .request-user-name {
     color: #000000;
-    font-family: "Open Sans";
+    font-family: "Open Sans", sans-serif;
     font-size: 13px;
     font-weight: bold;
   }
 
-  .request-logo{
+  .request-logo {
     max-width: 37px;
+    margin-right: 10px;
   }
 
   input[type="text"], textarea {
@@ -303,30 +311,30 @@
     margin-bottom: 0;
   }
 
-  .ancete-row__contentactions{
+  .ancete-row__contentactions {
     width: 60%;
   }
 
   @media (min-width: 1000px) {
-    .modal-dialog{
+    .modal-dialog {
       max-width: 957px;
     }
   }
 
-  @media (max-width: 992px){
-    .modal-body{
+  @media (max-width: 992px) {
+    .modal-body {
       flex-direction: column;
       align-items: center;
       padding-left: 0;
     }
-    .modal-ancete{
+    .modal-ancete {
       width: 100%;
     }
-    .modal-ancete__sidebar{
+    .modal-ancete__sidebar {
       width: 60%;
       margin-top: 10px;
     }
-    .ancete-row:nth-child(3) .ancete-row__content{
+    .ancete-row:nth-child(3) .ancete-row__content {
       flex-wrap: wrap;
     }
   }
@@ -334,19 +342,32 @@
   @media (max-width: 378px) {
     .ancete-row:nth-child(3) .ancete-row__content {
       justify-content: center;
+
+      .modal-request-type {
+        color: #000000;
+        font-family: "Open Sans", sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        margin-left: 10px;
+        margin-top: 15px;
+
+        i {
+          margin-right: 10px;
+        }
+      }
     }
-  }
-}
 
-#candidate-show{
-  .modal-title{
-    color: #1970ff;
-    margin-left: 10px;
-  }
+    #candidate-show {
+      .modal-title {
+        color: #1970ff;
+        margin-left: 10px;
+      }
 
-  .border-solid {
-    border: 1px solid #d7d7d7;
-    padding: 10px;
+      .border-solid {
+        border: 1px solid #d7d7d7;
+        padding: 10px;
+      }
+    }
   }
 }
 
