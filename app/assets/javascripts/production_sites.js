@@ -19,11 +19,11 @@ window.addEventListener('turbolinks:load', function() {
         checkbox.addEventListener('click', checkAll);
     }
 
-    tinymce.init({
-        selector: 'div#summernote1',
-        menubar: false,
-        toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
-    });
+    // tinymce.init({
+    //     selector: '.tinymce',
+    //     menubar: false,
+    //     toolbar: 'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist | forecolor backcolor casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | a11ycheck ltr rtl | showcomments addcomment',
+    // });
 });
 
 function changeActive(e) {

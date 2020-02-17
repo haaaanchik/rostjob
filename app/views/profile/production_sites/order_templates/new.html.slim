@@ -1,77 +1,28 @@
-/.container
-  h2.text-center
-    | Новый шаблон к Заявке
-  hr
-  .row
-    .col-lg-2.offset-lg-2.text-right
-      = link_to profile_production_site_orders_path(@production_site) do
-        i.far.fa-arrow-alt-circle-left.fa-2x
-    .col-lg-6
-      p.text-center.font-italic
-        | *шаг 1 из 3
-        br
-        | *Производственная площадка: #{@production_site.title}
-  = form_with model: [:profile, @order_template],
-              url: profile_production_site_order_templates_path(@production_site),
-              id: 'order_template_form' do |f|
-    = render partial: 'form', locals: { f: f }
-    hr
-    .form-group
-      .row
-        .col-lg-2.offset-lg-5
-          = f.submit 'Далее', class: 'btn btn-primary'
-
 .main_patternRequest
-		section.pattern
-			header
-		      .pattern_back
-			    button
-			      i class="fa fa-angle-left fa-2x"
-			      span Назад
-
-			  p Новый шаблон к Заявке
-
-			.pattern_body
-				header
-				  | Производственная площадка: #{@production_site.title}
-
-
-				.pattern_body_steps_nav
-					.pattern_body_steps_nav_step.check
-					  |	1
-
-					hr
-					.pattern_body_steps_nav_step
-					  |	2
-
-					hr
-					.pattern_body_steps_nav_step
-					  |	3
-
-				.pattern_body_steps_form
-
-				  .pattern_body_steps_form_step.show
-                    .pattern_body_steps_form_step_input
-                      label for="patternName" Название шаблона
-                      input type="text" id="patternName" placeholder="Введите название шаблона"
-
-                    .pattern_body_steps_form_step_input
-                      label for="profession" Профессия
-                      input type="text" id="profession" placeholder="Начните набирать"
-
-                    .pattern_body_steps_form_step_input
-                      label for="priceInRubles" Цена в рублях
-                      input type="text" id="priceInRubles" placeholder="Цена появится после ввода профессии"
-
-                    .pattern_body_steps_form_step_input
-                       label for="qualification" Квалификация
-                       input type="text" id="qualification" placeholder="Укажите квалификацию"
-
-                    footer class="pattern_body_steps_form_step_next"
-                      a href="#"
-                        p
-                          | Далее
-                        i class="fa fa-angle-right fa-2x"
+  section.pattern
+    header
+      .pattern_back
+        = link_to profile_production_site_orders_path(@production_site) do
+          i.fa.fa-angle-left.fa-2x
+          span Назад
+      p Новый шаблон к Заявке
+    .pattern_body
+      header
+        | Производственная площадка: #{@production_site.title}
+      .pattern_body_steps_nav
+        .pattern_body_steps_nav_step.check
+          |	1
+        hr
+        .pattern_body_steps_nav_step
+          |	2
+        hr
+        .pattern_body_steps_nav_step
+          |	3
+      .pattern_body_steps_form
+        = form_with model: [:profile, @order_template],
+                url: profile_production_site_order_templates_path(@production_site),
+                id: 'order_template_form' do |f|
+          = render 'form', f: f
 
 
 

@@ -1,122 +1,57 @@
-/.container
-  h2.text-center
-    | Информация для Рекрутера
-  hr
-  .row
-    .col-lg-2.offset-lg-2.text-right
-      = link_to description_info_profile_production_site_order_template_path(@production_site) do
-        i.far.fa-arrow-alt-circle-left.fa-2x
-    .col-lg-6
-      p.text-center.font-italic
-        | *шаг 3 из 3
-        br
-        | *Производственная площадка: #{@production_site.title}
-        br
-        |  *Шаблон: #{ @order_template.title }
-
-  = form_with model: [:profile, @order_template],
-          url: profile_production_site_order_template_path(@production_site, @order_template),
-          id: 'order_template_form' do |f|
-    = hidden_field_tag :template_creation_step, 3
-    = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-      .form-group
-        .row
-          .col-lg-3.control-label.offset-lg-1
-            = oi_f.label :remark, 'Напишите сюда информацию, которую должен знать рекрутер'
-          .col-lg-6
-            = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
-            .invalid-feedback
-    = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
-      .form-group
-        .row
-          .col-lg-3.control-label.offset-lg-1
-            = cp_f.label :name, 'Контактное лицо'
-          .col-lg-3
-            = cp_f.text_field :name, class: 'form-control', placeholder: 'имя'
-            .invalid-feedback
-          .col-lg-3
-            = cp_f.phone_field :phone, class: 'form-control', placeholder: '+7(  ) ---'
-            .invalid-feedback
-    .form-group
-      .row
-        .col-lg-3.control-label.offset-lg-1
-          label
-            | Вы можете добавить анкету для соискателей
-        .col-lg-5
-          .file-field
-            .btn.btn-success.btn-sm.float-left
-              span Выберите анкету
-              = f.file_field :document, id: 'order_template_document_file'
-            .file-path-wrapper
-              input id='order_template_document' class='form-control file-path validate' type="text" placeholder="Загрузите анкету"
-              .invalid-feedback
-    hr
-    .form-group
-      .row
-        .col-lg-2.offset-lg-4
-          = f.submit 'Сохранить', class: 'btn btn-primary'
-        .col-lg-6
-          = f.button 'Сохранить и опубликовать', class: 'btn btn-white'
-
-/javascript:
-    function ready() {
-        $('input.btn').unwrap();
-    }
-    document.addEventListener('DOMContentLoaded', ready);
-
 .main_patternRequest
-		section.pattern
-			header
-		      .pattern_back
-			    button
-			      i class="fa fa-angle-left fa-2x"
-			      span Назад
+  section.pattern
+    header
+      .pattern_back
+        = link_to description_info_profile_production_site_order_template_path(@production_site) do
+          i.fa.fa-angle-left.fa-2x
+          span Назад
+      p Новый шаблон к Заявке
+    .pattern_body
+      header
+        | Производственная площадка: #{@production_site.title}
+      .pattern_body_steps_nav
+        .pattern_body_steps_nav_step.check
+          |	1
 
+        hr
+        .pattern_body_steps_nav_step.check
+          |	2
 
+        hr
+        .pattern_body_steps_nav_step.check
+          |	3
 
-			  p Новый шаблон к Заявке
+      .pattern_body_steps_form
+        = form_with model: [:profile, @order_template],
+                url: profile_production_site_order_template_path(@production_site, @order_template),
+                id: 'order_template_form' do |f|
+          = hidden_field_tag :template_creation_step, 3
 
-			.pattern_body
-				header
-				  | Производственная площадка: #{@production_site.title}
+          .pattern_body_steps_form_step.show
+            .pattern_body_steps_form_step_input.textArea
+              p Дополнительная информация для рекрутера
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
+                .invalid-feedback
 
+            .pattern_body_steps_form_step_input.contact-face
+              = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+                label Контактное лицо
+                = cp_f.text_field :name, id: 'contact-face', class: 'form-control', placeholder: 'Имя'
+                .invalid-feedback
+                = cp_f.text_field :phone, id: 'contact-face-number', class: 'form-control', placeholder: '+7'
+                .invalid-feedback
 
-				.pattern_body_steps_nav
-					.pattern_body_steps_nav_step.check
-					  |	1
+            .pattern_body_steps_form_step_input.add_ancete
+              p Вы можете добавить свою анкету для соискателей
+              a href="#" id="add_ancete" Загрузите анкету
 
-					hr
-					.pattern_body_steps_nav_step.check
-					  |	2
+            .pattern_body_steps_form_step_input.save_as_template
+              p Сохранить как шаблон
+              = f.submit 'Нажмите, чтобы сохранить как шаблон',  id: 'save_as_template'
 
-					hr
-					.pattern_body_steps_nav_step.check
-					  |	3
+            footer.pattern_body_steps_form_step_next
+              = f.button id: 'send' do
+                | Опубликовать
 
-				.pattern_body_steps_form
-
-                .pattern_body_steps_form_step.show
-
-                    .pattern_body_steps_form_step_input.textArea
-                        p Дополнительная информация для рекрутера
-                        #summernote1
-
-
-                    .pattern_body_steps_form_step_input.contact-face
-                        label for="contact-face" Контактное лицо
-                        input type="text" id="contact-face" placeholder="Имя"
-                        input type="text" id="contact-face-number" placeholder="+7"
-
-                    .pattern_body_steps_form_step_input.add_ancete
-                        p Вы можете добавить свою анкету для соискателей
-                        a href="#" id="add_ancete" Загрузите анкету
-
-                    .pattern_body_steps_form_step_input.save_as_template
-                        p Сохранить как шаблон
-                        a href="#" id="save_as_template" Нажмите, чтобы сохранить как шаблон
-
-                    footer class="pattern_body_steps_form_step_next"
-                      a href="#" id="send"
-                        | Опубликовать
-
-            a.pattern_close href="#" Закрыть
+    a.pattern_close.add_ancete_close href="#add_ancete" Закрыть

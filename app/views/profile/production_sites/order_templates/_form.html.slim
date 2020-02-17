@@ -1,34 +1,35 @@
 = f.hidden_field :position_id
 = hidden_field_tag :template_creation_step, 1
-.form-group
-  .row
-    .col-lg-3.control-label.offset-lg-1
-      = f.label :name, 'Название шаблона'
-    .col-lg-6
-      = f.text_field :name, class: 'form-control'
-      .invalid-feedback
-.form-group
-  .row
-    .col-lg-3.control-label.offset-lg-1
-      = f.label :profession, 'Профессия'
-    .col-lg-6
-      = f.text_field :position_search, value: f.object.title, class: 'form-control',
-              placeholder: 'Начните набирать название профессии',
-              data: { 'auto-url' => '/search_position' }
-      .invalid-feedback
-.form-group
-  .row
-    .col-lg-3.control-label.offset-lg-1
-      = f.label :profession_price, 'Цена'
-    .col-lg-6
-      = number_field_tag :profession_price,
-              f.object.position&.price_group&.customer_price,
-              class: 'form-control',
-              disabled: true
-.form-group
-  .row
-    .col-lg-3.control-label.offset-lg-1
-      = f.label :skill, 'Квалификация'
-    .col-lg-6
-      = f.text_field :skill, class: 'form-control', placeholder: 'Введите квалификацию'
-      .invalid-feedback
+= hidden_field_tag :commit, 'далее'
+.pattern_body_steps_form_step.show
+  .pattern_body_steps_form_step_input
+    = f.label :name, 'Название шаблона'
+    = f.text_field :name, class: 'form-control', placeholder: 'Введите название шаблона'
+    .invalid-feedback
+
+  .pattern_body_steps_form_step_input
+    = f.label :profession, 'Профессия'
+    = f.text_field :position_search,
+            value: f.object.title,
+            class: 'form-control',
+            placeholder: 'Начните набирать',
+            data: {'auto-url' => '/search_position'}
+    .invalid-feedback
+
+  .pattern_body_steps_form_step_input
+    = f.label :profession_price, 'Цена в рублях'
+    = text_field_tag :profession_price,
+            f.object.position&.price_group&.customer_price,
+            placeholder: 'Цена появится после ввода профессии',
+            disabled: true
+
+  .pattern_body_steps_form_step_input
+    = f.label :skill, 'Квалификация'
+    = f.text_field :skill, class: 'form-control', placeholder: 'Укажите квалификацию'
+    .invalid-feedback
+
+  footer.pattern_body_steps_form_step_next
+    = f.button do
+      p
+        | Далее
+      i.fa.fa-angle-right.fa-2x

@@ -71,7 +71,7 @@ table.ui-menu-item {
         position: absolute;
         top: 50%;
         transform: translate(0, -50%);
-        button{
+        a {
           display: flex;
           flex-direction: row;
           justify-content: center;
@@ -303,7 +303,7 @@ table.ui-menu-item {
               position: relative;
               margin-right: 0;
               margin-left: auto;
-              a{
+              button {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -408,6 +408,9 @@ table.ui-menu-item {
   font-family: "Open Sans";
   font-size: 14px;
   font-weight: 400;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
 .pattern_body_steps_form_step_input.add_ancete,
@@ -440,4 +443,9 @@ table.ui-menu-item {
   font-weight: normal;
   font-family: "Arial";
   margin-left: 5px;
+}
+
+.main_patternRequest .invalid-feedback {
+  width: 60%;
+  margin-left: 34%;
 }

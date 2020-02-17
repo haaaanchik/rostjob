@@ -1,113 +1,52 @@
-/.container
-  h2.text-center
-    | Информация для Cоискателя
-  hr
-  .row
-    .col-lg-2.offset-lg-2.text-right
-      = link_to edit_profile_production_site_order_template_path(@production_site) do
-        i.far.fa-arrow-alt-circle-left.fa-2x
-    .col-lg-6
-      p.text-center.font-italic
-        | *шаг 2 из 3
-        br
-        | *Производственная площадка: #{@production_site.title}
-        br
-        |  *Шаблон: #{ @order_template.title }
-
-  = form_with model: [:profile, @order_template],
-          url: profile_production_site_order_template_path(@production_site, @order_template),
-          id: 'order_template_form' do |f|
-    = f.hidden_field :position_id
-    = hidden_field_tag :template_creation_step, 2
-    .form-group
-      .row
-        .col-lg-3.control-label.offset-lg-1
-          = f.label :city, 'Город'
-        .col-lg-4
-          = f.text_field :city, class: "form-control", placeholder: 'Начните набирать название города',
-                  data: { 'auto-url' => '/search_city', 'auto-add-text' => true,
-                          'autocomplete-on' => 'order_template_city' }
-    .form-group
-      .row
-        .col-lg-3.control-label.offset-lg-1
-          = f.label :salary, 'Зарплата'
-        .col-lg-4
-          = f.text_field :salary, class: 'form-control'
-          .invalid-feedback
-    = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-      .form-group
-        .row
-          .col-lg-3.control-label.offset-lg-1
-            = oi_f.label :terms, 'Предлагаемые условия'
-          .col-lg-6
-            = oi_f.text_area :terms, class: 'form-control p-4 tinymce', rows: 10
-            .invalid-feedback
-    hr
-    .form-group
-      .row
-        .col-lg-2.offset-lg-5
-          = f.submit 'Далее', class: 'btn btn-primary'
-
 .main_patternRequest
-		section.pattern
-			header
-		      .pattern_back
-			    button
-			      i class="fa fa-angle-left fa-2x"
-			      span Назад
+  section.pattern
+    header
+      .pattern_back
+        = link_to edit_profile_production_site_order_template_path(@production_site) do
+          i.fa.fa-angle-left.fa-2x
+          span Назад
+      p Новый шаблон к Заявке
+    .pattern_body
+      header
+        | Производственная площадка: #{@production_site.title}
 
-			  p Новый шаблон к Заявке
+      .pattern_body_steps_nav
+        .pattern_body_steps_nav_step.check
+          |  1
+        hr
+        .pattern_body_steps_nav_step.check
+          |  2
+        hr
+        .pattern_body_steps_nav_step
+          |  3
+      .pattern_body_steps_form
+        = form_with model: [:profile, @order_template],
+                url: profile_production_site_order_template_path(@production_site, @order_template),
+                id: 'order_template_form' do |f|
+          = f.hidden_field :position_id
+          = hidden_field_tag :template_creation_step, 2
+          = hidden_field_tag :commit, 'далее'
+          .pattern_body_steps_form_step.show
+            .pattern_body_steps_form_step_input
+              = f.label :city, 'Город'
+              = f.text_field :city, class: 'form-control', placeholder: 'Начните набирать',
+                      data: {'auto-url' => '/search_city', 'auto-add-text' => true,
+                              'autocomplete-on' => 'order_template_city'}
+              .invalid-feedback
 
-			.pattern_body
-				header
-				  | Производственная площадка: #{@production_site.title}
+            .pattern_body_steps_form_step_input
+              label Зарплата
+              = f.text_field :salary, class: 'form-control'
+              .invalid-feedback
 
+            .pattern_body_steps_form_step_input.textArea
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                p Условия работ
+                = oi_f.text_area :terms, class: 'form-control tinymce', rows: 10
+                .invalid-feedback
 
-				.pattern_body_steps_nav
-					.pattern_body_steps_nav_step.check
-					  |	1
-
-					hr
-					.pattern_body_steps_nav_step.check
-					  |	2
-
-					hr
-					.pattern_body_steps_nav_step
-					  |	3
-
-				.pattern_body_steps_form
-
-                .pattern_body_steps_form_step.show
-                    .pattern_body_steps_form_step_input
-                        label for="city" Город
-                        input type="text" id="city" placeholder="Начните набирать"
-
-
-                    .pattern_body_steps_form_step_input
-                        label for="salary" Зарплата
-                        input type="text" id="salary" placeholder=""
-
-
-                    .pattern_body_steps_form_step_input.textArea
-                        p Условия работ
-                        #summernote1
-                          p Обязанности
-                          ul
-                            li 1
-                            li 2
-                          p Условия
-                          ul
-                            li 1
-                            li 2
-                          p Требования
-                          ul
-                            li 1
-                            li 2
-
-
-                    footer class="pattern_body_steps_form_step_next"
-                      a href="#"
-                        p
-                          | Далее
-                        i class="fa fa-angle-right fa-2x"
-
+            footer.pattern_body_steps_form_step_next
+              = f.button do
+                p
+                  | Далее
+                i.fa.fa-angle-right.fa-2x
