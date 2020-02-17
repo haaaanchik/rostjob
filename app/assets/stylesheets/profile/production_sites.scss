@@ -41,7 +41,6 @@ $phone: "max-width: 768px";
 
       &_platform {
         margin-right: 10px;
-        //margin-bottom: 20px;
         height: 580px;
         padding: 20px;
         display: grid;
@@ -50,14 +49,14 @@ $phone: "max-width: 768px";
         gap: 30px;
         border-radius: 8px;
         background-color: $secondaryColor;
-        box-shadow: 0px 0px 15px 0px rgba(77, 77, 77, 0.15);
+        box-shadow: 0 0 15px 0 rgba(77, 77, 77, 0.15);
 
         header {
           font-family: $primaryFont;
           font-weight: 700;
           font-size: 16px;
           color: $primaryColor;
-          //height: auto ;
+          height: 40px ;
           a {
             color: $primaryColor;
           }
@@ -116,8 +115,8 @@ $phone: "max-width: 768px";
             display: flex;
             flex-direction: column;
             justify-content: center;
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border: 2px solid $secondaryColorDark;
             border-radius: 50%;
             text-align: center;
@@ -315,12 +314,12 @@ $phone: "max-width: 768px";
 
 .company-page{
   display: flex;
+  height: calc(100vh - 58px) ;
 }
 
 .company-page .company-page__platforms{
   width: 356px;
   padding: 15px 15px 0 15px;
-  height: 100vh;
   overflow: auto;
 }
 
@@ -414,7 +413,6 @@ $phone: "max-width: 768px";
   align-items: center;
   justify-content: center;
   text-align: center;
-  /*flex: 1 0 calc(100% / 5 - 15px);*/
   margin: 0 7px;
   padding: 24px;
   box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
@@ -426,6 +424,9 @@ $phone: "max-width: 768px";
   font-weight: bold;
   max-height: 78px;
   min-width: 163px;
+  span{
+    line-height: 18px;
+  }
 }
 
 .item-type.active::after{
@@ -499,6 +500,7 @@ $phone: "max-width: 768px";
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 7px;
 }
 
 .publish:hover{
@@ -849,6 +851,10 @@ $phone: "max-width: 768px";
   font-family: $primaryFont;
   font-size: 15px;
   font-weight: 800;
+  i{
+    margin-right: 2px;
+    font-size: 13px;
+  }
 }
 
 .column > p{
@@ -982,6 +988,8 @@ $phone: "max-width: 768px";
   bottom: 15px;
   right: 20px;
   display: flex;
+  font-size: 14px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .requests-part__body .buttons img{
@@ -991,7 +999,7 @@ $phone: "max-width: 768px";
 #redact, #info, #close-request{
   box-shadow: 0 0 14px 1px rgba(77, 77, 77, 0.3);
   border-radius: 15px;
-  padding: 2px 8px;
+  padding: 4px 8px;
   color: white;
   display: flex;
   align-items: center;

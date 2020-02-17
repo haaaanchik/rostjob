@@ -13,7 +13,7 @@ $tablet: "max-width: 1000px";
 $phone: "max-width: 768px";
 
 section{
-  padding: 20px 30px;
+  padding: 10px 30px 20px;
   border-radius: 4px;
   width: 100%;
   background-color: $secondaryColor;
@@ -40,7 +40,6 @@ h3.title{
   font-weight: 400;
   font-size: 13px;
   line-height: 27px;
-  text-transform: uppercase;
   color: $secondaryColor;
   border:none;
   background-image: linear-gradient(rgb(25,112,255) 0%,rgb(104,162,255) 50%,rgb(25,112,255) 100%);
@@ -78,7 +77,8 @@ main section{
 }
 
 .img-user{
-  width: 100px;
+  width: 84px;
+  border-radius: 50%;
 }
 
 #pen{
