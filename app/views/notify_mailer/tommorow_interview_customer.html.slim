@@ -1,0 +1,4 @@
+= "У вас завтра (#{Date.tomorrow.to_s}) запланировано интервью с:"
+- @prop_emps.each do |emp|
+  p
+    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number} на позицию #{emp.order.title};"

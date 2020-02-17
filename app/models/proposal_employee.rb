@@ -35,7 +35,7 @@ class ProposalEmployee < ApplicationRecord
       transitions to: :transfer
     end
 
-    event :to_interview, after: :to_close? do
+    event :to_interview, after: [:to_close?, :mail_for_contractor_interview] do
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
@@ -55,7 +55,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :hired, to: :approved
     end
 
-    event :to_paid, after: :set_payment_date do
+    event :to_paid, after: [:set_payment_date, :mail_for_contractor_has_paid] do
       transitions from: :approved, to: :paid
     end
 
@@ -75,7 +75,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :inbox, to: :deleted
     end
 
-    event :hire do
+    event :hire, after: :mail_for_contractor_hired do
       transitions from: %i[interview viewed deleted disputed], to: :hired
     end
   end
@@ -114,9 +114,25 @@ class ProposalEmployee < ApplicationRecord
     Arel.sql("CONVERT(#{table_name}.employee_cv_id, CHAR(8))")
   end
 
+  def mail_interview_customer
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'today_interview_customer')
+  end
+
   private
 
   def mail_inbox
-    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'candidates_inbox')
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'candidates_inbox')
+  end
+
+  def mail_for_contractor_hired
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'proposal_employee_hired')
+  end
+
+  def mail_for_contractor_interview
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_about_interview')
+  end
+
+  def mail_for_contractor_has_paid
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_has_paid')
   end
 end

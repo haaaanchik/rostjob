@@ -1,0 +1,9 @@
+| Завтра у вашего кондидата собеседование:
+- @prop_emps.each do |emp|
+  p
+    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number} на позицию #{emp.order.title};"
+
+p
+  | Уточните у кандидата успевает ли он, если не успевает скорректируйте дату приезда.
+p
+  = link_to 'Инструкция для корректировки даты приезда.', page_url('correct_date_arrive')

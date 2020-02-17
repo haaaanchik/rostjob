@@ -57,7 +57,7 @@ class Order < ApplicationRecord
       transitions from: %i[waiting_for_payment moderation rejected], to: :draft
     end
 
-    event :wait_for_payment do
+    event :wait_for_payment, after: :send_mail_order_wait_for_payment do
       transitions from: :draft, to: :waiting_for_payment
     end
 
@@ -65,7 +65,7 @@ class Order < ApplicationRecord
       transitions from: %i[rejected draft waiting_for_payment], to: :moderation
     end
 
-    event :publish do
+    event :publish, after: :mail_customer_order_is_published do
       transitions from: %i[moderation completed], to: :published
     end
 
@@ -134,6 +134,7 @@ class Order < ApplicationRecord
     reject!
     comments.create(text: reason)
     balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. Причина: заявка не прошла модерацию.")
+    mail_customer_order_is_rejected
   end
 
   def to_hidden
@@ -188,6 +189,10 @@ class Order < ApplicationRecord
     OrderMailJob.perform_later(order: self, method: 'published')
   end
 
+  def send_mail_wait_for_payment
+    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment')
+  end
+
   private
 
   def logger_params(action_title)
@@ -204,11 +209,19 @@ class Order < ApplicationRecord
     }
   end
 
-  def send_mail_wait_for_payment
-    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment')
+  def send_mail_order_is_moderate
+    OrderMailJob.perform_now(order: self, method: 'moderated')
   end
 
-  def send_mail_order_is_moderate
-    SendModerationMailJob.perform_now(order: self)
+  def mail_customer_order_is_published
+    OrderMailJob.perform_now(order: self, method: 'published')
+  end
+
+  def send_mail_order_wait_for_payment
+    SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment') unless can_be_paid?
+  end
+
+  def mail_customer_order_is_rejected
+    OrderMailJob.perform_now(order: self, method: 'rejected')
   end
 end

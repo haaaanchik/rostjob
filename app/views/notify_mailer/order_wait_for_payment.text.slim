@@ -1,2 +1,5 @@
+| Ваша заявка
 - @orders.each do |order|
-  = "Ожидается оплаты заявка № #{order.id} - #{order.title}"
+  = "#{order.title};"
+| Для оплаты заявки просмотрите инструкцию по сылке.
+= url_for page_url('manual_how_to_pay')

@@ -1,3 +1,4 @@
+| У вас неоплаченный счёт
 - @invoices.each do |invoice|
   p
-    = link_to "У вас не оплаченный счёт на сумму #{invoice.amount}", profile_invoice_url(invoice.id)
+    = link_to "На сумму #{invoice.amount}", profile_invoice_url(invoice.id)

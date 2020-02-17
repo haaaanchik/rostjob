@@ -8,6 +8,7 @@ class Invoice < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than: 0, less_than: 100_000_000.00 }
 
   before_save :set_invoice_number
+  after_create_commit :send_mail_wait_for_payment
 
   scope :customers, -> { joins(:profile).where('profiles.profile_type = ?', 'customer') }
   scope :contractors, -> { joins(:profile).where('profiles.profile_type = ?', 'contractor') }
@@ -25,8 +26,6 @@ class Invoice < ApplicationRecord
     event :delete_invoice do
       transitions from: :created, to: :deleted
     end
-
-    event :created, after: :send_mail_wait_for_payment
   end
 
   def set_invoice_number
@@ -49,8 +48,6 @@ class Invoice < ApplicationRecord
                       .execute("update invoice_number_seqs set invoice_number = #{start_value}")
     ActiveRecord::Base.connection.execute('unlock tables')
   end
-
-  private
 
   def send_mail_wait_for_payment
     SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'invoce_wait_payment')

@@ -1,3 +1,8 @@
+| Ваша заявка
 - @orders.each do |order|
   p
-    = "Ожидается оплаты заявка № #{order.id} - #{order.title}"
+    = "#{order.title};"
+p
+  | Для оплаты заявки просмотрите инструкцию.
+p
+  = link_to 'Сылка на инструкцию', page_url('manual_how_to_pay')
