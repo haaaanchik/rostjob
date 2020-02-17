@@ -4,10 +4,14 @@ class Candidates
 
   @bind: ->
     $('.candidate-comment').on 'keyup', @searchEnterComment
+    $('.clickable-candidate').on 'click', @openCandidate
 
   @searchEnterComment: (e) ->
     e.preventDefault()
     toastr.info('Добавление комментария временно недоступен!')
+
+  @openCandidate: ->
+    window.location = $(this).data('href')
 
 $(document).on 'turbolinks:load', ->
   Candidates.init()

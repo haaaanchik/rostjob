@@ -1,9 +1,9 @@
-.worksheets__item id="candidate_#{candidate.id}" data-href=candidate.link_to_candidate_or_ticket
+.worksheets__item.clickable-candidate id="candidate_#{candidate.id}" data-href=candidate.link_to_candidate_or_ticket
   .info
     span
-      i class="fa fa-flag"
-      | Спор <br>
-      span class="date" с = candidate.created_at.strftime('%d.%m.%Y')
+      i.fa.fa-bookmark class="#{ candidate.status_background_class + '-text' }"
+      | #{ t("proposal_employee.state.#{candidate.state}") } <br>
+      span class="date" = candidate.created_at.strftime('%d.%m.%Y')
 
   .info
     a href="#"
