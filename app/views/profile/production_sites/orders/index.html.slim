@@ -39,18 +39,20 @@
           .publish
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
-        - order_templates.each do |order_t|
-          .order
-            input type="checkbox" value=order_t.id
-            .content
-              .order__number №#{ order_t.id }
-              .order__description
-                p.order__title
-                  = link_to  order_t.title,
-                          edit_profile_production_site_order_template_path(@production_site, order_t),
-                          class: 'black-text'
-                .order__bottom
-                  span.order__price #{ order_t.contractor_price } руб. / чел.
+        .orders-list__body-scrolling
+          - order_templates.each do |order_t|
+            .order
+              input type="checkbox" value=order_t.id
+              .content
+                .order__number №#{ order_t.id }
+                .order__description
+                  p.order__title
+                    = link_to  order_t.title,
+                            edit_profile_production_site_order_template_path(@production_site, order_t),
+                            class: 'black-text'
+                  .order__bottom
+                    span.order__price #{ order_t.contractor_price } руб. / чел.
+          /p.nothing-to-show Шаблоны отсутствуют
 
       .order-list__body data-tab="pending_payments"
         .orders-list__header
@@ -58,29 +60,31 @@
           .publish
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
-        - waiting_pay_orders.each do |order|
-          .order
-            .content
+        .orders-list__body-scrolling
+          - waiting_pay_orders.each do |order|
+            .order
+              .content
               .order__number №#{ order.id }
-              .order__description
-                p.order__title
-                  = link_to order.title,
-                          profile_production_site_order_path(@production_site, order),
-                          class: 'black-text'
-                .order__bottom
-                  span.order__price #{ order.contractor_price } руб. / чел.
-                  .order__statistic
-                    .element
-                      i.fa.fa-flag.mr-2
-                      span = order.without_inbox_candidate_count
+                .order__description
+                  p.order__title
+                    = link_to order.title,
+                            profile_production_site_order_path(@production_site, order),
+                            class: 'black-text'
+                  .order__bottom
+                    span.order__price #{ order.contractor_price } руб. / чел.
+                    .order__statistic
+                      .element
+                        i.fa.fa-flag.mr-2
+                        span = order.without_inbox_candidate_count
 
-                    .element
-                      i.fa.fa-users.mr-2
-                      span = order.number_free_places
+                      .element
+                        i.fa.fa-users.mr-2
+                        span = order.number_free_places
 
-                    .element
-                      i.fa.fa-envelope.mr-2
-                      span = order.proposal_employees.inbox.count
+                      .element
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
+          p.nothing-to-show Заявки, ожидающие оплаты, отсутствуют
 
       .order-list__body data-tab="on_moderation"
         .orders-list__header
@@ -88,30 +92,32 @@
           .publish
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
-        - moderation_orders.each do |order|
-          .order
-            .content
-              .order__number №#{ order.id }
+        .orders-list__body-scrolling
+          - moderation_orders.each do |order|
+            .order
+              .content
+                .order__number №#{ order.id }
 
-              .order__description
-                p.order__title
-                  = link_to order.title,
-                          profile_production_site_order_path(@production_site, order),
-                          class: 'black-text'
-                .order__bottom
-                  span.order__price #{ order.contractor_price } руб. / чел.
-                  .order__statistic
-                    .element
-                      i.fa.fa-flag.mr-2
-                      span = order.without_inbox_candidate_count
+                .order__description
+                  p.order__title
+                    = link_to order.title,
+                            profile_production_site_order_path(@production_site, order),
+                            class: 'black-text'
+                  .order__bottom
+                    span.order__price #{ order.contractor_price } руб. / чел.
+                    .order__statistic
+                      .element
+                        i.fa.fa-flag.mr-2
+                        span = order.without_inbox_candidate_count
 
-                    .element
-                      i.fa.fa-users.mr-2
-                      span = order.number_free_places
+                      .element
+                        i.fa.fa-users.mr-2
+                        span = order.number_free_places
 
-                    .element
-                      i.fa.fa-envelope.mr-2
-                      span = order.proposal_employees.inbox.count
+                      .element
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
+          p.nothing-to-show Заявки, находящиеся на модерации, отсутствуют
 
       .order-list__body.show-tab data-tab="published"
         .orders-list__header
@@ -119,30 +125,32 @@
           .publish
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
-        - published_orders.each do |order|
-          .order
-            .content
-              .order__number №#{ order.id }
+        .orders-list__body-scrolling
+          - published_orders.each do |order|
+            .order
+              .content
+                .order__number №#{ order.id }
 
-              .order__description
-                p.order__title
-                  = link_to order.title,
-                          profile_production_site_order_path(@production_site, order),
-                          class: 'black-text'
-                .order__bottom
-                  span.order__price #{ order.contractor_price } руб. / чел.
-                  .order__statistic
-                    .element
-                      i.fa.fa-flag.mr-2
-                      span = order.without_inbox_candidate_count
+                .order__description
+                  p.order__title
+                    = link_to order.title,
+                            profile_production_site_order_path(@production_site, order),
+                            class: 'black-text'
+                  .order__bottom
+                    span.order__price #{ order.contractor_price } руб. / чел.
+                    .order__statistic
+                      .element
+                        i.fa.fa-flag.mr-2
+                        span = order.without_inbox_candidate_count
 
-                    .element
-                      i.fa.fa-users.mr-2
-                      span = order.number_free_places
+                      .element
+                        i.fa.fa-users.mr-2
+                        span = order.number_free_places
 
-                    .element
-                      i.fa.fa-envelope.mr-2
-                      span = order.proposal_employees.inbox.count
+                      .element
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
+          p.nothing-to-show Опубликованные заявки отсутствуют
 
       .order-list__body data-tab="finished"
         .orders-list__header
@@ -150,27 +158,29 @@
           .publish
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
-        - completed_orders.each do |order|
-          .order
-            .content
-              .order__number №#{ order.id }
+        .orders-list__body-scrolling
+          - completed_orders.each do |order|
+            .order
+              .content
+                .order__number №#{ order.id }
 
-              .order__description
-                p.order__title
-                  = link_to order.title,
-                          profile_production_site_order_path(@production_site, order),
-                          class: 'black-text'
-                .order__bottom
-                  span.order__price #{ order.contractor_price } руб. / чел.
-                  .order__statistic
-                    .element
-                      i.fa.fa-flag.mr-2
-                      span = order.without_inbox_candidate_count
+                .order__description
+                  p.order__title
+                    = link_to order.title,
+                            profile_production_site_order_path(@production_site, order),
+                            class: 'black-text'
+                  .order__bottom
+                    span.order__price #{ order.contractor_price } руб. / чел.
+                    .order__statistic
+                      .element
+                        i.fa.fa-flag.mr-2
+                        span = order.without_inbox_candidate_count
 
-                    .element
-                      i.fa.fa-users.mr-2
-                      span = order.number_free_places
+                      .element
+                        i.fa.fa-users.mr-2
+                        span = order.number_free_places
 
-                    .element
-                      i.fa.fa-envelope.mr-2
-                      span = order.proposal_employees.inbox.count
+                      .element
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
+          /p.nothing-to-show Завершенные заявки отсутствуют

@@ -515,10 +515,8 @@ $phone: "max-width: 768px";
 
 .order-list__body{
   border-bottom: 1px solid #e1e1e1;
-  padding-bottom: 15px;
-  /*height: 450px;*/
-  height: calc(100vh - 180px);
-  overflow: auto;
+  padding-bottom: 10px;
+  height: calc(100vh - 200px);
 }
 
 .order-list__body .order{
@@ -1049,8 +1047,44 @@ $phone: "max-width: 768px";
   font-weight: bold;
 }
 
-#ui-id-1{
+#ui-id-1 {
   width: 371px;
+}
+
+.orders-list__body-scrolling{
+  height: calc(100vh - 250px);
+  width: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+
+    background-color: $secondaryColor;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.7);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: transparentize($secondaryColorDark, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: $secondaryColorDark;
+  }
+
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+  }
+}
+
+.nothing-to-show{
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  color:  #b7b7b7;
+  font-weight: bold;
 }
 
 @media (max-width: 1320px) {
