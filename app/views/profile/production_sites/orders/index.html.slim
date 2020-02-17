@@ -52,7 +52,8 @@
                             class: 'black-text'
                   .order__bottom
                     span.order__price #{ order_t.contractor_price } руб. / чел.
-          /p.nothing-to-show Шаблоны отсутствуют
+          - unless order_templates.present?
+            p.nothing-to-show Шаблоны отсутствуют
 
       .order-list__body data-tab="pending_payments"
         .orders-list__header
@@ -84,7 +85,8 @@
                       .element
                         i.fa.fa-envelope.mr-2
                         span = order.proposal_employees.inbox.count
-          p.nothing-to-show Заявки, ожидающие оплаты, отсутствуют
+          - unless waiting_pay_orders.present?
+            p.nothing-to-show Заявки, ожидающие оплаты, отсутствуют
 
       .order-list__body data-tab="on_moderation"
         .orders-list__header
@@ -117,7 +119,8 @@
                       .element
                         i.fa.fa-envelope.mr-2
                         span = order.proposal_employees.inbox.count
-          p.nothing-to-show Заявки, находящиеся на модерации, отсутствуют
+          - unless moderation_orders.present?
+            p.nothing-to-show Заявки, находящиеся на модерации, отсутствуют
 
       .order-list__body.show-tab data-tab="published"
         .orders-list__header
@@ -150,7 +153,8 @@
                       .element
                         i.fa.fa-envelope.mr-2
                         span = order.proposal_employees.inbox.count
-          p.nothing-to-show Опубликованные заявки отсутствуют
+          - unless published_orders.present?
+            p.nothing-to-show Опубликованные заявки отсутствуют
 
       .order-list__body data-tab="finished"
         .orders-list__header
@@ -183,4 +187,5 @@
                       .element
                         i.fa.fa-envelope.mr-2
                         span = order.proposal_employees.inbox.count
-          /p.nothing-to-show Завершенные заявки отсутствуют
+          - unless completed_orders.present?
+            p.nothing-to-show Завершенные заявки отсутствуют
