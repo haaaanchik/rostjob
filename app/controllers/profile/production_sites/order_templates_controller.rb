@@ -42,17 +42,18 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def destroy
-    if current_profile.order_templates.where(id: params[:order_ids]).destroy_all
-      render json: { message: 'удаленны' }, status: 201
+    if current_profile.order_templates.where(id: params[:order_template_ids]).destroy_all
+      render json: { message: 'шаблоны удаленны' }, status: 201
     else
-      render json: { message: 'не удалось удалить' }, status: 422
+      render json: { message: 'не удалось удалить шаблоны' }, status: 422
     end
   end
 
   def copy
-    OrderTemplate.where(id: params[:order_ids]).find_each(batch_size: 50).each do |order_template|
+    current_profile.order_templates.where(id: params[:order_ids]).each.each do |order_template|
       Cmd::OrderTemplate::Copy.call(order_template: order_template)
     end
+    render json: { message: 'все выбранные шаблоны cкопированы' }, status: 201
   end
 
   def create_order

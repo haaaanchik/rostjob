@@ -1,10 +1,48 @@
 class OrderTemplates
+  reloadPage = 0
+
   @init: ->
+    @tabsActive()
     @bind()
+
+  @tabsActive: ->
+    if reloadPage == 1
+      $('.header .item-type.js-input-type[data-target="published"]').removeClass('active')
+      $('.orders-list .order-list__body[data-tab="published"]').removeClass('show-tab')
+      $('.header .item-type.js-input-type[data-target="templates"]').addClass('active')
+      $('.orders-list .order-list__body[data-tab="templates"]').addClass('show-tab')
+      reloadPage = 0
 
   @bind: ->
     $('#order_template_position_search').on 'focusin', @addProfessionAutocomplete
+    $('#delete').on 'click', @deleteCollection
+    $('#copy').on 'click', @copyCollection
 
+  @deleteCollection: ->
+    if confirm('Вы действительно хотите удалить выбранные шаблоны?')
+      ajaxSendCopyOrDelete('/order_templates', 'DELETE')
+
+  @copyCollection: ->
+    if confirm('Вы действительно хотите копировать выбранные шаблоны?')
+      ajaxSendCopyOrDelete('/order_templates/copy', 'POST')
+
+  ajaxSendCopyOrDelete = (url, method) ->
+    order_template_ids = []
+    production_sites = $('.orders-list[data-production_sites-id]').data('production_sites-id')
+    $('.order > input:checked').each (index, element) ->
+      order_template_id = element.value
+      order_template_ids.push order_template_id
+
+    $.ajax
+      url: '/profile/production_sites/' + production_sites + url
+      method: method
+      dataType: 'json'
+      data:
+        order_template_ids: order_template_ids
+      success: ->
+        reloadPage = 1
+        Turbolinks.visit(window.location.href)
+    return
 
   @addProfessionAutocomplete: ->
     $this = $(this)
