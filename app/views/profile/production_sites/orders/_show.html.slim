@@ -9,9 +9,9 @@
     = render 'profile/production_sites/left_order_list'
 
   .requests-part
-    .header
+    .header class="header__#{order.state}"
       p id="request-part-title" №#{ order.id } #{ order.title } - #{ production_site.title }
-      span #{ order.contractor_price } руб. / чел.
+      span #{ order.customer_price } руб. / чел.
 
     .requests-part__body
       .column
