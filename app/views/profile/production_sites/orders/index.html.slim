@@ -75,16 +75,16 @@
                     span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
-                        i.fa.fa-flag.mr-2
-                        span = order.without_inbox_candidate_count
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
 
                       .element
                         i.fa.fa-users.mr-2
                         span = order.number_free_places
 
                       .element
-                        i.fa.fa-envelope.mr-2
-                        span = order.proposal_employees.inbox.count
+                        i.fa.fa-bookmark.mr-2
+                        span = order.without_inbox_candidate_count
           - unless waiting_pay_orders.present?
             p.nothing-to-show Заявки, ожидающие оплаты, отсутствуют
 
@@ -109,16 +109,16 @@
                     span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
-                        i.fa.fa-flag.mr-2
-                        span = order.without_inbox_candidate_count
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
 
                       .element
                         i.fa.fa-users.mr-2
                         span = order.number_free_places
 
                       .element
-                        i.fa.fa-envelope.mr-2
-                        span = order.proposal_employees.inbox.count
+                        i.fa.fa-bookmark.mr-2
+                        span = order.without_inbox_candidate_count
           - unless moderation_orders.present?
             p.nothing-to-show Заявки, находящиеся на модерации, отсутствуют
 
@@ -143,16 +143,16 @@
                     span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
-                        i.fa.fa-flag.mr-2
-                        span = order.without_inbox_candidate_count
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
 
                       .element
                         i.fa.fa-users.mr-2
                         span = order.number_free_places
 
                       .element
-                        i.fa.fa-envelope.mr-2
-                        span = order.proposal_employees.inbox.count
+                        i.fa.fa-bookmark.mr-2
+                        span = order.without_inbox_candidate_count
           - unless published_orders.present?
             p.nothing-to-show Опубликованные заявки отсутствуют
 
@@ -177,15 +177,15 @@
                     span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
-                        i.fa.fa-flag.mr-2
-                        span = order.without_inbox_candidate_count
+                        i.fa.fa-envelope.mr-2
+                        span = order.proposal_employees.inbox.count
 
                       .element
                         i.fa.fa-users.mr-2
                         span = order.number_free_places
 
                       .element
-                        i.fa.fa-envelope.mr-2
-                        span = order.proposal_employees.inbox.count
+                        i.fa.fa-bookmark.mr-2
+                        span = order.without_inbox_candidate_count
           - unless completed_orders.present?
             p.nothing-to-show Завершенные заявки отсутствуют

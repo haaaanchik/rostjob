@@ -21,13 +21,13 @@
                   | #{ p_order.contractor_price } руб. / чел.
                 .order__statistic
                   .element
-                    i.fa.fa-flag.mr-2
-                    span = p_order.without_inbox_candidate_count
+                    i.fa.fa-envelope.mr-2
+                    span = p_order.proposal_employees.inbox.count
 
                   .element
                     i.fa.fa-users.mr-2
                     span = p_order.number_free_places
 
                   .element
-                    i.fa.fa-envelope.mr-2
-                    span = p_order.proposal_employees.inbox.count
+                    i.fa.fa-bookmark
+                    span = p_order.without_inbox_candidate_count

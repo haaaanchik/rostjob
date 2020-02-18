@@ -77,7 +77,7 @@ class Order < ApplicationRecord
       transitions from: :published, to: :hidden
     end
 
-    event :complete do
+    event :complete, after: :refund_amount do
       transitions from: %i[hidden published], to: :completed
     end
   end
@@ -153,6 +153,12 @@ class Order < ApplicationRecord
 
   def number_free_places
     number_of_employees - without_inbox_candidate_count
+  end
+
+  def refund_amount
+    remaining_places = number_free_places
+    return if remaining_places <= 0
+    Cmd::Order::Refund.call(remaining_places: remaining_places, order: self)
   end
 
   def without_inbox_candidate_count

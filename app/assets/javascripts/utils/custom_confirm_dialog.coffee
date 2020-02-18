@@ -1,5 +1,5 @@
 dataConfirmModal.setDefaults({
-  title: 'Confirm your action',
+  title: 'Подтвердите свои действия',
   commit: 'Да',
   commitClass: 'btn btn-success',
   cancel: 'Нет',
