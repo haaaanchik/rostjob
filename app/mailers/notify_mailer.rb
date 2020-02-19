@@ -4,13 +4,13 @@ class NotifyMailer < ApplicationMailer
     @employee_cv = params[:objects]
     customer_email = @employee_cv.order.user.email
 
-    mail(to: customer_email, subject: 'Работник отправлен')
+    mail(to: customer_email, subject: 'RostJob. В заявку поступила анкета.')
   end
 
   def order_wait_for_payment
     @orders = params[:objects]
     email = @orders.first.user.email
-    subject = @orders.size == 1 ? 'Ожидаем оплату за заявку на' : 'Ожидаем оплату за заявки на'
+    subject = @orders.size == 1 ? 'RostJob. Ожидаем оплату за заявку на' : 'RostJob. Ожидаем оплату за заявки на'
 
     mail(to: email, subject: "#{subject} #{Date.today}")
   end
@@ -18,7 +18,7 @@ class NotifyMailer < ApplicationMailer
   def invoce_wait_payment
     @invoices = params[:objects]
     email = @invoices.first.profile.user.email
-    subject = @invoices.size == 1 ? 'У вас есть неплаченный счёт на' : 'У вас есть неплаченныe счёта на'
+    subject = @invoices.size == 1 ? 'RostJob. У вас есть неплаченный счёт на' : 'RostJob. У вас есть неплаченныe счёта на'
 
     mail(to: email, subject: "#{ subject }  #{ Date.today.to_s }")
   end
@@ -28,13 +28,13 @@ class NotifyMailer < ApplicationMailer
     email = @prop_emps.first.order.user.email
 
     mail(to: email,
-      subject: "Сегодня #{Date.today} запланированно интевью")
+      subject: "RostJob. Собеседование на #{Date.today} ")
   end
 
   def candidates_inbox
     @candidates = params[:objects]
     email = @candidates.first.order.user.email
 
-    mail(to: email, subject: "У вас есть люди в очереди на #{Date.today}")
+    mail(to: email, subject: "RostJob. У вас есть люди в очереди на #{Date.today}")
   end
 end

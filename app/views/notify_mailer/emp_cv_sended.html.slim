@@ -1,6 +1,3 @@
-= "Заявка №#{ @employee_cv.order.id } поступила анкета №#{ @employee_cv.id }. Назначьте дату собеседования чтобы Рекрутер закрыл заявку."
+= "В заявка №#{ @employee_cv.order.id } '#{ @employee_cv.order.title }' поступила анкета №#{ @employee_cv.id }. Назначьте дату собеседования чтобы Рекрутер закрыл заявку."
 p
-  = link_to "Заявка №#{ @employee_cv.order.id }", profile_production_site_order_url(@employee_cv.order.production_site.id, @employee_cv.order.id), 
-    style: 'text-decoration: none'
-p
-  = link_to 'Чтобы узнать как назначить собеседование прочтите инструкцию.', root_url, style: 'text-decoration: none'
+  = 'С вопросами обращайтесь на почту manager@best-hr.pro .'

@@ -6,6 +6,6 @@ class ModerationMailer < ApplicationMailer
   #
   def send_notification
     @order = params[:order]
-    mail(to: Rails.configuration.moderation_email_to, subject: 'Новая заявка на модерации')
+    mail(to: Rails.configuration.moderation_email_to, subject: 'RostJob. Вашу заявку просматривает администрация сайта.')
   end
 end
