@@ -32,8 +32,8 @@ careerist_job_fetch_resumes:
 #  queue: critical
 #  description: "Creates job for generating payment order to pay NDFL tax"
 
-every_day_mail_processing_job:
-  cron: "00 7 * * *"
-  class: "SendingEveryDayMailJob"
-  queue: critical
-  description: "Send every day mails for users"
+# every_day_mail_processing_job:
+#   cron: "00 7 * * *"
+#   class: "SendingEveryDayMailJob"
+#   queue: critical
+#   description: "Send every day mails for users"
