@@ -1,4 +1,4 @@
-.col-md-10.order-md-2.order-1.offset-md-1
+/.col-md-10.order-md-2.order-1.offset-md-1
   .card.testimonial-card.w-100.m-2.mt-4.mb-4
     .card-up.bg-rostjob.lighten-1.card-up-hr
       .container
@@ -98,5 +98,75 @@ javascript:
   }
 
   document.addEventListener('turbolinks:load', ready);
+
+
+#request-publishing
+  .request-block
+    h1.page-title Публикация заявки
+    .request-block-header
+      p ООО «Комбайновый завод Ростсельмаш»
+      span г. Ростов-на-Дону
+    .request-block-container
+      .request-content
+        = image_tag('/img/no-avatar.png', class: 'logo')
+        .request-body
+          p.subtitle
+            | Маляр по металлу (Автомаляр). 4-6 разряд от 60 000 р 200 р/ч
+          p.subtitle
+            | г. Набережные Челны
+          p.subtitle
+            | Обязанности:
+          span
+            | укладка,сортировка изделий на ленточном конвейере
+          p.subtitle
+            | Требования:
+          span
+            | работнику при себе иметь, постельное белье, одеяло, средства личной гигиены, кухонная утварь;
+            br/
+            | не допускаются работники с регистрацией в г.Набережные Челны;
+            br/
+            | отсутствие негативного опыта на КамаЗе;
+            br/
+            | смежная профессия приветствуется.
+          p.subtitle
+            | Условия:
+          span
+            | постоянно. 6/1 - 12 (Сменный);
+            br/
+            | своевременная выплата з/п (2 раза в месяц);
+            br/
+            | работа вахтовым методом 60/30;
+            br/
+            | жилье за счет Работодателя;
+            br/
+            | к сотрудникам готовым работать без межвахтового отпуска применяется дополнительная система лояльности. Компенсация проезда работникам в случае возвращения из межвахтового отпуска.
+          span.salary 2 000 руб / чел
+      .sidebar
+        .contact-person
+          p.title
+            | Контактное лицо:
+          p.initials
+            | Ринат
+          p.phone-number
+            | +7 (960) 802 56 28
+        .peoples-need
+          p.title Нужно людей:
+          .count
+            = image_tag('/img/minus.png', id: 'minus')
+            span#number-of-people 1
+            = image_tag('/img/plus.png', id: 'plus')
+        .to-pay
+          p.title
+            | К оплате:
+          span#sum-to-pay
+            | 12000 руб.
+        .balance
+          p.title
+            | Ваш баланс:
+          span
+            | 55000 руб.
+    .buttons
+      span.public Опубликовать
+      span.cancel Отменить
 
 
