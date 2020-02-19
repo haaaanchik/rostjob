@@ -13,6 +13,10 @@ class UserDecorator < ObjDecorator
     0
   end
 
+  def label_full_name
+    profile.contractor? ? 'Фамилия Имя' : 'Наименование организации'
+  end
+
   def withdrawal_link
     return tag_td if object.profile_type == 'customer'
     object.amount <= 0.0 ? tag_td : tag_td_a
