@@ -25,6 +25,9 @@
 # require jquery.inputmask.date.extensions
 #= require action_cable
 #= require pre_publish
+#= require coremain
+#= require daygridmain
+#= require rec_main
 #= require_tree .
 
 @scroll_to_bottom = (element) ->
