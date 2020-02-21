@@ -4,6 +4,7 @@ module Cmd
       include Interactor
 
       def call
+        summ_additional_employees = order.number_additional_employees * order.customer_price
         context.fail! if order.number_additional_employees.nil?
         order.increment!(:number_of_employees, order.number_additional_employees)
         Cmd::UserActionLogger::Log.call(params: logger_params)
@@ -12,7 +13,7 @@ module Cmd
         order.update(number_additional_employees: nil,
                      customer_total:              customer_total,
                      contractor_total:            contractor_total)
-        order.balance.withdraw(order.customer_total, "Увеличение количества сотрудников для заявки №#{order.id}")
+        order.balance.withdraw(summ_additional_employees, "Увеличение количества сотрудников для заявки №#{order.id}")
         order.public_send(:to_open?)
       end
 

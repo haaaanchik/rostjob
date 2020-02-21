@@ -11,7 +11,7 @@
   .requests-part
     .header class="header__#{@order.state}"
       p id="request-part-title" №#{ @order.id } #{ @order.title } - #{ @production_site.title }
-      span #{ @order.customer_price } руб. / чел.
+      span #{ @order.customer_price.to_i } руб. / чел.
 
     .requests-part__body
       .column
@@ -20,7 +20,10 @@
             i.fa.fa-bookmark style="color: #ffd800"
             |  В очереди
 
-        p.peoples-left Осталось 12 человек
+        p.peoples-left ="Осталось #{@order.number_free_places} человек"
+        p.red-text
+          = @order.candidates.disputed.count
+          span.ml-2 = image_tag '/img/new/smile-sow.png'
         p.add-personal data-toggle="modal" data-target="#addNewQuantityEmployeeModal" + Добавить персонал
 
         .column__body
