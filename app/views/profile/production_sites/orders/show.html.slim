@@ -21,9 +21,10 @@
             |  В очереди
 
         p.peoples-left ="Осталось #{@order.number_free_places} человек"
-        p.red-text
-          = @order.candidates.disputed.count
-          span.ml-2 = image_tag '/img/new/smile-sow.png'
+        p
+          = link_to profile_tickets_path, class: 'red-text' do
+            = " + #{@order.candidates.disputed.count}"
+            span.ml-2 спор
         p.add-personal data-toggle="modal" data-target="#addNewQuantityEmployeeModal" + Добавить персонал
 
         .column__body
@@ -51,10 +52,10 @@
         .column__title
           p
             i.fa.fa-bookmark style="color: #b7b7b7"
-            |  Оплачен
+            |  В оплате
 
         .column__body
-          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'paid' }
+          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'approved' }
 
       .buttons
         = link_to first_step_profile_production_site_order_path(@production_site, @order), id: 'redact' do
