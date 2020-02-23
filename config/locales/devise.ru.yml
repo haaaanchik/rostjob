@@ -18,15 +18,15 @@ ru:
       unconfirmed: "You have to confirm your email address before continuing."
     mailer:
       confirmation_instructions:
-        subject: "Подтверждение адреса электронной почты"
+        subject: "RostJob. Подтверждение адреса электронной почты"
       reset_password_instructions:
-        subject: "Сброс пароля"
+        subject: "RostJob. Сброс пароля"
       unlock_instructions:
-        subject: "Разблокировка учётной записи"
+        subject: "RostJob. Разблокировка учётной записи"
       email_changed:
-        subject: "Email изменён"
+        subject: "RostJob. Email изменён"
       password_change:
-        subject: "Пароль изменён"
+        subject: "RostJob. Пароль изменён"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
