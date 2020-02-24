@@ -1,3 +1,3 @@
 = "Заявка №#{ @order.id } #{ @order.title } - завершена"
 
-= link_to 'Перейти к заявке', profile_production_site_order_url(@order.production_site_id, @order)
+= url_for profile_production_site_order_url(@order.production_site_id, @order)
