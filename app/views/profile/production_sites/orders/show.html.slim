@@ -66,9 +66,11 @@
           = image_tag '/img/new/info.png'
           | Инфо
 
-        a#close-request href="#"
-          = image_tag '/img/new/close.png'
-          | Закрыть
+        - unless @order.completed?
+          = link_to complete_profile_production_site_order_path(production_site, @order), id: 'close-request',
+                  method: :put, data: {confirm: 'Завершить заявку?'} do
+            = image_tag '/img/new/close.png'
+            | Закрыть
 
 .modal.fade.left id="addNewQuantityEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addNewQuantityEmployeeModalLabel" aria-hidden="true"
   .modal-dialog.modal-lg role="document"
