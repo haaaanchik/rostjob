@@ -7,7 +7,7 @@
     = render 'profile/production_sites/left_order_list'
 
   .company-page__tabs
-    .header
+    .header.active-tab data-active=params[:tab_state]
       .item-type.template.js-input-type data-target="templates"
         span Шаблоны
 
@@ -47,11 +47,11 @@
                 .order__number №#{ order_t.id }
                 .order__description
                   p.order__title
-                    = link_to  order_t.title,
-                            edit_profile_production_site_order_template_path(@production_site, order_t),
+                    = link_to  order_t.name,
+                            first_step_profile_production_site_order_template_path(@production_site, order_t),
                             class: 'black-text'
                   .order__bottom
-                    span.order__price #{ order_t.contractor_price } руб. / чел.
+                    span.order__price #{ order_t.customer_price.to_i } руб. / чел.
           - unless order_templates.present?
             p.nothing-to-show Шаблоны отсутствуют
 
@@ -69,10 +69,10 @@
                 .order__description
                   p.order__title
                     = link_to order.title,
-                            profile_production_site_order_path(@production_site, order),
+                            first_step_profile_production_site_order_path(@production_site, order),
                             class: 'black-text'
                   .order__bottom
-                    span.order__price #{ order.customer_price } руб. / чел.
+                    span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
                         i.fa.fa-flag.mr-2
@@ -103,10 +103,10 @@
                 .order__description
                   p.order__title
                     = link_to order.title,
-                            profile_production_site_order_path(@production_site, order),
+                            first_step_profile_production_site_order_path(@production_site, order),
                             class: 'black-text'
                   .order__bottom
-                    span.order__price #{ order.customer_price } руб. / чел.
+                    span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
                         i.fa.fa-flag.mr-2
@@ -140,7 +140,7 @@
                             profile_production_site_order_path(@production_site, order),
                             class: 'black-text'
                   .order__bottom
-                    span.order__price #{ order.customer_price } руб. / чел.
+                    span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
                         i.fa.fa-flag.mr-2
@@ -174,7 +174,7 @@
                             profile_production_site_order_path(@production_site, order),
                             class: 'black-text'
                   .order__bottom
-                    span.order__price #{ order.customer_price } руб. / чел.
+                    span.order__price #{ order.customer_price.to_i } руб. / чел.
                     .order__statistic
                       .element
                         i.fa.fa-flag.mr-2

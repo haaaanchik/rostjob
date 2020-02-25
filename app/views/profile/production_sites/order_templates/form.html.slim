@@ -1,0 +1,11 @@
+ruby:
+  is_order_template = @model_resource.is_a?(OrderTemplate)
+  step = t("profile.production_sites.orders.partials.#{@model_resource.creation_step}")
+
+= render "profile/production_sites/order_template_forms/#{step}",
+        title: 'Редактрование шаблона к Заявке',
+        model: @model_resource,
+        next_button: first_step_save_button,
+        is_order_template: is_order_template,
+        button_text: 'Опубликовать',
+        url: profile_production_site_order_template_path(@production_site, @model_resource)

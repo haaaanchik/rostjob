@@ -6,3 +6,7 @@ ru:
     order_templates:
       commit:
         save: 'Сохранить'
+      partials:
+        1: 'first_step'
+        2: 'second_step'
+        3: 'third_step'

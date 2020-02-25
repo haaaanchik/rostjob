@@ -66,4 +66,19 @@ class OrderDecorator < ObjDecorator
                     class: classes) { 'Опубликовать заявку' }
     end
   end
+
+  def back_url_from_second_step(production_site)
+    h.first_step_profile_production_site_order_path(production_site, object)
+  end
+
+  def back_url_from_third_step(production_site)
+    h.second_step_profile_production_site_order_path(production_site, object)
+  end
+
+  def first_step_next_link(production_site)
+    h.content_tag(:a, href: h.second_step_profile_production_site_order_path(production_site, object)) do
+      h.concat(h.content_tag(:p) { 'Далее' })
+      h.concat(h.content_tag(:image, src: h.asset_path('svg/thin_arrow_right.svg'), id: 'btn-next') {})
+    end
+  end
 end

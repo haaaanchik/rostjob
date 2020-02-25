@@ -1,1 +1,84 @@
-= render 'show', production_site: @production_site, order: @order
+- if @proposal_employee.present?
+  = link_to '', profile_candidate_path(@proposal_employee), class: 'd-none' , id: 'click_proposal_employee', remote: true
+.company-page.orders
+  .company-page__platforms
+    .search.search-production-site
+      input type="text" placeholder="Поиск площадок"
+      = image_tag '/img/new/search.png', id: 'search'
+
+    = render 'profile/production_sites/left_order_list'
+
+  .requests-part
+    .header class="header__#{@order.state}"
+      p id="request-part-title" №#{ @order.id } #{ @order.title } - #{ @production_site.title }
+      span #{ @order.customer_price } руб. / чел.
+
+    .requests-part__body
+      .column
+        .column__title
+          p
+            i.fa.fa-bookmark style="color: #ffd800"
+            |  В очереди
+
+        p.peoples-left Осталось 12 человек
+        p.add-personal data-toggle="modal" data-target="#addNewQuantityEmployeeModal" + Добавить персонал
+
+        .column__body
+          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'inbox' }
+      .column
+        .column__title
+          p
+            i.fa.fa-bookmark style="color: #ff9000"
+            |  Собеседование
+
+        .column__body
+          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'interview' }
+
+      .column
+        .column__title
+          p
+            i.fa.fa-bookmark style="color: #00ca5f"
+            |  Нанят
+
+        .column__body
+          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'hired' }
+
+
+      .column
+        .column__title
+          p
+            i.fa.fa-bookmark style="color: #b7b7b7"
+            |  Оплачен
+
+        .column__body
+          = render partial: 'proposal_employee_card', locals: { order: @order, state: 'paid' }
+
+      .buttons
+        = link_to first_step_profile_production_site_order_path(@production_site, @order), id: 'redact' do
+          = image_tag '/img/new/redact.png'
+          | Редактировать
+
+        a#info href="#"
+          = image_tag '/img/new/info.png'
+          | Инфо
+
+        a#close-request href="#"
+          = image_tag '/img/new/close.png'
+          | Закрыть
+
+.modal.fade.left id="addNewQuantityEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addNewQuantityEmployeeModalLabel" aria-hidden="true"
+  .modal-dialog.modal-lg role="document"
+    .modal-content
+      = form_for @order,
+                 url: update_pre_publish_profile_production_site_order_path(@production_site),
+                 remote: true,
+                 method: :put do |f|
+        .modal-header
+          h4.modal-title Добавить персонал
+          button.close type="button" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" &times;
+        .modal-body
+          .offset-2.col-8
+            = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников', class: 'form-control'
+        .modal-footer
+          = f.submit 'Добавить', class: 'btn btn-success'

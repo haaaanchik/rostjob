@@ -8,3 +8,16 @@ ru:
       rejected: 'отклонена'
       hidden: 'скрыта'
       completed: 'выполнена'
+
+  activerecord:
+    errors:
+      models:
+        order:
+          attributes:
+            error:
+              other_info:
+                terms: 'не может быть пустым'
+                remark: 'не может быть пустым'
+              contact_person:
+                name: 'не может быть пустым'
+                phone: 'не может быть пустым'

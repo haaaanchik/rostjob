@@ -162,20 +162,20 @@ Rails.application.routes.draw do
   namespace :profile do
     resources :production_sites do
       scope module: :production_sites do
-        resources :order_templates, except: %i[destroy] do
+        resources :order_templates, except: %i[edit show] do
           member do
-            post :create_order
             put :move
-            get :description_info
-            get :additional_info
+            put :save_name
+            get :first_step
+            get :second_step
+            get :third_step
           end
           collection do
-            delete :destroy
+            delete :destroy_array
             post :copy
           end
         end
-        get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
-        resources :orders, except: %i[create] do
+        resources :orders, only: %i[index update show] do
           member do
             put :hide
             get :pre_publish
@@ -185,6 +185,9 @@ Rails.application.routes.draw do
             put :move
             put :update_pre_publish
             put :add_additional_employees
+            get :first_step
+            get :second_step
+            get :third_step
           end
           collection do
             post :add_position
@@ -286,8 +289,6 @@ Rails.application.routes.draw do
       end
     end
     # FIXME: refactor this asap
-    post :orders, constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#create_pre_publish'
-    post :orders, constraints: ->(req) {req.params.key?(:create)}, to: 'orders#create'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:pre_publish)}, to: 'orders#update_pre_publish'
     patch 'orders/:id', constraints: ->(req) {req.params.key?(:create)}, to: 'orders#update'
 

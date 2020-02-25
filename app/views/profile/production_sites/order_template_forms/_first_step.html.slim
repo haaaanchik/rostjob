@@ -1,0 +1,52 @@
+.main_patternRequest
+  section.pattern
+    header
+      .pattern_back
+        = link_to profile_production_site_orders_path(@production_site) do
+          = image_tag asset_path('svg/thin_arrow_left.svg'), id: 'btn-prev'
+          span Назад
+      p = title
+    .pattern_body
+      header
+        | Производственная площадка: #{@production_site.title}
+      .pattern_body_steps_nav
+        .pattern_body_steps_nav_step.check
+          |  1
+        hr
+        .pattern_body_steps_nav_step
+          |  2
+        hr
+        .pattern_body_steps_nav_step
+          |  3
+      .pattern_body_steps_form
+        = form_with model: [:profile, model],
+                url: url,
+                id: 'order_template_form' do |f|
+
+          = f.hidden_field :position_id
+          = hidden_field_tag :creation_step, 1
+          = hidden_field_tag :commit, 'далее'
+          .pattern_body_steps_form_step.show
+            .pattern_body_steps_form_step_input
+              = f.label :profession, 'Профессия'
+              = f.text_field :position_search,
+                      value: f.object.title,
+                      class: 'form-control',
+                      placeholder: 'Начните набирать',
+                      data: {'auto-url' => '/search_position'}
+              .invalid-feedback
+
+            .pattern_body_steps_form_step_input
+              = f.label :profession_price, 'Цена в рублях'
+              = text_field_tag :profession_price,
+                      f.object.position&.price_group&.customer_price,
+                      placeholder: 'Цена появится после ввода профессии',
+                      disabled: true
+
+            .pattern_body_steps_form_step_input
+              = f.label :skill, 'Квалификация'
+              = f.text_field :skill, class: 'form-control', placeholder: 'Укажите квалификацию'
+              .invalid-feedback
+
+            footer.pattern_body_steps_form_step_next
+              = next_button

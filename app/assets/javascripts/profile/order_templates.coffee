@@ -15,12 +15,14 @@ class OrderTemplates
 
   @bind: ->
     $('#order_template_position_search').on 'focusin', @addProfessionAutocomplete
-    $('#delete').on 'click', @deleteCollection
+    $('#delete').on 'click', @destroyArray
     $('#copy').on 'click', @copyCollection
+    $('#save_as_template').on 'click', @showNameInput
+    $('.order-template__name').on 'focusout', @saveName
 
-  @deleteCollection: ->
+  @destroyArray: ->
     if confirm('Вы действительно хотите удалить выбранные шаблоны?')
-      ajaxSendCopyOrDelete('/order_templates', 'DELETE')
+      ajaxSendCopyOrDelete('/order_templates/destroy_array', 'DELETE')
 
   @copyCollection: ->
     if confirm('Вы действительно хотите копировать выбранные шаблоны?')
@@ -84,6 +86,30 @@ class OrderTemplates
       $('#profession_price').val($item.price)
       $('#order_template_position_id').val($item.id)
     return false
+
+  @showNameInput: ->
+    $(this).fadeOut 700
+    $(this).next().fadeIn 700, ->
+      $(this).removeClass('d-none')
+
+  @saveName: ->
+    productionSiteId = $('.pattern_body_steps_form').data('production-site-id')
+    orderTemplateId = $(this).data('id')
+    url = '/profile/production_sites/' + productionSiteId + '/order_templates/' + orderTemplateId + '/save_name'
+    $.ajax
+      url: url
+      method: 'put'
+      dataType: 'json'
+      data:
+        name: $(this).val()
+      success: (data) ->
+        $('#order_template_template_saved').val(true)
+        $('#template_name').remove()
+        $('#save_as_template').parent().append('<i class="ml-4 green-text fa fa-check"> <span class="ml-2">шаблон успешно сохранен</span> </i>')
+      error: (msg) ->
+        console.log(msg)
+        toastr.error('Не удалось сохранить шаблон')
+    return
 
 $(document).on 'turbolinks:load', ->
   OrderTemplates.init()

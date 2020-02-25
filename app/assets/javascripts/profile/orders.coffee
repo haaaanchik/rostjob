@@ -1,6 +1,16 @@
 class Orders
   @init: ->
+    @tabsActive()
     @clickProposalEmployee()
+
+  @tabsActive: ->
+    states = ['templates', 'pending_payments', 'on_moderation', 'published', 'finished']
+    active = $('.header.active-tab').data('active')
+    if states.includes(active)
+      $('.header .item-type.js-input-type[data-target="published"]').removeClass('active')
+      $('.orders-list .order-list__body[data-tab="published"]').removeClass('show-tab')
+      $('.header .item-type.js-input-type[data-target="'+ active + '"]').addClass('active')
+      $('.orders-list .order-list__body[data-tab="'+ active + '"]').addClass('show-tab')
 
   @clickProposalEmployee: ->
     if $('#click_proposal_employee').length
@@ -157,20 +167,6 @@ $(document).on('change', '#order_contractor_price', (event) ->
   $('#customer_total').html(customer_total)
   $('#order_contractor_price').val(contractor_price)
   $('#contractor_total').html(contractor_total)
-)
-
-$(document).on('click', '[data-order-position="new"]', (event) ->
-  val = $('#order_position_search').val()
-
-  if val == ''
-    toastr.info('Введите название профессии')
-  else
-    data = position: {title: val, duties: '', price_group_id: 1}
-    $.ajax
-      method: 'post'
-      url: '/profile/orders/add_position'
-      data: data
-    return
 )
 
 # FIXME: refactor this asap

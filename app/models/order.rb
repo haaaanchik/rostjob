@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   include AASM
   include OrderRepository
+  include Order::OrderTemplatable
   extend Enumerize
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
@@ -8,6 +9,7 @@ class Order < ApplicationRecord
 
   belongs_to :profile
   belongs_to :production_site
+  belongs_to :position
   has_many :invites
   has_many :candidates, class_name: 'ProposalEmployee'
   has_many :comments, dependent: :destroy
@@ -21,13 +23,6 @@ class Order < ApplicationRecord
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: {greater_than_or_equal_to: 0}
   validates :number_of_employees, presence: true, numericality: {only_integer: true}
-  validates :title, :city, presence: true
-  validates :salary, presence: true
-  # validates :commission, presence: true, numericality: { only_integer: true }
-  # validates :payment_type, presence: true
-  # validates :warranty_period, presence: true, numericality: {only_integer: true}
-  # validates :number_of_recruiters, presence: true, numericality: { only_integer: true }
-  # validates :accepted, acceptance: {message: 'must be abided'}
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /.*\/.*\z/
@@ -88,30 +83,7 @@ class Order < ApplicationRecord
   end
 
   def initialize(attrs = nil)
-    defaults = {
-      base_customer_price: 0,
-      base_contractor_price: 0,
-      customer_price: 0,
-      contractor_price: 0,
-      customer_total: 0,
-      contractor_total: 0,
-      warranty_period: 10,
-      other_info: {
-        age_from: nil,
-        age_to: nil,
-        remark: nil,
-        sex: nil,
-        terms: nil,
-        related_profession: nil
-      },
-      contact_person: {
-        name: nil,
-        phone: nil
-      },
-      for_cis: false,
-      advertising: false,
-      adv_text: nil
-    }
+    defaults = default_init
 
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)

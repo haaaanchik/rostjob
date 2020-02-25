@@ -1,0 +1,8 @@
+ru:
+  profile:
+    production_sites:
+      orders:
+        partials:
+          1: 'first_step'
+          2: 'second_step'
+          3: 'third_step'

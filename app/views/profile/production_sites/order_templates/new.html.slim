@@ -1,30 +1,5 @@
-.main_patternRequest
-  section.pattern
-    header
-      .pattern_back
-        = link_to profile_production_site_orders_path(@production_site) do
-          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="btn-prev" x="0px" y="0px" viewBox="0 0 511.995 511.995" style="enable-background:new 0 0 511.995 511.995;" xml:space="preserve" width="512px" height="512px" class=""><g><g>
-            <path d="M381.039,248.62L146.373,3.287c-4.083-4.229-10.833-4.417-15.083-0.333c-4.25,4.073-4.396,10.823-0.333,15.083    L358.56,255.995L130.956,493.954c-4.063,4.26-3.917,11.01,0.333,15.083c2.063,1.979,4.729,2.958,7.375,2.958    c2.813,0,5.604-1.104,7.708-3.292L381.039,263.37C384.977,259.245,384.977,252.745,381.039,248.62z" data-original="#000000" class="active-path" data-old_color="#000000" fill="#B7B7B7"/>
-          span Назад
-      p Новый шаблон к Заявке
-    .pattern_body
-      header
-        | Производственная площадка: #{@production_site.title}
-      .pattern_body_steps_nav
-        .pattern_body_steps_nav_step.check
-          |	1
-        hr
-        .pattern_body_steps_nav_step
-          |	2
-        hr
-        .pattern_body_steps_nav_step
-          |	3
-      .pattern_body_steps_form
-        = form_with model: [:profile, @order_template],
-                url: profile_production_site_order_templates_path(@production_site),
-                id: 'order_template_form' do |f|
-          = render 'form', f: f
-
-
-
-
+= render 'profile/production_sites/order_template_forms/first_step',
+        title: 'Новый шаблон к Заявке',
+        model: @order_template,
+        next_button: first_step_save_button,
+        url: profile_production_site_order_templates_path(@production_site)

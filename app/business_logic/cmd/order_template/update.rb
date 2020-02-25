@@ -4,11 +4,11 @@ module Cmd
       include Interactor
 
       def call
-        if [1, 2].include?(order_template.template_creation_step.to_i)
-          params_with_price = Cmd::OrderTemplate::ParamsWithPrice.call(order_template_params: params,
-                                                                       position:              position,
-                                                                       only_base:             false)
-          context.params = params_with_price.order_template_params
+        if [1, 2].include?(order_template.creation_step.to_i)
+          params_with_price = Cmd::Price::ParamsWithPrice.call(params:     params,
+                                                               position:   position,
+                                                               only_base:  false)
+          context.params = params_with_price.params
         end
         set_other_info
         result = Cmd::Order::CalculateUrgency.call(params: params)
@@ -34,7 +34,7 @@ module Cmd
       end
 
       def set_other_info
-        case order_template.template_creation_step
+        case order_template.creation_step
         when 2
           params[:other_info]['remark'] = order_template.other_info['remark']
         when 3

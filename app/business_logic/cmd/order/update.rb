@@ -5,6 +5,7 @@ module Cmd
 
       def call
         result = Cmd::Order::CalculateUrgency.call(params: params)
+        set_other_info
         context.fail! unless order.update(params.merge(urgency: result.urgency))
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
@@ -21,6 +22,17 @@ module Cmd
 
       def current_user
         order.profile.user
+      end
+
+      def set_other_info
+        case order.creation_step
+        when 2
+          params[:other_info]['remark'] = order.other_info['remark']
+        when 3
+          params[:other_info]['terms'] = order.other_info['terms']
+        else
+          order
+        end
       end
 
       def logger_params

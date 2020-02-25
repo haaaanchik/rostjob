@@ -215,7 +215,7 @@ input::placeholder{
                   cursor: pointer;
                 }
               }
-              input[type="text"], input[type="tel"]{
+              input[type="text"], input[type="tel"], input[type="number"]{
                 width: 100%;
                 max-width: 370px;
                 padding-left: 15px;
@@ -308,7 +308,7 @@ input::placeholder{
               position: relative;
               margin-right: 0;
               margin-left: auto;
-              button {
+              button, a {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -412,7 +412,7 @@ input::placeholder{
   width: 146px;
 }
 
-#add_ancete,{
+#add_ancete {
   padding-left: 18px;
   text-decoration: underline;
   color: #1970ff;

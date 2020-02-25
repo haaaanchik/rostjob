@@ -4,11 +4,11 @@ module Cmd
       include Interactor
 
       def call
-        result = Cmd::OrderTemplate::ParamsWithPrice.call(order_template_params: params,
-                                                          position:              position,
-                                                          only_base:             true)
-        context.params = result.order_template_params
-        @order_template = profile.order_templates.create(params.merge(production_site: production_site))
+        params_with_price = Cmd::Price::ParamsWithPrice.call(params:     params,
+                                                             position:   position,
+                                                             only_base:  true)
+        context.params = params_with_price.params.merge(production_site: production_site)
+        @order_template = profile.order_templates.create(params.merge(name: set_name))
         @order_template.errors.add(:position_search, 'Выберите профессию') unless position
         context.order_template = @order_template
         context.fail! unless @order_template.persisted?
@@ -35,6 +35,10 @@ module Cmd
 
       def profile
         context.profile
+      end
+
+      def set_name
+        "#{ params[:title] } - #{ Date.today.strftime('%d.%m.%Y') }"
       end
     end
   end

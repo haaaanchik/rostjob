@@ -1,11 +1,14 @@
+ruby:
+  is_order_template = model.is_a?(OrderTemplate)
+
 .main_patternRequest
   section.pattern
     header
       .pattern_back
-        = link_to edit_profile_production_site_order_template_path(@production_site) do
-          i.fa.fa-angle-left.fa-2x
+        = link_to model.back_url_from_second_step(@production_site) do
+          = image_tag asset_path('svg/thin_arrow_left.svg'), id: 'btn-prev'
           span Назад
-      p Новый шаблон к Заявке
+      p = title
     .pattern_body
       header
         | Производственная площадка: #{@production_site.title}
@@ -20,11 +23,11 @@
         .pattern_body_steps_nav_step
           |  3
       .pattern_body_steps_form
-        = form_with model: [:profile, @order_template],
-                url: profile_production_site_order_template_path(@production_site, @order_template),
+        = form_with model: [:profile, model],
+                url: url,
                 id: 'order_template_form' do |f|
           = f.hidden_field :position_id
-          = hidden_field_tag :template_creation_step, 2
+          = hidden_field_tag :creation_step, 2
           = hidden_field_tag :commit, 'далее'
           .pattern_body_steps_form_step.show
             .pattern_body_steps_form_step_input
@@ -49,4 +52,9 @@
               = f.button do
                 p
                   | Далее
-                i.fa.fa-angle-right.fa-2x
+                = image_tag asset_path('svg/thin_arrow_right.svg'), id: 'btn-next'
+
+    - if is_order_template
+      = link_to 'Закрыть', profile_production_site_order_template_path(@production_site, model),
+              data: {method: :delete},
+              class: 'pattern_close add_ancete_close'

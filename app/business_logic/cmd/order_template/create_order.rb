@@ -8,14 +8,14 @@ module Cmd
         customer_total = order_template.customer_price
         contractor_total = order_template.contractor_price
         attributes = order_template.attributes
-        order_attributes = attributes.merge('id' => nil, 'number_of_employees' => number_of_employees,
-                                            'customer_total' => customer_total, 'contractor_total' => contractor_total)
-                                     .except('name', 'created_at', 'updated_at')
+        order_attributes = attributes.merge('customer_total' => customer_total, 'contractor_total' => contractor_total)
+                                     .except('id', 'name', 'created_at', 'updated_at', 'template_saved')
         result = Cmd::Order::Create.call(profile: profile, params: order_attributes, position: profession)
         result.order.document = order_template.document
         result.order.save
         context.order = result.order
         context.fail! unless result.success?
+        order_template.destroy unless order_template.template_saved
       end
 
       private
@@ -26,14 +26,6 @@ module Cmd
 
       def profile
         order_template.profile
-      end
-
-      def number_of_employees
-        if context.number_of_employees && !context.number_of_employees.empty?
-          context.number_of_employees.to_i
-        else
-          order_template.number_of_employees
-        end
       end
     end
   end

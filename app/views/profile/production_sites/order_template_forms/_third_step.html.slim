@@ -2,10 +2,10 @@
   section.pattern
     header
       .pattern_back
-        = link_to description_info_profile_production_site_order_template_path(@production_site) do
-          i.fa.fa-angle-left.fa-2x
+        = link_to model.back_url_from_third_step(@production_site) do
+          = image_tag asset_path('svg/thin_arrow_left.svg'), id: 'btn-prev'
           span Назад
-      p Новый шаблон к Заявке
+      p = title
     .pattern_body
       header
         | Производственная площадка: #{@production_site.title}
@@ -21,11 +21,13 @@
         .pattern_body_steps_nav_step.check
           |	3
 
-      .pattern_body_steps_form
-        = form_with model: [:profile, @order_template],
-                url: profile_production_site_order_template_path(@production_site, @order_template),
+      .pattern_body_steps_form data-production-site-id=@production_site.id
+        = form_with model: [:profile, model],
+                url: url,
                 id: 'order_template_form' do |f|
-          = hidden_field_tag :template_creation_step, 3
+          = hidden_field_tag :creation_step, 3
+          - if is_order_template
+            = f.hidden_field :template_saved
 
           .pattern_body_steps_form_step.show
             .pattern_body_steps_form_step_input.textArea
@@ -44,14 +46,22 @@
 
             .pattern_body_steps_form_step_input.add_ancete
               p Вы можете добавить свою анкету для соискателей
-              a href="#" id="add_ancete" Загрузите анкету
+              #add_ancete Загрузите анкету
 
-            .pattern_body_steps_form_step_input.save_as_template
-              p Сохранить как шаблон
-              = f.submit 'Нажмите, чтобы сохранить как шаблон',  id: 'save_as_template'
+            - if is_order_template
+              .pattern_body_steps_form_step_input.save_as_template
+                p Сохранить как шаблон
+                #save_as_template Нажмите, чтобы сохранить как шаблон
+                = text_field_tag :template_name,
+                        f.object.name,
+                        class: 'form-control order-template__name ml-auto d-none',
+                        data: { id: f.object.id }
 
             footer.pattern_body_steps_form_step_next
               = f.button id: 'send' do
-                | Опубликовать
+                | #{ button_text }
 
-    a.pattern_close.add_ancete_close href="#add_ancete" Закрыть
+    - if is_order_template
+      = link_to 'Закрыть', profile_production_site_order_template_path(@production_site, model),
+              data: {method: :delete},
+              class: 'pattern_close add_ancete_close'
