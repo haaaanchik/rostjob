@@ -167,7 +167,7 @@ class Order < ApplicationRecord
   end
 
   def without_inbox_candidate_count
-    proposal_employees.where.not('proposal_employees.state': ['inbox', 'paid']).count
+    proposal_employees.count_without_paid_inbox_revoke
   end
 
   def to_close?
