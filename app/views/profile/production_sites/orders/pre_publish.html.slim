@@ -26,7 +26,7 @@
         .row.m-0.p-0.pr-1.pl-1.pb-1
           .col-md-9.pr-0.pl-0
             .d-flex.justify-content-end
-              - if !order.can_be_paid?
+              - if order.replenish_balance?
                 .text-right.z-depth-1.rounded.mb-0.position-relative.red
                   p.white-text.m-1.h4
                     b

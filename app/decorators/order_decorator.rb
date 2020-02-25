@@ -49,15 +49,20 @@ class OrderDecorator < ObjDecorator
     number_additional_employees.to_i * customer_price
   end
 
+  def replenish_balance?
+    return can_be_paid? if number_additional_employees.nil?
+    employees_can_be_paid?
+  end
+
   def link_button
     classes = 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
     case
-    when employees_can_be_paid? && !number_additional_employees.nil?
+    when employees_can_be_paid?
       h.content_tag(:a,
                     href: h.add_additional_employees_profile_production_site_order_path(production_site, object),
                     class: classes,
                     data: { method: :put }) { 'Оплатить' }
-    when !employees_can_be_paid? || !can_be_paid?
+    when !replenish_balance?
       h.content_tag(:a,
                     href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
                     class: classes) { 'Пополнить баланс' }
