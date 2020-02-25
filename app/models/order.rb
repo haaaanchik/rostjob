@@ -93,6 +93,11 @@ class Order < ApplicationRecord
     balance.amount >= customer_total
   end
 
+  def employees_can_be_paid?
+    return false if number_additional_employees.nil?
+    balance.amount >= (number_additional_employees * customer_price)
+  end
+
   def calculate_total
     customer_price * number_of_employees
   end

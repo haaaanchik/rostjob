@@ -52,15 +52,15 @@ class OrderDecorator < ObjDecorator
   def link_button
     classes = 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
     case
-    when !can_be_paid?
-      h.content_tag(:a,
-                    href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
-                    class: classes) { 'Пополнить баланс' }
-    when !number_additional_employees.nil?
+    when employees_can_be_paid? && !number_additional_employees.nil?
       h.content_tag(:a,
                     href: h.add_additional_employees_profile_production_site_order_path(production_site, object),
                     class: classes,
                     data: { method: :put }) { 'Оплатить' }
+    when !employees_can_be_paid? || !can_be_paid?
+      h.content_tag(:a,
+                    href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
+                    class: classes) { 'Пополнить баланс' }
     else
       h.content_tag(:button, id: 'order_publish',
                     class: classes) { 'Опубликовать заявку' }
