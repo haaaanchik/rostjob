@@ -25,5 +25,6 @@ module ProposalEmployeeRepository
                                                                                    proposal_employees.payment_date < ? and
                                                                                    proposal_employees.payment_date > ? ',
                                                                                   'paid', profile_id, current_date, prev_date) }
+    scope :count_without_paid_inbox_revoke, -> { where.not(state: ['inbox', 'paid', 'revoked']).count }
   end
 end

@@ -133,6 +133,11 @@ class ProposalEmployeeDecorator < ObjDecorator
                   id: 'get-recruter'){} if attr[:text].present?
   end
 
+  def display_date_to_card
+    return format_date(interview_date) if ['inbox', 'interview'].include? state
+    format_date(interview_date)
+  end
+
   def interview_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end
@@ -184,5 +189,9 @@ class ProposalEmployeeDecorator < ObjDecorator
       text = 'Назначить'
     end
     { name: name, text: text }
+  end
+
+  def format_date(date)
+    date.strftime('%d.%m.%Y')
   end
 end
