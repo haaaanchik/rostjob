@@ -1,53 +1,52 @@
 #main_personalAccount
+  section.personalAccount
+    header Лицевой счет
 
-    section.personalAccount
-        header Лицевой счет
+    .personalAccount_balance
+      p
+        | Баланс:
+        span #{ @current_profile.balance.amount } руб.
 
-        .personalAccount_balance
-           p
-             | Баланс:
-             span 2450 руб.
+    .personalAccount_operations
+      button.btn-open#operations
+        span Операции
+        i.fa.fa-angle-right.fa-rotate-90.fa-2x
 
-        .personalAccount_operations
-           button class="btn-open" id="operations"
-             span Операции
-             i class="fa fa-angle-right fa-rotate-90 fa-2x"
+  section.personalAccount_open.close
+    .personalAccount_open_table
+      table
+        thead
+          tr
+            th Дата
+            th Описание операции
+            th Приход
+            th Расход
 
-    section.personalAccount_open.close
-        .personalAccount_open_table
-            table
-                thead
-                    tr
-                      th Дата
-                      th Описание операции
-                      th Приход
-                      th Расход
+        tbody
+          = render @current_profile.balance.bill_transactions.order(id: :desc).limit(10)
 
-                tbody
-                    = render @current_profile.balance.bill_transactions.order(id: :desc).first(10)
+  section.allAccounts
+    header Все счета
 
-    section.allAccounts
-        header Все счета
+    .allAccounts_button
+      button.btn-open
+        span Подробнее
+        i.fa.fa-angle-right.fa-rotate-90.fa-2x
 
-        .allAccounts_button
-            button class="btn-open"
-              span Подробнее
-              i class="fa fa-angle-right fa-rotate-90 fa-2x"
+  section.allAccounts_open.close
+    .allAccounts_open_table
+      table
+        thead
+          tr
+            th Номер
+            th Дата
+            th Баланс
+            th Статус
+            th Действия
 
-    section.allAccounts_open.close
-        .allAccounts_open_table
-            table
-                thead
-                    tr
-                      th Номер
-                      th Дата
-                      th Баланс
-                      th Статус
-                      th Действия
+        tbody
+          = render @invoices.persisted
 
-                tbody
-                    = render @invoices.persisted
-
-    section.replenishAccount
-        header Пополнить счет
-        = render partial: 'new'
+  section.replenishAccount
+    header Пополнить счет
+    = render partial: 'form'

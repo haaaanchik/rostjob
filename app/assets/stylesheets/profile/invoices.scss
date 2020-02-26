@@ -404,7 +404,7 @@
         }
 
         &_input{
-            margin-bottom: 5px;
+            margin-bottom: 20px;
             label{
                 font-family: $primaryFont;
                 font-weight: 400;
@@ -412,19 +412,20 @@
                 color: $primaryColor;
             }
             input[type="text"]{
-                height: 20px;
-                width: 108px;
-                font-family: $primaryFont;
-                font-weight: 400;
-                font-size: 14px;
-                color: $secondaryColorDark;
-                border: none;
-                border-bottom: 1px solid $secondaryColorDark;
-                transition-duration: 0.5s;
-                &:focus{
-                    color: $primaryColor;
-                    border-bottom: 1px solid $primaryColor;
-                }
+              display: inline-block;
+              height: 20px;
+              width: 108px;
+              font-family: $primaryFont;
+              font-weight: 400;
+              font-size: 14px;
+              color: $secondaryColorDark;
+              border: none;
+              border-bottom: 1px solid $secondaryColorDark;
+              transition-duration: 0.5s;
+              &:focus{
+                color: $primaryColor;
+                border-bottom: 1px solid $primaryColor;
+              }
             }
         }
         @media(max-width: 900px){

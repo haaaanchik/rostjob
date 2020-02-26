@@ -70,14 +70,3 @@ function checkAll() {
     }
 
 }
-
-/*            invoices                              */
-
-$(".personalAccount_operations button").click(function(){
-    document.querySelector('.personalAccount_open').classList.toggle('close');
-});
-
-$(".allAccounts_button button").click(function(){
-    document.querySelector('.allAccounts_open').classList.toggle('close');
-});
-
