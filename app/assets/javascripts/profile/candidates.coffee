@@ -5,6 +5,7 @@ class Candidates
   @bind: ->
     $('.candidate-comment').on 'keyup', @searchEnterComment
     $('.clickable-candidate').on 'click', @openCandidate
+    $('.js-filters').on 'click', @openFilters
 
   @searchEnterComment: (e) ->
     e.preventDefault()
@@ -12,6 +13,9 @@ class Candidates
 
   @openCandidate: ->
     window.location = $(this).data('href')
+
+  @openFilters: ->
+    $('.js-filters-dropdown').toggleClass('filters-show')
 
 $(document).on 'turbolinks:load', ->
   Candidates.init()

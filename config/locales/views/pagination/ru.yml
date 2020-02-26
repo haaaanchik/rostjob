@@ -3,8 +3,8 @@ ru:
     pagination:
       first: '<'
       last: '>'
-      previous: '<<'
-      next: '>>'
+      previous: Назад
+      next: Вперед
       truncate: "&hellip;"
   helpers:
     page_entries_info:

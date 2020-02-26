@@ -71,20 +71,6 @@ function checkAll() {
 
 }
 
-// profile candidates
-
-let filters_btn = document.querySelector('.js-filters');
-
-if(filters_btn){
-    filters_btn.addEventListener('click', openFilters);
-}
-
-let filters_list = document.querySelector('.js-filters-dropdown');
-
-function openFilters() {
-    filters_list.classList.toggle('filters-show');
-}
-
 /*            invoices                              */
 
 $(".personalAccount_operations button").click(function(){

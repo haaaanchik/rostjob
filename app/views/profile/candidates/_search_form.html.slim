@@ -1,58 +1,51 @@
 - val =  params[:q] ? params[:q][:candidate_fields_cont] : nil
 - filter = params[:q] ? params[:q][:state_in] : %w[]
 
-= search_form_for @q, url: profile_candidates_path, class: 'mt-5 d-flex flex-column align-items-center' do |f|
-  = f.search_field :candidate_fields_cont, placeholder: 'Поиск анкет', class: 'form-control w-100', value: val
-  button class='btn my-2 btn-primary add-card waves-effect waves-light' type='submit'
-    | Применить
-  p.h4.align-self-start.filters__title
-    | Фильтры
-  
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { class: 'form-check-input', id: 'candidate_filter_inbox' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_inbox' do
-      p.rounded.yellow.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-1
-        span.mr-2.profession В очереди
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'interview', filter&.include?('interview'), { class: 'form-check-input', id: 'candidate_filter_interview' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_interview' do
-      p.rounded.orange.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-1
-        span.mr-2.profession Собеседование
-  .form-check.form-check-inline.my-2.d-flex.align-items-center
-    = check_box_tag 'q[state_in][]', 'hired', filter&.include?('hired'), { class: 'form-check-input', id: 'candidate_filter_hired' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_hired' do
-      p.rounded.green.m-0.filters-elem.w-100.d-flex.align-items-center
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession Нанят Принят
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'disputed', filter&.include?('disputed'), { class: 'form-check-input', id: 'candidate_filter_disputed' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_disputed' do
-      p.rounded.red.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession Спор
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { class: 'form-check-input', id: 'candidate_filter_paid' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_paid' do
-      p.rounded.grey.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession Оплачен
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'reserved', filter&.include?('reserved'), { class: 'form-check-input', id: 'candidate_filter_reserved' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_reserved' do
-      p.rounded.blue.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession В резерве
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'transfer', filter&.include?('transfer'), { class: 'form-check-input', id: 'candidate_filter_transfer' }
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_transfer' do
-      p.rounded.default-color.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession Перенос
-  .form-check.form-check-inline.my-2
-    = check_box_tag 'q[state_in][]', 'approved', filter&.include?('approved'), {class: 'form-check-input', id: 'candidate_filter_approved'}
-    = label :state, nil, class: 'form-check-label d-flex align-items-center w-100', for: 'candidate_filter_approved' do
-      p.rounded.yellow.m-0.filters-elem.w-100
-        i.fas.fa-bookmark.ml-2.mr-2
-        span.mr-2.profession Ждет акта
+= search_form_for @q, url: profile_candidates_path do |f|
+  .filters-dropdown.js-filters-dropdown
+    p
+      = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { id: 'candidate_filter_inbox' }
+      i.fa.fa-bookmark.yellow-text
+      = label :state, nil, for: 'candidate_filter_inbox' do
+        | В очереди
+    p
+      = check_box_tag 'q[state_in][]', 'interview', filter&.include?('interview'), { id: 'candidate_filter_interview' }
+      i.fa.fa-bookmark.orange-text
+      = label :state, nil, for: 'candidate_filter_interview' do
+        | Собеседование
+
+    p
+      = check_box_tag 'q[state_in][]', 'hired', filter&.include?('hired'), { id: 'candidate_filter_hired' }
+      i.fa.fa-bookmark.green-text
+      = label :state, nil, for: 'candidate_filter_hired' do
+        | Нанят
+
+    p
+      = check_box_tag 'q[state_in][]', 'disputed', filter&.include?('disputed'), { id: 'candidate_filter_disputed' }
+      i.fa.fa-bookmark.red-text
+      = label :state, nil, for: 'candidate_filter_disputed' do
+        | Спор
+
+    p
+      = check_box_tag 'q[state_in][]', 'paid', filter&.include?('paid'), { id: 'candidate_filter_paid' }
+      i.fa.fa-bookmark.grey-text
+      = label :state, nil, for: 'candidate_filter_paid' do
+        | Оплачен
+
+    p
+      = check_box_tag 'q[state_in][]', 'reserved', filter&.include?('reserved'), { id: 'candidate_filter_reserved' }
+      i.fa.fa-bookmark.blue-text
+      = label :state, nil, for: 'candidate_filter_reserved' do
+        | В резерве
+
+    p
+      = check_box_tag 'q[state_in][]', 'transfer', filter&.include?('transfer'), { id: 'candidate_filter_transfer' }
+      i.fa.fa-bookmark.default-color-text
+      = label :state, nil, for: 'candidate_filter_transfer' do
+        | Перенос
+
+    p
+      = check_box_tag 'q[state_in][]', 'approved', filter&.include?('approved'), { id: 'candidate_filter_approved' }
+      i.fa.fa-bookmark.yellow-text
+      = label :state, nil, for: 'candidate_filter_approved' do
+        | Ждет акта

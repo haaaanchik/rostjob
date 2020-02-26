@@ -138,6 +138,11 @@ class ProposalEmployeeDecorator < ObjDecorator
     format_date(interview_date)
   end
 
+  def display_candidate_date
+    date =  hiring_date.present? ? hiring_date : interview_date
+    date.strftime('%d.%m.%Y')
+  end
+
   def interview_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end

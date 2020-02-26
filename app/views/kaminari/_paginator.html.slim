@@ -8,11 +8,11 @@
 
 == paginator.render do
   nav aria-label="pagination"
-    ul.pagination.pagination-circle.pg-blue.mb-0.mt-2#personal_position
-      li.page-item
-        == first_page_tag unless current_page.first?
+    ul.pagination.pagination-circle.pg-blue.mb-0.mt-2.justify-content-center
       li.page-item
         == prev_page_tag unless current_page.first?
+      li.page-item
+        == first_page_tag unless current_page.first?
       - each_page do |page|
         li.page-item class="#{'active' if page.current?}"
           - if page.display_tag?
@@ -20,6 +20,6 @@
           - elsif !page.was_truncated?
             == gap_tag
       li.page-item
-        == next_page_tag unless current_page.last?
-      li.page-item
         == last_page_tag unless current_page.last?
+      li.page-item
+        == next_page_tag unless current_page.last?
