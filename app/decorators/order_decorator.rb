@@ -44,6 +44,14 @@ class OrderDecorator < ObjDecorator
                       .includes(:employee_cv)
   end
 
+  def fix_display_order_disputed
+    return unless candidates.disputed.present?
+    h.content_tag(:a,
+                  href: h.profile_tickets_path,
+                  class:'red-text') {" + #{ candidates.disputed.count} спор(ов)"}
+
+  end
+
   def total_price
     return customer_total if number_additional_employees.nil?
     number_additional_employees.to_i * customer_price

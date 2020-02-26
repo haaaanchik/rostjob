@@ -20,11 +20,10 @@
             i.fa.fa-bookmark style="color: #ffd800"
             |  В очереди
 
-        p.peoples-left ="Осталось #{@order.number_free_places} человек"
-        p
-          = link_to profile_tickets_path, class: 'red-text' do
-            = " + #{@order.candidates.disputed.count}"
-            span.ml-2 спор(ов)
+        p.peoples-left
+          | Осталось #{@order.number_free_places} человек
+          br
+          = @order.fix_display_order_disputed
         p.add-personal data-toggle="modal" data-target="#addNewQuantityEmployeeModal" + Добавить персонал
 
         .column__body
