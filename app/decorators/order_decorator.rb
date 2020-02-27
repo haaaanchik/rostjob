@@ -63,21 +63,36 @@ class OrderDecorator < ObjDecorator
   end
 
   def link_button
-    classes = 'btn button-hr btn-rounded waves-effect w-100 text-center active m-0 mb-4'
     case
     when employees_can_be_paid?
       h.content_tag(:a,
                     href: h.add_additional_employees_profile_production_site_order_path(production_site, object),
-                    class: classes,
+                    class: 'public',
                     data: { method: :put }) { 'Оплатить' }
     when !replenish_balance?
       h.content_tag(:a,
                     href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
-                    class: classes) { 'Пополнить баланс' }
+                    class: 'public') { 'Пополнить баланс' }
     else
-      h.content_tag(:button, id: 'order_publish',
-                    class: classes) { 'Опубликовать заявку' }
+      h.content_tag(:span, id: 'order_publish',
+                    class: 'public') { 'Опубликовать' }
     end
+  end
+
+  def link_cancel_publish(production_site)
+    return unless number_additional_employees.nil?
+    h.content_tag(:a,
+                  href: h.cancel_profile_production_site_order_path(production_site, object),
+                  class: 'cancel',
+                  data: { confirm: 'Вы действительно хотите отменить публикацию? заявка будет удаленаю полностью.',
+                          method: :put,
+                          remote: true }) { 'Отменить' }
+  end
+
+  def publish_title
+    title_text = !replenish_balance? ? 'Не достаточно средств' : 'Публикация заявки'
+    klass =  !replenish_balance? ? 'page-title red-text' : 'page-title'
+    h.content_tag(:h1, class: klass) { title_text }
   end
 
   def back_url_from_second_step(production_site)

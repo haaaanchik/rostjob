@@ -148,6 +148,10 @@ class Order < ApplicationRecord
     profile.balance
   end
 
+  def balance_amount
+    (balance.amount - customer_price).to_i
+  end
+
   def proposal_by_profile_id(profile_id)
     Proposal.find_by(order_id: id, profile_id: profile_id)
   end

@@ -266,7 +266,7 @@
 
 #request-publishing {
   width: 100%;
-  height: 100%;
+  height: auto;
   background-color: #f2f2f2;
   padding: 18px 0 33px 0;
   font-family: "Open sans", sans-serif;
@@ -275,7 +275,7 @@
 #request-publishing .request-block {
   width: 87.247%;
   max-width: 1100px;
-  height: 100%;
+  height: max-content;
   max-height: 662px;
   background-color: #fff;
   margin: 0 auto;
@@ -464,4 +464,10 @@
 
 #request-publishing .request-block .buttons .public:hover, #request-publishing .request-block .buttons .cancel:hover {
   cursor: pointer;
+}
+
+#request-publishing #number-of-people {
+  border: none;
+  width: 30%;
+  text-align: center;
 }

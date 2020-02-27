@@ -1,33 +1,54 @@
-$(function() {
-    let minus = document.getElementById('minus');
-    let plus = document.getElementById('plus');
-    let number = document.getElementById('number-of-people');
-    let sum = document.getElementById('sum-to-pay');
-    let price = 12000;
+window.addEventListener('turbolinks:load', function() {
+    let order = new PrePublish();
 
-    if(minus && plus){
-        minus.addEventListener('click', reduce);
-        plus.addEventListener('click', increase);
+    if(order.minus && order.plus){
+        order.minus.addEventListener('click', function(){ order.reduce() });
+        order.plus.addEventListener('click', function(){ order.increase() });
+    }
+});
+
+class PrePublish {
+    constructor() {
+        this.minus = document.getElementById('minus');
+        this.plus = document.getElementById('plus');
+        this.number = document.getElementById('number-of-people');
+        this.sum = document.getElementById('sum-to-pay');
+        this.balance = document.getElementById('balance');
+        this.price = document.getElementById('order_number_of_employees');
+        this.totalSum = 0;
     }
 
-    function getNumber(){
-        return number.textContent;
+    getNumber() {
+        return this.number.textContent;
     }
 
-    function reduce() {
-        let quantity = getNumber();
+    reduce() {
+        let quantity = this.getNumber();
         if(quantity > 1){
             quantity--;
-            number.textContent = quantity;
-            sum.textContent = (quantity * price) + ' руб.';
+            this.number.textContent = quantity;
+            this.totalSum = (quantity * this.price.dataset.customerPrice);
+            this.sum.textContent = this.totalSum + ' руб.';
+            this.setNumber();
+            this.setBalanceAmount();
         }
     }
 
-    function increase() {
-        let quantity = getNumber();
+    increase() {
+        let quantity = this.getNumber();
         quantity++;
-        number.textContent = quantity;
-        sum.textContent = (quantity * price) + ' руб.';
+        this.number.textContent = quantity;
+        this.totalSum = (quantity * this.price.dataset.customerPrice);
+        this.sum.textContent = this.totalSum + ' руб.';
+        this.setNumber();
+        this.setBalanceAmount();
     }
 
-});
+    setNumber() {
+        document.getElementById('order_number_of_employees').value = this.number.textContent;
+    }
+
+    setBalanceAmount() {
+        this.balance.textContent = (this.balance.dataset.balanceAmount - this.totalSum) + ' руб.';
+    }
+}

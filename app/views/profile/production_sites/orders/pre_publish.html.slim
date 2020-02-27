@@ -1,172 +1,46 @@
-/.col-md-10.order-md-2.order-1.offset-md-1
-  .card.testimonial-card.w-100.m-2.mt-4.mb-4
-    .card-up.bg-rostjob.lighten-1.card-up-hr
-      .container
-        .row.m-card-up
-          .p-0.d-flex.align-self-stretch.w-100
-            .ava-m.d-none.d-lg-block
-            .w-100
-              table[width="100%" height="90px"]
-                tbody
-                  tr
-                    td.align-bottom
-                      .d-none.d-md-block
-                        h4.card-title.white-text Публикация заявки №#{order.id}
-
-                    td.align-bottom.text-right[width="50%"]
-                      = link_to cancel_profile_production_site_order_path(@production_site, order), method: :put, class: 'btn-floating btn-sm red', remote: true do
-                        i.fas.fa-times
-                      p.card-title.white-text
-                        | Отменить публикацию
-    .d-flex.align-self-stretch
-      div
-        .avatar.ml-1.white.mr-0.d-none.d-lg-block
-          = image_tag('/img/no-avatar.jpg', class: 'rounded-circle', alt: 'avatar')
-      .container-fluid.p-0.d-flex.flex-column.justify-content-between.align-items-stretch.mt-1.ml-1
-        .row.m-0.p-0.pr-1.pl-1.pb-1
-          .col-md-9.pr-0.pl-0
-            .d-flex.justify-content-end
-              - if order.replenish_balance?
-                .text-right.z-depth-1.rounded.mb-0.position-relative.red
-                  p.white-text.m-1.h4
-                    b
-                      | Не достаточно средств
-              - else
-                .text-right.z-depth-1.rounded.mb-0.position-relative.blue
-                  p.white-text.m-1.h4
-                    b
-                      | Публикация заявки
-            .price.w-100.border.rounded.mb-0.p-1
-              p.h4.text-center.mt-1.mb-0
-                i.fas.fa-hammer.mr-1
-                strong #{order.title} #{order.skill}
-              p.text-center.m-0
-                i.fas.fa-money-bill-alt.w-2.mr-2
-                i.fas.fa-ruble-sign.mr-2
-                strong #{order.salary}
-              p.m-0
-                i.fas.fa-map-marker.w-2
-                strong.ml-2 #{order.city}
-              .d-none.d-md-block
-                p.h6.m-0
-                  i.fas.fa-bed.w-2.mr-2
-                  == order.other_info['terms']
-                hr.h6.m-0
-                p.h6.m-0
-                  i.fas.fa-comment-alt.w-2.mr-2
-                  |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
-                  br
-                  - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-                    == order.other_info['remark']
-          .col-md-3.border.rounded.m-0.mt-3.p-1.d-flex.flex-column.justify-content-between.pb-2
-            div
-              - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
-                                  order.contact_person['phone'] && !order.contact_person['phone'].empty?
-                .text-center.border.rounded.mb-3
-                  p.p-0.m-0.font-weight-bold
-                    |  Контактное лицо:
-                  p.font-italic.m-1
-                    = order.contact_person['name']
-                  p.font-italic.m-1
-                    = order.contact_person['phone']
-            - if order.document.present?
-              div.text-center
-                div
-                  .d-flex.justify-content-center
-                    = link_to order.document.url, class: 'btn-floating btn-sm blue' do
-                      i.fas.fa-file-download
-                  p.card-title.blue-text.text-center
-                    |Скачать
-                    br
-                    |анкету
-            div.p-0
-              hr
-              - if order.number_additional_employees.nil?
-                = render partial: 'number_of_employees',
-                                  locals: {production_site: @production_site, order: order, form_id: 'form_id'}
-              p.text-center Баланс: #{order.balance.amount}
-              p.h3.text-center К оплате:
-              p.h3.text-center#customer-total = order.total_price
-              = order.link_button
-
-javascript:
-  function ready() {
-    $('#order_publish').on('click', function (event) {
-      var $form = $(this).parent().find('form.edit_order');
-      $form.submit();
-    });
-  }
-
-  document.addEventListener('turbolinks:load', ready);
-
-
 #request-publishing
   .request-block
-    h1.page-title Публикация заявки
+    = order.publish_title
     .request-block-header
-      p ООО «Комбайновый завод Ростсельмаш»
-      span г. Ростов-на-Дону
+      p #{ @production_site.title }
+      span #{ @production_site.city }
     .request-block-container
       .request-content
-        = image_tag('/img/no-avatar.png', class: 'logo')
+        = image_tag order.profile.image_url, class: 'logo'
         .request-body
           p.subtitle
-            | Маляр по металлу (Автомаляр). 4-6 разряд от 60 000 р 200 р/ч
+            | #{ order.title }. #{order.skill} #{ order.salary }
           p.subtitle
-            | г. Набережные Челны
-          p.subtitle
-            | Обязанности:
-          span
-            | укладка,сортировка изделий на ленточном конвейере
-          p.subtitle
-            | Требования:
-          span
-            | работнику при себе иметь, постельное белье, одеяло, средства личной гигиены, кухонная утварь;
-            br/
-            | не допускаются работники с регистрацией в г.Набережные Челны;
-            br/
-            | отсутствие негативного опыта на КамаЗе;
-            br/
-            | смежная профессия приветствуется.
-          p.subtitle
-            | Условия:
-          span
-            | постоянно. 6/1 - 12 (Сменный);
-            br/
-            | своевременная выплата з/п (2 раза в месяц);
-            br/
-            | работа вахтовым методом 60/30;
-            br/
-            | жилье за счет Работодателя;
-            br/
-            | к сотрудникам готовым работать без межвахтового отпуска применяется дополнительная система лояльности. Компенсация проезда работникам в случае возвращения из межвахтового отпуска.
-          span.salary 2 000 руб / чел
+            | #{ order.city }
+          == order.other_info['terms']
+          span.salary #{ order.customer_price.to_i } руб / чел
       .sidebar
         .contact-person
           p.title
             | Контактное лицо:
           p.initials
-            | Ринат
+            | #{ order.contact_person['name'] }
           p.phone-number
-            | +7 (960) 802 56 28
-        .peoples-need
-          p.title Нужно людей:
-          .count
-            = image_tag('/img/minus.png', id: 'minus')
-            span#number-of-people 1
-            = image_tag('/img/plus.png', id: 'plus')
+            | #{ order.contact_person['phone'] }
+        - if order.number_additional_employees.nil?
+          = form_for order, url: publish_profile_production_site_order_path(@production_site), method: :put do |f|
+            = f.hidden_field :number_of_employees, data: { customer_price: order.customer_price.to_i }
+            .peoples-need
+              p.title Нужно людей:
+              .count
+                = image_tag('/img/minus.png', id: 'minus')
+                span#number-of-people 1
+                = image_tag('/img/plus.png', id: 'plus')
         .to-pay
           p.title
             | К оплате:
           span#sum-to-pay
-            | 12000 руб.
+            | #{ order.total_price.to_i } руб.
         .balance
           p.title
             | Ваш баланс:
-          span
-            | 55000 руб.
+          span#balance data-balance-amount=order.balance.amount
+            | #{ order.balance_amount } руб.
     .buttons
-      span.public Опубликовать
-      span.cancel Отменить
-
-
+      = order.link_button
+      = order.link_cancel_publish(@production_site)

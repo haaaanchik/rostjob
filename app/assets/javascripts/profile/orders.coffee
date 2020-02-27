@@ -2,6 +2,7 @@ class Orders
   @init: ->
     @tabsActive()
     @clickProposalEmployee()
+    @bind()
 
   @tabsActive: ->
     states = ['templates', 'pending_payments', 'on_moderation', 'published', 'finished']
@@ -15,6 +16,13 @@ class Orders
   @clickProposalEmployee: ->
     if $('#click_proposal_employee').length
       $('#click_proposal_employee')[0].click()
+
+  @bind: ->
+    $('#order_publish').on 'click', @publish
+
+  @publish: ->
+    $form = $(this).parent().prev().find('form.edit_order')
+    $form.submit()
 
 $(document).on 'turbolinks:load', ->
   Orders.init()
