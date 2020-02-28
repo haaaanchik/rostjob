@@ -1,3 +1,6 @@
+ruby:
+  unpaid_invoice= @invoices.created.present?
+
 #main_personalAccount
   section.personalAccount
     header Лицевой счет
@@ -47,6 +50,6 @@
         tbody
           = render @invoices.persisted
 
-  section.replenishAccount
+  section.replenishAccount data-unpaid-invoice=unpaid_invoice.to_s
     header Пополнить счет
     = render partial: 'form'
