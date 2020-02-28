@@ -1,4 +1,4 @@
-class SendEveryDaysNotifyMailJob < ApplicationJob
+class SendNotifyMailJob < ApplicationJob
   queue_as :mail
 
   def perform(args)

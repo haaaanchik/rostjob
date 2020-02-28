@@ -27,6 +27,7 @@
 #= require pre_publish
 #= require external/fullcalendar
 #= require external/fullcalendar/daygrid.min
+#= require lightbox
 #= require_tree .
 
 @scroll_to_bottom = (element) ->

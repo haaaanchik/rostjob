@@ -17,6 +17,8 @@ class ProposalEmployee < ApplicationRecord
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
   ransack_alias :pe_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
 
+  after_create :mail_inbox, if: -> { inbox? }
+
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
     state :interview
@@ -39,7 +41,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
-    event :to_inbox, after: [:to_open?, :mail_inbox] do
+    event :to_inbox, after: :to_open? do
       transitions from: %i[transfer interview reserved disputed], to: :inbox
     end
 

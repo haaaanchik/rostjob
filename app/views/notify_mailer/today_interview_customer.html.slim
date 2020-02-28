@@ -1,4 +1,24 @@
-| У вас сегодня запланировано интервью с:
-- @prop_emps.each do |emp|
-  p
-    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number} на позицию #{emp.order.title};"
+ruby:
+  interview_count_by_period = count_interview_by_days(@prop_emps)
+
+- if interview_count_by_period[:today_interviews] > 0
+  div style=('margin-bottom: 25px')
+    | Сегодня у Вас запланировано собеседование с:
+    br
+    ul
+      - @prop_emps.each do |emp|
+        - if emp.interview_date == DateTime.now.beginning_of_day
+          li
+            = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number};" 
+- if interview_count_by_period[:before_interviews] > 0
+  div
+    | Напоминаем что вы не отметили результат собеседования для:
+    br
+    ul
+      - @prop_emps.each do |emp|
+        - unless emp.interview_date == DateTime.now.beginning_of_day
+          li
+            = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number};" 
+
+| Если Вы не знаете как это сделать прочтите инструкцию.
+= link_to 'Инструкция по внесения результатов собеседования', page_url('manual_set_status_proposal_employee')

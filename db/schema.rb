@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_21_123438) do
+ActiveRecord::Schema.define(version: 2020_03_05_200339) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -599,6 +599,7 @@ ActiveRecord::Schema.define(version: 2020_02_21_123438) do
     t.datetime "password_changed_at"
     t.boolean "terms_of_service", default: false
     t.boolean "first_order_template_created", default: false
+    t.boolean "welcome", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -33,6 +33,7 @@
 @import "modal";
 @import "external/fullcalendar";
 @import "external/fullcalendar/daygrid";
+@import 'lightbox';
 
 @media (max-width: 1025px) {
   .stepper.colorful-timeline li {
@@ -291,4 +292,18 @@ header,
 }
 .custom-scroll::-webkit-scrollbar-thumb:active {
   background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+
+.lightbox {
+  display: flex;
+  flex-direction: column-reverse;
+
+  .lb-details {
+    display: none;
+  }
+
+  .lb-close {
+    position: relative;
+    left: 30px;
+  }
 }

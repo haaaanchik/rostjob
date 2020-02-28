@@ -59,7 +59,16 @@ class User < ApplicationRecord
   def update_without_curr_password(params)
     self.skip_validation_full_name = false
     result = update(params)
-    update_attribute(:password_changed_at, DateTime.now) if result
+    if result
+      update_attribute(:password_changed_at, DateTime.now)
+
+      if welcome == false
+        SendDirectMailJob.perform_now(user: self, method: 'welcome_message')
+        welcome = true
+        self.skip_reconfirmation!
+        self.save(validate: false)
+      end
+    end
     clean_up_passwords
     result
   end

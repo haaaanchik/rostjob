@@ -23,5 +23,8 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
       = image_tag asset_path('navbar/Rounded_Rectangle_blue.png'), class: 'number-of-messages-bg'
       span.number-of-messages = @opened_tickets_count
 
+    = link_to page_path('all_manuals') do
+      i.fas.fa-question
+
     = link_to logout_path, class: 'icon-link', method: :delete do
       = image_tag asset_path('navbar/exit.png')

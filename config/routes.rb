@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount Resque::Server.new, at: '/resque_web'
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
   # get 'login', to: 'sessions#new'
   # post 'login', to: 'sessions#create'
