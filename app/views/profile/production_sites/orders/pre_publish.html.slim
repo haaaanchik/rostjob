@@ -26,7 +26,7 @@
           = form_for order, url: publish_profile_production_site_order_path(@production_site), method: :put do |f|
             = f.hidden_field :number_of_employees, data: { customer_price: order.customer_price.to_i }
             .peoples-need
-              p.title Нужно людей:
+              p.title Количество персонала:
               .count
                 = image_tag('/img/minus.png', id: 'minus')
                 span#number-of-people 1
