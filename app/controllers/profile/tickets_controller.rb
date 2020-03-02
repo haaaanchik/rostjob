@@ -2,6 +2,8 @@ class Profile::TicketsController < ApplicationController
   include RolesHelper
 
   def index
+    @appeal = Appeal.new
+    @appeal.messages.build
     @paginated_tickets = tickets.includes(:user).page(params[:page])
   end
 

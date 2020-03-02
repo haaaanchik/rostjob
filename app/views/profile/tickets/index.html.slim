@@ -1,229 +1,38 @@
+ruby:
+  state_waiting = params[:q] ? params[:q][:state_waiting_fields_eq] : 'opened'
+
 #main_treatment
-			section class="treatment_search"
+  = render 'search_form', state_waiting_fields_eq: state_waiting
 
-				.treatment_search_input
-					input type="text" placeholder="Поиск обращений" id="search-input"
-					= image_tag('/img/new/search.png', class: 'search-img')
+  section.treatment_list
+    .treatment_list_new
+      button.btn-empty Новое обращение
 
-				.treatment_search_checkboxes
+    .treatment_list_tabs
+      = radio_button_tag 'q[state_waiting_fields_eq]', 'closed', state_waiting&.include?('closed'), id: 'closed_tickets'
+      = label :type, 'Закрытые', for: 'closed_tickets'
+      = radio_button_tag 'q[state_waiting_fields_eq]', 'opened', state_waiting&.include?('opened'), id: 'opened_tickets'
+      = label :type, 'Открытые', for: 'opened_tickets'
+      = radio_button_tag 'q[state_waiting_fields_eq]', profile_type, state_waiting&.include?(profile_type), { id: 'waiting_tickets' }
+        span.mr-2 В ожидании
+      = label :type, 'В ожидании', for: 'waiting_tickets'
 
-					.treatment_search_checkboxes_block
-						input type="checkbox" id="checkbox-treatment"
-						label for="checkbox-treatment" class="pseudoCheckbox"
-						  i class="fa fa-check"
+      #treatment-tab-table
+        table.table.bold
+          thead
+            tr
+              th №
+              th Тип
+              th Имя
+              th Дата
+              th Тема
+              th Статус
+          tbody
+            = render partial: 'ticket', collection: @paginated_tickets.decorate, as: :ticket
 
-						label for="checkbox-treatment" Обращения
+    .treatment_list_modal
+      .treatment-modal_back
 
-					.treatment_search_checkboxes_block
-						input type="checkbox" id="checkbox-disputes"
-						label for="checkbox-disputes" class="pseudoCheckbox"
-						  i class="fa fa-check"=
-
-						label for="checkbox-disputes" Споры
-
-
-
-
-			section class="treatment_list"
-
-				.treatment_list_new
-					button class="btn-empty" Новое обращение
-
-
-
-
-				.treatment_list_tabs
-					input type="radio" name="treatment-tabs" id="treatment-tab1" checked="true"
-					label for="treatment-tab1" Закрытые
-					input type="radio" name="treatment-tabs" id="treatment-tab2"
-					label for="treatment-tab2" Открытые
-					input type="radio" name="treatment-tabs" id="treatment-tab3"
-					label for="treatment-tab3" В ожидании
-
-					#treatment-tab1-table
-						table class="table bold"
-							thead
-								tr
-									th №
-									th Тип
-									th Имя
-									th Дата
-									th Тема
-									th Статус
-
-
-							tbody
-								tr
-									td 1
-									td Открытый
-									td Константин Сергеевич
-									td 09.01.2020
-									td Возврат средств
-									td На модерации
-
-								tr
-									td 2
-									td В ожидании
-									td Оксана Викторовна
-									td 11.01.2020
-									td Спор
-									td На рассмотрении
-
-								tr
-									td 3
-									td В ожидании
-									td Андрей Юрьевич
-									td 14.01.2020
-									td Спор
-									td На рассмотрении
-
-								tr
-									td 4
-									td Открытый
-									td Вячеслав Вениаминович
-									td 19.01.2020
-									td Спор
-									td На рассмотении
-								tr
-                                    td 4
-                                    td Открытый
-                                    td Вячеслав Вениаминович
-                                    td 19.01.2020
-                                    td Спор
-                                    td На рассмотении
-                                tr
-                                    td 4
-                                    td Открытый
-                                    td Вячеслав Вениаминович
-                                    td 19.01.2020
-                                    td Спор
-                                    td На рассмотении
-                                tr
-                                    td 4
-                                    td Открытый
-                                    td Вячеслав Вениаминович
-                                    td 19.01.2020
-                                    td Спор
-                                    td На рассмотении
-                                tr
-                                    td 4
-                                    td Открытый
-                                    td Вячеслав Вениаминович
-                                    td 19.01.2020
-                                    td Спор
-                                    td На рассмотении
-                                tr
-                                    td 4
-                                    td Открытый
-                                    td Вячеслав Вениаминович
-                                    td 19.01.2020
-                                    td Спор
-                                    td На рассмотении
-
-
-
-
-					#treatment-tab2-table
-						table class="table bold"
-							thead
-								tr
-									th №
-									th Тип
-									th Имя
-									th Дата
-									th Тема
-									th Статус
-
-							tbody
-								tr
-									td 1
-									td Открытый
-									td Константин Сергеевич
-									td 09.01.2020
-									td Возврат средств
-									td На модерации
-
-								tr
-									td 2
-									td В ожидании
-									td Оксана Викторовна
-									td 11.01.2020
-									td Спор
-									td На рассмотрении
-
-								tr
-									td 3
-									td В ожидании
-									td Андрей Юрьевич
-									td 14.01.2020
-									td Спор
-									td На рассмотрении
-
-
-
-					#treatment-tab3-table
-						table class="table bold"
-							thead
-								tr
-									th №
-									th Тип
-									th Имя
-									th Дата
-									th Тема
-									th Статус
-
-							tbody
-								tr
-									td 1
-									td Открытый
-									td Константин Сергеевич
-									td 09.01.2020
-									td Возврат средств
-									td На модерации
-
-								tr
-									td 2
-									td В ожидании
-									td Оксана Викторовна
-									td 11.01.2020
-									td Спор
-									td На рассмотрении
-
-
-				.treatment_list_modal
-                    .treatment-modal_back
-
-                    .treatment-modal_block
-                        .treatment-modal_block_wrapper
-                            button class="btn-close"
-                                span
-                                    hr
-                                    hr
-
-                            header Новое обращение
-
-                            .treatment-modal_block_wrapper_input
-                                label for="treatment-modal-theme" Тема
-                                input type="text" id="treatment-modal-theme" placeholder="Укажите тему обращения"
-
-                            .treatment-modal_block_wrapper_input
-                                label for="treatment-modal-text" Текст
-                                textarea placeholder="Напишите ваше обращение" id="treatment-modal-text"
-
-                            button class="btn" Отправить
-
-
-            section class="treatment_pagination"
-                    ul
-                        li Назад
-                        li 1
-                        li class="active" 2
-                        li 3
-                        li 4
-                        li 5
-                        li 6
-                        li 7
-                        li 8
-                        li Вперёд
-
-
+      .treatment-modal_block
+        = render 'profile/tickets/appeals/form'
+  = paginate @paginated_tickets

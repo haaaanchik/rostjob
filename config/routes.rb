@@ -226,7 +226,7 @@ Rails.application.routes.draw do
       end
     end
     namespace :tickets do
-      resources :appeals, only: %i[new create]
+      resources :appeals, only: %i[create]
       resources :incidents, only: %i[show new create]
     end
     resources :candidates, only: %i[index show] do
