@@ -37,7 +37,9 @@
         p
           - production_site.orders.published.each do |order|
             = link_to profile_production_site_order_path(production_site, order) do
-              p #{order.title} - #{order.number_of_employees}чел.
+              p
+                | #{order.title} -
+                i.fa.fa-users.ml-2.mr-2  #{order.number_free_places}
 
           - unless production_site.orders.published.present?
             p Отсутствуют опубликованные заявки.
