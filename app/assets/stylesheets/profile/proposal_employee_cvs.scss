@@ -21,12 +21,6 @@
       font-size: 0.9rem;
     }
   }
-  
-  #personal_position {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
 
   .form-check-inline {
     margin-right: 0;
@@ -70,10 +64,12 @@
     padding: 0;
   }
 
-  .filters{
+  .filters {
     display: flex;
     align-items: center;
     padding: 10px 0 10px 10px;
+    position: relative;
+    cursor: pointer;
   }
 
   .filters > p{
@@ -171,34 +167,6 @@
     width: calc(37.5% );
   }
 
-
-  .page-number{
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .page-number a{
-    color: #000000;
-    font-family: "Open Sans", sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    text-decoration: none;
-  }
-
-  .page-number a:first-child{
-    margin-right: 30px;
-  }
-
-  .page-number a:last-child{
-    margin-left: 30px;
-  }
-
-  .filters{
-    position: relative;
-  }
-
   .filters-dropdown{
     position: absolute;
     bottom: -100%;
@@ -214,9 +182,12 @@
     pointer-events: auto;
   }
 
-  .filters-dropdown p:hover{
-    color: blue;
-    cursor: pointer;
+  .filters-dropdown p, .filters-dropdown p label {
+    &:hover {
+      color: blue;
+    }
+
+    cursor: pointer !important;
   }
 
   .filters-show{
@@ -237,14 +208,6 @@
   .filters-dropdown > p i{
     margin-right: 5px;
     margin-left: 5px;
-  }
-
-  .page-number .active-page{
-    color: blue;
-  }
-
-  .page-number a{
-    margin: 0 5px;
   }
 
   .info{

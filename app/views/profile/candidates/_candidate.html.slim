@@ -3,7 +3,8 @@
     span
       i.fa.fa-bookmark class="#{ candidate.status_background_class + '-text' }"
       | #{ t("proposal_employee.state.#{candidate.state}") } <br>
-      span class="date" = candidate.created_at.strftime('%d.%m.%Y')
+      span.date
+        | c #{ candidate.display_candidate_date }
 
   .info
     a href="#"
@@ -14,4 +15,4 @@
 
 
   .info
-    span #{candidate.place_of_work}
+    span #{ candidate.order.production_site.title }

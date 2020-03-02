@@ -4,7 +4,7 @@ class ProductionSites
     @bind()
 
   @bind: ->
-    $('.search-production-site').on 'keyup', @searchProductinSite
+    $('.search-production-site, .search_candidates').on 'keyup', @searchProductinSite
     $('.button-collapse').on 'click', @mobileMenuSlideToggle
 
   @draggableInit: ->

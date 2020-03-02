@@ -32,7 +32,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     if result.success?
       redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     else
-      render json: { validate: true, data: errors_data(context.order) }, status: 422
+      render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
   end
 
