@@ -113,7 +113,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   end
 
   def order
-    @order ||= orders.find(params[:id])
+    @order ||= orders.find(params[:id]).decorate
   end
 
   def fetch_waiting_pay_orders
