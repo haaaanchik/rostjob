@@ -23,8 +23,9 @@ class Order
           number_of_employees: 1,
           other_info: {
             remark: nil,
-            terms: "<b>Обязанности:</b>\n<ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Требования:</strong>\n
-<ul>\n<li></li>\n<li></li>\n</ul>\n<strong>Условия:</strong>\n<ul>\n<li></li><li></li>\n</ul>",
+            terms: '<p class"subtitle">Обязанности:</p><span><ul><li></li><li></li></ul></span>
+<p class"subtitle">Требования:</p><span><ul><li></li><li></li></ul></span>
+<p class"subtitle">Условия:</p><span><ul><li></li><li></li></ul></span>',
           },
           contact_person: {
             name: nil,
