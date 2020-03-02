@@ -46,7 +46,9 @@
 
             .pattern_body_steps_form_step_input.add_ancete
               p Вы можете добавить свою анкету для соискателей
-              #add_ancete Загрузите анкету
+              #add_ancete
+                span Загрузите анкету
+                = f.file_field :document
 
             - if is_order_template
               .pattern_body_steps_form_step_input.save_as_template

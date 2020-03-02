@@ -42,6 +42,27 @@ input::placeholder{
   @media(max-width: 600px){
     height: calc(100vh - 58px);
   }
+  #order_template_document{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 105px;
+    opacity: 0;
+    height: 20px;
+    margin-left: 18px;
+    cursor: pointer;
+  }
+  #order_template_document:hover{
+    font-size: 0;
+  }
+  #add_ancete:hover{
+    cursor: pointer;
+  }
+  #add_ancete{
+    span:hover{
+      cursor: pointer;
+    }
+  }
   .pattern{
     margin: 58px auto 0;
     padding: 20px;
@@ -413,6 +434,7 @@ input::placeholder{
 }
 
 #add_ancete {
+  position: relative;
   padding-left: 18px;
   text-decoration: underline;
   color: #1970ff;

@@ -1,4 +1,4 @@
-$(document).on('click', '.tmp-unavailable, #add_column, #info, .download-empl-cv, #add_ancete', (event) ->
+$(document).on('click', '.tmp-unavailable, #add_column, #info, .download-empl-cv', (event) ->
   event.preventDefault()
   toastr.info('Функционал временно недоступен')
 )
