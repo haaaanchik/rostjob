@@ -36,7 +36,7 @@
                 = image_tag('/img/new/copy.png')
                 span Копировать
 
-          .publish
+          .publish id="#{'active-content-tab' if params[:tab_state] == 'templates' }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling
@@ -58,7 +58,7 @@
       .order-list__body data-tab="pending_payments"
         .orders-list__header
           .activities
-          .publish
+          .publish id="#{'active-content-tab' if params[:tab_state] == 'pending_payments' }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling
@@ -91,7 +91,7 @@
       .order-list__body data-tab="on_moderation"
         .orders-list__header
           .activities
-          .publish
+          .publish id="#{'active-content-tab' if params[:tab_state] == 'on_moderation' }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling
@@ -125,7 +125,7 @@
       .order-list__body.show-tab data-tab="published"
         .orders-list__header
           .activities
-          .publish
+          .publish id="#{'active-content-tab' if params[:tab_state] == 'published' || params[:tab_state].nil? }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling
@@ -159,7 +159,7 @@
       .order-list__body data-tab="finished"
         .orders-list__header
           .activities
-          .publish
+          .publish id="#{'active-content-tab' if params[:tab_state] == 'finished' }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling

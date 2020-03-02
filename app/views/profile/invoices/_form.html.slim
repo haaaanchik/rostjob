@@ -1,4 +1,7 @@
-.replenishAccount_input
-  label for="replenishAccountSumm" Сумма
-  input type="text" id="replenishAccountSumm"
-button class="btn" Выставить счет
+= form_with model: [:profile, @invoice], url: profile_invoices_path, local: true do |f|
+  - errors = @invoice.errors.messages
+  .replenishAccount_input
+    = f.label :amount, 'Сумма', for:  'replenishAccountSumm'
+    = f.text_field :amount, id: 'replenishAccountSumm', class: "form-control #{'is-invalid' unless errors[:amount].empty?}"
+    .invalid-feedback #{errors[:amount].first}
+  = f.button 'Выставить счет', class: 'btn'
