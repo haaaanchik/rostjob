@@ -59,7 +59,7 @@ class EmployeeCv < ApplicationRecord
     # удалена
     state :deleted
 
-    event :to_sent, after: :mail_with_to_sent do
+    event :to_sent do
       transitions from: :ready, to: :sent
     end
 
