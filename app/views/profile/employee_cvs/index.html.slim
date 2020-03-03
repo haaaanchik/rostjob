@@ -57,7 +57,7 @@
           - next if favorite.completed? && pr_employee_cvs.empty?
           .moveable.card.card-primary.card-list data-order-id="#{favorite.id}"
             .card-header.bg-primary
-              h3.card-title.text-left.text-white.mb-0 №#{favorite.title_with_skill}
+              h3.card-title.text-left.text-white.mb-0 #{favorite.title_with_skill}
               p.salary.text-left.text-white = favorite.salary
               .number_of_people
                 span.number_of_people_span #{favorite.contractor_price} / чел
