@@ -24,7 +24,7 @@
             = link_to new_profile_employee_cv_path(order_id: order.id), class: 'btn my-2 btn-block btn-primary add-card waves-effect waves-light', remote: true do
               i.fas.fa-plus
               |Отправить анкету
-        
+
         - unless @current_profile.profile_type == 'customer'
           - unless @employee_cv_id
             - if !@current_profile.favorites.find_by(id: order.id)
@@ -36,7 +36,7 @@
     .col-8.zayavka-body__right-part
       p.text-left.mt-3.mb-0
         i.fas.fa-city
-        strong.ml-2 #{order.place_of_work}
+        strong.ml-2 #{order.production_site.title}
       p.h4.text-left.mt-2.mb-0
         i.fas.fa-hammer.mr-2
         strong #{order.title}. #{order.skill}
@@ -45,24 +45,10 @@
         i.fas.fa-ruble-sign.mr-2
         strong #{order.salary}
       p.my-2.text-left
-        i.fas.fa-map-marker.w-2 
-        strong.ml-2 #{order.city}, #{order.district}
-      p.my-2.text-left
-        i.fas.fa-passport.w-2.mr-2
-        strong #{order.experience}
-      p.my-2.text-left
-        i.far.fa-calendar-alt.w-2.mr-2
-        strong #{order.work_period}. #{order.schedule}.
+        i.fas.fa-map-marker.w-2
+        strong.ml-2 #{order.city} #{order.district}
       p.h6.my-2.text-left
-        i.fas.fa-clipboard-list.w-2.mr-2
-        - unless order.description.nil? || order.description.empty?
-          strong == order.description
-      p.my-2.text-left
-        i.fas.fa-plus.w-2.mr-2
-        strong #{order.other_info['related_profession']}
-      p.h6.my-2.text-left
-        i.fas.fa-bed.w-2.mr-2
-        strong.mr-2 Предлагаемые условия:
+        i.fas.bold.w-2.mr-2
         == order.other_info['terms']
         hr.h6.my-3.text-left
       p.text-left.age
