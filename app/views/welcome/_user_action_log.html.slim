@@ -1,5 +1,5 @@
 h3.title Последние события
-.events_list
+.events_list.custom-scroll
   - @user_action_log_records.each do |record|
     .events_list_event
       header #{record.time} #{record.date}

@@ -1,4 +1,6 @@
 class UserActionLog < ApplicationRecord
+  include UserActionLogRepository
+
   validates :receiver_ids, presence: true
   validates :subject_id, presence: true
   validates :subject_type, presence: true
