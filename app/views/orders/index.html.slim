@@ -1,6 +1,5 @@
 ruby: 
   iteration = 0
-  val = params[:q] ? params[:q][:all_fields_cont] : nil
 
 .grey.lighten-4.d-flex.w-100#order_page
   - if current_profile.customer?
@@ -51,230 +50,43 @@ ruby:
                         strong.text-dark Награда
       = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
   - else
-    .col.col-sm-12.col-md-7.col-lg-9
-      .conteiner#orders_block
+    #requests-page
+      .requests-page-container
         - @orders.group_by(&:customer_name).each do |customer_name, items|
           - production_sites = items.group_by{ |it| it.production_site.title }
 
-          .d-flex
-            = image_tag('/img/no-avatar.jpg', class: 'img-fluid mt-md-2 mr-md-3', style: "border-radius: 50%; max-height: 99px;")
-            .title-block__text.ml-2.d-flex.flex-column.align-items-start.w-75
-              p.title-text.mt-2 = customer_name
-              p.work_place__name.text-left
-                | Рейтинг: 10 из 10
-            .d-flex.align-items-end
-              = search_form_for @q, url: orders_path do |f|
-                .row.mt-1
-                  .col-sm-12.col-md-6.col-lg-12.d-flex.justify-content-center.mb-2
-                    = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', class: 'form-control', value: val
+
           - production_sites.each_with_index do |(place_of_work, items), i|
-            .row.border.rounded.m-1.border-top-0
-              .col-md-12
-                .work_place_name.d-flex.justify-content-between.mb-2
-                  = place_of_work
-                  span.city_span_button.pt-1.pr-md-4.pl-md-4.pb-1
-                    = items.first.city
-                ul.nav.nav-tabs.nav-fill.border-bottom-0 role='tablist'
+            .platform
+              .header
+                p = place_of_work
+                span = items.first.city
+              .information
+                img.logo alt="" src="/img/no-avatar.png"
+                div
+                  p.name = customer_name
+                  p.characteristic
+                    | Рейтинг:
+                    span.custom-green  249
+                    | Сделки:
+                    span.custom-green  10/10
+              .tabs
+                ul#myTab.nav role="tablist"
                   li.nav-item
-                    a.nav-link.waves-light.active data-toggle='tab' href="#vacancies-#{iteration}" role='tab' aria-controls="vacancies"
-                      |Вакансии
-                  li.nav-item.ml-0
-                    a.nav-link.waves-light.text-dark data-toggle='tab' href="#info-#{iteration}" role='tab' aria-controls="info"
-                      |Информация
+                    a#home-tab.nav-link.active aria-controls="home" aria-selected="true" data-toggle="tab" href="#home-#{iteration}" role="tab"  Вакансии
                   li.nav-item
-                    a.nav-link.waves-light.text-dark data-toggle='tab' href="#contacts-#{iteration}" role='tab' aria-controls="contacts"
-                      |Контакты
-                .tab-content
-                  .tab-pane.fade.show.active id="vacancies-#{iteration}" role='tabpanel' aria-labelledby="vacancies-tab"
-                    = render partial: 'orders/contractor_order', collection: items, as: :order
-                  .tab-pane.fade id="info-#{iteration}" role='tabpanel' aria-labelledby="info-tab"
-                    p.font-small.text-muted.mx-1 align='justify'
-                      = items.first.production_site.info
-                  .tab-pane.fade id="contacts-#{iteration}" role='tabpanel' aria-labelledby="contacts-tab"
-                    p.text-center
-                      = items.first.production_site.phones
-              - iteration +=1
-    .col.col-sm-12.col-md-5.col-lg-3.pt-md-4
-      = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}
+                    a#profile-tab.nav-link aria-controls="profile" aria-selected="false" data-toggle="tab" href="#profile-#{iteration}" role="tab"  Информация
+                  li.nav-item
+                    a#contact-tab.nav-link aria-controls="contact" aria-selected="false" data-toggle="tab" href="#contact-#{iteration}" role="tab"  Контакты
+                .tab-content.custom-scroll
+                  .tab-pane.fade.show.active aria-labelledby="home-tab" role="tabpanel" id="home-#{iteration}"
+                    = render partial: 'contractor_order', collection: items, as: :order
+                  .tab-pane.fade aria-labelledby="profile-tab" role="tabpanel" id="profile-#{iteration}"
+                    = items.first.production_site.info
+                  .tab-pane.fade aria-labelledby="contact-tab" role="tabpanel" id="contact-#{iteration}"
+                    = items.first.production_site.phones
+            - iteration +=1
 
-
-
-/.platforms-container
-  /.platforms-title
-    | Ваши площадки для заявок
-
-  .platform
-    h3.platform-title Пискаревский молзавод
-    .platform__header
-      .logo
-        a href="#"
-          = image_tag('/img/new/upload-logo.png', class: 'img-fluid')
-      .info
-        .item
-          p
-            = image_tag('/img/new/banner.png', class: 'svg-icon')
-            | В найме:
-            span 120
-        .item
-          p
-            = image_tag('/img/new/social.png', class: 'svg-icon')
-            | Заявки:
-            span 140
-        .item
-          p
-            = image_tag('/img/new/turn.png', class: 'svg-icon')
-            | В очереди:
-            span 250
-    .platform_descr
-      <div class="bd-example bd-example-tabs">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active show" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
-            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
-          </div>
-          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
-          </div>
-          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-            <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh mi whatever gluten-free, carles pitchfork biodiesel fixie etsy retro mlkshk vice blog. Scenester cred you probably haven't heard of them, vinyl craft beer blog stumptown. Pitchfork sustainable tofu synth chambray yr.</p>
-          </div>
-        </div>
-      </div>
-    .platform__footer
-      a.button Добавить заявку
-      button
-        = image_tag('/img/new/pen.png', id:"pen")
-        | Редактировать
-
-
-  /.platform
-
-  /.platform
-
-  /.platform
-
-
-/.main_platforms
-  section class="platforms"
-			<header>Ваши площадки для заявок</header>
-			.platforms_list
-				.platforms_list_platform
-					<header>Пискаревский молзавод</header>
-					.platforms_list_platform_top
-						.platforms_list_platform_top_logo
-							a href="#" class="platforms_list_platform_top_logo_empty"
-							  p Загрузить логотип
-
-						.platforms_list_platform_top_info
-							ul.fa-ul
-								li
-								  i class="fa fa-flag"
-								  | В найме: 120
-								li
-								  i class="fa fa-users"
-								  | Заявки: 140
-								li
-								  i class="fa fa-envelope"
-								  | В очереди: 250
-
-
-					.platforms_list_platform_bottom
-                        .platforms_list_platform_bottom_nav
-                          button class="platforms_list_platform_bottom_nav_info show"
-                            | Информация
-                          button class="platforms_list_platform_bottom_nav_vacancies"
-                            | Вакансии
-                          button class="platforms_list_platform_bottom_nav_contacts"
-                            |  Контакты
-
-
-                        .platforms_list_platform_bottom_text
-                          div class= "platforms_list_platform_bottom_text_info show"
-                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia facere ab, culpa incidunt exercitationem numquam, suscipit tenetur aut, aspernatur, dignissimos nobis animi tempore dicta consectetur enim. Qui maiores deleniti amet, similique consectetur officia illum, velit eaque inventore a error perferendis ratione fuga totam omnis doloremque cupiditate illo itaque vitae natus quo nulla libero! Adipisci dolorum officiis nisi necessitatibus obcaecati at reiciendis veniam ea voluptate temporibus, quae labore vel nam repellendus sequi cupiditate, earum inventore quidem laboriosam excepturi corrupti. Architecto tempora cupiditate perferendis porro, natus, odio deserunt quia explicabo vitae voluptate fugit veniam quasi dolorem molestiae aperiam commodi obcaecati non asperiores.
-
-                          .platforms_list_platform_bottom_text_vacancies
-                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, eaque!
-
-                          .platforms_list_platform_bottom_text_contacts
-                            p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur voluptatum ut tenetur suscipit placeat tempore enim cupiditate reprehenderit voluptas id.
-
-					footer
-						button.add Добавить заявку
-						button.btn-edit
-					      = image_tag('/img/new/pen.png', id:"pen")
-						  | Редактировать
-
-
-
-                .platforms_list_platform
-                    <header>Концерн «Детскосельский»</header>
-                    .platforms_list_platform_top
-                      .platforms_list_platform_top_logo
-                        a href="#" class="platforms_list_platform_top_logo_empty"
-                          /p Загрузить логотип
-                          = image_tag('/img/new/platform_avatar.png')
-
-                      .platforms_list_platform_top_info
-                        ul.fa-ul
-                            li
-                              i class="fa fa-flag"
-                              | В найме: 120
-                            li
-                              i class="fa fa-users"
-                              | Заявки: 140
-                            li
-                              i class="fa fa-envelope"
-                              | В очереди: 250
-
-
-                    .platforms_list_platform_bottom
-                      .platforms_list_platform_bottom_nav
-                        button class="platforms_list_platform_bottom_nav_info show"
-                          | Информация
-                        button class="platforms_list_platform_bottom_nav_vacancies"
-                          | Вакансии
-                        button class="platforms_list_platform_bottom_nav_contacts"
-                          |  Контакты
-
-
-                      .platforms_list_platform_bottom_text
-                        div class= "platforms_list_platform_bottom_text_info show"
-                          p Концерн «Детскосельский» объединяет более 20 агропромышленных и
-                           перерабатывающих предприятий на территории России и Республики Беларусь.
-                           «Детскосельский» имеет в своем распоряжении 12 молочных комплексов,
-                           обеспеченных собственной кормовой базой, также предприятия концерна
-                           занимаются разведением племенных животных черно – пестрой, голштинской,
-                           айрширской и сементальской пород.
-
-                        .platforms_list_platform_bottom_text_vacancies
-                          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tempore, eaque!
-
-                        .platforms_list_platform_bottom_text_contacts
-                          p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur voluptatum ut tenetur suscipit placeat tempore enim cupiditate reprehenderit voluptas id.
-
-                    footer
-                        button.add Добавить заявку
-                        button.btn-edit
-                          = image_tag('/img/new/pen.png', id:"pen")
-                          | Редактировать
-
-                .platforms_list_platform.empty
-                  .add-platform
-                    = image_tag('/img/new/target.png')
-                    p Добавить площадку
-
-                .platforms_list_platform.empty
-                  .add-platform
-                    = image_tag('/img/new/target.png')
-                    p Добавить площадку
-
+  
+      .requests-page-filters
+        = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}

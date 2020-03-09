@@ -1,6 +1,6 @@
-// Place all the styles related to the orders controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$secondaryColor: #fff;
+$secondaryColorDark: #b7b7b7;
+
 .form-group.position-relative input {
   padding-right: 32px;
 }
@@ -53,77 +53,535 @@
 }
 
 #order_page {
-  .people_salary {
-    font-weight: bolder;
-    background-color: blue;
-    color: white;
-  }
-
-  .nav-link.active {
-    background-color:  #c7dcfd !important;
-  }
-
-  .nav-tabs > .nav-item:hover {
-    background-color:  #c7dcfd !important;
-  }
-
-  .city_span_button {
-    border-radius: 5px;
-    background-color:
-    #385e9b;
-    color:
-    white;
-    font-weight: bolder;
-    font-size: 17px;
-  }
-
-  .title-text {
-    text-decoration: underline;
-    font-weight: bolder;
-    font-size: 1.2rem;
-  }
-
-  .professions, .cities {
-      font-weight: bolder;
-  }
-
-  .zayavka {
+  #requests-page {
+    background-color: #f2f2f2;
+    font-family: "Open sans", sans-serif;
+    height: auto;
+    min-height: 100%;
+    width: 100%;
+    padding: 20px 35px 0 20px;
     display: flex;
-    border-bottom: 1px solid  silver;
-    transition: 0.55s;
+    flex-wrap: wrap;
+
+    .requests-page-container {
+      width: 75.5%;
+    }
+
+    .order_row:nth-child(2n) {
+      background-color: #fbfbfb;
+    }
+
+    
+
+    .platform {
+      width: 100%;
+      background-color: #fff;
+      box-shadow: 0 0 8px rgba(113, 113, 113, 0.2);
+      border-radius: 4px;
+      margin-bottom: 30px;
+      padding: 20px 20px 0 20px;
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        
+        p {
+          margin: 0;
+          font-size: 17px;
+          font-weight: bold;
+          line-height: 18px;
+        }
+
+        span {
+          color: #9046ff;
+          font-size: 15px;
+          line-height: 15px;
+          font-weight: bold;
+        }
+      }
+
+      .information {
+        display: flex;
+        margin-top: 20px;
+
+        .logo {
+          width: 69px;
+          height: 69px;
+          border-radius: 50%;
+          margin-right: 40px;
+        }
+
+        .custom-green {
+          color: #02da35;
+          font-weight: bold;
+        }
+
+        .custom-green:first-child {
+          margin-right: 20px;
+        }
+
+        .name {
+          margin-top: 8px;
+          margin-bottom: 10px;
+          font-size: 15px;
+        }
+
+        .characteristic {
+          font-size: 15px;
+          margin: 0;
+        }
+      }
+
+      .information-search {
+        display: flex;
+        align-items: center;
+        margin-left: auto;
+        position: relative;
+
+        img {
+          position: absolute;
+          right: 0;
+          bottom: 20px;
+        }
+
+        input {
+          border: 0;
+          border-bottom: 1px solid #a2a2a2;
+          width: 230px;
+        }
+
+        input::placeholder {
+          color: #999999;
+          font-size: 13px;
+        }
+
+        .search {
+          position: absolute;
+          right: 0;
+        }
+      }
+    }
+  }
+
+
+
+
+  #requests-page .platform .tabs {
+    margin-top: 25px;
+  }
+
+  #requests-page .platform .tabs .nav {
+    border-radius: 4px;
+    background-color: #ebebeb;
+  }
+
+  #requests-page .platform .tabs .nav-item {
+    line-height: 15px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  #requests-page .platform .tabs .nav-link {
+    color: #000000;
+    padding: 10px 40px;
+  }
+
+  #requests-page .platform .tabs .nav-link.active {
+    border-radius: 4px;
+    background-color: #d7d7d7;
+  }
+
+  #requests-page .platform .tabs .tab-content {
+    overflow: auto;
+    margin: 0 -20px;
+    padding: 0;
+  }
+
+  #requests-page .platform .tabs .tab-content .tab-pane:nth-child(2),
+  #requests-page .platform .tabs .tab-content .tab-pane:nth-child(3) {
+    padding: 0 20px;
+  }
+
+  #requests-page .platform .vacancy {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 20px;
+  }
+
+  #requests-page .platform .vacancy:hover {
+    cursor: pointer;
+    box-shadow: 0 0 13px 3px rgba(113, 113, 113, 0.15);
+  }
+
+  #requests-page .platform .vacancy.bg {
+    background-color: #fbfbfb;
+  }
+
+  #requests-page .platform .vacancy .star {
+    margin-left: 6px;
+    width: 18px;
+    height: 16px;
+  }
+
+  #requests-page .platform .vacancy .star:hover {
+    fill: yellow;
+  }
+
+  #requests-page .platform .vacancy p {
+    margin-bottom: 0;
+  }
+
+  #requests-page .platform .vacancy .number {
+    margin: 0 24px 0 40px;
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  #requests-page .platform .vacancy .description {
+    font-size: 14px;
+  }
+
+  #requests-page .platform .vacancy .salary {
+    margin-left: auto;
+    margin-right: 16px;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 4px;
+    background-color: #9046ff;
+    line-height: 13px;
+    padding: 4px 10px;
+  }
+
+  #requests-page .platform .details {
+    background-color: #ebebeb;
+    display: none;
+    padding: 20px 65px 35px 20px;
+    flex-wrap: wrap;
+
+    li {
+      background: none !important;
+    }
+  }
+
+  #requests-page .platform .details.opened {
+    display: flex;
+  }
+
+  #requests-page .platform .details .request-body {
+    width: 75%;
+    padding-bottom: 20px;
+    position: relative;
+    font-size: 14px;
+    border-bottom: 1px solid #e1e1e1;
+  }
+
+  #requests-page .platform .details .request-body .subtitle {
+    font-weight: 700;
+    line-height: 18px;
+    color: #000000;
+  }
+
+  #requests-page .platform .details .request-body .salary {
+    position: absolute;
+    right: 36px;
+    top: 0;
+    border-radius: 4px;
+    background-color: #1970ff;
+    line-height: 14px;
+    padding: 4px 10px;
+    color: #fff;
+    font-size: 13px;
+  }
+
+  #requests-page .platform .details .request-body p {
+    margin: 0;
+  }
+
+  #requests-page .platform .details .sidebar {
+    width: 25%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e1e1e1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #requests-page .platform .details .sidebar .contact-person {
+    font-size: 15px;
+  }
+
+  #requests-page .platform .details .sidebar .contact-person .title {
+    font-weight: bold;
+    margin: 0;
+  }
+
+  #requests-page .platform .details .sidebar .contact-person .initials {
+    margin: 0;
+  }
+
+  #requests-page .platform .details .sidebar .contact-person .phone-number {
+    margin: 0;
+  }
+
+  #requests-page .platform .details .sidebar .peoples-need {
+    margin-top: 60px;
+    width: 112px;
+  }
+
+  #requests-page .platform .details .sidebar .peoples-need .title {
+    color: #1970ff;
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+  }
+
+  #requests-page .platform .details .sidebar .peoples-need .count {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #requests-page .platform .details .sidebar .peoples-need .count img:hover {
     cursor: pointer;
   }
-  
-  .zayavka-oplata, .people_salary {
-    font-size: 0.9rem;
-  }
-}
 
-.show_card {
-  .zayavka__close {
+  #requests-page .platform .details .sidebar .peoples-need .count span {
+    font-size: 15px;
+  }
+
+  #requests-page .platform .details .sidebar .copy {
+    display: flex;
+    align-items: flex-start;
+    width: 80%;
+  }
+
+  #requests-page .platform .details .sidebar .copy:hover {
+    cursor: pointer;
+  }
+
+  #requests-page .platform .details .sidebar .copy .copy-img {
+    margin-right: 8px;
+    margin-top: 4px;
+  }
+
+  #requests-page .platform .details .sidebar .copy p {
+    margin: 0;
+    color: #1970ff;
+    font-size: 13px;
+  }
+
+  #requests-page .platform .details .buttons {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px;
+    margin-top: 20px;
+    justify-content: flex-end;
+  }
+
+  #requests-page .platform .details .buttons .add-to-favourite {
+    border-radius: 14px;
+    border: 1px solid #1970ff;
+    justify-content: center;
+    height: 27px;
+    display: flex;
+    margin-top: 18px;
+    align-items: center;
+    color: #1970ff;
+    font-size: 13px;
+  }
+
+    #requests-page .platform .details .buttons .delete-from-favourite {
+    border-radius: 14px;
+    border: 1px solid #7d7e7e;
+    justify-content: center;
+    height: 27px;
+    display: flex;
+    margin-top: 18px;
+    align-items: center;
+    color: #7d7e7e;
+    font-size: 13px;
+  }
+
+  #requests-page .platform .details .buttons .delete-from-favourite:hover {
+    cursor: pointer;
+  }
+
+  #requests-page .platform .details .buttons .send {
+    border-radius: 14px;
+    justify-content: center;
+    margin-top: 18px;
+    height: 27px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    background-image: linear-gradient(to top, #1d72ff 0%, #66a1ff 100%);
+  }
+
+  #requests-page .platform .details .buttons .send:hover {
+    cursor: pointer;
+  }
+
+  #requests-page .platform .details .comment {
+    width: 75%;
+    font-size: 14px;
+    margin-top: 20px;
+  }
+
+  #requests-page .platform .details .comment .subtitle {
+    font-weight: 700;
+    line-height: 18px;
+    color: #000000;
+  }
+
+  #requests-page .requests-page-filters {
+    padding: 20px 0 0 35px;
+    width: 24.5%;
+  }
+
+  #requests-page .requests-page-filters .title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  #requests-page .requests-page-filters #search {
+    border: 0;
+    width: 100%;
+    border-bottom: 1px solid #a2a2a2;
+    background-color: transparent;
+    margin-left: 5px;
+    position: static;
+  }
+
+  #requests-page .requests-page-filters #search::placeholder {
+    color: #999999;
+    font-size: 13px;
+  }
+
+  #requests-page .requests-page-filters .subtitle {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 40px 0 20px 0;
+  }
+
+  #requests-page .requests-page-filters .cities {
+    font-size: 15px;
+  }
+
+  #requests-page .requests-page-filters .professions {
+    font-size: 15px;
+  }
+
+  .filter-item {
+    margin-bottom: 12px;
+  }
+
+  .filter-item .checkbox {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    margin: 10px 0 0 20px;
+  }
+
+  .filter-item .checkbox + label {
+    position: relative;
+    padding: 0 0 0 20px;
+    cursor: pointer;
+  }
+
+  .filter-item .checkbox + label:before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1px solid #afafaf;
+    transition: .2s;
+  }
+
+  .filter-item .checkbox + label:after {
+    content: '';
     position: absolute;
     top: 0;
-    right: 0;
-    border: none;
-    font-size: 30px;
-    background-color: 
-    white !important;
-    width: 45px;
-    height: 45px;
-    z-index: 1;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    transition: .2s;
   }
-  
-  .people_salary_left {
-    font-weight: bolder;
-    background-color: blue;
-    color: white;
+
+  .filter-item .checkbox:checked + label:after {
+    content: '\2713';
+    font-weight: bold;
+  }
+
+  .pseudo-star {
+    font-size: 24px;
+    color: #e3e3e3;
     position: absolute;
-    top: -32px;
-    left: 100px;
+    left: 26px;
+    top: 2px;
   }
-  
-  .contacts {
-    border: 1px solid black;
+
+  .pseudo-star:hover:before, .pseudo-star-selected:before {
+    content: "\2605";
+    position: absolute;
+    color: yellow;
+  }
+
+  #requests-page .filters-search{
     position: relative;
+
+    img{
+      position: absolute;
+      right: 0;
+      top: 10px;
+    }
+
+    input {
+      border: 0;
+      border-bottom: 1px solid #a2a2a2;
+      width: 230px;
+    }
+
+    input::placeholder {
+      color: #999999;
+      font-size: 13px;
+    }
+
+    .search {
+      position: absolute;
+      right: 0;
+    }
+  }
+
+  .custom-scroll {
+    &::-webkit-scrollbar {
+      width: 6px;
+      background-color: $secondaryColor;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 6px;
+      background: transparentize($secondaryColorDark, 0.7);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 6px;
+      background: transparentize($secondaryColorDark, 0.4);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $secondaryColorDark;
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background: linear-gradient(left, #22ADD4, #1E98BA);
+    }
   }
 }

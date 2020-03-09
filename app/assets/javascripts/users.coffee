@@ -27,7 +27,7 @@ class Users
       return
 
     if location.pathname == '/profile/production_sites/' + id + '/orders'
-      messageFirst = 'Это окно где расположены Ваши заявки и шаблоны. Перейдите по ссылке, чтобы опубликовать Вашу первую заявку.'
+      messageFirst = 'Чтобы опубликовать заявку используйте кнопку.'
       script_steps = [{ 'click #active-content-tab': messageFirst, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
       return
