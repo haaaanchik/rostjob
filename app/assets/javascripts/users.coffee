@@ -43,11 +43,14 @@ class Users
     enjoyhint_instance.run()
 
   profileInvoices = (enjoyhint_instance, skipButton) ->
-    if $('.replenishAccount').data('unpaid-invoice')
-      message = 'Чтобы оплатить заявку оплатите счет на необходимую сумму. Впишите сумму и нажмите "Выставить счет".'
+    if window.location.search == '?state=created'
+      message = 'Вас счет находится здесь. Кликните на кнопку, чтобы распечатать его.'
+      script_steps = [{ 'click .file-pdf:first()': message, 'skipButton': skipButton }]
+      enjoyHintRun(enjoyhint_instance, script_steps)
+    else unless $('.allAccounts_open_table table tbody tr').length
+      message = 'Пополните счет. Для этого впишите необходимую сумму и нажмите выставить счет.'
       script_steps = [{ 'click .replenishAccount_input': message, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
-
 
 $(document).on 'turbolinks:load', ->
   Users.init()
