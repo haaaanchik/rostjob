@@ -1,29 +1,28 @@
-- if user_signed_in?
-  main#recruter-main
-    section.user
-      h3.title Краткая информация профиля
-      .user_info
-        .user_info_avatar
-          = image_tag(current_profile.image_url, class: 'img-user')
-          p.name = current_user.full_name
-          button
-            = link_to edit_user_registration_path, class: 'black-text redact' do
-              = image_tag('/img/new/pen.png', id:"pen")
-              | Редактировать
+main#recruter-main
+  section.user
+    h3.title Краткая информация профиля
+    .user_info
+      .user_info_avatar
+        = image_tag(current_profile.image_url, class: 'img-user')
+        p.name = current_user.full_name
+        button
+          = link_to edit_user_registration_path, class: 'black-text redact' do
+            = image_tag('/img/new/pen.png', id:"pen")
+            | Редактировать
 
-        .user_info_rating
-          p Рейтинг: <span> #{ current_profile.calculate_hiring_percent }%
-          p Сделки:  <span> #{ current_profile.amount_of_deals }
-          p
-            | Баланс:
-            span.ml-2.balance-color = @current_profile.balance.amount
-            |  руб.
-          button.user-btn
-            = link_to profile_invoices_path, class: 'text-white' do
-              | Пополнить
+      .user_info_rating
+        p Рейтинг: <span> #{ current_profile.calculate_hiring_percent }%
+        p Сделки:  <span> #{ current_profile.amount_of_deals }
+        p
+          | Баланс:
+          span.ml-2.balance-color = @current_profile.balance.amount
+          |  руб.
+        button.user-btn
+          = link_to profile_balance_path, class: 'text-white' do
+            | Пополнить
 
-    section.events
-      = render partial: 'user_action_log', locals: { profile: @current_profile }
+  section.events
+    = render partial: 'user_action_log'
 
-    section.calendar
-        #calendar
+  section.calendar
+    #calendar

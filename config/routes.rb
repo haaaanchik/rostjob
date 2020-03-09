@@ -337,7 +337,7 @@ Rails.application.routes.draw do
 
   get :terms,          to: 'terms#index'
   post 'terms/accept', to: 'terms#accept'
-
+  get :calendar_events, controller: 'welcome'
   mount ActionCable.server => '/cable'
   root to: 'welcome#index'
 end
