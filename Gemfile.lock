@@ -139,6 +139,7 @@ GEM
     choice (0.2.0)
     client_bank_exchange (0.2.2)
     climate_control (0.2.0)
+    clipboard-rails (1.7.1)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -602,6 +603,7 @@ DEPENDENCIES
   bootsnap (>= 1.1.0)
   capistrano-rails
   client_bank_exchange
+  clipboard-rails (~> 1.7, >= 1.7.1)
   coffee-rails (~> 4.2)
   conditional_validation
   data-confirm-modal

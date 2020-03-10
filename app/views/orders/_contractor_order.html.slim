@@ -1,12 +1,15 @@
-div id="order_id_#{order.id}"
-  .zayavka.js-zayavka.p-3.align-items-center.justify-content-between.hoverable.collapsable
-    p.zayavka-number.mb-0
-      | №#{order.id}
-    p.zayavka-text.mb-0
-      | #{order.title}. #{order.skill}
-      span.zayavka-oplata.ml-2 = order.salary
-    p.m-0.people_salary.p-1
-      |#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)}
-      i.fas.fa-ruble-sign.ml-1.mr-1
-      |/ чел.
+.order_row id="order_id_#{order.id}"
+  .vacancy.js-vacancy
+    - unless @current_profile.profile_type == 'customer'
+      - unless @employee_cv_id
+        - if !@current_profile.favorites.find_by(id: order.id)
+          = link_to '&#9734'.html_safe, add_to_favorites_order_path(order), class: 'pseudo-star', method: :put, remote: true
+        - else
+          = link_to '&#9734'.html_safe, remove_from_favorites_order_path(order), class: 'pseudo-star pseudo-star-selected', method: :put, remote: true
+
+    p.number = "№#{order.id}"
+    p.description 
+      = "#{order.title}. #{order.skill} #{order.salary}"
+    p.salary
+      = "#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)} руб / чел"
   = render partial: 'orders/show_card', locals: { order: order, order_advertising: false }

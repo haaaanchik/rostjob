@@ -135,3 +135,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'premailer-rails', '~> 1.10', '>= 1.10.3'
 gem 'high_voltage', '~> 3.1'
 gem 'lightbox2-rails', '~> 2.8', '>= 2.8.2.1'
+gem 'clipboard-rails', '~> 1.7', '>= 1.7.1'

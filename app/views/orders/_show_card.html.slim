@@ -1,61 +1,52 @@
 - amount = @current_profile.profile_type == 'customer' ? order.customer_price : order.contractor_price
 
-.w-100.collapsable_card.show_card data-order-id=order.id class="#{'collapse' unless order_advertising}"
-  .zayavka-body.col-12.d-flex
-    button.zayavka__close.js-zayavka-close.p-0
-      i.fa.fa-times
-    .col-4.d-flex.flex-column.justify-content-between
-      .contacts.mt-5.p-2
-        p.m-0.people_salary_left.p-1
-          = number_with_precision(amount, strip_insignificant_zeros: true)
-          | руб/чел.
-        p.contact-face.text-center.mb-1
-          | Контактное лицо
-        p.contact-person.name.mb-0.text-center
-          = order.contact_person['name']
-        p.contact-person.mb-1.text-center
-          = order.contact_person['phone']
-      .buttons
-        - if @current_profile.contractor?
-          - if @employee_cv_id
-            - pe_form = "#{render partial: 'profile/proposal_employees/form', locals: { order_id: order.id, employee_cv_id: @employee_cv_id }}"
-            button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
-          - else
-            = link_to new_profile_employee_cv_path(order_id: order.id), class: 'btn my-2 btn-block btn-primary add-card waves-effect waves-light', remote: true do
-              i.fas.fa-plus
-              |Отправить анкету
+.details
+  .sidebar
+    .contact-person
+      p.title
+        | Контактное лицо:
+      p.initials
+        = order.contact_person['name']
+      p.phone-number
+        = order.contact_person['phone']
+    .copy
+      = image_tag  '/img/new/copy.png', class: 'copy-img'
+      p.copy data-clipboard-target="#copy-body-#{order.id}" data-clipboard-action="copy"
+        | Копировать в буфер обмена
+  .request-body id="copy-body-#{order.id}"
+    p.subtitle
+      i.fas.fa-hammer.mr-2 
+      = "#{order.title}. #{order.skill}"
+    p.subtitle
+      i.fas.fa-money-bill-alt.w-2.mr-2
+      i.fas.fa-ruble-sign.mr-2 
+      = order.salary
+    p.subtitle
+      i.fas.fa-map-marker.w-2 
+      = "г. #{order.city}"
+    p.subtitle
+      i.fas.fa-bed.w-2.mr-2
+      == order.other_info['terms']
+  .buttons
+    - unless @current_profile.profile_type == 'customer'
+      - unless @employee_cv_id
+        - if !@current_profile.favorites.find_by(id: order.id)
+          = link_to 'Добавить в избранное', add_to_favorites_order_path(order), class: 'add-to-favourite add-remove-card', method: :put, remote: true
+        - else
+          = link_to 'Убрать из избранного', remove_from_favorites_order_path(order), class: 'delete-from-favourite add-remove-card', method: :put, remote: true
 
-        - unless @current_profile.profile_type == 'customer'
-          - unless @employee_cv_id
-            - if !@current_profile.favorites.find_by(id: order.id)
-              = link_to add_to_favorites_order_path(order), class: 'btn my-1 btn-block btn-success add-remove-card waves-effect waves-light', method: :put, remote: true do
-                i.fas.fa-plus  Добавить в избранное
-            - else
-              = link_to remove_from_favorites_order_path(order), class: 'btn my-1 btn-block btn-success add-remove-card waves-effect waves-light', method: :put, remote: true do
-                i.fas.fa-minus Убрать из избранного
-    .col-8.zayavka-body__right-part
-      p.text-left.mt-3.mb-0
-        i.fas.fa-city
-        strong.ml-2 #{order.production_site.title}
-      p.h4.text-left.mt-2.mb-0
-        i.fas.fa-hammer.mr-2
-        strong #{order.title}. #{order.skill}
-      p.text-left.m-0
-        i.fas.fa-money-bill-alt.w-2.mr-2
-        i.fas.fa-ruble-sign.mr-2
-        strong #{order.salary}
-      p.my-2.text-left
-        i.fas.fa-map-marker.w-2
-        strong.ml-2 #{order.city} #{order.district}
-      p.h6.my-2.text-left
-        i.fas.bold.w-2.mr-2
-        == order.other_info['terms']
-        hr.h6.my-3.text-left
-      p.text-left.age
-        i.fas.fa-comment-alt.w-2.mr-2
-        |#{order.other_info['age_from']} - #{order.other_info['age_to']}. #{order.other_info['sex']}
-      p.text-left.font-weight-bold
-        - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
-          == order.other_info['remark']
-          - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
-            order.contact_person['phone'] && !order.contact_person['phone'].empty?
+    - if @current_profile.contractor?
+      - if @employee_cv_id
+        - pe_form = "#{render partial: 'profile/proposal_employees/form', locals: { order_id: order.id, employee_cv_id: @employee_cv_id }}"
+        button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
+      - else
+        = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'send add-card', remote: true
+
+  .comment
+    p.subtitle
+      i.fas.fa-comment-alt.w-2.mr-2
+      | Комментарий для рекрутера:
+    - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
+      == order.other_info['remark']
+      - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
+        order.contact_person['phone'] && !order.contact_person['phone'].empty?

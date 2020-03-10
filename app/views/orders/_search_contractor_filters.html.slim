@@ -1,34 +1,41 @@
-- titles = order_filters.map(&:title).uniq
-- cities = order_filters.map { |order| order.production_site.city }.uniq
-- cities.delete(nil)
-- titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
-- cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
+ruby:
+  titles = order_filters.map(&:title).uniq
+  cities = order_filters.map { |order| order.production_site.city }.uniq
+  cities.delete(nil)
+  titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
+  cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
+  val = params[:q] ? params[:q][:all_fields_cont] : nil
 
 = search_form_for @q, url: orders_path, id: 'profesion-city-form'  do |f|
-  .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2.flex-column
-    h4.text-left.mt-2.mb-3.professions Профессии
-    - titles.each_with_index do |title, i|
-      .form-check.form-check-inline.mb-2
-        = check_box_tag 'q[title_fields_in][]',
-                        title,
-                        titles_val&.include?(title),
-                        class: 'form-check-input',
-                        id:     "title_filter_#{i}"
-        = label :title_fields, nil, class: 'form-check-label w-100', for: "title_filter_#{i}" do
-          p.rounded.m-0.truncate.w-100
-            i.mr-2
-            span.mr-2 = title
-  .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
-    h4.text-left.cities.mb-2.mt-4 Города
-  - cities.each_with_index do |city, i|
-    .col-sm-12.col-md-6.col-lg-12.d-flex.mb-2
-      .form-check.form-check-inline
+  h2.title Фильтры
+  .filters-search
+    = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', id: 'search', value: val
+    = image_tag('/img/new/search.png')
+  .cities
+    p.subtitle Города
+    - cities.each_with_index do |city, i|
+      .filter-item
         = check_box_tag 'q[city_fields_in][]',
                         city,
                         cities_val&.include?(city),
-                        class: 'form-check-input',
+                        class: 'checkbox',
                         id:    "city_filter_#{i}"
         = label :city_fields, nil, class: 'form-check-label', for: "city_filter_#{i}" do
           p.rounded.m-0.truncate
             i.mr-2
             span.mr-2 = city
+  .professions
+    p.subtitle
+      | Профессии
+    - titles.each_with_index do |title, i|
+      .filter-item
+        = check_box_tag 'q[title_fields_in][]',
+                        title,
+                        titles_val&.include?(title),
+                        class: 'checkbox',
+                        id:     "title_filter_#{i}"
+        = label :title_fields, nil, class: 'form-check-label w-100', for: "title_filter_#{i}" do
+          p.rounded.m-0.truncate.w-100
+            i.mr-2
+            span.mr-2 = title
+

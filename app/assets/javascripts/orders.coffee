@@ -44,13 +44,7 @@ $ ->
     form.submit()
   )
 
-
-  $(document).on('click', '.js-zayavka', ->
-    $(this).slideUp();
-    $(this).next().slideDown();
+  $('#order_page').on('click', '.js-vacancy', ->
+    $(this).next('.details').toggleClass('opened');
   )
-
-  $(document).on('click', '.js-zayavka-close', ->
-    $(this).parents('.collapse').slideUp()
-    $(this).parents('.collapse').parent().find('.collapsable').slideDown()
-  )
+  
