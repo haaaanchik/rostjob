@@ -237,6 +237,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     hashie (3.6.0)
+    high_voltage (3.1.2)
     hpricot (0.8.6)
     html2slim (0.2.0)
       hpricot
@@ -287,6 +288,8 @@ GEM
       tilt
     letter_opener (1.7.0)
       launchy (~> 2.2)
+    lightbox2-rails (2.8.2.1)
+      railties (>= 3.1)
     loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -610,6 +613,7 @@ DEPENDENCIES
   enumerize
   factory_bot_rails
   faker
+  high_voltage (~> 3.1)
   html2slim
   i18n-debug
   interactor
@@ -619,6 +623,7 @@ DEPENDENCIES
   jquery-turbolinks (~> 2.1)
   kaminari
   letter_opener (~> 1.7)
+  lightbox2-rails (~> 2.8, >= 2.8.2.1)
   mailgun-ruby
   mailgun_rails!
   mysql2 (~> 0.5.1)

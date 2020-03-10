@@ -1,2 +1,8 @@
+== @invoices.size > 1 ? 'К сожалению, у Вас есть неоплаченные счета: ' : 'К сожалению, у Вас есть неоплаченный счет'
 - @invoices.each do |invoice|
-  = "У вас не оплаченный счёт на сумму #{invoice.amount}. "
+  = "На сумму #{invoice.amount}, сылка на счёт - "
+  = url_for profile_invoice_url(invoice.id)
+  == @invoices.size > 1 ? '; ' : '.'
+
+| Если у Вас трудности с оплатой счёта посмотрите инструкцию по ссылке или обратитесь в саппорт.
+= url_for page_url('manual_how_to_pay_invoice')

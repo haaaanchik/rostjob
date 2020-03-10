@@ -156,9 +156,7 @@ class EmployeeCv < ApplicationRecord
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")
   end
 
-  private
-
   def mail_with_to_sent
-    SendEveryDaysNotifyMailJob.perform_now(objects: self, method: 'emp_cv_sended')
+    SendNotifyMailJob.perform_now(objects: self, method: 'emp_cv_sended')
   end
 end

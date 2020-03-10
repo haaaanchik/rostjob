@@ -1,0 +1,16 @@
+= "Уважаемый, #{@incidents.first.proposal_employee.profile.user.full_name}."
+- if @incidents.size > 1
+  p
+    = 'У вас есть не разрещённые споры. Их можно посмотреть по ссылке'
+    p
+      = link_to 'Список споров', profile_tickets_url
+-else
+  p
+    = "На Анкету №#{@incidents.first.proposal_employee.id} #{@incidents.first.proposal_employee.employee_cv.name}, открыт спор."
+  p
+    | По причине
+    = " #{@incidents.first.reason_text}. Заказчик комментирует: #{@incidents.first.messages.last.text}."
+    | Пожалуйста пройдите по ссылке и выберите вариант решения конфликта. Спасибо
+  p
+    = link_to 'Открытый спор', profile_ticket_url(@incidents.first.id)
+

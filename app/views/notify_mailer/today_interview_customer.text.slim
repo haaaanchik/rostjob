@@ -1,0 +1,14 @@
+ruby:
+  interview_count_by_period = count_interview_by_days(@prop_emps)
+
+- if interview_count_by_period[:today_interviews] > 0
+  | Сегодня у Вас запланировано собеседование с:
+  - @prop_emps.each do |emp|
+    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number};" if emp.interview_date == DateTime.now.beginning_of_day
+- if interview_count_by_period[:before_interviews] > 0
+  | Напоминаем что вы не отметили результат собеседования для:
+  - @prop_emps.each do |emp|
+    = "#{emp.employee_cv.name} контактный телефон #{emp.employee_cv.phone_number};" unless emp.interview_date == DateTime.now.beginning_of_day
+
+| Если Вы не знаете как это сделать прочтите инструкцию.
+= url_for page_url('manual_set_status_proposal_employee')

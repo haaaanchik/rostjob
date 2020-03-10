@@ -1,3 +1,6 @@
-| В очереди на рассмотрение  
-- @candidates.each do |candidate|
-  = "#{candidate.employee_cv.name}; "
+| У Вас имеются кандидаты ждущие назначения собеседования в заявку:
+- count_proposal_employee_by_order(@candidates).each do |order_id, result_count|
+  = "#{Order.find(order_id).title} в количестве #{result_count} кандидата(ов)."
+
+| Назначьте собеседование чтобы Рекрутер проконтролировал приезд в срок. Что-бы узнать как назначить собеседование посмотрите инструкцию по ссылке.
+= url_for('manual_how_to_set_date_interview')

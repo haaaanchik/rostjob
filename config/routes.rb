@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   mount Resque::Server.new, at: '/resque_web'
+  get "/pages/*id" => 'pages#show', as: :page, format: false
 
   # get 'login', to: 'sessions#new'
   # post 'login', to: 'sessions#create'
@@ -145,6 +146,15 @@ Rails.application.routes.draw do
       member do
         put :accept
         put :reject
+      end
+    end
+
+    resources :mails, only: %i[new create] do
+      collection do
+       get :send_mail_order_wait_payment
+       get :send_mail_invoice_wait_payment
+       get :send_mail_employee_sent
+       get :send_notify_interview
       end
     end
   end
