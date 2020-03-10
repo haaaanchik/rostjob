@@ -3,9 +3,12 @@
 body#landing
   header.container
     .block
-      a.land-logo href="#"
+      = link_to root_path, class: 'land-logo' do
         | rost
         span.col-blue job.com
+      - if Rails.env.staging?
+        span.counter.red
+        b stage
       .land-social
         a href="#"
           = image_tag('/img/vk.png')
@@ -16,15 +19,15 @@ body#landing
     .block.log-in-reg
       a.land-tel-number href="tel:+88007006768"  8 800 700 6786
       .log-in-or-reg
-        a.land-log-in href="#"  Вход
+        = link_to 'Вход', login_path, class: 'land-log-in'
         span.slash |
-        a.registration href="#"  Регистрация
+        = link_to 'Регистрация', new_contractor_path, class: 'registration'
     .mobile-menu
       ul
         li
-          a href="#"  Вход
+          = link_to 'Вход', login_path
         li
-          a href="#"  Регистрация
+          = link_to 'Регистрация', new_contractor_path
         li
           a href="tel:+88007006768"  8 800 700 6786
         li
@@ -43,9 +46,13 @@ body#landing
       .content
         h1.title Подбор персонала онлайн от ведущей HR компании
         p.subtitle Онлайн кадровое агентство
-        .hire-staff-block
-          input placeholder=("Введите email для регистрации") type="email" /
-          a.hire-staff-btn href="#"  Нанять персонал
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: { name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button 'Нанять персонал', name: :contractor, class: 'hire-staff-btn'
       .landing-header-img
         = image_tag('/img/header-img.png')
     section.advantages
@@ -120,7 +127,7 @@ body#landing
               span.stock-star *
           p на первую заявку всем новым зарегистрированным клиентам
       .stock_button
-        button Перейти к регистрации
+        = link_to 'Перейти к регистрации', new_contractor_path
         p * ограниченное предложение
       .stock_rectangles
         .stock_rectangles_wrapper
