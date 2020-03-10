@@ -1,4 +1,4 @@
-== @invoices.size > 1 ? 'К сожалению, у Вас есть неоплаченные счета: ' : 'К сожалению, у Вас есть неоплаченный счет'
+== @invoices.size > 1 ? 'У Вас есть неоплаченные счета: ' : 'У Вас есть неоплаченный счет'
 - @invoices.each do |invoice|
   p
     = link_to "На сумму #{invoice.amount}", profile_invoice_url(invoice.id)

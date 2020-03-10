@@ -28,7 +28,7 @@ class NotifyMailer < ApplicationMailer
     customer_email = @prop_emps.first.order.user.email
 
     mail(to: customer_email,
-      subject: "RostJob. Собеседования на сегодня")
+      subject: 'RostJob. Собеседования на сегодня')
   end
 
   def candidates_inbox
@@ -44,7 +44,7 @@ class NotifyMailer < ApplicationMailer
     customer_email = @prop_emps.first.order.user.email
 
     mail(to: customer_email,
-      subject: "RostJob. У вас завтра собеседование.")
+      subject: 'RostJob. У вас завтра собеседование.')
   end
 
   def tommorow_interview_contractor
@@ -59,21 +59,21 @@ class NotifyMailer < ApplicationMailer
     @prop_emp = params[:proposal_employees].first
     contractor_email = @prop_emp.profile.user.email
 
-    mail(to: contractor_email, subject: "RostJob. Уведомление об подтверждение нанятие кандидата.")
+    mail(to: contractor_email, subject: 'RostJob. Ваш кандидат нанят.')
   end
 
   def informated_contractor_about_interview
     @prop_emp = params[:proposal_employees].first
     contractor_email = @prop_emp.profile.user.email
 
-    mail(to: contractor_email, subject: "RostJob. Ваш кандидат приглашен на собеседование.")
+    mail(to: contractor_email, subject: 'RostJob. Ваш кандидат приглашен на собеседование.')
   end
 
   def informated_contractor_has_paid
     @prop_emp = params[:proposal_employees].first
     contractor_email = @prop_emp.profile.user.email
 
-    mail(to: contractor_email, subject: "RostJob. Вы получили вознаграждение")
+    mail(to: contractor_email, subject: 'RostJob. Вы получили вознаграждение')
   end
 
   def informated_contractor_has_disputed
