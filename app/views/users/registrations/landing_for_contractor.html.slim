@@ -1,6 +1,111 @@
 - errors = @user.errors.messages
 
-body#landing
+#landing-freelance
+
+  header.header
+    = render 'users/header_logo'
+
+    .header_registration
+      = link_to 'Вход&nbsp;'.html_safe, login_path
+      span
+        | /
+      = link_to '&nbsp;Регистрация'.html_safe, new_contractor_path
+    .header_scroll
+      button.header_scroll_down
+        = image_tag 'svg/arrow_2.svg', alt: 'down'
+      button.header_scroll_top
+        = image_tag 'svg/arrow_2.svg', alt: 'top'
+
+  main
+    section#main
+      .main
+        .main_info-header
+          h2 ROSTJOB - платформа для людей, занимающихся набором персонала
+        .main_info-text
+          p Зарегестрируйтесь, чтобы получить доступ к заявкам с гарантированными выплатами
+        .main_input
+          = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: { name: 'form-email', novalidate: '' } do |f|
+            .invalid-feedback = errors[:email].first
+            = f.email_field :email, class: 'form-control', placeholder: 'e-mail для регистрации'
+            = f.button 'зарегистрироваться', name: :contractor
+        .main_freelance
+          = link_to 'хочу нанять персонал', contractor_info_path
+        .main_img
+          = image_tag 'main_contactor.png'
+
+    section.request
+      .request_header
+        h3 Заголовок
+      .request_block
+        .request_block_nav
+          .arrow.arrow_left
+            = image_tag 'svg/arrow_2.svg', alt: 'left'
+          .arrow.arrow_right
+            = image_tag 'svg/arrow_2.svg', alt: 'left'
+          .navbar
+
+        .request_block_viewbox
+          .request_block_wrapper
+            .request_block_wrapper_item
+              .request_block_wrapper_item_img
+                = image_tag 'rostjob_02.jpg'
+              .request_block_wrapper_item_info
+                header
+                  | 1
+                h4
+                  | Дополнительный или <br> постоянный доход.
+                p
+                  | Зарегистрируйся чтобы стать фрилансером по подбору персонала.
+
+            .request_block_wrapper_item
+              .request_block_wrapper_item_img
+                = image_tag 'rostjob_04.jpg'
+              .request_block_wrapper_item_info
+                header
+                  | 2
+                h4
+                  | Еженедельные выплаты.
+                p
+                  | Официальные выплаты на расчетный счет для физических и юридических лиц.
+            .request_block_wrapper_item
+              .request_block_wrapper_item_img
+                = image_tag 'rostjob_03.jpg'
+              .request_block_wrapper_item_info
+                header
+                  | 3
+                h4
+                  | Постоянные заявки, <br> большие объемы.
+                p
+                  | На платформе всегда есть выбор на открытые заявки.
+            .request_block_wrapper_item
+              .request_block_wrapper_item_img
+                = image_tag 'rostjob_06.jpg'
+              .request_block_wrapper_item_info
+                header
+                  | 4
+                h4
+                  | Поддержка доступна <br> по телефону и WhatsApp.
+                p
+                  | Оперативный ответ от саппорта в течении 24 часов после обращения.
+            .request_block_wrapper_item
+              .request_block_wrapper_item_img
+                = image_tag 'rostjob_10.jpg'
+              .request_block_wrapper_item_info
+                header
+                  | 5
+                h4
+                  | Доступна мобильная версия сайта.
+                p
+                  | Возможность выполнения заявки с помощью применения гаджета.
+
+
+
+    = render partial: "landing", locals: { video_poster: 'main_contactor.png', video_name: 'example_video.mp4' }
+
+/body#landing
   header.container
     .block
       = link_to root_path, class: 'land-logo' do
@@ -224,6 +329,9 @@ body#landing
                         div
                           div
                             div
+    .scrollTop
+    .scrollBottom
+
   footer
     .container
       span.rights-reserved © Все права защищены
@@ -255,6 +363,43 @@ javascript:
       firstLine.classList.toggle('rotate-right');
       secondLine.classList.toggle('rotate-left');
       thirdLine.classList.toggle('hide');
+  }
+
+  $('.scrollTop').click(function() {
+  		$("html, body").animate({scrollTop: 0},500);
+  		return false;
+  });
+
+  $(window).scroll(function(){
+      if($(window).scrollTop()>500){
+        $('.scrollTop').show(500);
+      }
+      if($(window).scrollTop()<500){
+        $('.scrollTop').hide(500);
+      }
+  })
+
+  let button;
+  button = $(".scrollBottom");
+  button.click(function() {
+      let YOffset;
+      YOffset = parseInt(pageYOffset / innerHeight, 10);
+      $("html, body").animate({
+          scrollTop: (YOffset + 1) * innerHeight + 40
+      }, "slow");
+    console.log(YOffset, pageYOffset, innerHeight);
+  })
+
+  function onEntry(entry) {
+    $(entry).each(function () {
+        console.log(this);
+    });
+  }
+  let options = {};
+  let observer = new IntersectionObserver(onEntry, options);
+  let elements = document.querySelectorAll('section');
+  for (let elm of elements) {
+    observer.observe(elm);
   }
 
   

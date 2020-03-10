@@ -1,6 +1,6 @@
 - errors = @user.errors.messages
 
-header.header
+/header.header
   = render 'users/header_logo'
 
   .header_registration
@@ -14,7 +14,7 @@ header.header
     button.header_scroll_top
       = image_tag 'svg/arrow_2.svg', alt: 'top'
 
-main
+/main
   section#main
     .main
       .main_info-header
@@ -99,4 +99,237 @@ main
               p
                 | Не устроил кандидат - откажитесь от него и выберете другого.
   
-  = render partial: "landing", locals: { video_poster: 'main_customer.png', video_name: 'example_video.mp4' }     
+  = render partial: "landing", locals: { video_poster: 'main_customer.png', video_name: 'example_video.mp4' }
+
+body#landing
+  header.container
+    .block
+      a.land-logo href="#"
+        | rost
+        span.col-blue job.com
+      .land-social
+        a href="#"
+          = image_tag('/img/vk.png')
+        a.insta href="#"
+          = image_tag('/img/insta.png')
+        a href="#"
+          = image_tag('/img/youtube.png')
+    .block.log-in-reg
+      a.land-tel-number href="tel:+88007006768"  8 800 700 6786
+      .log-in-or-reg
+        a.land-log-in href="#"  Вход
+        span.slash |
+        a.registration href="#"  Регистрация
+    .mobile-menu
+      ul
+        li
+          a href="#"  Вход
+        li
+          a href="#"  Регистрация
+        li
+          a href="tel:+88007006768"  8 800 700 6786
+        li
+          a href="#"
+            = image_tag('/img/vk.png')
+          a.insta href="#"
+            = image_tag('/img/insta.png')
+          a href="#"
+            = image_tag('/img/youtube.png')
+    .burger
+      span
+      span
+      span
+  main
+    section.landing-header.container
+      .content
+        h1.title Подбор персонала онлайн от ведущей HR компании
+        p.subtitle Онлайн кадровое агентство
+        .hire-staff-block
+          input placeholder=("Введите email для регистрации") type="email" /
+          a.hire-staff-btn href="#"  Нанять персонал
+      .landing-header-img
+        = image_tag('/img/header-img.png')
+    section.advantages
+      header
+        p Наши преимущества
+      .advantages_rectangles
+        .advantages_rectangles_wrapper
+          div
+            div
+              div
+                div
+                  div
+                    div
+                      div
+                        div
+      .advantages_block
+        .advantages_block_item.advantages-item_clearly
+          .advantages_block_item_img
+            = image_tag('/img/1.svg')
+          header
+            | Наглядно
+          p Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
+        .advantages_block_item.advantages-item_bots
+          .advantages_block_item_img
+            = image_tag('/img/2.svg')
+          header
+            | Наглядно
+          p Автомат. звонки по базам поиска работ с помощью голосовых ботов бесплатно
+        .advantages_block_item.advantages-item_promptly
+          .advantages_block_item_img
+            = image_tag('/img/3.svg')
+          header
+            | Оперативно
+          p Оперативная комплектация вакансии в любые точки РФ
+        .advantages_block_item.advantages-item_warranty
+          .advantages_block_item_img
+            = image_tag('/img/4.svg')
+          header
+            | Гарантия
+          p Гарантия выполнения или возврат денег
+        .advantages_block_item.advantages-item_regions
+          .advantages_block_item_img
+            = image_tag('/img/5.svg')
+          header
+            | Регионы
+          p Более 500 представителей в регионах
+        .advantages_block_item.advantages-item_experience
+          .advantages_block_item_img
+            = image_tag('/img/6.svg')
+          header
+            | Опыт
+          p 10 летний профессиональный опыт в HR
+        .advantages_block_item.advantages-item_interface
+          .advantages_block_item_img
+            = image_tag('/img/7.svg')
+          header
+            | Интерфейс
+          p Интуитивно понятный интерфейс
+    section.stock
+      .stock_left
+        .stock_left_img
+          = image_tag('/img/stock.png')
+        .stock_left_text
+          p
+            | в честь года платформы
+            br/
+            span
+              | скидка
+              br/
+              span.stock-summ 5000
+              | рублей
+              span.stock-star *
+          p на первую заявку всем новым зарегистрированным клиентам
+      .stock_button
+        button Перейти к регистрации
+        p * ограниченное предложение
+      .stock_rectangles
+        .stock_rectangles_wrapper
+          div
+            div
+              div
+                div
+                  div
+                    div
+                      div
+                        div
+                          div
+                            div
+    section.steps
+      .steps_item
+        header
+          | Зарегестрируйтесь
+        p
+          | заполнив
+            <br>
+          | краткую форму
+        .steps_item_img
+          = image_tag('/img/list-check.svg')
+
+      .steps_item
+        header
+          | Создайте заявку
+        p
+          | с помощью
+            <br>
+          | конструктора заявок
+        .steps_item_img
+          = image_tag('/img/pazl.png')
+      .steps_item
+        header
+          | Используйте CRM
+        p
+          | для управления
+            <br>
+          | процесса рекрутирования
+        .steps_item_img
+          = image_tag('/img/crm.svg')
+    section.our-partnerships
+      .description
+        h2 Наши рекрутеры
+        p
+          | Наши алгоритмы по условиям Вашей заявки находят соискателей в базах поиска работ. Самостоятельно дозваниваются до них, предлагая Ваши условия труда
+          | с помощью технологий синтеза и обработки голоса. Обрабатывает ответы соискателей с помощью нейросетей,         и в случае проявления заинтересованности переводят звонок  на свободного рекрутера. Рекрутер получает уже теплый звонок с анкетой соискателя. Система не даст ни пропустить, ни забыть соискателя.
+        p
+          | Наши рекрутеры — это команда профессионалов с членами рабочей группы основателей фирмы. Отдел компании, который уже 10 лет комплектует заявки на подбор персонала.
+      .img-block
+        img.people-search alt="" src="img/people-search.png" /
+      .img-block.world
+        img.people-world alt="" src="img/people-world.png" /
+      .description
+        h2 Наши региональные представители
+        p
+          | Система региональных представителей это одно из комплексных решений ГК РОСТ. Для закрытия заявки в регионе ГК развивает фриланс рекрутеров в регионе. Привлечение рекрутских агентств, поиск фрилансеров на тематических сайтах, собственные доступные базы с соискателями в области HR привлекают в систему все больше рекрутеров.
+        p
+          | Вам не нужно заключать договор с каждым рекрутером отдельно. Все юридические вопросы с рекрутерами мы берем на себя. Вам лишь остается выбрать с каким соискателем от какого рекрутера Вам хочется работать.
+    section.about-us
+      /h2.title О группе компаний РОСТ
+      .description
+        div
+          h2.title О группе <br> компаний РОСТ
+          img.about-us-img alt="" src="img/about-us-img.png" /
+          p
+            | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+        .numbers
+          .number
+            span.big-number 30
+            p.number-desc рекрутеров
+          .number
+            span.big-number 55
+            p.number-desc объектов
+          .number
+            span.big-number 500
+            p.number-desc
+              | региональных
+              br/
+              | представителей
+      .about-us_rectangles
+        .about-us_rectangles_img
+          /img alt="" src="img/Layer.png" /
+          = image_tag('/img/Layer.png')
+        .about-us_rectangles_wrapper
+          div
+            div
+              div
+                div
+                  div
+                    div
+                      div
+                        div
+                          div
+                            div
+
+  footer
+    .container
+      span.rights-reserved © Все права защищены
+      .contacts
+        a.footer-tel-number href="tel:+88007006768"  8 800 700 6786
+        .footer-social
+          span.in-social Мы в соц. сетях:
+          a href="#"
+            img alt="vk" src="img/vk_w.png" /
+          a.insta href="#"
+            img alt="instagram" src="img/insta_w.png" /
+          a href="#"
+            img alt="youtube" src="img/youtube_w.png" /
+      a.designed-by href="#"  design by: sitini.ru
