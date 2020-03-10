@@ -1,1 +1,3 @@
-= "За анкету №#{@prop_emp.employee_cv.id} Вы получите вознаграждение после отработанного гарантийного периода сотрудником."
+= "За анкету №#{@prop_emp.employee_cv.id} #{@prop_emp.employee_cv.name}. Вы получите вознаграждение после гарантийного периода."
+p
+  = link_to 'Как посмотреть статус анкеты?', page_url('manual_how_check_status_proposal_employee.html')
