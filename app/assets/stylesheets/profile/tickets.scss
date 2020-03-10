@@ -602,18 +602,34 @@
   background-color: #f2f2f2;
 
   font-family: "Open sans", sans-serif;
-  .card-tools{
+  .card-tools {
     position: absolute;
     right: 0;
-      bottom: 0;
-      transform: translateY(150%);
-        button{
-          border: 0;
-          background-color: transparent;
-          color: gray;
+    bottom: 0;
+    transform: translateY(150%);
+    z-index: 10;
+    button {
+      border: 0;
+      background-color: transparent;
+      color: gray;
     }
-    .dropdown-menu{
-          transform: translate3d(-130px, 26px, 0px) !important;
+    .dropdown-menu {
+      transform: translate3d(-130px, 26px, 0px) !important;
+    }
+  }
+
+  .chat-sidebar {
+    .request-wrap-for-date {
+      position: relative;
+      z-index: 0;
+    }
+    .request-date-in-wrap {
+      position: absolute;
+      right: 7px;
+      bottom: 7px;
+      color: #8d8d8d;
+      font-size: 13px;
+      font-weight: bold;
     }
   }
 }
@@ -634,7 +650,7 @@
 
 #chat-room .chat-sidebar-header {
   position: relative;
-  height: 8.5798%;
+  min-height: 8.5798%;
   border-radius: 4px;
   background-color: #1970ff;
   padding: 14px 21px 11px;
@@ -661,7 +677,7 @@
 #chat-room .messages {
   height: calc(70% - 50px);
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   overflow: auto;
   margin: 10px 0 40px 0;
 }
@@ -744,7 +760,7 @@
 
 #chat-room .ready-text-examples {
   display: flex;
-  height: 12.5%;
+  min-height: 12.5%;
   width: 96.1206%;
   margin: 0 auto 2.5%;
 }
@@ -911,4 +927,13 @@
 
 .custom-scroll::-webkit-scrollbar-thumb:active {
   background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+
+@media (max-height: 768px) {
+  #chat-room .ready-text-examples{
+    margin: 0 auto 1.5%;
+  }
+  #chat-room .messages.custom-scroll{
+    margin: 10px 0 15px 0;
+  }
 }

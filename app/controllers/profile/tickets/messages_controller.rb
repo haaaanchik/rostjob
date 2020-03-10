@@ -8,7 +8,8 @@ class Profile::Tickets::MessagesController < ApplicationController
                                                ticket: ticket,
                                                message_params: message_params)
     if result.success?
-      render partial: 'profile/tickets/messages/message', object: result.message, layout: false
+      @status = 'success'
+      @message = result.message.decorate
     else
       render json: { validate: true, data: errors_data(result.message) }, status: 422
     end

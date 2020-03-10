@@ -1,12 +1,16 @@
-.d-flex.ticker-message.py-1.my-2.mx-1
-  .col-2
-    .h-100.d-flex.flex-column.justify-content-center.align-items-center
-      = image_tag  "/img/no-avatar.jpg", size: '85'
-      .message-sender-name
-        = message.sender_name
-  .col-10
-    .h-100.d-flex.flex-column.justify-content-between
-      .message-text
-        = message.text
-      .message-date.text-right
-        = message.message_ctreated_at
+- if message.sender_id == current_user.id
+  .message.user
+    = image_tag(message.sender.profile.image_url, class: 'message-logo')
+    .message-body
+      p class="sender-name" = message.sender_name
+      p class="message-content" = message.text
+      .date-and-time
+        span = message.message_created_at
+- else
+  .message
+    = image_tag(message.sender.profile.image_url, class: 'message-logo')
+    .message-body
+      p class="sender-name" = message.sender_name
+      p class="message-content" = message.text
+      .date-and-time
+        span = message.message_created_at

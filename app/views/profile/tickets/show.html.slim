@@ -69,98 +69,58 @@
                       = @ticket.user_full_name
 
 #chat-room
+  .chat-body
+    .messages.custom-scroll
+      = render partial: 'profile/tickets/messages/message', collection: @ticket.messages.decorate
+    = render partial: 'profile/tickets/toolbars/customer_actions'
+    = form_with model: Message.new, url: profile_ticket_messages_path(@ticket),
+                                    class: 'message-conten',
+                                    id: 'ticket_message_form' do |f|
+      .text-input
+        = f.text_area :text, placeholder: 'Наберите текст сообщения'
+        .attach-files#ticket-attach-file
+          input type="file"
+          = image_tag('/img//new/clip.png')
+          span style="margin-left: 5px" Прикрепить файл
 
-	.chat-body
+  .chat-sidebar
+    .chat-sidebar-header
+      p.chat-sidebar-title #{@ticket.proposal_employee.order.production_site.title}
+      span class="chat-sidebar-header-city" г. #{@ticket.proposal_employee.order.city}
 
-		.messages.custom-scroll
+    .chat-sidebar-body.custom-scroll
+      .request
+        .request-header
+          p class="card-name" № #{@ticket.proposal_employee.order.id } #{@ticket.proposal_employee.order.title}
+          hr
+          i class="fa fa-bookmark custom-orange" id="hanging-flag"
+          .card-tools
+            button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+              i.fas.fa-ellipsis-h
+            .dropdown-menu x-placement="bottom-start"
+              = link_to 'Отправить',
+                        profile_favorites_path(employee_cv_id: @ticket.proposal_employee.employee_cv),
+                        class: 'dropdown-item',
+                        data: { type: :script },
+                        remote: true
+              = link_to 'Изменить', edit_profile_employee_cv_path(@ticket.proposal_employee.employee_cv),
+                                                                  class: 'dropdown-item', remote: true
+              a.comment-emp-cv.dropdown-item href="#"  Комментарий
+              .dropdown-divider
+              = link_to 'Удалить',
+                        profile_employee_cv_path(@ticket.proposal_employee.employee_cv),
+                        data: {confirm: 'Удалить анкету?'},
+                        class: 'dropdown-item',
+                        method: :delete,
+                        remote: true
 
-			.message
-				= image_tag('/img//new/message-logo.png', class: 'message-logo')
-				.message-body
-					p class="sender-name" Менеджер РОСТ
-					p class="message-content" Здравствуйте! Мы решаем ваш вопрос. Я хочу назначить другое число приезда кандидата, соискатель не смог приехать в срок.
-						Кандидат не явился на собеседование, разберитесь пожалуйста. Я хочу отозвать анкету, кандидат не появится на собеседовании
+        a data-remote="true" href="#"
+          p class="request__title" № #{ @ticket.proposal_employee.id } #{@ticket.proposal_employee.employee_cv.name}
 
-					.date-and-time
-						span 15:30 17.02.2020
-
-			.message.user
-				= image_tag('/img//new/message-logo.png', class: 'message-logo')
-				.message-body
-					p class="sender-name" Менеджер РОСТ2
-					p class="message-content" Текст текст текст текст
-						текст текст текст текст текст текст текст текст текст
-						текст текст текст текст текст текст текст текст текст
-						текст текст текст текст текст текст текст текст текст
-						текст текст текст текст текст текст текст текст текст
-						текст текст текст текст текст текст текст текст текст
-
-					.date-and-time
-						span 15:30 17.02.2020
-
-		.ready-text-examples
-			.text-example
-				span Кандидат не явился на собеседование, разберитесь пожалуйста
-
-			.text-example
-				span Я хочу отозвать анкету, кандидат не появится на собеседовании
-
-
-			.text-example
-				span Кандидат не явился на собеседование, разберитесь пожалуйста
-
-
-			.text-example
-				span Я хочу назначить другое число приезда кандидата, соискатель не смог приехать в срок
-
-
-		.text-input
-			textarea name="" id="" placeholder="Наберите текст сообщения"
-			.attach-files
-				input type="file"
-				= image_tag('/img//new/clip.png')
-				span style="margin-left: 5px" Прикрепить файл
-
-	.chat-sidebar
-
-		.chat-sidebar-header
-			p.chat-sidebar-title Пискаревский молзавод производство
-
-			span class="chat-sidebar-header-city" г. Москва
-
-		.chat-sidebar-body.custom-scroll
-
-			.request
-				.request-header
-					p class="card-name" № 82 Оператор-сборщик схемных жгутов. Без опыта работы
-					hr
-					i class="fa fa-bookmark custom-orange" id="hanging-flag"
-					.card-tools
-                      button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
-                        i.fas.fa-ellipsis-h
-                      .dropdown-menu x-placement="bottom-start"
-                        = link_to 'Отправить',
-                                  profile_favorites_path(employee_cv_id: @ticket.proposal_employee.employee_cv),
-                                  class: 'dropdown-item',
-                                  data: { type: :script },
-                                  remote: true
-                        = link_to 'Изменить', edit_profile_employee_cv_path(@ticket.proposal_employee.employee_cv), class: 'dropdown-item', remote: true
-                        a.comment-emp-cv.dropdown-item href="#"  Комментарий
-                        .dropdown-divider
-                        = link_to 'Удалить',
-                                  profile_employee_cv_path(@ticket.proposal_employee.employee_cv),
-                                  data: {confirm: 'Удалить анкету?'},
-                                  class: 'dropdown-item',
-                                  method: :delete,
-                                  remote: true
-
-				a data-remote="true" href="#"
-					p class="request__title" № 124 Бахтияров Юрий
-
-				p class="phone-number" +7(918)-589-45-58
-				textarea class="candidate-comment" cols="30" placeholder="Напишите комментарий" rows="4"
-				div class="request__footer"
-					= image_tag('/img//new/no-avatar.png', class: 'request-logo')
-					p class="request-user-name" Светлана Сперанская
+        p class="phone-number" #{@ticket.proposal_employee.employee_cv.phone_number}
+        textarea class="candidate-comment" cols="30" placeholder="Напишите комментарий" rows="4"
+        div class="request__footer"
+          = image_tag('/img//new/no-avatar.png', class: 'request-logo')
+          p class="request-user-name" #{@ticket.user_full_name}
 
 
