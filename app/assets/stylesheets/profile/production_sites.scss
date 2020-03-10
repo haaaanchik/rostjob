@@ -366,9 +366,18 @@ $phone: "max-width: 768px";
   color: #525252;
   font-family: $primaryFont;
   font-size: 14px;
-  font-weight: bold;
+  font-weight: 500;
   a {
     color: #525252;
+  }
+
+  .current_production_sites{
+    font-weight: 700 !important;
+
+    &::before {
+      content: '\2022';
+      margin-right: 5px;
+    }
   }
 }
 

@@ -37,7 +37,7 @@
             = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
           .col-md-6.d-flex
             #choose-file
-              | Выберите файл
+              = f.label :image, 'Выберите файл'
               = f.file_field :image
       .form-group
         .row
