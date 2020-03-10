@@ -135,7 +135,7 @@ class ProposalEmployeeDecorator < ObjDecorator
 
   def display_date_to_card
     return format_date(interview_date) if ['inbox', 'interview'].include? state
-    format_date(interview_date)
+    format_date(hiring_date)
   end
 
   def display_candidate_date
