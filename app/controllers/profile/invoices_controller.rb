@@ -21,7 +21,7 @@ class Profile::InvoicesController < ApplicationController
     if current_profile.filled?
       result = ::Cmd::Invoice::Create.call(amount: amount, profile: current_profile)
       if result.success?
-        redirect_to profile_invoices_path
+        redirect_to profile_invoices_path(state: 'created')
       else
         @invoice = result.invoice
         invoices
