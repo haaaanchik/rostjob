@@ -1,106 +1,5 @@
 - errors = @user.errors.messages
 
-/header.header
-  = render 'users/header_logo'
-
-  .header_registration
-    = link_to 'Вход&nbsp;'.html_safe, login_path
-    span
-      | /
-    = link_to '&nbsp;Регистрация'.html_safe, new_customer_path
-  .header_scroll
-    button.header_scroll_down
-      = image_tag 'svg/arrow_2.svg', alt: 'down'
-    button.header_scroll_top
-      = image_tag 'svg/arrow_2.svg', alt: 'top'
-
-/main
-  section#main
-    .main
-      .main_info-header
-        h2 Зарегестрируйтесь в ROSTJOB, чтобы нанять персонал
-      .main_info-text
-        p На портале работают 200 фрилансеров по всему миру и рекрутеры с автоматическим голосовым помощником
-      .main_input
-        = form_for @user,
-                  method: :post,
-                  url: user_registration_path,
-                  html: { name: 'form-email', novalidate: '' } do |f|
-          .invalid-feedback = errors[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'e-mail для регистрации'
-          = f.button t("views.modals.signin.customer"), name: :customer
-      .main_freelance
-        = link_to 'Зарегистрироваться как фрилансер', landing_for_contractor_path
-      .main_img
-        = image_tag 'main_customer.png'
-
-  section.request
-    .request_header
-      h3 Заголовок
-    .request_block
-      .request_block_nav
-        .arrow.arrow_left
-          = image_tag 'svg/arrow_2.svg', alt: 'left'
-        .arrow.arrow_right
-          = image_tag 'svg/arrow_2.svg', alt: 'left'
-        .navbar
-      
-      .request_block_viewbox
-        .request_block_wrapper
-          .request_block_wrapper_item
-            .request_block_wrapper_item_img
-              = image_tag 'rostjob_05.jpg'
-            .request_block_wrapper_item_info
-              header 
-                | 1
-              h4
-                | Выполнение заявок сразу <br> после публикации
-              p
-                | Публикация заявки может занять 15 минут.
-          
-          .request_block_wrapper_item
-            .request_block_wrapper_item_img
-              = image_tag 'rostjob_01.jpg'
-            .request_block_wrapper_item_info
-              header
-                | 2
-              h4
-                | Заявки закрывают <br> фрилансеры по всему миру
-              p
-                | Опубликованную заявку выполняют все зарегистрированные пользователи
-          .request_block_wrapper_item
-            .request_block_wrapper_item_img
-              = image_tag 'rostjob_07.jpg'
-            .request_block_wrapper_item_info
-              header
-                | 3
-              h4
-                | Автоматические звонки <br> соискателям от голосовых ботов
-              p
-                | Самые современные технологии сбора и обработки баз соискателей
-          .request_block_wrapper_item
-            .request_block_wrapper_item_img
-              = image_tag 'rostjob_09.jpg'
-            .request_block_wrapper_item_info
-              header
-                | 4
-              h4
-                | Выберите лучшего <br> из предоставленных кандидатов
-              p
-                | Интерфейс отказа и приглашения соискателя проверен в работе
-          .request_block_wrapper_item
-            .request_block_wrapper_item_img
-              = image_tag 'rostjob_08.jpg'
-            .request_block_wrapper_item_info
-              header
-                | 5
-              h4
-                | Гарантия <br> 10 отработанных смен.
-              p
-                | Не устроил кандидат - откажитесь от него и выберете другого.
-  
-  = render partial: "landing", locals: { video_poster: 'main_customer.png', video_name: 'example_video.mp4' }
-
 body#landing
   header.container
     .block
@@ -117,15 +16,15 @@ body#landing
     .block.log-in-reg
       a.land-tel-number href="tel:+88007006768"  8 800 700 6786
       .log-in-or-reg
-        a.land-log-in href="#"  Вход
+        = link_to 'Вход', login_path, class: 'land-log-in'
         span.slash |
-        a.registration href="#"  Регистрация
+        = link_to 'Регистрация', new_customer_path, class: 'registration'
     .mobile-menu
       ul
         li
-          a href="#"  Вход
+          = link_to 'Вход', login_path
         li
-          a href="#"  Регистрация
+          = link_to 'Регистрация', new_customer_path
         li
           a href="tel:+88007006768"  8 800 700 6786
         li
@@ -144,9 +43,13 @@ body#landing
       .content
         h1.title Подбор персонала онлайн от ведущей HR компании
         p.subtitle Онлайн кадровое агентство
-        .hire-staff-block
-          input placeholder=("Введите email для регистрации") type="email" /
-          a.hire-staff-btn href="#"  Нанять персонал
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
         = image_tag('/img/header-img.png')
     section.advantages
@@ -221,7 +124,7 @@ body#landing
               span.stock-star *
           p на первую заявку всем новым зарегистрированным клиентам
       .stock_button
-        button Перейти к регистрации
+        = link_to 'Перейти к регистрации', new_customer_path
         p * ограниченное предложение
       .stock_rectangles
         .stock_rectangles_wrapper
@@ -333,3 +236,59 @@ body#landing
           a href="#"
             img alt="youtube" src="img/youtube_w.png" /
       a.designed-by href="#"  design by: sitini.ru
+
+javascript:
+    let lines_arr = document.querySelectorAll('.burger span');
+    let firstLine = lines_arr[0];
+    let secondLine = lines_arr[1];
+    let thirdLine = lines_arr[2];
+    let mobileMenu = $('.mobile-menu');
+
+    if (document.querySelector('.burger')) {
+        document.querySelector('.burger').addEventListener('click', openCloseMobileMenu);
+    }
+
+    function openCloseMobileMenu() {
+        mobileMenu.slideToggle();
+        firstLine.classList.toggle('rotate-right');
+        secondLine.classList.toggle('rotate-left');
+        thirdLine.classList.toggle('hide');
+    }
+
+    $('.scrollTop').click(function () {
+        $("html, body").animate({scrollTop: 0}, 500);
+        return false;
+    });
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 500) {
+            $('.scrollTop').show(500);
+        }
+        if ($(window).scrollTop() < 500) {
+            $('.scrollTop').hide(500);
+        }
+    })
+
+    let button;
+    button = $(".scrollBottom");
+    button.click(function () {
+        let YOffset;
+        YOffset = parseInt(pageYOffset / innerHeight, 10);
+        $("html, body").animate({
+            scrollTop: (YOffset + 1) * innerHeight + 40
+        }, "slow");
+        console.log(YOffset, pageYOffset, innerHeight);
+    })
+
+    function onEntry(entry) {
+        $(entry).each(function () {
+            console.log(this);
+        });
+    }
+
+    let options = {};
+    let observer = new IntersectionObserver(onEntry, options);
+    let elements = document.querySelectorAll('section');
+    for (let elm of elements) {
+        observer.observe(elm);
+    }
