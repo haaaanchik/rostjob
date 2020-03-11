@@ -1,15 +1,21 @@
 = form_with model: @appeal, url: profile_tickets_appeals_path do |f|
-  .form-group
-    = f.label :title, 'Тема'
-    = f.text_field :title, class: 'form-control'
-    .invalid-feedback
-  .form-group
-    = f.fields_for :messages do |m|
-      = m.label :text, 'Текст обращения'
-      = m.text_area :text, class: 'form-control'
+  .treatment-modal_block_wrapper
+    button class="btn-close"
+      span
+        hr
+        hr
+
+    header Новое обращение
+
+    .treatment-modal_block_wrapper_input
+      = f.label :title, 'Тема', for: 'treatment-modal-theme'
+      = f.text_field :title, id: 'treatment-modal-theme', placeholder: 'Укажите тему обращения'
       .invalid-feedback
-  .text-center
-    .container
-      .row.justify-content-center
-        .col-md-4
-          = f.submit 'Отправить', class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2'
+
+    .treatment-modal_block_wrapper_input
+      = f.fields_for :messages do |m|
+        = m.label :text, 'Текст', for: 'treatment-modal-text'
+        = m.text_area :text, placeholder: 'Напишите ваше обращение', id: 'treatment-modal-text'
+        .invalid-feedback
+
+    = f.submit 'Отправить', class: 'btn'

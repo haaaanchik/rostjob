@@ -4,7 +4,8 @@ class Incident < Ticket
   validates :proposal_employee_id, presence: true
   validates :reason, presence: true
 
-  enumerize :reason, in: { other: 0, not_come: 1 }, default: :other
+  enumerize :title, in: { other: 0, not_come: 1, fail_interview: 2 }
+  enumerize :reason, in: { other: 0, not_come: 1, fail_interview: 2 }, default: :other
 
   after_create :mail_for_contractor_has_incident, if: -> { opened? }
 

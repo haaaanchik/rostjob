@@ -1,5 +1,6 @@
 class Message < ApplicationRecord
   belongs_to :ticket
+  belongs_to :sender, class_name: 'User'
 
   validates :text, presence: true
   validates :sender_name, presence: true

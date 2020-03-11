@@ -1,30 +1,26 @@
-- url = profile_tickets_path
-- val =  params[:q] ? params[:q][:all_fields_cont] : nil
-- type = params[:q] ? params[:q].fetch(:type_in, %w[]) : %w[]
-- state_waiting = params[:q] ? params[:q][:state_waiting_fields_eq] : 'opened'
-= search_form_for @q, url: url do |f|
-  = hidden_field_tag 'q[state_not_eq]'
-  .input-group.flex.no-wrap
-    = f.search_field :all_fields_cont, placeholder: 'Поиск тикетов', class: 'form-control m-2', value: val
-    = link_to 'Новое обращение', new_profile_tickets_appeal_path, class: 'btn button-hr btn-rounded waves-effect candidates-menu-button active', remote: true
-    .form-check.form-check-inline
-      = check_box_tag 'q[type_in][]', 'appeal', type.include?('appeal'), { class: 'form-check-input', id: 'tickets_filter_appeals' }
-      = label :type, nil, class: 'form-check-label', for: 'tickets_filter_appeals' do
-        span.mr-2 Обращения
-    .form-check.form-check-inline
-      = check_box_tag 'q[type_in][]', 'incident', type.include?('incident'), { class: 'form-check-input', id: 'tickets_filter_incidents' }
-      = label :type, nil, class: 'form-check-label', for: 'tickets_filter_incidents' do
-        span.mr-2 Споры
+ruby:
+  val =  params[:q] ? params[:q][:all_fields_cont] : nil
+  type = params[:q] ? params[:q].fetch(:type_in, %w[]) : %w[]
+  state_not_eq = Profile::PROFILE_TYPES.include?(state_waiting_fields_eq) ? params[:q][:state_not_eq] : ''
 
-    .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
-      = label :type, nil, class: "btn button-hr btn-rounded waves-effect candidates-menu-button.w-50 p-1 text-center #{'active' if state_waiting&.include?('closed')}", for: 'closed_tickets' do
-        = radio_button_tag 'q[state_waiting_fields_eq]', 'closed', state_waiting&.include?('closed'), { id: 'closed_tickets' }
-        span.mr-2 Закрытые
+= search_form_for @q, url: profile_tickets_path do |f|
+  = hidden_field_tag 'q[state_not_eq]', state_not_eq
+  = hidden_field_tag 'q[state_waiting_fields_eq]', state_waiting_fields_eq
 
-      = label :type, nil, class: "btn button-hr btn-rounded waves-effect candidates-menu-button.w-50 p-1 text-center #{'active' if state_waiting&.include?('opened')}", for: 'opened_tickets' do
-        = radio_button_tag 'q[state_waiting_fields_eq]', 'opened', state_waiting&.include?('opened'), { id: 'opened_tickets' }
-        span.mr-2 Открытые
+  section.treatment_search
+    .treatment_search_input
+      = f.search_field :all_fields_cont, id: 'search-input', placeholder: 'Поиск обращений', value: val
+      = image_tag('/img/new/search.png', class: 'search-img')
 
-      = label :type, nil, class: "btn button-hr btn-rounded waves-effect candidates-menu-button.w-50 p-1 text-center #{'active' if state_waiting&.include?(profile_type)}", for: 'waiting_tickets' do
-        = radio_button_tag 'q[state_waiting_fields_eq]', profile_type, state_waiting&.include?(profile_type), { id: 'waiting_tickets' }
-        span.mr-2 В ожидании
+    .treatment_search_checkboxes
+      .treatment_search_checkboxes_block
+        = check_box_tag 'q[type_in][]', 'appeal', type.include?('appeal'), { id: 'tickets_filter_appeals'}
+        = label :type, nil, class: 'pseudoCheckbox', for: 'tickets_filter_appeals' do
+          i.fa.fa-check
+        = label nil, 'Обращения', for: 'tickets_filter_appeals'
+
+      .treatment_search_checkboxes_block
+        = check_box_tag 'q[type_in][]', 'incident', type.include?('incident'), { id: 'tickets_filter_incidents'}
+        = label :type, nil, class: 'pseudoCheckbox', for: 'tickets_filter_incidents' do
+          i.fa.fa-check
+        = label nil, 'Споры', for: 'tickets_filter_incidents'

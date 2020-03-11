@@ -86,3 +86,7 @@ body {
 .custom-select.is-invalid {
   border-color: #dc3545 !important;
 }
+
+.popover-header {
+    text-align: center;
+}

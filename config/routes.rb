@@ -226,8 +226,14 @@ Rails.application.routes.draw do
       end
     end
     namespace :tickets do
-      resources :appeals, only: %i[new create]
-      resources :incidents, only: %i[show new create]
+      resources :appeals, only: %i[create]
+      resources :incidents, only: %i[update show new create] do
+        member do
+          put :hire
+          put :revoke
+          put :inbox
+        end
+      end
     end
     resources :candidates, only: %i[index show] do
       member do
