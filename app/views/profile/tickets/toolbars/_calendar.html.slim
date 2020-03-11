@@ -1,0 +1,31 @@
+- hd = candidate.interview_date&.strftime('%d-%m-%Y') || Date.today.strftime('%d-%m-%Y')
+#candidate_form_datepicker.d-flex.justify-content-center.border-solid data-date=hd
+= form_with url: url, method: :put do |f|
+  = f.hidden_field field.to_sym, value: candidate.interview_date.strftime('%d.%m.%Y')
+  = f.submit button_text, class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2 m-0'
+
+javascript:
+  function init_datepicker() {
+    $('#candidate_form_datepicker').datepicker({
+      language: 'ru',
+      todayHighlight: false
+    });
+
+    $('#candidate_form_datepicker').on('changeDate', function() {
+      $('#hiring_date, #interview_date').val(
+          $('#candidate_form_datepicker').datepicker('getFormattedDate')
+      );
+    });
+  }
+
+  function defer(method) {
+    if(window.jQuery && $.fn.datepicker) {
+      method();
+    } else {
+      setTimeout(function () {
+        defer(method);
+      }, 50);
+    }
+  }
+
+  defer(init_datepicker);

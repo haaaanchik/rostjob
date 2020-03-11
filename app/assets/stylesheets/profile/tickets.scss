@@ -599,9 +599,14 @@
 #chat-room {
   display: flex;
   height: 100%;
+  width: 100%;
   background-color: #f2f2f2;
-
   font-family: "Open sans", sans-serif;
+
+  a.disabled {
+    color: gray !important;
+  }
+
   .card-tools {
     position: absolute;
     right: 0;
@@ -639,6 +644,11 @@
   margin: 15px;
   background-color: #fff;
   border-radius: 4px;
+
+  .dispute-closed {
+    text-align: center;
+    margin-top: 70px;
+  }
 }
 
 #chat-room .chat-sidebar {
@@ -760,13 +770,14 @@
 
 #chat-room .ready-text-examples {
   display: flex;
+  justify-content: center;
   min-height: 12.5%;
   width: 96.1206%;
   margin: 0 auto 2.5%;
 }
 
 #chat-room .ready-text-examples .text-example {
-  width: 25%;
+  width: 30%;
   padding: 13px 14px 12px 16px;
   border-radius: 4px;
   border: 1px solid #1970ff;
@@ -775,6 +786,7 @@
   font-size: 13px;
   font-weight: bold;
   line-height: 16px;
+  cursor: pointer;
 }
 
 #chat-room .text-input {
@@ -793,7 +805,6 @@
   resize: none;
   padding: 13px;
   font-size: 15px;
-  line-height: 7.09px;
 }
 
 #chat-room .text-input textarea::placeholder {

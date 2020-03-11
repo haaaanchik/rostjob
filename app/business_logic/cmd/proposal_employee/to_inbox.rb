@@ -16,7 +16,7 @@ module Cmd
       end
 
       def interview_date
-        candidate.interview_date
+        context.interview_date || candidate.interview_date
       end
 
       def current_user

@@ -12,8 +12,9 @@ class Messages
     $('#message_text').on 'keypress', @sendSubmit
 
   @sendSubmit: (e) ->
-    if e.which == 13
-      $(this).parents('form').submit()
+    if !e.shiftKey && e.keyCode == 13
+      form = $(this).parents('form')[0]
+      form.dispatchEvent(new Event('submit', { bubbles: true }))
 
 $(document).on 'turbolinks:load', ->
   Messages.init()

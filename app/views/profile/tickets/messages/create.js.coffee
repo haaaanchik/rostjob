@@ -1,5 +1,3 @@
-console.log('-----------', <% @message %>)
-
 <% if @status == 'success' %>
 <% rdr = render partial: 'profile/tickets/messages/message', locals: { message: @message } %>
 $('.messages.custom-scroll').append('<%= j rdr %>')
