@@ -109,7 +109,7 @@ body#landing
             | Интерфейс
           p Интуитивно понятный интерфейс
     section.stock
-      .stock_left
+      / .stock_left
         .stock_left_img
           = image_tag('/img/stock.png')
         .stock_left_text
@@ -123,7 +123,7 @@ body#landing
               | рублей
               span.stock-star *
           p на первую заявку всем новым зарегистрированным клиентам
-      .stock_button
+      / .stock_button
         = link_to 'Перейти к регистрации', new_customer_path
         p * ограниченное предложение
       .stock_rectangles
