@@ -175,3 +175,13 @@
   }
 
 }
+
+form#production_site_form #choose-file {
+  label {
+    margin: 0; 
+    padding: 10px;
+  }
+  input[type='file'] {
+    display: none;
+  }
+}
