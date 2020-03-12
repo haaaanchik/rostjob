@@ -51,7 +51,7 @@ body#landing
           = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
           = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
-        = image_tag('/img/header-img.png')
+        = image_tag('/img/stock.svg')
     section.advantages
       header
         p Наши преимущества
@@ -111,7 +111,7 @@ body#landing
     section.stock
       / .stock_left
         .stock_left_img
-          = image_tag('/img/stock.png')
+          = image_tag('/img/promotions_woman.svg')
         .stock_left_text
           p
             | в честь года платформы
@@ -123,6 +123,8 @@ body#landing
               | рублей
               span.stock-star *
           p на первую заявку всем новым зарегистрированным клиентам
+        .stock_right_img
+          = image_tag('/img/promotions_man.svg')
       / .stock_button
         = link_to 'Перейти к регистрации', new_customer_path
         p * ограниченное предложение
@@ -176,9 +178,9 @@ body#landing
         p
           | Наши рекрутеры — это команда профессионалов с членами рабочей группы основателей фирмы. Отдел компании, который уже 10 лет комплектует заявки на подбор персонала.
       .img-block
-        img.people-search alt="" src="img/people-search.png" /
+        img.people-search alt="" src="img/people-search.svg" /
       .img-block.world
-        img.people-world alt="" src="img/people-world.png" /
+        img.people-world alt="" src="img/people-world.svg" /
       .description
         h2 Наши региональные представители
         p
@@ -208,8 +210,7 @@ body#landing
               | представителей
       .about-us_rectangles
         .about-us_rectangles_img
-          /img alt="" src="img/Layer.png" /
-          = image_tag('/img/Layer.png')
+          = image_tag('/img/Layer.svg')
         .about-us_rectangles_wrapper
           div
             div
