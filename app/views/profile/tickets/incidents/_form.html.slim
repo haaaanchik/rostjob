@@ -4,7 +4,7 @@
   h5 Анкета: #{candidate.employee_cv.name}
   h5 Заявка: #{candidate.order.title}
   = label_tag :title, 'Тема спора:', class: 'form-check-label'
-  - Incident.reason.values.each do |r|
+  - Incident.title.values.each do |r|
     .form-check
       = radio_button_tag 'incident[title]', r, false, class: 'form-check-input'
       = label_tag "incident[title]_#{r}", t("enumerize.incident.reason.#{r}"), class: 'form-check-label'

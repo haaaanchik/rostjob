@@ -232,6 +232,7 @@ Rails.application.routes.draw do
           put :hire
           put :revoke
           put :inbox
+          put :interview
         end
       end
     end

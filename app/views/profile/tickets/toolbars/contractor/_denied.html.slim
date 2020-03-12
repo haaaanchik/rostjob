@@ -1,0 +1,5 @@
+.ready-text-examples
+  = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
+    span Да, кандидат не прошел собеседование, я хочу вернуть анкету
+  div class="text-example #{disabled}" data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
+    span Нет, кандидат устроился, уточните пожалуйста

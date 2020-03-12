@@ -1,0 +1,14 @@
+ruby:
+  waiting_field = { incident: { waiting: 'contractor' }}
+  message = 'Нет, кандидат был на собеседование, уточните пожалуйста'
+
+.ready-text-examples
+  = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
+    span Да, кандидат не явился на собеседование, я хочу вернуть анкету
+  .text-example data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
+    span Да, кандидат не явился на собеседование, я хочу изменить дату приезда
+  = link_to profile_tickets_incident_path(@ticket, waiting_field, message: message),
+          method: :put,
+          remote: true,
+          class: "text-example #{disabled}" do
+    span = message
