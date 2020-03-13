@@ -123,7 +123,7 @@ class ProposalEmployee < ApplicationRecord
   private
 
   def mail_inbox
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'candidates_inbox')
+    SendNotifyMailJob.perform_now(objects: [self], method: 'emp_cv_sended')
   end
 
   def mail_for_contractor_hired

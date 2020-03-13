@@ -1,4 +1,7 @@
-| У Вас имеются кандидаты ждущие назначения собеседования в заявку:
+- if @candidates.size == 1
+  | У Вас имеется кандидат ждущий назначения собеседования в заявку:
+- else
+  | У Вас имеются кандидаты ждущие назначения собеседования в заявку:
 - count_proposal_employee_by_order(@candidates).each do |order_id, result_count|
   p
     = "#{Order.find(order_id).title} в количестве #{result_count} кандидата(ов)"
