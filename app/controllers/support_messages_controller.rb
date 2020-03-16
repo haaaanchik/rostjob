@@ -7,7 +7,7 @@ class SupportMessagesController < ApplicationController
     @message_to_support = MessageToSupport.new(permitted_params)
     if verify_recaptcha(model: @message_to_support, attribute: :recaptcha) &&
        @message_to_support.save
-      SendMailJob.perform_later(message: @message_to_support)
+      SendMailJob.perform_later(message: @message_to_support, method: 'send_notification')
       redirect_to root_path
     else
       render json: { errors: @message_to_support.errors.messages }

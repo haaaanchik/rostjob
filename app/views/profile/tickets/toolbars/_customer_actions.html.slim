@@ -1,5 +1,5 @@
 ruby:
-  partial = @ticket.title.denied? ? 'denied' : 'other'
+  partial = @ticket.title.other? ? 'other' : 'denied'
   pe_form = "#{render partial: 'profile/tickets/toolbars/calendar',
                       locals: { url: hire_profile_tickets_incident_path(@ticket),
                                 candidate: @ticket.proposal_employee,

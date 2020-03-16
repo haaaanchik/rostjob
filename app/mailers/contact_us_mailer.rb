@@ -13,4 +13,11 @@ class ContactUsMailer < ApplicationMailer
 
     mail to: Rails.application.config.email_to
   end
+
+  def admin_dispute_notification
+    @message = params[:message]
+    @incident = params[:incident]
+
+    mail(to: 'manager@rostjob.com', subject: 'Спор')
+  end
 end
