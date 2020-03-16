@@ -26,5 +26,8 @@ module ProposalEmployeeRepository
                                                                                    proposal_employees.payment_date > ? ',
                                                                                   'paid', profile_id, current_date, prev_date) }
     scope :count_without_paid_inbox_revoke, -> { where.not(state: ['inbox', 'paid', 'revoked']).count }
+    scope :range_approved, -> (start_date, end_date){ where('warranty_date > ? AND warranty_date < ?', start_date, end_date)}
+    scope :range_hiring, -> (start_date, end_date){ where('warranty_date > ? AND warranty_date < ?', start_date, end_date)}
+    scope :range_interview, -> (start_date, end_date){ where('interview_date > ? AND interview_date < ?', start_date, end_date)}
   end
 end

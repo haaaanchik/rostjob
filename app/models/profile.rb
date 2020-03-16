@@ -77,7 +77,7 @@ class Profile < ApplicationRecord
   end
 
   def calculate_hiring_percent
-    ((amount_of_deals)/(amount_of_deals + proposal_employees.revoked.count))*100
+    (amount_of_deals + proposal_employees.revoked.count)/ amount_of_deals
   rescue ZeroDivisionError
     0.0
   end
