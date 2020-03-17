@@ -316,6 +316,19 @@
     background-color: #ffffff;
     padding: 15px 0;
 
+    .triangle {
+      width: 10px;
+      height: 10px;
+      display: block;
+      position: absolute;
+      border-top: 12px solid transparent;
+      border-left: 12px solid #d0d0d0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      top: 5px;
+      right: -13px;
+    }
+
     h4{
       position: relative;
       font-size: 13px;

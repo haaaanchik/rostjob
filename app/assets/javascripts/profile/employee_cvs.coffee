@@ -126,8 +126,16 @@ class EmployeeCvs
     coords = cur_input.getBoundingClientRect()
     answer_x = coords.left
     answer_y = coords.top
+    $('.triangle').css('top', 5+'px'); # сдвиг на 5 пикселей для красоты
+    if document.documentElement.clientHeight - coords.y < 434 # 434 полная высота напоминания
+      answer_y = coords.top - 400 # сдвиг на 400 пикселей вверх
+      $('.triangle').css('top', 405+'px');
+    if answer_y < 60 # 60 - это высота header на странице, отнимая выкидываю ее из учета
+      click_y = coords.y - 60
+      answer_y = 60
+      $('.triangle').css('top', click_y+'px');
     popup = document.querySelector('.popup')
-    popup.style.left = answer_x - 270 + 'px'
+    popup.style.left = answer_x - (coords.width + 58 )  + 'px' # на 46 пикселей напоминание больше инпута + 12px стрелочка
     popup.style.top = answer_y + 'px'
     if $(window).width() < 900
       popup.style.left = answer_x + 'px'
