@@ -25,10 +25,10 @@
                 = f.radio_button :gender, 'Ж', id: 'gender_female', class: 'form-check-input'
                 = f.label :gender, 'Ж', for: 'gender_female', class: 'form-check-label'
 
-  .border.rounded.white.mt-3
-    .modal-body.pt-1
-      .container-fluid
-        - if params[:state] == 'reminder'
+  - if params[:state] == 'reminder'
+    .border.rounded.white.mt-3
+      .modal-body.pt-1
+        .container-fluid
           | Напоминание
           .row
             .col-4

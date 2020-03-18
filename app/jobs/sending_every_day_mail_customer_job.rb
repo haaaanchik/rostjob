@@ -3,7 +3,6 @@ class SendingEveryDayMailCustomerJob < ApplicationJob
 
   def perform
     today_interview_customer
-    tomorrow_inteview_customer
     order_wait_for_payment
     invoice_wait_payment
     proposal_employee_inbox
@@ -34,13 +33,6 @@ class SendingEveryDayMailCustomerJob < ApplicationJob
     ProposalEmployee.interview.includes(:order).where('proposal_employees.interview_date <= ? ', DateTime.now.beginning_of_day)
       .group_by { |pr| pr.order.profile_id }.each do |_profile_id, prop_emp|
         ProposalEmployeeMailJob.perform_now(proposal_employees: prop_emp, method: 'today_interview_customer')
-      end
-  end
-
-  def tomorrow_inteview_customer
-    ProposalEmployee.interview.includes(:order).where(interview_date: (DateTime.now.beginning_of_day + 1.day))
-      .group_by { |pr| pr.order.profile_id }.each do |_profile_id, prop_emp|
-        ProposalEmployeeMailJob.perform_now(proposal_employees: prop_emp, method: 'tommorow_interview_customer')
       end
   end
 

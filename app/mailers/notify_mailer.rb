@@ -1,10 +1,10 @@
 class NotifyMailer < ApplicationMailer
 
   def emp_cv_sended
-    @employee_cv = params[:objects]
-    customer_email = @employee_cv.order.user.email
+    @proposal_employee = params[:objects].first
+    customer_email = @proposal_employee.order.user.email
 
-    mail(to: customer_email, subject: 'RostJob. В заявку поступила анкета.')
+    mail(to: customer_email, subject: "RostJob. В заявку №#{@proposal_employee.order.id} #{@proposal_employee.order.title} поступила анкета.")
   end
 
   def order_wait_for_payment
@@ -37,14 +37,6 @@ class NotifyMailer < ApplicationMailer
     subject = @candidates.size == 1 ? 'RostJob. Кандидат ждёт назначения собеседования.' : 'RostJob. Кандидаты ждут назначения собеседования.'
 
     mail(to: email, subject: subject)
-  end
-
-  def tommorow_interview_customer
-    @prop_emps = params[:proposal_employees]
-    customer_email = @prop_emps.first.order.user.email
-
-    mail(to: customer_email,
-      subject: 'RostJob. У вас завтра собеседование.')
   end
 
   def tommorow_interview_contractor

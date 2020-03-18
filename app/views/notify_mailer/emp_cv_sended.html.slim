@@ -1,4 +1,7 @@
-= "В заявку №#{ @employee_cv.order.id } '#{ @employee_cv.order.title }' поступила анкета №#{ @employee_cv.id }. Назначьте дату собеседования чтобы Рекрутер закрыл заявку. Если у Вас трудности с назначением собеседования посмотрите инструкцию."
+= "В заявку №#{ @proposal_employee.employee_cv.order.id } #{ @proposal_employee.employee_cv.order.title } поступила анкета "
+= link_to "№#{ @proposal_employee.id}", profile_production_site_order_url(@proposal_employee.order.production_site_id, @proposal_employee.order.id)
+| . Назначьте дату собеседования чтобы Рекрутер закрыл заявку.
+p 
+  | Если у Вас трудности с назначением собеседования посмотрите инструкцию.
 p
-  = link_to 'Инструкция по назначению собеседования', page_url('manual_how_to_set_date_interview')
-
+  = link_to 'Инструкция по назначению собеседования', page_url('manual_how_to_set_date_interview')    
