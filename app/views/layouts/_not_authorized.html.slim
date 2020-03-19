@@ -1,8 +1,17 @@
-.wrapper-not_authorized
-  header.header
-    = render 'users/header_logo'
-    .header_registration
-      = link_to 'Вход&nbsp;'.html_safe, login_path
+#common-landing
+  .header
+    a.company-name href="/"
+      | Rost
+      span.textBlue job.com
+    div
+      .social
+        a href="#"
+          = image_tag '/img/vk.png', alt: 'vk', class: 'vk'
+        a href="#"
+          = image_tag '/img/insta.png', alt: 'instagram',class: 'insta'
+        a href="#"
+          = image_tag '/img/youtube.png', alt: 'youtube',class: 'youtube'
+      = link_to 'Вход', login_path, class: 'log-in'
 
-  .container-fluid.h-100.w-100
+  .choose-container
     = yield

@@ -419,7 +419,7 @@ main{
 //Landing_choice
 #common-landing {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   margin: 0;
   font-family: 'Open-Sans', sans-serif;
 }
@@ -485,6 +485,7 @@ main{
   display: flex;
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 
 #common-landing .img-responsive {
@@ -531,7 +532,7 @@ main{
   padding-top: 60px;
 }
 
-#common-landing .choose-customer .content {
+#common-landing .choose-customer .choose-content {
   margin-right: 60px;
 }
 
@@ -544,7 +545,7 @@ main{
   width: 100%;
 }
 
-#common-landing .content {
+#common-landing .choose-content {
   padding-top: 60px;
 }
 

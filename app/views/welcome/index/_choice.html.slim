@@ -1,0 +1,20 @@
+.recruter
+  .choose-recruter
+    .img-container
+      = image_tag '/img/girl.png', class: 'img-responsive'
+    .choose-content
+      h2.title Я Рекрутер
+      p.description Хочу зарабатывать на поиске персонала
+      = link_to 'Перейти', landing_for_contractor_path, class: 'recruter-btn'
+  = image_tag '/img/clouds_l.png', class: 'clouds-left'
+  = image_tag '/img/rectangle_l.png', class: 'rectangle-left'
+.customer
+  .choose-customer
+    .img-container
+      = image_tag '/img/man.png', class: 'img-responsive'
+    .choose-content
+      h2.title Я заказчик
+      p.description.pl-1 Хочу, чтобы мне подобрали персонал
+      = link_to 'Перейти', landing_for_customer_path, class: 'customer-btn'
+  = image_tag '/img/clouds_r.png', class: 'clouds-right'
+  = image_tag '/img/rectangle_r.png', class: 'rectangle-right'
