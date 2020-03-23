@@ -277,7 +277,7 @@ $secondaryColorDark: #b7b7b7;
   }
 
   #requests-page .platform .details .request-body .subtitle {
-    font-weight: 700;
+    font-weight: 700 !important;
     line-height: 18px;
     color: #000000;
   }
