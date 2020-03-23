@@ -1,5 +1,6 @@
 - content_for :meta do
-  meta name='yandex-verification' content='b44acbed235a946c'
+  - if Rails.env.production?
+    meta name='yandex-verification' content='b44acbed235a946c'
 
 .recruter
   .choose-recruter
