@@ -29,5 +29,6 @@ module ProposalEmployeeRepository
     scope :range_approved, -> (start_date, end_date){ where('warranty_date > ? AND warranty_date < ?', start_date, end_date)}
     scope :range_hiring, -> (start_date, end_date){ where('warranty_date > ? AND warranty_date < ?', start_date, end_date)}
     scope :range_interview, -> (start_date, end_date){ where('interview_date > ? AND interview_date < ?', start_date, end_date)}
+    scope :range_inbox, -> (start_date, end_date){ where('interview_date > ? AND interview_date < ?', start_date, end_date)}
   end
 end

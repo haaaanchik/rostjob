@@ -5,7 +5,7 @@ json.array!(@empl_cv_hired) do |event|
   json.tooltip "Гарантийный период для анкеты #{event.employee_id_name}"
   json.color '#00ca5f'
   json.start event.hiring_date
-  json.end event.warranty_date
+  json.end event.warranty_date + 1.days
 end
 
 json.array!(@empl_cv_interview) do |event|
@@ -16,6 +16,16 @@ json.array!(@empl_cv_interview) do |event|
   json.tooltip "Анкета #{event.employee_id_name} на собеседования"
   json.start event.interview_date
   json.end event.interview_date
+  end
+
+json.array!(@empl_cv_inbox) do |event|
+  json.extract! event, :id, :interview_date
+  json.id event.id
+  json.title event.employee_id_name
+  json.color '#fd7e14'
+  json.tooltip "Анкета #{event.employee_id_name} дата приезда"
+  json.start event.interview_date
+  json.end event.interview_date
 end
 
 json.array!(@empl_cv_approved) do |event|
@@ -23,7 +33,7 @@ json.array!(@empl_cv_approved) do |event|
   json.id event.id
   json.title event.employee_id_name
   json.color '#808080'
-  json.tooltip "Анкета #{event.employee_id_name} подтверждения заказчика"
+  json.tooltip "Анкета #{event.employee_id_name} подтверждение оплаты заказчиком"
   json.start event.warranty_date
   json.end event.warranty_date
 end
