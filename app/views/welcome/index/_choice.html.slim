@@ -1,9 +1,12 @@
+- content_for :meta do
+  meta name='yandex-verification' content='b44acbed235a946c'
+
 .recruter
   .choose-recruter
     .img-container
       = image_tag '/img/girl.png', class: 'img-responsive'
     .choose-content
-      h2.title Я Рекрутер
+      h2.title Я рекрутер
       p.description Хочу зарабатывать на поиске персонала
       = link_to 'Перейти', landing_for_contractor_path, class: 'recruter-btn'
   = image_tag '/img/clouds_l.png', class: 'clouds-left'
