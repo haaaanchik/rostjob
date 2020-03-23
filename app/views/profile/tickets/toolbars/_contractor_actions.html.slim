@@ -1,16 +1,6 @@
 ruby:
-  pe_form = "#{render partial: 'profile/tickets/toolbars/calendar',
-                      locals: { url: inbox_profile_tickets_incident_path(@ticket),
-                                candidate: @ticket.proposal_employee,
-                                field: 'interview_date',
-                                button_text: 'НАЗНАЧИТЬ' }}"
-  waiting_field =  { incident: { waiting: 'contractor' }}
+  partial = @ticket.title.denied? ? 'denied' : 'other'
   disabled = @ticket.waiting == 'contractor' ? 'disabled' : ''
+  waiting_field = { incident: { waiting: 'contractor' }}
 
-.ready-text-examples
-  = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
-    span Да, кандидат не явился на собеседование, я хочу вернуть анкету
-  .text-example data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
-    span Да, кандидат не явился на собеседование, я хочу изменить дату приезда
-  = link_to profile_tickets_incident_path(@ticket, waiting_field), method: :put, remote: true, class: "text-example #{disabled}" do
-    span Нет, кандидат был на собеседование, уточните пожалуйста
+= render "profile/tickets/toolbars/contractor/#{partial}", waiting_field: waiting_field, disabled: disabled

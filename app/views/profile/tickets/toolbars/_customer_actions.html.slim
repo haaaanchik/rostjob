@@ -1,13 +1,15 @@
 ruby:
+  partial = @ticket.title.other? ? 'other' : 'denied'
   pe_form = "#{render partial: 'profile/tickets/toolbars/calendar',
                       locals: { url: hire_profile_tickets_incident_path(@ticket),
                                 candidate: @ticket.proposal_employee,
                                 field: 'hiring_date',
                                 button_text: 'НАНЯТЬ' }}"
-  t_form = "#{render partial: 'profile/tickets/toolbars/message'}"
+  pe_interview_form = "#{render partial: 'profile/tickets/toolbars/calendar',
+                                locals: {url: interview_profile_tickets_incident_path(@ticket),
+                                candidate: @ticket.proposal_employee,
+                                field: 'interview_date',
+                                button_text: 'НАЗНАЧИТЬ'}}"
 
-.ready-text-examples
-  .text-example data-toggle='popover' title='Дата выхода на работу' data-placement='top' data-html='true' data-content=pe_form
-    span Кандидат явился на собеседование, я хочу указать дату собеседования
-  .text-example data-toggle='popover' title='Не прошел собеседование' data-placement='top' data-html='true' data-content=t_form
-    span Кандидат явился, но не прошел собеседование
+= render "profile/tickets/toolbars/customer/#{partial}", pe_form: pe_form, pe_interview_form: pe_interview_form
+

@@ -1,0 +1,11 @@
+ruby:
+  message = 'Нет, кандидат устроился, уточните пожалуйста'
+
+.ready-text-examples
+  = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
+    span Да, кандидат не прошел собеседование, я хочу вернуть анкету
+  = link_to profile_tickets_incident_path(@ticket, waiting_field.merge(message: message).merge(send_message_admin: true)),
+          method: :put,
+          remote: true,
+          class: "text-example #{disabled}" do
+    span = message
