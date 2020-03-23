@@ -26,7 +26,10 @@
       .chat-sidebar-body.custom-scroll
         .request
           .request-header
-            p class="card-name" № #{@ticket.proposal_employee.order.id } #{@ticket.proposal_employee.order.title}
+            p.card-name
+              = link_to profile_production_site_order_path(@ticket.proposal_employee.order.production_site,
+                                                           @ticket.proposal_employee.order) do
+                | № #{@ticket.proposal_employee.order.id } #{@ticket.proposal_employee.order.title}
             hr
             i class="fa fa-bookmark custom-orange" id="hanging-flag"
             .card-tools
