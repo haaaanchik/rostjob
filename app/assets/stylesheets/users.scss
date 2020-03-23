@@ -28,19 +28,23 @@
 
   .header {
     position: absolute;
-    top: 5%;
-    left: 10%;
+    top: 4%;
+    left: 8.28%;
     
     .header_logo {
       margin-top: auto;
       margin-bottom: auto;
       display: block;
-      font-size: 27px;
+      font-size: 20px;
       font-family: "Open Sans", sans-serif;
       font-weight: 700;
       text-transform: uppercase;
       a {
-        color: #1970ff;
+        color: #000000;
+        text-transform: uppercase;
+        span{
+          color: #1970ff;
+        }
       }
 
       .counter {
