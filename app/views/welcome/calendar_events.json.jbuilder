@@ -22,7 +22,7 @@ json.array!(@empl_cv_inbox) do |event|
   json.extract! event, :id, :interview_date
   json.id event.id
   json.title event.employee_id_name
-  json.color '#fd7e14'
+  json.color '#ffff00'
   json.tooltip "Анкета #{event.employee_id_name} дата приезда"
   json.start event.interview_date
   json.end event.interview_date
@@ -35,7 +35,7 @@ json.array!(@empl_cv_approved) do |event|
   json.color '#808080'
   json.tooltip "Анкета #{event.employee_id_name} подтверждение оплаты заказчиком"
   json.start event.warranty_date
-  json.end event.warranty_date
+  json.end event.warranty_date + 1.days
 end
 
 json.array!(@empl_cv_reminders) do |event|
