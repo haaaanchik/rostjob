@@ -157,6 +157,11 @@ Rails.application.routes.draw do
        get :send_notify_interview
       end
     end
+    resources :trello, only: %i[index] do
+      collection do
+        get :export_xlsx
+      end
+    end
   end
 
   get 'profile/employee_cvs/new_full', to: 'profile/employee_cvs#new_full', as: :new_full_profile_employee_cv
