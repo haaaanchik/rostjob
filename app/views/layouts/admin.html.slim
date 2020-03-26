@@ -22,7 +22,6 @@ html
               - if can_access?(%w[admin moderator])
                 li.nav-item.active
                   = link_to 'Заявки на модерации', admin_orders_path, class: 'nav-link', data: {offset: '60'}
-              - if can_access?(%w[admin moderator])
                 li.nav-item.dropdown
                   = link_to 'Бухгалтерия', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                   .dropdown-menu
@@ -30,7 +29,6 @@ html
                     = link_to 'Перечисления исполнителям', admin_contractor_invoices_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Импорт выписок', admin_account_statements_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Экспорт полатёжных поручений', admin_payment_orders_path, class: 'dropdown-item', data: {offset: '60'}
-              - if can_access?(%w[admin moderator])
                 li.nav-item.dropdown
                   = link_to 'Справочники', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}, aria: {haspopup: true, extended: false}
                   .dropdown-menu
@@ -58,8 +56,11 @@ html
                     = link_to 'Экспорт заявок в EXCEL', admin_analytics_export_to_excel_path, class: 'dropdown-item', data: {offset: '60'}
                     = link_to 'Журнал событий', admin_analytics_user_action_log_path, class: 'dropdown-item', data: {offset: '60'}
                     / = link_to 'Спорные анкеты', admin_proposal_employees_path(scope: :disputed), class: 'dropdown-item', data: {offset: '60'}
-                li.nav-item
-                  = link_to 'Написать письмо', new_admin_mail_path, class: 'nav-link'
+                li.nav-item.dropdown
+                  = link_to 'Прочее', '#', class: 'nav-link dropdown-toggle', data: {toggle: 'dropdown'}
+                  .dropdown-menu
+                    = link_to 'Написать письмо', new_admin_mail_path, class: 'dropdown-item'
+                    = link_to 'Трелло', admin_trello_index_path, class: 'dropdown-item'
                 li.nav-item
                   = link_to admin_tickets_path, class: 'nav-link waves-effect waves-light' do
                     = @opened_tickets_count

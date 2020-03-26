@@ -1,0 +1,26 @@
+.container-fluid
+  h1.text-center
+    | Трелло
+  = link_to export_xlsx_admin_trello_index_path(format: :xlsx), target: :_blank, class: 'float-right mr-2' do
+    i.fa.fa-print.fa-2x.green-text
+  - @columns.each do |column_name, cards|
+    h4.mt-4 = column_name
+    table.table.table-sm.table-hover.mt-4
+      thead
+        tr
+          th Карточка
+          th Сайт заказчика
+          th Заказчики
+          th Адрес объект
+          th Контакт 1
+          th Итог переговоров
+          th Последний контакт
+          th Следующий
+          th Комментарий
+          th Контакт 2
+      tbody
+        - cards.each do |card|
+          tr
+            td = card.name
+            - @custom_field_options.each do |custom_field|
+              td = custom_field_item(card, custom_field.id)

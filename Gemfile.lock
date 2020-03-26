@@ -322,6 +322,7 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
+    oauth (0.5.4)
     oauth2 (1.4.1)
       faraday (>= 0.8, < 0.16.0)
       jwt (>= 1.0, < 3.0)
@@ -490,6 +491,12 @@ GEM
       rubocop (>= 0.60.0)
     ruby-graphviz (1.2.4)
     ruby-progressbar (1.10.1)
+    ruby-trello (2.2.0)
+      activemodel (>= 3.2.0)
+      addressable (~> 2.3)
+      json
+      oauth (>= 0.4.5)
+      rest-client (>= 1.8.0)
     rubyzip (1.0.0)
     rufus-scheduler (3.5.2)
       fugit (~> 1.1, >= 1.1.5)
@@ -663,6 +670,7 @@ DEPENDENCIES
   ru_propisju
   rubocop-rails
   rubocop-rspec
+  ruby-trello
   rubyzip
   russian (~> 0.6.0)
   rvm1-capistrano3

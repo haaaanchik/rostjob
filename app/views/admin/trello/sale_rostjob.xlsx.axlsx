@@ -1,0 +1,56 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: 'Продажи RostJob') do |sheet|
+  letters = *('A'..'AH')
+  (1..3).each { |_| letters.shift() }
+  black_border =  wb.styles.add_style border: { style: :thin, color: '000000' },
+                                      alignment: { horizontal: :center,
+                                                   vertical: :center,
+                                                   wrap_text: true}
+  text_center = wb.styles.add_style b: true, sz: 16,
+                                    alignment: { horizontal: :center,
+                                                 vertical: :center,
+                                                 wrap_text: true }
+  counter = 0
+  @columns.each do |column_name, cards|
+    sheet.add_row([])
+    sheet.add_row([column_name], height: 30, style: text_center )
+    counter += 2
+    sheet.merge_cells("A#{counter}:D#{counter}")
+    sheet.add_row([])
+    sheet.add_row([
+      'Карточка',
+      'Сайт заказчика',
+      'Заказчики',
+      'Адрес объект',
+      'Контакт 1',
+      'Итог переговоров',
+      'Последний контакт',
+      'Следующий',
+      'Комментарий',
+      'Контакт 2'
+      ],
+      sz: 12,
+      b: true,
+      style: black_border
+    )
+    counter += 2
+
+    cards.each do |card|
+      sheet.add_row([
+        card.name,
+        @custom_field_options.map { |custom_field| custom_field_item(card, custom_field.id) }
+        ].flatten,
+        sz: 10,
+        style: black_border
+      )
+      counter += 1
+    end
+
+    (1..3).each do |_|
+      sheet.add_row([])
+      counter += 1
+    end
+  end
+
+  sheet.column_widths 24, 20, 25, 20, 25, 41, 20, 20, 35, 35
+end
