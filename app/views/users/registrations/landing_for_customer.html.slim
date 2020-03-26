@@ -1,5 +1,9 @@
 - errors = @user.errors.messages
 
+- content_for :meta do
+  meta name='yandex-verification' content='b44acbed235a946c'
+  meta name='description' content='RostJob.сom это большой штат рекрутеров и представителей по всей стране. CRM и доступ к голосовым ботам бесплатно. Оплата только за результат.'
+
 body#landing
   header.container
     .block
@@ -41,8 +45,8 @@ body#landing
   main
     section.landing-header.container
       .content
-        h1.title Подбор персонала онлайн от ведущей HR компании
-        p.subtitle Онлайн кадровое агентство
+        p.title Подбор персонала онлайн от ведущей HR компании
+        h1.subtitle Онлайн кадровое агентство
         = form_for @user,
                 method: :post,
                 url: user_registration_path,
