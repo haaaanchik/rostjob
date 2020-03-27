@@ -90,3 +90,7 @@ body {
 .popover-header {
     text-align: center;
 }
+
+.btn-rounded {
+    border-radius: 2rem;
+}

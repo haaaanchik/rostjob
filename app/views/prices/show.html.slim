@@ -1,17 +1,17 @@
 ruby:
   val = params[:q].nil? ? nil:params[:q][:title_fields_cont]
 
-.container-fluid.mt-2.mb-2
+.container.mt-2.mb-2
   h1.text-center Прайс
   .row.justify-content-center.align-items-center
-    .col-lg-6
+    .col-lg-7
       = text_field :admin_position, :search, class: 'form-control', value: val,
                    placeholder: 'Наберите название профессии',
                    data:      { 'auto-url' => '/search_position', 'auto-select' => 'search_ransack_title',
                                 'auto-add-text' => false , 'autocomplete-on' => 'admin_position_search' }
 
-    .col-lg-2.text-center
-      = link_to 'Показать все', price_path,  class: 'btn btn-primary'
+    .col-lg-4.text-center
+      = link_to 'Показать все', price_path,  class: 'btn btn-primary btn-rounded'
 
   table.table.table-striped
     thead
@@ -24,3 +24,8 @@ ruby:
           td #{position.title}
           td = position.price_group.customer_price
   = paginate @paginated_price_items
+
+scss:
+  #common-landing .header {
+    position: relative;
+  }
