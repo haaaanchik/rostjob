@@ -13,15 +13,11 @@ class PricesController < ApplicationController
   end
 
   def paginated_price_items
-    @paginated_price_items ||= price_items.page(params[:page])
+    @paginated_price_items ||= price_items.includes(:price_group).page(params[:page])
   end
 
   def price_items
-    @price_items ||= if term_is_valid
-                       term = "#{params[:term].downcase}%"
-                       Position.where('lower(title) like ?', term).order(title: :asc)
-                     else
-                       Position.order(title: :asc)
-                     end
+    @q = Position.order(title: :asc).ransack(params[:q])
+    @q.result
   end
 end

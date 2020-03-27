@@ -1,20 +1,26 @@
-.row
-  .col-6
-    h1 Прайс
-  .col-7.mt-3
-    = text_field :price_position, :search, class: "form-control",
-      placeholder: 'Наберите название профессии'
-  .col-1.mt-1
-    button#price_search.btn.btn-indigo Найти
-  .col-3.mt-1.ml-5
-    = link_to 'Показать все', price_path, class: 'btn btn-indigo'
-  table.table.mt-3
-    tr
-      th Профессия
-      th Цена
-    = render partial: 'price_item', collection: @paginated_price_items
-.row
-  .col
-  .col
-    = paginate @paginated_price_items
-  .col
+ruby:
+  val = params[:q].nil? ? nil:params[:q][:title_fields_cont]
+
+.container-fluid.mt-2.mb-2
+  h1.text-center Прайс
+  .row.justify-content-center.align-items-center
+    .col-lg-6
+      = text_field :admin_position, :search, class: 'form-control', value: val,
+                   placeholder: 'Наберите название профессии',
+                   data:      { 'auto-url' => '/search_position', 'auto-select' => 'search_ransack_title',
+                                'auto-add-text' => false , 'autocomplete-on' => 'admin_position_search' }
+
+    .col-lg-2.text-center
+      = link_to 'Показать все', price_path,  class: 'btn btn-primary'
+
+  table.table.table-striped
+    thead
+      tr
+        th Наименование
+        th Цена
+    tbody
+      - @paginated_price_items.each do |position|
+        tr
+          td #{position.title}
+          td = position.price_group.customer_price
+  = paginate @paginated_price_items
