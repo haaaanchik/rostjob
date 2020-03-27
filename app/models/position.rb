@@ -5,6 +5,8 @@ class Position < ApplicationRecord
 
   validates :title, presence: true
 
+  ransack_alias :title_fields, :title
+
   def self.search_by_term(params)
     cased = "%#{params.mb_chars.to_s.downcase}%"
     all.includes(:price_group)
