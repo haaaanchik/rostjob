@@ -26,7 +26,8 @@
       = "г. #{order.city}"
     p.subtitle
       i.fas.fa-bed.w-2.mr-2
-      == order.other_info['terms']
+      p 
+        == order.other_info['terms']
   .buttons
     - unless @current_profile.profile_type == 'customer'
       - unless @employee_cv_id
