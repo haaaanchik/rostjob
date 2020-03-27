@@ -1,7 +1,7 @@
 ruby:
   val = params[:q].nil? ? nil:params[:q][:title_fields_cont]
 
-.container.mt-2.mb-2
+.container.mt-2.mb-2.shadow-none
   h1.text-center Прайс
   .row.justify-content-center.align-items-center
     .col-lg-7
@@ -13,7 +13,7 @@ ruby:
     .col-lg-4.text-center
       = link_to 'Показать все', price_path,  class: 'btn btn-primary btn-rounded'
 
-  table.table.table-striped
+  table.table
     thead
       tr
         th Наименование
