@@ -4,8 +4,8 @@
     .moveable.card.card-success data-emp-cv-id="#{emp_cv.id}"
       span.d-flex class="interview-date-show" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
       .card-header.d-flex
-        p.initials.text-white
-          = link_to emp_cv.name, edit_profile_employee_cv_path(emp_cv), class: 'white-text', remote: true
+        p.initials
+          = link_to emp_cv.name, edit_profile_employee_cv_path(emp_cv), remote: true
         .card-tools
           button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
             i.fas.fa-ellipsis-h
@@ -24,6 +24,7 @@
                       class: 'dropdown-item',
                       method: :delete,
                       remote: true
+          i.fas.fa-bookmark.right-top.col-red
 
       .card-body
         p.card_phone_number = emp_cv.phone_number
@@ -32,7 +33,7 @@
                           emp_cv.comment,
                           class: 'card_textarea js-call-popup default-scroll',
                           placeholder: 'Напишите комментарий…',
-                          style: 'overflow-y: scroll; overflow-wrap: break-word;',
+                          style: 'overflow-y: auto; overflow-wrap: break-word;',
                           dir: 'auto',
                           data: { date: emp_cv.reminder_date,
                                   time: emp_cv.reminder_time }

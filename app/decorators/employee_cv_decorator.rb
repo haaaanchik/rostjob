@@ -28,7 +28,7 @@ class EmployeeCvDecorator < ApplicationDecorator
   def color_reminder
     case
     when object.reminder < Date.today
-      'red text-body'
+      ''
     when (object.reminder >= Date.today) && (object.reminder <= Date.today + 1.days)
       'yellow'
     else
