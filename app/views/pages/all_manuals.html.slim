@@ -4,7 +4,6 @@
     - if current_user.profile.customer?
       li = link_to 'Инстукция по публикации заявки', page_path('manual_create_order')
       li = link_to 'Инструкция на оплату заявки', page_path('manual_how_to_pay_order')
-      li = link_to 'Инструкция на оплату счёта', page_path('manual_how_to_pay_invoice')
       li = link_to 'Инструкция на назначение даты собеседования', page_path('manual_how_to_set_date_interview')
     - else
       li = link_to 'Инструкция для коррекции даты прибытия соискателя', page_path('manual_correct_date_arrive')
