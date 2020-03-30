@@ -50,6 +50,10 @@ class ProposalEmployeeDecorator < ObjDecorator
     model.employee_cv.name
   end
 
+  def employee_id_name
+    "№#{employee_cv.id} #{employee_cv.name}"
+  end
+
   def title
     model.order.title
   end

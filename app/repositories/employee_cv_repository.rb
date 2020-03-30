@@ -24,6 +24,7 @@ module EmployeeCvRepository
     scope :created_last_1month, -> {
       where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 1.month, Time.current.end_of_day - 1.day
     }
+    scope :range_reminders, -> (start_date, end_date){ where('reminder > ? AND reminder < ?', start_date, end_date)}
     scope :with_reminders, -> {
       where.not(reminder: nil).order(:reminder)
     }

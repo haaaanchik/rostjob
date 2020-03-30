@@ -12,7 +12,11 @@ class WelcomeController < ApplicationController
   end
 
   def calendar_events
-    @logs = UserActionLog.json_contain_receiver_ids(current_user).log_range(params[:start], params[:end]).decorate
+    @empl_cv_hired = proposal_employee.hired.range_hiring(params[:start], params[:end]).decorate
+    @empl_cv_interview = proposal_employee.interview.range_interview(params[:start], params[:end]).decorate
+    @empl_cv_inbox = proposal_employee.inbox.range_inbox(params[:start], params[:end]).decorate
+    @empl_cv_approved = proposal_employee.approved.range_approved(params[:start], params[:end]).decorate
+    @empl_cv_reminders = current_profile.employee_cvs.ready.range_reminders(params[:start], params[:end])
   end
 
   private
@@ -22,6 +26,10 @@ class WelcomeController < ApplicationController
                                               .order(id: :desc)
                                               .page(params[:page]).per(10)
                                               .decorate
+  end
+
+  def proposal_employee
+    current_profile.proposal_employees
   end
 
   def prepare_data
