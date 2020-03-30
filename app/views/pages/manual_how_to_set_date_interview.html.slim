@@ -8,32 +8,42 @@ ruby:
     h2.text-center Инструкция как нанять кандидата
     .content.d-flex.flex-column
 
-      | В опубликованную Вами заявку поступила анкета Соискателя: это значит, что Рекрутер нашел потенциального сотрудника для Вас. Вам нужно убедиться подходит ли Соискатель по условиям заявки.
+      | В опубликованную Вами заявку поступила анкета Соискателя: это значит, что Рекрутер нашел потенциального сотрудника для Вас.
+        Вам нужно убедиться подходит ли Соискатель по условиям заявки.
       p
-        | Если Соискатель удовлетворяет условие заявки: пригласите его на собеседование.
-        br
-        = link_to "Анкета №#{ proposal_employee_id }", profile_production_site_order_path(production_sites_id, order_id, proposal_employee_id: proposal_employee_id) if order_id && production_sites_id
-      p
-        | Иначе просто отзовите анкету.
-        br
-        = link_to "Анкета №#{ proposal_employee_id }", profile_production_site_order_path(production_sites_id, order_id, proposal_employee_id: proposal_employee_id) if order_id && production_sites_id
-      p
-        | Так же могут быть случаи, когда Вам нужно переместить Анкету в другую заявку. (ссылка)
+        | Если Соискатель удовлетворяет условие заявки: пригласите его на #{ link_to 'собеседование', '#interview', 'data-turbolinks': 'false' }
 
-      | Для того чтобы пригласить Соискателя на собеседование кликните по ФИО Соискателя в Заявке.
+      = link_to "Анкета №#{ proposal_employee_id }",
+                profile_production_site_order_path(production_sites_id, order_id,
+                                                   proposal_employee_id: proposal_employee_id) if order_id && production_sites_id
+      p
+        | Иначе просто #{link_to 'отзовите анкету', '#cancel-profile', 'data-turbolinks': 'false'}
 
-      = link_to image_path('/img/manuals/orders/9.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+      = link_to "Анкета №#{ proposal_employee_id }",
+                profile_production_site_order_path(production_sites_id, order_id,
+                                                   proposal_employee_id: proposal_employee_id) if order_id && production_sites_id
+      p
+        | Так же могут быть случаи, когда Вам нужно переместить Анкету #{link_to 'в другую заявку', '#another-proposal','data-turbolinks': 'false'}
+
+      p
+        | Для того чтобы пригласить Соискателя на собеседование кликните по ФИО Соискателя в Заявке.
+
+      = link_to image_path('/img/manuals/orders/9.jpg'), data: { lightbox: "images" },
+                                                         class: 'text-center my-3 rounded mx-auto z-depth-2' do
         = image_tag '/img/manuals/orders/9_mini.jpg'
 
       | Откроется анкета Соискателя. Выберите дату и нажмите кнопку «Назначить».
-      = link_to image_path('/img/manuals/orders/10.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+      = link_to image_path('/img/manuals/orders/10.jpg'), data: { lightbox: "images" },
+                                                          class: 'text-center my-3 rounded mx-auto z-depth-2' do
         = image_tag '/img/manuals/orders/10_mini.jpg'
-      | Анкета переместится в колонку Собеседование, Рекрутер проконтролирует приезд Соискателя в день назначения собеседования.
-      = link_to image_path('/img/manuals/orders/11.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+      h6#interview Анкета переместится в колонку Собеседование, Рекрутер проконтролирует приезд Соискателя в день назначения собеседования.
+      = link_to image_path('/img/manuals/orders/11.jpg'), data: { lightbox: "images" },
+                                                          class: 'text-center my-3 rounded mx-auto z-depth-2' do
         = image_tag '/img/manuals/orders/11_mini.jpg'
-      | Если по каким-либо причинам кандидат Вам не подходит: используйте кнопку «Отозвать» в анкете соискателя,
+      h6#cancel-profile Если по каким-либо причинам кандидат Вам не подходит: используйте кнопку «Отозвать» в анкете соискателя,
       strong чтобы отказаться от анкеты.
-      = link_to image_path('/img/manuals/orders/12.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+      = link_to image_path('/img/manuals/orders/12.jpg'), data: { lightbox: "images" },
+                                                          class: 'text-center my-3 rounded mx-auto z-depth-2' do
         = image_tag '/img/manuals/orders/12_mini.jpg'
-      | Если Вам нужно перенести анкету в другую заявку используйте кнопку перенести.
+      h6#another-proposal Если Вам нужно перенести анкету в другую заявку используйте кнопку перенести.
 
