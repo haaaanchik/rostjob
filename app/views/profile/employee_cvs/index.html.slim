@@ -15,8 +15,8 @@
         .popup__body
           .reminder_date_datepicker.d-flex.justify-content-center
         .popup__footer
-          button class="btn btn-sm add-reminder" Сохранить
-          button class="btn btn-sm close-reminder" Убрать
+          button.btn.btn-sm.add-reminder Сохранить
+          button.btn.btn-sm.close-reminder Убрать
         span.triangle
 
 
@@ -67,7 +67,7 @@
           - next if favorite.completed? && pr_employee_cvs.empty?
           .moveable.card.card-list data-order-id="#{favorite.id}"
             .card-header
-              h3.card-title.text-left.mb-0 №#{favorite.title_with_skill}
+              h3.card-title.text-left.mb-0 #{favorite.title_with_skill}
               p.salary.text-left = favorite.salary
               .number_of_people
                 span.number_of_people_span #{favorite.contractor_price} / чел
@@ -75,30 +75,26 @@
               .card-tools
                 button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
                   i.fas.fa-ellipsis-h
-                .dropdown-menu style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start"
-                  a.dropdown-item data-remote="true" data-type="script" href="/profile/favorites?employee_cv_id=10962"  Отправить
-                  a.dropdown-item data-remote="true" href="/profile/employee_cvs/10962/edit"  Изменить
-                  a.comment-emp-cv.dropdown-item href="#"  Комментарий
-                  .dropdown-divider
-                  a.dropdown-item data-confirm=("Удалить анкету?") data-method="delete" data-remote="true" href="/profile/employee_cvs/10962" rel="nofollow"  Удалить
+                .dropdown-menu x-placement="bottom-start"
+                  a.dropdown-item.favorite-info Информация
+                  a.dropdown-item.favorite-remove Убрать
+
               = image_tag('/img/new/arrow-down.png', class: 'arrow js-arrow')
 
-            .card-body.interior.custom-scroll.js-slide-elem
-              .card-scroll-window.js-card-scroll-window data-state="favorite" style="#{ 'height: auto' unless pr_employee_cvs.present? }"
-                <div class="moveable card card-success" data-emp-cv-id="10962"><span class="d-flex interview-date-show" data-content="<div class=&quot;align-items-center justify-content-center&quot;><div class=&quot;col-auto&quot;><div class=&quot;form-group&quot;><label for=&quot;interview_date&quot;>Дата прибытия кандидата</label><input type=&quot;date&quot; name=&quot;interview_date&quot; id=&quot;interview_date&quot; class=&quot;form-control&quot; /><div class=&quot;invalid-feedback&quot;></div></div></div><div class=&quot;col-auto d-flex&quot;><input type=&quot;submit&quot; name=&quot;commit&quot; value=&quot;Отправить&quot; class=&quot;btn btn-success btn-sm btn-rounded mt-2 btn-interview&quot; data-disable-with=&quot;Отправить&quot; /><input type=&quot;submit&quot; name=&quot;commit&quot; value=&quot;Отменить&quot; class=&quot;btn btn-default btn-sm btn-rounded mt-2 btn-interview-cancel&quot; data-disable-with=&quot;Отменить&quot; /></div></div>" data-html="true" data-placement="top" data-toggle="popover"></span><div class="card-header d-flex"><p class="initials"><a data-remote="true" href="/profile/employee_cvs/10962/edit">Иванов Иван</a></p><div class="card-tools"><button aria-expanded="false" aria-haspopup="true" class="btn-info" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-h"></i></button><div class="dropdown-menu" style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start"><a class="dropdown-item" data-type="script" data-remote="true" href="/profile/favorites?employee_cv_id=10962">Отправить</a><a class="dropdown-item" data-remote="true" href="/profile/employee_cvs/10962/edit">Изменить</a><a class="comment-emp-cv dropdown-item" href="#"> Комментарий</a><div class="dropdown-divider"></div><a data-confirm="Удалить анкету?" class="dropdown-item" data-remote="true" rel="nofollow" data-method="delete" href="/profile/employee_cvs/10962">Удалить</a></div></div></div><div class="card-body"><p class="card_phone_number">+7(988)-888-88-88</p><div class="card_bottom"><textarea name="comment" id="comment" class="card_textarea js-call-popup default-scroll" placeholder="Напишите комментарий…" style="overflow-y: auto; overflow-wrap: break-word;" dir="auto" data-date="13.02.2020" data-time="17:00">12344</textarea><span class="data ">13.02.2020 17:00</span></div></div></div>
-                <div class="moveable card card-success" data-emp-cv-id="10962"><span class="d-flex interview-date-show" data-content="<div class=&quot;align-items-center justify-content-center&quot;><div class=&quot;col-auto&quot;><div class=&quot;form-group&quot;><label for=&quot;interview_date&quot;>Дата прибытия кандидата</label><input type=&quot;date&quot; name=&quot;interview_date&quot; id=&quot;interview_date&quot; class=&quot;form-control&quot; /><div class=&quot;invalid-feedback&quot;></div></div></div><div class=&quot;col-auto d-flex&quot;><input type=&quot;submit&quot; name=&quot;commit&quot; value=&quot;Отправить&quot; class=&quot;btn btn-success btn-sm btn-rounded mt-2 btn-interview&quot; data-disable-with=&quot;Отправить&quot; /><input type=&quot;submit&quot; name=&quot;commit&quot; value=&quot;Отменить&quot; class=&quot;btn btn-default btn-sm btn-rounded mt-2 btn-interview-cancel&quot; data-disable-with=&quot;Отменить&quot; /></div></div>" data-html="true" data-placement="top" data-toggle="popover"></span><div class="card-header d-flex"><p class="initials"><a data-remote="true" href="/profile/employee_cvs/10962/edit">Иванов Иван</a></p><div class="card-tools"><button aria-expanded="false" aria-haspopup="true" class="btn-info" data-toggle="dropdown" type="button"><i class="fas fa-ellipsis-h"></i></button><div class="dropdown-menu" style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;" x-placement="bottom-start"><a class="dropdown-item" data-type="script" data-remote="true" href="/profile/favorites?employee_cv_id=10962">Отправить</a><a class="dropdown-item" data-remote="true" href="/profile/employee_cvs/10962/edit">Изменить</a><a class="comment-emp-cv dropdown-item" href="#"> Комментарий</a><div class="dropdown-divider"></div><a data-confirm="Удалить анкету?" class="dropdown-item" data-remote="true" rel="nofollow" data-method="delete" href="/profile/employee_cvs/10962">Удалить</a></div></div></div><div class="card-body"><p class="card_phone_number">+7(988)-888-88-88</p><div class="card_bottom"><textarea name="comment" id="comment" class="card_textarea js-call-popup default-scroll" placeholder="Напишите комментарий…" style="overflow-y: auto; overflow-wrap: break-word;" dir="auto" data-date="13.02.2020" data-time="17:00">12344</textarea><span class="data ">13.02.2020 17:00</span></div></div></div>
+            .card-body.interior.custom-scroll.js-slide-elem style="display: none;"
+              .card-scroll-window.js-card-scroll-window data-state="favorite"
                 - pr_employee_cvs.decorate.each do |pr_emp|
                   - employee_cv = pr_emp.employee_cv.decorate
                   - pe_form = "#{render partial: 'profile/favorites/interview_date'}"
                   .card.card-success.card-in-list.collapsed-card.moveable data-emp-cv-id="#{employee_cv.id}" data-proposal-emp-id="#{pr_emp.id}"
-                    span type="button" class="interview-date-show" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
+                    span.interview-date-show type="button" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
                     .card-header.card-header-in-list
-                      p.initials.text-white data-card-widget="collapse"
-                        = link_to employee_cv.name, edit_profile_employee_cv_path(employee_cv), class: 'white-text', remote: true
+                      p.initials data-card-widget="collapse"
+                        = link_to employee_cv.name, edit_profile_employee_cv_path(employee_cv), remote: true
                       .card-tools.d-none
                         button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
                           i.fas.fa-ellipsis-h
-                        .dropdown-menu x-placement="bottom-start" style="position: absolute; transform: translate3d(0px), 38px, 0px); top: 0px; left: 0px; will-change: transform;"
+                        .dropdown-menu x-placement="bottom-start"
                           = link_to 'Отправить',
                                   profile_favorites_path(employee_cv_id: employee_cv),
                                   class: 'dropdown-item',
@@ -124,7 +120,6 @@
                                         employee_cv.comment,
                                         class: 'card_textarea js-call-popup default-scroll',
                                         placeholder: 'Напишите комментарий…',
-                                        style: 'overflow-y: scroll; overflow-wrap: break-word;',
                                         dir: 'auto',
                                         data: { date: employee_cv.reminder_date,
                                                 time: employee_cv.reminder_time }

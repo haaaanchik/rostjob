@@ -43,8 +43,4 @@ $ ->
     form = $('#profesion-city-form')
     form.submit()
   )
-
-  $('#order_page').on('click', '.js-vacancy', ->
-    $(this).next('.details').toggleClass('opened');
-  )
   

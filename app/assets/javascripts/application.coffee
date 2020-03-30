@@ -29,7 +29,6 @@
 #= require external/fullcalendar/daygrid.min
 #= require lightbox
 #= require clipboard
-#= require employee_cvs
 #= require_tree .
 
 @scroll_to_bottom = (element) ->

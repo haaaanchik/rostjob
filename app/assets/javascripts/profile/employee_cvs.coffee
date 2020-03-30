@@ -20,8 +20,10 @@ class EmployeeCvs
     $('body').on 'click', '.btn-interview', @sentEmployeeCv
     $('body').on 'click', '.btn-interview-cancel', @cancelInterview
     $('.js-call-popup').on 'click', @getCoord
-    $('.close-reminder').on 'click', @closeReminder
+    $('.js-close-popup, .close-reminder').on 'click', @closeReminder
     $('.add-reminder').on 'click', @addReminder
+    $('.js-arrow ').on 'click', @hiddenFavoriteBlock
+    $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
 
   @proposalSelectEmployeeCv: (event) ->
     empl = $(this).val()
@@ -152,7 +154,7 @@ class EmployeeCvs
     return
 
   @closeReminder: ->
-    $('.popup').fadeOut 'fast'
+    $('.popup').slideToggle()
     $currentComment = null
     return
 
@@ -186,6 +188,12 @@ class EmployeeCvs
         toastrMessages(false)
     return
 
+  @hiddenFavoriteBlock: ->
+    $(this).parent('.card-header').next('.js-slide-elem').slideToggle()
+
+  @orderBlockToggleClass: ->
+    $(this).next('.details').toggleClass('opened')
+
   clearAndSetDateInput = ($this) ->
     date = if $this.data('date') == undefined then $('#reminder_date').val() else $this.data('date')
     time = if $this.data('time') == undefined then $('#reminder_time').val() else $this.data('time')
@@ -202,7 +210,6 @@ class EmployeeCvs
       return
     if prevState == 'favorite'
       currentEl =  $(evt.from)
-      currentEl.attr('style', 'height: auto') if currentEl.find('.moveable').length < 1
 
   changeState = (evt, currentState, prevState) ->
     itemEl = evt.item
