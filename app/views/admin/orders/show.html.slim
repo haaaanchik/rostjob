@@ -20,14 +20,31 @@
       .row
         .col-6
           dl.row
+            dt.col-sm-4 Имя заказчкика
+            dd.col-sm-8 = @order.user.full_name
+            dt.col-sm-4 Контакты заказчика
+            dd.col-sm-8 
+              i.fas.fa-mobile-alt.mr-2
+              = @order.profile.phone
+              br
+              i.far.fa-envelope.mr-2 
+              = @order.user.email
+
+            dt.col-sm-4 Имя контактного лица
+            dd.col-sm-8 = @order.contact_person['name']
+            dt.col-sm-4 Контактный телефон
+            dd.col-sm-8 = @order.contact_person['phone']
             dt.col-sm-4 Специализация
-            dd.col-sm-8 = @order.specialization
+            dd.col-sm-8 = @order.skill
             dt.col-sm-4 Город
             dd.col-sm-8 = @order.city
             dt.col-sm-4 Зарплата
-            dd.col-sm-8 #{@order.salary_from} - #{@order.salary_to}
+            dd.col-sm-8 = @order.salary
             dt.col-sm-4 Описание вакансии
-            dd.col-sm-8 == @order.description
+            dd.col-sm-8 == @order.other_info['terms']
+            dt.col-sm-4 Дополнительная информация для рекрутера
+            dd.col-sm-8 == @order.other_info['remark']
+
           = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'btn btn-green',
                   method: :put, data: {confirm: 'Вы уверены?'}
         .col-6
