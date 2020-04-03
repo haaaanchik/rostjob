@@ -7,7 +7,7 @@ module Cmd
         result = Cmd::EmployeeCv::Create.call(params: context.params, profile: context.profile)
         context.employee_cv = result.employee_cv
         context.fail! unless result.success?
-        result = Cmd::EmployeeCv::ToReady.call(employee_cv: result.employee_cv)
+        result = Cmd::EmployeeCv::ToReady.call(employee_cv: result.employee_cv, create_reminder: result.employee_cv.reminder?)
         context.fail! unless result.success?
       end
     end

@@ -1,8 +1,8 @@
 .card-body.js-custom-column-body.card-scroll-window data-state="#{state}"
   - employee_cvs.decorate.each do |emp_cv|
-    - pe_form = "#{render partial: 'profile/favorites/interview_date'}"
+    - pe_form = "#{render partial: 'interview_date'}"
     .moveable.card.card-success data-emp-cv-id="#{emp_cv.id}"
-      span.d-flex class="interview-date-show" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
+      span.d-inline-flex.interview-date-show data-toggle="popover" data-title="Дата прибытия кандидата" data-placement="right" data-html='true' data-content=pe_form
       .card-header.d-flex
         p.initials
           = link_to emp_cv.name, edit_profile_employee_cv_path(emp_cv), remote: true
@@ -24,7 +24,7 @@
                       class: 'dropdown-item',
                       method: :delete,
                       remote: true
-          i.fas.fa-bookmark.right-top.col-red
+          i.fas.fa-bookmark.right-top.col-purple
 
       .card-body
         p.card_phone_number = emp_cv.phone_number

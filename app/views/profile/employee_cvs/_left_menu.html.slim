@@ -1,6 +1,0 @@
-.list-group
-  - EmployeeCv.contractor_menu_items.each do |k|
-    - employee_cv_class = 'list-group-item list-group-item-action'
-    - if k == @term
-      - employee_cv_class += ' active'
-    = link_to t("employee_cv.contractor.menu.#{k}"), profile_employee_cvs_path(term: k), class: employee_cv_class

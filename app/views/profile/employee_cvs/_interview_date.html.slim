@@ -1,0 +1,29 @@
+.send_for_interview
+  = hidden_field_tag :interview_date, nil
+  .interview_date__body
+    .interview_date_datepicker.d-flex.justify-content-center
+  .interview_date__footer
+    button.btn.btn-success.btn-sm.btn-rounded.mt-2.btn-interview Отправить
+    button.btn.btn-default.btn-sm.btn-rounded.mt-2.btn-interview-cancel Отменить
+
+coffee:
+  class SendForInterview
+    @init: ->
+      @initInterviewDatepicker()
+      @bind()
+
+    @bind: ->
+      $('.send_for_interview .interview_date_datepicker').on 'changeDate', @interviewChangeDate
+
+    @initInterviewDatepicker: ->
+      date = new Date()
+      $('.send_for_interview .interview_date_datepicker').datepicker
+        language: 'ru'
+        todayHighlight: true
+      $('.send_for_interview .interview_date_datepicker').datepicker('setDate', date)
+
+    @interviewChangeDate: ->
+      date = $(this).datepicker('getFormattedDate')
+      $('.send_for_interview #interview_date').val(date)
+
+    SendForInterview.init()

@@ -32,29 +32,16 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def edit
-    @employee_cv = EmployeeCv.find_by id: params[:id]
-  end
-
-  def create_as_draft
-    result = Cmd::EmployeeCv::CreateAsDraft.call(params: employee_cvs_params, profile: current_profile)
-    if result.success?
-      @status = 'success'
-      redirect_to profile_employee_cvs_path(term: :draft)
-    else
-      @status = 'error'
-      @text = error_msg_handler result.employee_cv
-    end
+    @employee_cv = EmployeeCv.find_by(id: params[:id]).decorate
   end
 
   def create_as_ready
     result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
     if result.success?
       @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :ready)
       redirect_to profile_employee_cvs_path
     else
       @status = 'error'
-      # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
@@ -83,6 +70,11 @@ class Profile::EmployeeCvsController < ApplicationController
       @status = 'error'
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
+  end
+
+  def reset_reminder
+    employee_cv.update(comment: nil, reminder: nil)
+    redirect_to profile_employee_cvs_path
   end
 
   def destroy

@@ -1,0 +1,49 @@
+coffee:
+  class Calendar
+    @init: ->
+      @setReminderDate()
+      @initReminderDatepicker()
+      @initPhoneNumberMask()
+      @bind()
+
+    @bind: ->
+      $('#empl-form .reminder_date_datepicker').on 'changeDate', @formReminderChangeDate
+      $('#empl-form #reminder_time').on 'change', @setReminder
+      $('#empl-form #reminder_date').on 'keyup', @setReminder
+
+    @initReminderDatepicker: ->
+      date = new Date()
+      $('#empl-form .reminder_date_datepicker').datepicker
+        language: 'ru'
+        todayHighlight: true
+      $('#empl-form .reminder_date_datepicker').datepicker('setDate', date)
+
+    @formReminderChangeDate: ->
+      date = $(this).datepicker('getFormattedDate')
+      $('#empl-form #reminder_date').val(date)
+      Calendar.setReminder()
+
+    @setReminderDate: ->
+      reminder = $('#empl-form #employee_cv_reminder').val()
+      date = new Date(reminder)
+      getDay = date.getDay()+1
+      getDate = formattingNumber(date.getDate())
+      month = formattingNumber(getDay)
+      dataField = "#{getDate}.#{month}.#{date.getFullYear()}"
+      hours = formattingNumber(date.getHours())
+      minutes = formattingNumber(date.getMinutes())
+      $('#empl-form').find('#reminder_date').val(dataField)
+      $('#empl-form').find('#reminder_time').val("#{hours}:#{minutes}")
+
+    formattingNumber = (number) ->
+      if number < 10 then "0#{number}" else number
+
+    @initPhoneNumberMask: ->
+      $('input[type=tel]').inputmask("+7(999)-999-99-99")
+
+    @setReminder: ->
+      date = $('#empl-form #reminder_date').val()
+      time = $('#empl-form #reminder_time').val()
+      $('#employee_cv_reminder').val("#{date} #{ time }")
+
+  Calendar.init()
