@@ -9,11 +9,29 @@
 .remote-empl_cvs {
   display: none;
 }
+
+.new-employee_cv-form input[type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 153px;
+  opacity: 0;
+}
+
+.popover{
+  left: -290px !important;
+}
+
 .crm-list {
   #main_row {
     width: calc(100% - 313px);
     height: calc(100vh - 58px);
     font-family: "Open Sans", sans-serif;
+  }
+
+  .card-scroll-window::-webkit-scrollbar-thumb, .default-scroll::-webkit-scrollbar-thumb {
+    background-color: #9046ff !important;
+    background-image: unset !important;
   }
 
   .card-tools {
@@ -23,7 +41,7 @@
   }
 
   .card-scroll-window {
-    height: 242px;
+    height: 320px;
     overflow-y: auto;
   }
 
@@ -311,125 +329,6 @@
     margin: 0 auto 10px auto !important;
   }
 
-  .popup {
-    position: absolute;
-    width: 300px;
-    left: 50%;
-    border: 0;
-    z-index: 100;
-    display: none;
-    box-shadow: 1px 2px 15px rgba(113, 113, 113, 0.2);
-    border-radius: 4px;
-    background-color: #ffffff;
-    padding: 15px 0;
-
-    .triangle {
-      width: 10px;
-      height: 10px;
-      display: block;
-      position: absolute;
-      border-top: 12px solid transparent;
-      border-left: 12px solid #d0d0d0;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      top: 5px;
-      right: -13px;
-    }
-
-    h4{
-      position: relative;
-      font-size: 13px;
-      font-weight: bold;
-      text-align: left;
-      margin-bottom: 25px;
-      padding: 4px 0 0 15px;
-      .close{
-        position: absolute;
-        right: 8px;
-        top: 0;
-      }
-    }
-
-    .title{
-      color: #8d8d8d;
-      font-size: 13px;
-      margin-bottom: 5px;
-      width: 120px;
-      text-align: left;
-      margin-left: 17px;
-      font-weight: bold;
-    }
-
-    &-date{
-      width: 50%;
-    }
-
-    &-time{
-      width: 50%;
-    }
-
-    &__header {
-      display: flex;
-    }
-
-    .datepicker-switch{
-      color: #8d8d8d;
-      font-size: 13px;
-    }
-
-    &-input {
-      width: 120px;
-      margin: 0 5px;
-      height: 33px;
-      color: black;
-      font-size: 14px;
-      padding: 10px;
-      border-radius: 4px;
-      border: 1px solid #d7d7d7;
-    }
-
-    &__body {
-      height: auto;
-      width: 90%;
-      margin: 10px auto;
-      border: 0;
-      .datepicker{
-        width: 100%;
-        .table-condensed{
-          width: 100%;
-          .dow{
-            border: 1px solid #d7d7d7;
-          }
-          tbody{
-            border-radius: 4px;
-          }
-        }
-      }
-      .datepicker table tr td.today{
-        border-radius: 4px;
-        border: 2px solid #9046ff;
-        background-color: white;
-      }
-      .datepicker table tr td{
-        border: 1px solid #d7d7d7;
-      }
-    }
-
-    &__footer{
-      .add-reminder{
-        background-color: #9046ff;
-        border-radius: 4px;
-      }
-
-      .close-reminder{
-        background-color: #ff5b01;
-        border-radius: 4px;
-      }
-
-    }
-
-  }
-
   .btn-info:hover {
     cursor: pointer;
   }
@@ -457,28 +356,6 @@
 
   .popover {
     z-index: 1020;
-  }
-
-  //Custom text colors
-
-  .col-yellow{
-    color: #ffd800;
-  }
-
-  .col-green{
-    color: #00ca5f;
-  }
-
-  .col-orange{
-    color: #ff9000;
-  }
-
-  .col-gray{
-    color: #b7b7b7;
-  }
-
-  .col-red{
-    color: #f02200;
   }
 
   @media (max-width: 900px) {

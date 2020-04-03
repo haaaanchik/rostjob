@@ -16,7 +16,7 @@
           .reminder_date_datepicker.d-flex.justify-content-center
         .popup__footer
           button.btn.btn-sm.add-reminder Сохранить
-          button.btn.btn-sm.close-reminder Убрать
+          = link_to 'Убрать', '#', data: {remote: true, method: :put},  class: 'btn btn-sm close-reminder'
         span.triangle
 
 
@@ -85,9 +85,9 @@
               .card-scroll-window.js-card-scroll-window data-state="favorite"
                 - pr_employee_cvs.decorate.each do |pr_emp|
                   - employee_cv = pr_emp.employee_cv.decorate
-                  - pe_form = "#{render partial: 'profile/favorites/interview_date'}"
+                  - pe_form = "#{render partial: 'interview_date'}"
                   .card.card-success.card-in-list.collapsed-card.moveable data-emp-cv-id="#{employee_cv.id}" data-proposal-emp-id="#{pr_emp.id}"
-                    span.interview-date-show type="button" data-toggle="popover" data-placement="top" data-html='true' data-content=pe_form
+                    span.interview-date-show type="button" data-toggle="popover" data-placement="auto" data-title="Дата прибытия кандидата" data-html='true' data-content=pe_form
                     .card-header.card-header-in-list
                       p.initials data-card-widget="collapse"
                         = link_to employee_cv.name, edit_profile_employee_cv_path(employee_cv), remote: true

@@ -1,0 +1,91 @@
+.modal.fade.show#empl-form tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  .modal-dialog.modal-lg
+    .modal-content
+      = form_with model: [:profile, employee_cv], class: 'new-employee_cv-form' do |f|
+        = f.hidden_field :order_id, value: @order&.id
+        = f.hidden_field :reminder
+        .modal-header
+          .modal-header-top
+            .modal-title ##{ employee_cv.id } #{employee_cv.name}
+          p.modal-request-type
+            i.fa.fa-bookmark.col-purple
+            | #{ t("employee_cv.state.#{employee_cv.state}") }
+          button type="button" class="close" data-dismiss="modal" aria-label="Close"
+            span aria-hidden="true" ×
+          hr
+
+        .modal-body
+          .modal-ancete
+            h4.modal-ancete__title Анкета
+            .ancete-rows.must-have
+              .ancete-row
+                p.ancete-row__title Полное имя
+                .ancete-row__content
+                  = f.text_field :name, class: 'form-control'
+                  .invalid-feedback
+              .ancete-row
+                p.ancete-row__title Номер телефона
+                .ancete-row__contentactions
+                  = f.phone_field :phone_number, class: 'form-control'
+                  .invalid-feedback
+              .ancete-row
+                p.ancete-row__title Анкета для СБ
+                .ancete-row__content
+                  #choose-file
+                    | Выберите файл
+                    = f.file_field :document
+
+                  .sex
+                    label.mr-2 for="man" М
+                    = f.radio_button :gender, 'М', id: 'man', checked: true
+                    label.mr-2 for="woman" Ж
+                    = f.radio_button :gender, 'Ж', id: 'woman'
+
+            h4.modal-ancete__title Дополнительные сведения
+            .ancete-rows.more-info
+              .ancete-row
+                p.ancete-row__title Опыт работы
+                .ancete-row__content
+                  = f.text_area :experience, cols: 30, rows: 3
+              .ancete-row
+                p.ancete-row__title Образование
+                .ancete-row__content
+                  = f.text_area :education, cols: 30, rows: 3
+              .ancete-row
+                p.ancete-row__title Доп. информация
+                .ancete-row__content
+                  = f.text_area :remark, cols: 30, rows: 3
+              - if f.object.comment?
+                .ancete-row
+                  p.ancete-row__title Комментарий
+                  .ancete-row__contentactions
+                    = f.text_area :comment, class: 'form-control'
+                    .invalid-feedback
+          .modal-ancete__sidebar
+            .date-start-work.new-employee-cv.pt-0.shadow-none.position-static
+              - if f.object.reminder?
+                h4
+                  | Напоминание
+                .popup__header.ml-2
+                  .popup-date
+                    p.title Дата
+                    = text_field_tag :reminder_date, f.object.reminder_date, placeholder: '01.01.2001', class: 'popup-input'
+                  .popup-time.ml-3
+                    p.title Время
+                    = time_field_tag :reminder_time, f.object.reminder_time, placeholder: '23:59', class: 'popup-input'
+                .popup__body
+                  .reminder_date_datepicker.d-flex.justify-content-center
+            .footer
+              p Рекрутер
+              .ancete-recruter
+                = image_tag employee_cv.profile.image_url, class: 'request-logo'
+                p.request-user-name = employee_cv.profile.user.full_name
+        .p-2
+          hr
+          .text-center.p-2
+            - if @order
+              = f.submit 'Отправить', class: 'btn btn-sm btn-primary btn-rounded', name: :save_as_sent
+            - else
+              = f.submit 'Сохранить', class: 'btn btn-sm btn-primary btn-rounded', name: :save
+
+= render partial: 'calendar'

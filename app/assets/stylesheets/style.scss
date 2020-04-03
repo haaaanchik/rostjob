@@ -1,0 +1,242 @@
+body {
+  font-family: Verdana, Geneva, sans-serif!important;
+}
+
+.bg-rostjob {
+	background-color: #534741 !important;
+}
+
+.form-box {
+    margin: .375rem;
+    border-radius: 0;
+}
+
+.btn-box {
+  border-radius: 0;
+  line-height: 0.4;
+  font-size: 1rem;
+  border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+.btn-box:hover {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+.btn-box:focus {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+.btn-box:visited {
+  border-radius: 0;
+	line-height: 0.4;
+	font-size: 1rem;
+	border: 2px solid #fff!important;
+    background-color: transparent!important;
+    color: #fff!important;
+    text-transform: inherit;
+
+}
+
+.button-menu {
+  width: 100%;
+}
+
+#privacy_policy p {
+  text-indent: 40px;
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+#privacy_policy .list-item {
+  margin-top: 1rem;
+}
+
+#privacy_policy b {
+  font-weight: bold;
+}
+
+#privacy_policy {
+    padding: 30px;
+    margin: 0 auto;
+    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated
+.custom-select:invalid,
+.custom-select.is-invalid {
+  border-color: #dc3545 !important;
+}
+
+.popover-header {
+    text-align: center;
+}
+
+.crm-list, #empl-form, .send_for_interview {
+  .popup, .new-employee-cv, .interview_date {
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    border: 0;
+    z-index: 100;
+    display: none;
+    box-shadow: 1px 2px 15px rgba(113, 113, 113, 0.2);
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 15px 0;
+
+    .triangle {
+      width: 10px;
+      height: 10px;
+      display: block;
+      position: absolute;
+      border-top: 12px solid transparent;
+      border-left: 12px solid #d0d0d0;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      top: 5px;
+      right: -13px;
+    }
+
+    h4 {
+      position: relative;
+      font-size: 13px;
+      font-weight: bold;
+      text-align: left;
+      margin-bottom: 25px;
+      padding: 4px 0 0 15px;
+
+      .close {
+        position: absolute;
+        right: 8px;
+        top: 0;
+      }
+    }
+
+    .title {
+      color: #8d8d8d;
+      font-size: 13px;
+      margin-bottom: 5px;
+      width: 120px;
+      text-align: left;
+      margin-left: 17px;
+      font-weight: bold;
+    }
+
+    &-date {
+      width: 50%;
+    }
+
+    &-time {
+      width: 50%;
+    }
+
+    &__header {
+      display: flex;
+    }
+
+    .datepicker-switch {
+      color: #8d8d8d;
+      font-size: 13px;
+    }
+
+    &-input {
+      width: 120px;
+      margin: 0 5px;
+      height: 33px;
+      color: black;
+      font-size: 14px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #d7d7d7;
+    }
+
+    &__body {
+      height: auto;
+      width: 90%;
+      margin: 10px auto;
+      border: 0;
+      .datepicker {
+        width: 100%;
+        .table-condensed {
+          width: 100%;
+          .dow {
+            border: 1px solid #d7d7d7;
+          }
+          tbody {
+            border-radius: 4px;
+          }
+        }
+      }
+
+      .datepicker table tr {
+        td {
+          border: 1px solid #d7d7d7;
+          &.today {
+            border-radius: 4px;
+            border: 2px solid #9046ff;
+            background-color: white;
+            color: unset;
+          }
+        }
+      }
+    }
+
+    &__footer {
+      .add-reminder {
+        background-color: #9046ff;
+        border-radius: 4px;
+      }
+
+      .close-reminder {
+        background-color: #ff5b01;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+//Custom text colors
+
+.col-yellow{
+  color: #ffd800;
+}
+
+.col-green{
+  color: #00ca5f;
+}
+
+.col-orange{
+  color: #ff9000;
+}
+
+.col-gray{
+  color: #b7b7b7;
+}
+
+.col-red{
+  color: #f02200;
+}
+
+.col-purple {
+  color: #9046ff;
+}

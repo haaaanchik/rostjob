@@ -319,11 +319,11 @@ Rails.application.routes.draw do
         put :to_ready
         put :to_disput
         put :change_status
+        put :reset_reminder
       end
     end
     post :employee_cvs, constraints: ->(req) { req.params.key?(:pre_new_full) }, to: 'employee_cvs#pre_new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
-    post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_draft) }, to: 'employee_cvs#create_as_draft'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_for_send'
 
     resources :proposals, only: %i[index show create] do

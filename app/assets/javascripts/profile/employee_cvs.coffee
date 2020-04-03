@@ -4,6 +4,8 @@ class EmployeeCvs
   $prEmployeeId = null
   $popoverPosition = null
   $currentComment = null
+  $choosen = true
+  $counter = 0
 
   @init: ->
     @draggableInit()
@@ -12,18 +14,19 @@ class EmployeeCvs
   @bind: ->
     $('#proposal_select_employee_cv').on 'change', @proposalSelectEmployeeCv
     $('[id^="prp_employee_cv_state"]').on 'change', @prpEmployeeCvState
-    $(document).on 'click', 'label[for=proposal_employee_employee_cv_attributes_contractor_terms_of_service]', @termsOfService
     $(document).on 'show.bs.modal', '#formModalNewEmployeeCv', @showBsModal
     $('.reminder_date_datepicker').on 'changeDate', @reminderChangeDate
-#    $('.remote-block').on 'click', @remoteBlock
     $('.comment-emp-cv').on 'click', @activateСomment
     $('body').on 'click', '.btn-interview', @sentEmployeeCv
     $('body').on 'click', '.btn-interview-cancel', @cancelInterview
     $('.js-call-popup').on 'click', @getCoord
-    $('.js-close-popup, .close-reminder').on 'click', @closeReminder
+    $('.js-close-popup').on 'click', @closeReminder
     $('.add-reminder').on 'click', @addReminder
     $('.js-arrow ').on 'click', @hiddenFavoriteBlock
     $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
+    $('.chosen .card-scroll-window .card').on 'dragenter', @openCardBody
+    $('.chosen .card-scroll-window .card').on 'dragleave', @closeCardBody
+
 
   @proposalSelectEmployeeCv: (event) ->
     empl = $(this).val()
@@ -46,25 +49,19 @@ class EmployeeCvs
       data: data
     return
 
-  @termsOfService: (event) ->
-    console.log 'aaa'
-    element = $('#proposal_employee_employee_cv_attributes_contractor_terms_of_service')
-    checked = element.prop('checked')
-    if checked == false
-      $('.proposal-employee-cv-submit-button').removeClass('disabled')
-    else
-      $('.proposal-employee-cv-submit-button').addClass('disabled')
-
   @showBsModal: ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
 
   reminderDateDatepicker = () ->
-    date = $('#reminder_date').val()
+    date = $('#reminder_popup #reminder_date').val()
     $('.reminder_date_datepicker').datepicker
       language: 'ru'
       todayHighlight: true
 
     $('.reminder_date_datepicker').datepicker('setDate', date)
+
+  setDefaultComment = () ->
+    $currentComment.val('Напомнить мне!') unless $currentComment.val().length
 
   @draggableInit: ->
     arrEl = $('.js-custom-column-body, .js-card-scroll-window')
@@ -74,9 +71,12 @@ class EmployeeCvs
       try
         Sortable.create elem,
           group: name: 'sorting'
+          onChoose: (e) ->
+            $choosen = true
           onRemove: (evt) ->
             removeAndAddStyle(evt)
           onEnd: (evt) ->
+            $counter = 0
             currentState = $(evt.to).data('state')
             prevState = $(evt.from).data('state')
             return if currentState == prevState
@@ -89,11 +89,7 @@ class EmployeeCvs
 
   @reminderChangeDate: ->
     date = $(this).datepicker('getFormattedDate')
-    $('#reminder_date').val(date)
-
-#  @remoteBlock: ->
-#    $(this).children().last().toggleClass('fa-chevron-up fa-chevron-down')
-#    $('.remote-empl_cvs').fadeToggle(500)
+    $('#reminder_popup #reminder_date').val(date)
 
   @activateСomment: (event) ->
     event.preventDefault()
@@ -150,11 +146,19 @@ class EmployeeCvs
     clearAndSetDateInput($(this))
     reminderDateDatepicker()
     $currentComment = $(this)
+    setDefaultComment()
+    setResetReminderHref($(this))
     popup.style.display = 'block'
     return
 
+  setResetReminderHref = (position) ->
+    id = position.parents('.moveable').data('emp-cv-id')
+    $('.close-reminder').attr('href', '/profile/employee_cvs/' + id + '/reset_reminder')
+
   @closeReminder: ->
     $('.popup').slideToggle()
+    column = $currentComment.parents('.card-body.js-custom-column-body')
+    $currentComment.val('') if column.data('state') != 'reminder'
     $currentComment = null
     return
 
@@ -183,7 +187,7 @@ class EmployeeCvs
         $currentComment.parent().append(data.reminder_date)
         $currentComment = null
         toastr.success('Напоминание успешно доабвлено')
-        return
+        Turbolinks.visit(window.location.href)
       error: (msg) ->
         toastrMessages(false)
     return
@@ -194,9 +198,34 @@ class EmployeeCvs
   @orderBlockToggleClass: ->
     $(this).next('.details').toggleClass('opened')
 
+  @openCardBody = (e) ->
+    $counter++
+    if !e.target.classList.contains('card-header')
+      return false
+    else
+      target = $(e.target)
+    if $choosen == true && e.target.classList.contains('card-header')
+      target.next().slideDown()
+      e.preventDefault()
+    return
+
+  @closeCardBody = (e) ->
+    $counter--
+    if $counter == 0
+      if !e.target.classList.contains('card-header')
+        return false
+      else
+        target = $(e.target)
+      target.next().slideUp()
+      return
+
+
   clearAndSetDateInput = ($this) ->
-    date = if $this.data('date') == undefined then $('#reminder_date').val() else $this.data('date')
-    time = if $this.data('time') == undefined then $('#reminder_time').val() else $this.data('time')
+    newDate = new Date()
+    hours = if newDate.getHours() < 10 then "0#{newDate.getHours()}" else newDate.getHours()
+    minutes = if newDate.getMinutes() < 10 then "0#{newDate.getMinutes()}" else newDate.getMinutes()
+    date = if $this.data('date') == undefined then newDate else $this.data('date')
+    time = if $this.data('time') == undefined then "#{hours}:#{minutes}" else $this.data('time')
     $('#reminder_popup').find('#reminder_date').val(date)
     $('#reminder_popup').find('#reminder_time').val(time)
 

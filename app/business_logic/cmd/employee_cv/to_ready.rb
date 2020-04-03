@@ -6,7 +6,7 @@ module Cmd
       def call
         return reset_reminder if draggable
         context.fail! unless employee_cv.to_ready!
-        reset_reminder
+        reset_reminder unless create_reminder
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
@@ -22,6 +22,10 @@ module Cmd
 
       def draggable
         context.draggable
+      end
+
+      def create_reminder
+        context.create_reminder || false
       end
 
       def reset_reminder
