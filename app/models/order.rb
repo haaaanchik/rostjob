@@ -99,13 +99,20 @@ class Order < ApplicationRecord
   end
 
   def amount_deals
-    proposal_employees.paid.count
+    @amount_deals ||= proposal_employees.paid.count
+  end
+
+  def revoked_deals
+    @revoked_deals ||= proposal_employees.revoked.count
+  end
+
+  def all_deals
+    @all_deals ||= amount_deals + revoked_deals
   end
 
   def calculate_paid_percent
-    "#{((amount_deals.to_f / (amount_deals + proposal_employees.revoked.count)) * 10).round(1)}/10"
-  rescue ZeroDivisionError
-    0
+    return '0/10' if amount_deals.zero? || all_deals.zero?
+    "#{((amount_deals.to_f / all_deals) * 10).round(1)}/10"
   end
 
   def calculate_total
