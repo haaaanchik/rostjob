@@ -98,6 +98,16 @@ class Order < ApplicationRecord
     balance.amount >= (number_additional_employees * customer_price)
   end
 
+  def amount_deals
+    proposal_employees.paid.count
+  end
+
+  def calculate_paid_percent
+    "#{((amount_deals.to_f / (amount_deals + proposal_employees.revoked.count)) * 10).round(1)}/10"
+  rescue ZeroDivisionError
+    0
+  end
+
   def calculate_total
     customer_price * number_of_employees
   end
