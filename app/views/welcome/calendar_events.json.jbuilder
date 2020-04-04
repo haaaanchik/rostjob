@@ -42,7 +42,7 @@ json.array!(@empl_cv_reminders) do |event|
   json.extract! event, :id, :reminder
   json.id event.id
   json.title event.name
-  json.color '#ff0000'
+  json.color '#9046ff'
   json.tooltip "Напоминание для анкеты #{event.name}. Комментарии: #{event.comment}"
   json.start event.reminder
   json.end event.reminder
