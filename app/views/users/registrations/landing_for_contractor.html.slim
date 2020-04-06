@@ -1,7 +1,10 @@
 - errors = @user.errors.messages
 
-#landing-freelance
+- content_for :head do
+  meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
+  title Фриланс для людей без опыта и с опытом HR – RostJob.
 
+#landing-freelance
   header.header
     = render 'users/header_logo'
 
