@@ -22,10 +22,15 @@ class Profile::CandidatesController < ApplicationController
     @result = Cmd::ProposalEmployee::Pay.call(candidate: candidate)
   end
 
+  def approve_all_acts
+    @result = Cmd::ProposalEmployee::ApproveListActs.call(candidates: candidates, profile_id: params[:profile_id])
+  end
+
   def approval_list
-    @approval_list = candidates.includes(:employee_cv, order: :production_site)
+    @approval_list = candidates.includes(:employee_cv, :profile, order: :production_site)
                          .approved
                          .page(params[:page]).per(10)
+                         .group_by { |pr_empl| pr_empl.profile.decorate }
     @active_item = :approve_act_list
   end
 
