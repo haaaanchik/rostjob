@@ -1,239 +1,71 @@
-/.d-flex.justify-content-center.w-100#proposal_employees
-  .col-lg-11.order-lg-1.mt-4
-    p.text-center.font-italic
-      |*Список анкет на подтверждение оплаты.
-    .rounded.white
-      table.table.table-sm.table-borderless.scrollbar-near-moon.thin
-        thead
-          tr
-            th
-              strong №
-            th
-              strong Анкета
-            th
-              strong Заявка
-            th
-              strong Производственная площадка
-            th
-              strong Действие
-        tbody
-          - @approval_list.each do |p_employee|
-            tr data-pr-employee-id="#{ p_employee.id }"
-              td = p_employee.id
-              td = link_to p_employee.employee_cv.name, profile_production_site_order_path(p_employee.order.production_site,
-                                                                                           p_employee.order,
-                                                                                           proposal_employee_id: p_employee.id)
-              td = p_employee.order.title
-              td = p_employee.order.production_site.title
-              td
-                = link_to approve_act_profile_candidate_path(p_employee),
-                          class: 'green-text btn btn-sm',
-                          remote: true,
-                          method: :put do
-                  i.fas.fa-check-circle.mr-2
-                  | одобрить акт
-    = paginate @approval_list
-
-
 #acts.custom-scroll
   .single-act
-    .user-info
-      .logo
-        /img alt="" src="img/logo.png" /
-        = image_tag('/img/new/no-avatar.png')
-      .details
-        p.user-name
-          | Nataja-2019
-        p.user-rating
-          | Рейтинг:
-          span.textGreen 249
-        p.deals
-          | Сделки:
-          span.textGreen 10/10
-    div
-      .long-block
-        div
-          span.number
-            | №198
-          span.title
-            | Оператор-сборщик схемных жгутов ООО «Кирпичный завод»
-        div
-          span.number-of-workers
-            | 1 сотрудник(а)
-          span.human-price
-            | 2 000 руб / чел
-          span.price
-            | 2 000 руб
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
+    - @approval_list.each do |profile, proposal_employees|
+      - total_price_acts = 0
+      .user-info
+        .logo
+          = image_tag profile.image_url
+        .details
+          p.user-name
+            | #{ profile.user.full_name }
+          p.user-rating
+            | Рейтинг:
+            span.textGreen #{ profile.calculate_hiring_percent }
+          p.deals
+            | Сделки:
+            span.textGreen #{ profile.amount_of_deals }
+      div
+        - proposal_employees.group_by(&:order).each do |order, pr_employees|
+          - price = order.customer_price.to_i * pr_employees.count
+          - total_price_acts += price
+          .long-block
             div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-    div
-      .long-block
-        div
-          span.number
-            | №198
-          span.title
-            | Оператор-сборщик схемных жгутов ООО «Кирпичный завод»
-        div
-          span.number-of-workers
-            | 1 сотрудник(а)
-          span.human-price
-            | 2 000 руб / чел
-          span.price
-            | 2 000 руб
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
+              span.number
+                | №#{ order.id }
+              span.title
+                | #{ order.title } - #{ order.production_site.title }
             div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
-            div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-    .all
-      a.subscribe-all href="#"  Подписать все
-      p.all-price
-        | Итого:
-        span
-          | 6000 руб.
-    hr/
+              span.number-of-workers
+                | #{ pr_employees.count } сотрудник(а)
+              span.human-price
+                | #{ order.customer_price.to_i } руб / чел
+              span.price
+                | #{ price } руб
+          - pr_employees.each do |pr_employee|
+            .short-block
+              .short-block__content
+                .data
+                  i.fa.fa-bookmark.textGray
+                  div
+                    p.initials
+                      span ##{pr_employee.id}
+                      | #{pr_employee.employee_cv.name}
+                    p
+                      | #{pr_employee.employee_cv.phone_number}
+                .hire-data
+                  p
+                    | Нанят
+                  p
+                    | #{pr_employee.interview_date.strftime("%d.%m.%Y")}
 
+              = link_to approve_act_profile_candidate_path(pr_employee),
+                        class:'subscribe',
+                        remote: true,
+                        method: :put do
+                | Подписать акт
 
-  .single-act
-    .user-info
-      .logo
-        = image_tag('/img/new/no-avatar.png')
-      .details
-        p.user-name
-          | Nataja-2019
-        p.user-rating
-          | Рейтинг:
-          span.textGreen 249
-        p.deals
-          | Сделки:
-          span.textGreen 10/10
-    div
-      .long-block
-        div
-          span.number
-            | №198
-          span.title
-            | Оператор-сборщик схемных жгутов ООО «Кирпичный завод»
-        div
-          span.number-of-workers
-            | 1 сотрудник(а)
-          span.human-price
-            | 2 000 руб / чел
-          span.price
-            | 2 000 руб
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
-            div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-    div
-      .long-block
-        div
-          span.number
-            | №198
-          span.title
-            | Оператор-сборщик схемных жгутов ООО «Кирпичный завод»
-        div
-          span.number-of-workers
-            | 1 сотрудник(а)
-          span.human-price
-            | 2 000 руб / чел
-          span.price
-            | 2 000 руб
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
-            div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-      .short-block
-        .short-block__content
-          .data
-            i.fa.fa-bookmark.textGray
-            div
-              p.initials
-                span #59
-                | Хабибуллин Рамиль
-              p
-                | +79157815635
-          .hire-data
-            p
-              | Нанят
-            p
-              | 21.02.2020
-        a.subscribe href="#"
-          | Подписать акт
-    .all
-      a.subscribe-all href="#"  Подписать все
-      p.all-price
-        | Итого:
-        span
-          | 6000 руб.
-    hr/
+      .all
+        = link_to approve_all_acts_profile_candidates_path(profile_id: profile.id),
+                  class: 'subscribe-all',
+                  remote: true,
+                  method: :put do
+          | Подписать все
+        p.all-price
+          | Итого:
+          span
+            |  #{ total_price_acts }
+      hr
+
+    - unless @approval_list.present?
+      p.text-center.mt-4.font-italic
+        |Список актов пуст

@@ -242,6 +242,7 @@ Rails.application.routes.draw do
       end
       collection do
         get :approval_list
+        put :approve_all_acts
       end
     end
     resources :order_templates do
