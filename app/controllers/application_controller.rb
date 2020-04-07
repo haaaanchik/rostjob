@@ -84,10 +84,10 @@ class ApplicationController < BaseController
   end
 
   def opened_tickets_count
-    @opened_tickets_count = Ticket.with_other_tickets_for(current_user)
-                                .opened
-                                .without_waiting(current_profile)
-                                .count
+    @opened_tickets = Ticket.with_other_tickets_for(current_user)
+                          .opened
+                          .without_waiting(current_profile)
+    @opened_tickets_count = @opened_tickets.count
   end
 
   def p_employees_approved_count

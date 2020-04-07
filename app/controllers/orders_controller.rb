@@ -1,15 +1,9 @@
 class OrdersController < ApplicationController
   before_action :order, except: :index
+  before_action :redirect_to_disputes, only: :index
 
   def index
-    @term = params[:customer]
-    @active_item = case params[:customer]
-                   when nil
-                     :orders
-                   else
-                     params[:customer].to_sym
-                   end
-
+    @active_item = :orders
     employee_cv_id
     orders.decorate
   end
@@ -50,5 +44,13 @@ class OrdersController < ApplicationController
 
   def employee_cv_id
     @employee_cv_id = params[:employee_cv_id] || params[:q].try(:[], :employee_cv_id)
+  end
+
+  def redirect_to_disputes
+    path_name = URI(request.referer).path
+    if @opened_tickets_count > 0 && !path_name.include?('/profile/tickets/')
+      flash[:notice] = 'У вас есть анкета с открытым спором, пожалуйста просмотрите его!'
+      redirect_to profile_ticket_path(@opened_tickets.first)
+    end
   end
 end
