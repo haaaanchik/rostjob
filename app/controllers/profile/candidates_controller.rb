@@ -27,10 +27,11 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def approval_list
-    @approval_list = candidates.includes(:employee_cv, :profile, order: :production_site)
-                         .approved
-                         .page(params[:page]).per(10)
-                         .group_by { |pr_empl| pr_empl.profile.decorate }
+    @paginated_lists = candidates.includes(:employee_cv, :profile, order: :production_site)
+                           .approved
+                           .order(:profile_id)
+                           .page(params[:page]).per(10)
+    @approval_list = @paginated_lists.group_by { |pr_empl| pr_empl.profile.decorate }
     @active_item = :approve_act_list
   end
 
