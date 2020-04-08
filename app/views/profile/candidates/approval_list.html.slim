@@ -20,10 +20,11 @@
           - total_price_acts += price
           .long-block
             div
-              span.number
-                | №#{ order.id }
-              span.title
-                | #{ order.title } - #{ order.production_site.title }
+              = link_to profile_production_site_order_path(order.production_site_id, order), class: 'col-black order-title' do
+                span.number
+                  | №#{ order.id }
+                span.title
+                  | #{ order.title } - #{ order.production_site.title }
             div
               span.number-of-workers
                 | #{ pr_employees.count } сотрудник(а)
@@ -36,7 +37,7 @@
               .short-block__content
                 .data
                   i.fa.fa-bookmark.textGray
-                  div
+                  = link_to profile_candidate_path(pr_employee), remote: true do
                     p.initials
                       span ##{pr_employee.id}
                       | #{pr_employee.employee_cv.name}
@@ -63,9 +64,10 @@
         p.all-price
           | Итого:
           span
-            |  #{ total_price_acts }
+            |  #{ total_price_acts } руб
       hr
 
     - unless @approval_list.present?
       p.text-center.mt-4.font-italic
         |Список актов пуст
+  = paginate @paginated_lists

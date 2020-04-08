@@ -18,6 +18,7 @@ class ProposalEmployeeDecorator < ObjDecorator
     inbox: '#ffd800',
     interview: '#ff9000',
     hired: '#00ca5f',
+    approved: '#b7b7b7',
     paid: '#b7b7b7'
   }
 
@@ -27,7 +28,8 @@ class ProposalEmployeeDecorator < ObjDecorator
       'reserved' => %w[inbox interview transfer],
       'interview' => %w[hired disputed transfer],
       'hired' => %w[disputed],
-      'disputed' => %w[disputed]
+      'disputed' => %w[disputed],
+      'approved' => %w[disputed]
     },
     'contractor' => {
       'inbox' => %w[revoked disputed],

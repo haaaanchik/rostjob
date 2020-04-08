@@ -330,6 +330,10 @@
   align-items: center;
   margin-bottom: 15px;
   border-left: 5px solid #00ca5f;
+
+  .order-title:hover {
+    color: #212529
+  }
 }
 
 #acts .long-block .number {

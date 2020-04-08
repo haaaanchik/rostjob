@@ -39,14 +39,14 @@
                           employee_cv.gender,
                           employee_cv.gender.include?('М'),
                           id: 'man',
-                          class: 'disabled'
+                          class: 'disabled ml-2'
 
                   label for="woman" Ж
                   = radio_button_tag 'employee_cv[gender]',
                           employee_cv.gender,
                           employee_cv.gender.include?('Ж'),
                           id: 'woman',
-                          class: 'disabled'
+                          class: 'disabled ml-2'
 
 
           h4.modal-ancete__title Дополнительные сведения
