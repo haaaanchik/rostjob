@@ -21,4 +21,5 @@
       p Открытое окно — это окно Площадки. В открытом окне нажмите кнопку «Опубликовать заявку». Далее следуйте инструкциям публикации заявки. 
       = link_to image_path('/img/manuals/manual_create_order/5.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
         = image_tag '/img/manuals/manual_create_order/5_mini.jpg'
-      p Более подробнее о публикации заявки смотрите в инструкции «Статусы публикации заявки».
+      p Более подробнее о публикации заявки смотрите в инструкции 
+      = link_to '«Статусы публикации заявки».', page_path('manual_about_status_order')
