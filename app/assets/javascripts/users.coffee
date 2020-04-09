@@ -44,7 +44,7 @@ class Users
 
   profileInvoices = (enjoyhint_instance, skipButton) ->
     if window.location.search == '?state=created'
-      message = 'Вас счет находится здесь. Кликните на кнопку, чтобы распечатать его.'
+      message = 'Ваш счет находится здесь. Кликните на кнопку, чтобы распечатать его.'
       script_steps = [{ 'click .file-pdf:first()': message, 'skipButton': skipButton }]
       enjoyHintRun(enjoyhint_instance, script_steps)
     else unless $('.allAccounts_open_table table tbody tr').length

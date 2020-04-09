@@ -7,7 +7,7 @@ tr
   td
     = link_to profile_invoice_path(invoice) do
       i.fa.fa-print.fa-2x.mr-2
-    = link_to profile_invoice_path(invoice, format: :pdf),
+    = link_to profile_invoice_path(invoice, format: :pdf), target: '_blank',
       data: { toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF' },
       class: 'ml-1 file-pdf' do
       i.far.fa-file-pdf.fa-2x.mr-2
