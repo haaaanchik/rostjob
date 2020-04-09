@@ -70,7 +70,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_disputed do
-      transitions from: %i[inbox interview hired deleted], to: :disputed
+      transitions from: %i[inbox interview hired deleted approved], to: :disputed
     end
 
     event :to_deleted do
