@@ -45,7 +45,6 @@ body#landing
   main
     section.landing-header.container
       .content
-        p.title Подбор персонала онлайн от ведущей HR компании
         h1.subtitle Онлайн кадровое агентство
         = form_for @user,
                 method: :post,
@@ -54,6 +53,7 @@ body#landing
           .invalid-feedback = errors[:email].first
           = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
           = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
+        p.title Подбор персонала онлайн от ведущей HR компании
       .landing-header-img
         = image_tag('/img/stock.svg')
     section.advantages
