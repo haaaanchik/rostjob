@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
     get 'freelance', to: 'users/registrations#landing_for_contractor', as: 'landing_for_contractor'
-    get 'secret_reg', to: 'users/registrations#landing_for_customer', as: 'landing_for_customer'
+    get 'industrial', to: 'users/registrations#landing_for_customer', as: 'landing_for_customer'
     get :new_contractor, to: 'users/registrations#new_contractor'
     get :new_customer, to: 'users/registrations#new_customer'
     get :contractor_info, to: 'users/registrations#contractor_info'
