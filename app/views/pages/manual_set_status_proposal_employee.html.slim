@@ -1,0 +1,56 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Статусы анкет
+    .content.d-flex.flex-column
+      
+      p
+        | Исключая все лишнее остались 3 действия которые невозможно исключить из системы найма – это «Назначение собеседования»,
+          сам «Найм» и подтверждение «Оплаты» нашим Рекрутерам. Но когда дело касается людей не бывает все всегда гладко,
+          поэтому в системе предусмотрено еще одно действие «Спор». 
+      p
+        | Более подробную информацию вы можете узнать в инструкциях:
+      p
+        = link_to 'Как назначить собеседование?', page_path('manual_how_to_set_date_interview')
+      p
+        = link_to 'Как нанять персонал?', page_path('manual_how_hire')
+      p
+        = link_to 'Как выписать акт?', page_path('manual_how_create_act')
+      p
+        = link_to 'Как открыть «Спор»?', page_path('manual_how_start_disput')
+      p
+        | В этой инструкции мы остановимся на статусах Анкет
+      p
+        | Когда Анкета поступает в Заявку она приобретает статус «В очереди».
+      p
+        | Узнать подробные данные вы можете, кликнув по ФИО в карточке Соискателя. Дату приезда кандидата её вы увидите над ФИО в карточке.
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/1.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/1_mini.jpg'
+      p Для удобства мы разместили напоминание на главной странице.
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/2_mini.jpg'
+      p
+        | Далее у неё два выхода: либо Соискателю назначают в системе собеседование - тогда анкета меняет свой статус на «Собеседование», 
+          либо её отзывают - тем самым удаляя из заявки.
+      p
+        | Все дальнейшие статусы, т.е. все кроме «В очереди», являются статусами процесса Найма. 
+          И Анкета определяется в системе как «В найме». Если возникают ситуации, когда процесс идет не к дальнейшему найму кандидата и оплатой Рекрутера,
+          то чтобы решить ситуацию или даже отозвать анкету следует отправить Анкету в «Спор».
+      p
+        | После назначения собеседования анкета меняет свой статус на «Собеседование» и встает в заявке на столбик «Собеседование».
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/3.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/3_mini.jpg'
+      
+      p Для удобства Анкеты после даты их собеседования появляются на главной.
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/4.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/4_mini.jpg'
+      p
+        | Подсказки помогут Вам не пропустить собеседование. И по итогу собеседования в интерфейсе отметьте дату найма чтобы запустился счетчик гарантийного периода.
+          Карточка Анкеты перестроится в соответствующий ряд. Анкете будет присвоен статус «Нанят»
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/5.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/5_mini.jpg'
+      p По истечению гарантийного периода Анкета сменит статус на «В оплате».
+      = link_to image_path('/img/manuals/manual_set_status_proposal_employee/6.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_set_status_proposal_employee/6_mini.jpg'
+      p Это признак того что условие сделки выполнены. Переходите во вкладку Акты чтобы сгенерировать закрывающие документы.
+      p 
+        = link_to 'Как выписать Акт.', page_path('manual_how_create_act')

@@ -1,0 +1,22 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Параметры заявок: "В очереди", "Заявки" и "В найме"
+    .content.d-flex.flex-column
+      p Для ориентации в наполненности в RostJob используются Параметры заявки.
+      = link_to image_path('/img/manuals/manual_about_status_order_2/1.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order_2/1_mini.jpg'
+      p «В очереди» - это параметр с иконкой в виде письма.
+      = link_to image_path('/img/manuals/manual_about_status_order_2/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order_2/2_mini.jpg'
+      p
+        | Параметр «В очереди» отражает количество откликов на заявку. Анкеты со статусом «В очереди» отображают этот параметр в Заявке.
+      p «Заявка» — это параметр с иконкой в виде группы людей.
+      = link_to image_path('/img/manuals/manual_about_status_order_2/3.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order_2/3_mini.jpg'
+      p Заявка — это количество открытых мест. Заявка отражает сколько еще может поступить анкет до её закрытия.
+      p «В найме» - это параметр с иконкой в виде флажка.
+      = link_to image_path('/img/manuals/manual_about_status_order_2/4.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order_2/4_mini.jpg'
+      p
+        | Анкеты в заявке со статусом «Собеседование», «В найме», «В оплате», «Спор» в заявке в сумме отражают этот параметр.
+          Этот параметр отражает активные Анкеты в заявке.

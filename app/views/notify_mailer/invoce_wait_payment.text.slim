@@ -1,6 +1,6 @@
 == @invoices.size > 1 ? 'К сожалению, у Вас есть неоплаченные счета: ' : 'К сожалению, у Вас есть неоплаченный счет'
 - @invoices.each do |invoice|
-  = "На сумму #{invoice.amount}, сылка на счёт - "
+  = "На сумму #{invoice.amount}, ссылка на счёт - "
   = url_for profile_invoice_url(invoice.id)
   == @invoices.size > 1 ? '; ' : '.'
 

@@ -1,15 +1,16 @@
 .d-flex.justify-content-center.w-100
   .col-lg-8.col-sm-12
-    h2.text-center Инструкция на оплату заявки
+    h1.text-center Как пополнить баланс?
     .content.d-flex.flex-column
 
-      | Чтобы опубликовать заявку Вам нужен положительный баланс. Нажмите кнопку «Пополнить» на «Главной» странице чтобы открылся интерфейс пополнения баланса.
-      = link_to image_path('/img/manuals/orders/6.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/orders/6_mini.jpg'
-      | В интерфейсе пополнения баланса впишите сумму для пополнения и нажмите «Выставить счет».
-      = link_to image_path('/img/manuals/orders/7.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/orders/7_mini.jpg'
-      | Система сгенерирует счет, который вы сможете скачать или распечатать.
-      = link_to image_path('/img/manuals/orders/8.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/orders/8_mini.jpg'
-      | После поступления оплаты счет автоматически будет пополнен на оплаченную сумму в течении рабочего дня.
+      p
+        | Чтобы опубликовать заявку Вам нужен положительный баланс. Нажмите кнопку «Пополнить» на «Главной» странице чтобы открылся интерфейс пополнения баланса.
+      = link_to image_path('/img/manuals/manual_how_to_pay_order/1.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_how_to_pay_order/1_mini.jpg'
+      p В интерфейсе пополнения баланса впишите сумму для пополнения и нажмите «Выставить счет».
+      = link_to image_path('/img/manuals/manual_how_to_pay_order/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_how_to_pay_order/2_mini.jpg'
+      p Система сгенерирует счет, который вы сможете скачать или распечатать.
+      = link_to image_path('/img/manuals/manual_how_to_pay_order/3.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_how_to_pay_order/3_mini.jpg'
+      p После поступления оплаты счет автоматически будет пополнен на оплаченную сумму в течении рабочего дня.

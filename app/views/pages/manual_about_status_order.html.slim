@@ -1,0 +1,30 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Какие бывают статусы у заявки?
+    .content.d-flex.flex-column
+      p
+        | Как вы могли бы узнать в инструкции «Содержание заявки»: у заявки могут быть разные статусы.
+          И «Опубликована» это единственный статус, при котором заявка доступна для Рекрутеров.
+          Опубликованные заявки находятся во вкладке «Опубликованные».
+      = link_to image_path('/img/manuals/manual_about_status_order/1.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order/1_mini.jpg'
+      p
+        | Если Вы опубликовывали заявку, но она не находится в списке «Опубликованных» проверьте вкладки «Завершенные», «На модерации» и «Ожидающие оплаты».
+      = link_to image_path('/img/manuals/manual_about_status_order/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order/2_mini.jpg'
+      p
+        | Когда Ваша заявка попала в вкладку «Завершенные» значит она переполнилась. 
+          Подробнее почему так произошло читайте в инструкции «Опубликованные и Закрытые заявки».
+      = link_to image_path('/img/manuals/manual_about_status_order/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order/2_mini.jpg'
+      p
+        | Когда Ваша заявка попала в вкладку «Ожидающие оплаты» значит, что на Вашем балансе недостаточно средств для её публикации.
+          Если у вас затруднение с пополнением баланса прочите инструкцию «Как пополнить баланс?» или обратитесь в саппорт manager@rostjob.com 
+          или по номер 8 800 700 6786.
+      = link_to image_path('/img/manuals/manual_about_status_order/3.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_status_order/3_mini.jpg'
+      p
+        | Когда Ваша заявка во вкладке «На модерации» значит, что в настоящий момент Заявку рассматривает Администрация сайта и готовится для рекрутеров.
+          Подождите рабочую судку и в случае проблем обратитесь в саппорт manager@rostjob.com или по номер 8 800 700 6786.
+      p 
+        | Если Вы не закончили публикацию заявки как правило она сохраняется в качестве Шаблона во вкладке «Шаблоны». Подробнее о шаблонах в Инструкции «Шаблоны».
