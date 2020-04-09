@@ -1,12 +1,16 @@
 .d-flex.flex-column.w-100.h-100
-  h2.text-center Список всех инструкции
+  h1.text-center Список всех инструкции
   ul
-    - if current_user.profile.customer?
-      li = link_to 'Инстукция по публикации заявки', page_path('manual_create_order')
-      li = link_to 'Инструкция на оплату заявки', page_path('manual_how_to_pay_order')
-      li = link_to 'Инструкция на назначение даты собеседования', page_path('manual_how_to_set_date_interview')
-      li = link_to 'Инструкция по изменению статуса у анкеты', page_path('manual_set_status_for_emp_cv')
-    - else
-      li = link_to 'Инструкция для коррекции даты прибытия соискателя', page_path('manual_correct_date_arrive')
-      li = link_to 'Инструкция на назначение даты собеседования', page_path('manual_how_to_set_date_interview')
+    - if (user_signed_in? && current_user.profile.customer?) || !user_signed_in?
+      li = link_to 'Как опубликовать заявку?', page_path('manual_create_order')
+      li = link_to 'Как пополнить баланс?', page_path('manual_how_to_pay_order')
+      li = link_to 'Как назначить собеседование?', page_path('manual_how_to_set_date_interview')
+      li = link_to 'Какие бывают статусы у заявки?', page_path('manual_about_status_order')
+      li = link_to 'Опубликованные и Завершенные заявки.', page_path('manual_about_compleate_order')
+      li = link_to "Параметры заявок: 'В очереди', 'Заявки' и 'В найме'", page_path('manual_about_status_order_2')
+      li = link_to 'Содержание заявки', page_path('manual_what_is_be_order')
+      / li = link_to 'Инструкция на оплату счёта', page_path('manual_how_to_pay_invoice')
+      li = link_to 'Статусы анкет', page_path('manual_set_status_proposal_employee')
+    - if (user_signed_in? && current_user.profile.contractor?) || !user_signed_in?
+      li = link_to 'Как изменить дату прибытия соискателя?', page_path('manual_correct_date_arrive')
       li = link_to 'Инструкция по получению вознаграждения', page_path('manual_how_get_money')

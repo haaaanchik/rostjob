@@ -70,7 +70,8 @@ class NotifyMailer < ApplicationMailer
 
   def informated_contractor_has_disputed
     @incidents = params[:objects]
-    contractor_email = @incidents.first.proposal_employee.profile.user.email
+    @incident = @incidents.first
+    contractor_email = @incident.proposal_employee.profile.user.email
 
     subject = @incidents.size > 1 ? 'RostJob. Уведомление об открытых спорах' : 'RostJob. Уведомление об открытом споре'
 

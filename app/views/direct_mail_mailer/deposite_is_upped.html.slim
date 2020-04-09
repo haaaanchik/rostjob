@@ -1,0 +1,7 @@
+| Уважаемый, #{@user.full_name}.
+p
+  | На ваш счёт зачисленно #{@value_to_upped} руб.
+p
+  = link_to 'Посмотреть баланс', profile_invoices_url
+p
+  = link_to 'Как опубликовать заявку?', page_url('manual_create_order')

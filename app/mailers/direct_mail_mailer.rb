@@ -10,4 +10,11 @@ class DirectMailMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'RostJob. Добро пожаловать!')
   end
+
+  def deposite_is_upped
+    @user = params[:user]
+    @value_to_upped = params[:attrs][:amount]
+
+    mail(to: @user.email, subject: 'RostJob. Вам на счёт поступили деньги')
+  end
 end

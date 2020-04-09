@@ -1,0 +1,24 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Опубликованные и Завершенные заявки. 
+    .content.d-flex.flex-column
+      p
+        | После поступления заявки необходимого количества персонала. Заявка закрывается и становится недоступной для заполнения.
+      p Это можно узнать по количеству параметра «Заявка». Когда этот параметр равен 0 значит заявка заполнена.
+      = link_to image_path('/img/manuals/manual_about_compleate_order/1.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_compleate_order/1_mini.jpg'
+      p 
+        | Более подробнее можете узнать в инструкции 
+        = link_to "Параметры заявок: 'Входящие', 'Заявка' и 'В найме'", page_path('manual_about_status_order_2')
+      p После закрытия заявка попадает во вкладку «Завершенные».
+      = link_to image_path('/img/manuals/manual_about_compleate_order/2.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_compleate_order/2_mini.jpg'
+      p Вы всегда можете добавить людей заявку нажав кнопку " Добавить персонал".
+      = link_to image_path('/img/manuals/manual_about_compleate_order/3.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_compleate_order/3_mini.jpg'
+      p
+        | После оплаты параметр заявки обновится, и заявка автоматически станет доступной для заполнения.
+      p В случае если Вам нужно закрыть заявку используйте кнопку «Закрыть» в Заявке.
+      = link_to image_path('/img/manuals/manual_about_compleate_order/4.jpg'), data: { lightbox: "images" }, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_about_compleate_order/4_mini.jpg'
+      p Заявка автоматически закроется, а разница вернется Вам на Баланс.
