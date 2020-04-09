@@ -830,6 +830,11 @@ $phone: "max-width: 768px";
 .company-page.orders{
   height: calc(100vh - 58px) ;
   width: 100%;
+
+  .requests-part .request i.fa.fa-bookmark {
+    position: absolute;
+    top: 0;
+  }
 }
 
 .company-page.orders .company-page__platforms{
