@@ -49,7 +49,7 @@ class User < ApplicationRecord
   end
 
   def inactive_message
-    'Ваша учётная запись заблокирована. Для восстановления доступа обратитесь к менеджеру по email: manager@best-hr.pro'
+    'Ваша учётная запись заблокирована. Для восстановления доступа обратитесь к менеджеру по email: manager@rostjob.com'
   end
 
   def password_required?
@@ -61,13 +61,7 @@ class User < ApplicationRecord
     result = update(params)
     if result
       update_attribute(:password_changed_at, DateTime.now)
-
-      if welcome == false
-        SendDirectMailJob.perform_now(user: self, method: 'welcome_message')
-        welcome = true
-        self.skip_reconfirmation!
-        self.save(validate: false)
-      end
+      SendDirectMailJob.perform_now(user: self, method: 'welcome_message') if profile.contractor?
     end
     clean_up_passwords
     result
