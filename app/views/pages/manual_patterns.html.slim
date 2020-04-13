@@ -1,0 +1,15 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Шаблоны.
+    .content.d-flex.flex-column
+
+      p Для удобства публикаций одинаковых заявок используйте Шаблоны.
+      p Для этого перед публикации заявки на 3 шаге нажмите на кнопку "Сохранить как шаблон". Подробнее о читайте «Содержание заявки».
+      = link_to image_path('/img/manuals/manual_patterns/1.jpg'), data: { lightbox: "images" },
+                                                          class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_patterns/1_mini.jpg'
+      p Шаблон с выбранным названием будет сохранен во вкладке "Шаблоны".
+      = link_to image_path('/img/manuals/manual_patterns/2.jpg'), data: { lightbox: "images" },
+                                                          class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_patterns/2_mini.jpg'
+      p Шаблон можно будет отредактировать или опубликовать. Он не удалился пока вы это сами не сделаете.
