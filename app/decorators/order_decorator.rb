@@ -35,7 +35,8 @@ class OrderDecorator < ObjDecorator
   end
 
   def proposal_employees_by_status(state)
-    proposal_employees.includes(:employee_cv, profile: :user).send(state).order(:interview_date)
+    order_by = state == 'hired' ? 'hiring_date' : 'interview_date'
+    proposal_employees.includes(:employee_cv, profile: :user).send(state).order(order_by.to_sym)
   end
 
   def without_paid_revoked_employees
