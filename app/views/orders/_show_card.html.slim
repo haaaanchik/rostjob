@@ -39,7 +39,7 @@
     - if @current_profile.contractor?
       - if @employee_cv_id
         - pe_form = "#{render partial: 'profile/proposal_employees/form', locals: { order_id: order.id, employee_cv_id: @employee_cv_id }}"
-        button type="button" class="btn btn-success btn-rounded" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
+        button type="button" class="btn btn-rounded btn-sm" data-toggle="popover" data-placement="top" data-html='true'  data-content=pe_form Отправить анкету
       - else
         = link_to 'Отправить анкету', new_profile_employee_cv_path(order_id: order.id), class: 'send add-card', remote: true
 
