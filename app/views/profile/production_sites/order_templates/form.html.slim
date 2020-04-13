@@ -3,7 +3,7 @@ ruby:
   step = t("profile.production_sites.orders.partials.#{@model_resource.creation_step}")
 
 = render "profile/production_sites/order_template_forms/#{step}",
-        title: 'Редактрование шаблона к Заявке',
+        title: 'Публикация заявки',
         model: @model_resource,
         next_button: first_step_save_button,
         is_order_template: is_order_template,
