@@ -4,7 +4,7 @@
   meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
   title Фриланс для людей без опыта и с опытом HR – RostJob.
 
-#landing-freelance
+/#landing-freelance
   header.header
     = render 'users/header_logo'
 
@@ -114,3 +114,162 @@
         | &copy; ROSTJOB. Все права защищены
       p.design
         | Design by Tatiana Sytina
+
+#recruiters-landing
+  .mobile-menu
+    ul
+      li
+        a href="#"  Вход
+      li
+        a href="#"  Регистрация
+      li
+        a href="tel:+88007006768"  8 800 700 6786
+      li
+        a href="#"
+          = image_tag '/img/recruiters_landing/vk.png'
+        a.insta href="#"
+          = image_tag '/img/recruiters_landing/insta.png'
+        a href="#"
+          = image_tag '/img/recruiters_landing/youtube.png'
+  header
+    .block
+      a.land-logo href="#"
+        | rost
+        span.col-blue job.com
+      .land-social
+        a href="#"
+          = image_tag '/img/recruiters_landing/vk.png'
+        a.insta href="#"
+          = image_tag '/img/recruiters_landing/insta.png'
+        a href="#"
+          = image_tag '/img/recruiters_landing/youtube.png'
+    .block.log-in-reg
+      a.land-tel-number href="tel:+88007006768"  8 800 700 6786
+      .log-in-or-reg
+        a.land-log-in href="#"  Вход
+        span.slash
+          | /
+        a.registration href="#"  Регистрация
+    .burger
+      span
+      span
+      span
+  section.landing-header
+    .header-top
+      h1.title
+        | Доступ к заявкам с гарантированными выплатами
+      p.subtitle
+        | Фриланс подбора персонала
+      .registration-block.horizontal
+        input placeholder=("Введите e.mail для регистрации") type="email" /
+        a.reg-btn href="#"  Зарегестрироваться
+      = image_tag '/img/recruiters_landing/header_left.svg', class: 'header-left-img'
+      = image_tag '/img/recruiters_landing/header_right.svg', class: 'header-right-img'
+    .our-offers.container
+      p.title
+        | Что мы предлагаем?
+      .offers
+        .offer
+          p.title
+            | Надежный заработок
+          p.descr
+            | Дополнительный или основной доход
+        .offer
+          p.title
+            | Ежедневные выплаты
+          p.descr
+            | Официальные выплаты для физ. и юр. лиц
+        .offer
+          p.title
+            | Поддержка онлайн
+          p.descr
+            | По телефону и WhatsApp
+        .offer
+          p.title
+            | Постоянные заявки. Большие объемы
+          p.descr
+            | Бесплатная регистрация
+            br/
+            | и бесплатный доступ
+        .offer
+          p.title
+            | Мобильная версия
+          p.descr
+            | Возможность выполнять
+            br/
+            | заявки через гаджет
+      /img.rectangles-header alt="" src="img/rectangles_header.png" /
+      = image_tag '/img/recruiters_landing/rectangles_header.png', class: 'rectangles-header'
+  section.information
+    .container
+      .question
+        p.title
+          | Что такое заявка на подбор персонала?
+        p.answer
+          | Кто знаком с понятием HR сами собой понимают зачем нужен подбор и, кто за него платит. Но для большинства людей будет открытием, что HR - это целое сообщество, организующее условие жизни людей.
+          br/
+          br/
+          | От малых до самых крупных предприятий требуется персонал. Поэтому они публикуют заявки на сайте, на котором Вы находитесь. Заказчик уже заплатил, чтобы Вы нашли для него может разнорабочего без опыта, специалиста или может директора. Выполнить заявку на подбор значит найти персонал на предприятие, значит помочь человеку с работой, значит заработать и вырасти профессионально.
+        a.reg-btn href="#"  Зарегестрироваться
+      .question
+        p.title
+          | Как выполнить заявку на подбор
+          | персонала?
+        p.answer
+          | Заявки на подбор отличаются по содержанию, но смысл у них одинаковый. Ваша задача как HR, чтобы найденный Вами персонал отработал гарантийный период. Успех зависит от Вашего навыка работы с людьми. В этой сфере лидируют честные и пунктуальные, и требующие это от тех, с кем ведут дело.
+          br/
+          br/
+          | Чтобы выполнить заявку нужно найти соискателей и для этого есть бесконечное количество возможностей. Наши рекрутеры используют расклейку, объявления в газетах, сайты поиска работы и социальные сети.
+          br/
+          br/
+          | Чтобы представленный сотрудник отработал гарантийный период он должен знать о условиях труда. Эта информация, и что нужно для выполнения Вы узнаете в тексте заявки. Более подробную информацию Вы найдете в каталоге заявок после бесплатной регистрации.
+    = image_tag '/img/recruiters_landing/rectangles_info_left_top.png', class: 'rect-info-left-top'
+    = image_tag '/img/recruiters_landing/rectangles_info_right_bottom.png', class: 'rect-info-right-bottom'
+  section.our-partner.container
+    p.title
+      | Генеральный партнер
+    .representation
+      .logo-and-descr
+        = image_tag '/img/recruiters_landing/rost-logo.png', class: 'company-logo'
+        p.partner-description
+          | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+          | специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных
+          | корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      .achievements
+        .item
+          span.number
+            | 55
+          p объектов
+        .item
+          span.number
+            | 1500
+          p рабочего персонала
+        .item
+          span.number
+            | 10
+          p лет на рынке
+  section.free-registration.container
+    .img-container
+      = image_tag '/img/recruiters_landing/free_reg_img.svg', class: 'img-responsive'
+    div
+      p.title
+        span.col-purple
+          | Регистрируйтесь
+        | <br>бесплатно
+      .registration-block.vertical
+        input placeholder=("Введите e.mail для регистрации") type="email" /
+        a.reg-btn href="#"  Зарегестрироваться
+  footer
+    .container
+      span.rights-reserved © Все права защищены
+      .contacts
+        a.footer-tel-number href="tel:+88007006768"  8 800 700 6786
+        .footer-social
+          span.in-social Мы в соц. сетях:
+          a href="#"
+            img alt="vk" src="img/recruiters_landing/vk.png" /
+          a.insta href="#"
+            img alt="instagram" src="img/recruiters_landing/insta.png" /
+          a href="#"
+            img alt="youtube" src="img/recruiters_landing/youtube.png" /
+      a.designed-by href="#"  design by: sitini.ru
