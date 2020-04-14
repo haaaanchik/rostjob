@@ -22,21 +22,24 @@ class AddRatingToProductionSites < ActiveRecord::Migration[5.2]
       proposal_employees_paid = profile.customer_proposal_employees.paid.count
       proposal_employees_revoked = profile.customer_proposal_employees.revoked.count
       profile.update(deal_counter: proposal_employees_paid)
-      profile.update(rating: calculate_rating(profile, proposal_employees_revoked))
+      rating = calculate_rating(profile, proposal_employees_revoked)
+      profile.update(rating: (rating + 10)/2)
     end
 
     Profile.where(profile_type: 'contractor').each do |profile|
       proposal_employees_paid = profile.proposal_employees.paid.count
       proposal_employees_revoked = profile.proposal_employees.revoked.count
       profile.update(deal_counter: proposal_employees_paid)
-      profile.update(rating: calculate_rating(profile, proposal_employees_revoked))
+      rating = calculate_rating(profile, proposal_employees_revoked)
+      profile.update(rating: (rating + 10)/2)
     end
 
     ProductionSite.all.each do |pr_site|
       proposal_employees_paid = pr_site.proposal_employees.paid.count
       proposal_employees_revoked = pr_site.proposal_employees.revoked.count
       pr_site.update(deal_counter: proposal_employees_paid)
-      pr_site.update(rating: calculate_rating(pr_site, proposal_employees_revoked))
+      rating = calculate_rating(pr_site, proposal_employees_revoked)
+      pr_site.update(rating:  (rating + 10)/2)
     end
   end
 
@@ -44,6 +47,6 @@ class AddRatingToProductionSites < ActiveRecord::Migration[5.2]
     return 0.0 if profile.deal_counter.zero? || revoked_count.zero?
     (profile.deal_counter/(profile.deal_counter + revoked_count).to_d) * 10
   rescue ZeroDivisionError
-    0.0
+    5.0
   end
 end

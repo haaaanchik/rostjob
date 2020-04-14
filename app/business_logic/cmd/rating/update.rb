@@ -4,9 +4,12 @@ module Cmd
       include Interactor
 
       def call
-        order_profile.update(rating: calculate(order_profile, customer_revoked_count))
-        candidate_profile.update(rating: calculate(candidate_profile, pr_emlp_revoked_count(candidate_profile)))
-        production_site.update(rating: calculate(candidate_profile, pr_emlp_revoked_count(production_site)))
+        customer_rating = calculate(order_profile, customer_revoked_count)
+        contractor_rating = calculate(candidate_profile, pr_emlp_revoked_count(candidate_profile))
+        pr_site_rating = calculate(candidate_profile, pr_emlp_revoked_count(production_site))
+        order_profile.update(rating: (customer_rating + 10)/2)
+        candidate_profile.update(rating: (contractor_rating + 10)/2)
+        production_site.update(rating: (pr_site_rating + 10)/2)
       end
 
       private
@@ -29,9 +32,9 @@ module Cmd
 
       def calculate(profile, revoked_count)
         return 0.0 if profile.deal_counter.zero? || revoked_count.zero?
-        (profile.deal_counter/(profile.deal_counter + revoked_count).to_d) * 10
+        (((profile.deal_counter/(profile.deal_counter + revoked_count).to_d)*10)+10)/2
       rescue ZeroDivisionError
-        0.0
+        5.0
       end
 
       def customer_revoked_count

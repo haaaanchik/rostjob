@@ -2,7 +2,7 @@ class ObjDecorator < ApplicationDecorator
   delegate_all
 
   def display_rating
-    return 'Нет данных' if rating == 0.0
+    return 'Нет данных' if rating <= 5.0
     "#{rating}/10"
   end
 
