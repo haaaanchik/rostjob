@@ -4,113 +4,170 @@
   meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
   title Фриланс для людей без опыта и с опытом HR – RostJob.
 
-#landing-freelance
-  header.header
-    = render 'users/header_logo'
-
-    .header_registration
-      = link_to 'Вход&nbsp;'.html_safe, login_path
+#recruiters-landing
+  .mobile-menu
+    ul
+      li
+        = link_to 'Вход', login_path
+      li
+        = link_to 'Регистрация', new_contractor_path
+      li
+        a href="tel:+88007006768"  8 800 700 6786
+      li
+        a href="#"
+          = image_tag '/img/recruiters_landing/vk.png'
+        a.insta href="#"
+          = image_tag '/img/recruiters_landing/insta.png'
+        a href="#"
+          = image_tag '/img/recruiters_landing/youtube.png'
+  header
+    .block
+      a.land-logo href='/'
+        | rost
+        span.col-blue job.com
+      .land-social
+        a href="#"
+          = image_tag '/img/recruiters_landing/vk.png'
+        a.insta href="#"
+          = image_tag '/img/recruiters_landing/insta.png'
+        a href="#"
+          = image_tag '/img/recruiters_landing/youtube.png'
+    .block.log-in-reg
+      a.land-tel-number href="tel:+88007006768"  8 800 700 6786
+      .log-in-or-reg
+        = link_to 'Вход', login_path, class: 'land-log-in'
+        span.slash
+          | /
+        = link_to 'Регистрация', new_contractor_path, class: 'registration'
+    .burger
       span
-        | /
-      = link_to '&nbsp;Регистрация'.html_safe, new_contractor_path
-    .header_scroll
-      button.header_scroll_down
-        = image_tag 'svg/arrow_2.svg', alt: 'down'
-      button.header_scroll_top
-        = image_tag 'svg/arrow_2.svg', alt: 'top'
+      span
+      span
+  section.landing-header
+    .header-top
+      h1
+        | Фриланс подбора персонала
+      p.subtitle
+        | Доступ к заявкам с гарантированными выплатами
+      .registration-block.horizontal
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', novalidate: ''} do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
+          = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
+      = image_tag '/img/recruiters_landing/header_left.svg', class: 'header-left-img'
+      = image_tag '/img/recruiters_landing/header_right.svg', class: 'header-right-img'
+    .our-offers.container
+      p.title
+        | Что мы предлагаем?
+      .offers
+        .offer
+          p.title
+            | Надежный заработок
+          p.descr
+            | Дополнительный или основной доход
+        .offer
+          p.title
+            | Ежедневные выплаты
+          p.descr
+            | Официальные выплаты для физ. и юр. лиц
+        .offer
+          p.title
+            | Поддержка онлайн
+          p.descr
+            | По телефону и WhatsApp
+        .offer
+          p.title
+            | Постоянные заявки. Большие объемы
+          p.descr
+            | Бесплатная регистрация
+            br/
+            | и бесплатный доступ
+        .offer
+          p.title
+            | Мобильная версия
+          p.descr
+            | Возможность выполнять
+            br/
+            | заявки через гаджет
+      = image_tag '/img/recruiters_landing/rectangles_header.png', class: 'rectangles-header'
+  section.information
+    .container
+      .question
+        p.title
+          | Что такое заявка на подбор персонала?
+        p.answer
+          | Кто знаком с понятием HR сами собой понимают зачем нужен подбор и, кто за него платит. Но для большинства людей будет открытием, что HR - это целое сообщество, организующее условие жизни людей.
+          br/
+          br/
+          | От малых до самых крупных предприятий требуется персонал. Поэтому они публикуют заявки на сайте, на котором Вы находитесь. Заказчик уже заплатил, чтобы Вы нашли для него может разнорабочего без опыта, специалиста или может директора. Выполнить заявку на подбор значит найти персонал на предприятие, значит помочь человеку с работой, значит заработать и вырасти профессионально.
+        = link_to 'Зарегестрироваться', new_contractor_path, class: 'reg-btn'
+      .question
+        p.title
+          | Как выполнить заявку на подбор
+          | персонала?
+        p.answer
+          | Заявки на подбор отличаются по содержанию, но смысл у них одинаковый. Ваша задача как HR, чтобы найденный Вами персонал отработал гарантийный период. Успех зависит от Вашего навыка работы с людьми. В этой сфере лидируют честные и пунктуальные, и требующие это от тех, с кем ведут дело.
+          br/
+          br/
+          | Чтобы выполнить заявку нужно найти соискателей и для этого есть бесконечное количество возможностей. Наши рекрутеры используют расклейку, объявления в газетах, сайты поиска работы и социальные сети.
+          br/
+          br/
+          | Чтобы представленный сотрудник отработал гарантийный период он должен знать о условиях труда. Эта информация, и что нужно для выполнения Вы узнаете в тексте заявки. Более подробную информацию Вы найдете в каталоге заявок после бесплатной регистрации.
+    = image_tag '/img/recruiters_landing/rectangles_info_left_top.png', class: 'rect-info-left-top'
+    = image_tag '/img/recruiters_landing/rectangles_info_right_bottom.png', class: 'rect-info-right-bottom'
+  section.our-partner.container
+    p.title
+      | Генеральный партнер
+    .representation
+      .logo-and-descr
+        = image_tag '/img/recruiters_landing/rost-logo.png', class: 'company-logo'
+        p.partner-description
+          | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+          | специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных
+          | корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      .achievements
+        .item
+          span.number
+            | 55
+          p объектов
+        .item
+          span.number
+            | 1500
+          p рабочего персонала
+        .item
+          span.number
+            | 10
+          p лет на рынке
+  section.free-registration.container
+    .img-container
+      = image_tag '/img/recruiters_landing/free_reg_img.svg', class: 'img-responsive'
+    div
+      p.title
+        span.col-purple
+          | Регистрируйтесь
+        | <br>бесплатно
 
-  main
-    section#main
-      .main
-        .main_info-header
-          h2 ROSTJOB - платформа для людей, занимающихся набором персонала
-        .main_info-text
-          p Зарегестрируйтесь, чтобы получить доступ к заявкам с гарантированными выплатами
-        .main_input
-          = form_for @user,
-                  method: :post,
-                  url: user_registration_path,
-                  html: { name: 'form-email', novalidate: '' } do |f|
-            .invalid-feedback = errors[:email].first
-            = f.email_field :email, class: 'form-control', placeholder: 'e-mail для регистрации'
-            = f.button 'зарегистрироваться', name: :contractor
-        .main_freelance
-          = link_to 'хочу нанять персонал', contractor_info_path
-        .main_img
-          = image_tag 'main_contactor.png'
-
-    section.request
-      .request_header
-        h3 Заголовок
-      .request_block
-        .request_block_nav
-          .arrow.arrow_left
-            = image_tag 'svg/arrow_2.svg', alt: 'left'
-          .arrow.arrow_right
-            = image_tag 'svg/arrow_2.svg', alt: 'left'
-          .navbar
-
-        .request_block_viewbox
-          .request_block_wrapper
-            .request_block_wrapper_item
-              .request_block_wrapper_item_img
-                = image_tag 'rostjob_02.jpg'
-              .request_block_wrapper_item_info
-                header
-                  | 1
-                h4
-                  | Дополнительный или <br> постоянный доход.
-                p
-                  | Зарегистрируйся чтобы стать фрилансером по подбору персонала.
-
-            .request_block_wrapper_item
-              .request_block_wrapper_item_img
-                = image_tag 'rostjob_04.jpg'
-              .request_block_wrapper_item_info
-                header
-                  | 2
-                h4
-                  | Еженедельные выплаты.
-                p
-                  | Официальные выплаты на расчетный счет для физических и юридических лиц.
-            .request_block_wrapper_item
-              .request_block_wrapper_item_img
-                = image_tag 'rostjob_03.jpg'
-              .request_block_wrapper_item_info
-                header
-                  | 3
-                h4
-                  | Постоянные заявки, <br> большие объемы.
-                p
-                  | На платформе всегда есть выбор на открытые заявки.
-            .request_block_wrapper_item
-              .request_block_wrapper_item_img
-                = image_tag 'rostjob_06.jpg'
-              .request_block_wrapper_item_info
-                header
-                  | 4
-                h4
-                  | Поддержка доступна <br> по телефону и WhatsApp.
-                p
-                  | Оперативный ответ от саппорта в течении 24 часов после обращения.
-            .request_block_wrapper_item
-              .request_block_wrapper_item_img
-                = image_tag 'rostjob_10.jpg'
-              .request_block_wrapper_item_info
-                header
-                  | 5
-                h4
-                  | Доступна мобильная версия сайта.
-                p
-                  | Возможность выполнения заявки с помощью применения гаджета.
-
-
-
-    = render partial: "landing", locals: { video_poster: 'main_contactor.png', video_name: 'example_video.mp4' }
-
-  footer.footer
-    .footer_block
-      p.rights
-        | &copy; ROSTJOB. Все права защищены
-      p.design
-        | Design by Tatiana Sytina
+      = form_for @user,
+              method: :post,
+              url: user_registration_path,
+              html: {name: 'form-email', class: 'registration-block vertical'} do |f|
+        .invalid-feedback = errors[:email].first
+        = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
+        = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
+  footer
+    .container
+      span.rights-reserved © Все права защищены
+      .contacts
+        a.footer-tel-number href="tel:+88007006768"  8 800 700 6786
+        .footer-social
+          span.in-social Мы в соц. сетях:
+          a href="#"
+            img alt="vk" src="img/recruiters_landing/vk.png" /
+          a.insta href="#"
+            img alt="instagram" src="img/recruiters_landing/insta.png" /
+          a href="#"
+            img alt="youtube" src="img/recruiters_landing/youtube.png" /
+      a.designed-by href="#"  design by: sitini.ru
