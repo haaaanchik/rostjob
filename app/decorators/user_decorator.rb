@@ -1,4 +1,4 @@
-class UserDecorator < ObjDecorator
+class UserDecorator < ApplicationDecorator
   delegate_all
 
   def orders_count

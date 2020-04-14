@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_05_200339) do
+ActiveRecord::Schema.define(version: 2020_04_10_143838) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -380,6 +380,8 @@ ActiveRecord::Schema.define(version: 2020_03_05_200339) do
     t.string "city"
     t.text "info"
     t.text "phones"
+    t.decimal "rating", precision: 10, scale: 1, default: "0.0"
+    t.integer "deal_counter", default: 0
     t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
@@ -391,7 +393,7 @@ ActiveRecord::Schema.define(version: 2020_03_05_200339) do
     t.string "profile_type"
     t.text "description"
     t.string "city"
-    t.string "rating"
+    t.decimal "rating", precision: 10, scale: 1, default: "0.0"
     t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
@@ -403,6 +405,7 @@ ActiveRecord::Schema.define(version: 2020_03_05_200339) do
     t.string "legal_form"
     t.boolean "manager"
     t.datetime "updated_by_self_at"
+    t.integer "deal_counter", default: 0
   end
 
   create_table "proposal_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

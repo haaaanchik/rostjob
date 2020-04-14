@@ -1,4 +1,4 @@
-class OrderDecorator < ObjDecorator
+class OrderDecorator < ApplicationDecorator
   delegate_all
 
   def order_id
