@@ -10,10 +10,10 @@
             | #{ profile.user.full_name }
           p.user-rating
             | Рейтинг:
-            span.textGreen #{ profile.calculate_hiring_percent }
+            span.textGreen #{ profile.display_rating }
           p.deals
             | Сделки:
-            span.textGreen #{ profile.amount_of_deals }
+            span.textGreen #{ profile.display_deal_counter }
       div
         - proposal_employees.group_by(&:order).each do |order, pr_employees|
           - price = order.customer_price.to_i * pr_employees.count

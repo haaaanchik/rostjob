@@ -6,6 +6,8 @@ module Cmd
       def call
         context.fail! unless candidate.to_paid!
         Cmd::UserActionLogger::Log.call(params: customer_params) unless context.log == false
+        calculate_deal_counter
+        Cmd::Rating::Update.call(order_profile: order_profile, candidate: candidate)
       end
 
       private
@@ -14,12 +16,22 @@ module Cmd
         context.candidate
       end
 
+      def order_profile
+        candidate.order.profile
+      end
+
       def proposal_employee
         candidate
       end
 
       def customer
         candidate.order.profile.user
+      end
+
+      def calculate_deal_counter
+        order_profile.increment!(:deal_counter)
+        candidate.profile.increment!(:deal_counter)
+        candidate.order.production_site.increment!(:deal_counter)
       end
 
       def customer_params

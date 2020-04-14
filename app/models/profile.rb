@@ -10,6 +10,7 @@ class Profile < ApplicationRecord
   has_many :invoices
   has_many :tax_calculations
   has_many :proposal_employees
+  has_many :customer_proposal_employees, through: :orders, source: :proposal_employees
   has_many :answered_orders, -> { distinct }, through: :proposal_employees, source: :order
   has_many :employee_cvs
   has_many :order_profiles
@@ -70,16 +71,6 @@ class Profile < ApplicationRecord
                            proposal_employees.payment_date < ? and
                            proposal_employees.payment_date > ? ',
                           'paid', current_date, prev_date)
-  end
-
-  def amount_of_deals
-    proposal_employees.paid.count
-  end
-
-  def calculate_hiring_percent
-    (amount_of_deals + proposal_employees.revoked.count)/ amount_of_deals
-  rescue ZeroDivisionError
-    0.0
   end
 
   def free_manager?

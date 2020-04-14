@@ -1,4 +1,4 @@
-class ProductionSiteDecorator < ApplicationDecorator
+class ProductionSiteDecorator < ObjDecorator
   delegate_all
 
   def insert_klass(p_site)

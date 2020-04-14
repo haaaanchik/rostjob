@@ -4,6 +4,7 @@ class WelcomeController < ApplicationController
   def index
     @user = User.new
     if user_signed_in?
+      @profile = current_profile.decorate
       prepare_data if current_profile.customer?
       user_action_log_records
     end

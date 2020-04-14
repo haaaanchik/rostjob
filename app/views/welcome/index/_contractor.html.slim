@@ -3,7 +3,7 @@ main#recruter-main
     h3.title Краткая информация профиля
     .user_info
       .user_info_avatar
-        = image_tag(current_profile.image_url, class: 'img-user')
+        = image_tag(@profile.image_url, class: 'img-user')
         p.name = current_user.full_name
         button
           = link_to edit_user_registration_path, class: 'black-text redact' do
@@ -11,11 +11,11 @@ main#recruter-main
             | Редактировать
 
       .user_info_rating
-        p Рейтинг: <span> #{ current_profile.calculate_hiring_percent }%
-        p Сделки:  <span> #{ current_profile.amount_of_deals }
+        p Рейтинг: <span> #{ @profile.display_rating } </span>
+        p Сделки:  <span> #{ @profile.display_deal_counter } </span>
         p
           | Баланс:
-          span.ml-2.balance-color = @current_profile.balance.amount
+          span.ml-2.balance-color = @profile.balance.amount
           |  руб.
         button.user-btn
           = link_to profile_balance_path, class: 'text-white' do

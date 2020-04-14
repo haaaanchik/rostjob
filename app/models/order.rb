@@ -98,23 +98,6 @@ class Order < ApplicationRecord
     balance.amount >= (number_additional_employees * customer_price)
   end
 
-  def amount_deals
-    @amount_deals ||= proposal_employees.paid.count
-  end
-
-  def revoked_deals
-    @revoked_deals ||= proposal_employees.revoked.count
-  end
-
-  def all_deals
-    @all_deals ||= amount_deals + revoked_deals
-  end
-
-  def calculate_paid_percent
-    return '0/10' if amount_deals.zero? || all_deals.zero?
-    "#{((amount_deals.to_f / all_deals) * 10).round(1)}/10"
-  end
-
   def calculate_total
     customer_price * number_of_employees
   end

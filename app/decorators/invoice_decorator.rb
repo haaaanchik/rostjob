@@ -1,3 +1,3 @@
-class InvoiceDecorator < ObjDecorator
+class InvoiceDecorator < ApplicationDecorator
   delegate_all
 end

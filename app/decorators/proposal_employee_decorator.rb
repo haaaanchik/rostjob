@@ -1,4 +1,4 @@
-class ProposalEmployeeDecorator < ObjDecorator
+class ProposalEmployeeDecorator < ApplicationDecorator
   delegate_all
 
   STATUS_BACKGROUND_COLORS = {
