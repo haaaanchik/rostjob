@@ -22,7 +22,7 @@ class AddRatingToProductionSites < ActiveRecord::Migration[5.2]
       proposal_employees_paid = profile.customer_proposal_employees.paid.count
       proposal_employees_revoked = profile.customer_proposal_employees.revoked.count
       profile.update(deal_counter: proposal_employees_paid)
-      rating = calculate_rating(profile, proposal_employees_revoked)
+      rating = calculation_for_others(profile, proposal_employees_revoked)
       profile.update(rating: (rating + 10)/2)
     end
 
@@ -30,23 +30,30 @@ class AddRatingToProductionSites < ActiveRecord::Migration[5.2]
       proposal_employees_paid = profile.proposal_employees.paid.count
       proposal_employees_revoked = profile.proposal_employees.revoked.count
       profile.update(deal_counter: proposal_employees_paid)
-      rating = calculate_rating(profile, proposal_employees_revoked)
-      profile.update(rating: (rating + 10)/2)
+      rating = calculation_contractor(profile, proposal_employees_revoked)
+      profile.update(rating: rating)
     end
 
     ProductionSite.all.each do |pr_site|
       proposal_employees_paid = pr_site.proposal_employees.paid.count
       proposal_employees_revoked = pr_site.proposal_employees.revoked.count
       pr_site.update(deal_counter: proposal_employees_paid)
-      rating = calculate_rating(pr_site, proposal_employees_revoked)
+      rating = calculation_for_others(pr_site, proposal_employees_revoked)
       pr_site.update(rating:  (rating + 10)/2)
     end
   end
 
-  def calculate_rating(profile, revoked_count)
+  def calculation_contractor(profile, revoked_count)
     return 0.0 if profile.deal_counter.zero? || revoked_count.zero?
-    (profile.deal_counter/(profile.deal_counter + revoked_count).to_d) * 10
-  rescue ZeroDivisionError
-    5.0
+    calculation(profile.deal_counter, revoked_count)
+  end
+
+  def calculation_for_others(profile, revoked_count)
+    return 5.0 if profile.deal_counter.zero? || revoked_count.zero?
+    calculation(profile.deal_counter, revoked_count)
+  end
+
+  def calculation(deal_counter, revoked_count)
+    (deal_counter/(deal_counter + revoked_count).to_d) * 10
   end
 end
