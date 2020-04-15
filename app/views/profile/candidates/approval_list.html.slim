@@ -1,6 +1,7 @@
 #acts.custom-scroll
   .single-act
     - @approval_list.each do |profile, proposal_employees|
+      - pr_ids = proposal_employees.pluck(:id)
       - total_price_acts = 0
       .user-info
         .logo
@@ -56,7 +57,7 @@
                 | Подписать акт
 
       .all
-        = link_to approve_all_acts_profile_candidates_path(profile_id: profile.id),
+        = link_to approve_all_acts_profile_candidates_path(proposal_employees_ids: pr_ids),
                   class: 'subscribe-all',
                   remote: true,
                   method: :put do

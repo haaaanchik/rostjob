@@ -4,7 +4,7 @@ module Cmd
       include Interactor
 
       def call
-        acts = candidates.approved.where('proposal_employees.profile_id': profile_id)
+        acts = candidates.approved.find(selected_candidates_ids)
         context.fail! if acts.empty?
         acts.each do |act|
           pay = Cmd::ProposalEmployee::Pay.call(candidate: act)
@@ -14,12 +14,12 @@ module Cmd
 
       private
 
-      def profile_id
-        context.profile_id
-      end
-
       def candidates
         context.candidates
+      end
+
+      def selected_candidates_ids
+        context.selected_candidates_ids
       end
     end
   end
