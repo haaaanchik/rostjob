@@ -5,58 +5,20 @@
   title Фриланс для людей без опыта и с опытом HR – RostJob.
 
 #recruiters-landing
-  .mobile-menu
-    ul
-      li
-        = link_to 'Вход', login_path
-      li
-        = link_to 'Регистрация', new_contractor_path
-      li
-        a href="tel:+88007006768"  8 800 700 6786
-      li
-        a href="#"
-          = image_tag '/img/recruiters_landing/vk.png'
-        a.insta href="#"
-          = image_tag '/img/recruiters_landing/insta.png'
-        a href="#"
-          = image_tag '/img/recruiters_landing/youtube.png'
-  header
-    .block
-      a.land-logo href='/'
-        | rost
-        span.col-blue job.com
-      .land-social
-        a href="#"
-          = image_tag '/img/recruiters_landing/vk.png'
-        a.insta href="#"
-          = image_tag '/img/recruiters_landing/insta.png'
-        a href="#"
-          = image_tag '/img/recruiters_landing/youtube.png'
-    .block.log-in-reg
-      a.land-tel-number href="tel:+88007006768"  8 800 700 6786
-      .log-in-or-reg
-        = link_to 'Вход', login_path, class: 'land-log-in'
-        span.slash
-          | /
-        = link_to 'Регистрация', new_contractor_path, class: 'registration'
-    .burger
-      span
-      span
-      span
+  = render 'partials/header', registration_url: new_contractor_path
   section.landing-header
     .header-top
       h1
         | Фриланс подбора персонала
       p.subtitle
         | Доступ к заявкам с гарантированными выплатами
-      .registration-block.horizontal
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', novalidate: ''} do |f|
-          .invalid-feedback = errors[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
-          = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
+      = form_for @user,
+              method: :post,
+              url: user_registration_path,
+              html: {name: 'form-email', class: 'registration-block horizontal'} do |f|
+        .invalid-feedback = errors[:email].first
+        = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
+        = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
       = image_tag '/img/recruiters_landing/header_left.svg', class: 'header-left-img'
       = image_tag '/img/recruiters_landing/header_right.svg', class: 'header-right-img'
     .our-offers.container
@@ -107,7 +69,7 @@
       .question
         p.title
           | Как выполнить заявку на подбор
-          | персонала?
+          |  персонала?
         p.answer
           | Заявки на подбор отличаются по содержанию, но смысл у них одинаковый. Ваша задача как HR, чтобы найденный Вами персонал отработал гарантийный период. Успех зависит от Вашего навыка работы с людьми. В этой сфере лидируют честные и пунктуальные, и требующие это от тех, с кем ведут дело.
           br/

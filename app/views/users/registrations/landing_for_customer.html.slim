@@ -4,44 +4,8 @@
   meta name='description' content='RostJob.сom это большой штат рекрутеров и представителей по всей стране. CRM и доступ к голосовым ботам бесплатно. Оплата только за результат.'
   title Подбор персонала, гарантии комплектации по заявке - RostJob.
 
-body#landing
-  header.container
-    .block
-      a.land-logo href="/"
-        | rost
-        span.col-blue job.com
-      .land-social
-        a href="#"
-          = image_tag('/img/vk.png')
-        a.insta href="#"
-          = image_tag('/img/insta.png')
-        a href="#"
-          = image_tag('/img/youtube.png')
-    .block.log-in-reg
-      a.land-tel-number href="tel:+88007006768"  8 800 700 6786
-      .log-in-or-reg
-        = link_to 'Вход', login_path, class: 'land-log-in'
-        span.slash |
-        = link_to 'Регистрация', new_customer_path, class: 'registration'
-    .mobile-menu
-      ul
-        li
-          = link_to 'Вход', login_path
-        li
-          = link_to 'Регистрация', new_customer_path
-        li
-          a href="tel:+88007006768"  8 800 700 6786
-        li
-          a href="#"
-            = image_tag('/img/vk.png')
-          a.insta href="#"
-            = image_tag('/img/insta.png')
-          a href="#"
-            = image_tag('/img/youtube.png')
-    .burger
-      span
-      span
-      span
+body#customer-landing
+  = render 'partials/header', registration_url: new_customer_path
   main
     section.landing-header.container
       .content
@@ -241,59 +205,3 @@ body#landing
           a href="#"
             img alt="youtube" src="img/youtube_w.png" /
       a.designed-by href="#"  design by: sitini.ru
-
-javascript:
-    let lines_arr = document.querySelectorAll('.burger span');
-    let firstLine = lines_arr[0];
-    let secondLine = lines_arr[1];
-    let thirdLine = lines_arr[2];
-    let mobileMenu = $('.mobile-menu');
-
-    if (document.querySelector('.burger')) {
-        document.querySelector('.burger').addEventListener('click', openCloseMobileMenu);
-    }
-
-    function openCloseMobileMenu() {
-        mobileMenu.slideToggle();
-        firstLine.classList.toggle('rotate-right');
-        secondLine.classList.toggle('rotate-left');
-        thirdLine.classList.toggle('hide');
-    }
-
-    $('.scrollTop').click(function () {
-        $("html, body").animate({scrollTop: 0}, 500);
-        return false;
-    });
-
-    $(window).scroll(function () {
-        if ($(window).scrollTop() > 500) {
-            $('.scrollTop').show(500);
-        }
-        if ($(window).scrollTop() < 500) {
-            $('.scrollTop').hide(500);
-        }
-    })
-
-    let button;
-    button = $(".scrollBottom");
-    button.click(function () {
-        let YOffset;
-        YOffset = parseInt(pageYOffset / innerHeight, 10);
-        $("html, body").animate({
-            scrollTop: (YOffset + 1) * innerHeight + 40
-        }, "slow");
-        console.log(YOffset, pageYOffset, innerHeight);
-    })
-
-    function onEntry(entry) {
-        $(entry).each(function () {
-            console.log(this);
-        });
-    }
-
-    let options = {};
-    let observer = new IntersectionObserver(onEntry, options);
-    let elements = document.querySelectorAll('section');
-    for (let elm of elements) {
-        observer.observe(elm);
-    }
