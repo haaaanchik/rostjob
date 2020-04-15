@@ -1,5 +1,6 @@
 #= require external/jquery-3.3.1.min
 #= require rails-ujs
+#= require navbar
 
 valid = (form_submit) ->
   email = $("input[name='user[email]']")

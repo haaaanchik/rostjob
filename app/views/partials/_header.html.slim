@@ -1,0 +1,43 @@
+#navbar.container
+  .block
+    a.land-logo href='/'
+      span.col-blue rost
+      | job.com
+    .land-social
+      a href="#"
+        = image_tag('/img/vk.png')
+      a.insta href="#"
+        = image_tag('/img/insta.png')
+      a href="#"
+        = image_tag('/img/youtube.png')
+  .block.log-in-reg
+    a.land-tel-number href="tel:+88007006768"  8 800 700 6786
+    .log-in-or-reg
+      = link_to 'Вход', login_path, class: 'land-log-in'
+      span.slash |
+      = link_to 'Регистрация', registration_url, class: 'registration'
+  .burger
+    span
+    span
+    span
+
+#navbar-mobile
+  .mobile-menu
+    ul
+      li
+        = link_to 'Вход', login_path
+      li
+        = link_to 'Регистрация', registration_url
+      li
+        a href="tel:+88007006768"  8 800 700 6786
+      li
+        a href="#"
+          = image_tag('/img/vk.png')
+        a.insta href="#"
+          = image_tag('/img/insta.png')
+        a href="#"
+          = image_tag('/img/youtube.png')
+    .burger
+      span
+      span
+      span
