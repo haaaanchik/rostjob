@@ -1,7 +1,7 @@
 #interface-navbar
   = render 'interface/navbar'
 
-  .navside
+  .navside class="#{ 'recruiter' if current_profile.contractor?}"
     = link_to root_path, class: 'user-logo' do
       = image_tag asset_path('navside/user-logo.png')
 

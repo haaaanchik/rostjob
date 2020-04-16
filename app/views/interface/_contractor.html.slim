@@ -1,5 +1,10 @@
 ul.side-bar-ul
   li.nav-item
+    = link_to root_path,
+           title: 'Главная',
+           class: "nav-link"
+      i.fas.fa-home.svg-sidebar
+      p.icon-text Главная
     = link_to profile_employee_cvs_path,
               id: 'employee_cvs_list',
               title: 'Список Анкет',
