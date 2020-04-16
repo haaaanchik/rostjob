@@ -75,6 +75,7 @@ gem "redis"
 gem "redis-objects"
 gem "active_scheduler"
 gem "recaptcha"
+gem 'active_link_to'
 
 gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
 # Use ActiveStorage variant

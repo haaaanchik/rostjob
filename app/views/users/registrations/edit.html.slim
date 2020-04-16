@@ -5,111 +5,43 @@ ruby:
   password_confirmation = errors[:password_confirmation].first ? 'не совпадает с новым паролем' : nil
   current_password =  errors[:current_password].first
 
-/.container
-  h2.users-edit-title
-    | Настройки профиля
-  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-    .row
-      .col-md-10.offset-md-1.personal-info
-        .form-group
-          .d-flex.align-items-center
-            .col-lg-3.control-label
-              = f.label :full_name, f.object.decorate.label_full_name
-            .col-lg-8
-              .invalid-feedback.d-inline #{ full_name }
-              = f.text_field :full_name, class: "form-control #{'is-invalid' if full_name }"
-
-        .form-group
-          .d-flex
-            .col-lg-3.control-label
-              = f.label :password
-            .col-lg-8
-              .invalid-feedback.d-inline #{ password }
-              = f.password_field :password, class: "form-control #{'is-invalid' if password }", autocomplete: 'off'
-        .form-group
-          .d-flex.align-items-center
-            .col-lg-3.control-label
-              = f.label :password_confirmation
-            .col-lg-8
-              .invalid-feedback.d-inline #{ password_confirmation }
-              = f.password_field :password_confirmation, class: "form-control #{'is-invalid' if password_confirmation }", autocomplete: 'off'
-        - unless f.object.password_changed_at.nil?
-          .form-group
-            .d-flex.align-items-center
-              .col-lg-3.control-label
-                = f.label :current_password
-              .col-lg-8
-                .invalid-feedback.d-inline #{ current_password }
-                = f.password_field :current_password, class: "form-control #{'is-invalid' if current_password }", autocomplete: 'off'
-          .form-group
-            = f.fields_for :profile, current_profile do |ff|
-              .row
-                .col-md-3.control-label
-                  p Логотип компании
-                .col-md-2.avatar
-                  = image_tag(current_profile.image_url, class: 'img-fluid')
-                .col-md-7.d-flex.flex-column
-                  #choose-file
-                    | Выберите файл
-                    = ff.file_field :photo
-
-        .form-group
-          .row
-            .col-12
-              = f.submit 'Сохранить', class: ' submit'
-
 #setting-page
   .burger
     span
     span
     span
-  .settings-column
-    .header
-      h2.title Настройки
-      .user-data
-        /img.user-avatar alt="avatar" src="img/no-avatar.png" /
-        = image_tag('/img/new/no-avatar.png', class: 'user-avatar')
-        p.user-login Nataja-2019
-    ul.settings-list
-      li data-switch="profile"  Настройки профиля
-      li data-switch="card"  Карточка предприятия
-      li data-switch="mail"  Управление рассылками
-      li data-switch="contract"  Договор оферты
+  = render partial: 'partials/settings_menu'
   .settings-block-container
-    #profile.settings-block.show
-      .title Настройки профиля
-      form.profile-settings action=""
+    .settings-block-user
+      .title
+        | Настройки профиля
+      = form_for resource,
+              as: resource_name,
+              url: registration_path(resource_name),
+              html: { method: :put, class: 'profile-settings' } do |f|
         .form-item
-          label.title
-            | Наименование организации
-          input required="" type="text" /
+          = f.label :full_name, f.object.decorate.label_full_name, class: 'title'
+          = f.text_field :full_name, class: "#{'is-invalid' if full_name }"
         .form-item
-          label.title
-            | Пароль
-            span.help
-              span.hint
-                | тут, вероятно, должен быть какой-то текст
-          input required="" type="text" /
+          = f.label :password, class: 'title'
+          = f.password_field :password, class: "#{'is-invalid' if password_confirmation }", autocomplete: 'off'
         .form-item
-          label.title
-            | Повтор пароля
-          input required="" type="text" /
+          = f.label :password_confirmation, class: 'title'
+          = f.password_field :password_confirmation, class: "#{'is-invalid' if password_confirmation }", autocomplete: 'off'
+        - unless f.object.password_changed_at.nil?
+          .form-item
+            = f.label :current_password,  class: 'title'
+            = f.password_field :current_password, class: "#{'is-invalid' if current_password }", autocomplete: 'off'
         .form-item
-          label.title Логотип компании
-          .choosing-logo
-            /img.logo alt="" src="img/no-avatar.png" /
-            = image_tag('/img/new/no-avatar.png', class: 'logo')
-            div
-              span.file-btn
-                | Выберите файл
-                input#file-input type="file" /
-              .without-logo
-                input#without-logo type="radio" /
-                label for="without-logo"  Без логотипа
-        input type="submit" value="Сохранить" /
-    #card.company-card
-      .title Карточка предприятия
-    #mail.mailing-list-management
-      .title Управление рассылками
-    #contract.contract-offer
-      .title Договор оферты
+          = f.fields_for :profile, current_profile do |ff|
+            label.title Логотип компании
+            .choosing-logo
+              = image_tag(current_profile.image_url, class: 'logo')
+              div
+                span.file-btn
+                  | Выберите файл
+                  = ff.file_field :photo
+        = f.submit 'Сохранить', class: ' submit'
+
+    / .mailing-list-management
+    /   .title Управление рассылками
