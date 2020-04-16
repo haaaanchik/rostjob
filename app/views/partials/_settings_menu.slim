@@ -1,0 +1,12 @@
+.settings-column
+  .settings
+    .header
+      h2.title Настройки
+      .user-data
+        = image_tag current_profile.image_url, class: 'user-avatar'
+        p.user-login #{current_user.full_name}
+    ul.settings-list
+      li = active_link_to 'Настройки профиля',  edit_user_registration_path, class_active: 'active-link'
+      li = active_link_to 'Карточка предприятия', edit_profile_path, class_active: 'active-link'
+      li = active_link_to 'Управление рассылками', '#'
+      li = active_link_to 'Договор оферты', terms_path, class_active: 'active-link'

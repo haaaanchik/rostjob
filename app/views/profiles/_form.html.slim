@@ -1,9 +1,14 @@
 - errors = @profile.errors.messages
 - persisted = @profile.persisted?
 - profile_type = @profile.profile_type
+- header = @profile.private_person? ? 'Карточка физического лица' : 'Карточка предприятия'
 
-.col-md-9.order-md-2.mt-2
-  = form_with model: @profile, url: profile_path, class: 'new-profile-form mt-3' do |f|
-    = render partial: 'profiles/company_card', locals: {f: f, errors: errors, profile: @profile}
-    = f.submit t('buttons.save'), class: ' submit-left'
-
+#setting-page
+  = render partial: 'partials/settings_menu'
+  .settings-block-container
+    .company-card
+      .title data-company-header='Карточка предприятия' data-private-person-header='Карточка физического лица'
+        | #{ header }
+      = form_with model: @profile, url: profile_path do |f|
+        = render partial: 'profiles/company_card', locals: {f: f, errors: errors, profile: @profile}
+        = f.submit t('buttons.save'), class: ' submit-left'
