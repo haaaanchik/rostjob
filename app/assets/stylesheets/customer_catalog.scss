@@ -1,0 +1,289 @@
+#catalog {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  padding: 15px;
+  font-family: "Open-sans", sans-serif;
+
+  p {
+    margin: 0;
+  }
+
+  .catalog {
+    width: 70%;
+    height: max-content;
+    overflow: auto;
+    padding-right: 20px;
+    max-height: 100%;
+  }
+
+  .catalog-item {
+    padding: 20px 45px 15px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(113, 113, 113, 0.2);
+    border-radius: 4px;
+    margin-bottom: 18px;
+  }
+
+  .catalog-item-container {
+    display: flex;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+  }
+
+  .info-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 34px;
+    line-height: 13px;
+  }
+
+  .logo {
+    max-width: 61px;
+  }
+
+  .rating {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 12px;
+  }
+
+  .description {
+    margin: 0 23px 0 15px;
+    font-size: 13px;
+  }
+
+  hr {
+    margin-top: 30px;
+  }
+
+  .details {
+    margin: 0 6px 0 14px;
+    color: #1970ff;
+    font-size: 13px;
+  }
+
+  .item-btn {
+    display: flex;
+    margin-left: auto;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 166px;
+    height: 27px;
+    border-radius: 14px;
+    border: 1px solid #1970ff;
+    font-size: 13px;
+    color: #1970ff;
+  }
+
+  .input-container {
+    position: relative;
+    display: inline;
+    width: 100%;
+  }
+
+  .filters {
+    padding: 20px 0 0 35px;
+    width: 30%;
+
+    .title {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+
+    #search {
+      border: 0;
+      width: calc(100% - 5px);
+      max-width: 295px;
+      border-bottom: 1px solid #a2a2a2;
+      background-color: transparent;
+      margin-left: 5px;
+
+      &::placeholder {
+        color: #999999;
+        font-size: 13px;
+      }
+    }
+
+    .subtitle {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 36px 0 20px 0;
+    }
+
+    .cities {
+      font-size: 15px;
+    }
+
+    .professions {
+      font-size: 15px;
+    }
+  }
+
+  .filters-header {
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+  }
+
+  .filter-item {
+    margin-bottom: 15px;
+
+    .checkbox {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      margin: 10px 0 0 20px;
+    }
+
+    .checkbox + label {
+      position: relative;
+      padding: 0 0 0 20px;
+      cursor: pointer;
+    }
+
+    .checkbox + label:before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: -2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid #afafaf;
+      transition: 0.2s;
+    }
+
+    .checkbox + label:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 14px;
+      transition: 0.2s;
+    }
+
+    .checkbox:checked + label:after {
+      content: "✓";
+      font-weight: bold;
+    }
+  }
+
+  .col-green {
+    color: #02da35;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 1200px) {
+  #catalog {
+    .filters {
+      padding: 20px 0 0 15px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  #catalog {
+    .catalog-item {
+      padding: 20px;
+    }
+
+    .item-info {
+      min-width: 100px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #catalog {
+    flex-direction: column-reverse;
+    height: max-content;
+
+    .catalog {
+      width: 100%;
+      padding-right: 0;
+    }
+
+    .filters {
+      display: flex;
+      width: 100%;
+      flex-wrap: wrap;
+      padding: 0;
+      margin-bottom: 10px;
+
+      .subtitle {
+        margin: 10px 0 5px 0;
+      }
+    }
+
+    .filter-item {
+      margin-bottom: 5px;
+    }
+
+    .description, .details {
+      margin-right: 0;
+    }
+
+    .filters-header {
+      width: 100%;
+    }
+
+    .cities, .professions {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  #catalog {
+    .cities, .professions {
+      width: 100%;
+    }
+
+    .filters {
+      .title {
+        margin-bottom: 0;
+      }
+    }
+
+    .catalog-item {
+      padding: 10px;
+    }
+
+    .info-title {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .catalog-item-container {
+      flex-direction: column;
+    }
+
+    .rating {
+      margin-top: 10px;
+    }
+
+    .item-info {
+      margin-bottom: 15px;
+    }
+
+    .description, .details {
+      margin-left: 0;
+    }
+  }
+}
