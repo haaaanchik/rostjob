@@ -12,7 +12,9 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def user_action_log
-    user_action_log_records
+    @q = UserActionLog.ransack(params[:q])
+    @user_action_log_records = @q.result.page(params[:page])
+                                        .per(12).decorate
   end
 
   private
@@ -25,11 +27,5 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def orders
     @orders ||= Order.where(created_at: date_interval)
-  end
-
-  def user_action_log_records
-    @user_action_log_records ||= UserActionLog.order(id: :desc)
-                                              .page(params[:page])
-                                              .decorate
   end
 end
