@@ -7,7 +7,7 @@ class Incident < Ticket
   enumerize :title, in: { other: 0, not_come: 1, fail_interview: 2, denied: 3 }
   enumerize :reason, in: { other: 0, not_come: 1, fail_interview: 2 }, default: :other
 
-  after_create :mail_for_contractor_has_incident, if: -> { opened? }
+  after_create :mail_for_contractor_has_incident, if: -> { opened? && user.profile.notify_mails? }
 
   private
 

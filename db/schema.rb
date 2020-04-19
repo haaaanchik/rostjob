@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_28_100751) do
+ActiveRecord::Schema.define(version: 2020_04_19_172816) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -471,6 +471,17 @@ ActiveRecord::Schema.define(version: 2020_04_28_100751) do
     t.datetime "updated_at", null: false
     t.index ["session_id"], name: "index_sessions_on_session_id", unique: true
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
+  end
+
+  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "var", null: false
+    t.text "value"
+    t.string "target_type", null: false
+    t.integer "target_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["target_type", "target_id", "var"], name: "index_settings_on_target_type_and_target_id_and_var", unique: true
+    t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
   end
 
   create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

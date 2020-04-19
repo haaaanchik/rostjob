@@ -33,6 +33,10 @@ class Profile < ApplicationRecord
   has_attached_file :photo, styles: { medium: "100x100>", thumb: "50x50" }, default_url: "/img/default.png"
   validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
 
+  has_settings do |s|
+    s.key :general, defaults: { every_day_mailing: true, notify_mails: true }
+  end
+
   ransack_alias :all_fields, :user_full_name
   ransack_alias :title_fields, :orders_title
   ransack_alias :city_fields,  :orders_city
@@ -120,5 +124,13 @@ class Profile < ApplicationRecord
 
   def filled?
     true if company
+  end
+
+  def notify_mails?
+    settings(:general).notify_mails
+  end
+
+  def every_day_mailing?
+    settings(:general).every_day_mailing
   end
 end

@@ -17,7 +17,7 @@ class ProposalEmployee < ApplicationRecord
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
   ransack_alias :pe_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
 
-  after_create :mail_inbox, if: -> { inbox? }
+  after_create :mail_inbox, if: -> { inbox? && order.profile.notify_mails? }
 
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
@@ -117,7 +117,7 @@ class ProposalEmployee < ApplicationRecord
   end
 
   def mail_interview_customer
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'today_interview_customer')
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'today_interview_customer') if order.profile.notify_mails?
   end
 
   private
@@ -127,14 +127,14 @@ class ProposalEmployee < ApplicationRecord
   end
 
   def mail_for_contractor_hired
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'proposal_employee_hired')
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'proposal_employee_hired') if profile.notify_mails?
   end
 
   def mail_for_contractor_interview
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_about_interview')
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_about_interview') if profile.notify_mails?
   end
 
   def mail_for_contractor_has_paid
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_has_paid')
+    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_has_paid') if profile.notify_mails?
   end
 end

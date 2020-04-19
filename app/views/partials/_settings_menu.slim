@@ -8,5 +8,5 @@
     ul.settings-list
       li = active_link_to 'Настройки профиля',  edit_user_registration_path, class_active: 'active-link'
       li = active_link_to 'Карточка предприятия', edit_profile_path, class_active: 'active-link'
-      li = active_link_to 'Управление рассылками', '#'
+      li = active_link_to 'Управление рассылками', profile_settings_path, class_active: 'active-link'
       li = active_link_to 'Договор оферты', terms_path, class_active: 'active-link'

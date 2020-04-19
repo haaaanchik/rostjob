@@ -157,6 +157,6 @@ class EmployeeCv < ApplicationRecord
   end
 
   def mail_with_to_sent
-    SendNotifyMailJob.perform_now(objects: self, method: 'emp_cv_sended')
+    SendNotifyMailJob.perform_now(objects: self, method: 'emp_cv_sended') if order.profile.notify_mails?
   end
 end

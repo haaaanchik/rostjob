@@ -1,0 +1,11 @@
+#setting-page
+  = render partial: 'partials/settings_menu'
+  .settings-block-container
+    #mail.mailing-list-management style='display: block'
+      .title Управление рассылками
+    
+      = form_for :settings, url: profile_setting_path(current_user.profile), method: :put, html: { id: 'setting', class: 'd-flex flex-column' } do |f|
+        = f.check_box :every_day_mailing,  checked: current_user.profile.every_day_mailing?,  id: 'materialUnchecked', class: 'form-check-input'
+        label.form-check-label for='materialUnchecked' Ежедневная почтовая рассылка
+        = f.check_box :notify_mails,  checked: current_user.profile.notify_mails?, id: 'materialUnchecked1', class: 'form-check-input'
+        label.form-check-label for='materialUnchecked1' Письма с уведомлениями
