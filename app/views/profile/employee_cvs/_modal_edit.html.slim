@@ -55,16 +55,11 @@
                 p.ancete-row__title Доп. информация
                 .ancete-row__content
                   = f.text_area :remark, cols: 30, rows: 3
-              - if f.object.comment?
-                .ancete-row
-                  p.ancete-row__title Комментарий
-                  .ancete-row__contentactions
-                    = f.text_area :comment, class: 'form-control'
-                    .invalid-feedback
+
           .modal-ancete__sidebar
-            .date-start-work.new-employee-cv.pt-0.shadow-none.position-static
-              - if f.object.reminder?
-                h4
+            - if f.object.reminder?
+              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
+                .modal-ancete__title
                   | Напоминание
                 .popup__header.ml-2
                   .popup-date
@@ -75,6 +70,10 @@
                     = time_field_tag :reminder_time, f.object.reminder_time, placeholder: '23:59', class: 'popup-input'
                 .popup__body
                   .reminder_date_datepicker.d-flex.justify-content-center
+
+                p.ancete-row__title Комментарий
+                = f.text_area :comment, class: 'form-control'
+                .invalid-feedback
             .footer
               p Рекрутер
               .ancete-recruter

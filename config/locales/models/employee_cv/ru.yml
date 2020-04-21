@@ -13,6 +13,8 @@ ru:
       disputed: 'Спор'
       refused: 'Отклонена'
       deleted: 'Удалена'
+      inbox: 'В очереди'
+
 
     ext_data:
       pser: Серия паспорта

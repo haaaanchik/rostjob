@@ -2,7 +2,7 @@ coffee:
   class Calendar
     @init: ->
       @setReminderDate()
-      @initReminderDatepicker()
+      @initDatepicker()
       @initPhoneNumberMask()
       @bind()
 
@@ -10,13 +10,15 @@ coffee:
       $('#empl-form .reminder_date_datepicker').on 'changeDate', @formReminderChangeDate
       $('#empl-form #reminder_time').on 'change', @setReminder
       $('#empl-form #reminder_date').on 'keyup', @setReminder
+      $('#empl-form .interview_date_datepicker').on 'changeDate', @ChangeInterviewDate
 
-    @initReminderDatepicker: ->
+    @initDatepicker: ->
       date = new Date()
-      $('#empl-form .reminder_date_datepicker').datepicker
+      selector = '#empl-form .reminder_date_datepicker, #empl-form .interview_date_datepicker'
+      $(selector).datepicker
         language: 'ru'
         todayHighlight: true
-      $('#empl-form .reminder_date_datepicker').datepicker('setDate', date)
+      $(selector).datepicker('setDate', date)
 
     @formReminderChangeDate: ->
       date = $(this).datepicker('getFormattedDate')
@@ -46,4 +48,7 @@ coffee:
       time = $('#empl-form #reminder_time').val()
       $('#employee_cv_reminder').val("#{date} #{ time }")
 
+    @ChangeInterviewDate: ->
+      date = $(this).datepicker('getFormattedDate')
+      $('#empl-form #interview_date').val(date)
   Calendar.init()

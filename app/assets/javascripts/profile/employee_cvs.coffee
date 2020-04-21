@@ -9,6 +9,7 @@ class EmployeeCvs
 
   @init: ->
     @draggableInit()
+    @clickProposalEmployee()
     @bind()
 
   @bind: ->
@@ -37,6 +38,12 @@ class EmployeeCvs
       url: url
       data: data
     return
+
+  @clickProposalEmployee: ->
+    if $('#employee_cv_link').length
+      $('#employee_cv_link')[0].click()
+    if $('#proposal_employee_link').length
+      $('#proposal_employee_link')[0].click()
 
   @prpEmployeeCvState: (event) ->
     state = $(this).val()

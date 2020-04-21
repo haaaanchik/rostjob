@@ -37,7 +37,7 @@ class Profile::ProposalEmployeesController < ApplicationController
     result = Cmd::ProposalEmployee::CorrectInterviewDate.call(proposal_employee: proposal_employee,
                                                               interview_date: proposal_employee_params[:interview_date])
     if result.success?
-      redirect_to profile_proposal_employee_path(result.proposal_employee)
+      @result_success = true
     end
   end
 

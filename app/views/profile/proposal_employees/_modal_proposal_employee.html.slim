@@ -1,0 +1,72 @@
+- employee_cv = candidate.employee_cv
+.modal.fade.show#empl-form tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+  .modal-dialog.modal-lg
+    .modal-content
+      .modal-header
+        .modal-header-top
+          .modal-title ##{ candidate.id } #{employee_cv.name}
+          .modal-activities
+            = render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
+        p.modal-request-type
+          i.fa.fa-bookmark style="color: #{candidate.status_color_class}"
+          |  #{ t("proposal_employee.state.#{candidate.state}") }
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" ×
+        hr
+
+      .modal-body
+        .modal-ancete
+          h4.modal-ancete__title Анкета
+          .ancete-rows.must-have
+            .ancete-row
+              p.ancete-row__title Полное имя
+              .ancete-row__content
+                = text_field :employee_cv, :name, class: 'disabled', value: employee_cv.name
+            .ancete-row
+              p.ancete-row__title Номер телефона
+              .ancete-row__contentactions
+                = phone_field :employee_cv, :phone_number, class: 'disabled', value: employee_cv.phone_number
+            .ancete-row
+              p.ancete-row__title Анкета для СБ
+              .ancete-row__content
+                a.download-empl-cv href="#"
+                  = image_tag('/img/new/down.png')
+                  |  Скачать анкету
+
+                .sex
+                  label.mr-2 for="man" М
+                  = radio_button_tag 'employee_cv[gender]',
+                          employee_cv.gender,
+                          employee_cv.gender.include?('М'),
+                          id: 'man',
+                          class: 'disabled'
+
+                  label.mr-2 for="woman" Ж
+                  = radio_button_tag 'employee_cv[gender]',
+                          employee_cv.gender,
+                          employee_cv.gender.include?('Ж'),
+                          id: 'woman',
+                          class: 'disabled'
+
+          h4.modal-ancete__title Дополнительные сведения
+          .ancete-rows.more-info
+            .ancete-row
+              p.ancete-row__title Опыт работы
+              .ancete-row__content
+                = text_area :employee_cv, :experience, cols: 30, rows: 3, readonly: true, value: employee_cv.experience
+            .ancete-row
+              p.ancete-row__title Образование
+              .ancete-row__content
+                = text_area :employee_cv, :education, cols: 30, rows: 3, readonly: true, value: employee_cv.education
+            .ancete-row
+              p.ancete-row__title Доп. информация
+              .ancete-row__content
+                = text_area :employee_cv, :remark, cols: 30, rows: 3, readonly: true, value: employee_cv.remark
+        .modal-ancete__sidebar
+          .date-start-work.interview_date.pt-0.shadow-none.position-static
+            = render partial: 'profile/proposal_employees/candidate_form', locals: { candidate: candidate }
+          .footer
+            p Рекрутер
+            .ancete-recruter
+              = image_tag candidate.profile.image_url, class: 'request-logo'
+              p.request-user-name = candidate.profile.user.full_name

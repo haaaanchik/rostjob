@@ -1,34 +1,18 @@
 class Profile::EmployeeCvsController < ApplicationController
   before_action :employee_cvs, only: :index
+  before_action :employee_cv_order, only: :create_for_send
 
   def index
     @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
     @active_item = term
-  end
-
-  def show
-    @employee_cv = EmployeeCv.find(params[:id])
-    @remained_warranty_days = Holiday.remained_warranty_days(@employee_cv.hiring_date, @employee_cv.warranty_date)
+    @proposal_employee = ProposalEmployee.find_by(id: params[:proposal_employee_id])
+    @param_employee_cv = EmployeeCv.find_by(id: params[:employee_cv_id], profile_id: current_profile.id)
   end
 
   def new
     @employee_cv = EmployeeCv.new proposal_id: params[:proposal_id]
     # FIXME: refactor this asap
     order if params[:order_id]
-  end
-
-  def pre_new_full
-    flash['params'] = employee_cvs_params
-    redirect_to new_full_profile_employee_cv_path(state: params[:state])
-  end
-
-  def new_full
-    ecv_params = flash['params']
-    @employee_cv = EmployeeCv.new ecv_params
-    # FIXME: refactor this asap
-    if ecv_params
-      @order ||= Order.find_by(id: ecv_params['order_id']) if !ecv_params['order_id'].nil? || !ecv_params['order_id'].empty?
-    end
   end
 
   def edit
@@ -46,17 +30,15 @@ class Profile::EmployeeCvsController < ApplicationController
     end
   end
 
-  # FIXME: Refactor this beautiful code ASAP!!!
   def create_for_send
-    order2
-    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params,
+                                                 profile: current_profile,
+                                                 interview_date: params[:interview_date],
+                                                 order: @order, current_profile: current_profile)
     @employee_cv = result.employee_cv
     if result.success?
       @status = 'success'
-      # redirect_to profile_employee_cvs_path(term: :ready)
     else
-      @status = 'error'
-      # @text = error_msg_handler result.employee_cv
       render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
     end
   end
@@ -137,7 +119,7 @@ class Profile::EmployeeCvsController < ApplicationController
     @order = Order.find(params[:order_id])
   end
 
-  def order2
+  def employee_cv_order
     @order = Order.find_by(id: employee_cvs_params[:order_id])
   end
 
