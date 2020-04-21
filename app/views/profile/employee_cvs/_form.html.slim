@@ -73,11 +73,12 @@
                 .invalid-feedback
 
             - if @order.present?
-              = hidden_field_tag :interview_date, Date.today
-              h4.mb-0
-                | Дата приезда
-              .popup__body
-                .interview_date_datepicker.d-flex.justify-content-center
+              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
+                = hidden_field_tag :interview_date, Date.today
+                .modal-ancete__title
+                  | Дата приезда
+                .popup__body
+                  .interview_date_datepicker.d-flex.justify-content-center
         .p-2
           hr
         .text-center.p-2
