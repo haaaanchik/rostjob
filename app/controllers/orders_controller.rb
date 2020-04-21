@@ -47,6 +47,7 @@ class OrdersController < ApplicationController
   end
 
   def redirect_to_disputes
+    return if request.referer.nil?
     path_name = URI(request.referer).path
     if @opened_tickets_count > 0 && !path_name.include?('/profile/tickets/')
       flash[:notice] = 'У вас есть анкета с открытым спором, пожалуйста просмотрите его!'
