@@ -98,6 +98,41 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     ticket ? h.profile_ticket_path(ticket) : h.profile_tickets_path
   end
 
+  def contractor_calendar_title
+    case state
+    when 'inbox', 'interview'
+      'Дата приезда'
+    when 'hired'
+      'Дата выхода на работу'
+    else
+      ''
+    end
+  end
+
+  def contractor_calendar_text(warranty_days)
+    text = ''
+    klass = nil
+    hired_text = ''
+    case state
+    when 'paid', 'viewed'
+      text = h.t("proposal_employee.state.#{state}")
+      klass = 'text-success'
+    when 'hired'
+      text = h.t("proposal_employee.state.hired")
+      klass = 'text-success'
+      hired_text = ". Осталось #{h.t(:day, count: warranty_days.size)}."
+    when 'deleted', 'disputed'
+      text = h.t("proposal_employee.state.#{state}")
+      klass = 'text-danger'
+    when 'inbox'
+      text = h.t("proposal_employee.state.inbox")
+      klass = 'text-warning'
+    else
+      ''
+    end
+    h.content_tag(:span, class: "text-center #{klass}") { text + hired_text }
+  end
+
   def calendar_title
     case object.state
     when 'interview'

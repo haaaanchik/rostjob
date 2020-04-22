@@ -11,7 +11,6 @@
 
         .modal-body
           = f.hidden_field :order_id, value: @order&.id
-          = f.hidden_field :reminder, value: DateTime.now
           = hidden_field_tag :state, params[:state]
           .modal-ancete
             .ancete-rows.must-have
@@ -26,24 +25,38 @@
                   = f.phone_field :phone_number, class: 'form-control'
                   .invalid-feedback
               .ancete-row
-                p.ancete-row__title Пол
+                p.ancete-row__title Анкета для СБ
                 .ancete-row__content
+                  #choose-file
+                    | Выберите файл
+                    = f.file_field :document
+
                   .sex
                     label.mr-2 for="man" М
                     = f.radio_button :gender, 'М', id: 'man', checked: true
                     label.mr-2 for="woman" Ж
                     = f.radio_button :gender, 'Ж', id: 'woman'
-              - if params[:state] == 'reminder'
-                .ancete-row
-                  p.ancete-row__title Комментарий
-                  .ancete-row__contentactions
-                    = f.text_area :comment, value: 'Напомнить мне!' , class: 'form-control'
-                    .invalid-feedback
+
+            h4.modal-ancete__title Дополнительные сведения
+            .ancete-rows.more-info
+              .ancete-row
+                p.ancete-row__title Опыт работы
+                .ancete-row__content
+                  = f.text_area :experience, cols: 30, rows: 3
+              .ancete-row
+                p.ancete-row__title Образование
+                .ancete-row__content
+                  = f.text_area :education, cols: 30, rows: 3
+              .ancete-row
+                p.ancete-row__title Доп. информация
+                .ancete-row__content
+                  = f.text_area :remark, cols: 30, rows: 3
 
           .modal-ancete__sidebar
             - if params[:state] == 'reminder'
-              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static
-                h4
+              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
+                = f.hidden_field :reminder, value: DateTime.now
+                .modal-ancete__title
                   | Напоминание
                 .popup__header.ml-2
                   .popup-date
@@ -54,6 +67,18 @@
                     = time_field_tag :reminder_time, nil, placeholder: '23:59', class: 'popup-input'
                 .popup__body
                   .reminder_date_datepicker.d-flex.justify-content-center
+
+                p.ancete-row__title Комментарий
+                = f.text_area :comment, value: 'Напомнить мне!', class: 'form-control'
+                .invalid-feedback
+
+            - if @order.present?
+              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
+                = hidden_field_tag :interview_date, Date.today
+                .modal-ancete__title
+                  | Дата приезда
+                .popup__body
+                  .interview_date_datepicker.d-flex.justify-content-center
         .p-2
           hr
         .text-center.p-2
@@ -61,6 +86,5 @@
             = f.submit 'Отправить', class: 'btn btn-sm btn-primary btn-rounded', name: :save_as_sent
           - else
             = f.submit 'Сохранить', class: 'btn btn-sm btn-primary btn-rounded', name: :save
-          = f.submit 'Мне нужно ввести больше данных', class: 'btn btn-sm btn-default btn-rounded', name: :pre_new_full
 
 = render partial: 'calendar'

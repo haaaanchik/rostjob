@@ -164,7 +164,6 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'profile/employee_cvs/new_full', to: 'profile/employee_cvs#new_full', as: :new_full_profile_employee_cv
   resource :profile, except: %i[show destroy] do
     member do
       put :set_free
@@ -323,7 +322,6 @@ Rails.application.routes.draw do
         put :reset_reminder
       end
     end
-    post :employee_cvs, constraints: ->(req) { req.params.key?(:pre_new_full) }, to: 'employee_cvs#pre_new_full'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save) }, to: 'employee_cvs#create_as_ready'
     post :employee_cvs, constraints: ->(req) { req.params.key?(:save_as_sent) }, to: 'employee_cvs#create_for_send'
 

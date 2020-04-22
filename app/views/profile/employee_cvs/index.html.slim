@@ -1,3 +1,7 @@
+- if @proposal_employee.present?
+  = link_to '', profile_proposal_employee_path(@proposal_employee), class: 'd-none', id: 'proposal_employee_link', remote: true
+- if @param_employee_cv.present?
+  = link_to '', edit_profile_employee_cv_path(@param_employee_cv), class: 'd-none', id: 'employee_cv_link', remote: true
 .crm-list
   .grey.lighten-4.text-center.main-workspace
     .row.ml-0.mr-0#main_row
@@ -91,7 +95,7 @@
                     span.interview-date-show type="button" data-toggle="popover" data-placement="auto" data-title="Дата прибытия кандидата" data-html='true' data-content=pe_form
                     .card-header.card-header-in-list
                       p.initials data-card-widget="collapse"
-                        = link_to employee_cv.name, edit_profile_employee_cv_path(employee_cv), remote: true
+                        = link_to employee_cv.name, profile_proposal_employee_path(pr_emp), remote: true
                       .card-tools.d-none
                         button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
                           i.fas.fa-ellipsis-h
