@@ -3,12 +3,9 @@
     .filters.js-filters
       #filters Фильтры
       = image_tag('/img/new/arrow-down.png')
-
-    .search
-      input.search_candidates type="text" placeholder="Поиск анкет"
-      = image_tag('/img/new/search.png')
-
     = render 'search_form'
+    .show
+      = link_to 'Показать все', profile_candidates_path, class: 'btn btn-primary btn-sm btn-rounded'
 
   .worksheets
     .worksheets__titles

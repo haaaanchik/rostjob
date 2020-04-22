@@ -103,6 +103,13 @@
     right: 3px;
   }
 
+  .show {
+    .btn-sm {
+      padding: 0.3rem 1.6rem;
+      margin-left: 35px;
+    }
+  }
+
   .worksheets__titles{
     display: flex;
     border-radius: 4px 4px 0 0;
