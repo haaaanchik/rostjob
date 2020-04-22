@@ -250,6 +250,7 @@ class EmployeeCvs
       $popoverPosition = $(itemEl).find('.interview-date-show')
       $popoverPosition.popover('show', animation: true)
       $(itemEl).find('.card-tools').fadeOut 500
+      $(itemEl).find('i.fas.fa-bookmark.right-top').css('color', '#ffd800')
       return
 
     if currentState == 'reminder'
@@ -261,6 +262,8 @@ class EmployeeCvs
     if prevState == 'favorite'
       prEmpId = $(itemEl).data('proposal-emp-id')
       url = '/profile/proposal_employees/' + prEmpId + '/revoke'
+      $(itemEl).find('i.fas.fa-bookmark.right-top').css('color', '#9046ff')
+      $(itemEl).find('.card-tools').removeClass('d-none')
       draggable = true
 
     if currentState == 'ready' && prevState != 'favorite'

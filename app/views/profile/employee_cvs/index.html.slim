@@ -87,6 +87,7 @@
                   - employee_cv = pr_emp.employee_cv.decorate
                   - pe_form = "#{render partial: 'interview_date'}"
                   .card.card-success.card-in-list.collapsed-card.moveable data-emp-cv-id="#{employee_cv.id}" data-proposal-emp-id="#{pr_emp.id}"
+                    i.fas.fa-bookmark.right-top style="color: #{pr_emp.status_color_class}; top: 0"
                     span.interview-date-show type="button" data-toggle="popover" data-placement="auto" data-title="Дата прибытия кандидата" data-html='true' data-content=pe_form
                     .card-header.card-header-in-list
                       p.initials data-card-widget="collapse"
