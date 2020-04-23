@@ -195,7 +195,7 @@ $secondaryColorDark: #b7b7b7;
   #requests-page .platform .tabs .tab-content {
     overflow: auto;
     margin: 0 -20px;
-    padding: 0;
+    padding: 0 0 10px 0;
   }
 
   #requests-page .platform .tabs .tab-content .tab-pane:nth-child(2),
@@ -791,4 +791,125 @@ $secondaryColorDark: #b7b7b7;
       margin-left: 0;
     }
   }
+}
+
+@media (max-width: 1100px) {
+
+    #order_page #requests-page{
+      flex-direction: column-reverse;
+    }
+
+    #order_page #requests-page .requests-page-filters{
+      width: 100%;
+      padding: 0;
+    }
+
+    #profesion-city-form{
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    #profesion-city-form .filters-search-container {
+      width: 100%;
+    }
+
+    #profesion-city-form .cities{
+      width: 50%;
+    }
+
+    #profesion-city-form .professions{
+      width: 50%;
+    }
+
+    #order_page #requests-page .requests-page-container{
+      width: 100%;
+    }
+
+    #order_page #requests-page{
+      padding: 15px;
+    }
+
+  #order_page #requests-page .requests-page-filters #search{
+    max-width: 300px;
+  }
+
+  #order_page #requests-page .filters-search img{
+    display: none;
+  }
+
+}
+
+
+
+@media (max-width: 800px) {
+
+    #order_page #requests-page .platform .vacancy .salary{
+      margin: 0;
+    }
+    #order_page #requests-page .platform .vacancy .number{
+      margin: 0;
+    }
+
+    #profesion-city-form .cities{
+      width: 40%;
+    }
+
+    #profesion-city-form .professions{
+      width: 60%;
+    }
+
+    #order_page .order_row .vacancy{
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #order_page #requests-page .platform .vacancy .description{
+      margin: 5px 0;
+    }
+
+}
+
+
+
+@media (max-width: 550px) {
+
+    #profesion-city-form .cities, #profesion-city-form .professions{
+      width: 100%;
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+
+    #order_page #requests-page .platform .information{
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+      .logo{
+        margin-right: 0;
+      }
+      .name{
+        text-align: center;
+      }
+    }
+
+    #order_page #requests-page .requests-page-filters .subtitle{
+      margin: 10px 0 10px 0;
+    }
+
+  #order_page #requests-page .platform .header{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #order_page #requests-page .platform .header p{
+    margin-bottom: 5px;
+  }
+
+  #myTab{
+    justify-content: center;
+  }
+
 }

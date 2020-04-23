@@ -6,10 +6,11 @@ ruby:
   val = params[:q] ? params[:q][:all_fields_cont] : nil
 
 = search_form_for @q, url: url, id: 'profession-city-form'  do |f|
-  h2.title Фильтры
-  .filters-search
-    = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', id: 'search', value: val
-    = image_tag('/img/new/search.png')
+  .filters-search-container
+    h2.title Фильтры
+    .filters-search
+      = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', id: 'search', value: val
+      = image_tag('/img/new/search.png')
   .cities
     p.subtitle Города
     - cities.each_with_index do |city, i|
