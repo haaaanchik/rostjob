@@ -346,6 +346,9 @@
   .user-logo {
     margin-top: 20px;
     margin-bottom: 30px;
+    img{
+      object-fit: contain;
+    }
   }
 
   .navside__menu-item .svg-sidebar {

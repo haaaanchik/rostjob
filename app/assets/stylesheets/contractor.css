@@ -96,6 +96,7 @@ body {
 #recruter-main .user_info > div:first-child{
   width: 30%;
   justify-content: flex-start;
+  align-items: center;
 }
 
 #recruter-main .user_info > div:last-child{
@@ -113,6 +114,7 @@ body {
   width: 54px;
   height: 54px;
   margin-bottom: 15px;
+  object-fit: contain;
 }
 
 #recruter-main .user_info .name{

@@ -5,7 +5,7 @@
   .platforms_list_platform_top
     .platforms_list_platform_top_logo
       a href="#" class="platforms_list_platform_top_logo_empty"
-        = image_tag production_site.image.url(:thumb)
+        = image_tag(production_site.image.url(:thumb), class: 'object_fit_contain')
 
     .platforms_list_platform_top_info
       ul.fa-ul
