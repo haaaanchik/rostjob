@@ -2,7 +2,7 @@
   = render 'interface/navbar'
 
   .navside class="#{ 'recruiter' if current_profile.contractor?}"
-    = link_to root_path, class: 'user-logo' do
+    = link_to edit_user_registration_path, class: 'user-logo' do
       = image_tag asset_path('navside/user-logo.png')
 
     = render partial: "interface/#{@current_profile&.profile_type || 'nil'}", locals: { active_item: @active_item }

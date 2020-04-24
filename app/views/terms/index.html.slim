@@ -3,9 +3,10 @@
   .settings-block-container
     .contract-offer
       .title Договор оферты
-      .text-right
-        = link_to terms_path(format: 'pdf'), id: 'export-pdf' do
-          i.fas.fa-file-pdf
+      .text-center
+        = link_to terms_path(format: 'pdf') do
+          | Скачать договор 
+          i.fas.fa-file-pdf.fa-lg.ml-2
       .row.scrollbar-near-moon.thin.mt-2
         .border#privacy_policy
           = render 'term_pdf'
