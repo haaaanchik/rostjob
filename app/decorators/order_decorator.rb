@@ -91,7 +91,7 @@ class OrderDecorator < ApplicationDecorator
   end
 
   def publish_title
-    title_text = !replenish_balance? ? 'Не достаточно средств' : 'Публикация заявки'
+    title_text = !replenish_balance? ? 'Недостаточно средств' : 'Публикация заявки'
     klass =  !replenish_balance? ? 'page-title red-text' : 'page-title'
     h.content_tag(:h1, class: klass) { title_text }
   end
