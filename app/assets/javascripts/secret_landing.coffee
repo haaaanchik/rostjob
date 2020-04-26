@@ -5,7 +5,7 @@
 valid = (form_submit) ->
   email = $("input[name='user[email]']")
   $submit = $("button[name='customer']")
-  regEx = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
+  regEx = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i
   email.on 'change keyup input click', ->
     if form_submit.subm == true
       $submit.prop 'disabled', true
@@ -19,7 +19,7 @@ valid = (form_submit) ->
 submit = (form_submit) ->
   email = $("input[name='user[email]']")
   $submit = $("button[name='customer']")
-  regEx = /^[a-z0-9_-]+@[a-z0-9-]+\.[a-z]{2,6}$/i
+  regEx = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/i
   $submit.click ->
     if email.val().search(regEx) == 0
       $submit.prop 'disabled', false
