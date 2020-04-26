@@ -375,3 +375,23 @@
     display: flex;
   }
 }
+
+#setting-page .contract-offer {
+  img#signature {
+    height: 300px;
+    position: absolute;
+    right: 75px;
+    bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #setting-page .contract-offer {
+    img#signature {
+      height: 170px;
+      position: absolute;
+      right: 75px;
+      bottom: 200px;
+    }
+  }
+}
