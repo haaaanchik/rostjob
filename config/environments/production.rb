@@ -78,7 +78,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :mailgun
   config.action_mailer.mailgun_settings = {
     api_key: '11d7b7e27023d3b56880f00170e97c15-898ca80e-44046bdf',
-    domain: 'mg.best-hr.pro',
+    domain: 'mg.rostjob.com',
     region: 'eu'
   }
   config.action_mailer.default_url_options = { host: 'rostjob.com' }
