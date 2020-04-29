@@ -1,8 +1,8 @@
 - unless profile.private_person?
   .company-search
     .form-group.row
-      = label :dadata, 'Поиск предприятия или ИП', class: 'col-lg-3 col-auto col-form-label'
-      .col-lg-5.col-auto
+      = label :dadata, 'Поиск предприятия или ИП', class: 'col-lg-4 col-sm-6 col-12 col-form-label'
+      .col-lg-6.col-12.col-sm-6
         = text_field :dadata, :search, class: 'form-control',
                 'data-auto-select' => "profile_company_dadata",
                 'data-auto-url' => "/search_company_dadata",
@@ -13,8 +13,8 @@
   = render partial: 'companies/fields', locals: {f: c, errors: errors, profile: profile}
   h4.h4-responsive.pt-3 Платёжные реквизиты
   .form-group.row
-    = label :dadata, 'Поиск банка ', class: 'col-lg-3 col-auto col-form-label search-bank'
-    .col-lg-5.col-auto
+    = label :dadata, 'Поиск банка ', class: 'col-lg-4 col-12 col-sm-6 col-form-label search-bank'
+    .col-lg-6.col-12.col-sm-6
       = text_field :dadata, :search, class: 'form-control',
               'data-auto-select' => "profile_company_bank_dadata",
               'data-auto-url' => "/search_bank_dadata",
