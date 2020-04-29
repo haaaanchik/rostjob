@@ -28,7 +28,6 @@
 #= require external/fullcalendar
 #= require external/fullcalendar/daygrid.min
 #= require lightbox
-#= require clipboard
 #= require_tree .
 
 @scroll_to_bottom = (element) ->
@@ -157,6 +156,5 @@ $(document).ready ->
 
   $(document).on "turbolinks:load", ->
     $('input[type=tel]').inputmask("+7(999)-999-99-99")
-    new Clipboard('#order_page p.copy')
 
   $('[data-toggle="popover"]').popover('enable')

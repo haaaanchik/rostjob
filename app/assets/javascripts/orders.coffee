@@ -21,26 +21,7 @@ $ ->
       $("##{k}").addClass('invalid')
   )
 
-  $(document).on('click', 'button[id^=copy-to-clipboard-]', (event) ->
-    order_text = $(event.target).data('order')
-    copy_to_clipboard(order_text)
-  )
-
-  copy_to_clipboard = (text_to_copy) ->
-    textarea = document.createElement('textarea')
-    textarea.value = text_to_copy
-    textarea.setAttribute('readonly', '')
-    textarea.style.position = 'absolute'
-    textarea.style.left = '-9999px'
-    document.body.appendChild(textarea)
-    textarea.select()
-    successful = document.execCommand('copy')
-    textarea.remove()
-    if successful
-      toastr.success('Заявка скопирована!')
-
   $(document).on('click', '[id^=title_filter_], [id^=city_filter_]', ->
     form = $('#profesion-city-form')
     form.submit()
   )
-  
