@@ -114,7 +114,7 @@ body {
   width: 54px;
   height: 54px;
   margin-bottom: 15px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 #recruter-main .user_info .name{
