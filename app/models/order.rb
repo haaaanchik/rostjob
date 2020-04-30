@@ -183,10 +183,10 @@ class Order < ApplicationRecord
   end
 
   def to_open?
-    # return if number_free_places <= 0
-    # to_published
-    # Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
-    # OrderMailJob.perform_later(order: self, method: 'published')
+    return if number_free_places <= 0
+    to_published
+    Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
+    OrderMailJob.perform_later(order: self, method: 'published')
   end
 
   def send_mail_wait_for_payment

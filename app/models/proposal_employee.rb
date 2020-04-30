@@ -41,7 +41,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
-    event :to_inbox, after: :to_open? do
+    event :to_inbox do
       transitions from: %i[transfer interview reserved disputed], to: :inbox
     end
 
