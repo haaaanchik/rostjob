@@ -1,12 +1,11 @@
 ruby:
-  titles = order_filters.map(&:title).uniq
-  cities = order_filters.map { |order| order.production_site.city }.uniq
-  cities.delete(nil)
+  titles = orders.map(&:title).uniq
+  cities = orders.map(&:city).uniq
   titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
   cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
   val = params[:q] ? params[:q][:all_fields_cont] : nil
 
-= search_form_for @q, url: orders_path, id: 'profesion-city-form'  do |f|
+= search_form_for @q, url: url, id: 'profession-city-form'  do |f|
   h2.title Фильтры
   .filters-search
     = f.search_field :all_fields_cont, placeholder: 'Поиск анкет', id: 'search', value: val
@@ -38,4 +37,3 @@ ruby:
           p.rounded.m-0.truncate.w-100
             i.mr-2
             span.mr-2 = title
-

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_082112) do
+ActiveRecord::Schema.define(version: 2020_04_28_100751) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(version: 2020_04_15_082112) do
     t.bigint "companyable_id"
     t.string "legal_form"
     t.string "label"
+    t.text "description"
     t.index ["companyable_type", "companyable_id"], name: "index_companies_on_companyable_type_and_companyable_id"
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end

@@ -71,7 +71,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
 
   def configure_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:full_name, profile_attributes: [:id, :photo]])
+    devise_parameter_sanitizer
+        .permit(:account_update,
+                keys: [:full_name,
+                       profile_attributes: [:id, :photo,
+                                            company_attributes: [:id, :description]]])
   end
 
   # The path used after sign up.

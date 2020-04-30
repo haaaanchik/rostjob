@@ -106,7 +106,7 @@
 }
 
 #setting-page .profile-settings {
-  input[type='text'], input[type='password'] {
+  input[type='text'], input[type='password'], textarea {
     width: 376px;
     min-width: 376px;
     height: 38px;
@@ -114,6 +114,10 @@
     border: 1px solid #d7d7d7;
     padding: 0 10px;
     font-size: 14px;
+  }
+
+  textarea {
+    height: 80px;
   }
 }
 

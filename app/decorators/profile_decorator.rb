@@ -1,13 +1,11 @@
 class ProfileDecorator < ObjDecorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def order_cities
+    orders.published.map(&:city).uniq.join(', ')
+  end
 
+  def order_titles
+    orders.published.map(&:title).uniq.join(', ')
+  end
 end
