@@ -6,4 +6,8 @@ module UsersHelper
       'Название организации'
     end
   end
+
+  def roles_for_selector
+    [['Все', ''], ['Исполнитель', 'contractor'], ['Заказчик', 'customer']]
+  end
 end

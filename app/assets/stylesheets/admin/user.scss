@@ -1,0 +1,42 @@
+#admin_users_page {
+  #users_search {
+    .input_row {
+      width: 250px;
+    }
+  }
+
+  table tbody td { 
+    cursor: pointer;
+    
+    &:last-child {
+      cursor: default;
+    }
+  }
+}
+
+#admin_user_edit_page form {
+  .choosing-logo .file-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 153px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #f2f2f2;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  input[type='file'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 153px;
+    opacity: 0;
+  }
+
+  .profile_block, .company_block {
+    border: 1px solid silver;
+  }
+}
