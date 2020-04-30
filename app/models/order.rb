@@ -162,7 +162,7 @@ class Order < ApplicationRecord
   end
 
   def number_free_places
-    number_of_employees - without_inbox_candidate_count
+    number_of_employees - count_only_included_candidate
   end
 
   def refund_amount
@@ -171,8 +171,8 @@ class Order < ApplicationRecord
     Cmd::Order::Refund.call(remaining_places: remaining_places, order: self)
   end
 
-  def without_inbox_candidate_count
-    proposal_employees.count_without_paid_inbox_revoke
+  def count_only_included_candidate
+    proposal_employees.count_candidates_included_in_order
   end
 
   def to_close?
@@ -183,10 +183,10 @@ class Order < ApplicationRecord
   end
 
   def to_open?
-    return if number_free_places <= 0
-    to_published
-    Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
-    OrderMailJob.perform_later(order: self, method: 'published')
+    # return if number_free_places <= 0
+    # to_published
+    # Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
+    # OrderMailJob.perform_later(order: self, method: 'published')
   end
 
   def send_mail_wait_for_payment

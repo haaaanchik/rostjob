@@ -10,14 +10,14 @@ class ProductionSite < ApplicationRecord
   validates :title, :city, :info, :phones, presence: true
 
   def number_free_places
-    orders.where(state: ['published', 'completed']).sum(:number_of_employees) - without_inbox_candidate_count
+    orders.where(state: ['published', 'completed']).sum(:number_of_employees) - count_only_included_candidate
   end
 
   def inbox_candidate_count
     proposal_employees.inbox.count
   end
 
-  def without_inbox_candidate_count
-    proposal_employees.count_without_paid_inbox_revoke
+  def count_only_included_candidate
+    proposal_employees.count_candidates_included_in_order
   end
 end

@@ -84,7 +84,7 @@
 
                       .element
                         i.fa.fa-bookmark.mr-2
-                        span = order.without_inbox_candidate_count
+                        span = order.count_only_included_candidate
           - unless waiting_pay_orders.present?
             p.nothing-to-show Заявки, ожидающие оплаты, отсутствуют
 
@@ -118,7 +118,7 @@
 
                       .element
                         i.fa.fa-bookmark.mr-2
-                        span = order.without_inbox_candidate_count
+                        span = order.count_only_included_candidate
           - unless moderation_orders.present?
             p.nothing-to-show Заявки, находящиеся на модерации, отсутствуют
 
@@ -152,7 +152,7 @@
 
                       .element
                         i.fa.fa-bookmark.mr-2
-                        span = order.without_inbox_candidate_count
+                        span = order.count_only_included_candidate
           - unless published_orders.present?
             p.nothing-to-show Опубликованные заявки отсутствуют
 
@@ -186,6 +186,6 @@
 
                       .element
                         i.fa.fa-bookmark.mr-2
-                        span = order.without_inbox_candidate_count
+                        span = order.count_only_included_candidate
           - unless completed_orders.present?
             p.nothing-to-show Завершенные заявки отсутствуют
