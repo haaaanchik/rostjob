@@ -142,3 +142,81 @@ body {
   overflow: auto;
   margin-right: -30px;
 }
+
+@media (max-width: 1100px) {
+
+    #recruter-main{
+      display: flex;
+      flex-direction: column;
+      height: max-content;
+
+    }
+
+    #recruter-main >section{
+      margin-bottom: 15px;
+    }
+
+    #recruter-main .events{
+      height: 400px;
+      overflow-x: hidden;
+    }
+
+    #recruter-main .events_list{
+      margin-right: 0;
+    }
+
+    #recruter-main .user_info_avatar{
+      align-items: center;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    #recruter-main .user_info > div:first-child{
+      display: flex;
+      width: 50%;
+    }
+
+    #recruter-main .user_info > div:last-child{
+      flex-direction: column;
+      padding-left: 0;
+      width: 50%;
+      align-items: flex-start;
+    }
+
+}
+
+
+
+@media (max-width: 400px) {
+
+    #recruter-main .user_info{
+      flex-direction: column;
+      align-items: center;
+      overflow-y: unset;
+    }
+
+    #recruter-main .user_info > div:last-child{
+      align-items: center;
+      width: 100%;
+    }
+
+    #recruter-main .user_info > div:first-child{
+      width: 100%;
+    }
+
+    #recruter-main .fc-center{
+      align-items: center;
+    }
+
+    #recruter-main .fc-center h2{
+      font-size: 16px;
+    }
+
+    #recruter-main .events{
+        padding-right: 0;
+    }
+
+}
