@@ -1,14 +1,31 @@
+ruby:
+  selected_role = params[:q] && params[:q][:subject_role_eq] ? params[:q][:subject_role_eq] : nil
+
 - if staffer_signed_in?
-  h2 Журнал событий
-  table.table
-    tr
-      th Логин
-      th Роль
-      th Заявка
-      th Действие
-      th Анкета
-      th Дата
-      th Время
-      th Кнопка возврата
-    = render partial: 'user_action_logs/user_action_log', collection: @user_action_log_records
-  = paginate @user_action_log_records
+  .container-fluid.mt-2
+    h2.text-center Журнал событий
+    .row.mt-4
+      .col-2
+        = search_form_for [:admin, @q], url: admin_analytics_user_action_log_path, id: 'logs_search' do |f|
+          .md-form.m-0
+            = f.search_field :created_at_between_begin_and_end, class: 'form-control datepicker', id: 'date-picker-date', placeholder: 'Выберите дату'
+          .md-form
+            = f.text_field :main_logs_fields_cont, class: 'form-control'
+            = f.label :main_logs_fields_cont, 'Поиск по контексту'
+          = f.select :subject_role_eq, options_for_select([['Исполнитель', 'contractor'], ['Заказчик', 'customer']], 
+            selected_role), { prompt: 'По роли' }, { class: 'mdb-select md-form' }
+          .d-flex
+            = f.button 'Поиск', type: 'submit', class: 'btn btn-success btn-sm'
+            = link_to 'Сбросить фильтры', admin_analytics_user_action_log_path, class: 'btn btn-info btn-sm'
+      .col-10
+        table.table
+          tr
+            th Логин
+            th Роль
+            th Заявка
+            th Действие
+            th Анкета
+            th Дата
+            th Время
+          = render partial: 'user_action_logs/user_action_log', collection: @user_action_log_records
+        = paginate @user_action_log_records
