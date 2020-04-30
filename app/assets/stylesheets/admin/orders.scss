@@ -1,3 +1,24 @@
 // Place all the styles related to the admin::orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+ .col-6 {
+  .refresh {
+    float: left;
+    padding: 0 10px;
+  }
+
+   .col-sm-8 {
+     display: flow-root;
+   }
+
+   .col-sm-9 {
+     display: flex;
+     .waves-input-wrapper {
+       padding: 0!important;
+     }
+     .btn-green {
+       width: 100%;
+     }
+   }
+}

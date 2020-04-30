@@ -20,32 +20,41 @@
       .row
         .col-6
           dl.row
-            dt.col-sm-4 Имя заказчкика
+          = form_with model: [:admin, @order],url: admin_order_path(@order), class: 'new-employee_cv-form' do |f|
+            dt.col-sm-4.refresh Имя заказчкика
             dd.col-sm-8 = @order.user.full_name
-            dt.col-sm-4 Контакты заказчика
-            dd.col-sm-8 
+            dt.col-sm-4.refresh Контакты заказчика
+            dd.col-sm-8
               i.fas.fa-mobile-alt.mr-2
               = @order.profile.phone
               br
-              i.far.fa-envelope.mr-2 
+              i.far.fa-envelope.mr-2
               = @order.user.email
-
-            dt.col-sm-4 Имя контактного лица
-            dd.col-sm-8 = @order.contact_person['name']
-            dt.col-sm-4 Контактный телефон
-            dd.col-sm-8 = @order.contact_person['phone']
-            dt.col-sm-4 Специализация
-            dd.col-sm-8 = @order.skill
-            dt.col-sm-4 Город
-            dd.col-sm-8 = @order.city
-            dt.col-sm-4 Зарплата
-            dd.col-sm-8 = @order.salary
-            dt.col-sm-4 Описание вакансии
-            dd.col-sm-8 == @order.other_info['terms']
-            dt.col-sm-4 Дополнительная информация для рекрутера
-            dd.col-sm-8 == @order.other_info['remark']
-
-          = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'btn btn-green',
+            dt.col-sm-4.refresh Имя контактного лица
+            dd.col-sm-8
+              = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+                = cp_f.text_field :name, id: 'form-control', class: 'form-control'
+            dt.col-sm-4.refresh Контактный телефон
+            dd.col-sm-8
+              = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
+                = cp_f.phone_field :phone, id: 'form-control', class: 'form-control'
+            dt.col-sm-4.refresh Специализация
+            dd.col-sm-8 = f.text_field :skill, class: 'form-control'
+            dt.col-sm-4.refresh Город
+            dd.col-sm-8 = f.text_field :city, class: 'form-control'
+            dt.col-sm-4.refresh Зарплата
+            dd.col-sm-8 = f.text_field :salary, class: 'form-control'
+            dt.col-sm-4.refresh Описание вакансии
+            dd.col-sm-8
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                = oi_f.text_area :terms, class: 'form-control tinymce', rows: 5
+            dt.col-sm-4.refresh Дополнительная информация для рекрутера
+            dd.col-sm-8
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                = oi_f.text_area :remark, class: 'form-control'
+            dt.col-sm-9.pt-3.pl-1
+              = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'btn btn-green',
                   method: :put, data: {confirm: 'Вы уверены?'}
+              = f.submit 'Сохранить', class: 'btn btn-green'
         .col-6
           = render partial: 'order_reject_form', locals: {order: @order}
