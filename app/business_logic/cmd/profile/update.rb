@@ -7,6 +7,7 @@ module Cmd
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
           profile.save(context: :company)
+          SendDirectMailJob.perform_now(user: profile.user, method: 'welcome_message') if profile.customer?
         else
           profile.save
         end
