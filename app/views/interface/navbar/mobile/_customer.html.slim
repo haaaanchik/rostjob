@@ -19,3 +19,12 @@
             class: 'mobile-menu-text' do
       i.fas.fa-address-card.svg-sidebar
       span.ml-3.icon-text Анкеты
+
+  .mobile-list class="#{'mobile-list__active' if active_item == :approve_act_list}"
+    = link_to approval_list_profile_candidates_path,
+            title: 'Акты',
+            class: 'mobile-menu-text' do
+      i.fas.fa-money-bill-wave.svg-sidebar
+      span.ml-3.icon-text Акты
+      span.counter
+        b = @p_employees_approved_count
