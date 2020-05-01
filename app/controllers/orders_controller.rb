@@ -1,15 +1,16 @@
 class OrdersController < ApplicationController
-  before_action :order, except: :index
+  before_action :order, except: %i[index customer_orders]
   before_action :redirect_to_disputes, only: :index
 
   def index
     @active_item = :orders
-    employee_cv_id
-    orders.decorate
+    @customer_list = Kaminari.paginate_array(search_customer.decorate.uniq).page(params[:page])
+
   end
 
-  def show
-    render locals: { order: @order }
+  def customer_orders
+    @active_item = :orders
+    orders.decorate
   end
 
   def add_to_favorites
@@ -29,21 +30,24 @@ class OrdersController < ApplicationController
   end
 
   def orders
-    @order_filters = Order.published
-                          .with_customer_name
-                          .includes(:production_site, profile: :company)
-                          .order(advertising: :desc)
-
-    @q = if params[:customer].present?
-           Order.published.with_customer_name_by_customer(params[:customer]).order(advertising: :desc).ransack(params[:q])
-         else
-           @order_filters.ransack(params[:q])
-         end
+    @customer = Profile.find(params[:customer_id])
+    @order_filters = @customer.orders
+                         .published
+                         .with_customer_name
+                         .includes(:production_site, profile: :company)
+    @q = @order_filters.ransack(params[:q])
     @orders ||= @q.result
   end
 
-  def employee_cv_id
-    @employee_cv_id = params[:employee_cv_id] || params[:q].try(:[], :employee_cv_id)
+  def search_customer
+    @orders = Order.published
+                  .with_customer_name
+                  .includes(:production_site, profile: :company)
+    @q = Profile.joins(:orders)
+             .where('orders.state': 'published')
+             .customers.includes(:user, :company)
+             .order(rating: :desc).ransack(params[:q])
+    @q.result
   end
 
   def redirect_to_disputes

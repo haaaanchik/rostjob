@@ -40,7 +40,7 @@ $ ->
       toastr.success('Заявка скопирована!')
 
   $(document).on('click', '[id^=title_filter_], [id^=city_filter_]', ->
-    form = $('#profesion-city-form')
+    form = $('#profession-city-form')
     form.submit()
   )
   

@@ -1,90 +1,23 @@
-ruby: 
-  iteration = 0
-
-.grey.lighten-4.d-flex.w-100#order_page
-  - if current_profile.customer?
-      .row.m-1.mb-3
-        .col-md-8.p-0.mt-2
-          = render partial: 'search_form', locals: { form_id: 'order_search_form', url: orders_path }
-        .col-md-4.p-0.mt-3
-          .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]
-            button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center id='show_all' type="button"
-              i.far.fa-eye.w-10
-              |  Подробно
-            button.btn.button-hr.btn-rounded.waves-effect.candidates-menu-button.w-50.p-1.text-center.active id='hide_all' type="button"
-              i.far.fa-eye-slash.w-10
-              |  Скрыть
-      .row.m-1
-        .col-12.p-0
-          table[width="100%"]
-            tbody
-              tr
-                td.text-left.align-items-center.m-0 width="8%"
-                  p.m-0.ml-1.font-weight-bold
-                    = sort_link(@q, :id) do
-                      strong.text-dark Номер
-                td.text-center.align-items-center width="12%"
-                  p.m-0.font-weight-bold
-                    .d-none.d-md-block
-                      = sort_link(@q, :customer_name) do
-                        strong.text-dark Заказчик
-                td.text-center.align-items-center width="13%"
-                  p.m-0.font-weight-bold
-                    = sort_link(@q, :city) do
-                      strong.text-dark Город
-                td.text-center.align-items-center width="30%"
-                  p.m-0.font-weight-bold
-                    .d-none.d-md-block
-                      = sort_link(@q, :place_of_work) do
-                        strong.text-dark Производственная площадка
-                td.text-center.align-items-center width="22%"
-                  p.m-0.font-weight-bold
-                    = sort_link(@q, :title) do
-                      strong.text-dark Вакансия
-                td.text-center.align-items-center width="15%"
-                  p.m-0.font-weight-bold
-                    .d-none.d-md-block
-                      = sort_link(@q, :contractor_price) do
-                        strong.text-dark Награда
-      = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
-  - else
-    #requests-page
-      .requests-page-container
-        - @orders.group_by(&:customer_name).each do |customer_name, items|
-          - production_sites = items.group_by{ |it| it.production_site.title }
-
-
-          - production_sites.each_with_index do |(place_of_work, items), i|
-            .platform
-              .header
-                p = place_of_work
-                span = items.first.city
-              .information
-                img.logo alt="" src="/img/no-avatar.png"
-                div
-                  p.name = customer_name
-                  p.characteristic
-                    | Найм:
-                    span.custom-green  #{ items.first.production_site.decorate.display_rating }
-                    | Сделки:
-                    span.custom-green  #{ items.first.production_site.decorate.display_deal_counter }
-              .tabs
-                ul#myTab.nav role="tablist"
-                  li.nav-item
-                    a#home-tab.nav-link.active aria-controls="home" aria-selected="true" data-toggle="tab" href="#home-#{iteration}" role="tab"  Вакансии
-                  li.nav-item
-                    a#profile-tab.nav-link aria-controls="profile" aria-selected="false" data-toggle="tab" href="#profile-#{iteration}" role="tab"  Информация
-                  li.nav-item
-                    a#contact-tab.nav-link aria-controls="contact" aria-selected="false" data-toggle="tab" href="#contact-#{iteration}" role="tab"  Контакты
-                .tab-content.custom-scroll
-                  .tab-pane.fade.show.active aria-labelledby="home-tab" role="tabpanel" id="home-#{iteration}"
-                    = render partial: 'contractor_order', collection: items, as: :order
-                  .tab-pane.fade aria-labelledby="profile-tab" role="tabpanel" id="profile-#{iteration}"
-                    = items.first.production_site.info
-                  .tab-pane.fade aria-labelledby="contact-tab" role="tabpanel" id="contact-#{iteration}"
-                    = items.first.production_site.phones
-            - iteration +=1
-
-  
-      .requests-page-filters
-        = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, order_filters: @order_filters}
+#catalog
+  .catalog.custom-scroll
+    - @customer_list.each do |customer|
+      .catalog-item
+        p.info-title = customer.user.full_name
+        .catalog-item-container
+          .item-info
+            = image_tag customer.image_url, class: 'logo'
+            .rating
+              p
+                | Рейтинг:
+                span.col-green
+                  |  #{ customer.display_rating }
+          .item-description
+            p.description = customer.company.description
+            hr/
+            p.details
+              | #{ customer.order_cities }
+              | , #{ customer.order_titles }
+            = link_to 'Перейти к заявкам', orders_by_customer_path(customer), class: 'item-btn'
+    = paginate @customer_list
+  .requests-page-filters.custom-scroll
+    = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, url: orders_path}

@@ -32,8 +32,8 @@ ruby:
           .form-item
             = f.label :current_password,  class: 'title'
             = f.password_field :current_password, class: "#{'is-invalid' if current_password }", autocomplete: 'off'
-        .form-item
-          = f.fields_for :profile, current_profile do |ff|
+        = f.fields_for :profile do |ff|
+          .form-item
             label.title Логотип компании
             .choosing-logo
               = image_tag(current_profile.image_url, class: 'logo')
@@ -41,6 +41,12 @@ ruby:
                 span.file-btn
                   | Выберите файл
                   = ff.file_field :photo
+
+          - if current_profile.customer?
+            .form-item
+              = ff.fields_for :company do |fc|
+                label.title Описание компании
+                = fc.text_area :description
         = f.submit 'Сохранить', class: ' submit'
 
     / .mailing-list-management
