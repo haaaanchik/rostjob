@@ -1,15 +1,15 @@
 - errors = @user.errors.messages
 
 - content_for :head do
-  meta name='description' content='RostJob.сom это большой штат рекрутеров и представителей по всей стране. CRM и доступ к голосовым ботам бесплатно. Оплата только за результат.'
-  title Подбор персонала, гарантии комплектации по заявке - RostJob.
+  meta name='description' content='RostJob.сom Кадровое агентство по поиску и подбору персонала для компаний! Найдем Вашего идеального кандидата в срок!'
+  title  Кадровое агентство по подбору персонала.
 
 body#customer-landing
   = render 'partials/header', registration_url: new_customer_path
   main
     section.landing-header.container
       .content
-        h1 Онлайн кадровое агентство
+        h1 Агентство по подбору персонала
         = form_for @user,
                 method: :post,
                 url: user_registration_path,
