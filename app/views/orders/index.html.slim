@@ -2,7 +2,7 @@
   .catalog.custom-scroll
     - @customer_list.each do |customer|
       .catalog-item
-        p.info-title = customer.user.full_name
+        p.info-title = link_to customer.user.full_name, orders_by_customer_path(customer)
         .catalog-item-container
           .item-info
             = image_tag customer.image_url, class: 'logo'
