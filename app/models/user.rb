@@ -6,6 +6,7 @@ class User < ApplicationRecord
   before_validation :set_guid, on: :create
   belongs_to :profile, optional: true
   has_one :balance, through: :profile
+  has_many :user_action_logs, as: :subject
 
   accepts_nested_attributes_for :profile
 
