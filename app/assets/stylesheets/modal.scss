@@ -1,4 +1,4 @@
-#modal-production-site, #candidate-show, #empl-form {
+#modal-production-site, #candidate-show, #empl-form, #info_modal {
   font-family: "Open Sans", sans-serif;
 
   .modal-header {
@@ -375,4 +375,24 @@
   background-color: #9046ff;
   font-size: 0.64rem;
   color: white
+}
+
+#info_modal {
+  #request-publishing {
+    background-color: white;
+    padding: 0 0 33px 0;
+
+    .request-block {
+      width: 100%;
+      box-shadow: none;
+      padding: 0;
+    }
+    .request-block-container {
+      padding: 0 15px;
+    }
+  }
+  .modal-body {
+    padding-left: 0;
+    padding: 0;
+  }
 }
