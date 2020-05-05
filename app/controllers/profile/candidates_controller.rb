@@ -23,7 +23,7 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def approve_all_acts
-    @result = Cmd::ProposalEmployee::ApproveListActs.call(candidates: candidates, profile_id: params[:profile_id])
+    @result = Cmd::ProposalEmployee::ApproveListActs.call(candidates: candidates, selected_candidates_ids: params[:proposal_employees_ids])
   end
 
   def approval_list
