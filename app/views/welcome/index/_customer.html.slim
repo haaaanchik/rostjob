@@ -3,7 +3,7 @@ main
     h3.title Краткая информация профиля
     .user_info
       .user_info_avatar
-        = image_tag(@profile.image_url, class: 'img-user')
+        = image_tag(@profile.image_url, class: 'img-user object_fit_contain')
         p = current_user.full_name
         button
           = link_to edit_user_registration_path, class: 'black-text' do
