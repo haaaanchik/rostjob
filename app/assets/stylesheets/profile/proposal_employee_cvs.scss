@@ -29,6 +29,45 @@
 
 #proposal_employees .form-check-inline {
   width: 70%;
+  @media (max-width: 1350px) {
+    width: 80%;
+  }
+  @media (max-width: 1150px) {
+    width: 100%;
+  }
+}
+
+#proposal_employee_search{
+  .w-75{
+    width: 75%;
+    @media (max-width: 1150px) {
+      width: 100% !important;
+    }
+  }
+
+  @media (max-width: 990px) {
+    width: 50%;
+    margin: auto;
+  }
+
+  @media (max-width: 500px) {
+    width: 80%;
+  }
+
+}
+
+#proposal_employees{
+  .col-lg-9.order-lg-1{
+    .border.rounded{
+      @media (max-width: 800px) {
+        overflow-x: auto;
+        table{
+          min-width: 700px;
+        }
+      }
+    }
+
+  }
 }
 
 #candidates {
