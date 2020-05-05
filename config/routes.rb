@@ -28,6 +28,10 @@ Rails.application.routes.draw do
 
   resource :price, only: :show
 
+  namespace :profile do
+    resources :settings, only: %i[index update]
+  end
+
   namespace :api do
     namespace :v1 do
       resource :free_manager, only: :show

@@ -283,6 +283,8 @@ GEM
     kgio (2.11.2)
     launchy (2.4.3)
       addressable (~> 2.3)
+    ledermann-rails-settings (2.5.0)
+      activerecord (>= 4.2)
     less (2.6.0)
       commonjs (~> 0.2.7)
     less-rails (2.8.0)
@@ -640,6 +642,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   jquery-turbolinks (~> 2.1)
   kaminari
+  ledermann-rails-settings (~> 2.5)
   letter_opener (~> 1.7)
   lightbox2-rails (~> 2.8, >= 2.8.2.1)
   mailgun-ruby
