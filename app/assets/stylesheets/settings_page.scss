@@ -17,6 +17,9 @@
     position: fixed;
     width: 333px;
     background-color: #ffffff;
+    @media (max-width: 970px) {
+      width: 230px;
+    }
   }
 }
 

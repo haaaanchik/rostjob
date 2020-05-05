@@ -1,44 +1,44 @@
 = f.fields_for :accounts do |account_form|
   .form-group.row
-    = account_form.label :bank, t(:bank), class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :bank, t(:bank), class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_area :bank, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bank'].empty?}"
       .invalid-feedback #{errors[:'accounts.bank'].first}
   .form-group.row
-    = account_form.label :bank_address, t(:bank_address), class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :bank_address, t(:bank_address), class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_area :bank_address, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bank_address'].empty?}"
       .invalid-feedback #{errors[:'accounts.bank_address'].first}
   .form-group.row
-    = account_form.label :bic, t(:bic), class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :bic, t(:bic), class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_field :bic, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.bic'].empty?}"
       .invalid-feedback #{errors[:'accounts.bic'].first}
   .form-group.row
     / инн и кпп банка!!
-    = account_form.label :inn, 'ИНН банка', class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :inn, 'ИНН банка', class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_field :inn, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.inn'].empty?}"
       .invalid-feedback #{errors[:'accounts.inn'].first}
   .form-group.row
-    = account_form.label :kpp, 'КПП банка', class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :kpp, 'КПП банка', class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_field :kpp, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.kpp'].empty?}"
       .invalid-feedback #{errors[:'accounts.kpp'].first}
   .form-group.row
-    = account_form.label :account_number, t(:account_number), class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :account_number, t(:account_number), class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_field :account_number, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.account_number'].empty?}"
       .invalid-feedback #{errors[:'accounts.account_number'].first}
   .form-group.row
-    = account_form.label :corr_account, t(:corr_account), class: 'col-3 col-form-label require_field'
-    .col-lg-5.col-auto
+    = account_form.label :corr_account, t(:corr_account), class: 'col-lg-4 col-12 col-sm-6 require_field'
+    .col-lg-6.col-12.col-sm-6
       = account_form.text_field :corr_account, rows: '1' ,
               class: "form-control #{'is-invalid' unless errors[:'accounts.corr_account'].empty?}"
       .invalid-feedback #{errors[:'accounts.corr_account'].first}
