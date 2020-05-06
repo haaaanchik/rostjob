@@ -1,18 +1,21 @@
-.worksheets__item.clickable-candidate id="candidate_#{candidate.id}" data-href=candidate.link_to_candidate_or_ticket
+.worksheets__item.clickable-candidate id="candidate_#{candidate.id}" data-href=(candidate.link_to_candidate(current_user))
   .info
     span
       i.fa.fa-bookmark class="#{ candidate.status_background_class + '-text' }"
       | #{ t("proposal_employee.state.#{candidate.state}") } <br>
-      span.date
-        | c #{ candidate.display_candidate_date }
+      - if current_user.profile.customer?
+        span.date
+          | c #{ candidate.display_candidate_date }
 
   .info
     a href="#"
-      | ##{candidate.employee_cv_id} #{candidate.name} #{candidate.phone_number}
+      | ##{candidate.employee_cv_id} #{candidate.name} 
+      = candidate.candidate_phone_number(current_user)
 
   .info
     span №#{candidate.order_id} #{candidate.title}
 
 
   .info
-    span #{ candidate.order.production_site.title }
+    span
+      = candidate.display_pr_site_or_interview_date(current_user)

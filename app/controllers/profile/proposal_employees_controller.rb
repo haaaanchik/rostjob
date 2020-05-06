@@ -87,7 +87,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def paginated_proposal_employees
-    @paginated_proposal_employees ||= proposal_employees.page(params[:page]).per(10).decorate
+    @paginated_proposal_employees ||= proposal_employees.page(params[:page]).decorate
   end
 
   def proposal_employees

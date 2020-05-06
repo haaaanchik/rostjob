@@ -1,4 +1,5 @@
 class ProposalEmployeeDecorator < ApplicationDecorator
+  include Rails.application.routes.url_helpers
   delegate_all
 
   STATUS_BACKGROUND_COLORS = {
@@ -86,10 +87,6 @@ class ProposalEmployeeDecorator < ApplicationDecorator
 
   def status_color_class
     STATUS_ICON_COLORS[object.state.to_sym]
-  end
-
-  def link_to_candidate_or_ticket
-    object.disputed? ? ticket_path : order_path
   end
 
   def ticket_path
@@ -220,6 +217,24 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     model.employee_cv.gender == 'М' ? 'Мужской' : 'Женский'
   end
 
+  def display_pr_site_or_interview_date(user)
+    return order.production_site.title if user.profile.customer?
+
+    model.interview_date.strftime('%d.%m.%Y')
+  end
+
+  def candidate_phone_number(user)
+    return model.phone_number if user.profile.customer?
+
+    employee_cv.phone_number
+  end
+
+  def link_to_candidate(user)
+    return link_to_candidate_or_ticket if user.profile.customer?
+
+    profile_employee_cvs_path(proposal_employee_id: model.id)
+  end
+
   private
 
   def order_path
@@ -243,5 +258,9 @@ class ProposalEmployeeDecorator < ApplicationDecorator
 
   def format_date(date)
     date.strftime('%d.%m.%Y')
+  end
+
+  def link_to_candidate_or_ticket
+    object.disputed? ? ticket_path : order_path
   end
 end
