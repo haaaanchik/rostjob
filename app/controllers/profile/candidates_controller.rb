@@ -7,6 +7,11 @@ class Profile::CandidatesController < ApplicationController
   def show
     candidate
     @remained_warranty_days = Holiday.remained_warranty_days(candidate.hiring_date, candidate.warranty_date)
+    respond_to do |format|
+      format.html
+      format.js
+      format.pdf { render pdf_setting  }
+    end
   end
 
   # FIXME: refactor this asap
@@ -49,4 +54,17 @@ class Profile::CandidatesController < ApplicationController
     @q = ProposalEmployee.candidates(current_profile).ransack(params[:q])
     @candidates ||= @q.result
   end
+
+  def pdf_setting
+    {
+      pdf: "ROSTJOB_#{candidate.employee_cv.id}",
+      template: 'export_pdf/employee_cv.html',
+      orientation: 'Portrait',
+      page_size: 'A4',
+      show_as_html: params.key?('debug'),
+      dpi: 300,
+      encoding: 'utf-8'
+    }
+  end
+
 end

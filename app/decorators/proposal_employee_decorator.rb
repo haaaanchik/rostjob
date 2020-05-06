@@ -216,6 +216,10 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     ACTIONS[subject.subject_type][model.state]&.include?('approve')
   end
 
+  def sex
+    model.employee_cv.gender == 'М' ? 'Мужской' : 'Женский'
+  end
+
   private
 
   def order_path

@@ -1,0 +1,94 @@
+ruby:
+  employee_cv = @candidate.employee_cv
+
+= image_tag image_url("rost_job_logo.png"), id: 'logo'
+.title
+  h1 Анкета №#{@candidate.id}
+
+.body
+  p
+    span.sub-title Площадка: 
+    = @candidate.order.production_site.title
+    br
+    span.sub-title Заявка: 
+    = @candidate.order.title
+
+
+  table
+    tr
+      th 
+        | ФИО:
+      th  = employee_cv.name
+
+    tr
+      th 
+        | Конактный номер телефона:
+      th = employee_cv.phone_number
+
+    tr
+      th  
+        | Пол:
+      th  = @candidate.sex
+
+    tr style="height: 45px"
+      th colspan="2" Дополнительные сведения
+
+    tr
+      th Опыт работы:
+      th = employee_cv.experience
+
+    tr
+      th Образование:
+      th = employee_cv.education
+
+    tr
+      th Доп. информация:
+      th = employee_cv.remark
+
+  p
+    | Данные об кандидате предоставил, 
+    em
+      = @candidate.profile.user.full_name
+    = " контактный телефон #{@candidate.profile.phone}"
+
+div style='position: absolute; bottom: 0; text-align: center; width: 100%;'
+  | Данные анкета была сформированна на RostJOB.com
+
+
+scss:
+  * {
+    font-family: sans-serif;
+  }
+  .title {
+    text-align: center;
+  }
+  .sub-title, table tr th:nth-child(1) {
+    font-weight: 600;
+  }
+
+  .body {
+    table {
+      width: 100%
+    }
+
+    table th, p {
+      font-size: 24px;
+      font-weight: normal;
+      text-align: left;
+    }
+    table tr th {
+      &:nth-child(1) {
+        width: 41%;
+      }
+      &:nth-child(2) {
+        border-bottom: 1px solid black;
+        word-wrap: break-word;
+        max-width: 59%;
+      } 
+    }
+  }
+  #logo {
+    height: 25px;
+  }
+  
+
