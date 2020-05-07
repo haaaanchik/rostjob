@@ -18,7 +18,7 @@
               html: {name: 'form-email', class: 'registration-block horizontal'} do |f|
         .invalid-feedback = errors[:email].first
         = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
-        = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
+        = f.button 'Зарегистрироваться', name: :contractor, class: 'reg-btn'
       = image_tag '/img/recruiters_landing/header_left.svg', class: 'header-left-img'
       = image_tag '/img/recruiters_landing/header_right.svg', class: 'header-right-img'
     .our-offers.container
@@ -65,7 +65,7 @@
           br/
           br/
           | От малых до самых крупных предприятий требуется персонал. Поэтому они публикуют заявки на сайте, на котором Вы находитесь. Заказчик уже заплатил, чтобы Вы нашли для него может разнорабочего без опыта, специалиста или может директора. Выполнить заявку на подбор значит найти персонал на предприятие, значит помочь человеку с работой, значит заработать и вырасти профессионально.
-        = link_to 'Зарегестрироваться', new_contractor_path, class: 'reg-btn'
+        = link_to 'Зарегистрироваться', new_contractor_path, class: 'reg-btn'
       .question
         p.title
           | Как выполнить заявку на подбор
@@ -118,7 +118,7 @@
               html: {name: 'form-email', class: 'registration-block vertical'} do |f|
         .invalid-feedback = errors[:email].first
         = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
-        = f.button 'Зарегестрироваться', name: :contractor, class: 'reg-btn'
+        = f.button 'Зарегистрироваться', name: :contractor, class: 'reg-btn'
   footer
     .container
       span.rights-reserved © Все права защищены
