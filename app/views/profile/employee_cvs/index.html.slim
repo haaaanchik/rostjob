@@ -64,7 +64,7 @@
       .card-header
         h3.card-title.mb-0.text-white
           span.star ★
-          | Избранное
+          | Избранные
       .card-body.card-scroll-window
         - @favorites.each do |favorite|
           - pr_employee_cvs = favorite.without_paid_revoked_employees
