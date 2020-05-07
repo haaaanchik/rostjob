@@ -15,6 +15,6 @@ class DirectMailMailer < ApplicationMailer
     @user = params[:user]
     @value_to_upped = params[:attrs][:amount]
 
-    mail(to: @user.email, subject: 'RostJob. Вам на счёт поступили деньги')
+    mail(to: @user.email, subject: 'RostJob. Вы пополнили баланс.')
   end
 end
