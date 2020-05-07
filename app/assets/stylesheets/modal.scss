@@ -396,3 +396,28 @@
     padding: 0;
   }
 }
+
+#dispute{
+  font-family: "Open sans", sans-serif;
+  form{
+    >h5{
+      font-size: 18px;
+      font-weight: bold;
+    }
+    >label{
+      font-weight: bold;
+    }
+    .form-group{
+      label{
+        font-weight: bold;
+      }
+    }
+    input[type="submit"]{
+      color: white !important;
+      background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+      text-transform: capitalize;
+      font-size: 16px;
+      border: 0 !important;
+    }
+  }
+}
