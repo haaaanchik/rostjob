@@ -2,6 +2,10 @@ ruby:
   url = customer? ? revoke_profile_candidate_path(candidate) :
                     revoke_profile_proposal_employee_path(candidate)
 
+- if current_user.profile.customer?
+  = link_to  profile_candidate_path(format: :pdf), class: 'mr-3' do
+    i.far.fa-save.mr-1.mb-1
+    | Скачать
 - if candidate.transfer_action_enabled?(current_profile)
   .modal.fade#candidate_transfer_modal tabindex="-1" role="dialog" aria-labelledby="candidate_transfer_modal_label" aria-hidden="true"
     .modal-dialog.modal-lg role="document"
