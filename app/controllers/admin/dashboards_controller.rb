@@ -1,7 +1,6 @@
 class Admin::DashboardsController < Admin::ApplicationController
   def show
     metrics
-    paginated_employee_cvs
   end
 
   private
@@ -10,14 +9,6 @@ class Admin::DashboardsController < Admin::ApplicationController
     @metrics ||= [
       created_employee_cvs
     ]
-  end
-
-  def paginated_employee_cvs
-    @paginated_employee_cvs ||= employee_cvs.page(params[:page])
-  end
-
-  def employee_cvs
-    @employee_cvs = EmployeeCv.all
   end
 
   def created_employee_cvs
