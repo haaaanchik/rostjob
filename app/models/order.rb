@@ -218,7 +218,7 @@ class Order < ApplicationRecord
   end
 
   def send_mail_order_wait_for_payment
-    SendNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment') unless can_be_paid? && profile.notify_mails?
+    SendNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment') if (!can_be_paid? && profile.notify_mails?)
   end
 
   def mail_customer_order_is_rejected
