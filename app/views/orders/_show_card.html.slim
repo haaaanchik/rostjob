@@ -11,7 +11,7 @@
         = order.contact_person['phone']
     .copy
       = image_tag  '/img/new/copy.png', class: 'copy-img'
-      p.copy data-clipboard-target="#copy-body-#{order.id}" data-clipboard-action="copy"
+      p.copy data-clipboard-target="#copy-body-#{order.id}"
         | Копировать в буфер обмена
   .request-body id="copy-body-#{order.id}"
     p.subtitle
