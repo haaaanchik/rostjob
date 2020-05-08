@@ -1,0 +1,58 @@
+#admin-page{
+
+  @media only screen and (max-width: 1440px){
+    .side-nav.fixed {
+      transform: translateX(0);
+    }
+  }
+
+  .admin{
+    border-bottom: 1px solid white;
+  }
+
+  .open{
+    display: block !important;
+  }
+
+  .list-unstyled{
+    li{
+      a{
+        padding-left: 20px;
+        height: auto;
+        word-break: break-word;
+        transition: .3s;
+        &:hover{
+          color: #3f51b5;
+        }
+      }
+    }
+  }
+
+  .relative{
+    position: relative;
+  }
+
+  .toggle-menu-button{
+    position: fixed;
+    left: 15px;
+    top: 15px;
+    transition: .5s;
+    z-index: 1040;
+    color: white;
+
+    &:hover{
+      cursor: pointer;
+    }
+
+    .fas.fa-bars{
+      font-size:26px;
+    }
+
+    &.opened{
+      left: 16rem;
+    }
+
+  }
+
+}
+

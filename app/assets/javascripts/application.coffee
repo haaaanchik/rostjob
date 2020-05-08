@@ -28,6 +28,7 @@
 #= require external/fullcalendar
 #= require external/fullcalendar/daygrid.min
 #= require lightbox
+#= require admin_page_menu
 #= require_tree .
 
 @scroll_to_bottom = (element) ->
