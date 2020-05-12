@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'analytics/export_to_excel'
     get 'analytics/user_action_log'
+    get 'analytics/orders_info'
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'

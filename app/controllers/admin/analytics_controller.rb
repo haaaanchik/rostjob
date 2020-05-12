@@ -17,6 +17,16 @@ class Admin::AnalyticsController < Admin::ApplicationController
                                         .per(12).decorate
   end
 
+  def orders_info
+    @q = Order.order(:published_at).ransack(params[:q])
+    @orders = @q.result.includes(:user, :proposal_employees).where.not(state: :draft)
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf_settings }
+    end
+  end
+
   private
 
   def date_interval
@@ -27,5 +37,16 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def orders
     @orders ||= Order.where(created_at: date_interval)
+  end
+
+  def pdf_settings
+    {
+      pdf: 'analytics_orders',
+      template: 'export_pdf/_analytics_orders.html',
+      orientation: 'Landscape',
+      page_size: 'A4',
+      dpi: 300,
+      encoding: 'utf-8'
+    }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_19_172816) do
+ActiveRecord::Schema.define(version: 2020_05_12_093458) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -338,6 +338,7 @@ ActiveRecord::Schema.define(version: 2020_04_19_172816) do
     t.text "adv_text"
     t.bigint "production_site_id"
     t.integer "number_additional_employees"
+    t.date "published_at"
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
