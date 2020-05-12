@@ -16,17 +16,10 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
   def hire
     render(plain: 'order completed', status: 422) and return if order.completed?
 
-    if order.selected_candidates.count < order.number_of_employees
-      hiring_date = Date.parse(candidate_params[:hiring_date])
-      Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
-      flash[:redirection] = 'to_hired'
-      redirect_to profile_order_path(order)
-      # else
-      #   redirect_to profile_order_proposal_path(order, proposal)
-      # end
-    else
-      render plain: 'all employees has been hired', status: 422
-    end
+    hiring_date = Date.parse(candidate_params[:hiring_date])
+    Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
+    flash[:redirection] = 'to_hired'
+    redirect_to profile_order_path(order)
   end
 
   def fire
@@ -109,29 +102,11 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
 
   def candidate
     @candidate ||= candidates.find(params[:id]).decorate
-    # @candidate ||= EmployeeCv.find(candidate_params[:id])
   end
 
-  # def proposal
-  #   @proposal ||= Proposal.find(candidate_params[:proposal_id])
-  # end
-
-  # def proposals
-  #   @proposals ||= order.proposals
-  # end
-
-  # def order
-  #   @order ||= orders.find(params[:order_id])
-  # end
-
-  # def orders
-  #   @orders ||= current_profile.orders
-  # end
-
-  # Меню кандидатов и постраничный вывод
-  # def states_by_term
-  #   EmployeeCv.customer_menu_items[term]
-  # end
+  def order
+    @order ||= current_profile.orders.find(params[:order_id])
+  end
 
   def term
     term = params[:term]

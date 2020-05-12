@@ -38,7 +38,7 @@ class ProposalEmployee < ApplicationRecord
       transitions to: :transfer
     end
 
-    event :to_interview, after: [:to_close?, :mail_for_contractor_interview] do
+    event :to_interview, after: [:mail_for_contractor_interview] do
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
@@ -78,7 +78,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :inbox, to: :deleted
     end
 
-    event :hire, after: :mail_for_contractor_hired do
+    event :hire, after: %i[to_close? mail_for_contractor_hired] do
       transitions from: %i[interview viewed deleted disputed], to: :hired
     end
   end
