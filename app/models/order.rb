@@ -102,10 +102,6 @@ class Order < ApplicationRecord
     customer_price * number_of_employees
   end
 
-  def selected_candidates
-    candidates.select { |c| c.hired? || c.disputed? }
-  end
-
   def to_draft
     return unless may_cancel?
     if moderation?

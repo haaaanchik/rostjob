@@ -17,16 +17,12 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def hire
-    render(plain: 'order completed', status: 422) and return if order.completed? && !candidate.interview?
+    render(plain: 'order completed', status: 422) and return if order.completed?
 
-    if order.selected_candidates.count < order.number_of_employees
-      hiring_date = Date.parse(candidate_params[:hiring_date])
-      Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
-      flash[:redirection] = 'to_hired'
-      redirect_to profile_production_site_order_path(order.production_site, order)
-    else
-      render plain: 'all employees has been hired', status: 422
-    end
+    hiring_date = Date.parse(candidate_params[:hiring_date])
+    Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
+    flash[:redirection] = 'to_hired'
+    redirect_to profile_production_site_order_path(order.production_site, order)
   end
 
   def fire

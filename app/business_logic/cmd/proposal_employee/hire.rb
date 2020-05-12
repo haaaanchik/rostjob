@@ -7,7 +7,7 @@ module Cmd
         if hiring_date.present?
           candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date))
           candidate.hire!
-          order.complete! if order.reload.selected_candidates.count == order.number_of_employees
+          # order.complete! if order.reload.candidates.hired.count == order.number_of_employees
         else
           context.fail!
         end
