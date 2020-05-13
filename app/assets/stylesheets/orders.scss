@@ -504,6 +504,15 @@ $secondaryColorDark: #b7b7b7;
   }
 }
 
+#catalog{
+  .filters-search {
+    position: relative;
+    @media (max-width: 768px) {
+      max-width: 300px;
+    }
+  }
+}
+
 #catalog, #requests-page {
   .filters-search {
     position: relative;
@@ -534,6 +543,21 @@ $secondaryColorDark: #b7b7b7;
   .requests-page-filters {
     padding: 0 20px 0 20px;
     width: 24.5%;
+    @media (max-width: 1200px) {
+      width: 30%;
+    }
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    .profile_search{
+
+      @media (max-width: 768px) {
+        display: flex;
+        flex-wrap: wrap;
+      }
+    }
+
   }
 
   .requests-page-filters .title {
@@ -807,10 +831,6 @@ $secondaryColorDark: #b7b7b7;
     #profesion-city-form{
       display: flex;
       flex-wrap: wrap;
-    }
-
-    #profesion-city-form .filters-search-container {
-      width: 100%;
     }
 
     #profesion-city-form .cities{
