@@ -18,11 +18,13 @@ ruby:
       tr
         th Наименование
         th Цена
+        th.text-center Гарантийный период
     tbody
       - @paginated_price_items.each do |position|
         tr
           td #{position.title}
           td = position.price_group.customer_price
+          td.text-center 10 дней
   = paginate @paginated_price_items
 
 scss:
