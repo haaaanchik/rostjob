@@ -1,6 +1,6 @@
 .modal.fade.show tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="#{modal_id}"
   .modal-dialog.modal-lg
-    .modal-content
+    .modal-content.custom-scroll
       .modal-header
         -if local_assigns[:modal_title]
           h4.modal-title#myLargeModalLabel = modal_title if local_assigns[:modal_title]
