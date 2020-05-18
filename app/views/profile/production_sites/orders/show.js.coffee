@@ -1,0 +1,4 @@
+<% view = render partial: 'info', locals: { order: @order } %>
+<% over_partial = render_escape '/partials/modal',
+ { modal_id: 'info_modal', local_render: view } %>
+normal_modal_open 'info_modal', "<%= over_partial %>"

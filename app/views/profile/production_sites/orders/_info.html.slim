@@ -1,0 +1,25 @@
+#request-publishing
+  .request-block
+    .request-block-header
+      p #{ @production_site.title }
+      span #{ @production_site.city }
+    .request-block-container
+      .request-content
+        = image_tag @order.profile.image_url, class: 'logo'
+        .request-body
+          p.subtitle
+            | #{ @order.title }. #{@order.skill} #{ @order.salary }
+          p.subtitle
+            | #{ @order.city }
+          == @order.other_info['terms']
+          span.salary #{ @order.customer_price.to_i } руб / чел
+      .sidebar
+        .contact-person
+          p.title
+            | Контактное лицо:
+          p.initials
+            | #{ @order.contact_person['name'] }
+          p.phone-number
+            | #{ @order.contact_person['phone'] }
+    .buttons
+      = link_to 'Редактировать', first_step_profile_production_site_order_path(@production_site, @order), class: 'public'

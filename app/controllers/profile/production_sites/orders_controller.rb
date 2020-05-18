@@ -15,6 +15,10 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     order
     order.proposal_employees.map(&:mark_as_read)
     @proposal_employee = ProposalEmployee.find_by(id: params[:proposal_employee_id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update

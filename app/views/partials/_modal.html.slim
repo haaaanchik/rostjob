@@ -1,8 +1,9 @@
-.modal.fade.show#modal-production-site tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+.modal.fade.show tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="#{modal_id}"
   .modal-dialog.modal-lg
     .modal-content
       .modal-header
-        h4.modal-title#myLargeModalLabel = modal_title
+        -if local_assigns[:modal_title]
+          h4.modal-title#myLargeModalLabel = modal_title if local_assigns[:modal_title]
         button type="button" class="close" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" ×
 
