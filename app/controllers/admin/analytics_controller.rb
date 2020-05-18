@@ -13,7 +13,7 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def user_action_log
     @q = UserActionLog.ransack(params[:q])
-    @user_action_log_records = @q.result.page(params[:page])
+    @user_action_log_records = @q.result.includes(:subject).page(params[:page])
                                         .per(12).decorate
   end
 
