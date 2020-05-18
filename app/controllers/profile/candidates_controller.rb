@@ -40,6 +40,14 @@ class Profile::CandidatesController < ApplicationController
                                                             params).call
   end
 
+  def comment
+    if candidate.update(comment: params[:comment])
+      render json: { message: 'Updated' }, status: 200
+    else
+      render json: { message: 'Error updating comment' }, status: 422
+    end
+  end
+
   private
 
   def candidate
@@ -66,5 +74,4 @@ class Profile::CandidatesController < ApplicationController
       encoding: 'utf-8'
     }
   end
-
 end

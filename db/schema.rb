@@ -441,6 +441,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.bigint "dst_order_id"
     t.datetime "payment_date"
     t.boolean "approved_by_admin", default: false
+    t.text "comment"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"

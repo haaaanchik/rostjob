@@ -249,6 +249,12 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     h.content_tag(:span, "с #{display_candidate_date}", class: 'date')
   end
 
+  def display_comment(user)
+    return comment if user.profile.customer?
+
+    employee_cv.comment
+  end
+
   private
 
   def order_path

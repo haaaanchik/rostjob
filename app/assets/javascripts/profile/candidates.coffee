@@ -3,13 +3,31 @@ class Candidates
     @bind()
 
   @bind: ->
-    $('.candidate-comment').on 'keyup', @searchEnterComment
+    $('textarea.candidate-comment').on 'blur', @writeComment
     $('.clickable-candidate').on 'click', @openCandidate
     $('.js-filters').on 'click', @openFilters
 
-  @searchEnterComment: (e) ->
-    e.preventDefault()
-    toastr.info('Добавление комментария временно недоступен!')
+  @writeComment: ->
+    byWho = $(this).attr('id')
+    if byWho == "by_contractor"
+      toastr.info('Добавление комментария временно недоступен!')
+      e.preventDefault()
+      return
+
+    commentText = $(this).val()
+    candidateId = $(this).parents('.request').data('proposal_employee_id')
+    url = '/profile/candidates/'+candidateId+'/comment'
+
+    $.ajax url,
+      method: 'PUT'
+      dataType: 'json'
+      data:
+        comment: commentText
+      error: (data) ->
+        $(this).css('border: 1px solid red')
+        console.log(data.responseJSON.message)
+    return
+
 
   @openCandidate: ->
     window.location = $(this).data('href')
