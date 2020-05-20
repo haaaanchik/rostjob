@@ -536,6 +536,12 @@ $secondaryColorDark: #b7b7b7;
     width: 24.5%;
   }
 
+  @include media-breakpoint-between(xs, md) {
+    .requests-page-filters {
+      width: 100%;
+    }
+  }
+
   .requests-page-filters .title {
     font-size: 17px;
     font-weight: bold;
