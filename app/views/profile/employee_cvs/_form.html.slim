@@ -37,28 +37,28 @@
                     label.mr-2 for="woman" Ж
                     = f.radio_button :gender, 'Ж', id: 'woman'
 
-            h4.modal-ancete__title Дополнительные сведения
+            h4.modal-ancete__title.mt-1 Дополнительные сведения
             .ancete-rows.more-info
               .ancete-row
                 p.ancete-row__title Опыт работы
                 .ancete-row__content
-                  = f.text_area :experience, cols: 30, rows: 3
+                  = f.text_area :experience, cols: 30, rows: 5
               .ancete-row
                 p.ancete-row__title Образование
                 .ancete-row__content
-                  = f.text_area :education, cols: 30, rows: 3
+                  = f.text_area :education, cols: 30,  rows: 5
               .ancete-row
                 p.ancete-row__title Доп. информация
                 .ancete-row__content
-                  = f.text_area :remark, cols: 30, rows: 3
+                  = f.text_area :remark, cols: 30,  rows: 5
 
           .modal-ancete__sidebar
-            - if params[:state] == 'reminder'
-              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
-                = f.hidden_field :reminder, value: DateTime.now
+            - if @order.blank?
+              #reminder_block.date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border.w-100.disable_reminder
+                = f.hidden_field :reminder, value: nil
                 .modal-ancete__title
                   | Напоминание
-                .popup__header.ml-2
+                .popup__header.ml-3
                   .popup-date
                     p.title Дата
                     = text_field_tag :reminder_date, nil, placeholder: '01.01.2001', class: 'popup-input'
@@ -72,6 +72,10 @@
                 = f.text_area :comment, value: 'Напомнить мне!', class: 'form-control'
                 .invalid-feedback
 
+              .form-check.mt-3
+                input#reminder_disable_checkbox.form-check-input  type="checkbox"
+                label.form-check-label for="reminder_disable_checkbox"  Добавить напоминанме
+  
             - if @order.present?
               .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
                 = hidden_field_tag :interview_date, Date.today
