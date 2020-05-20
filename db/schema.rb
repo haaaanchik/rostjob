@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.index ["invoice_id"], name: "index_bill_transactions_on_invoice_id"
   end
 
-  create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "candidate_id"
     t.string "guid"
     t.json "call_data"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.bigint "proposal_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.integer "file_file_size"
+    t.bigint "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -226,7 +226,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.index ["ticket_id"], name: "index_messages_on_ticket_id"
   end
 
-  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.string "code"
     t.string "access_token"
@@ -404,15 +404,15 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
-    t.text "description"
     t.string "city"
     t.decimal "rating", precision: 10, scale: 1, default: "0.0"
     t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
     t.string "photo_content_type"
-    t.integer "photo_file_size"
+    t.bigint "photo_file_size"
     t.datetime "photo_updated_at"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "legal_form"
@@ -451,11 +451,11 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
   create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
+    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accepted"
     t.index ["order_id"], name: "index_proposals_on_order_id"
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
@@ -513,7 +513,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code"
     t.string "access_token"
     t.string "refresh_token"
@@ -526,7 +526,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.json "references"
   end
 
-  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.json "query_params"
     t.boolean "active"
@@ -560,7 +560,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.index ["company_id"], name: "index_tax_offices_on_company_id"
   end
 
-  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.string "type"
     t.string "state"
@@ -573,7 +573,7 @@ ActiveRecord::Schema.define(version: 2020_06_14_120217) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
-  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "id_region"
     t.integer "id_country"
     t.string "title"

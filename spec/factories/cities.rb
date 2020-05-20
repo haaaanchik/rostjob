@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :city do
-    title { "MyString" }
+    title { Faker::Address.city }
   end
 end

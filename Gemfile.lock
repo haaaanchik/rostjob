@@ -139,9 +139,18 @@ GEM
     capistrano-rails (1.4.0)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capybara (3.31.0)
+      addressable
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (~> 1.5)
+      xpath (~> 3.2)
     choice (0.2.0)
     client_bank_exchange (0.2.2)
     climate_control (0.2.0)
+    cliver (0.3.2)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -158,6 +167,7 @@ GEM
       addressable
     data-confirm-modal (1.6.2)
       railties (>= 3.0)
+    database_cleaner (1.8.3)
     debug_inspector (0.0.3)
     decent_exposure (3.0.0)
       activesupport (>= 4.0)
@@ -356,6 +366,10 @@ GEM
     pdf-core (0.7.0)
     petrovich (1.1.1)
     phonelib (0.6.28)
+    poltergeist (1.18.1)
+      capybara (>= 2.1, < 4)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
@@ -443,6 +457,7 @@ GEM
       redis (>= 3.0.4)
     redis-objects (1.4.3)
       redis (~> 4.0)
+    regexp_parser (1.7.0)
     request_store (1.4.1)
       rack (>= 1.4)
     responders (2.4.1)
@@ -609,6 +624,8 @@ GEM
     wicked_pdf (2.0.2)
       activesupport
     wkhtmltopdf-binary (0.12.5.4)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
 
 PLATFORMS
   ruby
@@ -623,10 +640,12 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   capistrano-rails
+  capybara (~> 3.31)
   client_bank_exchange
   coffee-rails (~> 4.2)
   conditional_validation
   data-confirm-modal
+  database_cleaner (~> 1.8, >= 1.8.3)
   decent_exposure (= 3.0.0)
   devise (~> 4.5)
   draper
@@ -644,6 +663,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   jquery-turbolinks (~> 2.1)
   kaminari
+  launchy
   ledermann-rails-settings (~> 2.5)
   letter_opener (~> 1.7)
   lightbox2-rails (~> 2.8, >= 2.8.2.1)
@@ -658,6 +678,7 @@ DEPENDENCIES
   paperclip!
   petrovich (~> 1.1, >= 1.1.1)
   phonelib
+  poltergeist
   prawn
   prawn-table
   premailer-rails (~> 1.10, >= 1.10.3)

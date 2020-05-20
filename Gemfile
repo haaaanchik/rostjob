@@ -116,6 +116,7 @@ group :development, :test, :staging, :production do
   gem 'rspec-rails'
   gem 'rails-erd'
   gem 'i18n-debug'
+  gem 'capybara', '~> 3.31'
 end
 
 group :development do
@@ -131,6 +132,12 @@ group :production do
     gem 'unicorn', '~> 5.4'
     gem 'unicorn-worker-killer', '~> 0.4.4'
   end
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.8', '>= 1.8.3'
+  gem 'launchy'
+  gem 'poltergeist'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

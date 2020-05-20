@@ -1,9 +1,8 @@
 FactoryBot.define do
   factory :order do
-    title { "MyString" }
-    specialization { "MyText" }
-    city { "MyString" }
-    description { "MyText" }
+    title { "Title order" }
+    city { Ffaker::Address.city }
+    description { "tetx description" }
     commission { "MyString" }
     payment_type { "MyString" }
     number_of_recruiters { 1 }
@@ -11,7 +10,6 @@ FactoryBot.define do
     accepted { false }
     visibility { "MyString" }
     state { "MyString" }
-    profile { nil }
     experience { 'adf' }
     schedule { 'adf' }
     salary { 'afd' }
