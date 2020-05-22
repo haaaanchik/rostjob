@@ -140,7 +140,7 @@ class OrderDecorator < ApplicationDecorator
     model.published_at&.strftime('%d.%m.%Y')
   end
 
-  def state
+  def state_for_selectors
     I18n.t("order.states_for_select.#{model.state}")
   end
 end
