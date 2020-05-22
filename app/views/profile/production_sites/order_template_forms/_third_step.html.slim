@@ -30,12 +30,6 @@
             = f.hidden_field :template_saved
 
           .pattern_body_steps_form_step.show
-            .pattern_body_steps_form_step_input.textArea
-              p Дополнительная информация для рекрутера
-              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-                = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
-                .invalid-feedback
-
             .pattern_body_steps_form_step_input.contact-face
               = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
                 label Контактное лицо
@@ -44,6 +38,28 @@
                 = cp_f.text_field :phone, id: 'contact-face-number', class: 'form-control', placeholder: '+7'
                 .invalid-feedback
 
+            .pattern_body_steps_form_step_input.textArea
+              p Дополнительная информация для рекрутера
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                = oi_f.text_area :remark, rows: 5, class: 'form-control tinymce'
+                .invalid-feedback
+                .d-flex.checkbox_row.my-1
+                  = oi_f.check_box :informate_aspirant, checked: !oi_f.object['informate_aspirant'].to_i.zero?,  id: 'materialUnchecked1', class: 'form-check-input'
+                  label.form-check-label for='materialUnchecked1' 
+                  span Я хочу, чтобы до соискателя довели все условия, описанные в заявке.
+                .d-flex.checkbox_row.my-1
+                  = oi_f.check_box :informate_customer, checked: !oi_f.object['informate_customer'].to_i.zero?,  id: 'materialUnchecked2', class: 'form-check-input'
+                  label.form-check-label for='materialUnchecked2'
+                  span Я хочу, чтобы перед отправлением соискателя согласовали с контактным лицом в заявке.
+                .d-flex.checkbox_row.my-1
+                  = oi_f.check_box :control_aspirant, checked: !oi_f.object['control_aspirant'].to_i.zero?,  id: 'materialUnchecked3', class: 'form-check-input'
+                  label.form-check-label for='materialUnchecked3'
+                  span Я хочу, чтобы рекрутеры проконтролировали приезд кандидата и при необходимости скорректировали дату приезда.
+                .d-flex.checkbox_row.my-1
+                  = check_box_tag :added_data, '0', f.object.added_data?, id: 'materialUnchecked4', class: 'form-check-input'
+                  label.form-check-label for='materialUnchecked4'
+                  span Я хочу, чтобы в анкету добавили данные
+                = oi_f.text_field :added_data, class: 'added_data mx-auto', placeholder: 'ФИО, телефон, регестрация, возраст'
             .pattern_body_steps_form_step_input.add_ancete
               p Вы можете добавить свою анкету для соискателей
               #add_ancete

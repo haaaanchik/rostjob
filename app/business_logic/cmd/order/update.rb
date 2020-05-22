@@ -28,6 +28,10 @@ module Cmd
         case order.creation_step
         when 2
           params[:other_info]['remark'] = order.other_info['remark']
+          params[:other_info]['added_data'] = order.other_info['added_data']
+          params[:other_info]['control_aspirant'] = order.other_info['control_aspirant']
+          params[:other_info]['informate_aspirant'] = order.other_info['informate_aspirant']
+          params[:other_info]['informate_customer'] = order.other_info['informate_customer']
         when 3
           params[:other_info]['terms'] = order.other_info['terms']
         else

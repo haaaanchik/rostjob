@@ -64,6 +64,29 @@
               .col-sm-8.mb-4
                 = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
                   = oi_f.text_area :remark, class: 'form-control tinymce'
+                  .row.my-2
+                    .col-sm-4
+                      = oi_f.check_box :informate_aspirant, checked: !oi_f.object['informate_aspirant'].to_i.zero?,  id: 'materialUnchecked1', class: 'form-check-input'
+                      label.form-check-label for='materialUnchecked1'
+                    .col-sm-8.mb-4
+                      | Я хочу, чтобы до соискателя довели все условия, описанные в заявке.
+                  .row.my-2
+                    .col-sm-4
+                      = oi_f.check_box :informate_customer, checked: !oi_f.object['informate_customer'].to_i.zero?,  id: 'materialUnchecked2', class: 'form-check-input'
+                      label.form-check-label for='materialUnchecked2'
+                    .col-sm-8.mb-4
+                      |  Я хочу, чтобы перед отправлением соискателя согласовали с контактным лицом в заявке.
+                  .row.my-2
+                    .col-sm-4
+                      = oi_f.check_box :control_aspirant, checked: !oi_f.object['control_aspirant'].to_i.zero?,  id: 'materialUnchecked3', class: 'form-check-input'
+                      label.form-check-label for='materialUnchecked3'
+                    .col-sm-8.mb-4
+                      |  Я хочу, чтобы рекрутеры проконтролировали приезд кандидата и при необходимости скорректировали дату приезда.
+                  .row.my-2
+                    .col-sm-4
+                      | Я хочу, чтобы в анкету добавили данные
+                    .col-sm-8.mb-4
+                      = oi_f.text_field :added_data, class: 'form-control', placeholder: 'ФИО, телефон, регестрация, возраст'
               .col-sm-12
                 .d-flex.mod_order_actions
                   .waves-input-wrapper

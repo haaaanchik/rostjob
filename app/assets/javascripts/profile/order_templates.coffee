@@ -19,6 +19,7 @@ class OrderTemplates
     $('#copy').on 'click', @copyCollection
     $('#save_as_template').on 'click', @showNameInput
     $('.order-template__name').on 'focusout', @saveName
+    $('.main_patternRequest').on 'keyup', '.added_data', @changeAddedData
 
   @destroyArray: ->
     if confirm('Вы действительно хотите удалить выбранные шаблоны?')
@@ -111,6 +112,12 @@ class OrderTemplates
         toastr.error('Не удалось сохранить шаблон')
     return
 
+  @changeAddedData: ->
+    if $(this).val().length == 0
+      $('#materialUnchecked4').prop('checked', false)
+    else
+      $('#materialUnchecked4').prop('checked', true)
+
 $(document).on 'turbolinks:load', ->
   OrderTemplates.init()
 
@@ -147,20 +154,6 @@ $(document).on('click', '[id^=order_template_number_of_employees_step_up]', (eve
   customer_total = customer_price * number_of_employees
   customer_total_class = '.customer-total-' + order_template_id
   $(customer_total_class).html(customer_total)
-)
-
-$(document).on('show.bs.modal', '#formModalNewOrderTemplate', ->
-  tinymce.init({
-    selector: 'textarea.tinymce'
-    branding: false
-    language: 'ru_RU'
-    elementpath: false
-    statusbar: false
-    menubar: false
-    toolbar: 'undo redo | bold italic underline | indent outdent | numlist bullist'
-    plugins: "lists"
-    forced_root_block: false
-  })
 )
 
 $(document).on('hide.bs.modal', '#formModalNewOrderTemplate', ->

@@ -12,4 +12,4 @@
       = "#{order.title}. #{order.skill} #{order.salary}"
     p.salary
       = "#{number_with_precision(order.contractor_price, strip_insignificant_zeros: true)} руб / чел"
-  = render partial: 'orders/show_card', locals: { order: order, order_advertising: false }
+  = render partial: 'orders/show_card', locals: { order: order.decorate, order_advertising: false }

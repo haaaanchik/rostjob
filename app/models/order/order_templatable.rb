@@ -26,6 +26,10 @@ class Order
             terms: '<p class"subtitle">Обязанности:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Требования:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Условия:</p><span><ul><li></li><li></li></ul></span>',
+            informate_aspirant: false,
+            informate_customer: false,
+            control_aspirant: false,
+            added_data: nil
           },
           contact_person: {
             name: nil,
@@ -36,6 +40,10 @@ class Order
           advertising: false,
           adv_text: nil
         }
+      end
+
+      def added_data?
+        other_info['added_data'].present?
       end
 
       private
@@ -51,8 +59,6 @@ class Order
                      I18n.t("activerecord.errors.models.#{model_name}.attributes.error.contact_person.name")) if contact_person['name'].blank?
           errors.add(:contact_person_phone.to_sym,
                      I18n.t("activerecord.errors.models.#{model_name}.attributes.error.contact_person.phone")) if contact_person['phone'].blank?
-          errors.add(:other_info_remark.to_sym,
-                     I18n.t("activerecord.errors.models.#{model_name}.attributes.error.other_info.remark")) if other_info['remark'].blank?
         else
           true
         end

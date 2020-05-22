@@ -51,3 +51,11 @@
       == order.other_info['remark']
       - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
         order.contact_person['phone'] && !order.contact_person['phone'].empty?
+    p.mt-2  
+      = order.show_informate_aspirant
+      br
+      = order.show_informate_customer
+      br
+      = order.show_control_aspirant
+      br
+      = order.show_added_data
