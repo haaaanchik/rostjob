@@ -2,19 +2,19 @@
 data-backdrop="true")
   .modal-dialog class="modal-#{local_assigns[:modal_size] ? modal_size : 'lg'}" role="document"
     .modal-content
-      .modal-header.text-center.bg-rostjob
+      .modal-header.text-center
         .container-fluid
           .row
             .col-10.offset-1
-              p#formModalLoginLabel.h4.modal-title.w-100.font-weight-bold.white-text
+              p#formModalLoginLabel.h4.modal-title.w-100.font-weight-bold
                 = modal_title if local_assigns[:modal_title]
             .col-1
-              button.close.white-text[aria-label="Close" data-dismiss="modal" type="button"]
+              button.close[aria-label="Close" data-dismiss="modal" type="button"]
                 span[aria-hidden="true "]
                   |  ×
 
         / h4.modal-title.w-100 = t("views.manage.#{modal_name.downcase}.form")
-      .modal-body.brown.lighten-5
+      .modal-body
         = local_render
   javascript:
       $('#formModal#{modal_name}').on('hidden.bs.modal', function (e) {
