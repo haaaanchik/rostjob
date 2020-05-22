@@ -1,5 +1,10 @@
-#logs_search {
+#logs_search, #orders_info_search {
   .btn {
     padding: 0.3rem 1.2rem;;
+  }
+}
+#orders_info_page {
+  table th {
+    padding-top: 0;
   }
 }

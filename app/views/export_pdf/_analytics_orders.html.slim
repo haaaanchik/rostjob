@@ -1,0 +1,65 @@
+ruby:
+  end_of_period = params[:q] && params[:q][:published_at_lteq] ? params[:q][:published_at_lteq] : nil
+
+table.table.table-bordered
+  thead
+    tr
+      th rowspan='2' Название организации
+      th rowspan='2' Заявка
+      th rowspan='2' Статус
+      th rowspan='2' Объем
+      th rowspan='2' Дата публикации
+      th colspan='4' Кандидаты
+      th rowspan='2' Оплачено
+      th rowspan='2' Разница (Объем ‐ Оплачено)
+      th rowspan='2' Процент найма
+      th rowspan='2' Скорость найма (сред. знач за период)
+    tr
+      th В очереди
+      th В найме
+      th В споре
+      th Отклоненные
+  tbody
+    - orders_group_by_profile(@orders).each do |profile, profile_orders|
+      - profile_orders.each do |order|
+        - order = order.decorate
+        tr
+          td = profile.user.full_name
+          td = order.title
+          td = order.state
+          td = order.count_volume
+          td = order.published_at
+          td = order.proposal_employees.inbox.count
+          td = order.proposal_employees.hired.count
+          td = order.proposal_employees.disputed.count
+          td = order.proposal_employees.rejected.count
+          td = order.proposal_employees.paid.count
+          td = order.difference_volum_and_paided
+          td = order.count_hired_in_percent.to_s + ' %'
+          td = order.count_speed_hired(end_of_period)
+
+scss:
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th, td {
+      border: 1px solid black;
+      text-align: center;
+    }
+    td {
+      text-align: center;
+
+      &:nth-child(1), &:nth-child(2) {
+        text-align: left;
+      } 
+    }
+    th:nth-child(1), td:nth-child(1) {
+      width: 12%;
+      padding-left: 7px;
+    }
+    th:nth-child(2), td:nth-child(2) {
+      width: 20%;
+      padding-left: 7px;
+    }
+  }

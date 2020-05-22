@@ -110,4 +110,37 @@ class OrderDecorator < ApplicationDecorator
       h.concat(h.content_tag(:image, src: h.asset_path('svg/thin_arrow_right.svg'), id: 'btn-next') {})
     end
   end
+
+  def count_volume
+    number_of_employees + candidates.where(state: [:hired, :approved, :paid]).count
+  end
+
+  def difference_volum_and_paided
+    count_volume - proposal_employees.paid.count
+  end
+
+  def count_hired_in_percent
+    result = proposal_employees.paid.count / count_volume.to_f
+    result = (result.nan? || result.infinite?) ? 0 : ( result.round(2) * 100 ).to_i
+    rescue ZeroDivisionError
+      0
+  end
+
+  def count_speed_hired(end_period)
+    end_period = ( end_period.nil? || end_period.empty?) ? Time.current : Date.parse(end_period)
+
+    be_month = (end_period.year - created_at.year) * 12 + end_period.month - created_at.month + ((end_period.day - created_at.day).positive? ? 1 : 0)
+    result = proposal_employees.paid.count / be_month.to_f
+    result = (result.nan? || result.infinite?) ? 0 : result.ceil
+    rescue ZeroDivisionError
+      0
+  end
+
+  def published_at
+    model.published_at&.strftime('%d.%m.%Y')
+  end
+
+  def state
+    I18n.t("order.states_for_select.#{model.state}")
+  end
 end

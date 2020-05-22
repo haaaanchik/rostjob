@@ -50,7 +50,6 @@ class Order < ApplicationRecord
     state :moderation
     state :published
     state :rejected
-    state :hidden
     state :completed
 
     event :cancel do
@@ -73,13 +72,20 @@ class Order < ApplicationRecord
       transitions from: :moderation, to: :rejected
     end
 
-    event :hide do
-      transitions from: :published, to: :hidden
-    end
-
     event :complete, after: :refund_amount do
       transitions from: %i[hidden published], to: :completed
     end
+  end
+
+  def self.state_attributtes_for_select
+    enum_array = []
+    self.aasm.states.map(&:name).each do |name|
+      if name != :draft
+        name = name.to_s
+        enum_array << [I18n.t("order.states_for_select.#{name}"), name]
+      end
+    end
+    enum_array
   end
 
   def initialize(attrs = nil)
@@ -121,7 +127,7 @@ class Order < ApplicationRecord
 
   def to_published
     return unless may_publish?
-    publish!
+    update(published_at: Date.today, state: :published)
     comments.create(text: 'Заявка допущена к публикации')
   end
 
