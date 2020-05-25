@@ -3,22 +3,12 @@ require 'rails_helper'
 RSpec.feature 'Production Site', type: :feature do
   context 'create new production_site' do
     let!(:production_site) { attributes_for(:production_site) }
-    let!(:user) { create(:customer)}
 
     scenario 'create new production_site', js: true do
-      visit login_path
-
-      fill_in 'E-Mail', with: user.email
-      fill_in 'Пароль', with: user.password
-      click_button 'Вход'
-
-      sleep(1)
-      find('.enjoyhint_skip_btn').click
+      sign_in(:customer)
 
       find('#production-site-list').click
       expect(page).to have_current_path(profile_production_sites_path)
-
-      sleep(1)
       click_link('Добавить площадку')
 
       sleep(1)
@@ -40,16 +30,8 @@ RSpec.feature 'Production Site', type: :feature do
     let!(:user) { create(:customer, :with_production_site) }
 
     scenario 'edit production_site', js: true do
-      new_title = user.profile.production_sites.first.title + ' update title'
-
-      visit login_path
-
-      fill_in 'E-Mail', with: user.email
-      fill_in 'Пароль', with: user.password
-      click_button 'Вход'
-
-      sleep(1)
-      find('.enjoyhint_skip_btn').click
+      new_title = ProductionSite.first.title + ' update title'
+      sign_in(:customer, :with_production_site)
 
       find('#production-site-list').click
 

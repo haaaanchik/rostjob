@@ -61,6 +61,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Warden::Test::Helpers
+  config.include Features::SessionHelpers, type: :feature
   config.extend ControllerMacros, type: :controller
   config.extend FeatureMacros, type: :feature
 end
