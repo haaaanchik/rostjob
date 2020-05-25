@@ -6,179 +6,190 @@
 
 body#customer-landing
   = render 'partials/header', registration_url: new_customer_path
+
   main
     section.landing-header.container
       .content
-        h1 Агентство по подбору персонала
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = errors[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
-        p.subtitle Подбор персонала онлайн от ведущей HR компании
+        h1.title
+          | Агентство по подбору
+          | персонала
+        h2.subtitle
+          | Поиск и подбор персонала
+          | от ведущей HR компании в России
+        .hire-staff-block
+          input placeholder=("Введите email для регистрации") type="email" /
+          a.hire-staff-btn href="#"  Нанять персонал
       .landing-header-img
-        = image_tag('/img/stock.svg')
+        img alt="" src="img/customer-landing/header-img.png" /
+    section.top-description
+      .container
+        .description
+          p.description-normal
+            | Трудно не согласиться, что почти все фирмы, кроме единичных семейных бизнесов,
+            span.bold нуждаются в организации подбора сотрудников.
+            | Даже когда персонал полностью укомплектован, важно иметь ресурсы для привлечения новых кадров, которые позволят восполнить текучесть и расширить масштабы деятельности.
+          p.description-small
+            | Для решения этих задач можно либо воспользоваться услугами дорогостоящего HR-специалиста, положившись на удачное стечение обстоятельств. Либо довериться фирмам по подбору сотрудников.
+        .description
+          p.description-small
+            | Впрочем, обращаясь к рядовым агентствам, есть риск столкнуться с целым рядом проблем. Включая отсутствие гарантий и наглядности динамики комплектаций. RostJob дает возможность убедиться в правильности заполнения заявок.
+            span.bold А также оплачивать только успешные сделки.
+          p.description-normal.bold
+            | RostJob – это сервис, который предоставляет интерфейс управления системой найма персонала от ведущей компании в области HR.
+      = image_tag  '/img/customer-landing/top-description-rectangle.png', class: 'rectangle'
     section.advantages
-      header
-        p Наши преимущества
-      .advantages_rectangles
-        .advantages_rectangles_wrapper
-          div
-            div
-              div
-                div
-                  div
-                    div
-                      div
-                        div
-      .advantages_block
-        .advantages_block_item.advantages-item_clearly
-          .advantages_block_item_img
-            = image_tag('/img/01.svg')
-          header
-            | Наглядно
-          p Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
-        .advantages_block_item.advantages-item_bots
-          .advantages_block_item_img
-            = image_tag('/img/02.svg')
-          header
-            | Инновационно
-          p Автоматизированные звонки по базам поиска работ с помощью голосовых ботов бесплатно
-        .advantages_block_item.advantages-item_promptly
-          .advantages_block_item_img
-            = image_tag('/img/03.svg')
-          header
-            | Оперативно
-          p Оперативная комплектация вакансий в любой точке РФ
-        .advantages_block_item.advantages-item_warranty
-          .advantages_block_item_img
-            = image_tag('/img/04.svg')
-          header
-            | Гарантия
-          p Гарантированное выполнение или возврат денег
-        .advantages_block_item.advantages-item_regions
-          .advantages_block_item_img
-            = image_tag('/img/05.svg')
-          header
-            | География
-          p Более 500 представителей в регионах
-        .advantages_block_item.advantages-item_experience
-          .advantages_block_item_img
-            = image_tag('/img/06.svg')
-          header
-            | Опыт
-          p 10 летний профессиональный опыт в HR
-        .advantages_block_item.advantages-item_interface
-          .advantages_block_item_img
-            = image_tag('/img/07.svg')
-          header
-            | Интерфейс
-          p Интуитивно понятный интерфейс
-    section.stock
-      / .stock_left
-        .stock_left_img
-          = image_tag('/img/promotions_woman.svg')
-        .stock_left_text
-          p
-            | в честь года платформы
-            br/
-            span
-              | скидка
-              br/
-              span.stock-summ 5000
-              | рублей
-              span.stock-star *
-          p на первую заявку всем новым зарегистрированным клиентам
-        .stock_right_img
-          = image_tag('/img/promotions_man.svg')
-      / .stock_button
-        = link_to 'Перейти к регистрации', new_customer_path
-        p * ограниченное предложение
-      .stock_rectangles
-        .stock_rectangles_wrapper
-          div
-            div
-              div
-                div
-                  div
-                    div
-                      div
-                        div
-                          div
-                            div
+      .container
+        h2.title Наши преимущества
+        = image_tag  '/img/customer-landing/top-description-rectangle.png', class: 'advantages_rectangles'
+        .advantages_block
+          .row
+            .advantages_block_item.advantages-item_clearly
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg1.svg" /
+              header
+                | Наглядно
+              p Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
+            .advantages_block_item.advantages-item_bots
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg2.webp" /
+              header
+                | Инновационно
+              p
+                | Автоматизированные звонки
+                | по базам поиска работ
+                | с помощью голосовых
+                | ботов бесплатно
+            .advantages_block_item.advantages-item_promptly
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg3.webp" /
+              header
+                | Оперативно
+              p Оперативная комплектация вакансии в любые точки РФ
+          .row
+            .advantages_block_item.advantages-item_warranty
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg4.webp" /
+              header
+                | Гарантия
+              p Гарантия выполнения или возврат денег
+            .advantages_block_item.advantages-item_regions
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg5.webp" /
+              header
+                | Регионы
+              p Более 500 представителей в регионах
+            .advantages_block_item.advantages-item_experience
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg6.webp" /
+              header
+                | Опыт
+              p 10 летний профессиональный опыт в HR
+            .advantages_block_item.advantages-item_interface
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg7.webp" /
+              header
+                | Интерфейс
+              p Интуитивно понятный интерфейс
+    section.services.container
+      h2.title
+        | Услуги кадрового агентства
+      .description-container
+        .description
+          p.description-normal.bold
+            | Кадровое интернет-агентство «RostJob» нацелено на партнерство как с молодыми компаниями, так и опытными бизнес-игроками – в частности, из Санкт-Петербурга и Москвы.
+        .description
+          p.description-small
+            | Рекрутеры сервиса, включая региональных представителей, занимаются проработкой заявок работодателей на поиск сотрудников. Отбор кандидатов идет в самых разноплановых сферах, а информация о соискателях тщательно проверяется.
+          p.description-small
+            | В целом площадка по подбору персонала «RostJob» осуществляет деятельность на основе договора оферты между заказчиками и исполнителями. Ознакомиться с документом можно после регистрации на сайте.
+          = image_tag  '/img/customer-landing/girl-in-descr.png', class: 'girl-in-descr'
+      #download-price-list
+        a href="#"  Скачать прайс лист
     section.steps
-      .steps_item
-        header
-          | Зарегестрируйтесь
-        p
-          | заполнив
-            <br>
-          | краткую форму
-        .steps_item_img
-          = image_tag('/img/list-check.svg')
-
-      .steps_item
-        header
-          | Создайте заявку
-        p
-          | с помощью
-            <br>
-          | конструктора заявок
-        .steps_item_img
-          = image_tag('/img/pazl.png')
-      .steps_item
-        header
-          | Используйте CRM
-        p
-          | для управления
-            <br>
-          | процесса рекрутирования
-        .steps_item_img
-          = image_tag('/img/crm.svg')
-    section.our-partnerships
-      .description
-        h2 Наши рекрутеры
-        p
-          | Наши алгоритмы по условиям Вашей заявки находят соискателей в базах поиска работ. Самостоятельно дозваниваются до них, предлагая Ваши условия труда
-          |  с помощью технологий синтеза и обработки голоса. Обрабатывают ответы соискателей с помощью нейросетей. В случае проявления заинтересованности переводят звонок  на свободного рекрутера. Рекрутер получает уже «теплый» звонок с анкетой соискателя. Система не позволит ни пропустить, ни забыть соискателя.
-        p
-          | Наши рекрутеры — это команда профессионалов, созданная с непосредственным участием основателей компании. На протяжении 10 лет они комплектуют заявки по подбору персонала.
-      .img-block
-        img.people-search alt="" src="img/people-search.svg" /
-      .img-block.world
-        img.people-world alt="" src="img/people-world.svg" /
-      .description
-        h2 Наши региональные представители
-        p
-          | Систематизация работы региональных представителей это - одно из комплексных решений ГК РОСТ. Для комплектации заявок мы развиваем фриланс рекрутеров в регионах РФ. Привлечение агентств, поиск фрилансеров на тематических сайтах, собственные доступные базы с соискателями в области HR привлекают в систему все больше рекрутеров.
-        p
-          | Вам не нужно заключать договор с каждым Исполнителем отдельно. Все юридические вопросы с рекрутерами мы берем на себя. Вам лишь остается выбрать с каким соискателем от какого рекрутера Вам хочется работать.
-    section.about-us
-      /h2.title О группе компаний РОСТ
-      .description
-        div
-          h2.title О группе <br> компаний РОСТ
-          img.about-us-img alt="" src="img/about-us-img.png" /
+      .container
+        .row
+          h2.steps-title
+            | Что нужно сделать для оформления заявки
+          .steps-container
+            .steps_item
+              p.title
+                | Зарегистрироваться
+              p
+                | Регистрация на сайте производится путем заполнения простейшей формы, куда потребуется ввести только адрес электронной почты. А затем подтвердить его переходом по ссылке, которая будет указана в отправленном системой письме.
+              .steps_item_img
+                img alt="" src="img/list-check.svg" /
+            .steps_item
+              p.title
+                | Создать заявку
+              p
+                | Оформление заявок на поиск персонала осуществляется с помощью специального конструктора, который упрощает работу с сервисом. В форме необходимо указать информацию о вакансии, контакты и сообщение для рекрутера.
+              .steps_item_img
+                img alt="" src="img/catalog.svg" /
+            .steps_item
+              p.title
+                | Используйте CRM
+              p
+                | Облегчить процесс управления поиском персонала позволит встроенная в сервис CRM-система.    Она представляет собой интерфейс для веб-приложения, автоматизирующий общение между исполнителями и заказчиками.
+              .steps_item_img
+                img alt="" src="img/crm.svg" /
+    section.our-partnerships.container
+      .row
+        .img-block.recruitment-agency
+          = image_tag  '/img/customer-landing/our-partnerships.png', class: 'recruitment-agency-img'
+        .description.recruitment-agency
+          h2 Как работает кадровое агентство
           p
-            | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
-        .numbers
-          .number
-            span.big-number 30
-            p.number-desc рекрутеров
-          .number
-            span.big-number 105
-            p.number-desc объектов
-          .number
-            span.big-number 500
-            p.number-desc
-              | региональных
-              br/
-              | представителей
+            | Кадровое интернет-агентство «RostJob» работает с соблюдением единого договора на предоставление услуг по поиску персонала. Исполнитель передает заказчику резюме кандидатов, чьи анкеты соответствуют требованиям вакансии. Если в ходе сотрудничества с сервисом работодатель находит подходящего сотрудника, он выплачивает рекрутеру вознаграждение, сумма которого была указана в заявке.
+          p
+            | Детальная информация о правах и обязанностях сторон будет доступна после регистрации.
+        .description.recruiters
+          h2 Рекрутеры
+          p
+            span.bold Отточенные алгоритмы
+            | позволяют агентству по подбору персонала «ROSTJOB» быстро находить соискателей даже
+            | в маловостребованных базах поиска работы. Система самостоятельно связывается с претендентами, после чего
+            | в автоматическом режиме переводят звонок заинтересовавшегося кандидата свободному рекрутеру.
+          p
+            | Иными словами, специалист начинает диалог с соискателем не с знакомства, а уже конкретного предложения.
+            span.bold Рекрутеры «ROSTJOB» – слаженный механизм с десятилетним опытом комплектования заявок по подбору персонала, что позволяет говорить о бесспорном профессионализме команды.
+        .img-block.recruiters
+          img.people-search alt="" src="img/people-search.png" /
+        .img-block.world
+          img.people-world alt="" src="img/customer-landing/people-world.png" /
+        .description.regional-representatives
+          h2 Региональные представители
+          p
+            | Системная работа с региональными представителями – комплексное и взвешенное решение агентства по поиску работы «ROSTJOB», позволяющее находить таланты во всех уголках России.
+          p
+            span.bold Опыт показал,
+            | что всеобъемлющая комплектация заявок может опираться только на развитие сотрудничества с рекрутерами, которые работают в удаленном режиме.
+          p
+            span.bold Как результат
+            | – работодателю не требуется заключать отдельный договор с каждым рекрутером. «ROSTJOB» уладил все юридические вопросы. Заказчику остается лишь одно – выбрать соискателя.
+    section.about-us
+      .container
+        h2.title Генеральный партнер
+        .description
+          .about-partner
+            img.about-us-img alt="" src="img/customer-landing/logo_rost3.png" /
+            p.description-normal
+              | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+          .numbers
+            .number
+              span.big-number 30
+              p.number-desc рекрутеров
+            .number
+              span.big-number 55
+              p.number-desc объектов
+            .number
+              span.big-number 500
+              p.number-desc
+                | региональных
+                br/
+                | представителей
       .about-us_rectangles
         .about-us_rectangles_img
-          = image_tag('/img/Layer.svg')
+          img alt="" src="img/customer-landing/girl-calling.png" /
         .about-us_rectangles_wrapper
           div
             div
