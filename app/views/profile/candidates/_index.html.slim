@@ -5,10 +5,7 @@
       = image_tag('/img/new/arrow-down.png')
       = render '/profile/candidates/search_form'
       .show
-        - if current_user.profile.customer?
-          = link_to 'Показать все', profile_candidates_path, class: 'btn btn-primary btn-sm btn-rounded'
-        - else
-          = link_to 'Показать все', profile_proposal_employees_path, class: 'btn btn-primary btn-sm btn-rounded'
+        = link_to 'Показать все', url_for_reset_filters, class: 'btn btn-primary btn-sm btn-rounded' 
 
   .worksheets
     .worksheets__titles

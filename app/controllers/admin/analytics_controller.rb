@@ -18,8 +18,7 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def orders_info
-    @q = Order.order(:published_at).ransack(params[:q])
-    @orders = @q.result.includes(:user, :proposal_employees).where.not(state: :draft)
+    @orders = paginate_array(find_orders, params[:page])
 
     respond_to do |format|
       format.html
@@ -39,12 +38,18 @@ class Admin::AnalyticsController < Admin::ApplicationController
     @orders ||= Order.where(created_at: date_interval)
   end
 
+  def find_orders
+    @q = Order.for_analytics.ransack(params[:q])
+    @orders = @q.result.includes(:user, :proposal_employees).where.not(state: :draft).decorate
+  end
+
   def pdf_settings
     {
       pdf: 'analytics_orders',
       template: 'export_pdf/_analytics_orders.html',
       orientation: 'Landscape',
       page_size: 'A4',
+      locals: { orders: find_orders },
       dpi: 300,
       encoding: 'utf-8'
     }

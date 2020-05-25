@@ -1,6 +1,10 @@
 class BaseController < ActionController::Base
   include WordsHelper
 
+  def paginate_array(lists, page)
+    Kaminari.paginate_array(lists).page(page)
+  end
+
   def errors_data(obj)
     errors_data = {}
     prefix = obj.class.to_s.underscore

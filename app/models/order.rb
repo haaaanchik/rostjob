@@ -77,17 +77,6 @@ class Order < ApplicationRecord
     end
   end
 
-  def self.state_attributtes_for_select
-    enum_array = []
-    self.aasm.states.map(&:name).each do |name|
-      if name != :draft
-        name = name.to_s
-        enum_array << [I18n.t("order.states_for_select.#{name}"), name]
-      end
-    end
-    enum_array
-  end
-
   def initialize(attrs = nil)
     defaults = default_init
 
@@ -144,7 +133,7 @@ class Order < ApplicationRecord
   end
 
   def to_completed
-    complete! if may_complete?
+    update(completed_at: Date.today, state: :completed) if may_complete?
   end
 
   def balance

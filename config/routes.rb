@@ -40,9 +40,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    get 'analytics/export_to_excel'
-    get 'analytics/user_action_log'
-    get 'analytics/orders_info'
+    namespace :analytics do
+      get :export_to_excel
+      get :user_action_log
+      get :orders_info
+    end
+
     get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'

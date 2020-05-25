@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def index
     @q = User.clients.ransack(params[:q])
-    @users = Kaminari.paginate_array(@q.result.decorate).page(params[:page])
+    @users = paginate_array(@q.result.decorate, params[:page])
   end
 
   def edit

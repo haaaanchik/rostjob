@@ -10,4 +10,10 @@ module ProposalEmployeesHelper
 
     :pe_fields_cont
   end
+
+  def url_for_reset_filters
+    return profile_candidates_path if current_user.profile.customer?
+
+    profile_proposal_employees_path
+  end
 end

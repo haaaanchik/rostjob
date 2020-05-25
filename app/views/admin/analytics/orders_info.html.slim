@@ -2,28 +2,26 @@
 
 .container-fluid.mt-2#orders_info_page
   h2.text-center Список заказов
-  .row.mt-4
-    .col-2
-      = search_form_for [:admin, @q], url: admin_analytics_orders_info_path, id: 'orders_info_search' do |f|
-        .d-flex.justify-content-between
-          .col-6
-            .md-form
-              = f.text_field :published_at_gteq, class: 'form-control datepicker', id: 'date-picker-date'
-              = f.label :published_at_gteq, 'От:'
-          .col-6
-            .md-form
-              = f.text_field :published_at_lteq, class: 'form-control datepicker', id: 'date-picker-date'
-              = f.label :published_at_lteq, 'По:'
-        .md-form
-          = f.text_field :user_full_name_or_title_cont, class: 'form-control'
-          = f.label :user_full_name_or_title_cont, 'Поиск по контексту'
-        = f.select :state_eq, options_for_select(Order.state_attributtes_for_select,
-                    selected_state), { prompt: 'По статусу заявки' }, { class: 'mdb-select md-form' }
-        .d-flex
-          = f.button 'Найти', type: :submit, class: 'btn btn-success btn-sm'
-          = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm'
-    .col-10
-      = link_to request.params.merge( format: 'pdf' ), class: 'float-right' do
+  = search_form_for [:admin, @q], url: admin_analytics_orders_info_path, id: 'orders_info_search', class: 'd-flex justify-content-between align-items-end' do |f|
+    = f.select :state_eq, options_for_select(orders_state_attributtes_for_select,
+            selected_state), {}, { class: 'mdb-select md-form mb-0' }
+
+    .md-form.mb-0
+      = f.text_field :published_at_gteq, class: 'form-control datepicker', id: 'date-picker-date'
+      = f.label :published_at_gteq, 'От:'
+    .md-form.mb-0
+      = f.text_field :published_at_lteq, class: 'form-control datepicker', id: 'date-picker-date'
+      = f.label :published_at_lteq, 'По:'
+  
+    .md-form.context-filed.mb-0
+      = f.text_field :user_full_name_or_title_cont, class: 'form-control'
+      = f.label :user_full_name_or_title_cont, 'Поиск по контексту'
+    
+    .d-flex.align-items-center
+      = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm mr-4 btn'
+      = link_to request.params.merge( format: 'pdf' ), title: 'Скачать в pdf' do
         i.fas.fa-save.fa-2x
-      = render 'export_pdf/analytics_orders', locals: {orders: orders_paginate(@orders) }
-      = paginate orders_paginate(@orders)
+
+  .row
+    = render 'export_pdf/analytics_orders', locals: { orders: @orders }
+  = paginate @orders

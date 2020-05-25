@@ -1,6 +1,3 @@
-ruby:
-  end_of_period = params[:q] && params[:q][:published_at_lteq] ? params[:q][:published_at_lteq] : nil
-
 table.table.table-bordered
   thead
     tr
@@ -9,34 +6,39 @@ table.table.table-bordered
       th rowspan='2' Статус
       th rowspan='2' Объем
       th rowspan='2' Дата публикации
-      th colspan='4' Кандидаты
+      th rowspan='2' Дата закрытия заявки
+      th colspan='5' Кандидаты
       th rowspan='2' Оплачено
       th rowspan='2' Разница (Объем ‐ Оплачено)
       th rowspan='2' Процент найма
-      th rowspan='2' Скорость найма (сред. знач за период)
+      th rowspan='2' Скорость найма (за срок существования)
     tr
       th В очереди
+      th На собеседовании
       th В найме
       th В споре
       th Отклоненные
   tbody
-    - orders_group_by_profile(@orders).each do |profile, profile_orders|
-      - profile_orders.each do |order|
-        - order = order.decorate
-        tr
-          td = profile.user.full_name
-          td = order.title
-          td = order.state_for_selectors
-          td = order.count_volume
-          td = order.published_at
-          td = order.proposal_employees.inbox.count
-          td = order.proposal_employees.hired.count
-          td = order.proposal_employees.disputed.count
-          td = order.proposal_employees.rejected.count
-          td = order.proposal_employees.paid.count
-          td = order.difference_volum_and_paided
-          td = order.count_hired_in_percent.to_s + ' %'
-          td = order.count_speed_hired(end_of_period)
+
+    - @orders.each do |order|
+      - order_pr_paid_count = order.count_pr_employees_state('paid')
+
+      tr
+        td = order.profile.user.full_name
+        td = order.title
+        td = order.state_for_analytics
+        td = order.number_of_employees
+        td = order.formated_date(:published_at)
+        td = order.formated_date(:completed_at)
+        td = order.count_pr_employees_state('inbox')
+        td = order.count_pr_employees_state('interview')
+        td = order.count_pr_employees_state('hired')
+        td = order.count_pr_employees_state('disputed')
+        td = order.count_pr_employees_state('rejected')
+        td = order_pr_paid_count
+        td = order.difference_volum_and_paided(order_pr_paid_count)
+        td = order.count_hired_in_percent(order_pr_paid_count).to_s + ' %'
+        td = order.count_speed_hired(order_pr_paid_count)
 
 scss:
   table {

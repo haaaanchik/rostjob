@@ -111,36 +111,41 @@ class OrderDecorator < ApplicationDecorator
     end
   end
 
-  def count_volume
-    number_of_employees
+  def difference_volum_and_paided(paid_candidates)
+    number_of_employees - paid_candidates
   end
 
-  def difference_volum_and_paided
-    count_volume - proposal_employees.paid.count
+  def count_hired_in_percent(paid_candidates)
+    return 0 if number_of_employees.zero?
+
+    paid_candidates / number_of_employees * 100
   end
 
-  def count_hired_in_percent
-    result = proposal_employees.paid.count / count_volume.to_f
-    result = (result.nan? || result.infinite?) ? 0 : ( result.round(2) * 100 ).to_i
-    rescue ZeroDivisionError
-      0
+  def count_speed_hired(size_paid_candidates)
+    return 0 if count_month_is_be.zero?
+
+    (size_paid_candidates / count_month_is_be).ceil
   end
 
-  def count_speed_hired(end_period)
-    end_period = ( end_period.nil? || end_period.empty?) ? Time.current : Date.parse(end_period)
-
-    be_month = (end_period.year - created_at.year) * 12 + end_period.month - created_at.month + ((end_period.day - created_at.day).positive? ? 1 : 0)
-    result = proposal_employees.paid.count / be_month.to_f
-    result = (result.nan? || result.infinite?) ? 0 : result.ceil
-    rescue ZeroDivisionError
-      0
+  def formated_date(column)
+    model.send(column)&.strftime('%d.%m.%Y')
   end
 
-  def published_at
-    model.published_at&.strftime('%d.%m.%Y')
-  end
-
-  def state_for_selectors
+  def state_for_analytics
     I18n.t("order.states_for_select.#{model.state}")
+  end
+
+  def count_pr_employees_state(state)
+    count_states ||= proposal_employees.group(:state).count
+    count_states[state] || 0
+  end
+
+  private
+
+  def count_month_is_be
+    start_periond = published_at || created_at
+    end_perion = completed_at || Date.today
+
+    (end_perion.to_date - start_periond.to_date).to_i
   end
 end
