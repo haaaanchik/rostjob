@@ -18,8 +18,8 @@ json.array!(@empl_cv_interview) do |event|
   json.color '#fd7e14'
   json.textColor '#212529'
   json.tooltip "Анкета #{event.employee_id_name} на собеседования"
-  json.start event.interview_date
-  json.end event.interview_date
+  json.start event.calendar_format_date
+  json.end event.calendar_format_date
   end
 
 json.array!(@empl_cv_inbox) do |event|
@@ -30,8 +30,8 @@ json.array!(@empl_cv_inbox) do |event|
   json.color '#ffff00'
   json.textColor '#212529'
   json.tooltip "Анкета #{event.employee_id_name} дата приезда"
-  json.start event.interview_date.strftime('%Y-%m-%d')
-  json.end event.interview_date.strftime('%Y-%m-%d')
+  json.start event.calendar_format_date
+  json.end event.calendar_format_date
 end
 
 json.array!(@empl_cv_approved) do |event|

@@ -184,6 +184,10 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     date.strftime('%d.%m.%Y')
   end
 
+  def calendar_format_date
+    interview_date.strftime('%Y-%m-%d')
+  end
+
   def interview_action_enabled?(subject)
     ACTIONS[subject.subject_type][model.state]&.include?('interview')
   end
