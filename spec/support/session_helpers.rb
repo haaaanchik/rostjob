@@ -8,7 +8,7 @@ module Features
     end
 
     def sign_in(who, trait = nil)
-      user = create(who, trait)
+      user = who.is_a?(Symbol) ? create(who, trait) : who
       visit login_path
       fill_in 'E-Mail', with: user.email
       fill_in 'Пароль', with: user.password

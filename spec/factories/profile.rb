@@ -17,9 +17,18 @@ FactoryBot.define do
       trait :with_profuction_site do
         after(:create) do |prof|
           create(:company, companyable: prof)
-          create(:production_site, profile: prof)
+          create(:production_site_without_orders, profile: prof)
         end
       end
+
+      # trait :with_orders do
+      #   after(:create) do |prof|
+      #     create(:company, companyable: prof)
+      #       create(:production_site, profile: prof)
+      #       create(:price_group)
+      #       # create(:order, production_site: prof.production_sites.first,  position: Position.first, profile: prof)
+      #   end
+      # end
     end
 
     trait :contractor_profile do

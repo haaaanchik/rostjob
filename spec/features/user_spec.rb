@@ -28,6 +28,7 @@ RSpec.feature 'Users', type: :feature do
   context 'login to system' do
     let!(:user) { create(:customer, :new)}
     let(:company) { attributes_for(:company) }
+    let(:account) { attributes_for(:account) }
 
     scenario 'loginning to the system' do
       visit root_path
@@ -55,10 +56,42 @@ RSpec.feature 'Users', type: :feature do
       fill_in "profile_company_attributes_kpp",	with: company[:kpp]
       fill_in "profile_company_attributes_director",	with: company[:director]
       fill_in "profile_company_attributes_acts_on",	with: company[:acts_on]
+      fill_in 'Наименование банка', with: account[:bank]
+      fill_in 'Адрес банка', with: account[:bank_address]
+      fill_in 'БИК', with: account[:bic]
+      fill_in 'ИНН банка', with: account[:inn]
+      fill_in 'КПП банка', with: account[:kpp]
+      fill_in 'Расчётный счёт', with: account[:account_number]
+      fill_in 'Корреспондентский счёт', with: account[:corr_account]
       click_button 'Сохранить'
- 
+
       expect(page).to have_content 'Главная'
       expect(page).to have_current_path(root_path)
+    end
+  end
+
+  context 'edit uset profile' do
+    let!(:customer) { create(:customer) }
+
+    before(:each) do
+      sign_in(customer)
+      click_link 'Редактировать'
+
+      fill_in 'Наименование организации', with: 'changed user name'
+    end
+
+    scenario 'edit! profile' do
+      fill_in 'user_current_password', with: customer.password
+      click_button 'Сохранить'
+
+      expect(page).to have_content 'changed user name'
+      expect(User.last.full_name).to eq('changed user name')
+    end
+
+    scenario 'cant update profile without password' do
+      click_button 'Сохранить'
+
+      expect(User.last.full_name).to eq(customer.full_name)
     end
   end
 end

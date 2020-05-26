@@ -14,17 +14,22 @@ FactoryBot.define do
       trait :new do
         password_digest { nil }
         password_changed_at { nil }
-        association :profile, factory: [:customer_profile, :without_company] 
+        association :profile, factory: [:customer_profile, :without_company]
       end
 
       trait :with_production_site do
         association :profile, factory: [:customer_profile, :with_profuction_site] 
+      end
+
+      trait :with_orders do
+        association :profile, factory: [:customer_profile, :with_orders]
       end
     end
 
     trait :contractor do
       association :profile, factory: [:profile, :contractor_profile]
     end
+
 
     after(:build) do |u|
       u.skip_confirmation_notification!

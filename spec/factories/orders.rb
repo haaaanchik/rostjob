@@ -1,19 +1,14 @@
 FactoryBot.define do
   factory :order do
     title { "Title order" }
-    city { Ffaker::Address.city }
+    city { Faker::Address.city }
     description { "tetx description" }
     commission { "MyString" }
-    payment_type { "MyString" }
-    number_of_recruiters { 1 }
-    enterpreneurs_only { false }
-    accepted { false }
-    visibility { "MyString" }
-    state { "MyString" }
-    experience { 'adf' }
-    schedule { 'adf' }
-    salary { 'afd' }
-    work_period { 'afd' }
-    place_of_work { 'adf' }
+    state { 'published' }
+    skill { 'master' }
+    contact_person { { contact_name: Faker::Name.name, contact_phone: '7978888888' } }
+    other_info { { remark: 'remart text', terms: 'add info' }}
+    salary { '1222' }
+    number_of_employees { '1' }
   end
 end
