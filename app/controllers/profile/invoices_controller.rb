@@ -1,4 +1,6 @@
 class Profile::InvoicesController < ApplicationController
+  before_action :set_authorize
+
   def index
     @invoice = Invoice.new(amount: params[:amount])
     @invoices = invoices.decorate
@@ -56,5 +58,9 @@ class Profile::InvoicesController < ApplicationController
 
   def invoices
     current_profile.invoices.customers.order(created_at: :desc)
+  end
+
+  def set_authorize
+    authorize Invoice
   end
 end

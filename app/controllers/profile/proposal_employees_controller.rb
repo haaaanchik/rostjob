@@ -1,4 +1,5 @@
 class Profile::ProposalEmployeesController < ApplicationController
+  before_action :set_authorize
   # layout false, only: :index
 
   def index
@@ -97,5 +98,9 @@ class Profile::ProposalEmployeesController < ApplicationController
     @q = ProposalEmployee.where(profile_id: current_profile.id)
                          .where.not(state: 'revoked').order(id: :desc).ransack(params[:q])
     @proposal_employees ||= @q.result
+  end
+
+  def set_authorize
+    authorize [:profile, :proposal_employee]
   end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Profile::EmployeeCvsController < ApplicationController
+  before_action :set_authorize
   before_action :employee_cvs, only: :index
 
   def index
@@ -128,5 +129,9 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def arrival_date
     employee_cvs_params[:arrival_date]
+  end
+
+  def set_authorize
+    authorize [:profile, :employee_cv]
   end
 end

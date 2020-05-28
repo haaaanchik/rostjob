@@ -1,4 +1,5 @@
 class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSites::ApplicationController
+  before_action :set_authorize, except: %i[index]
   before_action :set_order_template, except: %i[index new create destroy_array copy]
   before_action :set_position, only: %i[create update]
 
@@ -132,5 +133,9 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
            current_profile.order_templates.order(id: :desc).ransack(params[:q])
          end
     @order_templates ||= @q.result
+  end
+
+  def set_authorize
+    authorize [:profile, :order_template]
   end
 end

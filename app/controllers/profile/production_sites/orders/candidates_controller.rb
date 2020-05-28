@@ -1,4 +1,5 @@
 class Profile::ProductionSites::Orders::CandidatesController < Profile::ProductionSites::Orders::ApplicationController
+  before_action :set_authorize
 
   def show
     @pecv = candidate
@@ -134,5 +135,9 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
 
   def candidates
     @candidates ||= order.proposal_employees
+  end
+
+  def set_authorize
+    authorize [:profile, candidate]
   end
 end
