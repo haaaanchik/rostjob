@@ -53,14 +53,16 @@
               = link_to approve_act_profile_candidate_path(pr_employee),
                         class:'subscribe',
                         remote: true,
-                        method: :put do
+                        method: :put,
+                        data: { disable_with: 'Выполняется' } do
                 | Подписать акт
 
       .all
         = link_to approve_all_acts_profile_candidates_path(proposal_employees_ids: pr_ids),
                   class: 'subscribe-all',
                   remote: true,
-                  method: :put do
+                  method: :put,
+                  data: { disable_with: 'Выполняется' } do
           | Подписать все
         p.all-price
           | Итого:
