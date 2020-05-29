@@ -428,6 +428,32 @@
   margin-right: 5px;
 }
 
+#acts .contractor-column {
+  overflow: auto;
+  background-color: #ffffff;
+
+  .contractor-link  {
+    border-bottom: 1px solid #575757;
+
+    &:hover {
+      border-bottom: 1px solid #1970ff;
+    }
+
+    .active-link {
+      color: #007bff;
+    }
+
+    a {
+      color: #575757;
+    }
+
+    .contractor-img {
+      height: 50px;
+      width: auto;
+    }
+  }
+}
+
 @media (max-width: 950px) {
   #acts .all {
     width: 100%;

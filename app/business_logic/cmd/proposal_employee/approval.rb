@@ -3,16 +3,14 @@ module Cmd
     class Approval
       include Interactor
 
+      delegate :candidate, to: :context
+
       def call
         context.fail! unless candidate.to_approved!
         Cmd::UserActionLogger::Log.call(params: customer_params)
       end
 
       private
-
-      def candidate
-        context.candidate
-      end
 
       def customer
         candidate.order.profile.user

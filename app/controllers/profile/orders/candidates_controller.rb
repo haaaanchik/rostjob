@@ -82,6 +82,17 @@ class Profile::Orders::CandidatesController < ApplicationController
     end
   end
 
+  def to_approved
+    result = Cmd::ProposalEmployee::Approval.call(candidate: candidate)
+
+    if result.success?
+      redirect_to profile_production_site_order_path(result.candidate.order.production_site,
+                                                     result.candidate.order)
+    else
+      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
+    end
+  end
+
   private
 
   def transfer_params

@@ -312,6 +312,7 @@ Rails.application.routes.draw do
             put :reserve
             put :to_inbox
             put :to_interview
+            put :to_approved
             put :transfer
           end
         end

@@ -143,10 +143,15 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   end
 
   def calendar_form_url
-    if object.inbox?
-      h.to_interview_profile_order_candidate_path(object.order_id, object)
-    elsif object.interview?
-      h.hire_profile_order_candidate_path(object.order_id, object)
+    case state
+    when 'interview'
+      h.hire_profile_order_candidate_path(order_id, object)
+    when 'inbox'
+      h.to_interview_profile_order_candidate_path(order_id, object)
+    when 'hired'
+      h.to_approved_profile_order_candidate_path(order_id, object)
+    else
+      nil
     end
   end
 
@@ -249,12 +254,17 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   def interview_or_inbox
     name = nil
     text = nil
-    if object.interview?
+    case state
+    when 'interview'
       name = 'hiring_date'
       text = 'Нанять'
-    elsif object.inbox?
+    when 'inbox'
       name = 'interview_date'
       text = 'Назначить'
+    when 'hired'
+      text = 'Подтвердить гарантию'
+    else
+      nil
     end
     { name: name, text: text }
   end
