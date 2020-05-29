@@ -1,5 +1,4 @@
 class ProposalEmployeeDecorator < ApplicationDecorator
-  include Rails.application.routes.url_helpers
   delegate_all
 
   STATUS_BACKGROUND_COLORS = {
@@ -220,7 +219,7 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   def display_pr_site_or_interview_date(user)
     return order.production_site.title if user.profile.customer?
 
-    model.interview_date.strftime('%d.%m.%Y')
+    interview_date.strftime('%d.%m.%Y')
   end
 
   def candidate_phone_number(user)
@@ -232,7 +231,7 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   def link_to_candidate(user)
     return link_to_candidate_or_ticket if user.profile.customer?
 
-    profile_employee_cvs_path(proposal_employee_id: model.id)
+    h.profile_employee_cvs_path(proposal_employee_id: id)
   end
 
   private
