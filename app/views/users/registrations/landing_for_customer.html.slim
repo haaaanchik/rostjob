@@ -104,7 +104,7 @@ body#customer-landing
             | В целом площадка по подбору персонала «RostJob» осуществляет деятельность на основе договора оферты между заказчиками и исполнителями. Ознакомиться с документом можно после регистрации на сайте.
           = image_tag  '/img/customer-landing/girl-in-descr.png', class: 'girl-in-descr'
       #download-price-list
-        a href="#"  Скачать прайс лист
+        = link_to 'Посмотреть прайс лист', price_path
     section.steps
       .container
         .row
