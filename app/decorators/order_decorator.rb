@@ -112,7 +112,7 @@ class OrderDecorator < ApplicationDecorator
   end
 
   def count_volume
-    number_of_employees + candidates.where(state: [:hired, :approved, :paid]).count
+    number_of_employees
   end
 
   def difference_volum_and_paided
