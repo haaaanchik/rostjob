@@ -4,4 +4,4 @@
     = f.label :amount, 'Сумма', for:  'replenishAccountSumm'
     = f.text_field :amount, id: 'replenishAccountSumm', class: "form-control #{'is-invalid' unless errors[:amount].empty?}"
     .invalid-feedback #{errors[:amount].first}
-  = f.button 'Выставить счет', class: 'btn'
+  = f.button 'Выставить счет', class: 'btn', data: { disable_with: 'Формирую' }
