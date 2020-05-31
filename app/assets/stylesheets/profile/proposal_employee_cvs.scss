@@ -1,90 +1,3 @@
-#proposal_employees, #candidates {
-  .filters-elem, .status {
-    padding: 5px;
-  }
-
-  tr.hoverable:hover {
-    background-color: white;
-  }
-
-  .filters__title {
-    padding-left: 15%;
-  }
-  
-  .profession {
-    color: black;
-    font-weight: bolder;
-  }
-
-  @media (max-width: 1200px) {
-    .profession {
-      font-size: 0.9rem;
-    }
-  }
-
-  .form-check-inline {
-    margin-right: 0;
-  }
-}
-
-#proposal_employees .form-check-inline {
-  width: 70%;
-  @media (max-width: 1350px) {
-    width: 80%;
-  }
-  @media (max-width: 1150px) {
-    width: 100%;
-  }
-}
-
-#proposal_employee_search{
-  .w-75{
-    width: 75%;
-    @media (max-width: 1150px) {
-      width: 100% !important;
-    }
-  }
-
-  @media (max-width: 990px) {
-    width: 50%;
-    margin: auto;
-  }
-
-  @media (max-width: 500px) {
-    width: 80%;
-  }
-
-}
-
-#proposal_employees{
-  .col-lg-9.order-lg-1{
-    .border.rounded{
-      @media (max-width: 800px) {
-        overflow-x: auto;
-        table{
-          min-width: 700px;
-        }
-      }
-    }
-
-  }
-}
-
-#candidates {
-  form {
-    .form-check-inline {
-      width: 90%;
-    }
-
-    label {
-      height: auto;
-      &:before {
-        top: auto;
-      }
-    }
-  }
-}
-
 #worksheet{
   width: 100%;
   padding: 15px 15px 0 15px;
@@ -236,9 +149,8 @@
     cursor: pointer !important;
   }
 
-  .filters-show{
+  .filters-show {
     display: flex;
-    max-width: 100%;
   }
 
   .filters-dropdown > p{
@@ -587,5 +499,19 @@
 
   #acts .logo {
     margin-left: 0;
+  }
+}
+
+#worksheet.proposal_empl_page {
+  .worksheets__title:nth-child(2), .worksheets__item .info:nth-child(2) {
+    width: 34%;
+  }
+
+  .worksheets__title:nth-child(3), .worksheets__item .info:nth-child(3) {
+    width: 41%;
+  }
+
+  .worksheets__title:last-child, .worksheets__item .info:last-child {
+    width: 12.5%;
   }
 }

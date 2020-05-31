@@ -1,0 +1,30 @@
+#worksheet class=(current_user.profile.customer? ? 'worksheet' : 'proposal_empl_page worksheet')
+  .header
+    .filters.js-filters
+      #filters Фильтры
+      = image_tag('/img/new/arrow-down.png')
+      = render '/profile/candidates/search_form'
+      .show
+        - if current_user.profile.customer?
+          = link_to 'Показать все', profile_candidates_path, class: 'btn btn-primary btn-sm btn-rounded'
+        - else
+          = link_to 'Показать все', profile_proposal_employees_path, class: 'btn btn-primary btn-sm btn-rounded'
+
+  .worksheets
+    .worksheets__titles
+      .worksheets__title
+        p Статус
+      .worksheets__title
+        p Анкета
+      .worksheets__title
+        p Заявка
+      .worksheets__title
+        p
+          - if current_user.profile.customer?
+            | Площадка
+          - else
+            | Собеседование
+    .worksheets__body
+      = render partial: 'profile/candidates/candidate', collection: paginated_candidates
+
+  = paginate paginated_candidates
