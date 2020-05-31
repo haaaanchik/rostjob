@@ -1,2 +1,59 @@
-.col-4
-  = render 'form'
+.d-flex.flex-column.mt-4#admin_user_edit_page
+  h3.text-center.mb-3 Страница редактирования пользователя
+  = form_with model: [:admin, @user], local: false do |f|
+    .d-flex.justify-content-around
+      .col-5
+        .d-flex.flex-column
+          .information_block.mb-3.py-2.text-center
+            = image_tag(@user.profile.image_url, class: 'logo')
+            .mt-3
+              = @user.profile.decorate.role_in_budge
+            | Заходил в последний раз
+            br
+            = @user.last_sign_in_at&.strftime('%k:%M %e %B %Y')
+
+          .profile_block.p-3
+            h3.my-3 Профиль
+            .form-group.row
+              = f.label :full_name, t('staffer.name'), class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = f.text_field :full_name, class: "form-control "
+              
+            .form-group.row
+              = f.label :email, class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = f.text_field :email, class: "form-control "
+            .form-group.row
+              = f.label :password, 'Новый пароль', class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = f.password_field :password, class: "form-control"
+            .form-group.row
+              = f.label :password_confirmation, 'Подтвердить пароль', class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = f.password_field :password_confirmation, class: "form-control"
+            = f.fields_for :profile, @user.profile do |ff|
+              .form-group.row
+                .col-lg-4.col-12.col-sm-6
+                  | Логотип компании
+                .choosing-logo.col-lg-6.col-12.col-sm-6
+                  .text-center
+                    = image_tag(@user.profile.image_url, class: 'logo')
+                  span.file-btn.mx-auto.mt-3
+                    | Выберите файл
+                    = ff.file_field :photo
+              - if @user.profile.contractor?
+                .form-group
+                  .form-group.row
+                    = ff.label :phone, 'Контактный номер телефона', class: 'col-lg-4 col-12 col-sm-6'
+                    .col-lg-6.col-12.col-sm-6
+                      = ff.telephone_field :phone, class: "form-control"
+      - if @user.profile.customer?
+        .col-5.p-3.company_block
+          h3.my-2 Карточка предприятия
+          = f.fields_for :profile, @user.profile do |f_p|
+            = f_p.fields_for :company, @user.profile.company do |c_f|
+              = render partial: 'companies/fields', locals: {f: c_f, errors: @user.profile.company.errors, profile: @user.profile}
+    .d-flex.justify-content-end
+      .buttons.mr-5.mt-2
+        = f.button t('buttons.save'), type: :submit, class: 'btn btn-success ml-3'
+        = link_to 'Вернутся назад к списку', admin_users_path, class: 'btn btn-indigo'

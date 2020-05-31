@@ -1,6 +1,9 @@
 class Admin::UsersController < Admin::ApplicationController
+  before_action :user, only: %i[withdrawal update]
+
   def index
-    users
+    @q = User.clients.ransack(params[:q])
+    @users = Kaminari.paginate_array(@q.result.decorate).page(params[:page])
   end
 
   def edit
@@ -8,19 +11,29 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    user.update_attribute(:full_name, user_params[:full_name])
-    user.update_attribute(:is_active, user_params[:is_active])
-    if user.errors.messages.any?
-      render json: { validate: true, data: errors_data(user) }, status: 422
+    result = Cmd::Admin::User::Update.call(user: user, params: user_params) 
+    if result.success?
+      redirect_to admin_users_path
     else
-      redirect_to admin_clients_path
+      render json: {  validate: true,
+                      data: errors_data(result.user) },
+                      status: 422
     end
   end
+
+  def withdrawal
+    @contractor = @user.profile
+    @result = Cmd::Profile::Balance::Withdrawal.call(profile: @contractor, amount: @contractor.balance.amount,
+                                                     withdrawal_method_id: @contractor.withdrawal_methods.first.id)
+   end
 
   private
 
   def user_params
-    params.require(:user).permit(:full_name, :is_active)
+    params.require(:user).permit(:full_name, :email, :is_active, :password, :password_confirmation,
+                                  profile_attributes: [:id, :phone, :photo, 
+                                                       company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone, :inn, 
+                                                                            :fax, :email, :acts_on, :director, :kpp, :ogrn]])
   end
 
   def user

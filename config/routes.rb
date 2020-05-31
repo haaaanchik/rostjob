@@ -113,8 +113,7 @@ Rails.application.routes.draw do
       end
     end
     resources :staffers
-    resources :users, only: %i[index edit update]
-    resources :clients, only: %i[index] do
+    resources :users, only: %i[index edit update] do
       member do
         put :withdrawal
       end

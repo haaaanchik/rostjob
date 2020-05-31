@@ -1,14 +1,6 @@
 class UserDecorator < ApplicationDecorator
   delegate_all
 
-  def orders_count
-    model.orders_count ? model.orders_count : 0
-  end
-
-  def employee_cvs_count
-    model.employee_cvs_count ? model.employee_cvs_count : 0
-  end
-
   def disputs_count
     0
   end
@@ -18,22 +10,27 @@ class UserDecorator < ApplicationDecorator
   end
 
   def withdrawal_link
-    return tag_td if object.profile_type == 'customer'
-    object.amount <= 0.0 ? tag_td : tag_td_a
+    return if !(profile.contractor? && balance.amount > 0.0)
+
+    h.content_tag(:a,
+                  href: h.withdrawal_admin_user_path(object.id),
+                  class: 'blue-text',
+                  data: { method: :put, remote: true, disable_with: false }) { 'Выписать счет' }
+  end
+
+  def count_orders_or_employees
+    return orders_count if user.profile.customer?
+
+    employee_cvs_count
   end
 
   private
 
-  def tag_td
-    h.content_tag(:td) {}
+  def orders_count
+    model.orders_count ? model.orders_count : 0
   end
 
-  def tag_td_a
-    h.content_tag(:td, data: { 'user-id': object.id }) do
-      h.content_tag(:a,
-                    href: h.withdrawal_admin_client_path(object.id),
-                    class: 'blue-text',
-                    data: { method: :put, remote: true }) { 'выписать счет' }
-    end
+  def employee_cvs_count
+    model.employee_cvs_count ? model.employee_cvs_count : 0
   end
 end

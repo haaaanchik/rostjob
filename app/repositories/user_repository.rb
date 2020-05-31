@@ -3,7 +3,7 @@ module UserRepository
 
   included do
     scope :clients, -> {
-      select(:id, :full_name, :amount, :profile_type, :employee_cvs_count, :orders_count)
+      select(:id, :email, :profile_id, :full_name, :amount, :employee_cvs_count, :orders_count)
           .joins(:balance)
           .joins('left join (select profile_id, count(profile_id) as employee_cvs_count from employee_cvs group by profile_id) e on profiles.id = e.profile_id')
           .joins('left join (select profile_id, count(profile_id) as orders_count from orders group by profile_id) o on profiles.id = o.profile_id')
