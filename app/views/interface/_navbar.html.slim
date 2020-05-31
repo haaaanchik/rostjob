@@ -1,3 +1,6 @@
+ruby:
+  val = params[:q] ? params[:q][:pe_fields_cont] : nil
+
 nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
   .p-2.button-collapse.ml-2
     i.fas.fa-bars
@@ -15,8 +18,8 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
 
   .navbar__icons
     .search
-      button type="button" class="button"
-      input type="search" class="search-input" placeholder="Поиск"
+      = form_for :q, url: navbar_search_url, method: :get do |f|
+        = f.search_field candidate_search_field_name, class: 'search-input', placeholder: 'Поиск анкет', value: val
 
     = link_to profile_tickets_path, class: 'icon-link ' do
       = image_tag asset_path('navbar/communications.png')
