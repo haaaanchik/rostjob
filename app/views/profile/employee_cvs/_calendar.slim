@@ -11,6 +11,7 @@ coffee:
       $('#empl-form #reminder_time').on 'change', @setReminder
       $('#empl-form #reminder_date').on 'keyup', @setReminder
       $('#empl-form .interview_date_datepicker').on 'changeDate', @ChangeInterviewDate
+      $('#empl-form #reminder_disable_checkbox').on 'change', @remiderDisable
 
     @initDatepicker: ->
       date = new Date()
@@ -27,7 +28,11 @@ coffee:
 
     @setReminderDate: ->
       reminder = $('#empl-form #employee_cv_reminder').val()
-      date = new Date(reminder)
+      if reminder == ''
+        date = new Date()
+      else
+        date = new Date(reminder)
+
       getDay = date.getDay()+1
       getDate = formattingNumber(date.getDate())
       month = formattingNumber(getDay)
@@ -51,4 +56,13 @@ coffee:
     @ChangeInterviewDate: ->
       date = $(this).datepicker('getFormattedDate')
       $('#empl-form #interview_date').val(date)
+
+    @remiderDisable: ->
+      if $('#reminder_block').hasClass('disable_reminder')
+        $('#reminder_block').removeClass('disable_reminder')
+        Calendar.setReminder()
+      else
+        $('#reminder_block').addClass('disable_reminder')
+        $('input#employee_cv_reminder').val('')
+
   Calendar.init()

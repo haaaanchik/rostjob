@@ -46,22 +46,22 @@
               .ancete-row
                 p.ancete-row__title Опыт работы
                 .ancete-row__content
-                  = f.text_area :experience, cols: 30, rows: 3
+                  = f.text_area :experience, cols: 30, rows: 5
               .ancete-row
                 p.ancete-row__title Образование
                 .ancete-row__content
-                  = f.text_area :education, cols: 30, rows: 3
+                  = f.text_area :education, cols: 30, rows: 5
               .ancete-row
                 p.ancete-row__title Доп. информация
                 .ancete-row__content
-                  = f.text_area :remark, cols: 30, rows: 3
+                  = f.text_area :remark, cols: 30, rows: 5
 
           .modal-ancete__sidebar
             - if f.object.reminder?
-              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border
+              .date-start-work.new-employee-cv.pt-0.shadow-none.position-static.border.w-100
                 .modal-ancete__title
                   | Напоминание
-                .popup__header.ml-2
+                .popup__header.ml-3
                   .popup-date
                     p.title Дата
                     = text_field_tag :reminder_date, f.object.reminder_date, placeholder: '01.01.2001', class: 'popup-input'
