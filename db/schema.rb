@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_093458) do
+ActiveRecord::Schema.define(version: 2020_05_19_114851) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -198,6 +198,9 @@ ActiveRecord::Schema.define(version: 2020_05_12_093458) do
     t.json "buyer"
     t.json "goods"
     t.string "state"
+    t.boolean "checking_pay", default: false
+    t.string "tinkoff_pdf_url"
+    t.string "error_message"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

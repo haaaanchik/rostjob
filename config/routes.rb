@@ -272,8 +272,13 @@ Rails.application.routes.draw do
         get :approve_transfer
       end
     end
-    # get 'proposal_employee/:id', to: 'proposal_employee#show'
-    resources :invoices, only: %i[index show create destroy]
+
+    resources :invoices, only: %i[index show create] do
+      member do
+        get :check_invoice_tinkoff
+      end
+    end
+
     resources :answered_orders
     get '/orders/:state', to: 'orders#index', as: :orders_with_state, constraints: { state: /[_A-Za-z]+/ }
     # FIXME: refactor this asap

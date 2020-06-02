@@ -1,7 +1,7 @@
 class Profile::InvoicesController < ApplicationController
   def index
     @invoice = Invoice.new(amount: params[:amount])
-    invoices
+    @invoices = invoices.decorate
   end
 
   def show
@@ -19,21 +19,24 @@ class Profile::InvoicesController < ApplicationController
 
   def create
     if current_profile.filled?
-      result = ::Cmd::Invoice::Create.call(amount: amount, profile: current_profile)
-      if result.success?
+      @invoice = current_profile.invoices.new
+      @result = ::Cmd::Invoice::Create.call(amount: amount,
+                                            invoice: @invoice,
+                                            profile: current_profile)
+      if @result.success?
         redirect_to profile_invoices_path(state: 'created')
       else
-        @invoice = result.invoice
-        invoices
-        render 'index'
+        @invoices = invoices.decorate
+        render :index
       end
     else
       redirect_to edit_profile_path
     end
   end
 
-  def destroy
-    invoice.destroy
+  def check_invoice_tinkoff
+    invoice.update(checking_pay: true)
+    CheckInvoiceTinkoffJob.perform_later(invoice)
     redirect_to profile_invoices_path
   end
 
@@ -52,6 +55,6 @@ class Profile::InvoicesController < ApplicationController
   end
 
   def invoices
-    @invoices ||= current_profile.invoices.customers.order(created_at: :desc)
+    current_profile.invoices.customers.order(created_at: :desc)
   end
 end

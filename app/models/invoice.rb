@@ -7,7 +7,7 @@ class Invoice < ApplicationRecord
   validates :seller, :buyer, :goods, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0, less_than: 100_000_000.00 }
 
-  before_save :set_invoice_number
+  before_create :set_invoice_number
   after_create :send_mail_wait_for_payment, if: -> { profile.notify_mails? }
 
   scope :customers, -> { joins(:profile).where('profiles.profile_type = ?', 'customer') }
@@ -17,14 +17,9 @@ class Invoice < ApplicationRecord
   aasm column: :state do
     state :created, initial: true
     state :paid
-    state :deleted
 
     event :pay do
       transitions from: :created, to: :paid
-    end
-
-    event :delete_invoice do
-      transitions from: :created, to: :deleted
     end
   end
 
@@ -47,6 +42,16 @@ class Invoice < ApplicationRecord
     ActiveRecord::Base.connection
                       .execute("update invoice_number_seqs set invoice_number = #{start_value}")
     ActiveRecord::Base.connection.execute('unlock tables')
+  end
+
+  def last_invoice_number
+    ActiveRecord::Base.connection.execute('lock tables invoice_number_seqs write')
+    last_number = ActiveRecord::Base
+        .connection
+        .execute('select invoice_number from invoice_number_seqs limit 1')
+        .first.first
+    ActiveRecord::Base.connection.execute('unlock tables')
+    last_number
   end
 
   def send_mail_wait_for_payment
