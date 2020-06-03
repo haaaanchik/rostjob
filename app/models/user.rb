@@ -9,7 +9,7 @@ class User < ApplicationRecord
   has_many :user_action_logs, as: :subject
 
   accepts_nested_attributes_for :profile
-  ransack_alias :admin_search_fields, :full_name_or_id_or_email
+  ransack_alias :admin_search_fields, :full_name_or_id_or_email_or_profile_phone
 
   validates :full_name, presence: true, length: { minimum: 8 }, if: -> { !skip_validation_full_name }
   validates :email, presence: true, uniqueness: true

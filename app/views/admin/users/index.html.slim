@@ -13,12 +13,12 @@ ruby:
 
   table.table
     tr
-      th ID
-      th Логин
-      th Имя
+      th = sort_link(@q, :id, 'ID', default_order: :ASC)
+      th = sort_link(@q, :id, 'Логин') 
+      th = sort_link(@q, :full_name, 'Имя')
       th Контактный телефон
       th Роль
-      th Баланс
+      th = sort_link(@q, :balance_amount, 'Баланс')
       th Количество заявок / анкет
       th Открытые споры
       th Выписка счетов
