@@ -35,8 +35,9 @@ class Profile::CandidatesController < ApplicationController
   def approval_list
     @active_item = :approve_act_list
     @contractor_list = ::ProfilesWithCurrentActsQuery.new(current_profile).call
-    @active_contractor = ::FindProfileByActsQuery.new(@contractor_list, @contractor_list.first, params).call
-    @act_list = ::ActsByProfileQuery.new(@active_contractor).call
+    @approval_list = ::ApprovalListOrActsByProfileQuery.new(candidates.approved,
+                                                            @contractor_list,
+                                                            params).call
   end
 
   private
