@@ -11,7 +11,7 @@ class ProposalEmployee < ApplicationRecord
   has_many :incidents, dependent: :destroy
 
   validates :interview_date, :order_id, :employee_cv_id, presence: true
-  validates :employee_cv_id, uniqueness: { scope: :order_id }
+  validates_uniqueness_of :employee_cv_id, scope: :order_id, conditions: -> { where.not(state: 'revoked') }
 
   accepts_nested_attributes_for :employee_cv
 
