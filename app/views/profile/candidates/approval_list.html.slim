@@ -54,7 +54,7 @@
                         class:'subscribe',
                         remote: true,
                         method: :put,
-                        data: { disable_with: 'Выполняется' } do
+                        'data-disable-bouble-click': 'true' do
                 | Подписать акт
 
       .all
@@ -62,7 +62,7 @@
                   class: 'subscribe-all',
                   remote: true,
                   method: :put,
-                  data: { disable_with: 'Выполняется' } do
+                  'data-disable-bouble-click': 'true' do
           | Подписать все
         p.all-price
           | Итого:
