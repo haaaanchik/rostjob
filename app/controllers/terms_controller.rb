@@ -3,9 +3,9 @@ class TermsController < ApplicationController
     @terms = Terms.new
     flash[:alert] = 'Вы должны принять условия оферты, прежде чем продолжить' unless current_user.terms_of_service
     respond_to do |format|
-    format.html
-    format.pdf { render pdf_setting }
-end
+      format.html
+      format.pdf { render pdf_setting }
+    end
   end
 
   def accept
