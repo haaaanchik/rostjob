@@ -95,6 +95,11 @@
 
   .worksheets__title{
     padding: 10px;
+    @media (max-width: 768px) {
+      &:last-child{
+        display: none;
+      }
+    }
   }
 
   .worksheets__title{
@@ -132,6 +137,11 @@
     width: calc(25% ) ;
     padding: 10px;
     font-weight: bold;
+    @media (max-width: 768px) {
+      &:last-child{
+        display: none;
+      }
+    }
   }
 
   .worksheets__item .info:first-child{
@@ -488,6 +498,40 @@
   }
 }
 
+@media (max-width: 768px) {
+  #worksheet{
+    padding: 10px 10px 0 10px;
+    .worksheets__title:nth-child(1){
+      width: 30%;
+    }
+    .worksheets__title:nth-child(2){
+      width: 35%;
+    }
+    .worksheets__title:nth-child(3){
+      width: 35%;
+    }
+
+    .worksheets__item .info:nth-child(1){
+      width: 30%;
+    }
+    .worksheets__item .info:nth-child(2){
+      width: 35%;
+    }
+    .worksheets__item .info:nth-child(3){
+      width: 35%;
+    }
+
+    .worksheets__item, .worksheets__titles{
+      padding-left: 5px;
+    }
+
+    .worksheets__item .info, .worksheets__title{
+      padding: 5px;
+    }
+
+  }
+}
+
 @media (max-width: 700px) {
   #acts .long-block {
     flex-direction: column;
@@ -515,6 +559,12 @@
   }
   #proposal_employee_search{
     margin: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  #worksheet {
+    height: max-content;
   }
 }
 
