@@ -4,6 +4,8 @@ module Cmd
       include Interactor
 
       def call
+        context.fail! if proposal_employee.approved_by_admin
+
         profile = candidate.profile
         order = candidate.order
         employee_cv = candidate.employee_cv

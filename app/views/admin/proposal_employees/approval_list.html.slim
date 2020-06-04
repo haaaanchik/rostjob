@@ -23,7 +23,7 @@ table.table
                     class: 'green-text btn btn-sm',
                     remote: true,
                     method: :put,
-                    data: { disable_with: 'Выполняется' } do
+                    'data-disable-bouble-click': 'true' do
             i.fas.fa-check-circle.mr-2
             | одобрить акт
 = paginate @approval_list
