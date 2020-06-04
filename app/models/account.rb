@@ -2,7 +2,7 @@ class Account < ApplicationRecord
   belongs_to :accountable, polymorphic: true
   has_many :account_statements
 
-  # validates :account_number, :corr_account, :bic, :bank, :bank_address, presence: true
+  validates :bank, :bank_address, :bic, :inn, :kpp, :account_number, :corr_account, presence: true
 
   def initialize(attrs = nil)
     defaults = {

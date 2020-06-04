@@ -6,7 +6,11 @@ class WithdrawalJob < ApplicationJob
     company = withdrawal_method.company
     profile = withdrawal_method.profile
     balance = profile.balance
-    result = Cmd::Invoice::Create.call(profile: profile, company: company, amount: amount)
+    invoice = profile.invoices.new
+    result = Cmd::Invoice::Create.call(profile: profile,
+                                       invoice: invoice,
+                                       company: company,
+                                       amount: amount)
     return unless result.success?
     balance.withdraw(amount, 'Перевод вознаграждения исполнителю', result.invoice.id)
   end

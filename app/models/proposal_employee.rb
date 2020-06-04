@@ -11,7 +11,7 @@ class ProposalEmployee < ApplicationRecord
   has_many :incidents, dependent: :destroy
 
   validates :interview_date, :order_id, :employee_cv_id, presence: true
-  validates_uniqueness_of :employee_cv_id, scope: :order_id, conditions: -> { where.not(state: 'revoked') }
+  validate :check_uniqueness_employee_cv
 
   accepts_nested_attributes_for :employee_cv
 
@@ -122,6 +122,17 @@ class ProposalEmployee < ApplicationRecord
   end
 
   private
+
+  def check_uniqueness_employee_cv
+    uniqueness = ProposalEmployee.joins(:employee_cv)
+                     .where(employee_cv_id: employee_cv_id,
+                            order_id: order_id,
+                            'employee_cvs.phone_number': employee_cv.phone_number)
+                     .where.not(id: id,
+                                state: 'revoked')
+    errors.add(:employee_cv_id,
+               'Такая анкета уже существует.') unless uniqueness.blank?
+  end
 
   def mail_inbox
     SendNotifyMailJob.perform_now(objects: [self], method: 'emp_cv_sended')
