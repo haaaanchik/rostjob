@@ -75,7 +75,7 @@
                       | Подписать акт
 
             .all
-              = link_to approve_all_acts_profile_candidates_path(proposal_employees_ids: @active_contractor),
+              = link_to approve_all_acts_profile_candidates_path(profile_id: profile.id),
                       class: 'subscribe-all',
                       remote: true,
                       method: :put,
