@@ -431,7 +431,7 @@ main{
 //Landing_choice
 #common-landing {
   width: 100%;
-  height: calc(100vh - 58px);
+  height: calc(100vh);
   margin: 0;
   font-family: 'Open-Sans', sans-serif;
 }
@@ -440,7 +440,7 @@ main{
   position: absolute;
   height: 74px;
   width: 100%;
-  z-index: 3;
+  z-index: 9999;
   display: flex;
   align-items: center;
   padding-left: 8.28%;  //левый отступ
@@ -483,6 +483,10 @@ main{
   font-size: 20px;
   font-weight: bold;
   color: black;
+  img{
+    width: 170px;
+    max-width: 170px;
+  }
 }
 
 #common-landing .company-name .textBlue {
