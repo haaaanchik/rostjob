@@ -1,5 +1,5 @@
 #setting-page {
-  font-size: 16px;
+  font-size: 14px;
   position: relative;
   font-family: 'Open sans', sans-serif;
   width: 100%;
@@ -26,6 +26,10 @@
 #setting-page .settings-column .header {
   border-bottom: 1px solid #e1e1e1;
   padding: 20px;
+}
+
+#setting-page .settings-list > li.active-link-underline{
+  border-bottom: 1px solid #1970ff;
 }
 
 #setting-page .settings-column .title {
@@ -63,7 +67,7 @@
   list-style-type: none;
   font-size: 14px;
   font-weight: bold;
-  border-bottom: 1px solid #575757;
+  border-bottom: 1px solid #e1e1e1;
   margin-bottom: 20px;
   padding: 0 0 10px 10px;
 
@@ -102,6 +106,17 @@
   font-size: 17px;
   font-weight: bold;
   margin-bottom: 60px;
+}
+
+#setting-page .company-card form {
+  .require_field{
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+  }
+  .col-form-label{
+    color: rgb(109, 109, 109);
+  }
 }
 
 #setting-page .profile-settings {

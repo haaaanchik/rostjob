@@ -430,13 +430,20 @@ input::placeholder{
 }
 
 #add_ancete {
+  display: flex;
+  align-items: center;
   position: relative;
   padding-left: 18px;
   text-decoration: underline;
   color: #1970ff;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   font-weight: 400;
+  #order_document{
+    position: absolute;
+    max-width: 95%;
+    opacity: 0;
+  }
 }
 
 #save_as_template{

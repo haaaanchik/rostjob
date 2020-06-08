@@ -16,6 +16,8 @@ class Candidates
 
   @openFilters: ->
     $('.js-filters-dropdown').toggleClass('filters-show')
+    $('.js-filters > img').toggleClass('rotate')
+    $('#worksheet').toggleClass('max-content')
 
 $(document).on 'turbolinks:load', ->
   Candidates.init()

@@ -177,6 +177,7 @@
             border: none;
             background-color: transparent;
             cursor: pointer;
+            padding-left: 0;
             span{
                 line-height: 20px;
                 margin: auto 10px auto 0;
@@ -291,6 +292,10 @@
                         &:first-child{
                             font-weight: 600;
                         }
+                        width: 15%;
+                        &:nth-child(2){
+                            width: 55%;
+                        }
                     }
                 }
             }
@@ -307,6 +312,9 @@
         &_table{
             height: 100%;
             overflow-y: auto;
+            .badge{
+                box-shadow: unset;
+            }
         }
         table{
             width: 100%;
@@ -395,6 +403,7 @@
             background-size: 200% 200%;
             background-position: 0 100%;
             cursor: pointer;
+            box-shadow: unset;
             &:hover{
                 animation: gradient 5s ease infinite;
             }

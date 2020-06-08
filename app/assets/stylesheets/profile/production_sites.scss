@@ -41,12 +41,12 @@ $phone: "max-width: 768px";
 
       &_platform {
         margin-right: 10px;
-        height: 580px;
+        height: 490px;
         padding: 20px;
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 30px;
-        gap: 30px;
+        grid-gap: 12px;
+        gap: 12px;
         border-radius: 8px;
         background-color: $secondaryColor;
         box-shadow: 0 0 15px 0 rgba(77, 77, 77, 0.15);
@@ -112,11 +112,12 @@ $phone: "max-width: 768px";
           &_logo {
             margin: auto;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            width: 100px;
-            height: 100px;
+            margin-top: 4px;
+            //display: flex;
+            //flex-direction: column;
+            //justify-content: center;
+            width: 85px;
+            height: 85px;
             border: 2px solid $secondaryColorDark;
             border-radius: 50%;
             text-align: center;
@@ -357,8 +358,11 @@ $phone: "max-width: 768px";
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 7px;
+  padding: 7px 7px 7px 15px;
   border-bottom: 1px solid #e1e1e1;
+  img{
+    margin-right: 7px;
+  }
 }
 
 .platform__title{
@@ -373,6 +377,7 @@ $phone: "max-width: 768px";
 
   .current_production_sites{
     font-weight: 700 !important;
+    color: #007bff;
 
     &::before {
       content: '\2022';
@@ -428,7 +433,7 @@ $phone: "max-width: 768px";
   text-align: center;
   margin: 0 7px;
   padding: 24px;
-  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
+  //box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
   border-radius: 8px;
   background-color: #ffffff;
   color: #000000;
@@ -440,6 +445,10 @@ $phone: "max-width: 768px";
   span{
     line-height: 18px;
   }
+}
+
+.item-type.active{
+  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
 }
 
 .item-type.active::after{
@@ -558,6 +567,7 @@ $phone: "max-width: 768px";
 .content{
   width: 100%;
   margin-left: 7px;
+  margin-right: 6px;
   display: flex;
   border-radius: 4px;
   background-color: #ffffff;
@@ -590,10 +600,11 @@ $phone: "max-width: 768px";
 
 .order__title{
   margin-top: 0;
-  margin-bottom: 15px;
+  margin-bottom: 11px;
   font-family: $primaryFont;
   font-size: 15px;
   font-weight: bold;
+  line-height: 17px;
 }
 
 .order__number{
@@ -602,16 +613,20 @@ $phone: "max-width: 768px";
   font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
+  line-height: 17px;
 }
 
 .order__price{
+  display: block;
+  width: 125px;
+  max-height: 23px;
   border-radius: 4px;
   background-color: #1970ff;
   color: #ffffff;
   font-family: $primaryFont;
   font-size: 13px;
   font-weight: bold;
-  padding: 5px 8px;
+  padding: 2px 8px;
 }
 
 .order__statistic{
@@ -673,7 +688,8 @@ $phone: "max-width: 768px";
 
   &::-webkit-scrollbar-thumb {
     border-radius: 6px;
-    background: transparentize($secondaryColorDark, 0.4);
+    //background: transparentize($secondaryColorDark, 0.4);
+    background-color: rgb(183, 183, 183);
   }
 
   &::-webkit-scrollbar-thumb:hover {
@@ -922,7 +938,7 @@ $phone: "max-width: 768px";
   color: #000000;
   font-family: $primaryFont;
   font-size: 15px;
-  font-weight: 800;
+  font-weight: 700;
   i{
     margin-right: 2px;
     font-size: 13px;
@@ -950,6 +966,8 @@ $phone: "max-width: 768px";
 
 .request_data_time {
   text-align: center;
+  font-family: $primaryFont;
+  font-size: 15px;
 }
 
 .request__title{
@@ -1022,8 +1040,20 @@ $phone: "max-width: 768px";
   overflow: auto;
 }
 
+nav .pagination.pg-blue .page-item.active .page-link{
+  color: #4285f4;
+  box-shadow: unset;
+  background-color: transparent;
+  &:hover{
+    background-color: #eee;
+  }
+}
+
 .column .column__body{
   height: calc(100% - 47px);
+  .request:first-child{
+    margin-top: 0;
+  }
   &::-webkit-scrollbar {
     width: 6px;
 
@@ -1073,24 +1103,29 @@ $phone: "max-width: 768px";
 }
 
 #redact, #info, #close-request{
+  justify-content: center;
   box-shadow: 0 0 14px 1px rgba(77, 77, 77, 0.3);
   border-radius: 15px;
   padding: 4px 8px;
   color: white;
   display: flex;
   align-items: center;
+  font-weight: 700;
 }
 
 #redact{
+  width: 158px;
   background-color: #00ca5f;
 }
 
 #info{
+  width: 91px;
   background-color: #1970ff;
   margin: 0 7px;
 }
 
 #close-request{
+  width: 114px;
   background-color: #ff5b01;
 }
 

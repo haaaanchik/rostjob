@@ -299,7 +299,7 @@
   background-color: #ebebeb;
   padding: 10px 16px;
   justify-content: space-between;
-  margin-top: 23px;
+  margin: 20px 15px 0 15px ;
 }
 
 #request-publishing .request-block-header p {
@@ -363,7 +363,7 @@
   margin: 0;
 }
 
-#request-publishing .request-block-container .request-body p:first-child {
+#request-publishing .request-block-container .request-body > p {
   margin-bottom: 10px;
 }
 

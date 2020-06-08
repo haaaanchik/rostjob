@@ -91,8 +91,27 @@
   grid-gap: 15px;
   gap: 15px;
   background-color: #f2f2f2;
-  height: calc(100% - 58px);
+  //height: calc(100% - 58px);
+  height: 100%;
   font-family: "Open Sans", sans-serif;
+
+  .badge{
+    display: flex;
+    max-width: 78px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    &.open{
+      background-color: green;
+    }
+    &.close{
+      background-color: red;
+    }
+  }
+
   #search-input{
     position: relative;
   }
@@ -130,6 +149,7 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     align-items: flex-start;
+    padding: 0 20px;
     &_input{
       margin: auto 0;
       position: relative;
@@ -229,7 +249,7 @@
     &_new{
       position: absolute;
       right: 0;
-      top: 7px;
+      top: 5px;
       button{
         height: 28px;
         width: 177px;
@@ -246,7 +266,7 @@
         border-radius: 4px;
         max-height: calc(100vh - 58px - 16px*2 - 40px - 15px - 40px - 20px);
         overflow: auto;
-        box-shadow: 0 0 15px 0 rgba(77, 77, 77, 0.15);
+        //box-shadow: 0 0 15px 0 rgba(77, 77, 77, 0.15);
         table{
           thead{
             border-radius: 4px 4px 0 0;
@@ -356,7 +376,7 @@
               font-weight: 400;
               font-size: 13px;
               line-height: 27px;
-              text-transform: uppercase;
+              text-transform: capitalize;
               color: #fff;
               border: none;
               background: linear-gradient(#1970ff 0%, #68a2ff 50%, #1970ff 100%);
@@ -364,6 +384,7 @@
               background-position: 0 100%;
               cursor: pointer;
               padding: 0;
+              box-shadow: unset;
             }
             .btn-close{
               right: 12px;
@@ -371,8 +392,8 @@
               padding: 0;
               position: absolute;
               display: block;
-              width: 13px;
-              height: 13px;
+              width: 14px;
+              height: 14px;
               overflow: hidden;
               background-color: transparent;
               border: none;
@@ -419,6 +440,8 @@
                 font-size: 14px;
                 color: $primaryColor;
                 min-width: 45px;
+                margin-top: 0.5rem;
+                margin-bottom: 0;
               }
               input[type="text"], textarea{
                 width: 100%;
@@ -441,10 +464,13 @@
                 height: 38px;
               }
               textarea{
-                padding: 15px;
+                padding: 10px;
                 overflow-y: auto;
                 height: 215px;
                 resize: none;
+                &::placeholder{
+                  font-style: normal !important;
+                }
               }
             }
           }
@@ -457,6 +483,7 @@
     &.table{
       width: 100%;
       border-collapse: collapse;
+      margin-bottom: 0;
       thead{
         text-align: left;
         height: 35px;
@@ -464,7 +491,8 @@
         font-weight: 600;
         font-size: 14px;
         color: $primaryColor;
-        background-color: transparentize($secondaryColorDark, 0.3);
+        //background-color: transparentize($secondaryColorDark, 0.3);
+        background-color: rgb(230,230,230);
         border-radius: 4px 4px 0 0;
         th{
           padding: 5px 0 5px 20px ;
@@ -660,28 +688,41 @@
 
 #chat-room .chat-sidebar-header {
   position: relative;
+  display: flex;
   min-height: 8.5798%;
   border-radius: 4px;
-  background-color: #1970ff;
+  background-color: #ffffff;
   padding: 14px 21px 11px;
+  img{
+    max-width: 65px;
+    margin-right: 15px;
+  }
 }
 
 #chat-room .chat-sidebar-header-city {
-  position: absolute;
-  right: 12px;
-  top: 15px;
-  color: #ffffff;
+  //position: absolute;
+  //right: 12px;
+  //top: 15px;
+  color: black;
   font-size: 13px;
   line-height: 18px;
+  margin-top: 10px;
 }
 
 #chat-room .chat-sidebar-title {
   margin: 0;
   max-width: 82%;
-  color: #ffffff;
+  color: black;
   font-size: 14px;
   font-weight: bold;
   line-height: 18px;
+}
+
+#chat-room .chat-sidebar .order{
+  margin-top: 15px;
+  .content{
+    padding: 16px 26px 11px 21px;
+  }
 }
 
 #chat-room .messages {
@@ -695,11 +736,27 @@
 #chat-room .message {
   position: relative;
   display: flex;
-  width: 96.1206%;
-  margin: 10px auto 0;
+  //width: 96.1206%;
+  //margin: 10px auto 0;
   border-radius: 4px;
-  border: 1px solid #e1e1e1;
-  background-color: #ffffff;
+  //border: 1px solid #e1e1e1;
+  //background-color: #ffffff;
+  // new
+  background-color: rgb(250, 250, 250);
+  max-width: 50%;
+  width: max-content;
+  margin-top: 10px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+
+#chat-room .message.user {
+  flex-direction: row-reverse;
+  margin-left: auto;
+  margin-right: 10px;
+  background-color: rgb(239, 248, 253);
+  padding-left: 10px;
 }
 
 #chat-room .message-logo {
@@ -732,15 +789,28 @@
 
 #chat-room .message .date-and-time {
   position: absolute;
-  bottom: 10px;
-  right: 15px;
+  //bottom: 10px;
+  //right: 15px;
   color: #8d8d8d;
   font-size: 13px;
   font-weight: bold;
+  // new
+  bottom: 5px;
+  left: 10px;
 }
 
-#chat-room .message.user {
-  flex-direction: row-reverse;
+#chat-room .message.user .date-and-time {
+  right: 10px;
+  left: unset;
+}
+
+#chat-room .chat-sidebar .request{
+  width: 90%;
+  .flag{
+    position: absolute;
+    right: 10px;
+    top: 0;
+  }
 }
 
 #chat-room .message.user .message-content {
@@ -754,11 +824,6 @@
 
 #chat-room .message.user .sender-name {
   text-align: right;
-}
-
-#chat-room .message.user .date-and-time {
-  left: 15px;
-  right: unset;
 }
 
 #chat-room .message-logo {
