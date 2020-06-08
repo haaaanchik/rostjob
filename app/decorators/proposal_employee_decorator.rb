@@ -243,6 +243,12 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     h.profile_employee_cvs_path(proposal_employee_id: id)
   end
 
+  def display_candidate_date_for_customer(user)
+    return if user.profile.customer?
+
+    h.content_tag(:span, "с #{display_candidate_date}", class: 'date')
+  end
+
   private
 
   def order_path

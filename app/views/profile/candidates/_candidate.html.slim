@@ -3,9 +3,7 @@
     span
       i.fa.fa-bookmark class="#{ candidate.status_background_class + '-text' }"
       | #{ t("proposal_employee.state.#{candidate.state}") } <br>
-      - if current_user.profile.customer?
-        span.date
-          | c #{ candidate.display_candidate_date }
+      = candidate.display_candidate_date_for_customer(current_user)
 
   .info
     a href="#"

@@ -89,5 +89,7 @@ module OrderRepository
     scope :sort_by_order_place_of_work_desc, lambda { order('orders.place_of_work desc') }
     scope :sort_by_customer_name_asc, -> { order('companies.name asc') }
     scope :sort_by_customer_name_desc, -> { order('companies.name desc') }
+    scope :for_analytics, -> { select(:id, :title, :number_of_employees, :published_at, :completed_at,
+                                      :profile_id, :state, :created_at, :updated_at).order(:profile_id, :published_at) }
   end
 end
