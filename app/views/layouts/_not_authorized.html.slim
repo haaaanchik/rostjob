@@ -2,6 +2,9 @@
   .common-landing__header
     a.company-name href="/"
       = image_tag('/img/rostjob-logo.svg')
+      - if Rails.env.staging?
+            span.counter
+              b stage
     div
       .social
         a href='https://vk.com/rostjobcom'

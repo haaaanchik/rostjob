@@ -479,6 +479,7 @@ main{
 }
 
 #common-landing .company-name {
+  position: relative;
   text-transform: uppercase;
   font-size: 20px;
   font-weight: bold;
@@ -649,6 +650,12 @@ main{
   width: 82.12%;
   max-width: 560px;
   pointer-events: none;
+}
+
+#sign_up_page_wraper{
+  >.header{
+    display: none;
+  }
 }
 
 @media (max-width: 1200px) {
