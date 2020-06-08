@@ -1,6 +1,6 @@
 .form-group.row
   - name = profile.private_person? ? :full_name : :name
-  = f.label :name, t(name), data: {name: t(:name), full_name: t(:full_name)}, class: 'col-lg-4 col-12 col-sm-6 col-form-label require_field'
+  = f.label :name, t(name), data: {name: t(:name), full_name: t(:full_name)}, class: 'col-lg-4 col-12 col-sm-6  require_field'
   .col-lg-6.col-12.col-sm-6
     = f.text_area :name, rows: '1' , class: "form-control  #{'is-invalid' unless errors[:name].empty?}"
     .invalid-feedback #{errors[:name].first}

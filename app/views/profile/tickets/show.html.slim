@@ -20,11 +20,22 @@
   .chat-sidebar
     - if @ticket.is_a?(Incident)
       .chat-sidebar-header
-        p.chat-sidebar-title.clicable #{@ticket.proposal_employee.order.production_site.title}
-        span class="chat-sidebar-header-city" г. #{@ticket.proposal_employee.order.city}
+        = image_tag('/img//new/no-avatar.png')
+        div
+          p.chat-sidebar-title.clicable #{@ticket.proposal_employee.order.production_site.title}
+          span class="chat-sidebar-header-city" г. #{@ticket.proposal_employee.order.city}
+
+      .order
+        .content.content__published
+          /.order__number №47
+          .order__description
+            p.order__title
+              a.black-text href="/profile/production_sites/3/orders/47" № 82 Оператор-сборщик схемных жгутов. Без опыта работы
+            .order__bottom
+              span.order__price 10000 руб. / чел.
 
       .chat-sidebar-body.custom-scroll
-        .request
+        /.request
           .request-header
             p.card-name
               = link_to profile_production_site_order_path(@ticket.proposal_employee.order.production_site,
@@ -42,5 +53,15 @@
           div class="request__footer"
             = image_tag('/img//new/no-avatar.png', class: 'request-logo')
             p class="request-user-name" #{@ticket.user_full_name}
+
+        .request
+          i.fa.fa-bookmark.flag style=("color: #ff9000")
+          a data-remote="true" href="/profile/candidates/124" /
+          p.request__title №13043 Бахтияров Юрий
+          p.phone-number +7(918)-589-45-58
+          textarea.candidate-comment cols="30" placeholder=("Напишите комментарий") rows="4"
+          .request__footer
+            img.request-logo src="/img/new/no-avatar.png" /
+            p.request-user-name Светлана Сперанская
 
 
