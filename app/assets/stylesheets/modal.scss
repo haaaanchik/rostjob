@@ -393,13 +393,39 @@
       box-shadow: none;
       padding: 0;
     }
+
     .request-block-container {
       padding: 0 15px;
     }
+    
+    .request-block .request-block-header {
+      margin-top: 0;
+    }
+
+    .request-body li {
+      background: none !important;
+    }
+
+    .buttons {
+      margin-bottom: 10px;
+    
+      button {
+        border: none;
+      }
+    }
   }
+
   .modal-body {
     padding-left: 0;
     padding: 0;
+  }
+
+  .modal-header {
+    display: none;
+  }
+
+  .modal-content {
+    overflow-y: auto;
   }
 }
 

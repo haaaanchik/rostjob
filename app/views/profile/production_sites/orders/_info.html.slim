@@ -12,6 +12,10 @@
           p.subtitle
             | #{ @order.city }
           == @order.other_info['terms']
+          p.subtitle
+            | Комментарий для рекрутера:
+            == order.other_info['remark']
+
           span.salary #{ @order.customer_price.to_i } руб / чел
       .sidebar
         .contact-person
@@ -22,4 +26,6 @@
           p.phone-number
             | #{ @order.contact_person['phone'] }
     .buttons
+      button type="button" class="public mr-3" data-dismiss="modal" aria-label="Close"
+        span aria-hidden="true" Назад
       = link_to 'Редактировать', first_step_profile_production_site_order_path(@production_site, @order), class: 'public'
