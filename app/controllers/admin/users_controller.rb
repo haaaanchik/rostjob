@@ -31,9 +31,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def user_params
     params.require(:user).permit(:full_name, :email, :is_active, :password, :password_confirmation,
-                                  profile_attributes: [:id, :phone, :photo, 
-                                                       company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone, :inn, 
-                                                                            :fax, :email, :acts_on, :director, :kpp, :ogrn]])
+                                  profile_attributes: [:id, :phone, :photo,
+                                                        company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone, :inn,
+                                                          :fax, :email, :acts_on, :director, :kpp, :ogrn, :description, :legal_form,
+                                                          accounts_attributes: [:id, :account_number, :corr_account, :bic, :bank, :bank_address, :inn, :kpp]]])
   end
 
   def user
