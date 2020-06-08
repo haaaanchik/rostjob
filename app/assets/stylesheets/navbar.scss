@@ -6,6 +6,11 @@
   display: flex;
   justify-content: space-between;
 
+  .vk-icon{
+    width: 21px;
+    height: 21px;
+  }
+
   & > div {
     display: flex;
     align-items: center;
