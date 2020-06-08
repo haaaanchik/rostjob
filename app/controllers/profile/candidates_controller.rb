@@ -28,16 +28,16 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def approve_all_acts
-    @result = Cmd::ProposalEmployee::ApproveListActs.call(candidates: candidates, selected_candidates_ids: params[:proposal_employees_ids])
+    @result = Cmd::ProposalEmployee::ApproveListActs.call(candidates: candidates.approved,
+                                                          profile_id: params[:profile_id])
   end
 
   def approval_list
-    @paginated_lists = candidates.includes(:employee_cv, :profile, order: :production_site)
-                           .approved
-                           .order(:profile_id)
-                           .page(params[:page]).per(10)
-    @approval_list = @paginated_lists.group_by { |pr_empl| pr_empl.profile.decorate }
     @active_item = :approve_act_list
+    @contractor_list = ::ProfilesWithCurrentActsQuery.new(current_profile).call
+    @approval_list = ::ApprovalListOrActsByProfileQuery.new(candidates.approved,
+                                                            @contractor_list,
+                                                            params).call
   end
 
   private

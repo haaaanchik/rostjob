@@ -288,7 +288,23 @@
   display: flex;
   align-items: center;
   margin-bottom: 15px;
-  border-left: 5px solid #00ca5f;
+  border-left: 5px solid #ff2400;
+
+  &__waiting_for_payment {
+    border-left: 5px solid #FFA500;
+  }
+
+  &__moderation {
+    border-left: 5px solid #FFFF00;
+  }
+
+  &__published {
+    border-left: 5px solid #00ca5f;
+  }
+
+  &__completed {
+    border-left: 5px solid #C0C0C0;
+  }
 
   .order-title:hover {
     color: #212529
@@ -426,6 +442,32 @@
 
 #acts .number, #acts .initials span{
   margin-right: 5px;
+}
+
+#acts .contractor-column {
+  overflow: auto;
+  background-color: #ffffff;
+
+  .contractor-link  {
+    border-bottom: 1px solid #575757;
+
+    &:hover {
+      border-bottom: 1px solid #1970ff;
+    }
+
+    .active-link {
+      color: #007bff;
+    }
+
+    a {
+      color: #575757;
+    }
+
+    .contractor-img {
+      height: 50px;
+      width: auto;
+    }
+  }
 }
 
 @media (max-width: 950px) {
