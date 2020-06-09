@@ -6,6 +6,7 @@ class SettingsPage
   @bind: ->
     $('.burger').on 'click', @openAndCloseMobileMenu
 #    $("a.active-link").on 'click', @toggleActiveSettingsPage
+    $('#setting-page').on 'click', '#show_password_block', @showPasswordBlock
 
   @openAndCloseMobileMenu: ->
     burgerLines = $('.burger span')
@@ -13,6 +14,17 @@ class SettingsPage
     burgerLines[1].classList.toggle('rotate-left')
     burgerLines[2].classList.toggle('hide-line')
     $('.settings-column')[0].classList.toggle('mobile-menu')
+
+  @showPasswordBlock: (e) ->
+    e.preventDefault()
+    position = $(this)
+    $('#password_block').toggleClass('d-none')
+    if $('#password_block').is(':visible')
+      position.text('Скрыть')
+    else
+      position.text('Ввести пароль')
+      $('#user_password, #user_password_confirmation, #user_current_password').val('')
+
 
   @toggleActiveSettingsPage: ->
     console.log(123)

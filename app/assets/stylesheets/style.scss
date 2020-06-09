@@ -83,7 +83,8 @@ body {
 
 .was-validated .form-control:invalid, .form-control.is-invalid, .was-validated
 .custom-select:invalid,
-.custom-select.is-invalid {
+.custom-select.is-invalid,
+.form-item .is-invalid {
   border-color: #dc3545 !important;
 }
 
