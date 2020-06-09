@@ -11,6 +11,10 @@ class Order
       validates :city, :salary, presence: true, if: -> { creation_step == 2 }
       validate  :check_for_emptiness
 
+      ASPIRANT_TEXT = 'Рекрутируйте соискателя и доведите до него все требования и условия.'
+      CUSTOMER_TEXT = 'Согласуйте соискателя с контактным лицом в заявке.'
+      CONTRACTOR_ASPIRANT_TEXT = 'Проконтролируйте приезд в согласованную дату. При необходимости скорректируйте дату приезда в системе.'
+
       def default_init
         {
           base_customer_price: 0,
@@ -26,10 +30,23 @@ class Order
             terms: '<p class"subtitle">Обязанности:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Требования:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Условия:</p><span><ul><li></li><li></li></ul></span>',
-            informate_aspirant: false,
-            informate_customer: false,
-            control_aspirant: false,
-            added_data: nil
+            requirements: {
+              aspirant: {
+                show: '1',
+                text: self.class::ASPIRANT_TEXT
+              },
+              customer: {
+                show: '1',
+                text: self.class::CUSTOMER_TEXT
+              },
+              added_data: {
+                text: 'ФИО, телефон, регестрация, возраст'
+              },
+              control_aspirant: {
+                show: '1',
+                text: self.class::CONTRACTOR_ASPIRANT_TEXT
+              }
+            }
           },
           contact_person: {
             name: nil,
@@ -43,7 +60,7 @@ class Order
       end
 
       def added_data?
-        other_info['added_data'].present?
+        other_info['requirements']['added_data']['text'].present?
       end
 
       private

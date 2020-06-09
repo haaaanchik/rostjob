@@ -140,28 +140,21 @@ class OrderDecorator < ApplicationDecorator
     count_states[state] || 0
   end
 
-  def show_informate_aspirant
-    return unless other_info['informate_aspirant'] == '1'
-
-    'Рекрутируйте соискателя и доведите до него все требования и условия.'
-  end
-
-  def show_informate_customer
-    return unless other_info['informate_customer'] == '1'
-
-    'Согласуйте соискателя с контактрым лицом в заявке.'
-  end
-
-  def show_control_aspirant
-    return unless other_info['control_aspirant'] == '1'
-
-    'Проконтролируйте приезд в согласованую дату. При необходимости скорректируйте дату приезда в системе'
-  end
-
   def show_added_data
-    return unless other_info['added_data'].present?
+    return unless other_info['requirements']['added_data']['text'].present?
 
-    ('Отправьте анкету с заполнеными: ' + other_info['added_data'] + ' (анкеты без всех данных будут отклонены!)')
+    ('Отправьте анкету с заполненными: ' + other_info['requirements']['added_data']['text'] + ' (анкеты без всех данных будут отклонены!)')
+  end
+
+  def show_requirements
+    h.content_tag(:ol) do
+      order.other_info['requirements'].each do |key, value_hash|
+        text = value_hash['text'] if value_hash['show'] == '1'
+        text = show_added_data if key == 'added_data'
+
+        h.concat h.content_tag(:li, text)
+      end
+    end
   end
 
   private

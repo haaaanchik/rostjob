@@ -14,6 +14,13 @@
             | #{ order.city }
           == order.other_info['terms']
           span.salary #{ order.customer_price.to_i } руб / чел
+          p
+            | Заказчик ожидает увидеть и не видеть в заявке:
+          == @order.other_info['remark']
+          - if order.other_info['requirements']
+            p.requirements
+              | Комментарий для рекрутера:
+              = order.show_requirements
       .sidebar
         .contact-person
           p.title

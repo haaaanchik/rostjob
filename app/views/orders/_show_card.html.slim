@@ -46,16 +46,12 @@
   .comment
     p.subtitle
       i.fas.fa-comment-alt.w-2.mr-2
-      | Комментарий для рекрутера:
+      | Заказчик ожидает увидеть и не видеть в заявке:
     - unless order.other_info['remark'].nil? || order.other_info['remark'].empty?
       == order.other_info['remark']
       - if order.contact_person['name'] && !order.contact_person['name'].empty? || \
         order.contact_person['phone'] && !order.contact_person['phone'].empty?
-    p.mt-2  
-      = order.show_informate_aspirant
-      br
-      = order.show_informate_customer
-      br
-      = order.show_control_aspirant
-      br
-      = order.show_added_data
+    - if order.other_info['requirements']
+      p.mt-2.subtitle
+        strong Комментарий для рекрутера:
+        = order.show_requirements

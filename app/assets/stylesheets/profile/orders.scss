@@ -276,7 +276,7 @@
   width: 87.247%;
   max-width: 1100px;
   height: max-content;
-  max-height: 662px;
+  // max-height: 700px;
   background-color: #fff;
   margin: 0 auto;
   box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
@@ -471,4 +471,9 @@
   border: none;
   width: 30%;
   text-align: center;
+}
+
+#request-publishing .requirements {
+  border-top: 1px solid gainsboro;
+  padding-top: 10px;
 }
