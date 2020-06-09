@@ -4,7 +4,7 @@ tr.clickable-row data-href=profile_ticket_path(ticket)
     - if ticket.appeal?
       i.fas.fa-file-alt title='Обращение'
     - elsif ticket.incident?
-      i.fa.fa-bookmark.red-text title='Спор'
+      i.fas.fa-angry title='Спор'
   = ticket.user_full_name
   td = ticket.created_at
   td = ticket.incident? ? t("enumerize.incident.reason.#{ticket.title}") : ticket.title
