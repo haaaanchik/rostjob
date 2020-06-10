@@ -4,9 +4,68 @@
   }
 }
 #orders_info_page {
-  table th {
-    padding-top: 0;
+  .dataTables_paginate {
+    margin-top: 15px;
+    position: absolute;
+    text-align: right;
+    left: 45%;
+
+    .paginate_button.page-item.active a {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+      transition: all 0.2s linear;
+      border-radius: 0.125rem;
+      background-color: #4285f4;
+      color: #fff;
+    }
   }
+  .dt-buttons {
+    display: none;
+  }
+  table#order_table {
+    border-collapse: collapse;
+    width: 100%;
+
+    th {
+      padding-top: 0;
+    }
+
+    th, td {
+      border: 1px solid black;
+      text-align: center;
+      padding: 5px;
+    }
+
+    td {
+      text-align: center;
+      padding-top: 0;
+      padding-bottom: 0;
+
+      &:nth-child(3), &:nth-child(4) {
+        text-align: left;
+      }
+    }
+
+    th:nth-child(3), td:nth-child(3) {
+      width: 12%;
+      padding-left: 7px;
+    }
+
+    th:nth-child(4), td:nth-child(4) {
+      width: 20%;
+      padding-left: 7px;
+    }
+
+    .state-col {
+      white-space:nowrap;
+      max-width: 90px;
+    }
+
+    .date-col {
+      max-width: 100px;
+      min-width: 100px
+    }
+  }
+  
 
   #orders_info_search {
     .context-filed {

@@ -1,4 +1,4 @@
-- selected_state = params[:q] && params[:q][:state_eq] ? params[:q][:state_eq] : nil
+- selected_state = params[:q] && params[:q][:state_eq] ? params[:q][:state_eq] : 'published'
 
 .container-fluid.mt-2#orders_info_page
   h2.text-center Список заказов
@@ -19,9 +19,53 @@
     
     .d-flex.align-items-center
       = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm mr-4 btn'
-      = link_to request.params.merge( format: 'pdf' ), title: 'Скачать в pdf' do
+      = link_to  '#', id: 'export_pdf', title: 'Скачать в pdf' do
         i.fas.fa-save.fa-2x
 
   .row
-    = render 'export_pdf/analytics_orders', locals: { orders: @orders }
-  = paginate @orders
+    table.table.table-bordered#order_table
+      thead
+        tr
+          th rowspan='2' Статус
+          th.date-col rowspan='2' Дата публикации
+          th rowspan='2' Название организации
+          th rowspan='2' Заявка
+          th rowspan='2' Объем
+          th.date-col rowspan='2' Дата получения последней анкеты
+          th.date-col rowspan='2' Дата закрытия заявки
+          th colspan='5' Кандидаты
+          th rowspan='2' Оплачено
+          th rowspan='2' Разница (Объем ‐ Оплачено)
+          th rowspan='2' Процент найма
+          th rowspan='2' Скорость найма (за срок существования)
+
+        tr
+          th.state-col В очереди
+          th.state-col На собес
+          th.state-col В найме
+          th.state-col В споре
+          th.state-col Отклон
+      tbody
+
+        - @orders.each do |order|
+          - order_pr_paid_count = order.count_pr_employees_state('paid')
+
+          tr
+            td = order.state_for_analytics
+            td.date-col = order.formated_date(:published_at)
+            td = order.profile.user.full_name
+            td = order.title
+            td = order.number_of_employees
+            td.date-col = order.last_pr_empl
+            td.date-col = order.formated_date(:completed_at)
+            td.state-col = order.count_pr_employees_state('inbox')
+            td.state-col = order.count_pr_employees_state('interview')
+            td.state-col = order.count_pr_employees_state('hired')
+            td.state-col = order.count_pr_employees_state('disputed')
+            td.state-col = order.count_pr_employees_state('rejected')
+            td.state-col = order_pr_paid_count
+            td = order.difference_volum_and_paided(order_pr_paid_count)
+            td = order.count_hired_in_percent(order_pr_paid_count).to_s + ' %'
+            td = order.count_speed_hired(order_pr_paid_count)
+
+
