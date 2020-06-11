@@ -5,104 +5,535 @@
   title  Кадровое агентство по подбору персонала.
 
 body#customer-landing
-  = render 'partials/header', registration_url: new_customer_path
 
+  header.container
+    .block
+      a.land-logo href="#"
+        img alt="" src="img/customer-landing/Logo_Rost_Job_final.png" /
+    span Кадровое агентство по поиску и подбору персонала
+    .block.log-in-reg
+      button.green-btn--short.js-call-modal type="button"
+        | Заказать звонок
+      a.land-tel-number href="tel:+88007006768"  8 (800) 700-67-86
+    .mobile-menu
+      ul
+        li
+          a href="#"  О компании
+        li
+          a href="#"  Услуги
+        li
+          a href="#"  Цены
+        li
+          a href="#"  Акции
+        li
+          a href="#"  Контакты
+        li
+          a href="#"  Вход
+        li
+          a href="#"  Регистрация
+        li
+          a href="tel:+88007006768"  8 800 700 6786
+        li
+          button.green-btn--short.js-call-modal type="button"  Заказать звонок
+    .burger
+      span
+      span
+      span
   main
+    section.menu
+      .container
+        ul.menu-list
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | О компании
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Услуги
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Цены
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Акции
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Контакты
+        .log-in-or-reg
+          a.land-log-in href="#"  Вход
+          span.slash = '/'
+          a.registration href="#"  Регистрация
     section.landing-header.container
       .content
         h1.title
           | Агентство по подбору персонала
         h2.subtitle
-          | Подбор персонала для вашей компании за 3 дня по цене от 8 000 рублей за сотрудника с гарантией полного возврата денежних средств
+          | Подбор персонала для вашей компании за 3 дня по цене от 8 000 рублей за сотрудника с гарантией полного возврата денежных средств
         .hire-staff-block
           input placeholder=("Введите email для регистрации") type="email" /
           a.hire-staff-btn href="#"  Нанять персонал
       .landing-header-img
         img alt="" src="img/customer-landing/header-img.png" /
-    section.top-description
+      .stamp
+        div
+          span
+            | Лучшая цена в России
+    section.company-services
       .container
-        .description
-          p.description-normal
-            | Трудно не согласиться, что почти все фирмы, кроме единичных семейных бизнесов, 
-            span.bold нуждаются в организации подбора сотрудников. 
-            | Даже когда персонал полностью укомплектован, важно иметь ресурсы для привлечения новых кадров, которые позволят восполнить текучесть и расширить масштабы деятельности.
-          p.description-small
-            | Для решения этих задач можно либо воспользоваться услугами дорогостоящего <br>HR - специалиста, положившись на удачное стечение обстоятельств. Либо довериться фирмам по подбору сотрудников.
-        .description
-          p.description-small
-            | Впрочем, обращаясь к рядовым агентствам, есть риск столкнуться с целым рядом проблем. Включая отсутствие гарантий и наглядности динамики комплектаций. RostJob дает возможность убедиться в правильности заполнения заявок. 
-            span.bold А также оплачивать только успешные сделки.
-          p.description-normal.bold
-            | RostJob – это сервис, который предоставляет интерфейс управления системой найма персонала от ведущей компании в области HR.
-      = image_tag  '/img/customer-landing/top-description-rectangle.png', class: 'rectangle'
+        h2.title-common.company-services__title
+          | Услуги рекрутинговой компании
+        .blocks-container
+          .block
+            span
+              | Массовый набор специалистов
+              br/
+              span.blue-color от 8 000 ₽
+          .block
+            span
+              | Подбор Руководителей и ТОП менеджеров
+              br/
+              span.blue-color от 9 000 ₽
+          .block
+            span
+              | Поиск домашнего персонала
+              br/
+              span.blue-color от 10 000 ₽
+          .block
+            span
+              | Набор линейного персонала
+              br/
+              span.blue-color от 11 000 ₽
+          .block
+            span
+              | Наем разнорабочих специалистов
+              br/
+              span.blue-color от 12 000 ₽
+          .block
+            span
+              | Кадровый аутсорсинг
+              br/
+              span.blue-color от 13 000 ₽
+    section.specializing.container
+      h2.title-common.company-services__title
+        | Специализируемся на вакансиях в отраслях
+      .categories
+        .category-block
+          p.title
+            | Строительство
+          hr/
+          p.subtitle Строители
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Монтажники
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Недвижимость
+          hr/
+          p.subtitle Риелторы
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Ипотечные брокеры
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Розничная торговля
+          hr/
+          p.subtitle Уборщики
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Кладовщики
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Оптовая торговля
+          hr/
+          p.subtitle Менеджеры по продажам
+          p.price
+            | цена 8 000 ₽
+          p.subtitle.nowrap
+            | Менеджеры по работе с клиентами
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Логистика
+          hr/
+          p.subtitle Водители
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Курьеры
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Склады
+          hr/
+          p.subtitle Заведующие складом
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Кладовщики
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Производство
+          hr/
+          p.subtitle Инженеры
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Технологи
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Гостиничный бизнес
+          hr/
+          p.subtitle Администраторы
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Управляющие
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Бухгалтерия
+          hr/
+          p.subtitle Бухгалтеры
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Главние бухгалтеры
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Юриспруденция
+          hr/
+          p.subtitle Юристы
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Адвокаты
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Ресторанный бизнес
+          hr/
+          p.subtitle Официанты
+          p.price
+            | цена 8 000 ₽
+          p.subtitle
+            | Бармены
+          p.price
+            | цена 8 000 ₽
+          span.show-more.js-show-more
+            | Показать ещё
+            img.show-more-img alt="" src="img/customer-landing/show_more_arrow.png" /
+          .dropdown.js-dropdown
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+            p.subtitle
+              | Монтажники
+            p.price
+              | цена 8 000 ₽
+        .category-block
+          p.title
+            | Посмотреть весь прайс
+          hr/
+          button.green-btn type="button"
+            | Посмотреть
     section.advantages
       .container
-        h2.title Наши преимущества
-        = image_tag  '/img/customer-landing/top-description-rectangle.png', class: 'advantages_rectangles'
+        h2.title-common Наши преимущества
+        img.advantages_rectangles alt="" src="img/customer-landing/top-description-rectangle.png" /
+        img.advantages-girl alt="" src="img/customer-landing/girl-calling.png" /
         .advantages_block
           .row
-            .advantages_block_item.advantages-item_clearly
+            .advantages_block_item
+              .advantages_block_item_img
+                img alt="" src="img/customer-landing/svg/svg1.svg" /
+              header
+                | Самые низкие цены
+              p
+                | Стоимость подбора сотрудников от 8 000 до 25 000 руб
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg1.svg" /
               header
                 | Наглядно
-              p Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
-            .advantages_block_item.advantages-item_bots
+              p
+                | Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg2.webp" /
               header
                 | Инновационно
               p
-                | Автоматизированные звонки
-                | по базам поиска работ
-                | с помощью голосовых 
-                | ботов бесплатно
-            .advantages_block_item.advantages-item_promptly
+                | Автоматизированные звонки по базам поиска работ с помощью голосовых ботов бесплатно для ускорения поиска кандидатов
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg3.webp" /
               header
                 | Оперативно
               p Оперативная комплектация вакансии в любые точки РФ
           .row
-            .advantages_block_item.advantages-item_warranty
+            .advantages_block_item
               .advantages_block_item_img
-                img.icon-guarantee alt="" src="img/customer-landing/svg/svg4.webp" /
+                img alt="" src="img/customer-landing/svg/svg4.webp" /
               header
                 | Гарантия
-              p Гарантия выполнения или возврат денег
-            .advantages_block_item.advantages-item_regions
+              p
+                | Гарантия трудоутройства сотрудника в вашу компанию в течение
+                br/
+                | 7 дней или полный возврат денег
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg5.webp" /
               header
-                | Регионы
-              p Более 500 представителей в регионах
-            .advantages_block_item.advantages-item_experience
+                | География
+              p
+                | Поиск персонала осуществляют 516 рекрутеров во всех 85 регионах России
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg6.webp" /
               header
                 | Опыт
-              p 10 летний профессиональный опыт в HR
-            .advantages_block_item.advantages-item_interface
+              p
+                | Профессионально работаем в HR с 2010 года
+            .advantages_block_item
               .advantages_block_item_img
                 img alt="" src="img/customer-landing/svg/svg7.webp" /
               header
                 | Интерфейс
-              p Интуитивно понятный интерфейс
-    section.services.container
-      h2.title
-        | Услуги кадрового агентства
-      .description-container
-        .description
-          p.description-normal.bold
-            | Кадровое интернет-агентство «RostJob» нацелено на партнерство как с молодыми компаниями, так и опытными бизнес-игроками – в частности, из Санкт-Петербурга и Москвы.
-        .description
-          p.description-small
-            | Рекрутеры сервиса, включая региональных представителей, занимаются проработкой заявок работодателей на поиск сотрудников. Отбор кандидатов идет в самых разноплановых сферах, а информация о соискателях тщательно проверяется.
-          p.description-small
-            | В целом, площадка по подбору персонала «RostJob» осуществляет деятельность на основе договора оферты между заказчиками и исполнителями. Ознакомиться с документом можно после регистрации на сайте.
-          = image_tag  '/img/customer-landing/girl-in-descr.png', class: 'girl-in-descr'
-      #download-price-list
-        = link_to 'Посмотреть прайс лист', price_path
+              p
+                | Интуитивно понятный интерфейс нашей
+                br/
+                | CRM для новичков
     section.steps
       .container
         .row
@@ -113,64 +544,34 @@ body#customer-landing
               p.title
                 | Зарегистрироваться
               p
-                | Регистрация на сайте производится путем заполнения простейшей формы, куда потребуется ввести только адрес электронной почты. 
-                | Затем, подтвердить его переходом по ссылке, которая будет указана в отправленном системой письме.
+                | Регистрация на сайте производится путем заполнения простейшей формы, куда потребуется ввести только адрес электронной почты. А затем подтвердить его переходом по ссылке, которая будет указана в отправленном системой письме.
               .steps_item_img
-                img.icon-registration alt="" src="img/recruiters_landing/icon-registration.svg" /
+                img alt="" src="img/recruiters_landing/icon-registration.svg" /
             .steps_item
               p.title
                 | Создать заявку
               p
                 | Оформление заявок на поиск персонала осуществляется с помощью специального конструктора, который упрощает работу с сервисом. В форме необходимо указать информацию о вакансии, контакты и сообщение для рекрутера.
               .steps_item_img
-                img.icon-create alt="" src="img/recruiters_landing/icon-create.svg" /
+                img alt="" src="img/recruiters_landing/icon-create.svg" /
             .steps_item
               p.title
                 | Используйте CRM
               p
                 | Облегчить процесс управления поиском персонала позволит встроенная в сервис CRM-система.    Она представляет собой интерфейс для веб-приложения, автоматизирующий общение между исполнителями и заказчиками.
               .steps_item_img
-                img.icon-crm alt="" src="img/recruiters_landing/icon-crm.svg" /
-    section.our-partnerships.container
-      .row
-        .img-block.recruitment-agency
-          = image_tag  '/img/customer-landing/our-partnerships.png', class: 'recruitment-agency-img'
-        .description.recruitment-agency
-          h2 Как работает кадровое агентство
-          p
-            | Кадровое интернет-агентство «RostJob» работает с соблюдением единого договора на предоставление услуг по поиску персонала. Исполнитель передает заказчику резюме кандидатов, чьи анкеты соответствуют требованиям вакансии. Если в ходе сотрудничества с сервисом работодатель находит подходящего сотрудника, он выплачивает рекрутеру вознаграждение, сумма которого была указана в заявке.
-          p
-            | Детальная информация о правах и обязанностях сторон будет доступна после регистрации.
-        .description.recruiters
-          h2 Рекрутеры
-          p
-            span.bold Отточенные алгоритмы 
-            | позволяют агентству по подбору персонала «ROSTJOB» быстро находить соискателей даже 
-            | в маловостребованных базах поиска работы. Система самостоятельно связывается с претендентами, после чего
-            | в автоматическом режиме переводят звонок заинтересовавшегося кандидата свободному рекрутеру.
-          p
-            | Иными словами, специалист начинает диалог с соискателем не с знакомства, а уже конкретного предложения. 
-            span.bold Рекрутеры «ROSTJOB» – слаженный механизм с десятилетним опытом комплектования заявок по подбору персонала, что позволяет говорить о бесспорном профессионализме команды.
-        .img-block.recruiters
-          img.people-search alt="" src="img/customer-landing/people-search-new.png" /
-        .img-block.world
-          img.people-world alt="" src="img/customer-landing/people-world.png" /
-        .description.regional-representatives
-          h2 Региональные представители
-          p
-            | Системная работа с региональными представителями – комплексное и взвешенное решение агентства по поиску работы «ROSTJOB», позволяющее находить таланты во всех уголках России.
-          p
-            span.bold Опыт показал, 
-            | что всеобъемлющая комплектация заявок может опираться только на развитие сотрудничества с рекрутерами, которые работают в удаленном режиме.
-          p
-            span.bold Как результат 
-            | – работодателю не требуется заключать отдельный договор с каждым рекрутером. «ROSTJOB» уладил все юридические вопросы. Заказчику остается лишь одно – выбрать соискателя.
+                img alt="" src="img/recruiters_landing/icon-crm.svg" /
+          p.steps-help
+            = 'Нужна помощь или есть вопросы по системе – обращайтесь по телефону: '
+            span.bold 8 800 700 67 86,
+            = 'напишите на почту: '
+            span.bold manager@rosjob.com
     section.about-us
+      h2.title Генеральный партнер
       .container
-        h2.title Генеральный партнер
         .description
           .about-partner
-            img.about-us-img alt="" src="img/customer-landing/logo_rost3.png" /
+            img.about-us-img alt="" src="img/customer-landing/loro_rost3.png" /
             p.description-normal
               | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
           .numbers
@@ -187,8 +588,6 @@ body#customer-landing
                 br/
                 | представителей
       .about-us_rectangles
-        .about-us_rectangles_img
-          img alt="" src="img/customer-landing/girl-calling.png" /
         .about-us_rectangles_wrapper
           div
             div
@@ -200,18 +599,178 @@ body#customer-landing
                         div
                           div
                             div
-
+    section.services.container
+      h2.title
+        | Услуги кадрового агентства
+      .description-container
+        .description
+          p.description-normal.bold
+            | Кадровое интернет-агентство «RostJob» нацелено на партнерство как с молодыми компаниями, так и опытными бизнес-игроками – в частности, из Санкт-Петербурга и Москвы.
+        .description
+          p.description-small
+            | Рекрутеры сервиса, включая региональных представителей, занимаются проработкой заявок работодателей на поиск сотрудников. Отбор кандидатов идет в самых разноплановых сферах, а информация о соискателях тщательно проверяется.
+          p.description-small
+            | В целом площадка по подбору персонала «RostJob» осуществляет деятельность на основе договора оферты между заказчиками и исполнителями. Ознакомиться с документом можно после регистрации на сайте.
+          img.girl-in-descr alt="" src="img/customer-landing/girl-in-descr.png" /
+      #download-price-list
+        a href="#"  Посмотреть прайс лист
+    section.our-partnerships.container
+      .row
+        .img-block.recruitment-agency
+          img.recruitment-agency-img alt="" src="img/customer-landing/our-partnerships-1.png" /
+        .description.recruitment-agency
+          h2 Как работает кадровое агентство
+          p
+            | Кадровое интернет-агентство «RostJob» работает с соблюдением единого договора на предоставление услуг по поиску персонала. Исполнитель передает заказчику резюме кандидатов, чьи анкеты соответствуют требованиям вакансии. Если в ходе сотрудничества с сервисом работодатель находит подходящего сотрудника, он выплачивает рекрутеру вознаграждение, сумма которого была указана в заявке.
+          p
+            | Детальная информация о правах и обязанностях сторон будет доступна после регистрации.
+          a#download-contract-offer href="#"  Скачать договор оферты
+        .description.recruiters
+          h2 Рекрутеры
+          p
+            span.bold Отточенные алгоритмы позволяют агентству по подбору персонала «ROSTJOB» быстро находить соискателей даже в маловостребованных базах поиска работы. Система самостоятельно связывается с претендентами, после чего в автоматическом режиме переводят звонок заинтересовавшегося кандидата свободному рекрутеру.
+          p
+            | Иными словами, специалист начинает диалог с соискателем не с знакомства, а уже конкретного предложения.
+            span.bold Рекрутеры «ROSTJOB» – слаженный механизм с десятилетним опытом комплектования заявок по подбору персонала, что позволяет говорить о бесспорном профессионализме команды.
+        .img-block.recruiters
+          img.people-search alt="" src="img/customer-landing/people-search.png" /
+        .img-block.world
+          img.people-world alt="" src="img/customer-landing/people-world.png" /
+        .description.regional-representatives
+          h2 Региональные представители
+          p
+            | Системная работа с региональными представителями – комплексное и взвешенное решение агентства по поиску работы «ROSTJOB», позволяющее находить таланты во всех уголках России.
+          p
+            span.bold Опыт показал, что всеобъемлющая комплектация заявок может опираться только на развитие сотрудничества с рекрутерами, которые работают в удаленном режиме.
+          p
+            span.bold Как результат – работодателю не требуется заключать отдельный договор с каждым рекрутером. «ROSTJOB» уладил все юридические вопросы. Заказчику остается лишь одно – выбрать соискателя.
+    section.leave-request.container
+      .actions-container
+        img alt="" src="img/customer-landing/leave-request-man.png" /
+        .actions
+          .block
+            p.title
+              | Позвоните по телефону 8 (800) 700-67-86
+            p.description
+              | и получите бесплатный предварительный расчет стоимости услуг
+          .block
+            p.title
+              | или оставьте заявку
+            p.description
+              | и мы свяжемся с Вами в ближайше время
+      form.form action=""
+        p.title
+          | Хотите узнать стоимость
+        input.input.name placeholder=("Ваше имя") type="text" /
+        input.input.phone placeholder="Телефон" type="text" /
+        button.btn-send-form type="submit"
+          | Отправить
   footer
     .container
-      span.rights-reserved © Все права защищены
-      .contacts
-        a.footer-tel-number href="tel:+88007006768"  8 800 700 6786
-        .footer-social
-          span.in-social Мы в соц. сетях:
-          a href='https://vk.com/rostjobcom'
-            img alt="vk" src="img/recruiters_landing/vk.png"
-          / a.insta href="#"
-          /   img alt="instagram" src="img/insta_w.png" /
-          / a href="#"
-          /   img alt="youtube" src="img/youtube_w.png" /
-      a.designed-by href="http://sitini.ru/" target="_blank"  design by: sitini.ru
+      .footer-vacancies
+        p.item
+          | Массовый набор специалистов
+          br/
+          | от 8 000 ₽
+        p.item
+          | Подбор Руководителей и ТОП менеджеров
+          br/
+          | от 9 000 ₽
+        p.item
+          | Поиск домашнего персонала
+          br/
+          | от 10 000 ₽
+        p.item
+          | Кадровый аутсорсинг
+          br/
+          | от 13 000 ₽
+        p.item
+          | Наем разнорабочих специалистов
+          br/
+          | от 12 000 ₽
+        p.item
+          | Набор линейного персонала
+          br/
+          | от 11 000 ₽
+      hr/
+      .cities
+        .city
+          p.description
+            | г. Набережны Челны,
+            br/
+            | ул. Академика Рубаненко, 6
+        .city
+          p.description
+            | г. Санкт-Петербург,
+            br/
+            | ул. Академика Рубаненко, 6
+        .city
+          p.description
+            | г. Москва,
+            br/
+            | ул. Академика Рубаненко, 6
+        .city
+          p.description
+            | г. Казань,
+            br/
+            | ул. Академика Рубаненко, 6
+        .city
+          p.description
+            | г. Ростов,
+            br/
+            | ул. Академика Рубаненко, 6
+      .footer-bottom
+        .info
+          p.year
+            | © 2020
+          a.land-tel-number href="tel:+88007006768"  8 (800) 700-67-86
+          a href="mailto:manager@rostjob.com"
+            | manager@rostjob.com
+          a href="https://vk.com/rostjobcom"
+            | https://vk.com/rostjobcom
+          p.geolocation
+            img.geolocation-img alt="" src="img/customer-landing/geolocation.png" /
+            | г. Москва
+        a.designed-by href="#"  design by: sitini.ru
+  #modal.modal
+    #overlay.overlay
+      form.form action=""
+        img alt="" src="img/customer-landing/modal-man.png" /
+        .inputs-container
+          input.name placeholder=("Ваше имя") type="text" /
+          input.phone placeholder="Телефон" type="text" /
+          button.green-btn type="submit"  Отправить
+        .js-close-modal.close-modal
+          img alt="" src="img/customer-landing/close_modal.png" /
+
+javascript:
+    let arr = document.querySelectorAll('.js-show-more');
+    for (let i = 0; i < arr.length; i++) {
+        arr[i].addEventListener('click', openDropdown);
+    }
+
+    function openDropdown(e) {
+        $('.js-dropdown').not(e.target.nextElementSibling).removeClass('open');
+        let target = e.target;
+        if (target.classList.contains('show-more')) {
+            target.nextElementSibling.classList.toggle('open');
+        }
+    }
+
+    // Modal
+    $('.js-call-modal').on('click', openModal);
+
+    function openModal() {
+        $('#modal').addClass('open');
+    }
+
+    $('#overlay').on('click', closeModal);
+    $('.js-close-modal').on('click', closeModal);
+
+    function closeModal() {
+        $('#modal').removeClass('open');
+    }
+
+    $('#overlay .form').on('click', function (e) {
+        e.stopPropagation();
+    })
