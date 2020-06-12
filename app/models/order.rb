@@ -114,9 +114,11 @@ class Order < ApplicationRecord
     moderate! if may_moderate?
   end
 
+  # TODO: refactoring code
   def to_published
     return unless may_publish?
-    update(published_at: Date.today, state: :published)
+    publish!
+    update(published_at: Date.today)
     comments.create(text: 'Заявка допущена к публикации')
   end
 
@@ -132,8 +134,12 @@ class Order < ApplicationRecord
     hide! if may_hide?
   end
 
+  # TODO: refactoring code
   def to_completed
-    update(completed_at: Date.today, state: :completed) if may_complete?
+    return false unless may_complete?
+
+    complete!
+    update(completed_at: Date.today)
   end
 
   def balance
