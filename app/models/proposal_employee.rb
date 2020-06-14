@@ -125,8 +125,7 @@ class ProposalEmployee < ApplicationRecord
 
   def check_uniqueness_employee_cv
     uniqueness = ProposalEmployee.joins(:employee_cv)
-                     .where(employee_cv_id: employee_cv_id,
-                            order_id: order_id,
+                     .where(order_id: order_id,
                             'employee_cvs.phone_number': employee_cv.phone_number)
                      .where.not(id: id,
                                 state: 'revoked')
