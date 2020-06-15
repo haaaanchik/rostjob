@@ -15,7 +15,7 @@
           .profile_block.p-3
             h3.my-3 Профиль
             .form-group.row
-              = f.label :full_name, t('staffer.name'), class: 'col-lg-4 col-12 col-sm-6'
+              = f.label :full_name, @user.decorate.label_full_name, class: 'col-lg-4 col-12 col-sm-6'
               .col-lg-6.col-12.col-sm-6
                 = f.text_field :full_name, class: "form-control "
               
@@ -32,6 +32,12 @@
               .col-lg-6.col-12.col-sm-6
                 = f.password_field :password_confirmation, class: "form-control"
             = f.fields_for :profile, @user.profile do |ff|
+              = ff.fields_for :company do |c_f|
+                .form-group.row
+                  .col-lg-4.col-12.col-sm-6
+                    | Описание компании
+                  .col-lg-6.col-12.col-sm-6
+                    = c_f.text_area :description, class: 'form-control', rows: 4
               .form-group.row
                 .col-lg-4.col-12.col-sm-6
                   | Логотип компании
@@ -46,13 +52,12 @@
                   .form-group.row
                     = ff.label :phone, 'Контактный номер телефона', class: 'col-lg-4 col-12 col-sm-6'
                     .col-lg-6.col-12.col-sm-6
-                      = ff.telephone_field :phone, class: "form-control"
+                      = ff.telephone_field :phone, class: 'form-control'
       - if @user.profile.customer?
         .col-5.p-3.company_block
           h3.my-2 Карточка предприятия
           = f.fields_for :profile, @user.profile do |f_p|
-            = f_p.fields_for :company, @user.profile.company do |c_f|
-              = render partial: 'companies/fields', locals: {f: c_f, errors: @user.profile.company.errors, profile: @user.profile}
+            = render partial: 'profiles/company_card', locals: { f: f_p, errors: @user.profile.company.errors, profile: @user.profile }
     .d-flex.justify-content-end
       .buttons.mr-5.mt-2
         = f.button t('buttons.save'), type: :submit, class: 'btn btn-success ml-3'
