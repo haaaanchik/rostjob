@@ -1,11 +1,14 @@
 class Admin::ApplicationController < BaseController
   include Admin::SessionsHelper
+  include Pundit
 
   protect_from_forgery prepend: true
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   before_action :authenticate_staffer!
   before_action :opened_tickets_count, if: :staffer_signed_in?
   before_action :approved_admin_count, if: :staffer_signed_in?
+  before_action :set_authorize
 
   layout 'admin'
 
@@ -17,5 +20,17 @@ class Admin::ApplicationController < BaseController
 
   def approved_admin_count
     @approved_admin_count = ProposalEmployee.approved_by_admin.count
+  end
+
+  def pundit_user
+    current_staffer
+  end
+
+  def set_authorize
+    authorize [:admin, :staffer], :index?
+  end
+
+  def user_not_authorized
+    render 'admin/staffers/user_not_authorized'
   end
 end
