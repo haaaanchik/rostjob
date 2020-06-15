@@ -1,7 +1,5 @@
 #sign_in_page_wrapper
-  .header
-    = render 'users/header_logo.html'
- 
+
   .d-flex.flex-column.justify-content-center.align-items-center.h-100
     .text-center.border.border-light.p-5.d-flex.flex-column.justify-content-center.align-items-center
       - if @user.errors.messages.any?

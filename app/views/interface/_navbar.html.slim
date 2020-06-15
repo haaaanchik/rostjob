@@ -10,8 +10,7 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
             locals: { active_item: @active_item }
 
   = link_to root_path, class: 'main-logo' do
-    | Rost
-    span Job
+    = image_tag('/img/rostjob-logo.svg')
     - if Rails.env.staging?
       span.counter
         b stage

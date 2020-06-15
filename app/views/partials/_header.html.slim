@@ -1,8 +1,10 @@
 #navbar.container
   .block
     a.land-logo href='/'
-      span.col-blue rost
-      | job.com
+      = image_tag('/img/rostjob-logo.svg')
+      - if Rails.env.staging?
+            span.counter
+              b stage
     .land-social
       a.vk-icon href="https://vk.com/rostjobcom"
         = image_tag('/img/vk-icon.svg')

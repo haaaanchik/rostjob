@@ -1,8 +1,10 @@
 #common-landing
   .common-landing__header
     a.company-name href="/"
-      | Rost
-      span.textBlue job.com
+      = image_tag('/img/rostjob-logo.svg')
+      - if Rails.env.staging?
+            span.counter
+              b stage
     div
       .social
         a href='https://vk.com/rostjobcom'

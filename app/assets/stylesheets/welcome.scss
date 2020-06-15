@@ -431,7 +431,7 @@ main{
 //Landing_choice
 #common-landing {
   width: 100%;
-  height: calc(100vh - 58px);
+  height: calc(100vh);
   margin: 0;
   font-family: 'Open-Sans', sans-serif;
 }
@@ -440,7 +440,7 @@ main{
   position: absolute;
   height: 74px;
   width: 100%;
-  z-index: 3;
+  z-index: 9999;
   display: flex;
   align-items: center;
   padding-left: 8.28%;  //левый отступ
@@ -479,10 +479,15 @@ main{
 }
 
 #common-landing .company-name {
+  position: relative;
   text-transform: uppercase;
   font-size: 20px;
   font-weight: bold;
   color: black;
+  img{
+    width: 170px;
+    max-width: 170px;
+  }
 }
 
 #common-landing .company-name .textBlue {
@@ -645,6 +650,12 @@ main{
   width: 82.12%;
   max-width: 560px;
   pointer-events: none;
+}
+
+#sign_up_page_wraper{
+  >.header{
+    display: none;
+  }
 }
 
 @media (max-width: 1200px) {
