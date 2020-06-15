@@ -1,4 +1,6 @@
 class Admin::AnalyticsController < Admin::ApplicationController
+  skip_before_action :set_authorize, only: %i[orders_info]
+
   def export_to_excel
     orders
     respond_to do |format|
@@ -18,6 +20,8 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def orders_info
+    authorize [:admin, :analytic]
+
     @orders = paginate_array(find_orders, params[:page])
 
     respond_to do |format|

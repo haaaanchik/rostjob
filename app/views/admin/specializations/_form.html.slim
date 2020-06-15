@@ -1,10 +1,21 @@
-.card
-  .card-body
-    h3 #{@specialization.persisted? ? 'Редактировать специализацию' : 'Новая специализация'}
-    = form_with model: [:admin, @specialization] do |f|
-      .form-group
-        = f.label :title, t('specialization.title')
-        = f.text_field :title, class: "form-control"
-        .invalid-feedback
-      = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
-      = link_to t('buttons.cancel'), admin_specializations_path, class: 'btn btn-indigo mt-5'
+= form_with model: [:admin, @specialization] do |f|
+  .row.mt-4
+    .col-lg-2.mr-2
+      = f.label :title, t('specialization.title')
+    .col-lg-4
+      = f.text_field :title, class: "form-control"
+      .invalid-feedback
+  .row.mt-4
+    .col-lg-2.mr-2
+      = f.label :positions, t('specialization.position')
+    .col-lg-9
+      = f.collection_select :position_ids,
+              f.object.positions, :id, :title,
+              { selected: f.object.position_ids },
+              { multiple: 'multiple', class: 'form-control d-block' }
+      .invalid-feedback
+  .row
+    .col-lg-4.offset-lg-3.mb-4
+      = f.button t('buttons.save'), class: 'btn btn-primary mt-5'
+    .col-lg-4.mb-4
+      = link_to t('buttons.cancel'), admin_specializations_path, class: 'btn btn-default mt-5'

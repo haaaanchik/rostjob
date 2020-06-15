@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_133610) do
+ActiveRecord::Schema.define(version: 2020_06_14_120217) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -366,6 +366,13 @@ ActiveRecord::Schema.define(version: 2020_06_02_133610) do
     t.index ["title"], name: "index_positions_on_title"
   end
 
+  create_table "positions_specializations", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "specialization_id", null: false
+    t.bigint "position_id", null: false
+    t.index ["position_id"], name: "index_positions_specializations_on_position_id"
+    t.index ["specialization_id"], name: "index_positions_specializations_on_specialization_id"
+  end
+
   create_table "price_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -374,7 +381,7 @@ ActiveRecord::Schema.define(version: 2020_06_02_133610) do
     t.decimal "contractor_price", precision: 10, scale: 2
   end
 
-  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
+  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "title"
     t.bigint "profile_id"
     t.datetime "created_at", null: false

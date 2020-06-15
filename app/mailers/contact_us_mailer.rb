@@ -20,4 +20,11 @@ class ContactUsMailer < ApplicationMailer
 
     mail(to: 'manager@rostjob.com', subject: 'Спор')
   end
+
+  def request_call
+    @username = params[:username]
+    @phone_number = params[:phone_number]
+
+    mail(to: 'manager@rostjob.com', subject: 'Заявка на бесплатную консультацию')
+  end
 end

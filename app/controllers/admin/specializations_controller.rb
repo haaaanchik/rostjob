@@ -1,4 +1,6 @@
 class Admin::SpecializationsController < Admin::ApplicationController
+  before_action :set_authorize
+
   def index
     paginated_specializations
   end
@@ -37,7 +39,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   private
 
   def specialization_params
-    params.require(:specialization).permit(:title)
+    params.require(:specialization).permit(:title, position_ids: [])
   end
 
   def paginated_specializations
@@ -60,5 +62,9 @@ class Admin::SpecializationsController < Admin::ApplicationController
                          else
                            Specialization.order(title: :asc)
                          end
+  end
+
+  def set_authorize
+    authorize [:admin, :specialization]
   end
 end

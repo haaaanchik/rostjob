@@ -390,6 +390,8 @@ GEM
       pry (>= 0.12.0)
     public_suffix (4.0.3)
     puma (3.12.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     raabro (1.1.6)
     rack (2.0.7)
     rack-protection (2.0.5)
@@ -563,6 +565,8 @@ GEM
       railties (>= 3.1.1)
     tinymce-rails-langs (4.20180103)
       tinymce-rails (~> 4.1, >= 4.1.10)
+    toastr-rails (1.0.3)
+      railties (>= 3.1.0)
     ttfunk (1.5.1)
     turbolinks (5.2.0)
       turbolinks-source (~> 5.2)
@@ -664,6 +668,7 @@ DEPENDENCIES
   pry-rails
   pry-rescue
   puma (~> 3.11)
+  pundit
   rails (~> 5.2)
   rails-erd
   rails-i18n
@@ -693,6 +698,7 @@ DEPENDENCIES
   strip_attributes (~> 1.9)
   tinymce-rails
   tinymce-rails-langs
+  toastr-rails
   turbolinks (~> 5)
   tzinfo-data
   uglifier (~> 4.1, >= 4.1.10)
