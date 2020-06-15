@@ -69,7 +69,7 @@
         - @favorites.each do |favorite|
           - pr_employee_cvs = favorite.without_paid_revoked_employees
           - next if favorite.completed? && pr_employee_cvs.empty?
-          .moveable.card.card-list data-order-id="#{favorite.id}"
+          .moveable.card.card-list class="card-list__#{favorite.state}" data-order-id="#{favorite.id}"
             .card-header
               h3.card-title.text-left.mb-0 #{favorite.title_with_skill}
               p.salary.text-left = favorite.salary
