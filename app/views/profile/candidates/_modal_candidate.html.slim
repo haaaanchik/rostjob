@@ -4,7 +4,7 @@
     .modal-content
       .modal-header
         .modal-header-top
-          .modal-title ##{ candidate.id } #{employee_cv.name}
+          .modal-title ##{ employee_cv.id } #{employee_cv.name}
           .modal-activities
             = render partial: 'profile/candidates/toolbars/actions_candidate', locals: {candidate: candidate}
         p.modal-request-type
