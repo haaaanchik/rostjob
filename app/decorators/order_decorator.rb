@@ -157,6 +157,10 @@ class OrderDecorator < ApplicationDecorator
     end
   end
 
+  def last_pr_empl
+    proposal_employees&.last&.created_at&.strftime('%d.%m.%Y')
+  end
+
   private
 
   def count_month_is_be

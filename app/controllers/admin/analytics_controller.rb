@@ -22,12 +22,10 @@ class Admin::AnalyticsController < Admin::ApplicationController
   def orders_info
     authorize [:admin, :analytic]
 
-    @orders = paginate_array(find_orders, params[:page])
-
-    respond_to do |format|
-      format.html
-      format.pdf { render pdf_settings }
-    end
+    @q = Order.for_analytics.ransack(params[:q])
+    result = params[:q] && params[:q][:state_eq] ? @q.result : @q.result.where(state: :published)
+    @orders = result.includes(:user).joins('LEFT JOIN proposal_employees ON proposal_employees.order_id = orders.id')
+                .group('orders.id').where.not(state: :draft).reorder('MAX(proposal_employees.created_at) ASC').decorate
   end
 
   private
@@ -40,22 +38,5 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def orders
     @orders ||= Order.where(created_at: date_interval)
-  end
-
-  def find_orders
-    @q = Order.for_analytics.ransack(params[:q])
-    @orders = @q.result.includes(:user, :proposal_employees).where.not(state: :draft).decorate
-  end
-
-  def pdf_settings
-    {
-      pdf: 'analytics_orders',
-      template: 'export_pdf/_analytics_orders.html',
-      orientation: 'Landscape',
-      page_size: 'A4',
-      locals: { orders: find_orders },
-      dpi: 300,
-      encoding: 'utf-8'
-    }
   end
 end
