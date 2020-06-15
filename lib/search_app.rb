@@ -12,6 +12,8 @@ class SearchApp
                   City.autocomplete_search(params['term'])
                 when '/search_specialization'
                   Specialization.autocomplete_search(params['term'])
+                when '/search_admin_position'
+                  SearchPositionQuery.call(term: params['q']).limit(20)
                 when '/search_position'
                   Position.autocomplete_search(params['term'])
                 when '/search_company_dadata'

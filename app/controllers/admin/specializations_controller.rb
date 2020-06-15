@@ -37,7 +37,7 @@ class Admin::SpecializationsController < Admin::ApplicationController
   private
 
   def specialization_params
-    params.require(:specialization).permit(:title)
+    params.require(:specialization).permit(:title, position_ids: [])
   end
 
   def paginated_specializations

@@ -1,6 +1,9 @@
 class TermsController < ApplicationController
+  skip_before_action :auth_user, only: %i[download]
+
   def index
     @terms = Terms.new
+    @profile_type = current_profile.profile_type
     flash[:alert] = 'Вы должны принять условия оферты, прежде чем продолжить' unless current_user.terms_of_service
     respond_to do |format|
       format.html
@@ -17,6 +20,14 @@ class TermsController < ApplicationController
       redirect_to edit_user_registration_path
     else
       render :index
+    end
+  end
+
+  def download
+    @profile_type = 'customer'
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf_setting }
     end
   end
 

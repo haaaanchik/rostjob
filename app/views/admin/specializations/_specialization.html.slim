@@ -1,7 +1,8 @@
 tr
-  td #{specialization.title}
+  td= specialization.title
+  td= specialization.display_position_titles.html_safe
   td
-    = link_to edit_admin_specialization_path(specialization) do
+    = link_to edit_admin_specialization_path(specialization), class: 'mr-2' do
       i.far.fa-edit
     = link_to admin_specialization_path(specialization), method: :delete, data: { confirm: 'Вы уверены?' } do
       i.far.fa-trash-alt

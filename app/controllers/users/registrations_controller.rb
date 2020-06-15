@@ -4,21 +4,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # skip_before_action :authenticate_user!
   skip_before_action :auth_user
   before_action :configure_update_params, only: :update
-  before_action :set_user_new, only: %i[new new_contractor new_customer landing_for_contractor landing_for_customer]
-  before_action :set_secret_landing, only: %i[landing_for_contractor landing_for_customer]
 
   # GET /resource/sign_up
   def new
     @user = User.new
   end
-
-  def new_contractor; end
-
-  def new_customer; end
-
-  def landing_for_contractor; end
-
-  def landing_for_customer; end
 
   def contractor_info
     @message = 'Для регистрации или найма персонала обратитесь по адресу manager@rostjob.com или по номеру +7 960 079 06 41'
@@ -104,13 +94,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
       resource.skip_validation_password = params[:password].blank?
       resource.update_with_password(params)
     end
-  end
-
-  def set_user_new
-    @user = User.new
-  end
-
-  def set_secret_landing
-    render layout: 'secret_landing'
   end
 end
