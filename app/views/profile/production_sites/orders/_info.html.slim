@@ -13,8 +13,11 @@
             | #{ @order.city }
           == @order.other_info['terms']
           p.subtitle
-            | Комментарий для рекрутера:
+            | Заказчик ожидает увидеть и не видеть в заявке:
             == order.other_info['remark']
+          p.subtitle
+            | Комментарий для рекрутера:
+            = order.show_requirements
 
           span.salary #{ @order.customer_price.to_i } руб / чел
       .sidebar

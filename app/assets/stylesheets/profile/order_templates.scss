@@ -245,6 +245,9 @@ input::placeholder{
                 border-radius: 4px;
                 border: 1px solid rgb(215, 215, 215);
               }
+              .added_data {
+                max-width: 550px
+              }
 
               &_wrapper{
                 display: grid;
@@ -277,9 +280,13 @@ input::placeholder{
                     max-width: 100%;
                   }
                 }
-                >div{
+                >div {
                   width: 100%;
                   max-width: 370px;
+
+                  &.checkbox_row {
+                    max-width: 100%;
+                  }
                 }
                 .note-editor{
                   margin-top: 5px;
@@ -493,4 +500,15 @@ input::placeholder{
 .main_patternRequest .invalid-feedback {
   width: 60%;
   margin-left: 34%;
+}
+
+.main_patternRequest .pattern_body_steps_form_step  .checkbox_row {
+  label.form-check-label {
+    min-width: 50px;
+  }
+  span {
+    font-weight: 600;
+    font-size: 14px;
+    color: #000;
+  }
 }

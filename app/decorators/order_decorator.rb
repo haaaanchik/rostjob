@@ -140,6 +140,23 @@ class OrderDecorator < ApplicationDecorator
     count_states[state] || 0
   end
 
+  def show_added_data
+    return unless other_info['requirements']['added_data']['text'].present?
+
+    ('Отправьте анкету с заполненными: ' + other_info['requirements']['added_data']['text'] + ' (анкеты без всех данных будут отклонены!)')
+  end
+
+  def show_requirements
+    h.content_tag(:ol) do
+      order.other_info['requirements'].each do |key, value_hash|
+        text = value_hash['text'] if value_hash['show'] == '1'
+        text = show_added_data if key == 'added_data'
+
+        h.concat h.content_tag(:li, text)
+      end
+    end
+  end
+
   private
 
   def count_month_is_be

@@ -11,6 +11,10 @@ class Order
       validates :city, :salary, presence: true, if: -> { creation_step == 2 }
       validate  :check_for_emptiness
 
+      ASPIRANT_TEXT = 'Рекрутируйте соискателя и доведите до него все требования и условия.'
+      CUSTOMER_TEXT = 'Согласуйте соискателя с контактным лицом в заявке.'
+      CONTRACTOR_ASPIRANT_TEXT = 'Проконтролируйте приезд в согласованную дату. При необходимости скорректируйте дату приезда в системе.'
+
       def default_init
         {
           base_customer_price: 0,
@@ -26,6 +30,23 @@ class Order
             terms: '<p class"subtitle">Обязанности:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Требования:</p><span><ul><li></li><li></li></ul></span>
 <p class"subtitle">Условия:</p><span><ul><li></li><li></li></ul></span>',
+            requirements: {
+              aspirant: {
+                show: '1',
+                text: self.class::ASPIRANT_TEXT
+              },
+              customer: {
+                show: '1',
+                text: self.class::CUSTOMER_TEXT
+              },
+              added_data: {
+                text: 'ФИО, телефон, регестрация, возраст'
+              },
+              control_aspirant: {
+                show: '1',
+                text: self.class::CONTRACTOR_ASPIRANT_TEXT
+              }
+            }
           },
           contact_person: {
             name: nil,
@@ -36,6 +57,10 @@ class Order
           advertising: false,
           adv_text: nil
         }
+      end
+
+      def added_data?
+        other_info['requirements']['added_data']['text'].present?
       end
 
       private
@@ -51,8 +76,6 @@ class Order
                      I18n.t("activerecord.errors.models.#{model_name}.attributes.error.contact_person.name")) if contact_person['name'].blank?
           errors.add(:contact_person_phone.to_sym,
                      I18n.t("activerecord.errors.models.#{model_name}.attributes.error.contact_person.phone")) if contact_person['phone'].blank?
-          errors.add(:other_info_remark.to_sym,
-                     I18n.t("activerecord.errors.models.#{model_name}.attributes.error.other_info.remark")) if other_info['remark'].blank?
         else
           true
         end
