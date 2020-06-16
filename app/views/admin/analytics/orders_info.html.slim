@@ -27,12 +27,12 @@
       thead
         tr
           th rowspan='2' Статус
-          th.date-col rowspan='2' Дата публикации
+          th rowspan='2' Дата публикации
           th rowspan='2' Название организации
           th rowspan='2' Заявка
           th rowspan='2' Объем
-          th.date-col rowspan='2' Дата получения последней анкеты
-          th.date-col rowspan='2' Дата закрытия заявки
+          th rowspan='2' Дата получения последней анкеты
+          th rowspan='2' Дата закрытия заявки
           th colspan='5' Кандидаты
           th rowspan='2' Оплачено
           th rowspan='2' Разница (Объем ‐ Оплачено)
@@ -54,7 +54,10 @@
             td = order.state_for_analytics
             td.date-col = order.formated_date(:published_at)
             td = order.profile.user.full_name
-            td = order.title
+            td
+              = order.production_site.title
+              = ' <br> '.html_safe
+              b = "##{order.id} #{order.title}"
             td = order.number_of_employees
             td.date-col = order.last_pr_empl
             td.date-col = order.formated_date(:completed_at)

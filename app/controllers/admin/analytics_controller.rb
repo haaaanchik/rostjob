@@ -24,8 +24,7 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
     @q = Order.for_analytics.ransack(params[:q])
     result = params[:q] && params[:q][:state_eq] ? @q.result : @q.result.where(state: :published)
-    @orders = result.includes(:user).joins('LEFT JOIN proposal_employees ON proposal_employees.order_id = orders.id')
-                .group('orders.id').where.not(state: :draft).reorder('MAX(proposal_employees.created_at) ASC').decorate
+    @orders = result.includes(:user).where.not(state: :draft).decorate
   end
 
   private
