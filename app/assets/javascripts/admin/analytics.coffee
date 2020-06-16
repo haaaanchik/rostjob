@@ -33,12 +33,13 @@ class Analytics
         paginate:
           previous: '<<'
           next: '>>'
-      buttons: [ {
+      buttons: [ 
+        $.extend(true, {}, @fixNewLine(),
         extend: 'pdfHtml5'
         orientation: 'landscape'
         pageSize: 'TABLOID'
         download: 'open'
-        title: null
+        title: null  
         customize: (doc) ->
           doc.content[0].alignment = 'right'
           doc.styles.tableHeader = 
@@ -83,11 +84,19 @@ class Analytics
             '#aaa'
 
           doc.content[0].layout = objLayout
-      } ]
+        ) ]
 
   @exportPDF: (e) ->
     e.preventDefault()
     $('.dt-button.buttons-pdf').click()
+  
+  @fixNewLine: ->
+    exportOptions: 
+      format: 
+        body: (data, column, row) ->
+          data = data.replace( /<br\s*\/?>/ig, "\n" )
+          data = data.replace( /<b\s*\/?>/ig, '' )
+          data = data.replace( /<\/b\s*\/?>/ig, '' )
 
 $(document).on 'turbolinks:load', ->
   Analytics.init()
