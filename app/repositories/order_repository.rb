@@ -92,6 +92,6 @@ module OrderRepository
     scope :for_analytics, -> { select(:id, :title, :number_of_employees, :published_at, :completed_at, :production_site_id,
                                       :profile_id, :state, :created_at, :updated_at)
                                       .joins('LEFT JOIN proposal_employees ON proposal_employees.order_id = orders.id')
-                                      .group('orders.id').order('-max(proposal_employees.created_at) ASC') }
+                                      .group('orders.id').order('max(proposal_employees.created_at) ASC') }
   end
 end
