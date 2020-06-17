@@ -7,6 +7,7 @@ class SendingEveryDayMailCustomerJob < ApplicationJob
     invoice_wait_payment
     proposal_employee_inbox
     has_disputed_customer
+    has_unaproved_acts
   end
 
   private
@@ -39,6 +40,12 @@ class SendingEveryDayMailCustomerJob < ApplicationJob
   def has_disputed_customer
     ProposalEmployee.disputed.includes(:order, profile: :setting_objects).group_by { |pr| pr.order.profile }.each do |profile, prop_emp|
       ProposalEmployeeMailJob.perform_now(proposal_employees: prop_emp, method: 'informated_customer_has_disputed') if profile.every_day_mailing?
+    end
+  end
+
+  def has_unaproved_acts
+    ProposalEmployee.approved.includes(:order, profile: :setting_objects).group_by { |pr| pr.order.profile }.each do |profile, candidates|
+      ProposalEmployeeMailJob.perform_now(proposal_employees: candidates, method: 'informated_customer_wait_aprove_act') if profile.every_day_mailing?
     end
   end
 end
