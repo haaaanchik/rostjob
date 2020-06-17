@@ -17,15 +17,15 @@ body#customer-landing
     .mobile-menu
       ul
         li
-          a href="#"  О компании
+          = link_to 'О компании', '#', class: 'disabled'
         li
-          a href="#"  Услуги
+          = link_to 'Услуги', '#', class: 'disabled'
         li
-          a href="#"  Цены
+          = link_to 'Цены', '#', class: 'disabled'
         li
-          a href="#"  Акции
+          = link_to 'Акции', '#', class: 'disabled'
         li
-          a href="#"  Контакты
+          = link_to 'Контакты', '#', class: 'disabled'
         li
           = link_to 'Вход', login_path
         li
@@ -43,20 +43,15 @@ body#customer-landing
       .container
         ul.menu-list
           li.menu-list__item
-            a.menu-list__link href="#"
-              | О компании
+            = link_to 'О компании', '#', class: 'menu-list__link disabled'
           li.menu-list__item
-            a.menu-list__link href="#"
-              | Услуги
+            = link_to 'Услуги', '#', class: 'menu-list__link disabled'
           li.menu-list__item
-            a.menu-list__link href="#"
-              | Цены
+            = link_to 'Цены', '#', class: 'menu-list__link disabled'
           li.menu-list__item
-            a.menu-list__link href="#"
-              | Акции
+            = link_to 'Акции', '#', class: 'menu-list__link disabled'
           li.menu-list__item
-            a.menu-list__link href="#"
-              | Контакты
+            = link_to 'Контакты', '#', class: 'menu-list__link disabled'
         .log-in-or-reg
           = link_to 'Вход', login_path, class: 'land-log-in'
           span.slash = '/'
@@ -415,7 +410,7 @@ body#customer-landing
           p.geolocation
             = image_tag '/img/customer-landing/geolocation.png', class: 'geolocation-img'
             | г. Москва
-        a.designed-by href="#"  design by: sitini.ru
+        = link_to 'design by: sitini.ru', '#', class: 'designed-by disabled'
   #modal.modal
     #overlay.overlay
       = form_for '', url: request_call_path, method: :post, html: { class: 'form' } do |f|
