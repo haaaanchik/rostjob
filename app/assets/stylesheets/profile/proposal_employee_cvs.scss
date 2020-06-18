@@ -671,3 +671,11 @@
     width: 12.5%;
   }
 }
+
+#worksheet .filters-show {
+  p:hover {
+    .fa-bookmark.dark-text {
+      color: #000000;
+    }
+  }
+}
