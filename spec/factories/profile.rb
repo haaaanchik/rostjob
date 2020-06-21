@@ -31,7 +31,7 @@ FactoryBot.define do
       # end
     end
 
-    trait :contractor_profile do
+    factory :contractor_profile do
       profile_type { 'contractor' }
       legal_form   { 'private_person' }
     end

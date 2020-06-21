@@ -27,7 +27,6 @@ class SettingsPage
 
 
   @toggleActiveSettingsPage: ->
-    console.log(123)
     $("a.active-link").parents('li').addClass('active-link-underline');
 
 $(document).on 'turbolinks:load', ->

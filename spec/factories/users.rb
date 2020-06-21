@@ -26,10 +26,9 @@ FactoryBot.define do
       end
     end
 
-    trait :contractor do
-      association :profile, factory: [:profile, :contractor_profile]
+    factory :contractor do
+      association :profile, factory: [:contractor_profile]
     end
-
 
     after(:build) do |u|
       u.skip_confirmation_notification!

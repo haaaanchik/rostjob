@@ -31,8 +31,8 @@ RSpec.feature 'Order', type: :feature do
       click_button('Далее')
       sleep(1)
 
-      fill_in 'contact-face', with: order[:contact_person][:contact_name]
-      fill_in 'contact-face-number', with: order[:contact_person][:contact_phone]
+      fill_in 'contact-face', with: order[:contact_person][:name]
+      fill_in 'contact-face-number', with: order[:contact_person][:phone]
 
       page.execute_script("tinyMCE.get('order_template_other_info_remark').setContent('TEXT')")
       find_by_id('send').click
@@ -58,13 +58,18 @@ RSpec.feature 'Order', type: :feature do
   #     click_link('Редактировать')
 
   #     fill_in 'Квалификация', with: new_order_skill
+     
+  #     save_and_open_page
   #     click_link('Далее')
 
   #     click_button('Далее')
-  #     fill_in 'contact-face', with: order.contact_person['contact_name']
-  #     fill_in 'contact-face-number', with: order.contact_person['contact_phone']
+  #     save_and_open_page
   #     click_button('Сохранить')
 
+  #     sleep(5)
+      
+  #     binding.pry
+      
   #     expect(Order.last.skill).to eq(new_order_skill)
   #   end
   # end
@@ -88,36 +93,42 @@ RSpec.feature 'Order', type: :feature do
 
     scenario 'close!' do
       click_button('Да')
+
+      sleep(1)
+
       expect(customer.profile.orders.last.state).to eq('completed')
     end
 
     scenario 'dont closed' do
       click_button('Нет')
+
+      sleep(1)
+
       expect(customer.profile.orders.last.state).to eq('published')
     end
   end
 
-  context 'close order', js: true do
-    let!(:customer) { create(:customer, :with_production_site) }
-    let(:price_group) { create(:price_group) }
-    let!(:order) { create(:order, profile: customer.profile, production_site: customer.profile.production_sites.first, position: price_group.positions.first)}
+  # context 'add +1 emp to order', js: true do
+  #   let!(:customer) { create(:customer, :with_production_site) }
+  #   let(:price_group) { create(:price_group) }
+  #   let!(:order) { create(:order, profile: customer.profile, production_site: customer.profile.production_sites.first, position: price_group.positions.first)}
 
-    scenario 'add emp' do
-      sign_in(customer)
-      find('#production-site-list').click
-      find('#first_pr_site').click
-      click_link(order.title)
-      sleep(1)
-      find('.enjoyhint_skip_btn').click
-      find('.add-personal').click
-      sleep(1)
+  #   scenario 'add!' do
+  #     sign_in(customer)
+  #     find('#production-site-list').click
+  #     find('#first_pr_site').click
+  #     click_link(order.title)
+  #     sleep(1)
+  #     find('.enjoyhint_skip_btn').click
+  #     find('.add-personal').click
+  #     sleep(1)
 
-      # page.execute_script("$('#order_number_additional_employees').val('1')")
-      # find('#order_number_additional_employees').set('1')
-      # click_button('Добавить')
+  #     # page.execute_script("$('#order_number_additional_employees').val('1')")
+  #     # find('#order_number_additional_employees').set('1')
+  #     # click_button('Добавить')
 
-      # save_and_open_page
-      # expect(page).to have_content('Осталось 2 человек')
-    end
-  end
+  #     # save_and_open_page
+  #     # expect(page).to have_content('Осталось 2 человек')
+  #   end
+  # end
 end
