@@ -420,3 +420,12 @@
     }
   }
 }
+
+#setting-page #show_password_block {
+  text-align: center;
+  line-height: 32px;
+}
+
+#setting-page .invalid-feedback {
+  display: block;
+}

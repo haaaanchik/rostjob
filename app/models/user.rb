@@ -69,6 +69,18 @@ class User < ApplicationRecord
     result
   end
 
+  def update_with_be_password(params)
+    if params[:password].blank? && params[:password_confirmation].blank?
+      self.skip_validation_password = true
+      params.delete(:password)
+      params.delete(:password_confirmation)
+      params.delete(:current_password)
+      return update(params)
+    end
+
+    update_with_password(params)
+  end
+
   def accept_terms
     update_attribute(:terms_of_service, true)
   end
