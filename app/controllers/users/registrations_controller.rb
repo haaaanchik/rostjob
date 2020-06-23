@@ -28,9 +28,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
                   для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
                 render 'users/inform_page'
               else
-                render 'users/registrations/new_contractor' if params.key?(:contractor)
-                render 'users/registrations/new_customer' if params.key?(:customer)
-                # render json: { validate: true, data: errors_data(result.user) }
+                render 'landing_pages/new_contractor' if params.key?(:contractor)
+                render 'landing_pages/new_customer' if params.key?(:customer)
               end
   end
 
