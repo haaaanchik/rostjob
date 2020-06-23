@@ -1,9 +1,9 @@
 h5.sub_title
-  | Оферта
+  | Оферта 
   br
-  | на заключение договора на оказание услуг по поиску и подбору персонала
+  | на заключение договора по оказанию услуг поиска и подбора персонала 
   br
-  |  посредством веб-сервиса «ROSTJOB»
+  |  посредством веб-сервиса RostJob
 .body
   = render @profile_type
 
@@ -20,8 +20,12 @@ h5.sub_title
       br
       | Почтовый адрес: 423810, Республика Татарстан, г. Набережные Челны, ул. Академика Рубаненко, д.4, оф 359
       br
-      | Номера телефонов: (909) 312-26-00
-      br
+      .number_title Номера телефонов: 
+      .numbers
+        | +7 (8552) 78-10-30 
+        br  
+        | +7 (903) 319-76-28
+      .clear_block
       | ИНН: 1650390021
       br
       | КПП: 165001001
@@ -38,7 +42,7 @@ h5.sub_title
       br
       | БИК: 042202824
       br
-      | Генеральный директор: Юсупова Мария Васильевна действует на основании Устава
+      | Генеральный директор: Юсупов Ильфат Илюсович действует на основании Устава
 = image_tag image_url("/img/signature.jpg"), id: 'signature'
 
 
@@ -53,4 +57,25 @@ scss:
   }
   .body {
     font-size: 18px;
+
+    ol {
+      list-style-type: none;
+      counter-reset:  item;
+    }
+    li:before {
+      content: counter(item) ') ';
+      counter-increment: item;
+    }
+
+    .number_title {
+      float: left;
+      margin-right: 15px
+    }
+    .numbers {
+      float: left;
+    }
+    .clear_block {
+      clear: left;
+    }
   }
+
