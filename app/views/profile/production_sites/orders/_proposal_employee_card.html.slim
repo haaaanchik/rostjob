@@ -1,11 +1,12 @@
 - order.decorate.proposal_employees_by_status(state).decorate.each do |proposal_employee|
-  .request
+  .request data-proposal_employee_id="#{proposal_employee.id}"
     i.fa.fa-bookmark style="color: #{proposal_employee.status_color_class}"
     .request_data_time #{ proposal_employee.display_date_to_card }
     = link_to profile_candidate_path(proposal_employee), remote: true do
       p.request__title №#{ proposal_employee.employee_cv.id } #{ proposal_employee.employee_cv.name }
     p.phone-number = proposal_employee.employee_cv.phone_number
     textarea.candidate-comment cols="30" rows="4" placeholder="Напишите комментарий"
+      = proposal_employee.decorate.display_comment(current_user)
     .request__footer
       = image_tag proposal_employee.profile.image_url, class: 'request-logo'
       p.request-user-name = proposal_employee.profile.user.full_name

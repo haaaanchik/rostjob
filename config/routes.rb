@@ -255,6 +255,7 @@ Rails.application.routes.draw do
       member do
         put :revoke
         put :approve_act
+        put :comment
       end
       collection do
         get :approval_list
