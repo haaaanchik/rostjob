@@ -12,6 +12,7 @@
       / li = link_to 'Инструкция на оплату счёта', page_path('manual_how_to_pay_invoice')
       li = link_to 'Статусы анкет', page_path('manual_set_status_proposal_employee')
       li = link_to 'Шаблоны', page_path('manual_patterns')
+      li = link_to 'Как подтвердить Акт?', page_path('manual_how_to_approved_act')
     - if (user_signed_in? && current_user.profile.contractor?) || !user_signed_in?
       li =  link_to 'Как отправить анкету?', page_path('manual_how_send_emp')
       li = link_to 'Как изменить дату прибытия соискателя?', page_path('manual_correct_date_arrive')

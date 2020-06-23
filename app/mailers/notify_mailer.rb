@@ -80,10 +80,19 @@ class NotifyMailer < ApplicationMailer
 
   def informated_customer_has_disputed
     @prop_emp = params[:proposal_employees]
-    contractor_email = @prop_emp.first.profile.user.email
+    contractor_email = @prop_emp.first.order.profile.user.email
 
     subject = @prop_emp.size > 1 ? 'RostJob. Уведомление об открытых спорах' : 'RostJob. Уведомление об открытом споре'
 
     mail(to: contractor_email, subject: subject)
+  end
+
+  def informated_customer_wait_aprove_act
+    @prop_emps = params[:proposal_employees]
+    customer_email = @prop_emps.first.order.profile.user.email
+
+    subject = @prop_emps.size > 1 ? 'RostJob. Уведомление об неподтвержденных актах' : 'RostJob. Уведомление об неподтвержденном акте'
+
+    mail(to: customer_email, subject: subject)
   end
 end

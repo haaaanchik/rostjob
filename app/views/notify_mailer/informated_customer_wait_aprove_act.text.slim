@@ -1,0 +1,9 @@
+= "Уважаемый, #{@prop_emps.first.order.user.full_name}. "
+- if  @prop_emps.size > 1
+  | Ваши сотрудники отработали
+- else
+  | Ваш сотрудник отработал
+= ' гарантийный срок. Подтвердите выполнение условия в меню Акты. '
+= url_for approval_list_profile_candidates_url
+= 'Чтобы узнать как подтвердить Акт прочите инструкцию. Ссылка на инструкцию '
+= url_for page_url('manual_how_to_approved_act')
