@@ -1,8 +1,0 @@
-- val =  params[:q] ? params[:q][candidate_search_fields] : nil
-- filter = params[:q] ? params[:q][:state_in] : %w[]
-
-= search_form_for @q, url: url_form_canidates do |f|
-  .search
-    = f.search_field candidate_search_fields, class: 'search_candidates', placeholder: 'Поиск анкет', value: val
-    = image_tag('/img/new/search.png')
-

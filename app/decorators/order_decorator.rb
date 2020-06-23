@@ -147,12 +147,14 @@ class OrderDecorator < ApplicationDecorator
   end
 
   def show_requirements
+    return unless other_info['requirements']
+
     h.content_tag(:ol) do
-      order.other_info['requirements'].each do |key, value_hash|
+      model.other_info['requirements'].each do |key, value_hash|
         text = value_hash['text'] if value_hash['show'] == '1'
         text = show_added_data if key == 'added_data'
 
-        h.concat h.content_tag(:li, text)
+        h.concat h.content_tag(:li, text) unless text.nil?
       end
     end
   end

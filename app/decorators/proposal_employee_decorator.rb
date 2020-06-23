@@ -6,9 +6,10 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     'interview' => 'orange',
     'hired' => 'green',
     'disputed' => 'red',
-    'paid' => 'grey',
+    'paid' => 'dark',
     'deleted' => 'brown',
     'reserved' => 'blue',
+    'approved' => 'grey',
     'transfer' => 'default-color'
   }
 
