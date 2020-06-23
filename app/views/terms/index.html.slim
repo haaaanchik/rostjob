@@ -10,7 +10,7 @@
       .row.scrollbar-near-moon.thin.mt-2
         .border#privacy_policy
           = render 'term_pdf'
-
+          
           - unless current_profile.user.terms_of_service
             = form_for @terms,
                     url: terms_accept_path,
