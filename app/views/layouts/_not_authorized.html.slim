@@ -5,15 +5,16 @@
       - if Rails.env.staging?
         span.counter
           b stage
-    div
-      .social
-        a href='https://vk.com/rostjobcom'
-          = image_tag '/img/vk.png', alt: 'vk', class: 'vk'
-        / a href="#"
-        /   = image_tag '/img/insta.png', alt: 'instagram',class: 'insta'
-        / a href="#"
-        /   = image_tag '/img/youtube.png', alt: 'youtube',class: 'youtube'
-      = link_to 'Вход', login_path, class: 'log-in'
+    - unless current_page?(login_path)
+      div
+        .social
+          a href='https://vk.com/rostjobcom'
+            = image_tag '/img/vk.png', alt: 'vk', class: 'vk'
+          / a href="#"
+          /   = image_tag '/img/insta.png', alt: 'instagram',class: 'insta'
+          / a href="#"
+          /   = image_tag '/img/youtube.png', alt: 'youtube',class: 'youtube'
+        = link_to 'Вход', login_path, class: 'log-in'
 
   .choose-container.scrollbar-near-moon.thin
     = yield
