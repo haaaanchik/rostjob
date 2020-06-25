@@ -21,23 +21,19 @@ FactoryBot.define do
         end
       end
 
-      # trait :with_orders do
-      #   after(:create) do |prof|
-      #     create(:company, companyable: prof)
-      #       create(:production_site, profile: prof)
-      #       create(:price_group)
-      #       # create(:order, production_site: prof.production_sites.first,  position: Position.first, profile: prof)
-      #   end
-      # end
+      after(:create) do |prof|
+        create(:balance, profile: prof)
+      end
     end
 
     factory :contractor_profile do
       profile_type { 'contractor' }
       legal_form   { 'private_person' }
+
+      after(:create) do |prof|
+        create(:zero_balance, profile: prof)
+      end
     end
 
-    after(:create) do |prof|
-      create(:balance, profile: prof)
-    end
   end
 end

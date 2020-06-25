@@ -1,4 +1,4 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
+    # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -67,3 +67,6 @@ RSpec.configure do |config|
 end
 Faker::Config.locale = :ru
 Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :poltergeist do |app|
+   Capybara::Poltergeist::Driver.new(app, window_size: [1920, 1080])
+ end

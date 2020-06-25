@@ -44,44 +44,37 @@ RSpec.feature 'Order', type: :feature do
     end
   end
 
-  # context 'edit order' do
-  #   let!(:customer) { create(:customer, :with_production_site) }
-  #   let!(:price_group) { create(:price_group) }
-  #   let!(:order) { create(:order, profile: customer.profile, production_site: customer.profile.production_sites.first, position: price_group.positions.first)}
-  #   let(:new_order_skill) { "#{order.skill} 111" }
+  context 'edit order' do
+    let!(:order) { create(:order) }
+    let(:new_contact) { 'new contact name' }
 
-  #   scenario 'edit order' do
-  #     sign_in(customer)
-  #     find('#production-site-list').click
-  #     find('#first_pr_site').click
-  #     click_link(order.title)
-  #     click_link('Редактировать')
+    scenario 'edit order' do
+      sign_in(order.profile.user)
+      find('#production-site-list').click
+      find('#first_pr_site').click
+      click_link(order.title)
+      click_link('Редактировать')
 
-  #     fill_in 'Квалификация', with: new_order_skill
-     
-  #     save_and_open_page
-  #     click_link('Далее')
+      click_link('Далее')
 
-  #     click_button('Далее')
-  #     save_and_open_page
-  #     click_button('Сохранить')
+      click_button('Далее')
 
-  #     sleep(5)
-      
-  #     binding.pry
-      
-  #     expect(Order.last.skill).to eq(new_order_skill)
-  #   end
-  # end
+      fill_in 'contact-face', with: new_contact
+
+      click_button('Сохранить')
+
+      sleep(1)
+
+      expect(Order.last.contact_person['name']).to eq(new_contact)
+    end
+  end
 
   context 'close order', js: true do
-    let!(:customer) { create(:customer, :with_production_site) }
-    let(:price_group) { create(:price_group) }
-    let!(:order) { create(:order, profile: customer.profile, production_site: customer.profile.production_sites.first, position: price_group.positions.first)}
+    let!(:order) { create(:order) }
 
     before(:each) do
-      expect(customer.profile.orders.last.state).to eq('published')
-      sign_in(customer)
+      expect(Order.last.state).to eq('published')
+      sign_in(order.profile.user)
       find('#production-site-list').click
       find('#first_pr_site').click
       click_link(order.title)
@@ -96,7 +89,7 @@ RSpec.feature 'Order', type: :feature do
 
       sleep(1)
 
-      expect(customer.profile.orders.last.state).to eq('completed')
+      expect(Order.last.state).to eq('completed')
     end
 
     scenario 'dont closed' do
@@ -104,31 +97,94 @@ RSpec.feature 'Order', type: :feature do
 
       sleep(1)
 
-      expect(customer.profile.orders.last.state).to eq('published')
+      expect(Order.last.state).to eq('published')
     end
   end
 
-  # context 'add +1 emp to order', js: true do
-  #   let!(:customer) { create(:customer, :with_production_site) }
-  #   let(:price_group) { create(:price_group) }
-  #   let!(:order) { create(:order, profile: customer.profile, production_site: customer.profile.production_sites.first, position: price_group.positions.first)}
+  context 'add employ to order' do
+    let!(:order) { create(:order) }
 
-  #   scenario 'add!' do
-  #     sign_in(customer)
-  #     find('#production-site-list').click
-  #     find('#first_pr_site').click
-  #     click_link(order.title)
-  #     sleep(1)
-  #     find('.enjoyhint_skip_btn').click
-  #     find('.add-personal').click
-  #     sleep(1)
+    scenario 'add!', js: true do
+      sign_in(order.profile.user)
+      find('#production-site-list').click
+      find('#first_pr_site').click
 
-  #     # page.execute_script("$('#order_number_additional_employees').val('1')")
-  #     # find('#order_number_additional_employees').set('1')
-  #     # click_button('Добавить')
+      click_link(order.title)
+      sleep(1)
 
-  #     # save_and_open_page
-  #     # expect(page).to have_content('Осталось 2 человек')
-  #   end
-  # end
+      find('.enjoyhint_skip_btn').click
+      find('.add-personal').click
+      sleep(1)
+
+      page.execute_script("$('#order_number_additional_employees').val('1')")
+
+      click_button('Добавить')
+
+      sleep(1)
+
+      find('.enjoyhint_skip_btn').click
+      click_on('Оплатить')
+      sleep(1)
+
+      expect(Order.last.number_of_employees).to eq(order.number_of_employees + 1)
+      expect(page).to have_content("Осталось #{Order.last.number_of_employees} человек")
+    end
+
+    scenario "cant add, more that balance", js: true do
+      sign_in(order.profile.user)
+      find('#production-site-list').click
+      find('#first_pr_site').click
+
+      click_link(order.title)
+      sleep(1)
+
+      find('.enjoyhint_skip_btn').click
+      find('.add-personal').click
+      sleep(1)
+
+      page.execute_script("$('#order_number_additional_employees').val('999')")
+
+      click_button('Добавить')
+
+      sleep(1)
+
+      find('.enjoyhint_skip_btn').click
+      expect(page).to have_link('Пополнить баланс')
+      count_order = Order.last.customer_price * 999
+      expect(count_order).to be > Balance.last.amount
+    end
+  end
+
+  context 'reopen order' do
+    let!(:order) { create(:order, :compleated) }
+
+    scenario "reopen!", js: true do
+      sign_in(order.profile.user)
+      find('#production-site-list').click
+      find('#first_pr_site').click
+      sleep(1)
+      find('.enjoyhint_skip_btn').click
+      sleep(1)
+
+      find("div[data-target='finished']").click
+      sleep(1)
+
+      click_link(order.title)
+      sleep(1)
+      find('.enjoyhint_skip_btn').click
+
+      find('.add-personal').click
+      sleep(1)
+
+      page.execute_script("$('#order_number_additional_employees').val('1')")
+      click_button('Добавить')
+      sleep(1)
+
+      find('.enjoyhint_skip_btn').click
+      click_on('Оплатить')
+      sleep(1)
+
+      expect(Order.last.state).to eq('published')
+    end
+  end
 end

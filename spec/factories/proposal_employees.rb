@@ -18,12 +18,28 @@ FactoryBot.define do
       hiring_date { (Date.today - 1.month)}
     end
 
+    trait :paid do
+      state { 'paid' }
+      payment_date { Date.today }
+    end
+
+    ## Nested message
+    trait :disputed do
+      state { 'disputed' }
+      interview_date { Date.today }
+
+      # after(:create) do |pr_empl|
+      #   create(:incident, user: pr_empl.order.profile.user, waiting: 'contractor',
+      #           proposal_employee: pr_empl)
+      # end
+    end
+
     before(:create) do |pr_empl|
-      order = create(:created_order)
+      order = create(:order)
       pr_empl.order = order
       contractor = create(:contractor)
       pr_empl.profile = contractor.profile
-      pr_empl.employee_cv = create(:employee_cv)
+      pr_empl.employee_cv = create(:employee_cv, profile: contractor.profile)
     end
   end
 end

@@ -12,7 +12,12 @@ FactoryBot.define do
     ogrn { 'РОСТ' }
     director { Faker::Name.name }
     acts_on { 'РОСТ' }
-    own_company { false }
+    own_company { true }
     legal_form { "company" }
+    active { true }
+
+    after(:create) do |company|
+      create(:account, accountable: company)
+    end
   end
 end

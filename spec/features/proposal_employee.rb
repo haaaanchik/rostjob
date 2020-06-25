@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature 'ProposalEmployee', type: :feature do
   context 'contractor actions' do
     context 'work with orders' do
-      let!(:order) { create(:created_order) }
+      let!(:order) { create(:order) }
       let(:contractor) { create(:contractor) }
       let(:employee_cv) { attributes_for(:employee_cv) }
       let(:customer) { order.profile.user }
@@ -88,6 +88,54 @@ RSpec.feature 'ProposalEmployee', type: :feature do
         expect(EmployeeCv.where(profile_id: contractor.id).where.not(comment: nil).count).to eq(1)
       end
     end
+
+    context 'check fillters by state employeers in candidates page' do
+      let!(:order) { create(:order) }
+      let(:contractor) { create(:contractor) }
+      let!(:prop_eml_hired) do
+        cv = create(:employee_cv, profile: contractor.profile)
+        ProposalEmployee.create(order: order, profile: contractor.profile, employee_cv: cv,
+                                state: 'hired')
+      end
+
+      let!(:prop_eml_interviewed) do
+        cv2 = create(:employee_cv, profile: contractor.profile, phone_number: '+7(955)-555-55-66')
+        ProposalEmployee.create(order: order, profile: contractor.profile, employee_cv: cv2,
+                                state: 'interview', interview_date: Date.today)
+      end
+
+      before(:each) do
+        sign_in(prop_eml_hired.profile.user)
+
+        page.should have_link('Фильтры', href: profile_proposal_employees_path)
+        visit profile_proposal_employees_path
+
+        find('#filters').click
+      end
+
+      scenario 'show all candidates' do
+        expect(page).to have_content(prop_eml_interviewed.employee_cv.name)
+        expect(page).to have_content(prop_eml_hired.employee_cv.name)
+      end
+
+      scenario 'find candidate with status interview', js: true do
+        sleep(1)
+
+        page.execute_script("$('#candidate_filter_interview').click()")
+        sleep(1)
+        expect(page).not_to have_content(prop_eml_hired.employee_cv.name)
+        expect(page).to have_content(prop_eml_interviewed.employee_cv.name)
+      end
+
+      scenario "select state when don't be candidate", js: true do
+        sleep(1)
+
+        page.execute_script("$('#candidate_filter_paid').click()")
+        sleep(1)
+
+        expect(page).not_to have_content([prop_eml_interviewed.employee_cv.name, prop_eml_hired.employee_cv.name])
+      end
+    end
   end
 
   context 'customer actions' do
@@ -105,21 +153,20 @@ RSpec.feature 'ProposalEmployee', type: :feature do
         expect(page).to have_content(order_with_candidate.employee_cv.name)
       end
 
+      scenario 'revoke candidate', js: true do
+        find('.enjoyhint_close_btn').click
+        click_link(order_with_candidate.employee_cv.name)
+        sleep(1)
 
-      ## CAN"T FIND BUTTON
-      # scenario 'revoke candidate', js: true do
-      #   click_link(order_with_candidate.employee_cv.name)
-      #   sleep(1)
+        find('a', text: 'Отозвать').click
+        sleep(1)
 
-      #   find("a", text: 'Отозвать').click
-      #   sleep(1)
-      #   # find('.enjoyhint_close_btn').click
-      #   save_and_open_page
-      #   click_button('Да')
-      #   save_and_open_page
-      #   expect(page).not_to have_content(order_with_candidate.employee_cv.name)
-      #   save_and_open_page
-      # end
+        click_button('Да')
+        sleep(1)
+
+        expect(ProposalEmployee.last.state).to eq('revoked')
+        expect(page).not_to have_content(order_with_candidate.employee_cv.name)
+      end
 
       scenario 'set date_interview to candidate', js: true do
         click_link(order_with_candidate.employee_cv.name)

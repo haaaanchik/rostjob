@@ -10,14 +10,22 @@ FactoryBot.define do
     other_info { { remark: 'remart text', terms: 'add info' } }
     salary { '1222' }
     number_of_employees { '2' }
-  end
 
-  factory :created_order, parent: :order do
+    trait :compleated do
+      state { 'completed' }
+    end
+
     before(:create) do |order|
       customer = create(:customer, :with_production_site)
       order.profile = customer.profile
       order.production_site = customer.profile.production_sites.last
-      order.position = create(:price_group).positions.last
+
+      price_group            = create(:price_group)
+      order.position         = price_group.positions.last
+      order.customer_price   = price_group.customer_price
+      order.contractor_price = price_group.contractor_price
+      order.customer_total   = (price_group.customer_price   * order.number_of_employees)
+      order.contractor_total = (price_group.contractor_price * order.number_of_employees)
     end
   end
 end
