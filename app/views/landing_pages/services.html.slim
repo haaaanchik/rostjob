@@ -2,6 +2,7 @@
   = render 'header'
   main
     = render 'section_menu'
+    = render 'section_breadcrumbs'
     section.landing-header.container
       .content
         h1.title
@@ -19,69 +20,26 @@
         = image_tag '/img/services_landing/header-img.png'
     section.advantages
       .container
-        h2.title-common Наши преимущества
+        h2.title-common Ваши преимущества
         .advantages_block
-          .row
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg1.svg'
-              header
-                | Самые низкие цены
-              p
-                | Стоимость подбора сотрудников от 8 000 до 25 000 руб
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg1.svg'
-              header
-                | Наглядно
-              p
-                | Наглядная динамика комплектации от создания до исполнения заявки + CRM с возможностью интеграции
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg2.webp'
-              header
-                | Инновационно
-              p
-                | Автоматизированные звонки по базам поиска работ с помощью голосовых ботов бесплатно для ускорения поиска кандидатов
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg3.webp'
-              header
-                | Оперативно
-              p Оперативная комплектация вакансии в любые точки РФ
-          .row
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg4.webp'
-              header
-                | Гарантия
-              p
-                | Гарантия трудоутройства сотрудника в вашу компанию в течение
-                br/
-                | 7 дней или полный возврат денег
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg5.webp'
-              header
-                | География
-              p
-                | Поиск персонала осуществляют 516 рекрутеров во всех 85 регионах России
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg6.webp'
-              header
-                | Опыт
-              p
-                | Профессионально работаем в HR с 2010 года
-            .advantages_block_item
-              .advantages_block_item_img
-                = image_tag '/img/customer-landing/svg/svg7.webp'
-              header
-                | Интерфейс
-              p
-                | Интуитивно понятный интерфейс нашей
-                br/
-                | CRM для новичков
+          .advantages_block_item
+            .logo
+              img alt="" src="/img/services_landing/arrow_down_black.webp" /
+            .description
+              span.bold = 'Значительная экономия средств и времени, '
+              | Вам не надо регистрироваться и дополнительно оплачивать все известные сервисы, чтобы разместить вакансии.
+          .advantages_block_item
+            .logo
+              img alt="" src="/img/services_landing/graph_black_icon.webp" /
+            .description
+              span.bold = 'Размещая заявки у нас в системе '
+              | - они автоматически выгружается на всех профильных ресурсах.
+          .advantages_block_item
+            .logo
+              img alt="" src="/img/services_landing/clock_black_icon.webp" /
+            .description
+              span.bold = 'И самое важное, '
+              | с кандидатами проводят первичное собеседование и после его прохождения, соискатель передается Вам для финального собеседования, что позволяет рационально использовать рабочее время.
     section.specializing.container
       h2.title-common.company-services__title
         | Специализируемся на вакансиях в отраслях
@@ -285,40 +243,47 @@
               .img-container
                 = image_tag '/img/services_landing/show_more_arrow_green.png'
       button.green-btn.reviews-btn type="button"  Оставить отзыв
-    section.steps
-      .container
-        .row
-          h2.steps-title
-            | Что нужно сделать для оформления заявки на подбор
-          .steps-container
-            .steps_item
-              p.title
-                | Зарегистрироваться
-              p
-                | Регистрация на сайте производится путем заполнения простейшей формы, куда потребуется ввести только адрес электронной почты. А затем подтвердить его переходом по ссылке, которая будет указана в отправленном системой письме.
-              .steps_item_img
-                = image_tag '/img/list-check.svg'
-            .steps_item
-              p.title
-                | Создать заявку
-              p
-                | Оформление заявок на поиск персонала осуществляется с помощью специального конструктора, который упрощает работу с сервисом. В форме необходимо указать информацию о вакансии, контакты и сообщение для рекрутера.
-              .steps_item_img
-                = image_tag '/img/catalog.svg'
-            .steps_item
-              p.title
-                | Используйте CRM
-              p
-                | Облегчить процесс управления поиском персонала позволит встроенная в сервис CRM-система.    Она представляет собой интерфейс для веб-приложения, автоматизирующий общение между исполнителями и заказчиками.
-              .steps_item_img
-                = image_tag '/img/crm.svg'
-          p.steps-help
-            | Нужна помощь или есть вопросы по системе – обращайтесь по телефону:
-            span.bold
-              |  8 800 700 67 86,
-            |  напишите на почту:
-            span.bold
-              |  manager@rosjob.com
+    section.how-it-work.container
+      h2.title-common Как это работает
+      .stages
+        .stage
+          .count
+            span.big-number 1
+            .big-number-bg
+          p.stage-description
+            | Регистрируетесь
+            br/
+            | в системе
+        .step-arrow
+          img alt="" src="/img/services_landing/stage_arrow.png" /
+        .stage
+          .count
+            span.big-number 2
+            .big-number-bg
+          p.stage-description
+            | Пополняете
+            br/
+            | лицевой счет
+        .step-arrow
+          img alt="" src="/img/services_landing/stage_arrow.png" /
+        .stage
+          .count
+            span.big-number 3
+            .big-number-bg
+          p.stage-description
+            | Размещаете
+            br/
+            | заявку
+        .step-arrow
+          img alt="" src="/img/services_landing/stage_arrow.png" /
+        .stage
+          .count
+            span.big-number 4
+            .big-number-bg
+          p.stage-description
+            | Получаете
+            br/
+            | соискателей
     section.leave-request.container
       .actions-container
         = image_tag '/img/customer-landing/leave-request-man.png'
