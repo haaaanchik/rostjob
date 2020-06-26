@@ -45,10 +45,10 @@ class OrderDecorator < ApplicationDecorator
                       .includes(:employee_cv)
   end
 
-  def fix_display_order_disputed
+  def display_order_disputed
     return unless candidates.disputed.present?
     h.content_tag(:a,
-                  href: h.profile_tickets_path,
+                  href: h.profile_tickets_path(q: { search_by_order_eq: id, state_eq: 'opened' }),
                   class:'red-text') {" + #{ candidates.disputed.count} спор(ов)"}
 
   end

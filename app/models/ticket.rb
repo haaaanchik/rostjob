@@ -35,8 +35,9 @@ class Ticket < ApplicationRecord
     super(attrs_with_defaults)
   end
 
-  ransack_alias :all_fields, :id_or_title
+  ransack_alias :all_fields, :id_or_title_or_proposal_employee_employee_cv_name
   ransack_alias :state_waiting_fields, :state_or_waiting
+  ransack_alias :search_by_order, :proposal_employee_order_id
 
   ransacker :id do
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")
