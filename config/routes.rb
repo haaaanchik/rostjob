@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :new_contractor
     get :new_customer
     post :request_call
+    get :services
   end
 
   resource :price, only: :show
