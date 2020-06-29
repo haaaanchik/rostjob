@@ -12,6 +12,8 @@ class LandingPagesController < ActionController::Base
 
   def professions; end
 
+  def contacts; end
+
   def request_call
     ContactUsMailer
       .with(username: params[:username], phone_number: params[:phone_number])

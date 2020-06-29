@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     get :industrial
     get :freelance
     get :professions
+    get :contacts
     post :request_call
     # get :services
   end
