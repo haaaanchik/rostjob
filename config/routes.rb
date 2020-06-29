@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   scope module: :landing_pages do
     get :industrial
     get :freelance
+    get :professions
     post :request_call
     # get :services
   end
