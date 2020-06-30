@@ -439,6 +439,10 @@ javascript:
     // Modal
     $('.js-call-modal').on('click', openModal);
 
+    if (window.location.search == '?modal=request_call') {
+      openModal()
+    }
+
     function openModal() {
         $('#modal').addClass('open');
     }
