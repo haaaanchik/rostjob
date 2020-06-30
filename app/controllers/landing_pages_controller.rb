@@ -10,6 +10,8 @@ class LandingPagesController < ActionController::Base
 
   def services; end
 
+  def about; end
+
   def professions; end
 
   def contacts; end
