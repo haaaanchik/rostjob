@@ -1,0 +1,267 @@
+#landing-industry
+  header.container
+    .block
+      a.land-logo href="#"
+    span Кадровое агентство по поиску и подбору персонала
+    .block.log-in-reg
+      button.green-btn--short.js-call-modal type="button"
+        | Заказать звонок
+      a.land-tel-number href="tel:+88007006768"  8 (800) 700-67-86
+    .mobile-menu
+      ul
+        li
+          a href="#"  О компании
+        li
+          a href="#"  Услуги
+        li
+          a href="#"  Цены
+        li
+          a href="#"  Акции
+        li
+          a href="#"  Контакты
+        li
+          a href="#"  Вход
+        li
+          a href="#"  Регистрация
+        li
+          a href="tel:+88007006768"  8 800 700 6786
+        li
+          button.green-btn--short.js-call-modal type="button"  Заказать звонок
+    .burger
+      span
+      span
+      span
+  main
+    section.menu
+      .container
+        ul.menu-list
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | О компании
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Услуги
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Цены
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Акции
+          li.menu-list__item
+            a.menu-list__link href="#"
+              | Контакты
+        .log-in-or-reg
+          a.land-log-in href="#"  Вход
+          span.slash /
+          a.registration href="#"  Регистрация
+    section.breadcrumbs
+      .container
+        ul
+          li Главная
+          li Услуги
+    section.landing-header.container
+      .content
+        h1.title
+          | Подбор строительного персонала
+        h2.subtitle
+          | Строительный персонал от 8 000 ₽ за 5 дней в вашу компанию с помощью платформы от RostJob
+        .hire-staff-block
+          input placeholder=("Введите email для регистрации") type="email" /
+          a.hire-staff-btn href="#"  Зарегестрироваться
+      .landing-header-img
+        = image_tag '/img/industry-landing/header-img.png'
+    section.recruitment
+      h2.title-common
+        | Единичный и массовый набор сотрудников на строительные специальности
+      .container
+        .block
+          p.title
+            | Сварщики
+          p.price
+            | от 8 000
+        .block
+          p.title
+            | Монтажники
+          p.price
+            | от 8 000
+        .block
+          p.title
+            | Монолитчики
+          p.price
+            | от 8 000
+        .block
+          p.title
+            | Электрики
+          p.price
+            | от 8 000
+    section.unknown
+      .container
+        .img-container
+          = image_tag '/img/industry-landing/vacancy.png'
+        .description-container
+          p
+            | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+          p
+            | Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+    section.prices.container
+      h2.title-common
+        | Расценки на конкретные вакансии в отросли
+      .prices-table
+        .thead
+          span.thead__title
+            | Наименование
+          span.thead__price
+            | Цена
+          span.thead__period
+            | Гарантийный период
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории A
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории B
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории C
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории D
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель погрузчика-электроштабелера
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель экскаватора
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель экскаватора-погрузчика
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+      .pagination
+        a.active-page href="#"  1
+        a href="#"  2
+        a href="#"  3
+        a href="#"  4
+        a href="#"  5
+        a href="#" = '>'
+        a href="#"  Вперед
+    section.find-personal
+      h2.title-common
+        | Найдем персонал для строительных объектов любой сложности
+      .container
+        .img-container
+          = image_tag '/img/industry-landing/people_search.png'
+        .description-container
+          p
+            | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+          p
+            | Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+    section.how-it-work.container
+      h2.title-common Как это работает
+      .stages
+        .stage
+          .count
+            span.big-number 1
+            .big-number-bg
+          p.stage-description
+            | Регистрируетесь
+            br/
+            | в системе
+        .step-arrow
+          = image_tag '/img/industry-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 2
+            .big-number-bg
+          p.stage-description
+            | Пополняете
+            br/
+            | лицевой счет
+        .step-arrow
+          = image_tag '/img/industry-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 3
+            .big-number-bg
+          p.stage-description
+            | Размещаете
+            br/
+            | заявку
+        .step-arrow
+          = image_tag '/img/industry-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 4
+            .big-number-bg
+          p.stage-description
+            | Получаете
+            br/
+            | соискателей
+    section.leave-request.container
+      .actions-container
+        = image_tag '/img/industry-landing/leave-request-man.png'
+        .actions
+          .block
+            p.title
+              | Позвоните по телефону 8 (800) 700-67-86
+            p.description
+              | и получите бесплатный предварительный расчет стоимости услуг
+          .block
+            p.title
+              | или оставьте заявку
+            p.description
+              | и мы свяжемся с Вами в ближайше время
+      form.form action=""
+        p.title
+          | Хотите узнать стоимость
+        input.input.name placeholder=("Ваше имя") type="text" /
+        input.input.phone placeholder="Телефон" type="text" /
+        button.btn-send-form type="submit"
+          | Отправить
