@@ -1,0 +1,10 @@
+#modal.modal
+  #overlay.overlay
+    = form_for '', url: request_call_path, method: :post, html: { class: 'form' } do |f|
+      = image_tag '/img/customer-landing/modal-man.png'
+      .inputs-container
+        = f.text_field :username, class: 'name', placeholder: 'Ваше имя'
+        = f.phone_field :phone_number, class: 'phone', placeholder: 'Телефон'
+        button.green-btn type='submit'  Отправить
+      .js-close-modal.close-modal
+        = image_tag '/img/customer-landing/close_modal.png'

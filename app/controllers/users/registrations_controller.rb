@@ -1,14 +1,18 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # skip_before_action :authenticate_user!
   skip_before_action :auth_user
+  before_action :set_user_new, only: %i[new_contractor new_customer]
   before_action :configure_update_params, only: :update
 
   # GET /resource/sign_up
   def new
     @user = User.new
   end
+
+  def new_contractor; end
+
+  def new_customer; end
 
   def contractor_info
     @message = 'Для регистрации или найма персонала обратитесь по адресу manager@rostjob.com или по номеру +7 960 079 06 41'
@@ -28,8 +32,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
                   для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
                 render 'users/inform_page'
               else
-                render 'landing_pages/new_contractor' if params.key?(:contractor)
-                render 'landing_pages/new_customer' if params.key?(:customer)
+                render 'users/registrations/new_contractor' if params.key?(:contractor)
+                render 'users/registrations/new_customer' if params.key?(:customer)
               end
   end
 
@@ -108,5 +112,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       resource.update_with_be_password(params)
     end
+  end
+
+  def set_user_new
+    @user = User.new
   end
 end

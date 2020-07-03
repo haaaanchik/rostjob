@@ -1,19 +1,15 @@
 class LandingPagesController < ActionController::Base
-  layout 'application'
+  layout 'secret_landing'
 
-  before_action :set_user_new, only: %i[new_contractor new_customer freelance industrial]
+  before_action :set_user_new, only: %i[freelance industrial services]
   before_action :set_secret_landing, only: %i[freelance]
-
-  def new_contractor; end
-
-  def new_customer; end
+  before_action :set_specializations, only: %i[industrial services]
 
   def freelance; end
 
-  def industrial
-    @specializations = ActiveSpecializationsSpecification.to_scope
-    set_secret_landing
-  end
+  def industrial; end
+
+  def services; end
 
   def request_call
     ContactUsMailer
@@ -28,6 +24,11 @@ class LandingPagesController < ActionController::Base
 
   def set_user_new
     @user = User.new
+  end
+
+  def set_specializations
+    @specializations = ActiveSpecializationsSpecification.to_scope
+    set_secret_landing
   end
 
   def set_secret_landing

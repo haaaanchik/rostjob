@@ -1,0 +1,17 @@
+section.menu
+  .container
+    ul.menu-list
+      / li.menu-list__item
+            = link_to 'О компании', '#', class: 'menu-list__link disabled'
+      / li.menu-list__item
+      /   = link_to 'Услуги', services_path, class: 'menu-list__link'
+    / li.menu-list__item
+            = link_to 'Цены', '#', class: 'menu-list__link disabled'
+    / li.menu-list__item
+            = link_to 'Акции', '#', class: 'menu-list__link disabled'
+    / li.menu-list__item
+            = link_to 'Контакты', '#', class: 'menu-list__link disabled'
+    .log-in-or-reg
+      = link_to 'Вход', login_path, class: 'land-log-in'
+      span.slash = '/'
+      = link_to 'Регистрация', new_customer_path, class: 'registration'

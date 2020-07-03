@@ -1,0 +1,20 @@
+$alter-font: 'Rubik', sans-serif;
+$default-font: 'Open sans', sans-serif;
+$primary-font: 'Open Sans', sans-serif;
+
+$alter-color:#b7b7b7;
+$bgGray: #f3f3f3;
+$bgColorStock: #f2fffe;
+$bgColorPrimary: #fff;
+$bgColorSecondary: #f0f9fe;
+$primary-color: #000000;
+$primaryColor: #000;
+$secondaryColor: #1970ff;
+$secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-144);
+$secondary-color: #1970ff;
+
+$block-width: 1146px;
+$slide-width: 330px;
+$tablet: "max-width:1000px";
+$phone: "max-width:700px";
+

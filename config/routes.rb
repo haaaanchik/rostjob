@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
     get :contractor_info, to: 'users/registrations#contractor_info'
+    get :new_contractor, to: 'users/registrations#new_contractor'
+    get :new_customer, to: 'users/registrations#new_customer'
     post 'login', to: 'users/sessions#create'
     delete 'logout', to: 'users/sessions#destroy'
   end
@@ -25,9 +27,8 @@ Rails.application.routes.draw do
   scope module: :landing_pages do
     get :industrial
     get :freelance
-    get :new_contractor
-    get :new_customer
     post :request_call
+    # get :services
   end
 
   resource :price, only: :show

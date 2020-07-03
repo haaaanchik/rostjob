@@ -1,0 +1,381 @@
+#services-landing
+  = render 'header'
+  main
+    = render 'section_menu'
+    = render 'section_breadcrumbs'
+    section.landing-header.container
+      .content
+        h1.title
+          | Агентство по подбору персонала
+        h2.subtitle
+          | Подбор персонала для вашей компании за 3 дня по цене от 8 000 рублей за сотрудника с гарантией полного возврата денежных средств
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = @user.errors.messages.first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
+      .landing-header-img
+        = image_tag '/img/services_landing/header-img.png'
+    section.advantages
+      .container
+        h2.title-common Ваши преимущества
+        .advantages_block
+          .advantages_block_item
+            .logo
+              = image_tag '/img/services_landing/arrow_down_black.webp'
+            .description
+              span.bold = 'Значительная экономия средств и времени, '
+              | Вам не надо регистрироваться и дополнительно оплачивать все известные сервисы, чтобы разместить вакансии.
+          .advantages_block_item
+            .logo
+              = image_tag '/img/services_landing/graph_black_icon.webp'
+            .description
+              span.bold = 'Размещая заявки у нас в системе '
+              | - они автоматически выгружается на всех профильных ресурсах.
+          .advantages_block_item
+            .logo
+              = image_tag '/img/services_landing/clock_black_icon.webp'
+            .description
+              span.bold = 'И самое важное, '
+              | с кандидатами проводят первичное собеседование и после его прохождения, соискатель передается Вам для финального собеседования, что позволяет рационально использовать рабочее время.
+    section.specializing.container
+      h2.title-common.company-services__title
+        | Специализируемся на вакансиях в отраслях
+      .slider-categories-prev
+        = image_tag '/img/services_landing/slider-arrow-right.png'
+      .slider-categories-next
+        = image_tag '/img/services_landing/slider-arrow-right.png'
+      #slider-categories.categories
+        - @specializations.each do |specialization|
+          .category-block
+            p.title = specialization.title
+            .category-block-bg
+              - specialization.positions.limit(2).each do |position|
+                p.subtitle = position.title
+                p.price
+                  | цена #{position.price_group.customer_price.to_i} ₽
+              span.show-more.js-show-more
+                | Показать ещё
+                = image_tag '/img/services_landing/show_more_arrow_green.png', class: 'show-more-img'
+              .dropdown.js-dropdow.custom-scroll
+                - specialization.positions.offset(2).each do |position|
+                  p.subtitle = position.title
+                  p.price
+                    | цена #{position.price_group.customer_price.to_i} ₽
+
+      = link_to 'Посмотреть весь прайс', price_path, id: 'show-all-price', class: 'green-btn'
+    section.description-in-blocks
+      .container
+        .row
+          .description-block
+            h2.title-common Заголовок
+            .content
+              p
+                | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+              p
+                | Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+          .img-container
+            = image_tag '/img/services_landing/description-in-block-right.png', class: 'description-in-block-right'
+        .row
+          .description-block
+            h2.title-common Заголовок
+            .content
+              p
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus.
+              p
+                | Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc.
+          .img-container
+            = image_tag '/img/services_landing/description-in-block-left.png', class: 'description-in-block-left'
+    section.prices.container
+      h2.title-common
+        | Цены на услуги
+      .prices-table
+        .thead
+          span.thead__title
+            | Наименование
+          span.thead__price
+            | Цена
+          span.thead__period
+            | Гарантийный период
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Автомойщик
+          span.price
+            | 8 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории A
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории B
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории C
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водтель категории D
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель погрузчика-электроштабелера
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель экскаватора
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+        .tr
+          span.title
+            | Водитель экскаватора-погрузчика
+          span.price
+            | 12 000 ₽
+          span.period
+            | 10 дней
+      .pagination
+        a.active-page href="#"  1
+        a href="#"  2
+        a href="#"  3
+        a href="#"  4
+        a href="#"  5
+        a href="#"
+        a href="#"  Вперед
+    section.reviews
+      h2.title-common.reviews__title
+        | Отзывы клиентов
+      .slider-bg
+        .container
+          .slider-reviews-prev
+            = image_tag '/img/services_landing/slider-arrow-right.png'
+          .slider-reviews-next
+            = image_tag '/img/services_landing/slider-arrow-right.png'
+          #slider-reviews
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_3.png'
+              p.title
+                | ООО «ПластПром»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container.js-open-review
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_1.png'
+              p.title
+                | АО «Ленинградский металлозавод»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_2.png'
+              p.title
+                | ООО «ТВСЗ»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_3.png'
+              p.title
+                | ООО «ПластПром»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_1.png'
+              p.title
+                | АО «Ленинградский металлозавод»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+            .review-block
+              .logo
+                = image_tag '/img/services_landing/reviews_logo_2.png'
+              p.title
+                | ООО «ТВСЗ»
+              p.content
+                | Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum.
+              .img-container
+                = image_tag '/img/services_landing/show_more_arrow_green.png'
+      button.green-btn.reviews-btn type="button"  Оставить отзыв
+    section.how-it-work.container
+      h2.title-common Как это работает
+      .stages
+        .stage
+          .count
+            span.big-number 1
+            .big-number-bg
+          p.stage-description
+            | Регистрируетесь
+            br
+            | в системе
+        .step-arrow
+          = image_tag '/img/services_landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 2
+            .big-number-bg
+          p.stage-description
+            | Пополняете
+            br/
+            | лицевой счет
+        .step-arrow
+          = image_tag '/img/services_landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 3
+            .big-number-bg
+          p.stage-description
+            | Размещаете
+            br
+            | заявку
+        .step-arrow
+          = image_tag '/img/services_landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 4
+            .big-number-bg
+          p.stage-description
+            | Получаете
+            br
+            | соискателей
+    section.leave-request.container
+      .actions-container
+        = image_tag '/img/customer-landing/leave-request-man.png'
+        .actions
+          .block
+            p.title
+              | Позвоните по телефону 8 (800) 700-67-86
+            p.description
+              | и получите бесплатный предварительный расчет стоимости услуг
+          .block
+            p.title
+              | или оставьте заявку
+            p.description
+              | и мы свяжемся с Вами в ближайше время
+      = form_for '', url: request_call_path, method: :post, html: {class: 'form'} do |f|
+        p.title
+          | Хотите узнать стоимость
+        = f.text_field :username, class: 'input name', placeholder: 'Ваше имя'
+        = f.phone_field :phone_number, class: 'input phone', placeholder: 'Телефон'
+        = f.submit 'Отправить', class: 'btn-send-form'
+  = render 'footer'
+  = render 'request_call_modal'
+
+javascript:
+    // sliders
+    var categories_count = $('#slider-categories .category-block').length
+    var slidesToShow = 4
+    if(categories_count < 4){
+      slidesToShow = categories_count
+    }
+
+    $('#slider-categories').slick({
+        infinite: true,
+        slidesToShow: slidesToShow,
+        slidesToScroll: slidesToShow,
+        prevArrow: $('.slider-categories-prev'),
+        nextArrow: $('.slider-categories-next'),
+        responsive: [
+            {
+                breakpoint: 1200,
+                settings: {
+                    centerPadding: '40px',
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    });
+
+    $('#slider-reviews').slick({
+        centerMode: true,
+        centerPadding: '0',
+        slidesToShow: 3,
+        focusOnSelect: false,
+        prevArrow: $('.slider-reviews-prev'),
+        nextArrow: $('.slider-reviews-next'),
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+        ]
+    });
+
+    // open/close review
+
+    $('.js-open-review').on('click', toggleReview);
+
+    function toggleReview() {
+        $(this).prev().toggleClass('review-opened');
+    }
