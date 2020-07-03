@@ -1,0 +1,673 @@
+#recruiters-landing {
+  --purple: #9046ff;
+  overflow: hidden;
+  font-family: $primary-font;
+
+  .hide {
+    display: none;
+  }
+
+  .landing-header {
+    position: relative;
+    background-image: linear-gradient(to top, #f1fbff 0%, #ffffff 100%);
+
+    .header-top {
+      position: relative;
+      padding-top: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 200px;
+
+      h1 {
+        color: #9046ff;
+        font-size: 42px;
+        max-width: 468px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 60px;
+        line-height: 52px;
+      }
+    }
+
+    .subtitle {
+      color: #000000;
+      font-size: 24px;
+      margin-bottom: 115px;
+      line-height: 25px;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .horizontal input[type='email'] {
+      margin-right: 30px;
+      background-color: transparent;
+    }
+  }
+
+  .reg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 253px;
+    height: 55px;
+    border-radius: 28px;
+    background-color: #9046ff;
+    color: white;
+    font-size: 16px;
+    transition: 0.3s linear;
+    border: unset;
+  }
+
+  .reg-btn:hover{
+    transform: scale(1.1);
+    text-decoration: none;
+  }
+
+  input[type='email'] {
+    width: 247px;
+    border: 0;
+    border-bottom: 1px solid #b3b3b3;
+    padding-left: 4px;
+    outline: none;
+  }
+
+  input[type='email']::placeholder {
+    color: #b3b3b3;
+    font-size: 16px;
+  }
+
+  .our-offers {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    margin-left: 125px;
+  }
+
+  .our-offers > .title {
+    color: var(--purple);
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 80px;
+    padding-left: 16.15%;
+    line-height: 30px;
+  }
+
+  .our-offers .offers {
+    width: 75%;
+    column-count: 2;
+    margin-bottom: 120px;
+  }
+
+  .our-offers .offer {
+    position: relative;
+    margin-bottom: 60px;
+  }
+
+  .our-offers .offer:before {
+    position: absolute;
+    top: 0;
+    left: -20px;
+    //content: "\2713";
+    color: var(--purple);
+    content: url(asset_path('check.png')) ;
+    font-size: 14px;
+    font-weight: bold;
+    transform: translateX(-100%);
+  }
+
+  .our-offers .offer .title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 21px;
+    margin-bottom: 12px;
+    max-width: 290px;
+  }
+
+  .our-offers .offer .descr {
+    line-height: 15px;
+    font-size: 15px;
+  }
+
+  .rectangles-header {
+    position: absolute;
+    right: -300px;
+    bottom: -98px;
+  }
+
+  .information {
+    position: relative;
+    padding-top: 110px;
+    padding-bottom: 100px;
+  }
+
+  .information .title {
+    color: var(--purple);
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 31px;
+    margin-bottom: 55px;
+  }
+
+  .information .question {
+    font-size: 15px;
+  }
+
+  .information .question:nth-child(1) {
+    margin-left: auto;
+    max-width: 630px;
+    margin-bottom: 155px;
+  }
+
+  .information .question:nth-child(2) {
+    max-width: 620px;
+  }
+
+  .information .answer {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .information .reg-btn {
+    margin-top: 65px;
+  }
+
+  .information .rect-info-left-top {
+    position: absolute;
+    left: -388px;
+    top: -80px;
+  }
+
+  .information .rect-info-right-bottom {
+    position: absolute;
+    right: -388px;
+    bottom: -120px;
+  }
+
+  .our-partner {
+    padding-bottom: 110px;
+  }
+
+  .our-partner .title {
+    color: var(--purple);
+    font-size: 30px;
+    line-height: 32px;
+    font-weight: bold;
+    margin-bottom: 35px;
+    margin-left: 12%;
+  }
+
+  .our-partner .representation {
+    display: flex;
+    width: 1071px;
+    border-radius: 8px;
+    background-color: #f5fcff;
+    padding: 85px 100px 85px 140px;
+  }
+
+  .our-partner .company-logo {
+    margin-bottom: 55px;
+  }
+
+  .our-partner .logo-and-descr {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .partner-description{
+      font-size: 17px;
+      line-height: 28px;
+    }
+  }
+
+  .our-partner .achievements {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .our-partner .achievements .item {
+    margin-left: 43.5%;
+    margin-bottom: 10px;
+  }
+
+  .our-partner .achievements .item > p {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .our-partner .achievements .number {
+    color: #280e71;
+    font-size: 41px;
+    font-weight: bold;
+  }
+
+  .free-registration {
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 180px;
+  }
+
+  .free-registration .img-container {
+    width: 58.35%;
+    max-width: 665px;
+    margin-right: 60px;
+  }
+
+  .free-registration .title {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 90px;
+    max-width: 315px;
+  }
+
+  .vertical {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vertical input[type="email"] {
+    margin-bottom: 40px;
+  }
+
+  footer {
+    height: 91px;
+    background-color: #252525;
+  }
+
+  footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  footer .container .contacts {
+    display: flex;
+  }
+
+  footer .container .rights-reserved {
+    color: #616161;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  footer .container .footer-tel-number {
+    color: #bbbaba;
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 50px;
+    white-space: nowrap;
+  }
+
+  footer .container .footer-social {
+    display: flex;
+  }
+
+  footer .container .footer-social .insta {
+    margin: 0 15px;
+  }
+
+  footer .container .footer-social .in-social {
+    margin-right: 25px;
+    color: #afafaf;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+  }
+
+  footer .container .designed-by {
+    color: #616161;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+  .header-left-img {
+    position: absolute;
+    left: 2.3%;
+    max-width: 311px;
+    bottom: -70px;
+  }
+
+  .header-right-img {
+    position: absolute;
+    right: 6.3%;
+    max-width: 245px;
+    top: 170px;
+  }
+}
+
+@media (max-width: 400px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      position: relative;
+      z-index: 1;
+      padding-left: 12%;
+    }
+    .rectangles-header {
+      top: 60%;
+      z-index: 0;
+    }
+    .information .question .title {
+      font-size: 25px;
+      margin-bottom: 30px;
+    }
+    .free-registration .img-container {
+      width: 95%;
+    }
+    .free-registration .title {
+      font-size: 30px;
+    }
+    .container .footer-tel-number {
+      margin-bottom: 10px;
+    }
+    footer .container .footer-tel-number {
+      margin-bottom: 0;
+    }
+    footer .container .footer-social .in-social {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  #recruiters-landing {
+    .rectangles-header {
+      right: -250px;
+    }
+
+    .our-offers .offers {
+      margin-bottom: 50px;
+    }
+
+    .information .title {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #recruiters-landing {
+    .landing-header .header-top h1 {
+      width: 90%;
+      font-size: 32px;
+      line-height: unset;
+    }
+
+    .landing-header .subtitle {
+      font-size: 20px;
+    }
+
+    .landing-header .header-top {
+      margin-bottom: 100px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      padding-left: 20%;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #recruiters-landing {
+    .landing-header .header-top .registration-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .landing-header .horizontal input[type=email] {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+
+    .landing-header .subtitle {
+      margin-bottom: 60px;
+    }
+
+    .our-offers .offers {
+      padding-left: 28%;
+    }
+
+    .information .question .answer {
+      font-size: 16px;
+    }
+
+    .our-partner .partner-description {
+      max-width: 315px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  #recruiters-landing {
+    footer {
+      height: auto;
+    }
+
+    footer .container {
+      flex-direction: column;
+    }
+
+    footer .container .rights-reserved, footer .container .designed-by {
+      margin: 10px 0;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  #recruiters-landing {
+    .information > .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .information .question .title {
+      text-align: center;
+    }
+    .information .question:first-child {
+      margin-left: 0;
+      margin-bottom: 60px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #recruiters-landing {
+    .free-registration {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+    }
+    .free-registration .img-container {
+      width: 65%;
+      margin-bottom: 30px;
+      margin-right: 0;
+    }
+    .free-registration .title {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      padding-left: 33%;
+      column-count: 1;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  #recruiters-landing {
+    .header-right-img, .header-left-img {
+      display: none;
+    }
+    .our-partner .title {
+      text-align: center;
+      margin-left: 0;
+    }
+    .our-partner .representation {
+      padding: 40px 20px;
+    }
+    .our-partner .company-logo {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  #recruiters-landing {
+    .rectangles-header {
+      width: 400px;
+      right: -200px;
+    }
+    .our-offers > .title {
+      padding-left: 0;
+      text-align: center;
+    }
+    .our-offers .offer:before {
+      left: -10px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  #recruiters-landing {
+    .our-offers {
+      margin-left: auto;
+    }
+    .information .reg-btn {
+      display: flex;
+      margin: 40px auto 0;
+    }
+  }
+}
+
+@media (max-width: 968px) {
+  #recruiters-landing {
+    .header-left-img {
+      max-width: 200px;
+      top: 250px;
+    }
+    .header-right-img {
+      max-width: 180px;
+      top: 250px;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      width: 100%;
+    }
+    .rectangles-header {
+      bottom: -100px;
+    }
+    .information > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .information .rect-info-left-top {
+      width: 350px;
+      left: -175px;
+    }
+  }
+}
+
+@media (max-width: 1000px) {
+  #recruiters-landing {
+    .our-partner .representation {
+      flex-direction: column;
+    }
+
+    .our-partner .logo-and-descr {
+      margin-bottom: 30px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .our-partner .logo-and-descr, .our-partner .achievements {
+      width: 100%;
+    }
+
+    .our-partner .achievements {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .our-partner .achievements .item {
+      margin-left: 0;
+      width: 50%;
+      text-align: center;
+    }
+
+    .our-partner .partner-description {
+      text-align: center;
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  #recruiters-landing {
+    footer .container .footer-tel-number {
+      margin-right: 20px;
+    }
+
+    footer .container .footer-social .in-social {
+      margin-right: 20px;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  #recruiters-landing {
+    .header-left-img {
+      top: 170px;
+      bottom: unset;
+    }
+
+    .header-right-img {
+      right: 3.3%;
+    }
+
+    .rectangles-header {
+      width: 500px;
+      right: -250px;
+      bottom: -20px;
+    }
+
+    .information .rect-info-right-bottom {
+      width: 500px;
+      right: -250px;
+      bottom: 0;
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  #recruiters-landing .header-left-img {
+    max-width: 230px;
+
+    .header-right-img {
+      max-width: 200px;
+    }
+    .our-offers .offers {
+      width: 85%;
+    }
+    .information .rect-info-left-top {
+      width: 500px;
+      left: -250px;
+    }
+    .our-partner .representation {
+      width: 100%;
+    }
+  }
+}
