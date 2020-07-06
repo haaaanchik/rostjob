@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get :professions
     get :contacts
     post :request_call
-    # get :services
+    get :services
   end
 
   resource :price, only: :show

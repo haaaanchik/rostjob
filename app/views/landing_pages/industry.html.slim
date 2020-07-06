@@ -1,59 +1,8 @@
 #landing-industry
-  header.container
-    .block
-      a.land-logo href="#"
-    span Кадровое агентство по поиску и подбору персонала
-    .block.log-in-reg
-      button.green-btn--short.js-call-modal type="button"
-        | Заказать звонок
-      a.land-tel-number href="tel:+88007006768"  8 (800) 700-67-86
-    .mobile-menu
-      ul
-        li
-          a href="#"  О компании
-        li
-          a href="#"  Услуги
-        li
-          a href="#"  Цены
-        li
-          a href="#"  Акции
-        li
-          a href="#"  Контакты
-        li
-          a href="#"  Вход
-        li
-          a href="#"  Регистрация
-        li
-          a href="tel:+88007006768"  8 800 700 6786
-        li
-          button.green-btn--short.js-call-modal type="button"  Заказать звонок
-    .burger
-      span
-      span
-      span
+  = render 'header'
   main
-    section.menu
-      .container
-        ul.menu-list
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | О компании
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Услуги
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Цены
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Акции
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Контакты
-        .log-in-or-reg
-          a.land-log-in href="#"  Вход
-          span.slash /
-          a.registration href="#"  Регистрация
+    = render 'section_menu'
+    = render 'section_breadcrumbs', name: 'Отрасль'
     section.breadcrumbs
       .container
         ul
@@ -65,9 +14,13 @@
           | Подбор строительного персонала
         h2.subtitle
           | Строительный персонал от 8 000 ₽ за 5 дней в вашу компанию с помощью платформы от RostJob
-        .hire-staff-block
-          input placeholder=("Введите email для регистрации") type="email" /
-          a.hire-staff-btn href="#"  Зарегестрироваться
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = @user.errors.messages[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
         = image_tag '/img/industry-landing/header-img.png'
     section.recruitment
@@ -265,3 +218,25 @@
         input.input.phone placeholder="Телефон" type="text" /
         button.btn-send-form type="submit"
           | Отправить
+
+  = render 'footer'
+  = render 'request_call_modal'
+
+javascript:
+  // Modal
+  $('.js-call-modal').on('click', openModal);
+
+  function openModal() {
+    $('#modal').addClass('open');
+  }
+
+  $('#overlay').on('click', closeModal);
+  $('.js-close-modal').on('click', closeModal);
+
+  function closeModal() {
+    $('#modal').removeClass('open');
+  }
+
+  $('#overlay .form').on('click', function (e) {
+    e.stopPropagation();
+  })
