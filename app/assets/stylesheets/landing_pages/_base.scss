@@ -140,6 +140,10 @@ header.header {
     color: #000000;
     font-size: 15px;
     font-weight: bold;
+
+    &.active {
+      border-bottom: 2px solid $secondaryColor;
+    }
   }
 
   .log-in-or-reg {

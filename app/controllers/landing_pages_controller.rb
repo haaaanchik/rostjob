@@ -1,7 +1,7 @@
 class LandingPagesController < ActionController::Base
   layout 'secret_landing'
 
-  before_action :set_user_new, only: %i[freelance industrial services professions]
+  before_action :set_user_new, except: %i[request_call]
   before_action :set_specializations, only: %i[industrial services]
 
   def freelance; end
@@ -11,6 +11,8 @@ class LandingPagesController < ActionController::Base
   def services; end
 
   def professions; end
+
+  def contacts; end
 
   def request_call
     ContactUsMailer
