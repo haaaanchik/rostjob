@@ -1,8 +1,7 @@
 class LandingPagesController < ActionController::Base
   layout 'secret_landing'
 
-  before_action :set_user_new, only: %i[freelance industrial services]
-  before_action :set_secret_landing, only: %i[freelance]
+  before_action :set_user_new, only: %i[freelance industrial services professions]
   before_action :set_specializations, only: %i[industrial services]
 
   def freelance; end
@@ -30,10 +29,5 @@ class LandingPagesController < ActionController::Base
 
   def set_specializations
     @specializations = ActiveSpecializationsSpecification.to_scope
-    set_secret_landing
-  end
-
-  def set_secret_landing
-    render layout: 'secret_landing'
   end
 end

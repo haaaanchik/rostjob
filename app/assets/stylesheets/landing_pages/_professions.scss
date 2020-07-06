@@ -1,11 +1,3 @@
-$default-font: 'Open sans', sans-serif;
-$bgColorPrimary: #fff;
-$bgColorSecondary: #f0f9fe;
-$bgColorStock: #f2fffe;
-$primaryColor: #000;
-$bgGray: #f3f3f3;
-$secondaryColor: #1970ff;
-$secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-144);
 #professions-landing {
   font-family: $default-font;
 
@@ -131,95 +123,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
 
   .hide {
     display: none;
-  }
-
-  > header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 61px;
-    background-color: #fff;
-    justify-content: space-between;
-
-    > span {
-      font-size: 15px;
-    }
-
-    > div {
-      display: flex;
-      align-items: center;
-    }
-
-    .land-logo {
-      color: #000;
-      font-size: 20px;
-      font-weight: bold;
-      text-transform: uppercase;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-
-    .land-social {
-      display: flex;
-      margin-right: 47px;
-    }
-
-    .land-tel-number {
-      font-size: 18px;
-      font-weight: bold;
-      color: #000;
-      white-space: nowrap;
-      margin-left: 33px;
-
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-
-  .menu {
-    display: flex;
-    align-items: center;
-    height: 38px;
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-
-    > .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .menu-list {
-      width: 44.7%;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .menu-list__item {
-      list-style-type: none;
-    }
-
-    .menu-list__link {
-      color: #000000;
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    .log-in-or-reg {
-      display: flex;
-
-      .slash {
-        margin: 0 10px;
-      }
-
-      a {
-        font-size: 15px;
-        color: #000;
-      }
-    }
   }
 
   .landing-header {
@@ -773,89 +676,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
     &:hover {
       text-decoration: none;
       color: blue;
-    }
-  }
-
-  footer {
-    position: relative;
-    background-color: #252525;
-    padding-top: 50px;
-    padding-bottom: 50px;
-
-    .footer-vacancies {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .item {
-      font-size: 12px;
-      color: #ffffff;
-      max-width: 135px;
-
-      &:nth-child(4) {
-        max-width: 64px;
-      }
-    }
-
-    hr {
-      margin: 50px 0 20px;
-      height: 1px;
-      background-color: #494949;
-      max-width: 1090px;
-    }
-
-    .cities {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 60px;
-    }
-
-    .city {
-      width: 20%;
-      padding-left: 15px;
-      border-left: 2px solid #1970ff;
-
-      .description {
-        color: #ffffff;
-        font-size: 13px;
-      }
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-right: 45px;
-
-      .info {
-        width: 70%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        p {
-          color: #ffffff;
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 11px;
-          white-space: nowrap;
-        }
-
-        a {
-          color: #ffffff;
-          font-size: 13px;
-          font-weight: 400;
-          line-height: 13px;
-          white-space: nowrap;
-        }
-      }
-    }
-
-    .designed-by {
-      color: #616161;
-      font-size: 14px;
-      font-weight: bold;
-      text-decoration: underline;
     }
   }
 
@@ -1609,18 +1429,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       }
     }
 
-    > header {
-      > span {
-        display: none;
-      }
-    }
-
-    .menu {
-      .menu-list {
-        width: 55%;
-      }
-    }
-
     .stamp {
       top: 468px;
       left: 13%;
@@ -1888,16 +1696,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
     .steps {
       .steps-title {
         margin: 0 0 20px;
-      }
-    }
-
-    .menu {
-      .menu-list {
-        width: 70%;
-      }
-
-      > .container {
-        width: 100%;
       }
     }
 
@@ -2201,12 +1999,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
 
 @media (max-width: 600px) {
   #professions-landing {
-    header {
-      .land-logo {
-        margin-right: 0;
-      }
-    }
-
     .landing-header {
       position: relative;
       margin-bottom: 0;

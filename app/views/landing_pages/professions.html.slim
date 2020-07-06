@@ -1,60 +1,7 @@
 #professions-landing
-  header.container
-    .block
-      a.land-logo href="#"
-        / img alt="" src="img/Logo_Rost_Job_final.png" /
-    span Кадровое агентство по поиску и подбору персонала
-    .block.log-in-reg
-      button.green-btn--short.js-call-modal type="button"
-        | Заказать звонок
-      a.land-tel-number href="tel:+88007006768"  8 (800) 700-67-86
-    .mobile-menu
-      ul
-        li
-          a href="#"  О компании
-        li
-          a href="#"  Услуги
-        li
-          a href="#"  Цены
-        li
-          a href="#"  Акции
-        li
-          a href="#"  Контакты
-        li
-          a href="#"  Вход
-        li
-          a href="#"  Регистрация
-        li
-          a href="tel:+88007006768"  8 800 700 6786
-        li
-          button.green-btn--short.js-call-modal type="button"  Заказать звонок
-    .burger
-      span
-      span
-      span
+  = render 'header'
   main
-    section.menu
-      .container
-        ul.menu-list
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | О компании
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Услуги
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Цены
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Акции
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Контакты
-        .log-in-or-reg
-          a.land-log-in href="#"  Вход
-          span.slash /
-          a.registration href="#"  Регистрация
+    = render 'section_menu'
     section.landing-header.container
       .content
         h1.title
@@ -73,9 +20,13 @@
           span
             b = 'Гарантия: '
             | 10 дней
-        .hire-staff-block
-          input placeholder=("Введите email для регистрации") type="email" /
-          a.hire-staff-btn href="#"  Зарегестрироваться
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
         = image_tag '/img/professions-landing/people_search.png'
     section.how-it-work.container
@@ -296,6 +247,8 @@
         button.btn-send-form type="submit"
           | Отправить
 
+  = render 'footer'
+  = render 'request_call_modal'
 javascript:
     // Professions slider
 
