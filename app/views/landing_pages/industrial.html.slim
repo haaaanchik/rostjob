@@ -67,21 +67,21 @@ body#customer-landing
         | Специализируемся на вакансиях в отраслях
       .categories
         - @specializations.each do |specialization|
-                  .category-block
-                    p.title = specialization.title
-                    hr/
-                    - specialization.positions.limit(2).each do |position|
-                      p.subtitle = position.title
-                      p.price
-                        | цена #{position.price_group.customer_price.to_i} ₽
-                    span.show-more.js-show-more
-                      | Показать ещё
-                      = image_tag '/img/customer-landing/show_more_arrow.png', class: 'show-more-img'
-                    .dropdown.js-dropdown.custom-scroll
-                      - specialization.positions.offset(2).each do |position|
-                        p.subtitle = position.title
-                        p.price
-                          | цена #{position.price_group.customer_price.to_i} ₽
+          .category-block
+            p.title = specialization.title
+            hr/
+            - specialization.positions.limit(2).each do |position|
+              p.subtitle = position.title
+              p.price
+                | цена #{position.price_group.customer_price.to_i} ₽
+            span.show-more.js-show-more
+              | Показать ещё
+              = image_tag '/img/customer-landing/show_more_arrow.png', class: 'show-more-img'
+            .dropdown.js-dropdown.custom-scroll
+              - specialization.positions.offset(2).each do |position|
+                p.subtitle = position.title
+                p.price
+                  | цена #{position.price_group.customer_price.to_i} ₽
         .category-block
           p.title
             | Посмотреть весь прайс
