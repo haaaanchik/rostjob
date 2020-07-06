@@ -27,11 +27,12 @@ Rails.application.routes.draw do
   scope module: :landing_pages do
     get :industrial
     get :freelance
+    get :industry
     get :about_company
     get :professions
     get :contacts
     post :request_call
-    # get :services
+    get :services
   end
 
   resource :price, only: :show

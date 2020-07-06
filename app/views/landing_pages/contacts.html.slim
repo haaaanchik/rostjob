@@ -2,6 +2,7 @@
   = render 'header'
   main
     = render 'section_menu'
+    = render 'section_breadcrumbs', name: 'Контакты'
     section.landing-header.container
       .content
         h1.title
@@ -76,10 +77,6 @@
 javascript:
   // Modal
   $('.js-call-modal').on('click', openModal);
-
-  if (window.location.search == '?modal=request_call') {
-    openModal()
-  }
 
   function openModal() {
     $('#modal').addClass('open');

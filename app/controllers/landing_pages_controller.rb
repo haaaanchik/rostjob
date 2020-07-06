@@ -12,6 +12,8 @@ class LandingPagesController < ActionController::Base
 
   def about_company; end
 
+  def industry; end
+
   def professions; end
 
   def contacts; end

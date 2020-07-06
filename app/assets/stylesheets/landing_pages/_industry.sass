@@ -1,0 +1,900 @@
+#landing-industry
+  .bold
+    font-weight: bold
+
+  .description-small
+    font-size: 15px
+
+  .description-normal
+    font-size: 17px
+    line-height: 25px
+
+  .green-btn
+    display: flex
+    align-items: center
+    justify-content: center
+    width: 179px
+    height: 40px
+    border-radius: 20px
+    background-color: #badb2f
+    color: #ffffff
+    font-size: 15px
+    line-height: 42px
+    outline: none
+
+  .gray
+    width: 100%
+    height: 881px
+    background-color: #f5f5f5
+
+  .blue
+    height: 244px
+    background-color: #1970ff
+    opacity: 0.5
+
+  .blue-color
+    color: #1970ff
+
+  .white
+    height: 828px
+    background-color: #fff
+
+  .title-common
+    color: #000000
+    font-family: $default-font
+    font-size: 26px
+    font-weight: 700
+    line-height: 26px
+    text-align: center
+
+  .nowrap
+    white-space: nowrap
+
+  .burger
+    position: absolute
+    right: 20px
+    top: 17px
+    flex-direction: column
+    width: 30px
+    height: 25px
+    justify-content: space-around
+    display: none
+    z-index: 10
+    span
+      width: 100%
+      height: 3px
+      background-color: black
+      border-radius: 1px
+      transition: .7s
+
+  .rotate-right
+    position: absolute
+    transform: rotate(45deg)
+  .rotate-left
+    position: absolute
+    transform: rotate(-45deg)
+  .hide
+    display: none
+
+  .landing-header
+    display: flex
+    margin-top: 100px
+    margin-bottom: 110px
+    .content
+      .title
+        font-size: 45px
+        line-height: 50px
+        margin-top: 28px
+        margin-bottom: 0
+        color: #290e72
+        font-weight: 800
+        max-width: 610px
+      .subtitle
+        font-size: 18px
+        line-height: 25px
+        font-weight: normal
+        max-width: 456px
+        margin: 40px 0 90px 0
+
+      .hire-staff-block
+        display: flex
+        align-items: flex-end
+        input
+          border: 0
+          margin-right: 20px
+          width: 238px
+          border-bottom: 1px solid #b3b3b3
+          &::placeholder
+            color: #888888
+            font-size: 15px
+        .hire-staff-btn
+          display: flex
+          align-items: center
+          justify-content: center
+          font-weight: bold
+          color: #fff
+          width: 194px
+          height: 40px
+          border-radius: 20px
+          background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%)
+          border: 0
+    .landing-header-img
+      margin-top: -65px
+      max-width: 50%
+      display: flex
+      align-items: center
+      justify-content: center
+      margin-left: 88px
+      img
+        width: 100%
+        max-width: 471px
+
+
+  .recruitment
+    .title-common
+      max-width: 602px
+      margin: 0 auto 95px
+      line-height: 34px
+      @media (max-width: 1200px)
+        margin: 0 auto 50px
+      @media (max-width: 400px)
+        padding: 0 15px
+    .container
+      max-width: 1110px
+      display: flex
+      justify-content: space-between
+      @media (max-width: 1200px)
+        flex-wrap: wrap
+        justify-content: space-around
+    .block
+      width: 251px
+      height: 141px
+      display: flex
+      flex-direction: column
+      justify-content: center
+      align-items: center
+      border-radius: 4px
+      background-color: #ecffe2
+      color: #000000
+      font-size: 16px
+      font-weight: 700
+      line-height: 30px
+      @media (max-width: 1200px)
+        margin: 0 4% 30px
+      .title
+        font-size: 19px
+      .price
+        font-size: 16px
+
+  .unknown
+    margin-top: 140px
+    .container
+      display: flex
+      @media (max-width: 992px)
+        flex-direction: column
+        align-items: center
+    .img-container
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 50%
+      border-radius: 4px
+      background-color: #f0f9fe
+      max-width: 567px
+      margin-right: 64px
+      padding: 42px 0 28px 0
+      img
+        max-width: 100%
+      @media (max-width: 992px)
+        width: 100%
+        max-width: 100%
+        margin-right: 0
+        padding: 42px 10px 28px 10px
+    .description-container
+      width: 40.2%
+      padding-top: 24px
+      @media (max-width: 992px)
+        width: 100%
+      p
+        color: #000000
+        font-size: 15px
+        font-weight: 400
+        line-height: 24px
+        &:first-child
+          font-weight: 700
+          margin-bottom: 25px
+
+
+  .find-personal
+    margin-top: 160px
+    .title-common
+      margin-bottom: 100px
+      @media (max-width: 992px)
+        margin-bottom: 50px
+    .container
+      display: flex
+      @media (max-width: 992px)
+        flex-direction: column
+        align-items: center
+    .img-container
+      order: 2
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 50%
+      border-radius: 4px
+      background-color: #ecffe2
+      max-width: 567px
+      margin-left: 64px
+      padding: 42px 0 28px 0
+      img
+        width: 344px
+        max-width: 100%
+        @media (max-width: 400px)
+          width: unset
+      @media (max-width: 992px)
+        order: 0
+        width: 100%
+        max-width: 100%
+        margin-left: 0
+        padding: 42px 10px 28px 10px
+    .description-container
+      order: 1
+      width: 40.2%
+      padding-top: 24px
+      @media (max-width: 992px)
+        width: 100%
+      p
+        color: #000000
+        font-size: 15px
+        font-weight: 400
+        line-height: 24px
+        &:first-child
+          font-weight: 700
+          margin-bottom: 25px
+
+
+  .leave-request
+    display: flex
+    margin-bottom: 130px
+    margin-top: 155px
+    max-width: 987px
+    .actions-container
+      display: flex
+      width: 59%
+      max-width: 570px
+    .actions
+      width: 100%
+      max-width: 400px
+      display: flex
+      flex-direction: column
+      justify-content: space-between
+      margin: 0 30px
+      padding: 21px 0 30px 0
+    .block
+      .title
+        font-size: 22px
+        font-weight: 700
+        line-height: 24px
+      .description
+        font-size: 14px
+        line-height: 17px
+      &:first-child
+        .title
+          max-width: 276px
+          margin-bottom: 20px
+        .description
+          max-width: 290px
+      &:last-child
+        align-self: flex-end
+        .title
+          margin-bottom: 14px
+          line-height: 19px
+        .description
+          max-width: 151px
+    .form
+      display: flex
+      flex-direction: column
+      align-items: center
+      max-width: 413px
+      border-radius: 15px
+      background-color: #fafafc
+      padding: 50px 30px 35px
+      .title
+        color: #1970ff
+        font-size: 26px
+        font-weight: 700
+        line-height: 26px
+        margin-bottom: 50px
+
+      .input
+        width: 100%
+        height: 30px
+        border-radius: 4px
+        border: 1px solid #e1e1e1
+        background-color: #ffffff
+        &::placeholder
+          padding-left: 15px
+          color:  #888888
+        &.name
+          margin-bottom: 14px
+        &.phone
+          margin-bottom: 40px
+      .btn-send-form
+        display: flex
+        justify-content: center
+        align-items: center
+        border: 0
+        width: 194px
+        height: 40px
+        border-radius: 20px
+        background-color: #1970ff
+        color: #ffffff
+        font-size: 15px
+        line-height: 15px
+
+  .prices
+    margin-top: 135px
+    .title-common
+      margin-bottom: 66px
+    span
+      display: block
+    .prices-table
+      max-width: 752px
+      margin: auto
+    .thead
+      width: 100%
+      display: flex
+      align-items: center
+      padding: 0 20px
+      height: 47px
+      border-radius: 8px
+      background-color: #fafafc
+      span
+        font-size: 14px
+        font-weight: 700
+        line-height: 16px
+    .thead__title
+      width: 70%
+    .thead__price, .thead__period
+      width: 15%
+      text-align: center
+    .tr
+      display: flex
+      align-items: center
+      height: 55px
+      border-bottom: 1px solid #dee2e6
+      padding: 0 20px
+      .title
+        width: 70%
+      .price, .period
+        width: 15%
+        text-align: center
+      &:last-child
+        border-bottom: 0
+    .pagination
+      width: 309px
+      height: 32px
+      display: flex
+      align-items: center
+      margin: 50px auto 0
+      justify-content: space-evenly
+      a
+        color: black
+        text-decoration: none
+        &:hover
+          color: #1970ff
+          text-decoration: none
+      .active-page
+        color: #1970ff
+
+
+  .how-it-work
+    margin-top: 200px
+    @media (max-width: 1200px)
+      margin-top: 100px
+    .title-common
+      margin-bottom: 110px
+    .stages
+      display: flex
+      align-items: center
+      flex-wrap: wrap
+      @media (max-width: 1200px)
+        flex-direction: column
+    .stage
+      display: flex
+      flex-direction: column
+      align-items: center
+    .count
+      position: relative
+    .big-number
+      font-size: 55px
+      font-weight: 700
+      line-height: 41px
+    .big-number-bg
+      position: absolute
+      left: 10px
+      top: -5px
+      z-index: -1
+      width: 48px
+      height: 48px
+      border-radius: 50%
+      background-color: #f0f9fe
+    .stage-description
+      font-size: 19px
+      font-weight: 700
+      text-align: center
+      line-height: 21px
+      margin-top: 35px
+      padding-left: 25px
+    .step-arrow
+      margin: 0 80px
+      @media (max-width: 1200px)
+        margin: 20px 0
+      img
+        @media (max-width: 1200px)
+          transform: rotate(90deg)
+
+  #modal
+    display: none
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 10
+    &.open
+      display: block
+    .overlay
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 100%
+      height: 100%
+      background-color: rgba(0,0,0, 0.5)
+    .form
+      width: 42%
+      max-width: 570px
+      position: relative
+      display: flex
+      border-radius: 4px
+      background-color: #ffffff
+      padding: 47px 56px 44px 63px
+      max-height: 330px
+      @media (max-width: 600px)
+        >img
+          display: none
+    .inputs-container
+      width: 100%
+      display: flex
+      flex-direction: column
+      align-items: center
+      margin-left: 20px
+      input
+        width: 100%
+        height: 34px
+        border-radius: 4px
+        border: 1px solid #e1e1e1
+        background-color: #ffffff
+        &::placeholder
+          color: #888888
+          font-size: 15px
+          padding-left: 15px
+      .name
+        margin-top: 53px
+        margin-bottom: 14px
+    .green-btn
+      border: 0
+      margin-top: 37px
+    .close-modal
+      position: absolute
+      right: 13px
+      top: 12px
+      width: 13px
+      height: 13px
+      img
+        max-width: 100%
+
+@media (max-width: 1365px)
+  #landing-industry
+    .stamp
+      top: 480px
+
+@media (max-width: 1300px)
+  #landing-industry
+    .specializing
+      .slider-categories-prev
+        left: -20px
+      .slider-categories-next
+        right: 20px
+
+@media (max-width: 1200px)
+  #landing-industry
+    .landing-header
+      .content
+        padding-left: 0
+        .title
+          width: 90%
+    .our-partnerships
+      .description:first-child
+        padding-left: 57px
+      .description:last-child
+        padding-top: 40px
+    .top-description
+      .description:first-child, .description:last-child
+        max-width: 45%
+    .services
+      position: relative
+      .description:first-child, .description:last-child
+        max-width: 47%
+        padding: 50px
+    .steps
+      .steps-title
+        height: auto
+      .steps-container
+        flex-direction: column
+        align-items: center
+        .steps_item
+          margin-bottom: 15px
+
+    .our-partnerships
+      .description
+        h2
+          text-align: center
+      >.row
+        flex-direction: column
+        align-items: center
+      .description.recruitment-agency
+        order: 1
+        width: 100%
+        padding-left: 10px
+        p
+          max-width: unset
+      .recruitment-agency
+        order: 2
+        max-width: 100%
+      .description.recruiters
+        order: 3
+        width: 100%
+        padding-left: 10px
+        padding-right: 0
+        p, p:last-child
+          max-width: unset
+
+      .recruiters
+        order: 4
+        max-width: 100%
+      .world
+        order: 6
+        max-width: 100%
+      .description.regional-representatives
+        order: 5
+        width: 100%
+        padding-left: 0
+        p
+          max-width: unset
+      .description:last-child
+        padding-left: 10px !important
+    .stamp
+      top: 525px
+      left: 160px
+    .specializing
+      .category-block
+        display: flex
+        flex-direction: column
+        align-items: center
+        .title
+          padding-left: 0
+      .slider-categories-prev
+        left: 10px
+      .slider-categories-next
+        right: 10px
+
+  #download-contract-offer
+    margin: 10px auto 0
+
+@media (max-width: 1150px)
+  #landing-industry
+    .advantages-girl, .advantages_rectangles
+      display: none
+    .advantages_block
+      >.row:last-child
+        width: 100%
+    .about-us_rectangles
+      display: none
+
+@media (max-width: 1100px)
+  #landing-industry
+    .nowrap
+      white-space: normal
+
+@media (max-width: 1050px)
+  #landing-industry
+    .our-partnerships
+      .description:first-child, .description:last-child
+        padding-left: 30px
+        padding-top: 10px
+        p
+          width: 95%
+        p:last-child
+          margin-top: 10px
+
+@media (max-width: 992px)
+  #landing-industry
+    .top-description
+      >.container
+        flex-direction: column
+        justify-content: flex-start
+      .description:first-child, .description:last-child
+        width: 100%
+        max-width: 100%
+      .description:first-child
+        margin-bottom: 30px
+    .stamp
+      top: 468px
+      left: 13%
+      transform: rotate(-20deg)
+    .specializing
+      .category-block
+        width: 33%
+    .leave-request
+      flex-direction: column
+      align-items: center
+      margin-top: 50px
+      .actions-container
+        width: 100%
+    .description-in-blocks
+      .row
+        justify-content: center
+      .img-container
+        display: none
+
+@media (max-width: 990px)
+  #landing-industry
+    .landing-header
+      .content
+        .title
+          font-size: 33px
+        .hire-staff-block
+          flex-direction: column
+          align-items: flex-start
+          input
+            margin-right: 0
+          .hire-staff-btn
+            margin-top: 10px
+    .services
+      margin-top: 45px
+
+@media (max-width: 800px)
+  #landing-industry
+    .our-partnerships
+      flex-direction: column
+      align-items: center
+      .description, .img-block
+        width: 100%
+      .img-block
+        margin: 20px 0
+      .description
+        h2
+          text-align: center
+    .services
+      .title
+        margin-left: 0
+        text-align: center
+      .description-container
+        flex-direction: column
+        align-items: center
+        .description:first-child, .description:last-child
+          max-width: 100%
+        .description:first-child
+          margin-bottom: 30px
+      .girl-in-descr
+        display: none
+
+@media (max-width: 768px)
+  #landing-industry
+    .services
+      padding-right: 15px
+      padding-left: 15px
+    .steps
+      .steps-title
+        margin: 0 0 20px
+    .specializing
+      margin-top: 50px
+      .company-services__title
+        margin-bottom: 50px
+      .category-block
+        width: 50%
+        display: flex
+        flex-direction: column
+        align-items: center
+        .title
+          padding-left: 0
+        hr
+          width: 100%
+        &:last-child
+          max-width: unset
+      .dropdown
+        transform: translate(-50%, 100%)
+        bottom: -7px
+        left: 50%
+      .slider-categories-prev
+        left: 20px
+      .slider-categories-next
+        right: 20px
+    .reviews
+      .slider-reviews-prev
+        left: 20px
+      .slider-reviews-next
+        right: 20px
+
+@media (max-width: 740px)
+  #landing-industry
+    .landing-header
+      align-items: center
+      margin-top: 50px
+      .content
+        width: 100%
+        align-items: center
+        display: flex
+        flex-direction: column
+        .title, .subtitle
+          text-align: center
+        .hire-staff-block
+          align-items: center
+      .landing-header-img
+        display: none
+    .stamp
+      left: 20px
+      top: 420px
+
+@media (max-width: 700px)
+  #landing-industry
+    .prices
+      .thead__title, .tr .title
+        width: 60%
+      .thead__period, .thead__price, .tr .period, .tr .price
+        width: 20%
+
+@media (max-width: 640px)
+  #landing-industry
+    .company-services
+      padding-top: 50px
+      &__title
+        margin-bottom: 40px
+      .blocks-container
+        flex-direction: column
+        align-items: center
+
+@media (max-width: 640px)
+  #landing-industry
+    .top-description
+      .description:first-child, .description:last-child
+        padding: 30px
+
+@media (max-width: 500px)
+  #landing-industry
+    .leave-request
+      .actions-container
+        >img
+          display: none
+        .actions
+          min-height: 270px
+          width: 100%
+          margin: 0
+      .form
+        padding: 30px 20px 20px
+        .title
+          text-align: center
+    .prices
+      .tr
+        height: auto
+        min-height: 55px
+      .thead__title, .tr .title
+        width: 50%
+        word-break: break-word
+      .thead__period, .thead__price, .tr .period, .tr .price
+        width: 25%
+
+@media (max-width: 550px)
+  #landing-industry
+    .our-partnerships
+      margin-top: 15px
+      .description
+        padding: 15px !important
+        h2
+          font-size: 20px
+      .img-block
+        img
+          max-width: 100% !important
+    .about-us_rectangles
+      display: none
+    .top-description
+      .rectangle
+        display: none
+
+@media (max-width: 450px)
+  #landing-industry
+    .steps
+      .steps-container
+        margin-bottom: 30px
+        .steps_item
+          width: 100%
+          padding: 20px
+          .title
+            font-size: 18px
+
+@media (max-width: 600px)
+  #landing-industry
+    .landing-header
+      position: relative
+      margin-bottom: 0
+      padding-bottom: 100px
+      .content
+        .title
+          font-size: 32px
+          width: 100%
+        .subtitle
+          font-size: 20px
+          margin-bottom: 70px
+    .our-partnerships
+      .description:first-child, .description:last-child
+        padding: 0 15px
+        text-align: center
+      .description
+        p
+          width: 100% !important
+    .log-in-reg
+      display: none
+
+    .burger
+      display: flex
+
+    .top-description
+      .description:first-child, .description:last-child
+        padding: 15px
+    .services
+      .title
+        margin-bottom: 0
+      .description-container
+        .description:first-child, .description:last-child
+          padding: 15px
+          text-align: center
+    .stamp
+      left: unset
+      top: unset
+      right: 10px
+      bottom: 25px
+    .specializing
+      .category-block
+        width: 100%
+    .advantages_block
+      padding-top: 50px
+    .description-in-blocks
+      .row:nth-child(2), .row:first-child
+        .description-block
+          .content
+            padding: 30px
+
+@media (min-width: 992px ) and (max-width: 1100px)
+  #landing-industry
+    .services
+      .girl-in-descr
+        right: 0
+
+@media (max-width: 400px)
+  #landing-industry
+    .prices
+      .tr
+        height: auto
+        min-height: 55px
+      .thead__title, .tr .title
+        width: 40%
+        word-break: break-word
+      .thead__period, .thead__price, .tr .period, .tr .price
+        width: 30%
+    .reviews
+      .slider-reviews-prev
+        left: 10px
+      .slider-reviews-next
+        right: 10px
