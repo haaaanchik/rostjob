@@ -129,17 +129,24 @@ header.header {
   .menu-list {
     width: 44.7%;
     display: flex;
-    justify-content: space-between;
+    justify-content: left;
   }
 
   .menu-list__item {
     list-style-type: none;
+    &:nth-child(n+2) {
+      margin-left: 20px;
+    }
   }
 
   .menu-list__link {
     color: #000000;
     font-size: 15px;
     font-weight: bold;
+
+    &:hover {
+      text-decoration: none;
+    }
 
     &.active {
       border-bottom: 2px solid $secondaryColor;

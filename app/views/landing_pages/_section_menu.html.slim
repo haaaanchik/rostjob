@@ -1,8 +1,8 @@
 section.menu
   .container
     ul.menu-list
-      / li.menu-list__item
-          = link_to 'О компании', '#', class: 'menu-list__link disabled'
+      li.menu-list__item
+        = active_link_to 'О компании', about_company_path, class: 'menu-list__link'
       / li.menu-list__item
       /   = link_to 'Услуги', services_path, class: 'menu-list__link'
       / li.menu-list__item
