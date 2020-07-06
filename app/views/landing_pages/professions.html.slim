@@ -1,0 +1,287 @@
+#professions-landing
+  = render 'header'
+  main
+    = render 'section_menu'
+    section.landing-header.container
+      .content
+        h1.title
+          | Единичный и массовый подбор монтажников
+        h2.subtitle
+          | с помощью платформы по поиску персонала от RostJob
+        .info
+          span
+            b = 'Цена: '
+            | 8000 ₽
+          span.slash |
+          span
+            b = 'Срок: '
+            | до 5 дней
+          span.slash |
+          span
+            b = 'Гарантия: '
+            | 10 дней
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = errors[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
+      .landing-header-img
+        = image_tag '/img/professions-landing/people_search.png'
+    section.how-it-work.container
+      h2.title-common Как это работает
+      .stages
+        .stage
+          .count
+            span.big-number 1
+            .big-number-bg
+          p.stage-description
+            | Регистрируетесь
+            br/
+            | в системе
+        .step-arrow
+          = image_tag '/img/professions-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 2
+            .big-number-bg
+          p.stage-description
+            | Пополняете
+            br/
+            | лицевой счет
+        .step-arrow
+          = image_tag '/img/professions-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 3
+            .big-number-bg
+          p.stage-description
+            | Размещаете
+            br/
+            | заявку
+        .step-arrow
+          = image_tag '/img/professions-landing/stage_arrow.png'
+        .stage
+          .count
+            span.big-number 4
+            .big-number-bg
+          p.stage-description
+            | Получаете
+            br/
+            | соискателей
+    section.advantages
+      .container
+        h2.title-common Ваши преимущества
+        .advantages_block
+          .advantages_block_item
+            .logo
+              = image_tag '/img/professions-landing/arrow_down_black.webp'
+            .description
+              span.bold = 'Значительная экономия средств и времени, '
+              | Вам не надо регистрироваться и дополнительно оплачивать все известные сервисы, чтобы разместить вакансии.
+          .advantages_block_item
+            .logo
+              = image_tag '/img/professions-landing/graph_black_icon.webp'
+            .description
+              span.bold = 'Размещая заявки у нас в системе '
+              | - они автоматически выгружается на всех профильных ресурсах.
+          .advantages_block_item
+            .logo
+              = image_tag '/img/professions-landing/clock_black_icon.webp'
+            .description
+              span.bold = 'И самое важное, '
+              | с кандидатами проводят первичное собеседование и после его прохождения, соискатель передается Вам для финального собеседования, что позволяет рационально использовать рабочее время.
+    section.requirement-of-people
+      h2.title-common
+        | Набор монтажников
+      .container
+        p.description-small.bold
+          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+        p.description-small
+          | Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+    section.about-company
+      h2.title-common О компании RostJob
+      .container
+        .visual-block
+          .in-office
+            span.big-number 30
+            span.description
+              | Рекрутеров в центральном офисе
+          .in-regions
+            span.big-number 500
+            span.description
+              | Рекрутеров по России
+          .img-container
+            = image_tag '/img/professions-landing/girl_with_tablet.png'
+        .description-block
+          p
+            | ООО «РостДжоб» входит в Группу компаний «Рост».
+          p
+            | ГК «РОСТ» была основана в 2010 году. Основными направлением развития бизнеса было выбрано оказание услуг по подбору и предоставлению персонала компании (аутстаффинг и рекрутинг).
+          p
+            | Сегодня - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+          p
+            b = 'Цель компании '
+            | – сделать доступным подбор персонала для компаний в России.
+          p
+            b = 'Миссия компании '
+            | – обеспечивать Российские компании недорогим персоналом в сжатые сроки.
+    section.clients-slider
+      h2.title-common Наши клиенты
+      .container
+        .clients-slider-arrow-right
+          = image_tag '/img/professions-landing/slider-arrow-right.png'
+        .clients-slider-arrow-left
+          = image_tag '/img/professions-landing/slider-arrow-right.png'
+        #clients-slider.clients-slider-container
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image17.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image18.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image19.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image20.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image21.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image22.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image23.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image24.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image25.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image26.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image27.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image28.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image29.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image30.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image31.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image32.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image33.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image34.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image35.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image36.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image37.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image38.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image39.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image40.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image41.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image42.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image43.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image44.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image45.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image46.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image47.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image48.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image49.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image50.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image51.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image52.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image53.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image54.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image55.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image56.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image57.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image58.jpeg'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image59.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image60.png'
+          .img-container
+            = image_tag '/img/professions-landing/clients-logo/image61.png'
+    section.leave-request.container
+      .actions-container
+        = image_tag '/img/professions-landing/leave-request-man.png'
+        .actions
+          .block
+            p.title
+              | Позвоните по телефону 8 (800) 700-67-86
+            p.description
+              | и получите бесплатный предварительный расчет стоимости услуг
+          .block
+            p.title
+              | или оставьте заявку
+            p.description
+              | и мы свяжемся с Вами в ближайше время
+      form.form action=""
+        p.title
+          | Хотите узнать стоимость
+        input.input.name placeholder=("Ваше имя") type="text" /
+        input.input.phone placeholder="Телефон" type="text" /
+        button.btn-send-form type="submit"
+          | Отправить
+
+  = render 'footer'
+  = render 'request_call_modal'
+javascript:
+    // Professions slider
+
+    $('#clients-slider').slick({
+      infinite: true,
+      slidesToShow: 6,
+      slidesToScroll: 1,
+      autoplay: true,
+      autoplaySpeed: 2000,
+      prevArrow: $('.clients-slider-arrow-left'),
+      nextArrow: $('.clients-slider-arrow-right'),
+      responsive: [
+        {
+          breakpoint: 1200,
+          settings: {
+            // centerPadding: '40px',
+            slidesToShow: 4,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 992,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        }
+      ]
+    });
