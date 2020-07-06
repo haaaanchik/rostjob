@@ -1,36 +1,20 @@
-#landing-about
+#landing-about-company
+  = render 'header'
   main
-    section.menu
-      .container
-        ul.menu-list
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | О компании
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Услуги
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Цены
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Акции
-          li.menu-list__item
-            a.menu-list__link href="#"
-              | Контакты
-        .log-in-or-reg
-          a.land-log-in href="#"  Вход
-          span.slash /
-          a.registration href="#"  Регистрация
+    = render 'section_menu'
     section.landing-header.container
       .content
         h1.title
           | Рекрутинговая группа компаний RostJob
         h2.subtitle
           | №1 по соотношению цена/качество в России
-        .hire-staff-block
-          input placeholder=("Введите email для регистрации") type="email" /
-          a.hire-staff-btn href="#"  Зарегестрироваться
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+          .invalid-feedback = @user.errors.messages[:email].first
+          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
         = image_tag '/img/about-landing/contacts_header_img.png'
     section.advantages
@@ -191,32 +175,24 @@
               | Екатерина Роднина
             p.position
               | Должность с 2015 г.
-            p.description
-              | Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
           .employee-card
             = image_tag '/img/about-landing/foto2.png'
             p.initials
               | Дмитрий Селеванов
             p.position
               | Должность с 2015 г.
-            p.description
-              | Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
           .employee-card
             = image_tag '/img/about-landing/foto3.png'
             p.initials
               | Светлана Иванова
             p.position
               | Должность с 2015 г.
-            p.description
-              | Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
           .employee-card
             = image_tag '/img/about-landing/foto4.png'
             p.initials
               | Александра Морозова
             p.position
               | Должность с 2015 г.
-            p.description
-              | Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
     section.leave-request.container
       .actions-container
         = image_tag '/img/about-landing/leave-request-man.png'
@@ -231,13 +207,15 @@
               | или оставьте заявку
             p.description
               | и мы свяжемся с Вами в ближайше время
-      form.form action=""
+      = form_for '', url: request_call_path, method: :post, html: {class: 'form'} do |f|
         p.title
           | Хотите узнать стоимость
-        input.input.name placeholder=("Ваше имя") type="text" /
-        input.input.phone placeholder="Телефон" type="text" /
-        button.btn-send-form type="submit"
-          | Отправить
+        = f.text_field :username, class: 'input name', placeholder: 'Ваше имя'
+        = f.phone_field :phone_number, class: 'input phone', placeholder: 'Телефон'
+        = f.submit 'Отправить', class: 'btn-send-form'
+
+  = render 'footer'
+  = render 'request_call_modal'
 
 javascript:
   $('#clients-slider').slick({
@@ -273,3 +251,25 @@ javascript:
       }
     ]
   });
+
+  // Modal
+  $('.js-call-modal').on('click', openModal);
+
+  if (window.location.search == '?modal=request_call') {
+    openModal()
+  }
+
+  function openModal() {
+    $('#modal').addClass('open');
+  }
+
+  $('#overlay').on('click', closeModal);
+  $('.js-close-modal').on('click', closeModal);
+
+  function closeModal() {
+    $('#modal').removeClass('open');
+  }
+
+  $('#overlay .form').on('click', function (e) {
+    e.stopPropagation();
+  })

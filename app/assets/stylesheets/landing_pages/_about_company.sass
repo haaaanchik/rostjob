@@ -1,13 +1,4 @@
-$default-font: 'Open sans', sans-serif
-$bgColorPrimary: #fff
-$bgColorSecondary: #f0f9fe
-$bgColorStock: #f2fffe
-$primaryColor: #000
-$bgGray: #f3f3f3
-$secondaryColor: #1970ff
-$secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-144)
-
-#landing-about
+#landing-about-company
   .bold
     font-weight: bold
 
@@ -18,19 +9,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
     font-size: 17px
     line-height: 25px
 
-  .green-btn--short
-    display: flex
-    align-items: center
-    justify-content: center
-    width: 179px
-    height: 30px
-    border-radius: 15px
-    background-color: #badb2f
-    color: #ffffff
-    font-size: 15px
-    line-height: 42px
-    border: 0
-    outline: none
   .green-btn
     display: flex
     align-items: center
@@ -61,42 +39,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       border-radius: 1px
       transition: .7s
 
-  .mobile-menu
-    position: absolute
-    width: 100%
-    top: 0
-    margin-left: -15px
-    background-color: #f5f5f5
-    z-index: 10
-    display: none
-    padding-bottom: 7px
-    ul
-      width: 100%
-      padding-left: 0
-      margin: 0
-      li
-        position: relative
-        text-align: center
-        list-style-type: none
-        margin: 15px 0
-        font-size: 16px
-        a
-          color: #000
-        .insta
-          margin: 0 15px
-        button
-          margin: auto
-      li:after
-        content: ""
-        position: absolute
-        height: 1px
-        background-color: black
-        width: 160px
-        bottom: -7px
-        left: 50%
-        transform: translateX(-50%)
-
-
   .rotate-right
     position: absolute
     transform: rotate(45deg)
@@ -105,86 +47,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
     transform: rotate(-45deg)
   .hide
     display: none
-
-  >header
-    display: flex
-    align-items: center
-    position: relative
-    height: 61px
-    background-color: #fff
-    justify-content: space-between
-    >span
-      font-size: 15px
-    >div
-      display: flex
-      align-items: center
-    .land-logo
-      color: #000
-      font-size: 20px
-      font-weight: bold
-      text-transform: uppercase
-      &:hover
-        text-decoration: none
-    .land-social
-      display: flex
-      margin-right: 47px
-    .land-tel-number
-      font-size: 18px
-      font-weight: bold
-      color: #000
-      white-space: nowrap
-      margin-left: 33px
-      &:hover
-        text-decoration: none
-
-
-  .menu
-    display: flex
-    align-items: center
-    height: 38px
-    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1)
-    background-color: #ffffff
-    >.container
-      display: flex
-      justify-content: space-between
-      align-items: center
-    .menu-list
-      width: 44.7%
-      display: flex
-      justify-content: space-between
-    .menu-list__item
-      list-style-type: none
-    .menu-list__link
-      color: #000000
-      font-size: 15px
-      font-weight: bold
-    .log-in-or-reg
-      display: flex
-      .slash
-        margin: 0 10px
-      a
-        font-size: 15px
-        color: #000
-
-  .breadcrumbs
-    margin: 30px 0 0
-    font-size: 13px
-    color: #a8a8a8
-    line-height: 13px
-    ul
-      display: flex
-      flex-wrap: wrap
-      align-items: center
-      li
-        position: relative
-        display: flex
-        align-items: center
-        list-style-type: none
-        &:after
-          //content: url("../img/breadcrumbs_icon.png")
-          margin: 2px 10px 0
-      li:last-child:after
-        content: none
 
 
   .landing-header
@@ -492,71 +354,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         font-size: 15px
         line-height: 15px
 
-
-  footer
-    position: relative
-    background-color: #252525
-    padding-top: 50px
-    padding-bottom: 50px
-    .footer-vacancies
-      display: flex
-      justify-content: space-between
-    .item
-      font-size: 12px
-      color: #ffffff
-      max-width: 135px
-      &:nth-child(4)
-        max-width: 64px
-
-    hr
-      margin: 50px 0 20px
-      height: 1px
-      background-color: #494949
-      max-width: 1090px
-
-    .cities
-      display: flex
-      justify-content: space-between
-      margin-bottom: 60px
-
-    .city
-      width: 20%
-      padding-left: 15px
-      border-left: 2px solid #1970ff
-      .description
-        color: #ffffff
-        font-size: 13px
-
-    .footer-bottom
-      display: flex
-      justify-content: space-between
-      align-items: center
-      padding-right: 45px
-      .info
-        width: 70%
-        display: flex
-        align-items: center
-        justify-content: space-between
-        p
-          color: #ffffff
-          font-size: 13px
-          font-weight: 400
-          line-height: 11px
-          white-space: nowrap
-        a
-          color: #ffffff
-          font-size: 13px
-          font-weight: 400
-          line-height: 13px
-          white-space: nowrap
-
-    .designed-by
-      color: #616161
-      font-size: 14px
-      font-weight: bold
-      text-decoration: underline
-
-
   .review-opened
     max-height: 500px !important
     overflow: auto !important
@@ -591,9 +388,68 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       font-weight: 400
       line-height: 20px
 
+  #modal
+    display: none
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 10
+    &.open
+      display: block
+    .overlay
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 100%
+      height: 100%
+      background-color: rgba(0,0,0, 0.5)
+    .form
+      width: 42%
+      max-width: 570px
+      position: relative
+      display: flex
+      border-radius: 4px
+      background-color: #ffffff
+      padding: 47px 56px 44px 63px
+      max-height: 330px
+      @media (max-width: 600px)
+        >img
+          display: none
+    .inputs-container
+      width: 100%
+      display: flex
+      flex-direction: column
+      align-items: center
+      margin-left: 20px
+      input
+        width: 100%
+        height: 34px
+        border-radius: 4px
+        border: 1px solid #e1e1e1
+        background-color: #ffffff
+        &::placeholder
+          color: #888888
+          font-size: 15px
+          padding-left: 15px
+      .name
+        margin-top: 53px
+        margin-bottom: 14px
+    .green-btn
+      border: 0
+      margin-top: 37px
+    .close-modal
+      position: absolute
+      right: 13px
+      top: 12px
+      width: 13px
+      height: 13px
+      img
+        max-width: 100%
 
 @media (max-width: 1200px)
-  #landing-about
+  #landing-about-company
     .landing-header
       .content
         padding-left: 0
@@ -601,7 +457,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
           width: 90%
 
 @media (max-width: 1150px)
-  #landing-about
+  #landing-about-company
     .advantages-girl, .advantages_rectangles
       display: none
     .advantages_block
@@ -614,12 +470,12 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       display: none
 
 @media (max-width: 1100px)
-  #landing-about
+  #landing-about-company
     .nowrap
       white-space: normal
 
 @media (max-width: 1050px)
-  #landing-about
+  #landing-about-company
     .our-partnerships
       .description:first-child, .description:last-child
         padding-left: 30px
@@ -630,7 +486,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
           margin-top: 10px
 
 @media (max-width: 992px)
-  #landing-about
+  #landing-about-company
     .top-description
       >.container
         flex-direction: column
@@ -640,12 +496,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         max-width: 100%
       .description:first-child
         margin-bottom: 30px
-    >header
-      >span
-        display: none
-    .menu
-      .menu-list
-        width: 55%
     .stamp
       top: 468px
       left: 13%
@@ -673,7 +523,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         display: none
 
 @media (max-width: 990px)
-  #landing-about
+  #landing-about-company
     .landing-header
       .content
         .title
@@ -689,7 +539,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       margin-top: 45px
 
 @media (max-width: 900px)
-  #landing-about
+  #landing-about-company
     .about-us
       .title
         margin-left: 0
@@ -719,7 +569,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
           margin-bottom: 20px
 
 @media (max-width: 800px)
-  #landing-about
+  #landing-about-company
     .our-partnerships
       flex-direction: column
       align-items: center
@@ -750,18 +600,13 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         display: none
 
 @media (max-width: 768px)
-  #landing-about
+  #landing-about-company
     .services
       padding-right: 15px
       padding-left: 15px
     .steps
       .steps-title
         margin: 0 0 20px
-    .menu
-      .menu-list
-        width: 70%
-      >.container
-        width: 100%
     .specializing
       margin-top: 50px
       .company-services__title
@@ -792,7 +637,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         right: 20px
 
 @media (max-width: 740px)
-  #landing-about
+  #landing-about-company
     .landing-header
       align-items: center
       margin-top: 50px
@@ -819,7 +664,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
       top: 420px
 
 @media (max-width: 700px)
-  #landing-about
+  #landing-about-company
     .prices
       .thead__title, .tr .title
         width: 60%
@@ -828,7 +673,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
 
 
 @media (max-width: 640px)
-  #landing-about
+  #landing-about-company
     .company-services
       padding-top: 50px
       &__title
@@ -838,16 +683,13 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         align-items: center
 
 @media (max-width: 640px)
-  #landing-about
-    header
-      .land-social
-        display: none
+  #landing-about-company
     .top-description
       .description:first-child, .description:last-child
         padding: 30px
 
 @media (max-width: 500px)
-  #landing-about
+  #landing-about-company
     .leave-request
       .actions-container
         >img
@@ -871,10 +713,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         width: 25%
 
 @media (max-width: 550px)
-  #landing-about
-    header
-      .land-tel-number
-        display: none
+  #landing-about-company
     .about-us
       &_rectangles
         width: 70vw
@@ -898,7 +737,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         display: none
 
 @media (max-width: 450px)
-  #landing-about
+  #landing-about-company
     .steps
       .steps-container
         margin-bottom: 30px
@@ -909,10 +748,7 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
             font-size: 18px
 
 @media (max-width: 600px)
-  #landing-about
-    header
-      .land-logo
-        margin-right: 0
+  #landing-about-company
     .landing-header
       position: relative
       margin-bottom: 0
@@ -946,8 +782,6 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
         .description:first-child, .description:last-child
           padding: 15px
           text-align: center
-    .menu
-      display: none
     .stamp
       left: unset
       top: unset
@@ -971,13 +805,13 @@ $secondaryColorDark: adjust-color($secondaryColor, $red:-19, $green:-88, $blue:-
             padding: 30px
 
 @media (min-width: 992px ) and (max-width: 1100px)
-  #landing-about
+  #landing-about-company
     .services
       .girl-in-descr
         right: 0
 
 @media (max-width: 400px)
-  #landing-about
+  #landing-about-company
     .prices
       .tr
         height: auto
