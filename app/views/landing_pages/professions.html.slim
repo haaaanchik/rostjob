@@ -25,7 +25,7 @@
                 method: :post,
                 url: user_registration_path,
                 html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = errors[:email].first
+          .invalid-feedback = @user.errors.messages[:email].first
           = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
           = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
       .landing-header-img
