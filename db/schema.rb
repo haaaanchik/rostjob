@@ -397,7 +397,11 @@ ActiveRecord::Schema.define(version: 2020_09_02_091455) do
     t.datetime "updated_at", null: false
     t.bigint "price_group_id"
     t.integer "warranty_period", default: 10
+    t.text "description"
+    t.string "landing_title"
+    t.string "slug"
     t.index ["price_group_id"], name: "index_positions_on_price_group_id"
+    t.index ["slug"], name: "index_positions_on_slug", unique: true
     t.index ["title"], name: "index_positions_on_title"
   end
 

@@ -1,12 +1,15 @@
 tr
-  td #{position.title}
+  td = position.title
   td #{position.warranty_period}
+  td = position.landing_title
+  td == position.description
   td
     = form_with model: position, url: admin_position_path(position), method: :patch do |f|
       = f.collection_select :price_group_id, @price_groups, :id, :title,
         {}, class: 'custom-select', data: { position_id: position.id },
         onfocus: 'save_current_price_group_id(event)',
         onchange: 'update_position(event)'
+  td = position.slug
   td
     = link_to edit_admin_position_path(position), title: 'Редактировать' do
       i.far.fa-edit

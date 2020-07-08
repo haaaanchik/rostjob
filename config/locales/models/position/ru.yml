@@ -1,5 +1,8 @@
 ru:
   position:
+    slug: 'URL'
     title: 'Название должности'
     warranty_period: 'Гарантийный период'
     duties: 'Типовые должностные обязанности'
+    description: 'Описание'
+    landing_title: 'Название должности в лендинге'

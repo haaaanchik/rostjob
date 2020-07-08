@@ -7,13 +7,13 @@
       section.landing-header.container
         .content
           h1.title
-            | Единичный и массовый подбор монтажников
+            | Единичный и массовый подбор #{@profession.landing_title}
           h2.subtitle
             | с помощью платформы по поиску персонала от RostJob
           .info
             span
               b = 'Цена: '
-              | 8000 ₽
+              | #{@profession.display_price} ₽
             span.slash |
             span
               b = 'Срок: '
@@ -30,7 +30,7 @@
             = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
             = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
         .landing-header-img
-          = image_tag '/img/reusable_images/people_search.svg'
+          = image_tag '/img/professions-landing/people_search.png'
     section.how-it-work.container
       h2.title-common Как это работает
       .stages
@@ -96,12 +96,31 @@
               | с кандидатами проводят первичное собеседование и после его прохождения, соискатель передается Вам для финального собеседования, что позволяет рационально использовать рабочее время.
     section.requirement-of-people
       h2.title-common
-        | Набор монтажников
+        | Набор #{@profession.landing_title}
       .container
-        p.description-small.bold
-          | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-        p.description-small
-          | Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
+        - if @profession.description.present?
+          == @profession.description
+        - else
+          h2 Единичный и массовый подбор #{@profession.landing_title} стоимостью #{@profession.display_price} в штат Вашей организации.
+          ol.description-small
+            li
+              | Наш сервис публикует вашу вакансию на популярных платных порталах, таких как
+              |  #{raw @profession.display_other_services}.
+            li
+              | Обрабатываем резюме подходящих претендентов на вакансию
+              span.bold
+                |  #{@profession.landing_title}.
+            li Проводим первичное собеседование.
+            li Удостоверяемся в компетентности потенциального кандидата.
+            li Рассказываем об вашем предприятии и условиях работы.
+            li Направляем к Вам на заключительное собеседование кандидатов, которые подходят по вашим требованиям и готовых работать у Вас.
+          p
+            | Если кандидат не будет нанят к вам на работу в течение 10 дней,
+            |  вы можете вернуть зарезервированные денежные средства.
+          p.block-invoice
+            | В случае найма кандидата, денежные средства с лицевого счёта списываются только после
+            |  прохождения им минимального гарантийного периода в 10 рабочих смен.
+
     section.about-company
       h2.title-common О компании RostJob
       .container
@@ -241,13 +260,12 @@
               | или оставьте заявку
             p.description
               | и мы свяжемся с Вами в ближайше время
-      form.form action=""
+      = form_for '', url: request_call_path, method: :post, html: {class: 'form'} do |f|
         p.title
           | Хотите узнать стоимость
-        input.input.name placeholder=("Ваше имя") type="text" /
-        input.input.phone placeholder="Телефон" type="text" /
-        button.btn-send-form type="submit"
-          | Отправить
+        = f.text_field :username, class: 'input name', placeholder: 'Ваше имя'
+        = f.phone_field :phone_number, class: 'input phone', placeholder: 'Телефон'
+        = f.submit 'Отправить', class: 'btn-send-form'
 
   = render 'footer'
   = render 'request_call_modal'
@@ -287,3 +305,21 @@ javascript:
         }
       ]
     });
+
+    // Modal
+    $('.js-call-modal').on('click', openModal);
+
+    function openModal() {
+      $('#modal').addClass('open');
+    }
+
+    $('#overlay').on('click', closeModal);
+    $('.js-close-modal').on('click', closeModal);
+
+    function closeModal() {
+      $('#modal').removeClass('open');
+    }
+
+    $('#overlay .form').on('click', function (e) {
+      e.stopPropagation();
+    })

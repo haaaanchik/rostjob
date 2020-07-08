@@ -31,7 +31,7 @@ Rails.application.routes.draw do
         get :contacts
       end
     end
-    get :professions
+    get 'professions/:slug', action: 'professions', as: :professions
     post :request_call
     get :services
   end

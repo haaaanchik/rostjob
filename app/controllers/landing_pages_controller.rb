@@ -14,7 +14,9 @@ class LandingPagesController < ActionController::Base
 
   def industry; end
 
-  def professions; end
+  def professions
+    @profession = Position.find_by(slug: params[:slug]).decorate
+  end
 
   def contacts; end
 
