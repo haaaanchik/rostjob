@@ -35,7 +35,7 @@
             .card-tools
 
           a data-remote="true" href="#"
-            p class="request__title" № #{ @ticket.proposal_employee.id } #{@ticket.proposal_employee.employee_cv.name}
+            p class="request__title" № #{ @ticket.proposal_employee.employee_cv.id } #{@ticket.proposal_employee.employee_cv.name}
 
           p class="phone-number" #{@ticket.proposal_employee.employee_cv.phone_number}
           textarea class="candidate-comment" cols="30" placeholder="Напишите комментарий" rows="4" id=(current_user.profile.customer? ? 'by_customer' : 'by_contractor')
@@ -43,3 +43,4 @@
           div class="request__footer"
             = image_tag('/img//new/no-avatar.png', class: 'request-logo')
             p class="request-user-name" #{@ticket.user_full_name}
+ 
