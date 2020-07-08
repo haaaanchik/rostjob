@@ -211,7 +211,7 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   end
 
   def disput_action_enabled?(subject)
-    ACTIONS[subject.subject_type][model.state]&.include?('disputed')
+    ACTIONS[subject.subject_type][model.state]&.include?('disputed') && !model.disputed?
   end
 
   def transfer_action_enabled?(subject)
