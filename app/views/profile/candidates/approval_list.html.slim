@@ -57,7 +57,7 @@
                         i.fa.fa-bookmark.textGray
                         = link_to profile_candidate_path(pr_employee), remote: true do
                           p.initials
-                            span ##{pr_employee.id}
+                            span ##{pr_employee.employee_cv.id}
                             | #{pr_employee.employee_cv.name}
                           p
                             | #{pr_employee.employee_cv.phone_number}
