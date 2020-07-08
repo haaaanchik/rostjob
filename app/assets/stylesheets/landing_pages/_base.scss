@@ -113,7 +113,33 @@ header.header {
   }
 }
 
+.landing-header-bg{
+  background-color: #fafafc;
+  padding-top: 30px;
+  padding-bottom: 110px;
+}
+
+.landing-header{
+  .content{
+    .title{
+      font-family: "Open Sans - Extra Bold", sans-serif;
+    }
+  }
+}
+
+.hire-staff-btn{
+  background-color: #1970ff;
+  width: 220px;
+}
+
+.hire-staff-block{
+    input{
+      background-color: transparent;
+    }
+}
+
 .menu {
+  position: relative;
   display: flex;
   align-items: center;
   height: 38px;
@@ -130,6 +156,9 @@ header.header {
     width: 44.7%;
     display: flex;
     justify-content: left;
+    @media (max-width: 992px) {
+      padding-left: 0;
+    }
   }
 
   .menu-list__item {
@@ -168,7 +197,6 @@ header.header {
 }
 
 .breadcrumbs {
-  margin: 30px 0 0;
   font-size: 13px;
   color: #a8a8a8;
   line-height: 13px;
@@ -177,6 +205,9 @@ header.header {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    @media (max-width: 992px) {
+      padding-left: 0;
+    }
 
     li {
       position: relative;
@@ -597,6 +628,13 @@ footer {
     flex-wrap: wrap;
   }
 
+  .land-tel-number{
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 15px
+  }
+
   .footer-vacancies {
     display: flex;
     justify-content: space-between;
@@ -624,6 +662,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     //justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 60px;
     @media (max-width: 992px) {
       width: calc(100% - 130px);
@@ -696,94 +735,26 @@ footer {
   }
 }
 
-@media (max-width: 500px) {
-  footer {
-    .item, .city {
-      width: 48%;
-      margin-right: 2%;
-    }
-  }
-}
-
-@media (max-width: 550px) {
-  header {
-    .land-tel-number {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  header.header {
-    .land-logo {
-      margin-right: 0;
-    }
-    .log-in-reg {
-      display: none;
-    }
-  }
-}
-
-@media (max-width: 640px) {
-  header.header {
-    .land-social {
-      display: none;
-    }
-  }
-
-  footer {
-    height: auto;
-
-    .container {
-      flex-direction: column;
-
-      .rights-reserved, .designed-by {
-        margin: 10px 0;
-      }
-    }
-  }
-}
-
-@media (max-width: 650px) {
+@media (max-width: 1200px) {
   footer {
     .city {
-      width: 50%;
+      padding-left: 10px;
     }
+  }
+}
 
-    .footer-bottom {
-      .info {
-        width: auto;
-        flex-direction: column;
-        align-items: flex-start;
+@media (max-width: 1050px) {
+  footer {
+    .container {
+      .footer-tel-number {
+        margin-right: 20px;
+      }
 
-        a, p {
-          margin-bottom: 5px;
+      .footer-social {
+        .in-social {
+          margin-right: 20px;
         }
       }
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .menu {
-    .menu-list {
-      width: 70%;
-    }
-
-    > .container {
-      width: 100%;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  footer {
-    .cities {
-      justify-content: unset;
-    }
-
-    .city {
-      width: 33.3%;
     }
   }
 }
@@ -881,26 +852,108 @@ footer {
   }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 900px) {
   footer {
-    .container {
-      .footer-tel-number {
-        margin-right: 20px;
-      }
+    .cities {
+      justify-content: unset;
+    }
 
-      .footer-social {
-        .in-social {
-          margin-right: 20px;
+    .city {
+      width: 33.3%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .menu {
+    .menu-list {
+      width: 70%;
+    }
+
+    > .container {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  footer {
+    .city {
+      width: 50%;
+    }
+
+    .footer-bottom {
+      .info {
+        width: auto;
+        flex-direction: column;
+        align-items: flex-start;
+
+        a, p {
+          margin-bottom: 5px;
         }
       }
     }
   }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 640px) {
+  header.header {
+    .land-social {
+      display: none;
+    }
+  }
+
   footer {
-    .city {
-      padding-left: 10px;
+    height: auto;
+
+    .container {
+      flex-direction: column;
+
+      .rights-reserved, .designed-by {
+        margin: 10px 0;
+      }
     }
   }
 }
+
+@media (max-width: 600px) {
+  header.header {
+    .land-logo {
+      margin-right: 0;
+    }
+    .log-in-reg {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 550px) {
+  header {
+    .land-tel-number {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  footer {
+    .item, .city {
+      width: 48%;
+      margin-right: 2%;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

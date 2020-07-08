@@ -64,12 +64,13 @@
   .landing-header {
     display: flex;
     margin-top: 100px;
-    margin-bottom: 110px;
+    justify-content: space-between;
 
     .content {
-      padding-left: 70px;
+      padding-left: 40px;
 
       .title {
+        font-family: "Open Sans - Extra Bold", sans-serif;
         font-size: 45px;
         line-height: 50px;
         margin-top: 28px;
@@ -80,7 +81,7 @@
       }
 
       .subtitle {
-        font-size: 18px;
+        font-size: 17px;
         line-height: 25px;
         font-weight: normal;
         max-width: 456px;
@@ -96,6 +97,7 @@
           margin-right: 20px;
           width: 238px;
           border-bottom: 1px solid #b3b3b3;
+          background-color: transparent;
 
           &::placeholder {
             color: #888888;
@@ -109,10 +111,10 @@
           justify-content: center;
           font-weight: bold;
           color: #fff;
-          width: 194px;
+          width: 220px;
           height: 40px;
           border-radius: 20px;
-          background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+          background-color: #1970ff;
           border: 0;
         }
       }
@@ -124,7 +126,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-left: 88px;
 
       img {
         width: 100%;
@@ -253,7 +254,6 @@
 
   .title-common {
     color: #000000;
-    font-family: Roboto, sans-serif;
     font-size: 26px;
     font-weight: 700;
     line-height: 26px;
@@ -287,7 +287,7 @@
       outline: none;
 
       .title {
-        font-size: 19px;
+        font-size: 18px;
         font-weight: 700;
         line-height: 19px;
         padding-left: 30px;
@@ -295,7 +295,7 @@
       }
 
       .subtitle {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         line-height: 17px;
         padding-top: 30px;
@@ -633,12 +633,15 @@
     display: flex;
     margin-bottom: 130px;
     margin-top: 155px;
-    max-width: 987px;
+    max-width: 1060px;
 
     .actions-container {
       display: flex;
       width: 59%;
       max-width: 570px;
+      >img{
+        width: 321px;
+      }
     }
 
     .actions {
@@ -979,6 +982,7 @@
       align-items: center;
       margin: 50px auto 0;
       justify-content: space-evenly;
+      max-width: 100%;
 
       a {
         color: black;

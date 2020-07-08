@@ -2,34 +2,35 @@
   = render 'header'
   main
     = render 'section_menu'
-    = render 'section_breadcrumbs', name: 'Профессия'
-    section.landing-header.container
-      .content
-        h1.title
-          | Единичный и массовый подбор монтажников
-        h2.subtitle
-          | с помощью платформы по поиску персонала от RostJob
-        .info
-          span
-            b = 'Цена: '
-            | 8000 ₽
-          span.slash |
-          span
-            b = 'Срок: '
-            | до 5 дней
-          span.slash |
-          span
-            b = 'Гарантия: '
-            | 10 дней
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = @user.errors.messages[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
-      .landing-header-img
-        = image_tag '/img/professions-landing/people_search.png'
+    .landing-header-bg
+      = render 'section_breadcrumbs', name: 'Профессия'
+      section.landing-header.container
+        .content
+          h1.title
+            | Единичный и массовый подбор монтажников
+          h2.subtitle
+            | с помощью платформы по поиску персонала от RostJob
+          .info
+            span
+              b = 'Цена: '
+              | 8000 ₽
+            span.slash |
+            span
+              b = 'Срок: '
+              | до 5 дней
+            span.slash |
+            span
+              b = 'Гарантия: '
+              | 10 дней
+          = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+            .invalid-feedback = @user.errors.messages[:email].first
+            = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+            = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
+        .landing-header-img
+          = image_tag '/img/professions-landing/people_search.png'
     section.how-it-work.container
       h2.title-common Как это работает
       .stages
@@ -228,7 +229,7 @@
             = image_tag '/img/professions-landing/clients-logo/image61.png'
     section.leave-request.container
       .actions-container
-        = image_tag '/img/professions-landing/leave-request-man.png'
+        = image_tag '/img/customer-landing/leave-request-man.svg'
         .actions
           .block
             p.title

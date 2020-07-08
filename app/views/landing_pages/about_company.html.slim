@@ -2,22 +2,23 @@
   = render 'header'
   main
     = render 'section_menu'
-    = render 'section_breadcrumbs', name: 'О компании'
-    section.landing-header.container
-      .content
-        h1.title
-          | Рекрутинговая группа компаний RostJob
-        h2.subtitle
-          | №1 по соотношению цена/качество в России
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = @user.errors.messages[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
-      .landing-header-img
-        = image_tag '/img/about-landing/contacts_header_img.png'
+    .landing-header-bg
+      = render 'section_breadcrumbs', name: 'О компании'
+      section.landing-header.container
+        .content
+          h1.title
+            | Рекрутинговая группа компаний RostJob
+          h2.subtitle
+            | №1 по соотношению цена/качество в России
+          = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+            .invalid-feedback = @user.errors.messages[:email].first
+            = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+            = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
+        .landing-header-img
+          = image_tag '/img/about-landing/contacts_header_img.png'
     section.advantages
       .container
         h2.title-common Ваши преимущества
@@ -196,7 +197,7 @@
               | Должность с 2015 г.
     section.leave-request.container
       .actions-container
-        = image_tag '/img/about-landing/leave-request-man.png'
+        = image_tag '/img/customer-landing/leave-request-man.svg'
         .actions
           .block
             p.title

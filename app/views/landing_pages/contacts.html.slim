@@ -2,20 +2,21 @@
   = render 'header'
   main
     = render 'section_menu'
-    = render 'section_breadcrumbs', name: 'Контакты'
-    section.landing-header.container
-      .content
-        h1.title
-          | Получи предложение по найму персонала за 7 минут
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = @user.errors.messages[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
-      .landing-header-img
-        = image_tag '/img/contacts_landing/people-world.png'
+    .landing-header-bg
+      = render 'section_breadcrumbs', name: 'Контакты'
+      section.landing-header.container
+        .content
+          h1.title
+            | Получи предложение по найму персонала за 7 минут
+          = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+            .invalid-feedback = @user.errors.messages[:email].first
+            = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+            = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
+        .landing-header-img
+          = image_tag '/img/contacts_landing/people-world.png'
     section.banner.container
       .email-and-phone
         span.phone-label
@@ -52,7 +53,7 @@
                style='border:0;' tabindex='0' width='600']
     section.leave-request.container
       .actions-container
-        = image_tag '/img/contacts_landing/leave-request-man.png'
+        = image_tag '/img/customer-landing/leave-request-man.svg'
         .actions
           .block
             p.title
