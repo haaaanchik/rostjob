@@ -27,7 +27,12 @@ module TinkoffApi::Api
     response = error.response.body
     case error.response.code
     when 400
-      response = json_parse(response)['errorCode']
+      parse_error = json_parse(response)
+      if response['errorDetails'].present?
+        response = parse_error['errorDetails'].first[1]
+      else
+        response = parse_error['errorMessage']
+      end
     when 422, 500
       response = json_parse(response)['errorMessage']
     else
