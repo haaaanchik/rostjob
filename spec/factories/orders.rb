@@ -1,21 +1,31 @@
 FactoryBot.define do
   factory :order do
-    title { "MyString" }
-    specialization { "MyText" }
-    city { "MyString" }
-    description { "MyText" }
+    title { "Title order" }
+    city { Faker::Address.city }
+    description { "tetx description" }
     commission { "MyString" }
-    payment_type { "MyString" }
-    number_of_recruiters { 1 }
-    enterpreneurs_only { false }
-    accepted { false }
-    visibility { "MyString" }
-    state { "MyString" }
-    profile { nil }
-    experience { 'adf' }
-    schedule { 'adf' }
-    salary { 'afd' }
-    work_period { 'afd' }
-    place_of_work { 'adf' }
+    state { 'published' }
+    skill { 'master' }
+    contact_person { { name: Faker::Name.name, phone: '+79788888888' } }
+    other_info { { remark: 'remart text', terms: 'add info' } }
+    salary { '1222' }
+    number_of_employees { '2' }
+
+    trait :compleated do
+      state { 'completed' }
+    end
+
+    before(:create) do |order|
+      customer = create(:customer, :with_production_site)
+      order.profile = customer.profile
+      order.production_site = customer.profile.production_sites.last
+
+      price_group            = create(:price_group)
+      order.position         = price_group.positions.last
+      order.customer_price   = price_group.customer_price
+      order.contractor_price = price_group.contractor_price
+      order.customer_total   = (price_group.customer_price   * order.number_of_employees)
+      order.contractor_total = (price_group.contractor_price * order.number_of_employees)
+    end
   end
 end
