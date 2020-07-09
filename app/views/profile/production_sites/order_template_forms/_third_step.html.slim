@@ -46,7 +46,7 @@
 
                 = oi_f.fields_for :requirements, OpenStruct.new(oi_f.object['requirements']) do |or_f|
                   = or_f.fields_for :aspirant, OpenStruct.new(or_f.object['aspirant']) do |ra_f|
-                    .d-flex.checkbox_row.my-1
+                    .d-flex.checkbox_row.mt-4.mb-1
                       = ra_f.check_box :show, checked: !ra_f.object['show'].to_i.zero?,  id: 'materialUnchecked1', class: 'form-check-input'
                       label.form-check-label for='materialUnchecked1'
                       span Я хочу, чтобы до соискателя довели все условия, описанные в заявке.
@@ -67,11 +67,11 @@
                       = rca_f.hidden_field :text, value: rca_f.object['text']
 
                   = or_f.fields_for :added_data, OpenStruct.new(or_f.object['added_data']) do |rd_f|
-                    .d-flex.checkbox_row.my-1
+                    .d-flex.checkbox_row.mt-1.mb-4
                       = check_box_tag :added_data, '0', f.object.added_data?, id: 'materialUnchecked4', class: 'form-check-input'
                       label.form-check-label for='materialUnchecked4'
                       span Я хочу, чтобы в анкету добавили данные
-                    = rd_f.text_field :text, class: 'added_data mx-auto', placeholder: 'ФИО, телефон, регестрация, возраст'
+                    = rd_f.text_field :text, class: 'added_data ', placeholder: 'ФИО, телефон, регестрация, возраст'
 
             .pattern_body_steps_form_step_input.add_ancete
               p Вы можете добавить свою анкету для соискателей

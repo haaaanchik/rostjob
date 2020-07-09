@@ -476,8 +476,8 @@ input::placeholder{
   color: #ffffff;
   font-family: "Open Sans";
   font-size: 14px;
-  font-weight: bold;
   padding: 3px 25px;
+  font-weight: 400;
 }
 
 .pattern_close{
@@ -507,8 +507,12 @@ input::placeholder{
     min-width: 50px;
   }
   span {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 14px;
     color: #000;
   }
+}
+
+.main_patternRequest .added_data{
+  margin-left: 50px;
 }
