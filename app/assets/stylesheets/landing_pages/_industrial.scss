@@ -425,6 +425,22 @@
       outline: none;
       margin: auto;
 
+      &.skan{
+        
+        .content{
+          height: max-content;
+          max-height: unset;
+          margin-bottom: 0;
+          img{
+            max-width: 100%;
+          }
+        }
+      }
+
+      &.slick-current.skan{
+        padding: 51px 8px 10px 8px !important;
+      }
+
       p {
         text-align: center;
       }
@@ -442,6 +458,7 @@
         top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
+        overflow: hidden;
 
         img {
           max-width: 100%;
@@ -453,6 +470,7 @@
         font-weight: 700;
         line-height: 24px;
         margin-bottom: 25px;
+        word-break: break-all;
       }
 
       .content {
@@ -479,6 +497,14 @@
         .logo {
           width: 89px;
           height: 89px;
+        }
+
+        .title{
+          font-size: 17px;
+        }
+
+        .content{
+          font-size: 14px;
         }
       }
     }
