@@ -6,7 +6,7 @@
       = link_to 'Список споров', profile_tickets_url
 -else
   p
-    = "На Анкету №#{@incident.proposal_employee.id} #{@incident.proposal_employee.employee_cv.name}, открыт спор."
+    = "На Анкету №#{@incident.proposal_employee.employee_cv.id} #{@incident.proposal_employee.employee_cv.name}, открыт спор."
   p
     | По причине:
     = " #{@incident.title_text}. Заказчик комментирует: #{@incident.messages.last.text}. "
