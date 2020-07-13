@@ -22,6 +22,14 @@
     line-height: 42px
     outline: none
 
+  .menu
+    .menu-list
+      padding-left: 0
+
+  .breadcrumbs
+    ul
+      padding-left: 0
+
   .burger
     position: absolute
     right: 20px
@@ -48,10 +56,13 @@
   .hide
     display: none
 
+  .landing-header-bg
+    padding-bottom: 80px
+    margin-bottom: 60px
+
   .landing-header
     display: flex
     margin-top: 100px
-    margin-bottom: 110px
     padding: 0
     @media (max-width: 992px)
       flex-direction: column
@@ -142,7 +153,6 @@
 
   .title-common
     color: #000000
-    font-family: Roboto, sans-serif
     font-size: 26px
     font-weight: 700
     line-height: 26px
@@ -155,11 +165,13 @@
     display: flex
     margin-bottom: 130px
     margin-top: 155px
-    max-width: 987px
+    max-width: 1060px
     .actions-container
       display: flex
       width: 55%
       max-width: 570px
+      >img
+        width: 315px
     .actions
       width: 100%
       max-width: 400px
@@ -478,7 +490,6 @@
       margin-bottom: 50px
     .slider-bg
       background-color: #fafafc
-    //padding: 70px 0 90px 0
     .review-block
       position: relative
       max-width: 295px
@@ -528,7 +539,6 @@
         width: 295px !important
         min-height: 372px
         padding: 67px 30px 27px !important
-        //background-color: rgba(50, 137, 145, 0.5)
         .logo
           width: 89px
           height: 89px
@@ -568,7 +578,6 @@
     display: flex
     align-items: center
     justify-content: space-evenly
-  //margin-left: -20px
 
   .steps
     margin-top: 124px
@@ -590,7 +599,6 @@
       justify-content: flex-start
       width: 368px
       border-radius: 4px
-      //box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15)
       background-color: $bgColorPrimary
       .title
         order: 2
@@ -679,8 +687,6 @@
     .landing-header
       .content
         padding-left: 0
-    //.title
-    //	width: 90%
     .our-partnerships
       .description:first-child
         padding-left: 57px

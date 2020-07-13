@@ -2,22 +2,23 @@
   = render 'header'
   main
     = render 'section_menu'
-    = render 'section_breadcrumbs', name: 'Услуги'
-    section.landing-header.container
-      .content
-        h1.title
-          | Агентство по подбору персонала
-        h2.subtitle
-          | Подбор персонала для вашей компании за 3 дня по цене от 8 000 рублей за сотрудника с гарантией полного возврата денежных средств
-        = form_for @user,
-                method: :post,
-                url: user_registration_path,
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
-          .invalid-feedback = @user.errors.messages.first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
-      .landing-header-img
-        = image_tag '/img/services_landing/header-img.png'
+    .landing-header-bg
+      = render 'section_breadcrumbs', name: 'Услуги'
+      section.landing-header.container
+        .content
+          h1.title
+            | Агентство по подбору персонала
+          h2.subtitle
+            | Подбор персонала для вашей компании за 3 дня по цене от 8 000 ₽ за сотрудника с гарантией полного возврата денежных средств
+          = form_for @user,
+                  method: :post,
+                  url: user_registration_path,
+                  html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+            .invalid-feedback = @user.errors.messages.first
+            = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
+            = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
+        .landing-header-img
+          = image_tag '/img/services_landing/header-img.png'
     section.advantages
       .container
         h2.title-common Ваши преимущества
@@ -286,7 +287,7 @@
             | соискателей
     section.leave-request.container
       .actions-container
-        = image_tag '/img/customer-landing/leave-request-man.png'
+        = image_tag '/img/customer-landing/leave-request-man.svg'
         .actions
           .block
             p.title
@@ -312,13 +313,15 @@ javascript:
     var categories_count = $('#slider-categories .category-block').length
     var slidesToShow = 4
     if(categories_count < 4){
-      slidesToShow = categories_count
+      slidesToShow = categories_count - 1;
     }
+    slidesToShow992 = 2;
+    if(categories_count === 2) slidesToShow992 = 1;
 
     $('#slider-categories').slick({
         infinite: true,
         slidesToShow: slidesToShow,
-        slidesToScroll: slidesToShow,
+        slidesToScroll: 1,
         prevArrow: $('.slider-categories-prev'),
         nextArrow: $('.slider-categories-next'),
         responsive: [
@@ -326,14 +329,14 @@ javascript:
                 breakpoint: 1200,
                 settings: {
                     centerPadding: '40px',
-                    slidesToShow: 3,
+                    slidesToShow: slidesToShow,
                     slidesToScroll: 1,
                 }
             },
             {
                 breakpoint: 992,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: slidesToShow992,
                     slidesToScroll: 1,
                 }
             },

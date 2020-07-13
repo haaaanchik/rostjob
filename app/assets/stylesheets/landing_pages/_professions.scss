@@ -43,6 +43,19 @@
     outline: none;
   }
 
+  .menu{
+    .menu-list{
+      padding-left: 0
+    }
+  }
+
+  .breadcrumbs{
+    ul{
+      padding-left: 0
+    }
+  }
+
+
   .burger {
     position: absolute;
     right: 20px;
@@ -139,10 +152,11 @@
         color: #290e72;
         font-weight: 800;
         max-width: 650px;
+        font-family: "Open Sans - Extra Bold", sans-serif;
       }
 
       .subtitle {
-        font-size: 18px;
+        font-size: 17px;
         line-height: 25px;
         font-weight: normal;
 
@@ -198,7 +212,6 @@
           width: 194px;
           height: 40px;
           border-radius: 20px;
-          background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
           border: 0;
         }
       }
@@ -246,7 +259,6 @@
 
   .title-common {
     color: #000000;
-    font-family: Roboto, sans-serif;
     font-size: 26px;
     font-weight: 700;
     line-height: 26px;
@@ -553,12 +565,15 @@
     display: flex;
     margin-bottom: 130px;
     margin-top: 155px;
-    max-width: 987px;
+    max-width: 1060px;
 
     .actions-container {
       display: flex;
       width: 55%;
       max-width: 570px;
+      >img{
+        width: 315px;
+      }
     }
 
     .actions {
