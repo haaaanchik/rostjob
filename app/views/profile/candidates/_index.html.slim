@@ -9,12 +9,13 @@ ruby:
         #filters
           | Фильтры
           = image_tag('/img/new/arrow-down.png')
-        .search
-          = f.search_field candidate_search_fields, class: 'search_candidates', placeholder: 'Поиск анкет', value: val
-          = image_tag('/img/new/search.png')
-        .show
-          = link_to 'Показать все', url_for_reset_filters, class: 'btn btn-primary btn-sm btn-rounded' 
-    .filters-dropdown.js-filters-dropdown
+      .search
+        = f.search_field candidate_search_fields, class: 'search_candidates', placeholder: 'Поиск анкет', value: val
+      .show
+        = image_tag('/img/new/search.png', class: 'search_icon')
+        = link_to 'Показать все', url_for_reset_filters, class: 'btn btn-primary btn-sm btn-rounded' 
+
+    .filters-dropdown.js-filters-dropdown.filters-show.max-content
       p
         = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { id: 'candidate_filter_inbox' }
         i.fa.fa-bookmark.yellow-text

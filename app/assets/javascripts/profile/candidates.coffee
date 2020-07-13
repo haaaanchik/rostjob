@@ -6,7 +6,8 @@ class Candidates
     $('textarea.candidate-comment').on 'blur', @writeComment
     $('.clickable-candidate').on 'click', @openCandidate
     $('.js-filters').on 'click', @openFilters
-
+    $('[id^=candidate_filter_], .search_icon').on 'click', @sendFilterSubmit 
+   
   @writeComment: ->
     byWho = $(this).attr('id')
     if byWho == "by_contractor"
@@ -28,7 +29,6 @@ class Candidates
         console.log(data.responseJSON.message)
     return
 
-
   @openCandidate: ->
     window.location = $(this).data('href')
 
@@ -37,10 +37,10 @@ class Candidates
     $('.js-filters > img').toggleClass('rotate')
     $('#worksheet').toggleClass('max-content')
 
+  @sendFilterSubmit: -> 
+    form = $('#proposal_employee_search')[0]
+    form.submit()
+    
 $(document).on 'turbolinks:load', ->
   Candidates.init()
 
-$(document).on('click', '[id^=candidate_filter_]', ->
-  form = $('#proposal_employee_search')[0]
-  form.submit()
-)
