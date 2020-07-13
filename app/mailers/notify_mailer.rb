@@ -1,5 +1,4 @@
 class NotifyMailer < ApplicationMailer
-
   def emp_cv_sended
     @proposal_employee = params[:objects].first
     customer_email = @proposal_employee.order.user.email
