@@ -1,10 +1,10 @@
 #common-landing
   .common-landing__header
-    a.company-name href="/"
-      = image_tag('/img/rostjob-logo.svg')
+    = link_to root_path, class: 'company-name' do
+      = image_tag '/img/customer-landing/Logo_Rost_Job_final.png'
       - if Rails.env.staging?
-            span.counter
-              b stage
+        span.counter
+          b stage
     div
       .social
         a href='https://vk.com/rostjobcom'
