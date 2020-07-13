@@ -199,6 +199,10 @@ header.header {
   }
 }
 
+#clients-slider .clients-logo {
+  max-height: 150px !important;
+}
+
 span.counter {
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   position: absolute;
