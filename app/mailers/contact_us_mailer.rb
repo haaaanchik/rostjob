@@ -25,6 +25,6 @@ class ContactUsMailer < ApplicationMailer
     @username = params[:username]
     @phone_number = params[:phone_number]
 
-    mail(to: 'manager@rostjob.com', subject: 'Заявка на бесплатную консультацию')
+    mail(to: ['manager@rostjob.com', 'msk@rostjob.com'], subject: 'Заявка на бесплатную консультацию')
   end
 end
