@@ -637,6 +637,9 @@ main{
   width: 75.12%;
   max-width: 510px;
   pointer-events: none;
+  @media (max-width: 768px ){
+    display: none;
+  }
 }
 
 #common-landing .clouds-left {
@@ -650,6 +653,9 @@ main{
   width: 82.12%;
   max-width: 560px;
   pointer-events: none;
+  @media (max-width: 768px ){
+    display: none;
+  }
 }
 
 #sign_up_page_wraper{
@@ -691,34 +697,9 @@ main{
   }
 }
 
-@media (max-width: 600px) {
-  #common-landing .choose-recruter {
-    margin-right: 0;
-    padding: 20px 10px 0;
-  }
 
-  #common-landing .choose-customer {
-    margin-left: 0;
-    padding: 20px 10px 0;
-  }
 
-  #common-landing .customer .choose-content {
-    margin-right: 0;
-  }
-
-  #common-landing .common-landing__header {
-    padding: 0 10px;
-  }
-}
-
-@media (max-width: 500px) {
-  #common-landing .choose-container {
-    flex-direction: column;
-  }
-
-  #common-landing .img-responsive {
-    display: none;
-  }
+@media (max-width: 768px) {
 
   #common-landing .recruter, #common-landing .customer {
     width: 100%;
@@ -736,10 +717,166 @@ main{
   #common-landing .choose-content {
     padding-top: 0;
   }
+
+  #common-landing{
+    height: auto;
+
+    .choose-container{
+      padding-top: 74px;
+    }
+
+    .common-landing__header{
+      padding: 0 4%;
+      background-color: #ffffff;
+      > div{
+        width: 25.3%;
+        max-width: 140px;
+        height: 71%;
+        align-items: center;
+      }
+    }
+
+    .company-name {
+      width: 47.3%;
+      max-width: 170px;
+      img{
+        max-width: 100%;
+        width: 100%;
+      }
+    }
+    
+    .social{
+      display: none;
+    }
+
+    .log-in{
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      border-radius: 30px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      color: #000000;
+      font-family: "Open Sans - Semi Bold";
+      font-size: calc( (100vw - 320px)/(1366 - 755) * (30 - 16) + 16px);
+      font-weight: 400;
+    }
+
+    .title{
+      color: #000000;
+      font-size: calc( (100vw - 320px)/(1366 - 755) * (63 - 30) + 30px);
+      font-weight: 700;
+    }
+
+    .description{
+      color: #000000;
+      font-size: calc( (100vw - 320px)/(1366 - 755) * (30 - 15) + 15px);
+      font-weight: 400;
+    }
+
+    .recruter-btn{
+      background-color: #9046ff;
+      // margin-top: 85px;
+      margin-top: 24%;
+    }
+
+    .customer-btn{
+      background-color: #1970ff;
+      margin-top: 90px;
+    }
+    
+    .recruter-btn, .customer-btn{
+      width: 83%;
+      max-width: 300px;
+      height: 40px;
+      max-height: 77px;
+      // height: 45px;
+      font-size: calc( (100vw - 320px)/(1366 - 755) * (30 - 15) + 15px);
+      font-weight: 400;
+      font-family: "Open Sans - Semi Bold";
+      color: #ffffff;
+      border-radius: 39px;
+    }
+
+    .choose-content{
+      width: 62%;
+      max-width: 360px
+    }
+
+    .choose-recruter{
+      flex-direction: row;
+      margin-right: 0;
+      align-items: flex-start;
+      padding-bottom: 90px;
+
+      .choose-content{
+        // margin-top: 130px;
+        margin-top: 17%;
+      }
+
+      .img-container{
+        max-width: 312px;
+        width: 41.3%;
+        // margin-right: -65px;
+        margin-right: -10.6%;
+      }
+
+    }
+
+    .choose-customer{
+      flex-direction: row-reverse;
+      margin-left: 0;
+      .img-container{
+        width: 180px;
+      }
+    }
+
+    .choose-container {
+      flex-direction: column;
+    }
+
+    .rectangle-left{
+      transform: translate(-74%, 58%);
+    }
+
+    .rectangle-right{
+      transform: translate(71%, 58%);
+    }
+
+    .customer{
+      .choose-content{
+        margin-top: 75px;
+      }
+    }
+
+  }
+
 }
 
-@media (max-width: 400px) {
-  #common-landing .social {
-    display: none;
-  }
-}
+// @media (max-width: 600px) {
+//   #common-landing{
+
+//     .img-container{
+//       display: none;
+//     }
+
+//     .choose-recruter{
+//       .choose-content{
+//         margin-top: 0;
+//       }
+//     }
+
+//     .customer{
+//       .choose-content{
+//         margin-top: 0;
+//       }
+//     }
+
+//   }
+// }
+
+// @media (max-width: 400px) {
+//   #common-landing .social {
+//     display: none;
+//   }
+// }
