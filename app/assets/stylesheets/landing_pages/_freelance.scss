@@ -342,245 +342,60 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 1200px) {
   #recruiters-landing {
-    .our-offers .offers {
-      position: relative;
-      z-index: 1;
-      padding-left: 12%;
-    }
-    .rectangles-header {
-      top: 60%;
-      z-index: 0;
-    }
-    .information .question .title {
-      font-size: 25px;
-      margin-bottom: 30px;
-    }
-    .free-registration .img-container {
-      width: 95%;
-    }
-    .free-registration .title {
-      font-size: 30px;
-    }
-    .container .footer-tel-number {
-      margin-bottom: 10px;
-    }
-    footer .container .footer-tel-number {
-      margin-bottom: 0;
-    }
-    footer .container .footer-social .in-social {
-      margin-right: 10px;
-    }
-  }
-}
+  .header-left-img {
+    max-width: 230px;}
 
-@media (max-width: 450px) {
-  #recruiters-landing {
-    .rectangles-header {
-      right: -250px;
-    }
-
-    .our-offers .offers {
-      margin-bottom: 50px;
-    }
-
-    .information .title {
-      font-size: 32px;
-    }
-  }
-}
-
-@media (max-width: 480px) {
-  #recruiters-landing {
-    .landing-header .header-top h1 {
-      width: 90%;
-      font-size: 32px;
-      line-height: unset;
-    }
-
-    .landing-header .subtitle {
-      font-size: 20px;
-    }
-
-    .landing-header .header-top {
-      margin-bottom: 100px;
-    }
-  }
-}
-
-@media (max-width: 500px) {
-  #recruiters-landing {
-    .our-offers .offers {
-      padding-left: 20%;
-    }
-  }
-}
-
-@media (max-width: 600px) {
-  #recruiters-landing {
-    .landing-header .header-top .registration-block {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .landing-header .horizontal input[type=email] {
-      margin-right: 0;
-      margin-bottom: 15px;
-    }
-
-    .landing-header .subtitle {
-      margin-bottom: 60px;
-    }
-
-    .our-offers .offers {
-      padding-left: 28%;
-    }
-
-    .information .question .answer {
-      font-size: 16px;
-    }
-
-    .our-partner .partner-description {
-      max-width: 315px;
-    }
-  }
-}
-
-@media (max-width: 700px) {
-  #recruiters-landing {
-    footer {
-      height: auto;
-    }
-
-    footer .container {
-      flex-direction: column;
-    }
-
-    footer .container .rights-reserved, footer .container .designed-by {
-      margin: 10px 0;
-    }
-  }
-}
-
-@media (max-width: 750px) {
-  #recruiters-landing {
-    .information > .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .information .question .title {
-      text-align: center;
-    }
-    .information .question:first-child {
-      margin-left: 0;
-      margin-bottom: 60px;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  #recruiters-landing {
-    .free-registration {
-      flex-direction: column;
-      align-items: center;
-      margin-top: 0;
-    }
-    .free-registration .img-container {
-      width: 65%;
-      margin-bottom: 30px;
-      margin-right: 0;
-    }
-    .free-registration .title {
-      margin-bottom: 50px;
-    }
-  }
-}
-
-@media (max-width: 780px) {
-  #recruiters-landing {
-    .our-offers .offers {
-      padding-left: 33%;
-      column-count: 1;
-    }
-  }
-}
-
-@media (max-width: 800px) {
-  #recruiters-landing {
-    .header-right-img, .header-left-img {
-      display: none;
-    }
-    .our-partner .title {
-      text-align: center;
-      margin-left: 0;
-    }
-    .our-partner .representation {
-      padding: 40px 20px;
-    }
-    .our-partner .company-logo {
-      max-width: 100%;
-    }
-  }
-}
-
-@media (max-width: 850px) {
-  #recruiters-landing {
-    .rectangles-header {
-      width: 400px;
-      right: -200px;
-    }
-    .our-offers > .title {
-      padding-left: 0;
-      text-align: center;
-    }
-    .our-offers .offer:before {
-      left: -10px;
-    }
-  }
-}
-
-@media (max-width: 900px) {
-  #recruiters-landing {
-    .our-offers {
-      margin-left: auto;
-    }
-    .information .reg-btn {
-      display: flex;
-      margin: 40px auto 0;
-    }
-  }
-}
-
-@media (max-width: 968px) {
-  #recruiters-landing {
-    .header-left-img {
-      max-width: 200px;
-      top: 250px;
-    }
     .header-right-img {
-      max-width: 180px;
-      top: 250px;
+      max-width: 200px;
     }
-  }
-}
-
-@media (max-width: 991px) {
-  #recruiters-landing {
     .our-offers .offers {
-      width: 100%;
-    }
-    .rectangles-header {
-      bottom: -100px;
-    }
-    .information > .container {
-      position: relative;
-      z-index: 1;
+      width: 85%;
     }
     .information .rect-info-left-top {
-      width: 350px;
-      left: -175px;
+      width: 500px;
+      left: -250px;
+    }
+    .our-partner .representation {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 1100px) {
+  #recruiters-landing {
+    .header-left-img {
+      top: 170px;
+      bottom: unset;
+    }
+
+    .header-right-img {
+      right: 3.3%;
+    }
+
+    .rectangles-header {
+      width: 500px;
+      right: -250px;
+      bottom: -20px;
+    }
+
+    .information .rect-info-right-bottom {
+      width: 500px;
+      right: -250px;
+      bottom: 0;
+    }
+  }
+}
+
+@media (max-width: 1050px) {
+  #recruiters-landing {
+    footer .container .footer-tel-number {
+      margin-right: 20px;
+    }
+
+    footer .container .footer-social .in-social {
+      margin-right: 20px;
     }
   }
 }
@@ -619,59 +434,274 @@
   }
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 991px) {
   #recruiters-landing {
-    footer .container .footer-tel-number {
-      margin-right: 20px;
-    }
-
-    footer .container .footer-social .in-social {
-      margin-right: 20px;
-    }
-  }
-}
-
-@media (max-width: 1100px) {
-  #recruiters-landing {
-    .header-left-img {
-      top: 170px;
-      bottom: unset;
-    }
-
-    .header-right-img {
-      right: 3.3%;
-    }
-
-    .rectangles-header {
-      width: 500px;
-      right: -250px;
-      bottom: -20px;
-    }
-
-    .information .rect-info-right-bottom {
-      width: 500px;
-      right: -250px;
-      bottom: 0;
-    }
-  }
-}
-
-@media (max-width: 1200px) {
-  #recruiters-landing .header-left-img {
-    max-width: 230px;
-
-    .header-right-img {
-      max-width: 200px;
-    }
     .our-offers .offers {
-      width: 85%;
-    }
-    .information .rect-info-left-top {
-      width: 500px;
-      left: -250px;
-    }
-    .our-partner .representation {
       width: 100%;
     }
+    .rectangles-header {
+      bottom: -100px;
+    }
+    .information > .container {
+      position: relative;
+      z-index: 1;
+    }
+    .information .rect-info-left-top {
+      width: 350px;
+      left: -175px;
+    }
   }
 }
+
+@media (max-width: 968px) {
+  #recruiters-landing {
+    .header-left-img {
+      max-width: 200px;
+      top: 250px;
+    }
+    .header-right-img {
+      max-width: 180px;
+      top: 250px;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  #recruiters-landing {
+    .our-offers {
+      margin-left: auto;
+    }
+    .information .reg-btn {
+      display: flex;
+      margin: 40px auto 0;
+    }
+  }
+}
+
+@media (max-width: 850px) {
+  #recruiters-landing {
+    .rectangles-header {
+      width: 400px;
+      right: -200px;
+    }
+    .our-offers > .title {
+      padding-left: 0;
+      text-align: center;
+    }
+    .our-offers .offer:before {
+      left: -10px;
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  #recruiters-landing {
+    .header-right-img, .header-left-img {
+      display: none;
+    }
+    .our-partner .title {
+      text-align: center;
+      margin-left: 0;
+    }
+    .our-partner .representation {
+      padding: 40px 20px;
+    }
+    .our-partner .company-logo {
+      max-width: 100%;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      padding-left: 33%;
+      column-count: 1;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #recruiters-landing {
+    .free-registration {
+      flex-direction: column;
+      align-items: center;
+      margin-top: 0;
+    }
+    .free-registration .img-container {
+      width: 65%;
+      margin-bottom: 30px;
+      margin-right: 0;
+    }
+    .free-registration .title {
+      margin-bottom: 50px;
+    }
+  }
+}
+
+@media (max-width: 750px) {
+  #recruiters-landing {
+    .information > .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .information .question .title {
+      text-align: center;
+    }
+    .information .question:first-child {
+      margin-left: 0;
+      margin-bottom: 60px;
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  #recruiters-landing {
+    footer {
+      height: auto;
+    }
+
+    footer .container {
+      flex-direction: column;
+    }
+
+    footer .container .rights-reserved, footer .container .designed-by {
+      margin: 10px 0;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  #recruiters-landing {
+    .landing-header .header-top .registration-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .landing-header .horizontal input[type=email] {
+      margin-right: 0;
+      margin-bottom: 15px;
+    }
+
+    .landing-header .subtitle {
+      margin-bottom: 60px;
+    }
+
+    .our-offers .offers {
+      padding-left: 28%;
+    }
+
+    .information .question .answer {
+      font-size: 16px;
+    }
+
+    .our-partner .partner-description {
+      max-width: 315px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      padding-left: 20%;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  #recruiters-landing {
+    .landing-header .header-top h1 {
+      width: 90%;
+      font-size: 32px;
+      line-height: unset;
+    }
+
+    .landing-header .subtitle {
+      font-size: 20px;
+    }
+
+    .landing-header .header-top {
+      margin-bottom: 100px;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  #recruiters-landing {
+    .rectangles-header {
+      right: -250px;
+    }
+
+    .our-offers .offers {
+      margin-bottom: 50px;
+    }
+
+    .information .title {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #recruiters-landing {
+    .our-offers .offers {
+      position: relative;
+      z-index: 1;
+      padding-left: 12%;
+    }
+    .rectangles-header {
+      top: 60%;
+      z-index: 0;
+    }
+    .information .question .title {
+      font-size: 25px;
+      margin-bottom: 30px;
+    }
+    .free-registration .img-container {
+      width: 95%;
+    }
+    .free-registration .title {
+      font-size: 30px;
+    }
+    .container .footer-tel-number {
+      margin-bottom: 10px;
+    }
+    footer .container .footer-tel-number {
+      margin-bottom: 0;
+    }
+    footer .container .footer-social .in-social {
+      margin-right: 10px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

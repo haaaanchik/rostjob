@@ -148,6 +148,9 @@ header.header {
   height: 38px;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+  @media (max-width: 600px){
+    display: none;
+  }
 
   > .container {
     display: flex;
