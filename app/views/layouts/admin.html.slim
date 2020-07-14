@@ -8,6 +8,7 @@ html
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = action_cable_meta_tag
+    = render 'partials/yandex_metrika'
   body#admin-page
     #modal_append
     - if staffer_signed_in?

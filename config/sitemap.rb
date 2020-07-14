@@ -9,4 +9,6 @@ SitemapGenerator::Sitemap.create do
   add new_contractor_path, priority: 1, changefreq: false
   add new_customer_path, priority: 1, changefreq: false
   add contractor_info_path, priority: 1, changefreq: false
+  add about_company_path, priority: 1, changefreq: false
+  add contacts_path, priority: 1, changefreq: false
 end

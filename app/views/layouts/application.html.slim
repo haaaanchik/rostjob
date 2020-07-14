@@ -13,6 +13,7 @@ html
     = stylesheet_link_tag 'not_authorized', media: 'all', 'data-turbolinks-track': 'reload' if !user_signed_in?
     - if user_signed_in?
       = action_cable_meta_tag if @current_profile.manager?
+    = render 'partials/yandex_metrika'
   body
     #modal_append
     = render partial: user_signed_in? ? 'layouts/authorized' : 'layouts/not_authorized'
