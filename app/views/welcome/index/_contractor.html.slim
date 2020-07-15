@@ -14,9 +14,14 @@ main#recruter-main
         p Найм: <span> #{ @profile.display_rating } </span>
         p Сделки:  <span> #{ @profile.display_deal_counter } </span>
         p
-          | Баланс:
-          span.ml-2.balance-color = @profile.balance.amount
-          |  руб.
+          - if @current_profile.manager?
+            = check_box_tag :free_manager, true, @current_profile.free_manager?, class: 'form-check-input',
+                    data: {set_free_url: set_free_profile_path, unset_free_url: unset_free_profile_path}
+            = label :free_manager, 'Свободен', class: 'form-check-label', for: 'free_manager'
+          - else
+            | Баланс:
+            span.ml-2.balance-color = @profile.balance.amount
+            |  руб.
         button.user-btn
           = link_to profile_balance_path, class: 'text-white' do
             | Снять
