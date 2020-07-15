@@ -766,6 +766,7 @@ main{
       color: #000000;
       font-size: calc( (100vw - 320px)/(1366 - 755) * (63 - 30) + 30px);
       font-weight: 700;
+      margin-bottom: 11%;  
     }
 
     .description{
@@ -776,21 +777,19 @@ main{
 
     .recruter-btn{
       background-color: #9046ff;
-      // margin-top: 85px;
-      margin-top: 24%;
+      margin-top: 27%; 
     }
 
     .customer-btn{
       background-color: #1970ff;
-      margin-top: 90px;
+      margin-top: 30%;
     }
     
     .recruter-btn, .customer-btn{
       width: 83%;
       max-width: 300px;
-      height: 40px;
+      height: 77px;
       max-height: 77px;
-      // height: 45px;
       font-size: calc( (100vw - 320px)/(1366 - 755) * (30 - 15) + 15px);
       font-weight: 400;
       font-family: "Open Sans - Semi Bold";
@@ -803,21 +802,23 @@ main{
       max-width: 360px
     }
 
+    .choose-recruter, .choose-customer{
+      width: 100%;
+      padding: 13% 0;
+      align-items: flex-start;
+    }
+
     .choose-recruter{
       flex-direction: row;
       margin-right: 0;
-      align-items: flex-start;
-      padding-bottom: 90px;
 
       .choose-content{
-        // margin-top: 130px;
         margin-top: 17%;
       }
 
       .img-container{
         max-width: 312px;
-        width: 41.3%;
-        // margin-right: -65px;
+        width: 56.3%;
         margin-right: -10.6%;
       }
 
@@ -826,9 +827,17 @@ main{
     .choose-customer{
       flex-direction: row-reverse;
       margin-left: 0;
-      .img-container{
-        width: 180px;
+
+      .choose-content{
+        margin-top: 10%;
+        margin-right: 8.5%;
       }
+
+      .img-container{
+        width: 38.6%;
+        max-width: 180px;
+      }
+
     }
 
     .choose-container {
@@ -836,47 +845,28 @@ main{
     }
 
     .rectangle-left{
-      transform: translate(-74%, 58%);
+      transform: translate(-75%, 59%);
     }
 
     .rectangle-right{
-      transform: translate(71%, 58%);
-    }
-
-    .customer{
-      .choose-content{
-        margin-top: 75px;
-      }
+      transform: translate(69%, 61%);
     }
 
   }
 
 }
+@media (max-width: 500px) {
+  #common-landing{
 
-// @media (max-width: 600px) {
-//   #common-landing{
+    .choose-customer{
+      .choose-content{
+        margin-right: 0;
+      }
+    }
 
-//     .img-container{
-//       display: none;
-//     }
-
-//     .choose-recruter{
-//       .choose-content{
-//         margin-top: 0;
-//       }
-//     }
-
-//     .customer{
-//       .choose-content{
-//         margin-top: 0;
-//       }
-//     }
-
-//   }
-// }
-
-// @media (max-width: 400px) {
-//   #common-landing .social {
-//     display: none;
-//   }
-// }
+    .recruter-btn, .customer-btn{
+      height: 40px;
+      width: 70%;
+    }
+  }
+}
