@@ -344,8 +344,9 @@
 
 @media (max-width: 1200px) {
   #recruiters-landing {
-  .header-left-img {
-    max-width: 230px;}
+    .header-left-img {
+      max-width: 230px;
+    }
 
     .header-right-img {
       max-width: 200px;
@@ -495,20 +496,87 @@
 }
 
 @media (max-width: 800px) {
+  #new_user{
+    order: 4;
+  }
   #recruiters-landing {
-    .header-right-img, .header-left-img {
+
+    .header-right-img {
       display: none;
     }
+
     .our-partner .title {
       text-align: center;
       margin-left: 0;
     }
+
     .our-partner .representation {
       padding: 40px 20px;
     }
+
     .our-partner .company-logo {
       max-width: 100%;
     }
+
+    .header-left-img{
+      position: static;
+      order: 2;
+      width: 64%;
+      max-width: 480px;
+    }
+
+    .landing-header{
+
+      .reg-btn{
+        width: 68%;
+        max-width: 507px;
+        font-size: calc( (100vw - 320px)/(768 - 320) * (32 - 18) + 18px);
+        height: 110px;
+        border-radius: 56px;
+      }
+
+      .header-top{
+        padding-top: 17%;
+
+        input[type='email']{
+          width: 80%;
+          height: 40px;
+          max-width: 500px;
+          margin-right: 0;
+          margin-bottom: 6.5%;
+          padding: 0;
+          &::placeholder{
+            font-size: calc( (100vw - 320px)/(768 - 320) * (32 - 16) + 16px);
+            text-align: center;
+          }
+        }
+
+        h1{
+          order: 1;
+          font-size: calc( (100vw - 320px)/(768 - 320) * (66 - 42) + 42px);
+          max-width: 610px;
+          margin-bottom: 12%;
+          line-height: 70px;
+        }
+
+        .subtitle{
+          order: 3;
+          margin: 10% 0 16.7% 0;
+          font-size: calc( (100vw - 320px)/(768 - 320) * (40 - 24) + 24px);
+          max-width: 650px;
+          line-height: unset;
+        }
+
+        .registration-block {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+      }
+    }
+
   }
 }
 
@@ -574,9 +642,10 @@
 
 @media (max-width: 600px) {
   #recruiters-landing {
-    .landing-header .header-top .registration-block {
-      display: flex;
-      flex-direction: column;
+    .landing-header{
+      .reg-btn{
+        height: 80px;
+      }
     }
 
     .landing-header .horizontal input[type=email] {
@@ -646,6 +715,11 @@
 
 @media (max-width: 400px) {
   #recruiters-landing {
+    .landing-header{
+      .reg-btn{
+        height: 60px;
+      }
+    }
     .our-offers .offers {
       position: relative;
       z-index: 1;
@@ -676,32 +750,3 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
