@@ -20,19 +20,27 @@
   .chat-sidebar
     - if @ticket.is_a?(Incident)
       .chat-sidebar-header
-        p.chat-sidebar-title.clicable #{@ticket.proposal_employee.order.production_site.title}
-        span class="chat-sidebar-header-city" г. #{@ticket.proposal_employee.order.city}
+        = image_tag @ticket.proposal_employee.order.production_site.image.url(:thumb)
+        .title-and-city-container
+          p.chat-sidebar-title.clicable #{@ticket.proposal_employee.order.production_site.title}
+          span class="chat-sidebar-header-city" г. #{@ticket.proposal_employee.order.city}
+
+      .order
+        .content.content__published
+          .order__description
+            p.order__title
+              = link_to profile_production_site_order_path(@ticket.proposal_employee.order.production_site,
+                      @ticket.proposal_employee.order), class: 'black-text'  do
+                | #{@ticket.proposal_employee.order.title}
+            .order__bottom
+              span.order__price 
+                = @ticket.display_candidate_price(current_user)
+                = ' руб. / чел.'
 
       .chat-sidebar-body.custom-scroll
         .request data-proposal_employee_id="#{ @ticket.proposal_employee.id}"
-          .request-header
-            p.card-name
-              = link_to profile_production_site_order_path(@ticket.proposal_employee.order.production_site,
-                      @ticket.proposal_employee.order) do
-                | № #{@ticket.proposal_employee.order.id } #{@ticket.proposal_employee.order.title}
-            hr
-            i class="fa fa-bookmark custom-orange" id="hanging-flag"
-            .card-tools
+          i class="fa fa-bookmark custom-orange flag" id="hanging-flag"
+          .card-tools
 
           a data-remote="true" href="#"
             p class="request__title" № #{ @ticket.proposal_employee.employee_cv.id } #{@ticket.proposal_employee.employee_cv.name}
@@ -43,4 +51,3 @@
           div class="request__footer"
             = image_tag('/img//new/no-avatar.png', class: 'request-logo')
             p class="request-user-name" #{@ticket.user_full_name}
- 

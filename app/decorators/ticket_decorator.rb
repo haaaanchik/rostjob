@@ -31,6 +31,12 @@ class TicketDecorator < ApplicationDecorator
     h.content_tag(:td) { full_name }
   end
 
+  def display_candidate_price(user)
+    return proposal_employee.order.customer_price if user.profile.customer?
+
+    proposal_employee.order.contractor_price
+  end 
+
   private
 
   def proposal_employee_user_name
