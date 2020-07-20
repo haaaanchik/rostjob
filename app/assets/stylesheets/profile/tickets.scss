@@ -633,6 +633,10 @@
   width: 100%;
   background-color: #f2f2f2;
   font-family: "Open sans", sans-serif;
+  @media (max-width: 992px) {
+    height: auto;
+    flex-direction: column-reverse;
+  }
 
   a.disabled, .disabled {
     color: gray !important;
@@ -675,6 +679,10 @@
   margin: 15px;
   background-color: #fff;
   border-radius: 4px;
+  @media (max-width: 992px) {
+    width: 100%;
+    margin: 20px 0 0 0;
+  }
 
   .dispute-closed {
     text-align: center;
@@ -687,6 +695,10 @@
   border-radius: 4px;
   background-color: #e6e6e6;
   margin: 15px 15px 15px 0;
+  @media (max-width: 992px) {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 #chat-room .chat-sidebar-header {
@@ -695,10 +707,14 @@
   min-height: 8.5798%;
   border-radius: 4px;
   background-color: #ffffff;
-  padding: 14px 21px 11px;
+  padding: 3% 0 3% 6%;
   img{
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
     max-width: 65px;
-    margin-right: 15px;
+    margin-right: 4.65%;
+    border-radius: 50%;
   }
 }
 
@@ -714,7 +730,7 @@
 
 #chat-room .chat-sidebar-title {
   margin: 0;
-  max-width: 82%;
+  max-width: 100%;
   color: black;
   font-size: 14px;
   font-weight: bold;
@@ -739,12 +755,7 @@
 #chat-room .message {
   position: relative;
   display: flex;
-  //width: 96.1206%;
-  //margin: 10px auto 0;
   border-radius: 4px;
-  //border: 1px solid #e1e1e1;
-  //background-color: #ffffff;
-  // new
   background-color: rgb(250, 250, 250);
   max-width: 50%;
   width: max-content;
@@ -752,6 +763,9 @@
   margin-left: 10px;
   padding-bottom: 10px;
   padding-right: 10px;
+  @media ( max-width: 600px ) {
+    max-width: 100%;
+  }
 }
 
 #chat-room .message.user {
@@ -809,10 +823,20 @@
 
 #chat-room .chat-sidebar .request{
   width: 90%;
+  @media ( max-width: 992px ) {
+    width: 96%;
+    max-width: 400px;
+  }
   .flag{
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 0;
+  }
+  .request__footer{
+    .request-logo{
+      width: 28px;
+      height: 28px;
+    }
   }
 }
 
@@ -842,6 +866,9 @@
   min-height: 12.5%;
   width: 96.1206%;
   margin: 0 auto 2.5%;
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+  }
 }
 
 #chat-room .ready-text-examples .text-example {
@@ -855,6 +882,12 @@
   font-weight: bold;
   line-height: 16px;
   cursor: pointer;
+  @media (max-width: 600px) {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 2%;
+    padding: 10px;
+  }
 }
 
 #chat-room .text-input {
@@ -933,13 +966,6 @@
   }
 }
 
-#hanging-flag {
-  position: absolute;
-  bottom: 0;
-  right: 8px;
-  transform: translateY(90%);
-}
-
 .custom-orange {
   color: #f02200;
 }
@@ -1013,6 +1039,20 @@
 
 .custom-scroll::-webkit-scrollbar-thumb:active {
   background: linear-gradient(left, #22ADD4, #1E98BA);
+}
+
+#chat-room{
+  .chat-sidebar{
+    .order{
+      .content{
+        padding: 10px 15px;
+      }
+      .order__price{
+        width: auto;
+        min-width: 120px;
+      }
+    }
+  }
 }
 
 @media (max-height: 768px) {
