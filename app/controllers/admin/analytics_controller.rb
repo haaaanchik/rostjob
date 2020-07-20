@@ -1,5 +1,4 @@
 class Admin::AnalyticsController < Admin::ApplicationController
-  skip_before_action :set_authorize, only: %i[orders_info]
 
   def export_to_excel
     orders
@@ -20,8 +19,6 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def orders_info
-    authorize [:admin, :analytic]
-
     @q = Order.for_analytics.ransack(params[:q])
     result = params[:q] && params[:q][:state_eq] ? @q.result : @q.result.where(state: :published)
     @orders = result.includes(:user).where.not(state: :draft).decorate
@@ -37,5 +34,9 @@ class Admin::AnalyticsController < Admin::ApplicationController
 
   def orders
     @orders ||= Order.where(created_at: date_interval)
+  end
+
+  def set_authorize
+    authorize [:admin, :analytic]
   end
 end
