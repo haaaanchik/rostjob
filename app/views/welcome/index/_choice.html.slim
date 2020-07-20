@@ -13,7 +13,10 @@
       p.description Хочу зарабатывать на поиске персонала
       = link_to 'Перейти', freelance_path, class: 'recruter-btn'
   = image_tag '/img/clouds_l.png', class: 'clouds-left'
-  = image_tag '/img/rectangle_l.png', class: 'rectangle-left'
+  /= image_tag '/img/rectangle_l.png', class: 'rectangle-left'
+  picture
+    source media=("(max-width: 768px)") srcset="/img/common-landing/big_top_rectangle.png" 
+      = image_tag '/img/rectangle_l.png', class: 'rectangle-left'
 .customer
   .choose-customer
     .img-container
@@ -23,7 +26,10 @@
       p.description.pl-1 Хочу, чтобы мне подобрали персонал
       = link_to 'Перейти', industrial_path, class: 'customer-btn'
   = image_tag '/img/clouds_r.png', class: 'clouds-right'
-  = image_tag '/img/rectangle_r.png', class: 'rectangle-right'
+  /= image_tag '/img/rectangle_r.png', class: 'rectangle-right'
+  picture
+    source media=("(max-width: 768px)") srcset="/img/common-landing/big_bottom_rectangle.png" 
+      = image_tag '/img/rectangle_r.png', class: 'rectangle-right'
 
 scss:
   #navbar {
