@@ -2,8 +2,9 @@
   width: 100%;
   padding: 15px 15px 0 15px;
   background-color: #f2f2f2;
-  //height: calc(100vh - 58px);
   height: 100%;
+  max-height: 100%;
+  overflow: hidden;
   position: relative;
   font-family: "Open Sans", sans-serif;
 
@@ -24,7 +25,6 @@
 
   .filters {
     display: flex;
-    //flex-wrap: wrap;
     align-items: center;
     padding: 0 0 0 10px;
     position: relative;
@@ -82,7 +82,6 @@
     display: flex;
     border-radius: 4px 4px 0 0;
     background-color: #e6e6e6;
-    margin-top: 12px;
   }
 
   .worksheets__title p{
@@ -116,6 +115,7 @@
 
   .worksheets{
     height: 86%;
+    margin-top: 12px;
   }
 
   .worksheets__body{
@@ -158,8 +158,6 @@
 
   .filters-dropdown{
     position: static;
-    //bottom: -135%;
-    //left: 0;
     display: none;
     flex-wrap: wrap;
     background-color: white;
@@ -184,9 +182,6 @@
 
   .filters-show {
     display: flex;
-    //flex-wrap: wrap;
-    //max-width: 100%;
-    //width: 100%;
   }
 
   .filters-dropdown > p{
@@ -228,15 +223,10 @@
     align-items: center;
     font-weight: bold;
     font-size: 16px;
-    //margin: 0 10px 0 0;
     img{
       margin-left: 10px;
       margin-top: 4px;
     }
-  }
-
-  .worksheets__body{
-    //padding-left: 10px;
   }
 
   .worksheets__titles{
@@ -273,7 +263,6 @@
   }
 
   .worksheets__item:hover{
-    //box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     transition: all 0.55s ease-in-out;
     cursor: pointer;
   }
@@ -601,12 +590,7 @@
   }
   #proposal_employee_search{
     margin: auto;
-  }
-}
-
-@media (max-width: 550px) {
-  #worksheet {
-    height: max-content;
+    width: 100%;
   }
 }
 

@@ -34,8 +34,17 @@ class Candidates
 
   @openFilters: ->
     $('.js-filters-dropdown').toggleClass('filters-show')
-    $('.js-filters > img').toggleClass('rotate')
-    $('#worksheet').toggleClass('max-content')
+    $('#filters img').toggleClass('rotate')
+    if ( $('.js-filters-dropdown').hasClass('filters-show') )
+      filtersHeight = $('.js-filters-dropdown').outerHeight(true)
+      worksheetHeight = $('#worksheet').height();
+      filtersHeightPercent = (filtersHeight / worksheetHeight) * 100
+      worksheetsHeight = ( $('.worksheets').height() / worksheetHeight) * 100
+      console.log(filtersHeightPercent + '%')
+      console.log(worksheetsHeight + '%' )
+      $('.worksheets').css('height', (worksheetsHeight - filtersHeightPercent ) + '%')
+    else
+      $('.worksheets').css('height', '')
 
 $(document).on 'turbolinks:load', ->
   Candidates.init()
