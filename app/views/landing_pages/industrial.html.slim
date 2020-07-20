@@ -270,7 +270,8 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo1.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan4.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan4.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan4.jpeg'
             .review-block
               .logo
                 = image_tag '/img/customer-landing/clients-logo/leroy_merlin.jpeg'
@@ -285,7 +286,8 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo2.jpeg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan7.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan7.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan7.jpeg'
             .review-block
               .logo
                 = image_tag '/img/customer-landing/logos/av_ural.png'
@@ -300,7 +302,8 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo3.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan2.jpg'
+                = link_to image_path('/img/customer-landing/skans/skan2.jpg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan2.jpg'
             .review-block
               .logo
                 = image_tag '/img/customer-landing/logos/medicine.png'
@@ -315,7 +318,8 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo4.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan9.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan9.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan9.jpeg'
             .review-block
               .logo
                 = image_tag '/img/customer-landing/logos/door_han.png'
@@ -328,7 +332,8 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo5.jpg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan10.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan10.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan10.jpeg'
             .review-block
               .logo
                 = image_tag '/img/customer-landing/logos/5_micron.png'
@@ -341,42 +346,50 @@ body#customer-landing
               .logo
                 = image_tag '/img/customer-landing/logos/logo6.jpg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan1.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan1.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan1.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo7.jpeg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan5.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan5.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan5.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo8.jpg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan6.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan6.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan6.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo9.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan13.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan13.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan13.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo10.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan12.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan12.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan12.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo11.jpg'
               p.content
-                = image_tag '/img/customer-landing/skans/skan3.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan3.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan3.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo12.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan11.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan11.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan11.jpeg'
             .review-block.skan
               .logo
                 = image_tag '/img/customer-landing/logos/logo13.png'
               p.content
-                = image_tag '/img/customer-landing/skans/skan8.jpeg'
+                = link_to image_path('/img/customer-landing/skans/skan8.jpeg'), data: { lightbox: 'images' } do
+                  = image_tag '/img/customer-landing/skans/skan8.jpeg'
       / button.green-btn.reviews-btn type="button"  Оставить отзыв
 
     section.advantages-list.container
@@ -558,6 +571,8 @@ javascript:
       ]
     });
 
+    $('#slider-reviews').slickLightbox();
+
     // open/close review
 
     $('.js-open-review').on('click', toggleReview);
@@ -565,3 +580,4 @@ javascript:
     function toggleReview() {
       $(this).prev().toggleClass('review-opened');
     }
+
