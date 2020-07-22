@@ -1,4 +1,4 @@
-class EmployeeCvs
+class RostJob.ProfileEmployeeCvsIndex
   $orderId = null
   $employeeCvId = null
   $prEmployeeId = null
@@ -10,6 +10,7 @@ class EmployeeCvs
   @init: ->
     @draggableInit()
     @clickProposalEmployee()
+    @clickNewCandidate()
     @bind()
 
   @bind: ->
@@ -44,6 +45,21 @@ class EmployeeCvs
       $('#employee_cv_link')[0].click()
     if $('#proposal_employee_link').length
       $('#proposal_employee_link')[0].click()
+
+  @clickNewCandidate: ->
+    param = location.search.match(/modal=new_empl/g)
+    paramModal = if param == null then null else param[0]
+    return if paramModal != 'modal=new_empl'
+
+    $.ajax
+      url: '/profile/employee_cvs/new'
+      method: 'GET'
+      data: location.search
+      dataType: 'script'
+      cache: false
+      processData: false
+      contentType: false
+
 
   @prpEmployeeCvState: (event) ->
     state = $(this).val()
@@ -296,6 +312,3 @@ class EmployeeCvs
       toastr.success('Анкета успешно перенеса')
     else
       toastr.error('Не удалось перенести анкету, пожалуйста обновите страницу и обратитесь к администратору')
-
-$(document).on 'turbolinks:load', ->
-  EmployeeCvs.init()

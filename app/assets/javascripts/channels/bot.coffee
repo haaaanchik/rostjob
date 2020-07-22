@@ -5,4 +5,4 @@ App.chat = App.cable.subscriptions.create "BotChannel",
 
   received: (data) ->
     console.log data
-    window.location.replace(data['employee_cv_url'])
+    window.location.replace(data['new_empl_cv_url'])

@@ -17,12 +17,12 @@
               .ancete-row
                 p.ancete-row__title Полное имя
                 .ancete-row__content
-                  = f.text_field :name, class: 'form-control'
+                  = f.text_field :name, class: 'form-control', value: params[:name]
                   .invalid-feedback
               .ancete-row
                 p.ancete-row__title Номер телефона
                 .ancete-row__contentactions
-                  = f.phone_field :phone_number, class: 'form-control'
+                  = f.phone_field :phone_number, class: 'form-control', value: params[:phone_number]
                   .invalid-feedback
               .ancete-row
                 p.ancete-row__title Анкета для СБ

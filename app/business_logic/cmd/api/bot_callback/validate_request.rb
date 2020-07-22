@@ -20,9 +20,9 @@ module Cmd
 
         def bot_callback_params
           {
-            guid: input_params['guid'],
-            candidate_id: input_params['candidate_id'],
-            call_data: input_params['call_data']
+            guid: input_params[:guid],
+            name: input_params[:name],
+            phone: input_params[:phone]
           }
         end
 

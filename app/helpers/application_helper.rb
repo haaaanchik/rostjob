@@ -1,4 +1,7 @@
 module ApplicationHelper
+  def body_data_page
+    (params[:controller].split('/') << action_name).map(&:camelize).join
+  end
 
   def body_controller
     params[:controller].split('/').push(params[:action]).join('_')

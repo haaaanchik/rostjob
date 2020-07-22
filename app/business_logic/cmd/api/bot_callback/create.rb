@@ -4,39 +4,27 @@ module Cmd
       class Create
         include Interactor
 
+        delegate :input_params, to: :context
+
         def call
           cb = ::BotCallback.create(bot_callback_params)
-          context.callback = cb
           context.fail!(code: 422, message: cb.errors.messages) if cb.invalid?
           Cmd::FreeManager::Remove.call(user_id: user.id)
-          ActionCable.server.broadcast("bot_channel_#{profile.id}",
-                                       employee_cv_url: "/bots/employee_cvs/#{candidate_id}")
+          context.profile_id = user.profile.id
         end
 
         private
 
         def bot_callback_params
           {
-            guid: input_params['guid'],
-            candidate_id: input_params['candidate_id'],
-            call_data: input_params['call_data']
+            guid: input_params[:guid],
+            candidate_id: input_params[:name],
+            call_data: "Номер телефона: #{input_params[:phone]}"
           }
         end
 
-        def candidate_id
-          input_params[:candidate_id]
-        end
-
-        def profile
-          user.profile
-        end
-
         def user
-          ::User.find_by(guid: input_params['guid'])
-        end
-
-        def input_params
-          context.input_params
+          @user ||= ::User.find_by(guid: input_params[:guid])
         end
       end
     end
