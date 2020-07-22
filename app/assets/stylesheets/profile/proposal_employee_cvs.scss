@@ -294,6 +294,7 @@
 #acts .logo img {
   width: 100%;
   object-fit: cover;
+  border-radius: 50%;
 }
 
 #acts .details p {
@@ -341,6 +342,11 @@
   .order-title:hover {
     color: #212529
   }
+
+  > div:last-child span{
+    white-space: nowrap;
+  }
+
 }
 
 #acts .long-block .number {
@@ -477,11 +483,23 @@
 }
 
 #acts .contractor-column {
+  position: fixed;
   overflow: auto;
   background-color: #ffffff;
 
+  @media (max-width: 991px) {
+    position: static;
+  }
+
   .contractor-link  {
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid #575757;
+
+    @media (min-width: 991px) and (max-width: 1100px) {
+      flex-direction: column;
+      text-align: center;
+    }
 
     &:hover {
       border-bottom: 1px solid #1970ff;
@@ -498,7 +516,25 @@
     .contractor-img {
       height: 50px;
       width: auto;
+      border-radius: 50%;
     }
+  }
+
+  .header{
+    line-height: unset;
+    padding: 0;
+  }
+
+  h3.title{
+    height: auto;
+    line-height: unset;
+  }
+
+}
+
+@media (max-width: 1200px ){
+  #acts .long-block div:last-child {
+    width: 50%;
   }
 }
 
@@ -506,10 +542,6 @@
   #acts .all {
     width: 100%;
     justify-content: center;
-  }
-
-  #acts .long-block div:last-child {
-    width: 50%;
   }
 }
 
@@ -610,6 +642,10 @@
 
   #acts .long-block {
     padding: 10px;
+  }
+
+  #acts .subscribe-all.ml-2{
+    margin: 10px 0.5rem 0 0;
   }
 }
 

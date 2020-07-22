@@ -5,6 +5,11 @@
   width: 100%;
   background-color: #f2f2f2;
   display: flex;
+
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 #setting-page .settings-column {
@@ -13,12 +18,18 @@
   background-color: #ffffff;
   max-width: 333px;
 
+  @media (max-width: 992px) {
+    width: 100%;
+    max-width: unset;
+  }
+
   .settings {
     position: fixed;
     width: 333px;
     background-color: #ffffff;
-    @media (max-width: 970px) {
-      width: 230px;
+    @media (max-width: 992px) {
+      position: static;
+      width: 100%;
     }
   }
 }
@@ -90,6 +101,10 @@
   align-items: center;
   justify-content: center;
   padding: 20px;
+  @media (max-width: 992px) {
+    width: 100%;
+    padding: 15px;
+  }
 }
 
 #setting-page .settings-block-user, #setting-page .company-card, #setting-page .mailing-list-management, #setting-page .contract-offer {
@@ -106,6 +121,10 @@
   font-size: 17px;
   font-weight: bold;
   margin-bottom: 60px;
+  @media (max-width: 992px) {
+    text-align: center;
+    margin-bottom: 20px;
+  }
 }
 
 #setting-page .company-card form {
@@ -137,6 +156,10 @@
 
   textarea {
     height: 80px;
+    @media (max-width:500px ){
+      width: 100%;
+      min-width: unset;
+    }
   }
 }
 
@@ -150,6 +173,9 @@
   height: 32px;
   border-radius: 16px;
   background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+  @media (max-width: 992px){
+    margin: 0 auto;
+  }
 }
 
 #setting-page .profile-settings .form-item {
@@ -336,27 +362,13 @@
   }
 }
 
-@media (max-width: 970px) {
-  #setting-page .settings-column {
-    width: 230px;
-  }
-
-  #setting-page .settings-block-container {
-    width: calc(100% - 230px);
-  }
-}
-
 @media (max-width: 870px) {
-  #setting-page .settings-column {
-    display: none;
-  }
-
   #setting-page .settings-block-container {
     width: 100%;
   }
 }
 
-@media (max-width: 560px) {
+@media (max-width: 992px) {
   #setting-page .profile-settings .form-item {
     flex-direction: column;
   }
@@ -394,7 +406,7 @@
 
   #setting-page .profile-settings input[type=text], #setting-page .profile-settings input[type=password] {
     min-width: unset;
-    width: 80%;
+    width: 100%;
   }
 
   #setting-page .burger {
@@ -426,8 +438,15 @@
   text-align: center;
   line-height: 32px;
   margin-left: 26%;
+  @media (max-width: 992px){
+    margin: 0 auto;
+  }
 }
 
 #setting-page .invalid-feedback {
   display: block;
+}
+
+#setting-page .submit-left{
+  margin: 10px auto 0;
 }
