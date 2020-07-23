@@ -25,7 +25,6 @@ class RostJob.ProfileEmployeeCvsIndex
     $('.js-close-popup').on 'click', @closeReminder
     $('.add-reminder').on 'click', @addReminder
     $('.js-arrow ').on 'click', @hiddenFavoriteBlock
-    $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
     $('.chosen .card-scroll-window .card').on 'dragenter', @openCardBody
     $('.chosen .card-scroll-window .card').on 'dragleave', @closeCardBody
 
@@ -217,9 +216,6 @@ class RostJob.ProfileEmployeeCvsIndex
 
   @hiddenFavoriteBlock: ->
     $(this).parent('.card-header').next('.js-slide-elem').slideToggle()
-
-  @orderBlockToggleClass: ->
-    $(this).next('.details').toggleClass('opened')
 
   @openCardBody = (e) ->
     $counter++

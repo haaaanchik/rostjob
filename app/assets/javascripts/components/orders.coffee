@@ -1,9 +1,10 @@
-class CopyOrder
+class RostJob.OrdersCustomerOrders
   @init: ->
     @bind()
 
   @bind: ->
     $('#order_page').on 'click', 'p.copy', @copyProcess
+    $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
 
   @copyProcess: ->
     copy_body_container = $(this).data('clipboard-target')
@@ -19,6 +20,9 @@ class CopyOrder
 
     copy_to_clipboard(copy_text)
 
+  @orderBlockToggleClass: ->
+    $(this).next('.details').toggleClass('opened')
+
   copy_to_clipboard = (text_to_copy) ->
     textarea = document.createElement('textarea')
     textarea.value = text_to_copy
@@ -30,7 +34,3 @@ class CopyOrder
     successful = document.execCommand('copy')
     textarea.remove()
     toastr.success('Заявка скопирована!') if successful
-
-
-$(document).on 'turbolinks:load', ->
-  CopyOrder.init()
