@@ -27,13 +27,14 @@
               .ancete-row__contentactions
                 = phone_field :employee_cv, :phone_number, class: 'disabled', value: employee_cv.phone_number
             .ancete-row
-              p.ancete-row__title Анкета для СБ
+              p.ancete-row__title 
+              / Анкета для СБ
               .ancete-row__content
-                a.download-empl-cv href="#"
-                  = image_tag('/img/new/down.png')
-                  |  Скачать анкету
+                / a.download-empl-cv href="#"
+                /   = image_tag('/img/new/down.png')
+                /   |  Скачать анкету
 
-                .sex
+                .sex.text-center
                   label.mr-2 for="man" М
                   = radio_button_tag 'employee_cv[gender]',
                           employee_cv.gender,

@@ -29,13 +29,14 @@
                   = f.phone_field :phone_number, class: 'form-control'
                   .invalid-feedback
               .ancete-row
-                p.ancete-row__title Анкета для СБ
+                p.ancete-row__title 
+                  / Анкета для СБ
                 .ancete-row__content
-                  #choose-file
-                    | Выберите файл
-                    = f.file_field :document
+                  / #choose-file
+                  /   | Выберите файл
+                  /   = f.file_field :document
 
-                  .sex
+                  .sex.text-center
                     label.mr-2 for="man" М
                     = f.radio_button :gender, 'М', id: 'man', checked: true
                     label.mr-2 for="woman" Ж
