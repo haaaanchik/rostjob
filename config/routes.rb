@@ -383,6 +383,7 @@ Rails.application.routes.draw do
   post 'terms/accept', to: 'terms#accept'
   get 'terms/download', to: 'terms#download'
   get :calendar_events, controller: 'welcome'
+  mount Thredded::Engine => '/forum'
   mount ActionCable.server => '/cable'
   root to: 'welcome#index'
 end

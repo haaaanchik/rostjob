@@ -90,6 +90,12 @@ class User < ApplicationRecord
     super
   end
 
+  def forum_admin
+    app_env = Rails.env.to_sym
+    admins = Rails.application.credentials[app_env][:forum_admins].split(',')
+    admins.include?(email)
+  end
+
   private
 
   def fill_from_profile
