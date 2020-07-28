@@ -25,3 +25,9 @@
     p Акты
     span.counter
       b = @p_employees_approved_count
+
+  = link_to thredded_path,
+            title: 'Форум',
+            class: 'navside__menu-item' do
+    i.fas.fa-id-card-alt.svg-sidebar
+    p Форум

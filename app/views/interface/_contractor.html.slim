@@ -25,6 +25,12 @@ ul.side-bar-ul
             class: "nav-link #{'nav-link__active' if active_item == :orders}" do
       i.fas.fa-align-justify.svg-sidebar
       p.icon-text Каталог заявок
+  li.nav-item
+    = link_to thredded_path,
+            title: 'Форум',
+            class: 'nav-link' do
+      i.fas.fa-id-card-alt.svg-sidebar
+      p.icon-text Форум
   / li.nav-item
   /   = link_to profile_favorites_path,
   /             title: 'Избранные заявки',
