@@ -9,10 +9,11 @@ ruby:
         #filters
           | Фильтры
           = image_tag('/img/new/arrow-down.png')
+        = link_to 'Показать все', url_for_reset_filters, class: 'btn btn-primary btn-sm btn-rounded show-all-mobile' 
       .search
         = f.search_field candidate_search_fields, class: 'search_candidates', placeholder: 'Поиск анкет', value: val
-      .show
         = image_tag('/img/new/search.png', class: 'search_icon')
+      .show
         = link_to 'Показать все', url_for_reset_filters, class: 'btn btn-primary btn-sm btn-rounded' 
 
     .filters-dropdown.js-filters-dropdown.filters-show.max-content

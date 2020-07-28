@@ -36,6 +36,10 @@
       padding: 10px 0 0 0;
       justify-content: center;
     }
+    @media (max-width: 400px) {
+      justify-content: space-around;
+      flex-direction: row;
+    }
   }
 
   .filters > p{
@@ -67,6 +71,10 @@
     position: absolute;
     top: 3px;
     right: 3px;
+    @media (max-width: 400px) {
+      top: unset;
+      bottom: 3px;
+    }
   }
 
   .show {
@@ -75,6 +83,15 @@
       margin-left: 35px;
       text-transform: unset;
       box-shadow: unset;
+    }
+    @media (max-width: 768px ) {
+      display: none;
+    }
+  }
+
+  .show-all-mobile{
+    @media (min-width: 768px ) {
+      display: none;
     }
   }
 
@@ -226,6 +243,9 @@
     img{
       margin-left: 10px;
       margin-top: 4px;
+      @media ( max-width: 768px ) {
+        margin-top: 0;
+      }
     }
   }
 
@@ -635,15 +655,11 @@
   #worksheet .search{
     margin-left: 10px;
   }
-  #proposal_employee_search{
-    width: 274px;
-    margin: 0;
-  }
   #worksheet .show .btn-sm{
     margin-left: 10px;
   }
   #proposal_employee_search{
-    width: 250px;
+    width: 100%;
   }
 }
 
@@ -702,8 +718,7 @@
       margin: auto;
     }
     .search{
-      margin-left: 0;
-      margin-top: 5px;
+      margin: 10px auto;
     }
   }
   #proposal_employee_search{

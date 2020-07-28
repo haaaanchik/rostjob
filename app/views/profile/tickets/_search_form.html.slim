@@ -11,6 +11,8 @@ ruby:
     .treatment_search_input
       = f.search_field :all_fields_cont, id: 'search-input', placeholder: 'Поиск обращений', value: val
       = image_tag('/img/new/search.png', class: 'search-img')
+    .treatment_list_new.mobile
+      span.btn-empty Новое обращение
 
     .treatment_search_checkboxes
       .treatment_search_checkboxes_block

@@ -18,7 +18,7 @@ ruby:
               html: { method: :put, class: 'profile-settings' }, remote: true do |f|
         .form-item
           = f.label :full_name, f.object.decorate.label_full_name, class: 'title'
-          .d-flex.flex-column
+          .d-flex.flex-column.user-full-name-container
             = f.text_field :full_name
             .invalid-feedback
         = link_to_show_password_block(resource)
