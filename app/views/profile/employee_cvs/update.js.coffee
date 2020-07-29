@@ -1,4 +1,4 @@
 <% if @status == 'success' %>
-toastr.success('', 'Успех!')
-location.reload();
+toastr.success('', 'Анкета успешна обновлена')
+location.reload()
 <% end %>
