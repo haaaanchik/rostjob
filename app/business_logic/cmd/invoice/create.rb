@@ -44,15 +44,15 @@ module Cmd
         {
           name: company.name,
           short_name: company.short_name,
-          inn: company.private_person? ? account.inn : company.inn,
-          kpp: company.private_person? ? account.kpp : company.kpp,
+          inn: company.private_person? ? account&.inn : company.inn,
+          kpp: company.private_person? ? account&.kpp : company.kpp,
           address: company[:address],
           account: {
-            account_number: account.account_number,
-            corr_account: account.corr_account,
-            bic: account.bic,
-            bank: account.bank,
-            bank_address: account.bank_address
+            account_number: account&.account_number,
+            corr_account: account&.corr_account,
+            bic: account&.bic,
+            bank: account&.bank,
+            bank_address: account&.bank_address
           }
         }
       end
