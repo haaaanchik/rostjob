@@ -3,11 +3,13 @@ module Cmd
     class Update
       include Interactor
 
+      delegate :profile, to: :context
+
       def call
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
-          profile.save(context: :company)
-          SendDirectMailJob.perform_now(user: profile.user, method: 'welcome_message') if profile.customer?
+          saved = profile.save(context: :company)
+          send_welcome_message(saved)
         else
           profile.save
         end
@@ -30,16 +32,18 @@ module Cmd
         context.params
       end
 
-      def profile
-        context.profile
-      end
-
       def company?
         if profile.persisted?
           profile.legal_form == 'company'
         else
           profile_params[:legal_form] == 'company'
         end
+      end
+
+      def send_welcome_message(saved)
+        return unless profile.customer? && saved
+
+        SendDirectMailJob.perform_now(user: profile.user, method: 'welcome_message')
       end
 
       def logger_params

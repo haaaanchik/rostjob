@@ -1,13 +1,15 @@
 module Cmd
   module Profile
-    module Balance
+    module Company
       class Create
         include Interactor
 
         delegate :profile, to: :context
 
         def call
-          context.fail!(message: 'Не удалось создать счёт для профиля') unless profile.create_balance
+          company = profile.build_company
+          company.save(validate: false)
+          context.company = company
         end
       end
     end
