@@ -8,7 +8,7 @@ class Invoice < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than: 0, less_than: 100_000_000.00 }
 
   before_create :set_invoice_number
-  after_create :send_mail_wait_for_payment, if: -> { profile.notify_mails? }
+  after_create :send_mail_wait_for_payment, if: -> { profile.customer? && profile.notify_mails? }
 
   scope :customers, -> { joins(:profile).where('profiles.profile_type = ?', 'customer') }
   scope :contractors, -> { joins(:profile).where('profiles.profile_type = ?', 'contractor') }
