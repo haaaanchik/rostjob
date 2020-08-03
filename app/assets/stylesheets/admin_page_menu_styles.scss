@@ -54,5 +54,14 @@
 
   }
 
+  #quickMenu{
+    .nav-item{
+      cursor: pointer;
+    }
+  }
+  #quickMenuBtn{
+    margin-left: auto !important;
+  }
+
 }
 
