@@ -1,21 +1,19 @@
 #acts
   .row
-    .col-12.col-lg-2.contractor-column.position-fixed.h-100
-      .header
-        h3.mt-3.title Список исполнителей
+    .col-12.col-lg-2.contractor-column.h-100.custom-scroll
+      h3.mt-3.title Список исполнителей
       .custom-scroll
         .contractor-link.py-2.align-items-center
-          .mb-2
-            = active_link_to 'Все Акты', approval_list_profile_candidates_path, class_active: false
+          = active_link_to 'Все Акты', approval_list_profile_candidates_path, class_active: false
         - @contractor_list.each do |contractor|
-          .contractor-link.py-2.d-flex.align-items-center
+          .contractor-link.py-2
             .mr-2
               = image_tag contractor.profile.image_url, class: 'contractor-img'
             = active_link_to contractor.user.full_name,
                              approval_list_profile_candidates_path(profile_id: contractor.profile.id),
                              class_active: 'active-link', active: contractor.id == params[:profile_id].to_i
 
-    .col-12.col-lg-10.offset-2
+    .col-12.col-lg-10.offset-lg-2
       .custom-scroll.ml-2
         .single-act
           - @approval_list.each do |profile, items|
