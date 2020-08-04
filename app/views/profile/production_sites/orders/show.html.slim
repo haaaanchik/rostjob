@@ -23,7 +23,7 @@
         p.peoples-left
           | Осталось #{@order.number_free_places} человек
           br
-          = @order.fix_display_order_disputed
+          = @order.display_order_disputed
         p.add-personal data-toggle="modal" data-target="#addNewQuantityEmployeeModal" + Добавить персонал
 
         .column__body

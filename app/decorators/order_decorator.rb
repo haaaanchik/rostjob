@@ -45,11 +45,14 @@ class OrderDecorator < ApplicationDecorator
                       .includes(:employee_cv)
   end
 
-  def fix_display_order_disputed
+  def display_order_disputed
     return unless candidates.disputed.present?
+    return link_to_disputed if candidates.disputed.count == 1
+
     h.content_tag(:a,
-                  href: h.profile_tickets_path,
-                  class:'red-text') {" + #{ candidates.disputed.count} спор(ов)"}
+                  href: h.profile_tickets_path(q: { search_by_order_eq: id,
+                                                    state_eq: 'opened' }),
+                  class:'red-text') {"+ #{ candidates.disputed.count} спор(ов)"}
 
   end
 
@@ -164,6 +167,14 @@ class OrderDecorator < ApplicationDecorator
   end
 
   private
+
+  def link_to_disputed
+    incident = candidates.disputed.first.incidents.first
+
+    h.link_to "+ #{ candidates.disputed.count} спор(ов)",
+              h.profile_ticket_path(incident),
+              class:'red-text'
+  end
 
   def count_month_is_be
     start_periond = published_at || created_at

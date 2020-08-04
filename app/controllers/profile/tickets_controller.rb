@@ -27,7 +27,7 @@ class Profile::TicketsController < ApplicationController
 
   def tickets
     params[:q][:waiting_not_eq] = profile_type if params[:q] && params[:q][:state_waiting_fields_eq] == 'opened'
-    @q = Ticket.with_other_tickets_for(current_user).ransack(params[:q] || { state_cont:     'opened',
+    @q = Ticket.with_other_tickets_for(current_user).ransack(params[:q] || { state_eq: 'opened',
                                                                              waiting_not_eq: profile_type })
     @tickets ||= @q.result
   end
