@@ -26,7 +26,7 @@
 
       h1 {
         color: #9046ff;
-        font-size: 42px;
+        font-size: 45px;
         max-width: 468px;
         text-align: center;
         margin-top: 0;
@@ -161,10 +161,18 @@
     margin-left: auto;
     max-width: 630px;
     margin-bottom: 155px;
+    margin-right: 100px;
+    @media (max-width:1200px){
+      margin-right: unset;  
+    }
   }
 
   .information .question:nth-child(2) {
     max-width: 620px;
+    margin-left: 100px;
+    @media (max-width:1200px){
+      margin-left: unset;  
+    }
   }
 
   .information .answer {
@@ -190,6 +198,7 @@
 
   .our-partner {
     padding-bottom: 110px;
+    margin-top: 55px;
   }
 
   .our-partner .title {
@@ -207,6 +216,10 @@
     border-radius: 8px;
     background-color: #f5fcff;
     padding: 85px 100px 85px 140px;
+    @media (max-width: 1200px) {
+      width: 100%;
+      padding: 40px 50px;
+    }
   }
 
   .our-partner .company-logo {
@@ -232,7 +245,7 @@
 
   .our-partner .achievements .item {
     margin-left: 43.5%;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
 
   .our-partner .achievements .item > p {
@@ -439,6 +452,8 @@
   #recruiters-landing {
     .our-offers .offers {
       width: 100%;
+      position: relative;
+      z-index: 1;
     }
     .rectangles-header {
       bottom: -100px;
@@ -643,8 +658,12 @@
 @media (max-width: 600px) {
   #recruiters-landing {
     .landing-header{
-      .reg-btn{
+      .reg-btn {
         height: 80px;
+      }
+      .header-top .registration-block {
+        display: flex;
+        flex-direction: column;
       }
     }
 
@@ -683,7 +702,7 @@
   #recruiters-landing {
     .landing-header .header-top h1 {
       width: 90%;
-      font-size: 32px;
+      font-size: 40px;
       line-height: unset;
     }
 
