@@ -42,7 +42,7 @@
           i class="fa fa-bookmark custom-orange flag" id="hanging-flag"
           .card-tools
 
-          a data-remote="true" href="#"
+          = link_to profile_candidate_path(@ticket.proposal_employee), remote: true do
             p class="request__title" № #{ @ticket.proposal_employee.employee_cv.id } #{@ticket.proposal_employee.employee_cv.name}
 
           p class="phone-number" #{@ticket.proposal_employee.employee_cv.phone_number}
