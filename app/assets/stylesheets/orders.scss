@@ -553,7 +553,10 @@ $secondaryColorDark: #b7b7b7;
     .profile_search{
 
       @media (max-width: 768px) {
+        display: -webkit-box;
+        display: -ms-flexbox;
         display: flex;
+        -ms-flex-wrap: wrap;
         flex-wrap: wrap;
       }
     }
@@ -590,6 +593,9 @@ $secondaryColorDark: #b7b7b7;
     font-size: 15px;
     font-weight: bold;
     margin: 40px 0 20px 0;
+    @media (max-width: 768px ){
+      margin: 10px 0 10px 0;
+    }
   }
 
   .requests-page-filters .cities {
@@ -764,7 +770,10 @@ $secondaryColorDark: #b7b7b7;
 
 @media (max-width: 768px) {
   #catalog {
-    flex-direction: column-reverse;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
     height: max-content;
 
     .catalog {
