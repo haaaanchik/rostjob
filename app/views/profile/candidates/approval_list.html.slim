@@ -1,91 +1,87 @@
-#acts
-  .row
-    .col-12.col-lg-2.contractor-column.h-100.custom-scroll
-      h3.mt-3.title Список исполнителей
+#acts.row.m-0.p-0
+    .contractor-column.custom-scroll
+      h3.title Список исполнителей
       .custom-scroll
-        .contractor-link.py-2.align-items-center
-          = active_link_to 'Все Акты', approval_list_profile_candidates_path, class_active: false
+        
         - @contractor_list.each do |contractor|
-          .contractor-link.py-2
-            .mr-2
+          .contractor-link
+            .mx-lg-4.mx-2
               = image_tag contractor.profile.image_url, class: 'contractor-img'
-            = active_link_to contractor.user.full_name,
-                             approval_list_profile_candidates_path(profile_id: contractor.profile.id),
-                             class_active: 'active-link', active: contractor.id == params[:profile_id].to_i
+            .details
+              = active_link_to contractor.user.full_name,
+                              approval_list_profile_candidates_path(profile_id: contractor.profile.id), class: 'initials',
+                              class_active: 'active-link', active: contractor.id == params[:profile_id].to_i
+              p.user-rating
+                | Найм:
+                span.textGreen #{ contractor.display_rating }
+              p.deals
+                | Сделки:
+                span.textGreen #{ contractor.display_deal_counter }
 
-    .col-12.col-lg-10.offset-lg-2
-      .custom-scroll.ml-2
-        .single-act
-          - @approval_list.each do |profile, items|
-            - total_price_acts = 0
-            .user-info
-              .logo
-                = image_tag profile.image_url
-              .details
-                p.user-name
-                  | #{ profile.user.full_name }
-                p.user-rating
-                  | Найм:
-                  span.textGreen #{ profile.display_rating }
-                p.deals
-                  | Сделки:
-                  span.textGreen #{ profile.display_deal_counter }
-            div
-              - items.group_by(&:order).each do |order, pr_employees|
-                - price = order.customer_price.to_i * pr_employees.count
-                - total_price_acts += price
-                .long-block class="long-block__#{order.state}"
-                  div
-                    = link_to profile_production_site_order_path(order.production_site_id, order), class: 'col-black order-title' do
-                      span.number
-                        | №#{ order.id }
-                      span.title
-                        | #{ order.title } - #{ order.production_site.title }
-                  div
-                    span.number-of-workers
-                      | #{ pr_employees.count } сотрудник(а)
-                    span.human-price
-                      | #{ order.customer_price.to_i } руб / чел
-                    span.price
-                      | #{ price } руб
-                - pr_employees.each do |pr_employee|
-                  .short-block
-                    .short-block__content
-                      .data
-                        i.fa.fa-bookmark.textGray
-                        = link_to profile_candidate_path(pr_employee), remote: true do
-                          p.initials
-                            span ##{pr_employee.employee_cv.id}
-                            | #{pr_employee.employee_cv.name}
-                          p
-                            | #{pr_employee.employee_cv.phone_number}
+    .constractor-acts-container.custom-scroll
+      .showAllActs.my-3
+            = active_link_to 'Смотреть все акты', approval_list_profile_candidates_path, class_active: false
+      .acts-container
+        - @approval_list.each do |profile, items|
+          - total_price_acts = 0
+          .single-act
+            - items.group_by(&:order).each do |order, pr_employees|
+              - price = order.customer_price.to_i * pr_employees.count
+              - total_price_acts += price
+              .long-block class="long-block__#{order.state}"
+                div
+                  = link_to profile_production_site_order_path(order.production_site_id, order), class: 'col-black order-title' do
+                    span.number
+                      | №#{ order.id }
+                    span.title
+                      | #{ order.title } - #{ order.production_site.title }
+                div
+                  span.number-of-workers
+                    | #{ pr_employees.count } сотрудник(а)
+                  span.human-price
+                    | #{ order.customer_price.to_i } руб / чел
+                  /span.price
+                    | #{ price } руб
+              - pr_employees.each do |pr_employee|
+                .short-block
+                  .short-block__content
+                    .data
+                      i.fa.fa-bookmark.textGray
+                      = link_to profile_candidate_path(pr_employee), remote: true do
+                        p.initials
+                          span ##{pr_employee.employee_cv.id}
+                          | #{pr_employee.employee_cv.name}
+                        p
+                          | #{pr_employee.employee_cv.phone_number}
+                    .more-info
                       .hire-data
                         p
                           | Нанят
                         p
                           | #{pr_employee.interview_date.strftime("%d.%m.%Y")}
+                      span.price
+                        | #{ price } руб
 
-                    = link_to approve_act_profile_candidate_path(pr_employee.id),
-                            class: 'subscribe-all ml-2',
-                            remote: true,
-                            method: :put,
-                            data: { disable_with: 'Выполняется' } do
-                      | Подписать акт
+                  = link_to approve_act_profile_candidate_path(pr_employee.id),
+                          class: 'sign-an-act ml-lg-4 ml-2',
+                          remote: true,
+                          method: :put,
+                          data: { disable_with: 'Выполняется' } do
+                    | Подписать акт
+          hr
+          .all
+            = link_to approve_all_acts_profile_candidates_path(profile_id: profile.id),
+                    class: 'subscribe-all',
+                    remote: true,
+                    method: :put,
+                    data: { disable_with: 'Выполняется' } do
+              | Подписать все
+            p.all-price
+              | Итого:
+              span
+                |  #{ total_price_acts } руб
 
-            .all
-              = link_to approve_all_acts_profile_candidates_path(profile_id: profile.id),
-                      class: 'subscribe-all',
-                      remote: true,
-                      method: :put,
-                      data: { disable_with: 'Выполняется' } do
-                | Подписать все
-              p.all-price
-                | Итого:
-                span
-                  |  #{ total_price_acts } руб
-            hr
-
-          - unless @approval_list.present?
-            p.text-center.mt-4.font-italic
-              |Список актов пуст
-        = paginate @approval_list
+        - unless @approval_list.present?
+          p.text-center.mt-4.font-italic
+            |Список актов пуст
+      = paginate @approval_list
