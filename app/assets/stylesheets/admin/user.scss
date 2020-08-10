@@ -5,9 +5,7 @@
     }
   }
 
-  table tbody td { 
-    cursor: pointer;
-    
+  table tbody td {
     &:last-child {
       cursor: default;
     }

@@ -128,6 +128,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index edit update] do
       member do
         put :withdrawal
+        put :change_manager_status
       end
     end
     resources :specializations

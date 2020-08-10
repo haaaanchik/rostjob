@@ -1,12 +1,14 @@
-ruby:
-  selected_role = params[:q] && params[:q][:profile_profile_type_eq] ? params[:q][:profile_profile_type_eq] : nil
-
 #admin_users_page
   h1.text-center.mb-2 Пользователи сервиса
   .row
-    = search_form_for [:admin, @q], url: admin_users_path, id: 'users_search', class: 'd-flex justify-content-between w-100' do |f|
-      = f.select :profile_profile_type_eq, options_for_select(roles_for_selector, selected_role), 
-        {}, { class: 'mdb-select md-form ml-3 mb-0' }
+    = search_form_for [:admin, @q],
+                      url: admin_users_path,
+                      id: 'users_search',
+                      class: 'd-flex justify-content-between w-100' do |f|
+      = f.select :profile_profile_type_eq,
+                 options_for_select(roles_for_selector, f.object.profile_profile_type_eq),
+                 {},
+                 { class: 'mdb-select md-form ml-3 mb-0' }
       .md-form.mr-3.mb-0.input_row
         = f.text_field :admin_search_fields_cont, class: 'form-control'
         = f.label :admin_search_fields_cont, 'Поиск по контексту'
@@ -22,5 +24,6 @@ ruby:
       th Количество заявок / анкет
       th Открытые споры
       th Выписка счетов
+      th Менеджер
     = render @users
   = paginate @users
