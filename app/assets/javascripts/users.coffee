@@ -4,11 +4,10 @@ class Users
     @enjoyHintProccess() if admin_path == null
 
   @enjoyHintProccess: ->
-    enjoyhint_instance = new EnjoyHint({})
     skipButton = { text: 'Понял!' }
     locPath = location.pathname.match(/\d+/g)
     id = if locPath == null then locPath else locPath.join()
-    return profileInvoices(enjoyhint_instance, skipButton) if location.pathname == '/profile/invoices'
+    return profileInvoices(skipButton) if location.pathname == '/profile/invoices'
     return if $('#order_template_form').length or $.cookie('profile_type') == 'contractor' or $.cookie('profile_type') == null or
       $.cookie('terms_of_service') == 'false' or $.cookie('password_changed_at') == null or
       $.cookie('updated_by_self_at') == null or $.cookie('first_order_template_created') == 'true' or window.innerWidth < 401
@@ -23,34 +22,35 @@ class Users
         message = 'Чтобы опубликовать Заявку Вам следует создать Площадку. Чтобы рекрутеры смогли найти ' +
           'Вас, заполните данные о месте работы в окне по этой кнопке.'
       script_steps = [{ "#{$selector}": message, 'skipButton': skipButton }]
-      enjoyHintRun(enjoyhint_instance, script_steps)
+      enjoyHintRun(script_steps)
       return
 
     if location.pathname == '/profile/production_sites/' + id + '/orders'
       messageFirst = 'Чтобы опубликовать заявку используйте кнопку.'
       script_steps = [{ 'click #active-content-tab': messageFirst, 'skipButton': skipButton }]
-      enjoyHintRun(enjoyhint_instance, script_steps)
+      enjoyHintRun(script_steps)
       return
 
     if $('#production-site-list').length
       message = 'Добро пожаловать на портал для поиска персонала ROSTJOB. Ваши заявки будут находиться здесь.'
       script_steps = [{ '#right_window #production-site-list': message, 'skipButton': skipButton }]
-      enjoyHintRun(enjoyhint_instance, script_steps)
+      enjoyHintRun(script_steps)
 
-  enjoyHintRun = (enjoyhint_instance, script_steps) ->
+  enjoyHintRun = (script_steps) ->
+    enjoyhint_instance = new EnjoyHint({})
     enjoyhint_script_steps = script_steps
     enjoyhint_instance.set enjoyhint_script_steps
     enjoyhint_instance.run()
 
-  profileInvoices = (enjoyhint_instance, skipButton) ->
+  profileInvoices = (skipButton) ->
     if window.location.search == '?state=created'
       message = 'Ваш счет находится здесь. Кликните на кнопку, чтобы распечатать его.'
       script_steps = [{ 'click .file-pdf:first()': message, 'skipButton': skipButton }]
-      enjoyHintRun(enjoyhint_instance, script_steps)
+      enjoyHintRun(script_steps)
     else unless $('.allAccounts_open_table table tbody tr').length
       message = 'Пополните счет. Для этого впишите необходимую сумму и нажмите выставить счет.'
       script_steps = [{ 'click .replenishAccount_input': message, 'skipButton': skipButton }]
-      enjoyHintRun(enjoyhint_instance, script_steps)
+      enjoyHintRun(script_steps)
 
 $(document).on 'turbolinks:load', ->
   Users.init()
