@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::ApplicationController
-  before_action :user, only: %i[withdrawal update]
+  before_action :user, only: %i[withdrawal update change_manager_status]
 
   def index
     @q = User.clients.ransack(params[:q])
@@ -25,7 +25,11 @@ class Admin::UsersController < Admin::ApplicationController
     @contractor = @user.profile
     @result = Cmd::Profile::Balance::Withdrawal.call(profile: @contractor, amount: @contractor.balance.amount,
                                                      withdrawal_method_id: @contractor.withdrawal_methods.first.id)
-   end
+  end
+
+  def change_manager_status
+    @user.profile.update(manager: params[:active])
+  end
 
   private
 
