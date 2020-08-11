@@ -35,7 +35,16 @@ class TicketDecorator < ApplicationDecorator
     return proposal_employee.order.customer_price if user.profile.customer?
 
     proposal_employee.order.contractor_price
-  end 
+  end
+
+  def display_customer_order_url(order)
+    return h.content_tag(:div, order.title) if h.current_profile.contractor?
+
+    h.link_to order.title,
+              h.profile_production_site_order_path(order.production_site,
+                                                   order),
+              class: 'black-text'
+  end
 
   private
 
