@@ -43,7 +43,7 @@ class Admin::PositionsController < Admin::ApplicationController
   end
 
   def position_params
-    params.require(:position).permit(:title, :duties, :price_group_id)
+    params.require(:position).permit(:title, :duties, :price_group_id, :warranty_period)
   end
 
   def paginated_positions

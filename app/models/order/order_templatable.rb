@@ -23,7 +23,6 @@ class Order
           contractor_price: 0,
           customer_total: 0,
           contractor_total: 0,
-          warranty_period: 10,
           number_of_employees: 1,
           other_info: {
             remark: nil,

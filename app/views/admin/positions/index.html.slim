@@ -1,18 +1,19 @@
-.col-6
-  h1 Справочник профессий
-.col-6.text-right
-  = link_to 'Добавить новую профессию', new_admin_position_path,
-    class: 'btn btn-indigo new_position'
-.col-9.mt-3
-  = text_field :admin_position, :search, class: "form-control",
-    placeholder: 'Начните набирать название профессии',
-    data: { 'auto-url' => '/search_position', 'auto-select' => 'search_term',
-    'auto-add-text' => false , 'autocomplete-on' => 'admin_position_search' }
-.col.mt-1
-  = link_to 'Показать все', admin_positions_path, class: 'btn btn-indigo'
+h1.text-center.my-2 Справочник профессий
+.d-flex.align-items-center
+  .col-4
+    = text_field :admin_position, :search, class: "form-control",
+      placeholder: 'Начните набирать название профессии',
+      data: { 'auto-url' => '/search_position', 'auto-select' => 'search_term',
+      'auto-add-text' => false , 'autocomplete-on' => 'admin_position_search' }
+  .col-2
+    = link_to 'Показать все', admin_positions_path, class: 'btn btn-indigo'
+  .col-6.text-right
+    = link_to 'Добавить новую профессию', new_admin_position_path,
+      class: 'btn btn-indigo new_position'
 table.table
   tr
     th Наименование
+    th Гарантийный срок
     th Ценовая группа
     th Действия
   = render @paginated_positions

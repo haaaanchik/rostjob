@@ -26,4 +26,8 @@ class OrderTemplate < ApplicationRecord
     attrs_with_defaults = attrs ? defaults.merge(attrs) : defaults
     super(attrs_with_defaults)
   end
+
+  def title
+    position&.title
+  end
 end

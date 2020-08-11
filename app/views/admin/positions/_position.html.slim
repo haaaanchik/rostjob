@@ -1,5 +1,6 @@
 tr
   td #{position.title}
+  td #{position.warranty_period}
   td
     = form_with model: position, url: admin_position_path(position), method: :patch do |f|
       = f.collection_select :price_group_id, @price_groups, :id, :title,
@@ -7,7 +8,7 @@ tr
         onfocus: 'save_current_price_group_id(event)',
         onchange: 'update_position(event)'
   td
-    = link_to edit_admin_position_path(position) do
+    = link_to edit_admin_position_path(position), title: 'Редактировать' do
       i.far.fa-edit
-    = link_to admin_position_path(position), method: :delete, data: { confirm: 'Вы уверены?' } do
-      i.far.fa-trash-alt
+    = link_to admin_position_path(position), method: :delete, title: 'Удалить', data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt.ml-2
