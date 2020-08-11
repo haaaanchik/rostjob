@@ -30,11 +30,10 @@ ruby:
           span class="chat-sidebar-header-city" г. #{order.city}
 
       .order
-        .content class=("content__#{order.state}")
+        .content class="order_state__#{order.state}"
           .order__description
             p.order__title
-              = link_to order.title, profile_production_site_order_path(order.production_site,
-                      order), remote: true, class: 'black-text'
+              = @ticket.display_customer_order_url(order)
             .order__bottom
               span.order__price 
                 = @ticket.display_candidate_price(current_user)
