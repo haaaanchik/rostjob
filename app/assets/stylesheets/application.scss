@@ -49,11 +49,8 @@
   }
 }
 
-html,
-body,
-header,
-.jarallax {
-  height: 50px;
+html{
+  overflow: hidden;
 }
 
 .content-wrapper{
