@@ -49,39 +49,17 @@
   }
 }
 
-html{
-  overflow: hidden;
+body{
+  height: 100vh;
 }
 
 .content-wrapper{
+  height: 100%;
   background-color: white;
   min-height: 471px;
   padding-top: 58px;
   max-height: 100vh;
-}
-
-#right_window {
-  overflow: auto;
-  //height: 91.5vh;
-  padding-left: 80px;
-}
-
-@media (max-width: 900px) {
-  #right_window {
-    width: calc(100% - 300px);
-  }
-}
-
-@media (max-width: 600px) {
-  #right_window {
-    width: 100%;
-  }
-}
-
-@media (max-width: 400px) {
-  #right_window {
-    padding-left: 0;
-  }
+  margin-left: 80px;
 }
 
 .question-help {
