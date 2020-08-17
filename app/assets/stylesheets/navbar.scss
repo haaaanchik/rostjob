@@ -206,6 +206,15 @@
 }
 
 #interface-navbar {
+  .btn-group {
+    .dropdown-toggle {
+      color: inherit;
+    }
+    .dropdown-menu {
+      left: -40px;
+    }
+  }
+
   .svg-sidebar {
     color: white;
     width: 20px;
