@@ -16,6 +16,11 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
         b stage
 
   .navbar__icons
+    = link_to 'Как стать самозанятым?',
+              '/as_an_individual.pdf',
+              class: 'dropdown-item',
+              target: '_blank'
+
     .search
       = form_for :q, url: navbar_search_url, method: :get do |f|
         = f.search_field candidate_search_field_name, class: 'search-input', placeholder: 'Поиск анкет', value: val
@@ -25,19 +30,8 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
       = image_tag asset_path('navbar/Rounded_Rectangle_blue.png'), class: 'number-of-messages-bg'
       span.number-of-messages = @opened_tickets_count
 
-    .btn-group
-      = link_to 'Справочник',
-                '#',
-                class: 'dropdown-toggle',
-                'data-toggle': 'dropdown',
-                'aria-haspopup': 'true',
-                'aria-expanded': 'false'
-      .dropdown-menu
-        = link_to page_path('all_manuals'), class: 'dropdown-item' do
-          | Инструкции
-        = link_to '/as_an_individual.pdf', class: 'dropdown-item', target: '_blank' do
-          | Как стать самозанятым!
-
+    = link_to page_path('all_manuals') do
+      i.fas.fa-question
 
     = link_to logout_path, class: 'icon-link', method: :delete do
       = image_tag asset_path('navbar/exit.png')
