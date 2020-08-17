@@ -1,7 +1,10 @@
 class Profile::FavoritesController < ApplicationController
   def index
     @active_item = :favorites
-    employee_cv_id
+    favorites.decorate
+  end
+
+  def search_orders
     favorites.decorate
   end
 

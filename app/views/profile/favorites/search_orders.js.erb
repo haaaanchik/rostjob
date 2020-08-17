@@ -1,0 +1,6 @@
+<% orders = render partial: 'orders/contractor_order', collection: @favorites, as: :order %>
+$('#order_page .platform').html("<%= j orders %>");
+
+<% if @favorites.blank? %>
+  $('#order_page .platform').html('<p class="text-center">Ничего не найдено!</p>');
+<% end %>

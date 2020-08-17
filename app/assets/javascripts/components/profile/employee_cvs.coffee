@@ -27,6 +27,7 @@ class RostJob.ProfileEmployeeCvsIndex
     $('.js-arrow ').on 'click', @hiddenFavoriteBlock
     $('.chosen .card-scroll-window .card').on 'dragenter', @openCardBody
     $('.chosen .card-scroll-window .card').on 'dragleave', @closeCardBody
+    $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
 
 
   @proposalSelectEmployeeCv: (event) ->
@@ -308,3 +309,6 @@ class RostJob.ProfileEmployeeCvsIndex
       toastr.success('Анкета успешно перенеса')
     else
       toastr.error('Не удалось перенести анкету, пожалуйста обновите страницу и обратитесь к администратору')
+
+  @orderBlockToggleClass: ->
+    $(this).next('.details').toggleClass('opened')

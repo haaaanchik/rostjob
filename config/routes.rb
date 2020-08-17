@@ -274,7 +274,11 @@ Rails.application.routes.draw do
         post :create_order
       end
     end
-    resources :favorites, only: %i[index]
+    resources :favorites, only: %i[index] do
+      collection do
+        get :search_orders
+      end
+    end
     resources :proposal_employees, only: %i[index show new create] do
       scope module: :proposal_employees do
         resources :complaints, only: %i[index new create]
@@ -372,7 +376,6 @@ Rails.application.routes.draw do
   get '/orders/:customer_id', to: 'orders#customer_orders', as: :orders_by_customer, constraints: { state: /[_A-Za-z]+/ }
   resources :orders, only: %i[index] do
     member do
-      put :manage_fav
       put :add_to_favorites
       put :remove_from_favorites
     end
