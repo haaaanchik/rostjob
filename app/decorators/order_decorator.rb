@@ -166,6 +166,14 @@ class OrderDecorator < ApplicationDecorator
     proposal_employees&.last&.created_at&.strftime('%d.%m.%Y')
   end
 
+  def salary_button
+    bonus_price = contractor_price * 1.5
+
+    h.link_to '/as_an_individual.pdf' do
+      "<b>#{h.number_with_precision(contractor_price, strip_insignificant_zeros: true)} руб / чел </b><br> или #{h.number_with_precision(bonus_price, strip_insignificant_zeros: true)} руб <br> как получить?".html_safe
+    end
+  end
+
   private
 
   def link_to_disputed
