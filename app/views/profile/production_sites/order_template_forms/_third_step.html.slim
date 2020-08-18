@@ -33,10 +33,12 @@
             .pattern_body_steps_form_step_input.contact-face
               = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
                 label Контактное лицо
-                = cp_f.text_field :name, id: 'contact-face', class: 'form-control', placeholder: 'Имя'
-                .invalid-feedback
-                = cp_f.text_field :phone, id: 'contact-face-number', class: 'form-control', placeholder: '+7'
-                .invalid-feedback
+                .contact-name
+                  = cp_f.text_field :name, class: 'form-control contact-face_field', placeholder: 'Имя'
+                  .invalid-feedback.ml-0.w-100
+                .contact-phone
+                  = cp_f.text_field :phone, class: 'form-control contact-face-number_filed', placeholder: '+7'
+                  .invalid-feedback.ml-0.w-100
 
             .pattern_body_steps_form_step_input.textArea
               p Напишите сюда кого вы хотите видеть и не видеть в заявке

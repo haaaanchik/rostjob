@@ -424,17 +424,18 @@ input::placeholder{
   padding-left: 0;
 }
 
-.contact-face{
+.pattern_body_steps_form_step_input.contact-face {
   flex-wrap: nowrap;
+
+  .contact-face_field {
+    width: 210px;
+  }
+  
+  .contact-face-number_filed {
+    width: 146px;
+  }
 }
 
-#contact-face{
-  width: 210px;
-}
-
-#contact-face-number{
-  width: 146px;
-}
 
 #add_ancete {
   display: flex;
