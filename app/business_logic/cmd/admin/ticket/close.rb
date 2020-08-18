@@ -1,12 +1,11 @@
 module Cmd
-  module Ticket
-    module Incident
-      class Hire
+  module Admin
+    module Ticket
+      class Close
         include Interactor::Organizer
 
-        organize Cmd::ProposalEmployee::Hire,
-                 Cmd::Ticket::Incident::Close,
-                 Cmd::Ticket::Message::Create
+        organize Cmd::Ticket::Close,
+                 Cmd::NotifyMail::Ticket::CloseByAdmin
 
         around do |interactor|
           ActiveRecord::Base.transaction do

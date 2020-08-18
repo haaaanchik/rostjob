@@ -7,8 +7,10 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :order
   belongs_to :profile
   belongs_to :employee_cv
+  has_one :user, through: :profile
   has_many :complaints, dependent: :destroy
   has_many :incidents, dependent: :destroy
+  has_one :user, through: :profile
 
   validates :interview_date, :order_id, :employee_cv_id, presence: true
   validate :check_uniqueness_employee_cv
@@ -17,8 +19,6 @@ class ProposalEmployee < ApplicationRecord
 
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
   ransack_alias :pe_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_title_or_order_place_of_work
-
-  after_create :mail_inbox, if: -> { inbox? && order.profile.notify_mails? }
 
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
@@ -38,7 +38,7 @@ class ProposalEmployee < ApplicationRecord
       transitions to: :transfer
     end
 
-    event :to_interview, after: [:mail_for_contractor_interview] do
+    event :to_interview do
       transitions from: %i[inbox reserved disputed], to: :interview
     end
 
@@ -78,7 +78,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :inbox, to: :deleted
     end
 
-    event :hire, after: %i[to_close? mail_for_contractor_hired] do
+    event :hire, after: :to_close? do
       transitions from: %i[interview viewed deleted disputed], to: :hired
     end
   end
@@ -131,18 +131,6 @@ class ProposalEmployee < ApplicationRecord
                                 state: 'revoked')
     errors.add(:employee_cv_id,
                'Такая анкета уже существует.') unless uniqueness.blank?
-  end
-
-  def mail_inbox
-    SendNotifyMailJob.perform_now(objects: [self], method: 'emp_cv_sended')
-  end
-
-  def mail_for_contractor_hired
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'proposal_employee_hired') if profile.notify_mails?
-  end
-
-  def mail_for_contractor_interview
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_about_interview') if profile.notify_mails?
   end
 
   def mail_for_contractor_has_paid

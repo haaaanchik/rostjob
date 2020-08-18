@@ -7,7 +7,9 @@ module Cmd
         @proposal_employee = profile.proposal_employees.create context.params
         context.proposal_employee = @proposal_employee
         context.fail! unless @proposal_employee.persisted?
+        
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+        Cmd::NotifyMail::ProposalEmployee::Inbox.call(proposal_employee: @proposal_employee)
       end
 
       private

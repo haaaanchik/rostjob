@@ -17,4 +17,26 @@ class DirectMailMailer < ApplicationMailer
 
     mail(to: @user.email, subject: 'RostJob. Вы пополнили баланс.')
   end
+
+  def mail_about_close_incident
+    @user = params[:user]
+    @message = params[:message]
+    @incident = params[:attrs][:incident]
+    @ticket = params[:attrs][:ticket]
+
+    mail(to: @user.email, subject: 'RostJob. Спор был закрыт')
+  end
+
+  def informated_about_revoke_candidate
+    @user = params[:user]
+    @prop_emp = params[:attrs][:proposal_employee]
+
+    mail(to: @user.email, subject: 'RostJob. Анкета кандидата была отозвана')
+  end
+
+  def informated_admin_about_precedent
+    @incident = params[:attrs][:incident]
+
+    mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}")
+  end
 end

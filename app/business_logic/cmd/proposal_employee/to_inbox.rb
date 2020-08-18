@@ -3,20 +3,20 @@ module Cmd
     class ToInbox
       include Interactor
 
+      delegate :candidate, to: :context
+      delegate :log, to: :context
+
       def call
         candidate.update(interview_date: interview_date)
         context.fail! unless candidate.to_inbox!
-        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+        Cmd::UserActionLogger::Log.call(params: logger_params) if log
+        Cmd::NotifyMail::ProposalEmployee::Inbox.call(proposal_employee: candidate)
       end
 
       private
 
-      def candidate
-        context.candidate
-      end
-
       def interview_date
-        context.interview_date || candidate.interview_date
+        Date.parse(context.interview_date) || candidate.interview_date
       end
 
       def current_user

@@ -3,24 +3,30 @@ module Cmd
     class ToInterview
       include Interactor
 
+      delegate :candidate, to: :context
+      delegate :log, to: :context
+
       def call
         context.fail! unless candidate.update(interview_date: interview_date)
         context.fail! unless candidate.to_interview!
-        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+
+        Cmd::UserActionLogger::Log.call(params: logger_params)
+
+        notify_mail_for_contractor
       end
 
       private
 
-      def candidate
-        context.candidate
-      end
-
       def interview_date
-        context.interview_date
+        Date.parse(context.interview_date)
       end
 
       def current_user
         candidate.order.profile.user
+      end
+
+      def notify_mail_for_contractor
+        Cmd::NotifyMail::ProposalEmployee::Interview.call(proposal_employee: candidate)
       end
 
       def receiver_ids

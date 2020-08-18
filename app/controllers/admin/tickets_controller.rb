@@ -8,7 +8,7 @@ class Admin::TicketsController < Admin::ApplicationController
   end
 
   def close
-    result = Cmd::Ticket::Close.call(ticket: ticket)
+    result = Cmd::Admin::Ticket::Close.call(ticket: ticket)
     redirect_to admin_tickets_path if result.success?
   end
 

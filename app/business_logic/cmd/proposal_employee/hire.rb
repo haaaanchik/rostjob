@@ -3,16 +3,19 @@ module Cmd
     class Hire
       include Interactor
 
-      def call
-        if hiring_date.present?
-          candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date, order.warranty_period))
-          candidate.hire!
-          # order.complete! if order.reload.candidates.hired.count == order.number_of_employees
-        else
-          context.fail!
-        end
+      delegate :candidate, to: :context
+      delegate :log, to: :context
 
-        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+      def call
+        context.fail! if hiring_date.nil?
+
+        candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date, order.warranty_period))
+        candidate.hire!
+
+        # order.complete! if order.reload.candidates.hired.count == order.number_of_employees
+        Cmd::UserActionLogger::Log.call(params: logger_params) if log
+
+        mail_for_contractor_hired
       end
 
       private
@@ -21,12 +24,12 @@ module Cmd
         candidate.order
       end
 
-      def hiring_date
-        context.hiring_date
+      def mail_for_contractor_hired
+        Cmd::NotifyMail::ProposalEmployee::Hire.call(proposal_employee: candidate)
       end
 
-      def candidate
-        context.candidate
+      def hiring_date
+        Date.parse(context.hiring_date)
       end
 
       def current_user
