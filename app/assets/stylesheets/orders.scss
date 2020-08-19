@@ -550,7 +550,14 @@ $secondaryColorDark: #b7b7b7;
     }
   }
 
+  .profile_search{
+    position: absolute;
+    top: 0;
+    width: 90%;
+  }
+
   .requests-page-filters {
+    position: relative;
     padding: 0 20px 0 20px;
     width: 24.5%;
     @media (max-width: 1200px) {
@@ -602,7 +609,7 @@ $secondaryColorDark: #b7b7b7;
   .requests-page-filters .subtitle {
     font-size: 15px;
     font-weight: bold;
-    margin: 40px 0 20px 0;
+    margin: 20px 0 20px 0;
     @media (max-width: 768px ){
       margin: 10px 0 10px 0;
     }
