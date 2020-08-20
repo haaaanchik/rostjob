@@ -16,10 +16,10 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
         b stage
 
   .navbar__icons
-    = link_to 'Как стать самозанятым?',
-              '/as_an_individual.pdf',
-              class: 'dropdown-item',
-              target: '_blank'
+    - if current_profile && current_profile.contractor?
+      = link_to 'Как стать самозанятым?',
+                page_path('as_an_individual'),
+                class: 'dropdown-item'
 
     .search
       = form_for :q, url: navbar_search_url, method: :get do |f|

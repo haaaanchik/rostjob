@@ -59,21 +59,27 @@ body {
   width: 100%;
 }
 
-#privacy_policy p {
+#tinkoff_individial {
+  .col-blue {
+    color: #007bff;
+  }
+}
+
+#privacy_policy p, #tinkoff_individial p {
   text-indent: 40px;
   margin-bottom: 0;
   text-align: justify;
 }
 
-#privacy_policy .list-item {
+#privacy_policy .list-item, #tinkoff_individial .list-item {
   margin-top: 1rem;
 }
 
-#privacy_policy b {
+#privacy_policy b, #tinkoff_individial b {
   font-weight: bold;
 }
 
-#privacy_policy {
+#privacy_policy, #tinkoff_individial {
     padding: 30px;
     margin: 0 auto;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
