@@ -61,10 +61,13 @@
             | Указанный специальный налоговый режим предусматривает следующие ставки налога: 4 процента в
             |  отношении доходов, полученных от физических лиц, и 6 процентов в отношении доходов, полученных
             |  от юридических лиц или индивидуальных предпринимателей (
-            span.col-blue части 1
+            = link_to 'части 1',
+                      'https://login.consultant.ru/link/?req=doc&base=RZR&n=340220&date=09.07.2020&dst=100098&fld=134',
+                      target: '_blank'
             |  и
-            span.col-blue
-              |  2 статьи 10
+            = link_to '2 статьи 10',
+                      'https://login.consultant.ru/link/?req=doc&base=RZR&n=340220&date=09.07.2020&dst=100099&fld=134',
+                      target: '_blank'
             |  ФЗ).
 
         .list-item
@@ -88,11 +91,11 @@
               | с помощью учетной записи Единого портала государственных и муниципальных услуг.
           p
             | Также налогоплательщик может зарегистрироваться, обратившись в&nbsp;
-            span.col-blue
+            = link_to 'https://npd.nalog.ru/credit-orgs/', target: '_blank' do
               u
                 | уполномоченные банки
             | , а при отсутствии смартфона - работать через&nbsp;
-            span.col-blue
+            = link_to 'https://lknpd.nalog.ru/auth/login', target: '_blank' do
               u
                 | вэб-версию приложения «Мой налог»
             | .
@@ -101,15 +104,15 @@
           ol
             li
               | Бесплатное мобильное приложение «
-              span.col-blue
+              = link_to 'https://npd.nalog.ru/app/' do
                 u Мой налог
               | »
             li
-              span.col-blue
+              = link_to 'https://lknpd.nalog.ru/auth/login' do
                 u Кабинет налогоплательщика
               |  «Налога на профессиональный доход» на сайте ФНС России
             li
-              .col-blue
+              = link_to 'https://npd.nalog.ru/credit-orgs/', target: '_blank' do
                 u Уполномоченные банки
             li
               | С помощью учетной записи Единого портала государственных и муниципальных услуг
