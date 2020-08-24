@@ -40,6 +40,7 @@ class Order
                 text: self.class::CUSTOMER_TEXT
               },
               added_data: {
+                show: '1',
                 text: 'ФИО, телефон, регистрация, возраст'
               },
               control_aspirant: {

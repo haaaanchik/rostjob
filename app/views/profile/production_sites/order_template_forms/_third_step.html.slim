@@ -68,7 +68,7 @@
 
                   = or_f.fields_for :added_data, OpenStruct.new(or_f.object['added_data']) do |rd_f|
                     .d-flex.checkbox_row.mt-1.mb-4
-                      = check_box_tag :added_data, '0', f.object.added_data?, id: 'materialUnchecked4', class: 'form-check-input'
+                      = rd_f.check_box :show, checked: !rd_f.object['show'].to_i.zero?, id: 'materialUnchecked4', class: 'form-check-input'
                       label.form-check-label for='materialUnchecked4'
                       span Я хочу, чтобы в анкету добавили данные
                     = rd_f.text_field :text, class: 'added_data ', placeholder: 'ФИО, телефон, регестрация, возраст'
