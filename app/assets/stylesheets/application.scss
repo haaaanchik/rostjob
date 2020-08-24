@@ -60,6 +60,9 @@ body{
   padding-top: 58px;
   max-height: 100vh;
   margin-left: 80px;
+  @media ( max-width: 600px ) {
+    margin-left: 0;
+  }
 }
 
 .question-help {

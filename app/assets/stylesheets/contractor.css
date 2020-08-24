@@ -188,9 +188,11 @@ body {
       align-items: flex-start;
     }
 
+    #recruter-main .fc-button{
+      padding: 0 !important;
+    }
+
 }
-
-
 
 @media (max-width: 400px) {
 

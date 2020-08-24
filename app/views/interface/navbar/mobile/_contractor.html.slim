@@ -37,6 +37,13 @@
       i.fas.fa-id-card-alt.svg-sidebar
       span.ml-3.icon-text Форум
 
+  .mobile-list
+    = link_to page_path('as_an_individual'), 
+                title: 'Как стать самозанятым?',
+                class: 'mobile-menu-text' do
+      i.fas.fa-question.svg-sidebar
+      span.ml-3.icon-text Как стать самозанятым?
+
   / .mobile-list class="#{'mobile-list__active' if active_item == :favorites}"
   /   = link_to profile_favorites_path,
   /           title: 'Избранные заявки',
