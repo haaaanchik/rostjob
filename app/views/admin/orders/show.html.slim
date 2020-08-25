@@ -97,8 +97,10 @@
                         = or_f.fields_for :added_data, OpenStruct.new(or_f.object['added_data']) do |rd_f|
                           .row.my-2
                             .col-sm-4
-                              | Я хочу, чтобы в анкету добавили данные
+                              = rd_f.check_box :show, checked: !rd_f.object['show'].to_i.zero?,  id: 'materialUnchecked4', class: 'form-check-input'
+                              label.form-check-label for='materialUnchecked4'
                             .col-sm-8.mb-4
+                              | Я хочу, чтобы в анкету добавили данные
                               = rd_f.text_field :text, class: 'form-control', placeholder: 'ФИО, телефон, регестрация, возраст'
               .col-sm-12
                 .d-flex.mod_order_actions

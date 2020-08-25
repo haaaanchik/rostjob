@@ -29,7 +29,8 @@ module Cmd
         when 2
           params[:other_info]['remark'] = order.other_info['remark']
 
-          params[:other_info] = params[:other_info].merge('requirements' => { 'added_data'=> { 'text' => added_data_text },
+          params[:other_info] = params[:other_info].merge('requirements' => { 
+            'added_data'=> { 'text' => added_data_text, 'show' => add_data_show },
             'control_aspirant' => { 'text' => ::Order::CONTRACTOR_ASPIRANT_TEXT, 'show' => control_aspirant_show },
             'aspirant' => { 'text' => ::Order::ASPIRANT_TEXT, 'show' => aspirant_show },
             'customer' => { 'text' => ::Order::CUSTOMER_TEXT, 'show' => customer_show }
@@ -69,6 +70,10 @@ module Cmd
 
       def aspirant_show
         order.other_info['requirements'] ? order.other_info['requirements']['aspirant']['show'] : nil
+      end
+
+      def add_data_show
+        order.other_info['requirements'] ? order.other_info['requirements']['added_data']['show'] : nil
       end
     end
   end
