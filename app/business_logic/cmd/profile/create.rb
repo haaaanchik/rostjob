@@ -3,8 +3,11 @@ module Cmd
     class Create
       include Interactor
 
+      delegate :user, to: :context
+      delegate :profile_params, to: :context
+
       def call
-        @profile = current_user.build_profile(profile_params)
+        @profile = user.build_profile(profile_params)
         if company?
           @profile.save(context: :company)
         else
@@ -12,18 +15,14 @@ module Cmd
         end
         context.profile = @profile
         context.failed! if @profile.errors.messages.any?
-        Cmd::User::Registration::Update.call(user: current_user, params: { profile_id: @profile.id }, log: false)
-        Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
+        Cmd::User::Registration::Update.call(user: user, params: { profile_id: @profile.id }, log: false)
+        Cmd::UserActionLogger::Log.call(params: logger_params) if log
       end
 
       private
 
-      def profile_params
-        context.params
-      end
-
-      def current_user
-        context.user
+      def log
+        context.log || false
       end
 
       def company?
@@ -32,11 +31,11 @@ module Cmd
 
       def logger_params
         {
-          login: current_user.email,
-          receiver_ids: [current_user.id],
-          subject_id: current_user.id,
+          login: user.email,
+          receiver_ids: [user.id],
+          subject_id: user.id,
           subject_type: 'User',
-          subject_role: current_user.profile.profile_type,
+          subject_role: user.profile.profile_type,
           action: 'Профиль создан',
           object_id: @profile.id,
           object_type: 'Profile'

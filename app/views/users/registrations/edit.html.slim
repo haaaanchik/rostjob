@@ -50,7 +50,7 @@ ruby:
                   | Выберите файл
                   = ff.file_field :photo
 
-          - if current_profile.customer?
+          - if current_profile.customer? && current_profile.updated_by_self_at.present?
             .form-item
               = ff.fields_for :company do |fc|
                 label.title Описание компании

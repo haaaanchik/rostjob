@@ -21,9 +21,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     result = if params.key? :customer
-      ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params)
+      ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
+                                                     profile_params: { profile_type: 'customer', legal_form: 'company' } )
     elsif params.key? :contractor
-      ::Cmd::User::Registration::CreateContractor.call(user_params: user_params)
+      ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
+                                                       profile_params: { profile_type: 'contractor' })
     end
 
     @user = result.user
@@ -32,6 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                   для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
                 render 'users/inform_page'
               else
+                flash[:alert] = result.message.first
                 render 'users/registrations/new_contractor' if params.key?(:contractor)
                 render 'users/registrations/new_customer' if params.key?(:customer)
               end

@@ -5,12 +5,14 @@ module Cmd
         class Create
           include Interactor
 
+          delegate :profile, to: :context
+          delegate :legal_form, to: :context
+
           def call
             context.failed! unless profile.contractor?
-            type = "WithdrawalMethod::#{method}".constantize
-            wm = profile.withdrawal_methods.create type: type
+            wm = profile.withdrawal_methods.create(type: type)
             context.failed! unless wm.persisted?
-            company = wm.create_company legal_form: legal_form
+            company = wm.create_company(legal_form: legal_form)
             context.failed! unless company.persisted?
             account = company.accounts.create
             context.failed! unless account.persisted?
@@ -24,14 +26,6 @@ module Cmd
 
           def method
             (legal_form + '_account').camelize
-          end
-
-          def profile
-            context.profile
-          end
-
-          def legal_form
-            context.legal_form
           end
         end
       end
