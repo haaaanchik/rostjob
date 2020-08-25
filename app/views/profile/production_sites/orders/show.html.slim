@@ -61,7 +61,7 @@
           = image_tag '/img/new/redact.png'
           | Редактировать
 
-        = link_to profile_production_site_order_path(@production_site, @order), id: 'info', remote: true do
+        = link_to info_order_path(@order), id: 'info', remote: true do
           = image_tag '/img/new/info.png'
           | Инфо
 

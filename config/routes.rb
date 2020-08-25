@@ -376,6 +376,7 @@ Rails.application.routes.draw do
   get '/orders/:customer_id', to: 'orders#customer_orders', as: :orders_by_customer, constraints: { state: /[_A-Za-z]+/ }
   resources :orders, only: %i[index] do
     member do
+      get :info
       put :add_to_favorites
       put :remove_from_favorites
     end

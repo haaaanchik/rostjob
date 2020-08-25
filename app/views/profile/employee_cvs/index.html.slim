@@ -80,8 +80,15 @@
                 button.btn-info aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
                   i.fas.fa-ellipsis-h
                 .dropdown-menu x-placement="bottom-start"
-                  a.dropdown-item.favorite-info Информация
-                  a.dropdown-item.favorite-remove Убрать
+                  = link_to 'Информация',
+                            info_order_path(favorite),
+                            remote: true,
+                            class: 'dropdown-item'
+                  = link_to 'Убрать',
+                            remove_from_favorites_order_path(favorite),
+                            method: :put,
+                            remote: true,
+                            class: 'dropdown-item'
 
               = image_tag('/img/new/arrow-down.png', class: 'arrow js-arrow')
 

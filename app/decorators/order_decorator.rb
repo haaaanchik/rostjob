@@ -5,6 +5,12 @@ class OrderDecorator < ApplicationDecorator
     model.id
   end
 
+  def display_info_price
+    return customer_price.to_i if h.current_profile.customer?
+
+    contractor_price.to_i
+  end
+
   def urgency_title
     'Срочность заявки ' + I18n.t("enumerize.order.urgency.#{model.urgency}")
   end

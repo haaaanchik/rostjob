@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :order, except: %i[index customer_orders]
+  before_action :order, except: %i[index customer_orders info]
   before_action :redirect_to_disputes, only: :index
 
   def index
@@ -21,6 +21,10 @@ class OrdersController < ApplicationController
   def remove_from_favorites
     @employee_cv_id = params[:employee_cv_id]
     Cmd::Order::RemoveFromFavorites.call(order: order, profile: current_profile)
+  end
+
+  def info
+    @order = Order.find(params[:id]).decorate
   end
 
   private
