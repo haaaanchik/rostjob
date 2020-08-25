@@ -84,6 +84,7 @@
             span aria-hidden="true" &times;
         .modal-body
           .offset-2.col-8
-            = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников', class: 'form-control'
+            = f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников',
+              class: 'form-control', value: ( @order.number_additional_employees || 1 ), required: true
         .modal-footer
           = f.submit 'Добавить', class: 'btn btn-success'
