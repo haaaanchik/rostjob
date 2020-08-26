@@ -3,22 +3,18 @@ class ApplicationController < BaseController
   include WordsHelper
 
   protect_from_forgery prepend: true
-  before_action :set_raven_context
+  # before_action :set_raven_context
   # before_action :authenticate_user!
   before_action :left_menu_items
   before_action :auth_user
   before_action :ensure_cr_order_and_activate, if: :user_signed_in?
-  before_action :create_profile, if: :user_signed_in_without_profile
   before_action :opened_tickets_count, if: :user_signed_in?
   before_action :p_employees_approved_count, if: :user_signed_in?
   before_action :set_user_info_to_cookies
+  helper_method :current_profile
 
-  def create_profile
-    redirect_to new_profile_path
-  end
-
-  def user_signed_in_without_profile
-    user_signed_in? && !current_profile
+  def current_profile
+    @current_profile ||= current_user.profile
   end
 
   private

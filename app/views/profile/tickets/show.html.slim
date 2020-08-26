@@ -44,8 +44,7 @@ ruby:
           i class="fa fa-bookmark flag" id="hanging-flag" style="color: #{candidate.status_color_class}"
           .card-tools
 
-          = link_to profile_candidate_path(@ticket.proposal_employee), remote: true do
-            p class="request__title" № #{ @ticket.proposal_employee.employee_cv.id } ]#{@ticket.proposal_employee.employee_cv.name}
+          = candidate.link_to_show(current_user)
           p class="phone-number" #{candidate.employee_cv.phone_number}
           textarea class="candidate-comment" cols="30" placeholder="Напишите комментарий" rows="4" id=(current_user.profile.customer? ? 'by_customer' : 'by_contractor')
             = candidate.display_comment(current_user)

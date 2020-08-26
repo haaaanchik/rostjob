@@ -28,16 +28,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                                        profile_params: { profile_type: 'contractor' })
     end
 
-    @user = result.user
-    @status = if result.success?
-                @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
-                  для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
-                render 'users/inform_page'
-              else
-                flash[:alert] = result.message.first
-                render 'users/registrations/new_contractor' if params.key?(:contractor)
-                render 'users/registrations/new_customer' if params.key?(:customer)
-              end
+    if result.success?
+      @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
+        для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
+      render 'users/inform_page'
+    else
+      @status = false
+      render 'users/registrations/new_contractor' if params.key?(:contractor)
+      render 'users/registrations/new_customer' if params.key?(:customer)
+    end
   end
 
   # GET /resource/edit

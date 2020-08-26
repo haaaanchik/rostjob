@@ -20,7 +20,7 @@ json.array!(@empl_cv_interview) do |event|
   json.tooltip "Анкета #{event.employee_id_name} на собеседования"
   json.start event.calendar_format_date
   json.end event.calendar_format_date
-  end
+end
 
 json.array!(@empl_cv_inbox) do |event|
   json.extract! event, :id, :interview_date

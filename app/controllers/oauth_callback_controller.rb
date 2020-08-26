@@ -1,6 +1,5 @@
 class OauthCallbackController < ApplicationController
   skip_before_action :auth_user
-  skip_before_action :create_profile
 
   def superjob
     if params[:code]

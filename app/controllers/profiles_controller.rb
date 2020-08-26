@@ -1,30 +1,11 @@
 class ProfilesController < ApplicationController
-  skip_before_action :create_profile, only: %i[new create]
-  before_action :redirect_if_already_created, only: %i[new create]
 
   def show
     profile
   end
 
-  def new
-    @profile = Profile.new
-    company = @profile.build_company
-    company.accounts.build
-  end
-
   def edit
     profile
-  end
-
-  def create
-    result = Cmd::Profile::Create.call(user: current_user, params: profile_params)
-    profile = result.profile
-    if result.success?
-      Cmd::Profile::Balance::Create.call(profile: profile)
-      redirect_to root_path
-    else
-      render json: { validate: true, data: errors_data(profile) }
-    end
   end
 
   def update
@@ -52,10 +33,6 @@ class ProfilesController < ApplicationController
   end
 
   private
-
-  def redirect_if_already_created
-    redirect_to edit_profile_path if current_profile
-  end
 
   def company?
     params[:profile][:legal_form] == 'company'

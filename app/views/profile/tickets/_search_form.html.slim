@@ -16,13 +16,13 @@ ruby:
 
     .treatment_search_checkboxes
       .treatment_search_checkboxes_block
-        = check_box_tag 'q[type_in][]', 'appeal', type.include?('appeal'), { id: 'tickets_filter_appeals'}
+        = check_box_tag 'q[type_in][]', 'Appeal', type.include?('Appeal'), { id: 'tickets_filter_appeals'}
         = label :type, nil, class: 'pseudoCheckbox', for: 'tickets_filter_appeals' do
           i.fa.fa-check
         = label nil, 'Обращения', for: 'tickets_filter_appeals'
 
       .treatment_search_checkboxes_block
-        = check_box_tag 'q[type_in][]', 'incident', type.include?('incident'), { id: 'tickets_filter_incidents'}
+        = check_box_tag 'q[type_in][]', 'Incident', type.include?('Incident'), { id: 'tickets_filter_incidents'}
         = label :type, nil, class: 'pseudoCheckbox', for: 'tickets_filter_incidents' do
           i.fa.fa-check
         = label nil, 'Споры', for: 'tickets_filter_incidents'
