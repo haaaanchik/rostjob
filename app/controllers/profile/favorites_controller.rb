@@ -5,7 +5,8 @@ class Profile::FavoritesController < ApplicationController
   end
 
   def search_orders
-    favorites.decorate
+    q = Order.published.order(created_at: :desc).ransack(params[:q])
+    @orders = q.result.decorate
   end
 
   private
