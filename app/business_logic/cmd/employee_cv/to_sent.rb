@@ -3,16 +3,15 @@ module Cmd
     class ToSent
       include Interactor
 
+      delegate :employee_cv, to: :context
+
       def call
         context.fail! unless employee_cv.to_sent!
+
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end
 
       private
-
-      def employee_cv
-        context.employee_cv
-      end
 
       def current_user
         employee_cv.profile.user

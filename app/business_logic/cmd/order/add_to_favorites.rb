@@ -3,19 +3,12 @@ module Cmd
     class AddToFavorites
       include Interactor
 
+      delegate :order,   to: :context
+      delegate :profile, to: :context
+
       def call
-        result = order.order_profiles.find_or_create_by! profile: profile
+        result = order.order_profiles.find_or_create_by!(profile: profile)
         context.fail! unless result
-      end
-
-      private
-
-      def order
-        context.order
-      end
-
-      def profile
-        context.profile
       end
     end
   end

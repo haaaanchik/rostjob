@@ -3,29 +3,25 @@ module Cmd
     class ToReady
       include Interactor
 
+      delegate :draggable,   to: :context
+      delegate :employee_cv, to: :context
+
       def call
         return reset_reminder if draggable
+
         context.fail! unless employee_cv.to_ready!
-        reset_reminder unless create_reminder
+        reset_reminder unless create_reminder?
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
       private
 
-      def employee_cv
-        context.employee_cv
-      end
-
       def current_user
         employee_cv.profile.user
       end
 
-      def draggable
-        context.draggable
-      end
-
-      def create_reminder
-        context.create_reminder || false
+      def create_reminder?
+        employee_cv.reminder?
       end
 
       def reset_reminder

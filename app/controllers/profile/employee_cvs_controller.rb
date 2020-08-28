@@ -1,6 +1,5 @@
 class Profile::EmployeeCvsController < ApplicationController
   before_action :employee_cvs, only: :index
-  before_action :employee_cv_order, only: :create_for_send
 
   def index
     @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
@@ -20,7 +19,8 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def create_as_ready
-    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params, profile: current_profile)
+    result = Cmd::EmployeeCv::CreateAsReady.call(profile: current_profile,
+                                                 employee_cvs_params: employee_cvs_params)
     if result.success?
       @status = 'success'
       redirect_to profile_employee_cvs_path
@@ -31,16 +31,12 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def create_for_send
-    result = Cmd::EmployeeCv::CreateAsReady.call(params: employee_cvs_params,
-                                                 profile: current_profile,
-                                                 interview_date: params[:interview_date],
-                                                 order: @order, current_profile: current_profile)
-    @employee_cv = result.employee_cv
-    if result.success?
-      @status = 'success'
-    else
-      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
-    end
+    result = Cmd::EmployeeCv::Send.call(employee_cvs_params: employee_cvs_params,
+                                        interview_date: params[:interview_date],
+                                        profile: current_profile,
+                                        order: employee_cv_order)
+
+     @status = result.success? ? 'success' : 'fail'
   end
 
   def update

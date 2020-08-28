@@ -19,11 +19,14 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def create
-    Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
-    result = Cmd::ProposalEmployee::Create.call(profile: current_profile, params: proposal_employee_params)
+    result = Cmd::ProposalEmployee::Create.call(order: order,
+                                                employee_cv: employee_cv,
+                                                profile: current_profile,
+                                                interview_date: proposal_employee_params[:interview_date])
+
     @employee_cv = employee_cv
+
     if result.success?
-      Cmd::EmployeeCv::ToSent.call(employee_cv: @employee_cv, log: false)
       @status = 'success'
       render json: { pr_employee_id: result.proposal_employee.id } if params[:draggable]
       # redirect_to profile_employee_cvs_path(term: :ready)
