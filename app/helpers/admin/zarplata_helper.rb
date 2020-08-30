@@ -6,7 +6,7 @@ module Admin::ZarplataHelper
       client_id: zarplata_config[:client_id],
       scope: 'basic'
     }
-    "#{zarplata_config[:api_url]}/authorize?#{query_params.to_query}"
+    "#{zarplata_config[:oauth_url]}/authorize?#{query_params.to_query}"
   end
 
   def payment_type_alias_option
