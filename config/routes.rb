@@ -52,13 +52,16 @@ Rails.application.routes.draw do
       post :publish
       get :refresh_token
     end
+
+    get '/', to: 'dashboards#show'
+    root to: 'dashboards#show'
+
     namespace :analytics do
       get :export_to_excel
       get :user_action_log
       get :orders_info
     end
 
-    get '/', to: 'dashboards#show'
     get 'login', to: 'sessions#new'
     post 'login', to: 'sessions#create'
     delete 'logout', to: 'sessions#destroy'
@@ -184,7 +187,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :profile, except: %i[show destroy] do
+  resource :profile, only: %i[show edit update] do
     member do
       put :set_free
       put :unset_free

@@ -1,6 +1,8 @@
 class BaseController < ActionController::Base
   include WordsHelper
 
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
   def paginate_array(lists, page)
     Kaminari.paginate_array(lists).page(page)
   end
@@ -26,5 +28,14 @@ class BaseController < ActionController::Base
       errors_data["#{prefix}#{err_path}#{field_name}"] = err.last
     end
     errors_data
+  end
+
+  private
+
+  def record_not_found
+    url = request.url.include?('admin') ? admin_root_path : root_path
+
+    redirect_back(fallback_location: url)
+    flash[:alert] = 'Запись не существует или не была найдена'
   end
 end

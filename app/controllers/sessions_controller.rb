@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: :callback
   # skip_before_action :authenticate_user!, only: %i[new create]
   skip_before_action :auth_user, only: %i[new create]
-  skip_before_action :create_profile
 
   def new
     errors

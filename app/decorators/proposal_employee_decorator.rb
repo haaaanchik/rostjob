@@ -256,6 +256,14 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     employee_cv.comment
   end
 
+  def link_to_show(user)
+    url = revoked? ? '#' : url_to_show(user)
+
+    h.content_tag :a, href: url, 'data-remote' => true do
+      h.content_tag(:p, "№ #{employee_cv.id} #{employee_cv.name}", class: 'request__title')
+    end
+  end
+
   private
 
   def order_path
@@ -288,5 +296,11 @@ class ProposalEmployeeDecorator < ApplicationDecorator
 
   def link_to_candidate_or_ticket
     object.disputed? ? ticket_path : order_path
+  end
+
+  def url_to_show(user)
+    return h.profile_candidate_path(model) if user.profile.customer?
+
+    h.profile_proposal_employee_path(model)
   end
 end

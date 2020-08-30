@@ -15,8 +15,4 @@ module SessionsHelper
     cookies.delete(:password_changed_at)
     cookies.delete(:first_order_template_created)
   end
-
-  def current_profile
-    @current_profile ||= current_user.profile
-  end
 end

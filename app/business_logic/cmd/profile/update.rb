@@ -8,11 +8,11 @@ module Cmd
       def call
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
-          saved = profile.save(context: :company)
-          send_welcome_message(saved)
+          send_welcome_message if profile.save(context: :company)
         else
           profile.save
         end
+
         context.fail! if profile.errors.messages.any?
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end
@@ -40,8 +40,8 @@ module Cmd
         end
       end
 
-      def send_welcome_message(saved)
-        return unless profile.customer? && saved
+      def send_welcome_message
+        return unless profile.customer? && profile.updated_by_self_at.nil?
 
         SendDirectMailJob.perform_now(user: profile.user, method: 'welcome_message')
       end

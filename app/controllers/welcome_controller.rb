@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  skip_before_action :auth_user
+  skip_before_action :auth_user, only: :index
 
   def index
     @user = User.new

@@ -19,7 +19,7 @@ class TermsController < ApplicationController
       flash[:notice] = 'Условия оферты приняты!'
       redirect_to edit_user_registration_path
     else
-      render :index
+      redirect_to terms_path
     end
   end
 
