@@ -1,0 +1,56 @@
+= form_with scope: :zarplata, url: admin_zarplata_publish_path do |f|
+  .form-group
+    = f.label 'Должность', class: 'form-check-label'
+    = f.text_field :header, class: 'form-control', value: order.title
+
+  .form-group
+    = f.label 'Описание', class: 'form-check-label'
+    = f.text_area :description, rows: 5, class: 'form-control tinymce', value: order.other_info['terms']
+
+
+  = f.fields_for :rubrics do |rubrics_f|
+    .form-group
+      = rubrics_f.label 'Рубрика', class: 'form-check-label'
+      = rubrics_f.collection_select :id,
+                                    [],
+                                    :id,
+                                    :title,
+                                    {},
+                                    { class: 'form-control d-block' }
+    .form-group
+      = rubrics_f.label 'Специализации', class: 'form-check-label'
+      = rubrics_f.collection_select :specialities,
+                                    [],
+                                    :id,
+                                    :title,
+                                    {},
+                                    { multiple: true, class: 'form-control d-block' }
+
+  .form-group
+    = f.label 'Тип оплаты', class: 'form-check-label'
+    = f.select :payment_type_alias, payment_type_alias_option, {}, { class: 'mdb-select md-form w-25' }
+
+  .form-group
+    = f.label 'Максимальная зарплата', class: 'form-check-label'
+    = f.number_field :salary_max, class: 'form-control', value: order.salary.to_i
+
+  = f.fields_for :contact do |contact_f|
+    .form-group
+      = contact_f.label 'ФИО', class: 'form-check-label'
+      = contact_f.text_field :name, class: 'form-control', value: order.contact_person['name']
+
+    .form-group
+      = contact_f.label 'Телефон', class: 'form-check-label'
+      = contact_f.text_field :phones, class: 'form-control', value: order.contact_person['phone']
+
+    .form-group
+      = contact_f.label 'Город', class: 'form-check-label'
+      = contact_f.collection_select :city,
+                                    [],
+                                    :id,
+                                    :name,
+                                    {},
+                                    { class: 'form-control d-block' }
+
+  .actions.text-center
+    = f.submit 'Опубликовать вакансию', class: 'btn btn-sm btn-success'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_011218) do
+ActiveRecord::Schema.define(version: 2020_08_18_013914) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -167,6 +167,14 @@ ActiveRecord::Schema.define(version: 2020_07_28_011218) do
     t.text "comment"
     t.boolean "careerist_job", default: false
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
+  end
+
+  create_table "external_auths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "code"
+    t.string "provider"
+    t.json "values"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

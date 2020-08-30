@@ -15,6 +15,13 @@ class OauthCallbackController < ApplicationController
     end
   end
 
+  def zarplata
+    result = Cmd::Admin::ExternalAuths::Zarplata::AccessToken.call(code: params[:code])
+    flash[:alert] = result.error if result.failure?
+
+    redirect_to admin_zarplata_path
+  end
+
   private
 
   def superjob_config
