@@ -11,79 +11,77 @@ html
   body#admin-page data-page=body_data_page
     #modal_append
     - if staffer_signed_in?
-      header
-        nav.navbar.navbar-expand.navbar-dark.indigo.fixed-top
-          #navbarSupportedContent-7.collapse.navbar-collapse
-            ul.navbar-nav.ml-auto
-              li.nav-item
-                = link_to admin_tickets_path, class: 'nav-link waves-effect waves-light' do
-                  = @opened_tickets_count
-                  i.fas.fa-envelope.ml-1
-              li.nav-item
-                = link_to approval_list_admin_proposal_employees_path, class: 'nav-link waves-effect waves-light' do
-                  = @approved_admin_count
-                  i.fas.fa-money-bill-wave.ml-1
-              li.nav-item.dropdown
-                = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete
+      nav.navbar.navbar-expand.navbar-dark.indigo.fixed-top
+        #navbarSupportedContent-7.collapse.navbar-collapse
+          ul.navbar-nav.ml-auto
+            li.nav-item
+              = link_to admin_tickets_path, class: 'nav-link waves-effect waves-light' do
+                = @opened_tickets_count
+                i.fas.fa-envelope.ml-1
+            li.nav-item
+              = link_to approval_list_admin_proposal_employees_path, class: 'nav-link waves-effect waves-light' do
+                = @approved_admin_count
+                i.fas.fa-money-bill-wave.ml-1
+            li.nav-item.dropdown
+              = link_to "Выход (#{current_staffer.name})", admin_logout_path, class: 'nav-link', method: :delete
 
-      div
-        .toggle-menu-button
-          i.fas.fa-bars
-        #slide-out.side-nav style="transition: .5s"
-          ul.custom-scrollbar
-            li
-              div
-                = link_to admin_path, class: 'admin' do
-                            strong ADMIN
+      .toggle-menu-button
+        i.fas.fa-bars
+      #slide-out.side-nav style="transition: .5s"
+        ul.custom-scrollbar
+          li
+            div
+              = link_to admin_path, class: 'admin' do
+                          strong ADMIN
 
-            li
-              ul.collapsible.collapsible-accordion
-                li
-                  = link_to 'Заявки на модерации', admin_orders_path, class: 'collapsible-header'
+          li
+            ul.collapsible.collapsible-accordion
+              li
+                = link_to 'Заявки на модерации', admin_orders_path, class: 'collapsible-header'
 
-                li.relative
-                  i.fas.fa-angle-down.rotate-icon
-                  = link_to 'Бухгалтерия', '#', class: 'collapsible-header js-prevent'
-                  .collapsible-body
-                    ul.list-unstyled
-                      li
-                        = link_to 'Выписанные счета', admin_invoices_path
-                      li
-                        = link_to 'Перечисления исполнителям', admin_contractor_invoices_path
-                      li
-                        = link_to 'Импорт выписок', admin_account_statements_path
-                      li
-                        = link_to 'Экспорт платёжных поручений', admin_payment_orders_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'Бухгалтерия', '#', class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Выписанные счета', admin_invoices_path
+                    li
+                      = link_to 'Перечисления исполнителям', admin_contractor_invoices_path
+                    li
+                      = link_to 'Импорт выписок', admin_account_statements_path
+                    li
+                      = link_to 'Экспорт платёжных поручений', admin_payment_orders_path
 
-                li.relative
-                  i.fas.fa-angle-down.rotate-icon
-                  = link_to 'Справочники', '#', class: 'collapsible-header js-prevent'
-                  .collapsible-body
-                    ul.list-unstyled
-                      li
-                        = link_to 'Сотрудники сервиса', admin_staffers_path
-                      li
-                        = link_to 'Пользователи', admin_users_path
-                      li
-                        = link_to 'Специализации', admin_specializations_path
-                      li
-                        = link_to 'Профессии', admin_positions_path
-                      li
-                        = link_to 'Города', admin_cities_path
-                      li
-                        = link_to 'Ценовые группы', admin_price_groups_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'Справочники', '#', class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Сотрудники сервиса', admin_staffers_path
+                    li
+                      = link_to 'Пользователи', admin_users_path
+                    li
+                      = link_to 'Специализации', admin_specializations_path
+                    li
+                      = link_to 'Профессии', admin_positions_path
+                    li
+                      = link_to 'Города', admin_cities_path
+                    li
+                      = link_to 'Ценовые группы', admin_price_groups_path
 
-                li.relative
-                  i.fas.fa-angle-down.rotate-icon
-                  = link_to 'SuperJob', '#', class: 'collapsible-header js-prevent'
-                  .collapsible-body
-                    ul.list-unstyled
-                      li
-                        = link_to 'Авторизация на портале', admin_oauth_superjob_path
-                      li
-                        = link_to 'Запросы на поиск анкет', admin_superjob_queries_path
-                      li
-                        = link_to 'Выгрузка для HR-ботов', download_admin_oauth_superjob_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'SuperJob', '#', class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Авторизация на портале', admin_oauth_superjob_path
+                    li
+                      = link_to 'Запросы на поиск анкет', admin_superjob_queries_path
+                    li
+                      = link_to 'Выгрузка для HR-ботов', download_admin_oauth_superjob_path
 
                 li.relative
                   i.fas.fa-angle-down.rotate-icon
@@ -93,35 +91,35 @@ html
                       li
                         = link_to 'Авторизация на портале', admin_zarplata_authorization_path
 
-                li.relative
-                  = link_to 'Карьерист.ру', admin_careerists_path, class: 'collapsible-header'
+              li.relative
+                = link_to 'Карьерист.ру', admin_careerists_path, class: 'collapsible-header'
 
 
-                li.relative
-                  i.fas.fa-angle-down.rotate-icon
-                  = link_to 'Аналитика', '#', class: 'collapsible-header js-prevent'
-                  .collapsible-body
-                    ul.list-unstyled
-                      li
-                        = link_to 'Экспорт заявок в EXCEL', admin_analytics_export_to_excel_path
-                      li
-                        = link_to 'Журнал событий', admin_analytics_user_action_log_path
-                      li
-                        = link_to 'Журнал заказов', admin_analytics_orders_info_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'Аналитика', '#', class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Экспорт заявок в EXCEL', admin_analytics_export_to_excel_path
+                    li
+                      = link_to 'Журнал событий', admin_analytics_user_action_log_path
+                    li
+                      = link_to 'Журнал заказов', admin_analytics_orders_info_path
 
-                li.relative
-                  i.fas.fa-angle-down.rotate-icon
-                  = link_to 'Прочее', '#', class: 'collapsible-header js-prevent'
-                  .collapsible-body
-                    ul.list-unstyled
-                      li
-                        = link_to 'Написать письмо', new_admin_mail_path
-                      li
-                        = link_to 'Трелло', admin_trello_index_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'Прочее', '#', class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Написать письмо', new_admin_mail_path
+                    li
+                      = link_to 'Трелло', admin_trello_index_path
 
           .sidenav-bg.mask-strong
 
-    .container-fluid.w-100
+    .container-fluid.w-100.content-container
       = yield
     = javascript_include_tag 'application', media: 'all',
             data: {'turbolinks-eval' => false,
