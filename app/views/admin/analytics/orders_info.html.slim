@@ -14,8 +14,8 @@
       = f.label :published_at_lteq, 'По:'
   
     .md-form.context-filed.mb-0
-      = f.text_field :user_full_name_or_title_cont, class: 'form-control'
-      = f.label :user_full_name_or_title_cont, 'Поиск по контексту'
+      = f.text_field :user_full_name_or_position_title_cont, class: 'form-control'
+      = f.label :user_full_name_or_position_title_cont, 'Поиск по контексту'
     
     .d-flex.align-items-center
       = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm mr-4 btn'
