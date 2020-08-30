@@ -6,11 +6,11 @@
   .input-group.flex.no-wrap
     = f.search_field :all_fields_cont, placeholder: 'Поиск тикетов', class: 'form-control m-2', value: val
     .form-check.form-check-inline
-      = check_box_tag 'q[type_in][]', 'appeal', type.include?('appeal'), { class: 'form-check-input', id: 'tickets_filter_appeals' }
+      = check_box_tag 'q[type_in][]', 'Appeal', type.include?('Appeal'), { class: 'form-check-input', id: 'tickets_filter_appeals' }
       = label :type, nil, class: 'form-check-label', for: 'tickets_filter_appeals' do
           span.mr-2 Обращения
     .form-check.form-check-inline
-      = check_box_tag 'q[type_in][]', 'incident', type.include?('incident'), { class: 'form-check-input', id: 'tickets_filter_incidents' }
+      = check_box_tag 'q[type_in][]', 'Incident', type.include?('Incident'), { class: 'form-check-input', id: 'tickets_filter_incidents' }
       = label :type, nil, class: 'form-check-label', for: 'tickets_filter_incidents' do
           span.mr-2 Споры
     .btn-group.group-menu.w-100[role="group" aria-label="Basic example"]

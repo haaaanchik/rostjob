@@ -7,6 +7,7 @@ class Tickets
     $('section.treatment_search').on 'click', '[for^=tickets_filter_]', @sendTicketsFormFilter
     $('.treatment_list_new').on 'click', @openModal
     $('.treatment-modal_back, .treatment_list_modal .btn-close').on 'click', @closeModal
+    $('#admin_tickers').on 'click', '[for$=_tickets], .form-check-input', @findTicket
 
   @openModal: ->
     $('.treatment_list_modal').addClass('show')
@@ -33,6 +34,9 @@ class Tickets
         form.submit()
       300
     )
+
+  @findTicket: ->
+    $('#ticket_search').submit()
 
 $(document).on 'turbolinks:load', ->
   Tickets.init()
