@@ -34,7 +34,9 @@ input::placeholder{
 .main_patternRequest{
   position: relative;
   width: 100%;
+  min-height: 100%;
   background-color: #f2f2f2;
+  padding-top: 30px;
   @media(max-width: 600px){
     height: calc(100vh - 58px);
   }
@@ -60,7 +62,7 @@ input::placeholder{
     }
   }
   .pattern{
-    margin: 58px auto 0;
+    margin: auto;
     padding: 20px;
     position: relative;
     display: block;

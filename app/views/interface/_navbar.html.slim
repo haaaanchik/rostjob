@@ -2,7 +2,7 @@ ruby:
   val = params[:q] ? params[:q][:pe_fields_cont] : nil
 
 nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
-  .p-2.button-collapse.ml-2
+  .p-2.button-collapse.ml-2.mobile-menu-icon
     i.fas.fa-bars
 
   .mobile-menu.bg-primary
@@ -19,7 +19,7 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
     - if current_profile && current_profile.contractor?
       = link_to 'Как стать самозанятым?',
                 page_path('as_an_individual'),
-                class: 'dropdown-item'
+                class: 'self-employed'
 
     .search
       = form_for :q, url: navbar_search_url, method: :get do |f|
@@ -33,5 +33,5 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
     = link_to page_path('all_manuals') do
       i.fas.fa-question
 
-    = link_to logout_path, class: 'icon-link', method: :delete do
+    = link_to logout_path, class: 'icon-link logout', method: :delete do
       = image_tag asset_path('navbar/exit.png')
