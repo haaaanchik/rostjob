@@ -11,7 +11,7 @@ class Admin::ZarplataController < Admin::ApplicationController
       ExternalAuth.zarplata.update(values: nil)
     end
 
-    redirect_to admin_zarplata_path
+    redirect_to admin_zarplata_authorization_path
   end
 
   def order

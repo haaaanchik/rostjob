@@ -18,7 +18,7 @@ class OauthCallbackController < ApplicationController
     result = Cmd::Admin::ExternalAuths::Zarplata::AccessToken.call(code: params[:code])
     flash[:alert] = result.error if result.failure?
 
-    redirect_to admin_zarplata_path
+    redirect_to admin_zarplata_authorization_path
   end
 
   private
