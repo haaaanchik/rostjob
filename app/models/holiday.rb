@@ -5,8 +5,8 @@ class Holiday < ApplicationRecord
 
   scope :holidays, ->(hiring_date) { where date: (hiring_date - 1.month).beginning_of_month..(hiring_date + 1.month).end_of_month }
 
-  def self.warranty_date(hiring_date)
-    add_working_days(hiring_date, WARRANTY_PERIOD)
+  def self.warranty_date(hiring_date, warranty_period)
+    add_working_days(hiring_date, warranty_period)
   end
 
   def self.plus_five_working_days(date)

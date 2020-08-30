@@ -13,7 +13,8 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
 
   def create
     result = Cmd::OrderTemplate::Create.call(profile: current_profile, params: order_template_params,
-                                             position: @position, production_site: production_site)
+                                             position: @position, production_site: production_site,
+                                             only_base: true)
     if result.success?
       redirect_to second_step_profile_production_site_order_template_path(production_site, result.order_template)
     else
@@ -92,7 +93,7 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def order_template_params
-    params.require(:order_template).permit(:name, :title, :city, :salary, :position_id, :contractor_price,
+    params.require(:order_template).permit(:name, :city, :salary, :position_id, :contractor_price,
                                            :number_of_employees, :skill, :document, :template_saved,
                                            contact_person: {}, other_info: {})
   end

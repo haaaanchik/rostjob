@@ -1,19 +1,26 @@
-.card
-  .card-body
-    h3 #{@position.persisted? ? 'Редактировать профессию' : 'Новая профессия'}
-    = form_with model: [:admin, @position] do |f|
-      .col.mb-2
-        = f.label :title, t('position.title')
-        = f.text_field :title, class: 'form-control'
-        .invalid-feedback
-      .col.mb-3
-        = f.label :duties, t('position.duties')
-        = f.text_area :duties, rows: 5, class: 'form-control tinymce'
-        .invalid-feedback
-      .col.mb-2
-        .form-group
-          = f.collection_select :price_group_id, @price_groups, :id, :title,
-            { prompt: 'Выберите ценовую группу' }, class: 'custom-select', required: true
-          .invalid-feedback
-      = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
-      = link_to t('buttons.cancel'), admin_positions_path, class: 'btn btn-indigo mt-5'
+.d-flex.justify-content-center.mt-3
+  .col-md-8.col-sm-10
+    .card
+      .card-body
+        h3 #{@position.persisted? ? 'Редактировать профессию' : 'Новая профессия'}
+        = form_with model: [:admin, @position] do |f|
+          .col.mb-2
+            = f.label :title, t('position.title')
+            = f.text_field :title, class: 'form-control'
+            .invalid-feedback
+          .col.mb-3
+            = f.label :duties, t('position.duties')
+            = f.text_area :duties, rows: 5, class: 'form-control tinymce'
+            .invalid-feedback
+          .col.md-2
+            .form-group
+              = f.label :warranty_period, t('position.warranty_period')
+              = f.number_field :warranty_period, in: 1..60, step: 1, class: 'form-control'
+          .col.mb-2
+            .form-group
+              = f.collection_select :price_group_id, @price_groups, :id, :title,
+                { prompt: 'Выберите ценовую группу' }, class: 'custom-select', required: true
+              .invalid-feedback
+          .d-flex.mt-3.justify-content-end
+            = link_to t('buttons.cancel'), admin_positions_path, class: 'btn btn-primary'
+            = f.button t('buttons.save'), type: 'submit', class: 'btn btn-success ml-3'

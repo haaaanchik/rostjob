@@ -3,7 +3,8 @@ class Position < ApplicationRecord
 
   belongs_to :price_group
 
-  validates :title, presence: true
+  validates :title, :warranty_period, presence: true
+  validates :warranty_period, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
   ransack_alias :title_fields, :title
 

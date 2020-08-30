@@ -7,7 +7,7 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
 
   def update
     hiring_date = Date.parse(correction_params[:hiring_date])
-    candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date), hiring_date_corrected: true)
+    candidate.update(hiring_date: hiring_date, warranty_date: Holiday.warranty_date(hiring_date, order.warranty_period), hiring_date_corrected: true)
     @pecv = candidate
     @remained_warranty_days = Holiday.remained_warranty_days(@pecv.hiring_date, @pecv.warranty_date)
     redirect_to profile_candidate_path(candidate)

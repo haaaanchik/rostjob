@@ -44,6 +44,9 @@ class Order < ApplicationRecord
     Arel.sql("CONVERT(#{table_name}.salary_to, CHAR(8))")
   end
 
+  delegate :title,           to: :position
+  delegate :warranty_period, to: :position
+
   aasm column: :state, skip_validation_on_save: true, no_direct_assignment: false do
     state :draft, initial: true
     state :waiting_for_payment

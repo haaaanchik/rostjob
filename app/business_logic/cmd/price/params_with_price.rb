@@ -28,7 +28,6 @@ module Cmd
       def title_and_base_price
         params[:base_customer_price] = position&.price_group&.customer_price
         params[:base_contractor_price] = position&.price_group&.contractor_price
-        params[:title] = position&.title
       end
 
       def contractor_prices_equal

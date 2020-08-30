@@ -271,13 +271,11 @@ ActiveRecord::Schema.define(version: 2020_08_18_013914) do
 
   create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
-    t.string "title"
     t.text "specialization"
     t.string "city"
     t.integer "salary_from"
     t.integer "salary_to"
     t.text "description"
-    t.integer "warranty_period"
     t.string "state"
     t.bigint "profile_id"
     t.integer "number_of_employees"
@@ -315,7 +313,6 @@ ActiveRecord::Schema.define(version: 2020_08_18_013914) do
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title"
     t.text "specialization"
     t.string "city"
     t.integer "salary_from"
@@ -323,7 +320,6 @@ ActiveRecord::Schema.define(version: 2020_08_18_013914) do
     t.text "description"
     t.integer "commission"
     t.integer "payment_type", default: 0
-    t.integer "warranty_period", default: 10
     t.integer "number_of_recruiters", default: 1
     t.boolean "enterpreneurs_only"
     t.boolean "accepted"
@@ -382,6 +378,7 @@ ActiveRecord::Schema.define(version: 2020_08_18_013914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "price_group_id"
+    t.integer "warranty_period", default: 10
     t.index ["price_group_id"], name: "index_positions_on_price_group_id"
     t.index ["title"], name: "index_positions_on_title"
   end
