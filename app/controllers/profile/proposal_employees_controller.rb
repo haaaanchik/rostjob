@@ -49,7 +49,7 @@ class Profile::ProposalEmployeesController < ApplicationController
   end
 
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: true)
+    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, user: current_user)
     if result.success?
       @status = 'success'
       render json: { revoke: 'success' } if params[:draggable]

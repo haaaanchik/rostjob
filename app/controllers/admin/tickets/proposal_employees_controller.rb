@@ -1,13 +1,7 @@
 class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationController
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, log: true)
-    if result.success?
-      result = Cmd::EmployeeCv::ToReady.call(employee_cv: proposal_employee.employee_cv)
-      if result.success?
-        ticket.to_closed!
-        redirect_to admin_tickets_path
-      end
-    end
+    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee, user: current_staffer)
+    redirect_to admin_tickets_path if result.success?
   end
 
   def hire

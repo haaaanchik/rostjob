@@ -1,0 +1,5 @@
+| Уважаемый, #{@user.full_name}.
+p 
+  | Ваша анкета  
+  = link_to "№#{@prop_emp.employee_cv.id} - #{@prop_emp.employee_cv.name}", profile_employee_cvs_url(proposal_employee_id: @prop_emp.id)
+  |  была отозвана по заявке №#{@prop_emp.order.id}.

@@ -16,8 +16,7 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
   def hire
     render(plain: 'order completed', status: 422) and return if order.completed?
 
-    hiring_date = Date.parse(candidate_params[:hiring_date])
-    Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: hiring_date)
+    Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: candidate_params[:hiring_date])
     flash[:redirection] = 'to_hired'
     redirect_to profile_order_path(order)
   end

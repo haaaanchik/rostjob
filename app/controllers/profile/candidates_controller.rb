@@ -16,7 +16,7 @@ class Profile::CandidatesController < ApplicationController
 
   # FIXME: refactor this asap
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: candidate, log: true)
+    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: candidate, user: current_user)
     result.success? ? (redirect_to profile_candidates_path) :
                       (render json: { validate: true,
                                       data:     errors_data(result.proposal_employee) },

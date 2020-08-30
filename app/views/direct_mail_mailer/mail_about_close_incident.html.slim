@@ -1,0 +1,8 @@
+| Уважаемый(ая), #{@user.full_name}.
+p
+  - if @ticket.nil? || @ticket == false
+    | Спор №#{@incident.id}, был закрыт, c следующим текстом: #{@message}
+  - else
+    | #{@message}
+p
+  = link_to 'Посмотреть историю спора', profile_ticket_url(@incident)

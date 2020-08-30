@@ -21,10 +21,12 @@ class Profile::Tickets::IncidentsController < ApplicationController
   def update
     ticket_waiting = incident.waiting
     result = Cmd::Ticket::Incident::Update.call(incident: incident,
+                                                ticket: incident,
+                                                message_params: { text: params[:message] },
                                                 incident_params: incident_params,
+                                                user: current_user,
                                                 params: params)
     if result.success?
-      create_message(params[:message]) if params[:message].present?
       flash[:notice] = flash_notice(ticket_waiting)
       redirect_to profile_ticket_path(result.incident)
     else
@@ -33,12 +35,15 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def hire
-    hiring_date = Date.parse(params[:hiring_date])
-    result = Cmd::ProposalEmployee::Hire.call(candidate: incident.proposal_employee,
-                                              hiring_date: hiring_date)
+    result = Cmd::Ticket::Incident::Hire.call(candidate: incident.proposal_employee,
+                                              message_params: { text: 'Для анкеты назначена дата найма.' },
+                                              hiring_date: params[:hiring_date],
+                                              incident: incident,
+                                              ticket: incident,
+                                              user: current_user,
+                                              log: true)
+
     if result.success?
-      create_message('Для анкеты назначена дата найма')
-      incident.to_closed!
       redirect_to profile_ticket_path(incident)
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422
@@ -46,37 +51,38 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: incident.proposal_employee, log: true)
-    if result.success?
-      create_message('Анкета  отозвана!')
-      redirect_to profile_ticket_path(incident)
-    else
-      @status = 'error'
-    end
+    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: incident.proposal_employee, 
+                                                message_params: { text: 'Для анкеты назначена дата найма.' },
+                                                incident: incident,
+                                                ticket: incident,
+                                                user: current_user)
+
+    result.success? ? (redirect_to profile_ticket_path(incident)) : @status = 'error'
   end
 
   def inbox
-    interview_date = Date.parse(params[:interview_date])
-    result = Cmd::ProposalEmployee::ToInbox.call(candidate: incident.proposal_employee,
-                                                 interview_date: interview_date,
-                                                 log: true)
+    result = Cmd::Ticket::Incident::Inbox.call(candidate: incident.proposal_employee,
+                                                message_params: { text: 'Анкета переведена в очередь.' },
+                                                interview_date: params[:interview_date],
+                                                incident: incident,
+                                                ticket: incident,
+                                                user: current_user,
+                                                log: true)
+
     if result.success?
-      incident.to_closed!
-      create_message('Анкета переведена в очередь')
       redirect_to profile_ticket_path(incident)
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422
     end
   end
 
-  def inteview
-    interview_date = Date.parse(params[:interview_date])
-    result = Cmd::ProposalEmployee::ToInterview.call(candidate: incident.proposal_employee,
-                                                     interview_date: interview_date,
-                                                     log: true)
+  def interview
+    result = Cmd::Ticket::Incident::Interview.call(candidate: incident.proposal_employee, user: current_user,
+                                                    message_params: { text: 'Для анкеты назвачена дата собеседования.' },
+                                                    ticket: incident, interview_date: params[:interview_date],
+                                                    incident: incident)
+
     if result.success?
-      create_message('Для анкеты назвачена дата собеседования.')
-      incident.to_closed!
       redirect_to profile_ticket_path(incident)
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422

@@ -4,7 +4,11 @@ module Cmd
       class Create
         include Interactor
 
+        delegate :user, to: :context
+
         def call
+          return unless context.message_params
+
           message = context.ticket.messages.build(message_params)
           context.message = message
           context.fail! unless context.message.save
@@ -18,10 +22,6 @@ module Cmd
 
         def sender_name
           user.full_name
-        end
-
-        def user
-          context.user
         end
       end
     end

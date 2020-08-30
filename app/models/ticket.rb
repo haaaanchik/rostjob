@@ -50,4 +50,11 @@ class Ticket < ApplicationRecord
   def incident?
     is_a? Incident
   end
+
+  def members
+    customer = proposal_employee.order.user
+    cntractor = proposal_employee.user
+
+    { customer: customer, cntractor: cntractor }
+  end
 end

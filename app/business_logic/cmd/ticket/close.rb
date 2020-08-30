@@ -3,13 +3,11 @@ module Cmd
     class Close
       include Interactor
 
+      delegate :ticket, to: :context
+
       def call
-        if ticket.is_a? Appeal
-          ticket.to_closed!
-        elsif ticket.is_a? Incident
-          ticket.to_closed!
-          candidate.hire!
-        end
+      context.fail! unless ticket.to_closed!
+      hired_canidate
       end
 
       private
@@ -18,8 +16,10 @@ module Cmd
         ticket.proposal_employee
       end
 
-      def ticket
-        context.ticket
+      def hired_canidate
+        return unless ticket.is_a? Incident
+
+        candidate.hire!
       end
     end
   end

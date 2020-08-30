@@ -1,0 +1,3 @@
+| Уважаемый, #{@user.full_name}. 
+|  Ваша анкета №#{@prop_emp.employee_cv.id} - #{@prop_emp.employee_cv.name} была отозвана по заявке №#{@prop_emp.order.id}. 
+|  Ссылка на анкету #{url_for profile_employee_cvs_url(proposal_employee_id: @prop_emp.id)} 

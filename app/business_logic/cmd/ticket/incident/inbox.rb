@@ -1,12 +1,12 @@
 module Cmd
   module Ticket
     module Incident
-      class Update
+      class Inbox
         include Interactor::Organizer
 
-        organize Cmd::Ticket::Incident::ToUpdate,
+        organize Cmd::ProposalEmployee::ToInbox,
                  Cmd::Ticket::Message::Create,
-                 Cmd::NotifyMail::Ticket::Incident::Precedent
+                 Cmd::Ticket::Incident::Close
 
         around do |interactor|
           ActiveRecord::Base.transaction do
