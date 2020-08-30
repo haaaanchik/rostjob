@@ -1,0 +1,10 @@
+<% partial_form = render partial: 'form', locals: {order: @order} %>
+<% over_partial = render_escape '/partials/modal',
+ { modal_title: 'Публикация вакансии на Зарплата.ру', local_render: partial_form, modal_id: 'zarplataRuPublishVacancy' } %>
+normal_modal_open('zarplataRuPublishVacancy', "<%= over_partial %>")
+
+setTimeout(function(){
+  RostJob.AdminZarplataSearch.init()
+  init_mdb();
+  initTinymce()}, 700
+)

@@ -174,6 +174,14 @@ class OrderDecorator < ApplicationDecorator
     end
   end
 
+  def order_zp_city
+    response = ZarplataRu::Search.city(city)
+    return [] if response['geo'].blank?
+
+    response['geo'].collect { |geo| {id: geo['id'],
+                                      name: geo['name']}}
+  end
+
   private
 
   def link_to_disputed

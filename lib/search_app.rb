@@ -22,6 +22,12 @@ class SearchApp
                   Account.search_bank_dadata(params['term'])
                 when '/search_ifns'
                   Company.search_ifns_dadata(params['term'])
+                when '/search_zarplata_rubrics'
+                  ZarplataRu::Search.rubrics
+                when '/search_zarplata_specialties'
+                  ZarplataRu::Search.specialties(params['parent_id'])
+                when '/search_zarplata_city'
+                  ZarplataRu::Search.city(params['term'])
                 else
                   ''
                 end

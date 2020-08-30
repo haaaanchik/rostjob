@@ -2,12 +2,9 @@ Rails.application.routes.draw do
   mount Resque::Server.new, at: '/resque_web'
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
-  # get 'login', to: 'sessions#new'
-  # post 'login', to: 'sessions#create'
-  # delete 'logout', to: 'sessions#destroy'
+  get '/oauth/callback/superjob', to: 'oauth_callback#superjob'
+  get '/oauth/callback/zarplata', to: 'oauth_callback#zarplata'
 
-  # get '/auth/:provider/callback' => 'sessions#callback'
-  get '/oauth/callback/superjob' => 'oauth_callback#superjob'
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
     get :contractor_info, to: 'users/registrations#contractor_info'
@@ -49,6 +46,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    namespace :zarplata do
+      get 'order/:id', action: 'order', as: :order
+      get :authorization
+      post :publish
+      get :refresh_token
+    end
     namespace :analytics do
       get :export_to_excel
       get :user_action_log

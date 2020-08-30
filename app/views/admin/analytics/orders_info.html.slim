@@ -38,15 +38,14 @@
           th rowspan='2' Разница (Объем ‐ Оплачено)
           th rowspan='2' Процент найма
           th rowspan='2' Скорость найма (за срок существования)
-
+          th rowspan='2' Публикация на сервисе Зарплата.ру
         tr
           th.state-col В очереди
           th.state-col На собес
           th.state-col В найме
           th.state-col В споре
           th.state-col Отклон
-      tbody
-
+      tbody.justify-content-center
         - @orders.each do |order|
           - order_pr_paid_count = order.count_pr_employees_state('paid')
 
@@ -70,5 +69,7 @@
             td = order.difference_volum_and_paided(order_pr_paid_count)
             td = order.count_hired_in_percent(order_pr_paid_count).to_s + ' %'
             td = order.count_speed_hired(order_pr_paid_count)
-
-
+            td
+              = link_to 'Опубликовать',
+                        admin_zarplata_order_path(order),
+                        remote: true

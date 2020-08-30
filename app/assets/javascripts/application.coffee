@@ -114,9 +114,7 @@ bootstrapClearButton()
       $('[href="#top-section"]').fadeOut('slow')
     return
 
-$(document).ready ->
-  scroll_to_bottom($('.ticket-messages')[0])
-  init_mdb()
+@initTinymce = () ->
   tinyMCE.init({
     selector: 'textarea.tinymce'
     branding: false
@@ -129,6 +127,10 @@ $(document).ready ->
     forced_root_block: false
   })
 
+$(document).ready ->
+  scroll_to_bottom($('.ticket-messages')[0])
+  init_mdb()
+  initTinymce()
   $(document).on 'focusin', '*[data-mask-on="date"]', ->
     $(this).datepicker({
       format: 'dd.mm.yyyy',

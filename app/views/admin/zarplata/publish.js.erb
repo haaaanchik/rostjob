@@ -1,0 +1,6 @@
+<% if @result.success? %>
+  normal_modal_close('zarplataRuPublishVacancy')
+  toastr.success('Заявка успешно опубликована!')
+<% else %>
+  toastr.error('<%= @result.error %>')
+<% end %>
