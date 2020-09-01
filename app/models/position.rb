@@ -2,6 +2,7 @@ class Position < ApplicationRecord
   include Autocompletable
 
   belongs_to :price_group
+  has_many :orders, dependent: :restrict_with_error
 
   validates :title, :warranty_period, presence: true
   validates :warranty_period, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
