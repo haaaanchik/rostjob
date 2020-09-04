@@ -14,9 +14,9 @@ class Order < ApplicationRecord
   has_many :candidates, class_name: 'ProposalEmployee'
   has_many :comments, dependent: :destroy
   has_many :proposals
-  has_many :proposal_employees
+  has_many :proposal_employees, dependent: :destroy
   has_many :profiles, -> { distinct }, through: :proposal_employees
-  has_many :order_profiles
+  has_many :order_profiles, dependent: :destroy
   has_many :employee_cvs, through: :proposal_employees, source: :employee_cv
   has_one  :user, through: :profile
 
@@ -31,6 +31,7 @@ class Order < ApplicationRecord
   ransack_alias :candidate_fields, :id_or_title_or_place_of_work_or_employee_cv_name
   ransack_alias :title_fields, :title
   ransack_alias :city_fields, :city
+  ransack_alias :analytics_fields, :user_full_name_or_position_title_or_production_site_title
 
   ransacker :id do
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")

@@ -6,7 +6,7 @@ class Analytics
 
   @bind: ->
     $('#orders_info_page').on 'change', '#orders_info_search select', @doSearch
-    $('#orders_info_page').on 'keyup', '#q_user_full_name_or_title_cont', @doSearch
+    $('#orders_info_page').on 'keyup', '#q_analytics_fields_cont', @doSearch
     $('#orders_info_page').on 'change', '#date-picker-date', @doSearch
     $('#orders_info_page').on 'click', '#export_pdf', @exportPDF
 
