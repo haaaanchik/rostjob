@@ -79,6 +79,14 @@ body {
   font-weight: bold;
 }
 
+#incident_title.is-invalid {
+  color: #dc3545;
+}
+
+#incident_title.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
 #privacy_policy, #tinkoff_individial {
     padding: 30px;
     margin: 0 auto;

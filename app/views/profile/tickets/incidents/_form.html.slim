@@ -3,7 +3,8 @@
   = f.hidden_field :proposal_employee_id, value: candidate.id
   h5 Анкета: #{candidate.employee_cv.name}
   h5 Заявка: #{candidate.order.title}
-  = label_tag :title, 'Тема спора:', class: 'form-check-label'
+  = label_tag :title, 'Тема спора:', class: 'form-check-label', id: 'incident_title'
+  .invalid-feedback
   - Incident.title.values.each do |r|
     .form-check
       = radio_button_tag 'incident[title]', r, false, class: 'form-check-input'
