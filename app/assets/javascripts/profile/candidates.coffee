@@ -1,6 +1,7 @@
 class Candidates
   @init: ->
     @bind()
+    @openFilters()
 
   @bind: ->
     $('textarea.candidate-comment').on 'blur', @writeComment
