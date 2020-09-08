@@ -63,7 +63,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def destroy
     result = Cmd::EmployeeCv::ToDeleted.call(employee_cv: employee_cv)
     @employee_cv = result.employee_cv
-    # redirect_to profile_employee_cvs_path(term: term)
+    redirect_to profile_employee_cvs_path(term: term), notice: 'Анкета успешно удалена'
   end
 
   def change_status
