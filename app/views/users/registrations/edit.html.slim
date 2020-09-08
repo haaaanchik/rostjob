@@ -45,7 +45,7 @@ ruby:
           .form-item
             label.title Логотип компании
             .choosing-logo
-              = image_tag(current_profile.image_url, class: 'logo')
+              = image_tag(current_profile.image_url, class: 'logo', id: 'preview-logo')
               div
                 span.file-btn
                   | Выберите файл

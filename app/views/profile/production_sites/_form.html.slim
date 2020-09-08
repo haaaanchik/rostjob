@@ -34,7 +34,7 @@
           .col-md-4.control-label
             p Логотип площадки
           .col-md-2.avatar
-            = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
+            = image_tag production_site.image.url(:thumb), class: 'img-fluid', id: 'preview-logo'
           .col-md-6.d-flex
             #choose-file
               = f.label :image, 'Выберите файл'
