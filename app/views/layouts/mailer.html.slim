@@ -9,7 +9,9 @@ html
       .col
         .nav
           .nav__logo
-            = link_to image_tag('https://i.ibb.co/m5gXndF/Logo-Rost-Job-final.png'), root_url
+
+            = link_to image_tag("https://#{ActionMailer::Base.default_url_options[:host]}#{ActionMailer::Base.default_url_options[:port]}/img/customer-landing/Logo_Rost_Job_final.png"),
+              root_url
         .content    
           = yield
         .footer
