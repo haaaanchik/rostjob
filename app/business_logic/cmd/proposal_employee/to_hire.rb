@@ -6,10 +6,12 @@ module Cmd
       include Interactor
 
       delegate :candidate, to: :context
-      delegate :log, to: :context
+      delegate :order,     to: :context
+      delegate :log,       to: :context
 
       def call
-        context.fail! if hiring_date.blank?
+
+        context.fail! if hiring_date.blank? && order.number_free_places > 1
 
         candidate.update(hiring_date: hiring_date,
                          warranty_date: Holiday.warranty_date(hiring_date, order.warranty_period))

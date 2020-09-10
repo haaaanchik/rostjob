@@ -11,4 +11,6 @@
         = f.password_field :password, class: 'form-control'
         = f.label :password, 'Пароль'
       .d-flex.justify-content-center.m-4
-        = f.submit 'Войти', class: 'btn button-hr btn-rounded waves-effect m-4 pt-1 pb-1 text-center'
+        = button_tag class: 'btn btn-success d-flex align-items-center' do
+          i.fas.fa-sign-in-alt.fa-2x.mr-3
+          | Войти

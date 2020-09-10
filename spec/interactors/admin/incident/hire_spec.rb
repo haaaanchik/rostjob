@@ -10,7 +10,8 @@ RSpec.feature 'Admin::Incident::Hire', type: :interactor do
                                        hiring_date: '1.01.2020',
                                        incident: incident,
                                        ticket: incident,
-                                       user: admin.decorate
+                                       user: admin.decorate,
+                                       order: incident.proposal_employee.order
                                       )
     end
 

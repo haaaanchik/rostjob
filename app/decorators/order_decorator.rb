@@ -72,8 +72,20 @@ class OrderDecorator < ApplicationDecorator
     employees_can_be_paid?
   end
 
-  def link_button
+  def link_button(proposal)
     case
+    when employees_can_be_paid? && proposal[:canidate_id].present?
+      url = if proposal[:incident_id].present?
+              h.hire_profile_tickets_incident_path(proposal[:incident_id], hiring_date: proposal[:hiring_date])
+            else
+              h.hire_in_compleated_order_profile_order_candidate_path(object, proposal[:canidate_id], 
+                                                                      candidate: {hiring_date: proposal[:hiring_date]})
+            end
+
+      h.content_tag(:a,
+                    href: url,
+                    class: 'public',
+                    data: { method: :put }) { 'Оплатить и нанять' }
     when employees_can_be_paid?
       h.content_tag(:a,
                     href: h.add_additional_employees_profile_production_site_order_path(production_site, object),

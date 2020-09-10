@@ -3,20 +3,15 @@ module Cmd
     class WaitForPayment
       include Interactor
 
+      delegate :order,  to: :context
+      delegate :params, to: :context
+
       def call
-        context.fail! if !order.number_additional_employees.nil? || !order.to_waiting_for_payment
+        context.fail! if order.number_additional_employees.blank? || !order.to_waiting_for_payment
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
       private
-
-      def order
-        context.order
-      end
-
-      def params
-        context.params
-      end
 
       def current_user
         order.profile.user

@@ -349,6 +349,7 @@ Rails.application.routes.draw do
             put :to_interview
             put :to_approved
             put :transfer
+            put :hire_in_compleated_order
           end
         end
         # put 'candidates/:id/hire', to: 'candidates#hire'

@@ -1,3 +1,7 @@
+- proposal_id = params[:proposal_employee] ? params[:proposal_employee][:proposal_employee_id] : nil
+- hiring_date = params[:proposal_employee] ? params[:proposal_employee][:hiring_date] : nil
+- incident = params[:incident]
+
 #request-publishing
   .request-block
     = order.publish_title
@@ -49,5 +53,5 @@
           span#balance data-balance-amount=order.balance.amount
             | #{ order.balance_amount } руб.
     .buttons
-      = order.link_button
+      = order.link_button(canidate_id: proposal_id, hiring_date: hiring_date, incident_id: incident)
       = order.link_cancel_publish(@production_site)

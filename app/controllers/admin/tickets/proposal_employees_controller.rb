@@ -12,8 +12,9 @@ class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationC
   def hire
     result = Cmd::Ticket::Incident::Hire.call(message_params: { text: 'Для анкеты назначена дата найма, администратором.' },
                                               hiring_date: candidate_params[:hiring_date],
-                                              candidate: proposal_employee,
+                                              order: proposal_employee.order,
                                               user: current_staffer.decorate,
+                                              candidate: proposal_employee,
                                               incident: ticket,
                                               ticket: ticket)
 

@@ -39,12 +39,14 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def hire
-    result = Cmd::Ticket::Incident::Hire.call(candidate: incident.proposal_employee,
-                                              message_params: { text: 'Для анкеты назначена дата найма.' },
+    result = Cmd::Ticket::Incident::Hire.call(message_params: { text: 'Для анкеты назначена дата найма.' },
+                                              order: incident.proposal_employee.order,
+                                              candidate: incident.proposal_employee,
                                               hiring_date: params[:hiring_date],
                                               incident: incident,
-                                              ticket: incident,
                                               user: current_user,
+                                              ticket: incident,
+                                              dont_send: true,
                                               log: true)
 
     do_after_action(result)

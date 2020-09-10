@@ -10,7 +10,8 @@ RSpec.feature 'Incident::Hire', type: :interactor do
                                        incident: incident,
                                        ticket: incident,
                                        user: incident.proposal_employee.order.user,
-                                       log: true)
+                                       log: true,
+                                       order: incident.proposal_employee.order)
     end
 
 
