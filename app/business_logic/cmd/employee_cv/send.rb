@@ -1,9 +1,11 @@
 module Cmd
-  module ProposalEmployee
-    class Create
+  module EmployeeCv
+    class Send
       include Interactor::Organizer
 
-      organize Cmd::Order::AddToFavorites,
+      organize Cmd::EmployeeCv::Create,
+               Cmd::EmployeeCv::ToReady,
+               Cmd::Order::AddToFavorites,
                Cmd::ProposalEmployee::ToCreate,
                Cmd::EmployeeCv::ToSent,
                Cmd::NotifyMail::ProposalEmployee::Inbox

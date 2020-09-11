@@ -3,8 +3,11 @@ module Cmd
     class Create
       include Interactor
 
+      delegate :employee_cvs_params,  to: :context
+      delegate :profile, to: :context
+
       def call
-        @employee_cv = profile.employee_cvs.build params
+        @employee_cv = profile.employee_cvs.build(employee_cvs_params)
         @employee_cv.save
         context.employee_cv = @employee_cv
         context.fail! unless @employee_cv.persisted?
@@ -13,16 +16,8 @@ module Cmd
 
       private
 
-      def params
-        context.params
-      end
-
       def current_user
         profile.user
-      end
-
-      def profile
-        context.profile
       end
 
       def logger_params
