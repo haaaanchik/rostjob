@@ -81,7 +81,7 @@ Rails.application.configure do
     domain: 'mg.rostjob.com',
     region: 'eu'
   }
-  config.action_mailer.default_url_options = { host: 'rostjob.com' }
+  config.action_mailer.default_url_options = { host: 'rostjob.com', protocol: 'https' }
   config.action_mailer.default_options = { from: 'noreply@rostjob.com', charset: 'utf-8' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
