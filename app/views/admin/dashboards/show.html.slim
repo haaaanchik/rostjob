@@ -47,6 +47,8 @@
               = link_to 'Профессии', admin_positions_path, class: 'dropdown-item'
               = link_to 'Города', admin_cities_path, class: 'dropdown-item'
               = link_to 'Ценовые группы', admin_price_groups_path, class: 'dropdown-item'
+              - if policy([:admin, :production_site]).index?
+                = link_to 'Площадки', admin_production_sites_path
           li.nav-item.dropdown
             span.nav-link.dropdown-toggle#dropdown03 aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" SuperJob
             .dropdown-menu aria-labelledby="dropdown03" 

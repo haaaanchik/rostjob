@@ -180,11 +180,14 @@ Rails.application.routes.draw do
        get :send_notify_interview
       end
     end
+
     resources :trello, only: %i[index] do
       collection do
         get :export_xlsx
       end
     end
+
+    resources :production_sites, except: %i[new create]
   end
 
   resource :profile, only: %i[show edit update] do

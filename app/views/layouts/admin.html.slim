@@ -70,6 +70,9 @@ html
                       = link_to 'Города', admin_cities_path
                     li
                       = link_to 'Ценовые группы', admin_price_groups_path
+                    - if policy([:admin, :production_site]).index?
+                      li
+                        = link_to 'Площадки', admin_production_sites_path
 
               li.relative
                 i.fas.fa-angle-down.rotate-icon
@@ -106,7 +109,6 @@ html
                       = link_to 'Журнал событий', admin_analytics_user_action_log_path
                     li
                       = link_to 'Журнал заказов', admin_analytics_orders_info_path
-
               li.relative
                 i.fas.fa-angle-down.rotate-icon
                 = link_to 'Прочее', '#', class: 'collapsible-header js-prevent'

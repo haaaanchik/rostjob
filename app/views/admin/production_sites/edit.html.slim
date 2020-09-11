@@ -1,0 +1,44 @@
+.d-flex.flex-column.mt-4.align-items-center#admin_user_edit_page
+  h3.text-center.mb-3 Страница редактирования площадки
+  = form_with model: [:admin, @platform], local: false, class: 'w-75' do |f|
+    .form-group
+      .d-flex.align-items-center
+        .col-lg-4.control-label
+          label Наименование производ. площадки
+        .col-lg-7
+          = f.text_field :title, class: 'form-control'
+    .form-group
+      .d-flex
+        .col-lg-4.control-label
+          label Город
+        .col-lg-7
+          = f.text_field :city, class: 'form-control'
+    .form-group
+      .d-flex.align-items-center
+        .col-lg-4.control-label style="align-self: flex-start"
+          label Общая информация
+        .col-lg-7
+          = f.text_area :info, class: 'form-control'
+
+    .form-group
+      .d-flex
+        .col-lg-4.control-label
+          label Обратная связь
+        .col-lg-7
+          = f.text_area :phones, class: 'form-control', rows: 3
+    .form-group
+      .row.m-0
+        .col-md-4.control-label
+          p Логотип площадки
+        .col-md-2.avatar
+          = image_tag('/img/new/no-avatar.png', class: 'img-fluid')
+        .col-md-6.d-flex
+          #choose-file
+            = f.label :image, 'Выберите файл'
+            = f.file_field :image
+      .d-flex.justify-content-end
+        = link_to 'Удалить', admin_production_site_path(@platform),
+                             data: { confirm: 'Вы хотите удалить площадку?' },
+                             class: 'btn btn-danger',
+                             method: :delete
+        = f.button 'Обновить', type: 'submit', class: 'btn btn-success ml-3'

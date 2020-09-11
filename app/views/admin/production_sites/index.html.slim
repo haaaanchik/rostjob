@@ -1,0 +1,39 @@
+.container-fluid.mt-2#admin_production_sites
+  h2.text-center Список площадок
+  .row.mt-4
+    .col-2
+      = search_form_for [:admin, @q], url: admin_production_sites_path, id: 'logs_search' do |f|
+        .md-form
+          = f.text_field :title_or_user_full_name_cont, class: 'form-control'
+          = f.label :title_or_user_full_name_cont, 'Поиск по названию платформы или имени облодателя'
+        .d-flex
+          = f.button 'Поиск', type: 'submit', class: 'btn btn-success btn-sm'
+          = link_to 'Сбросить фильтры', admin_production_sites_path, class: 'btn btn-info btn-sm'
+    .col-10
+      table.table
+        thead
+          tr
+            th Названия платформы
+            th Владелец
+            th Заявок в платформе
+            th Зарегистрирована
+            th Действия
+        tbody
+          - @platforms.decorate.each do |platform|
+            tr
+              td = platform.title
+              td = platform.owner_name
+              td 
+                = link_to platform.orders.size,
+                          admin_analytics_orders_info_path(q: {analytics_fields_cont: platform.title, state_eq: nil})
+              td = platform.created_at_str
+              td
+                = link_to edit_admin_production_site_path(platform), class: 'mr-2' do
+                  i.fas.fa-pencil-alt
+                = link_to admin_production_site_path(platform),
+                          data: { confirm: 'Вы хотите удалить площадку?' },
+                          class: 'ml-2 text-danger',
+                          method: :delete  do
+                  i.fab.fa-bitbucket
+      
+      = paginate @platforms

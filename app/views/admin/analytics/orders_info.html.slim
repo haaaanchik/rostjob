@@ -1,4 +1,5 @@
 - selected_state = params[:q] && params[:q][:state_eq] ? params[:q][:state_eq] : 'published'
+- search_input = params[:q] && params[:q][:analytics_fields_cont] ?  params[:q][:analytics_fields_cont] : nil
 
 .container-fluid.mt-2#orders_info_page
   h2.text-center Список заказов
@@ -14,8 +15,8 @@
       = f.label :published_at_lteq, 'По:'
   
     .md-form.context-filed.mb-0
-      = f.text_field :user_full_name_or_position_title_cont, class: 'form-control'
-      = f.label :user_full_name_or_position_title_cont, 'Поиск по контексту'
+      = f.text_field :analytics_fields_cont, class: 'form-control', value: search_input
+      = f.label :analytics_fields_cont, 'Поиск по контексту'
     
     .d-flex.align-items-center
       = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm mr-4 btn'
