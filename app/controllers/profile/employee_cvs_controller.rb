@@ -57,9 +57,7 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def destroy
-    result = Cmd::EmployeeCv::ToDeleted.call(employee_cv: employee_cv)
-    @employee_cv = result.employee_cv
-    # redirect_to profile_employee_cvs_path(term: term)
+    @result = Cmd::EmployeeCv::ToDeleted.call(employee_cv: employee_cv)
   end
 
   def change_status
