@@ -266,7 +266,8 @@
 
 #request-publishing {
   width: 100%;
-  height: auto;
+  height: 100%;
+  overflow: auto;
   background-color: #f2f2f2;
   padding: 18px 0 33px 0;
   font-family: "Open sans", sans-serif;
@@ -282,6 +283,10 @@
   box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
   border-radius: 4px;
   padding: 24px 40px 36px 31px;
+  @media ( max-width: 992px ){
+    width: 95%;
+    padding: 15px;
+  }
 }
 
 #request-publishing .request-block .page-title {
@@ -300,6 +305,9 @@
   padding: 10px 16px;
   justify-content: space-between;
   margin: 20px 15px 0 15px ;
+  @media ( max-width: 992px ){
+    margin: 20px 0 0 0
+  }
 }
 
 #request-publishing .request-block-header p {
@@ -320,12 +328,20 @@
 #request-publishing .request-block-container {
   display: flex;
   margin-top: 35px;
+  @media ( max-width: 992px ){
+    flex-direction: column;
+    margin-top: 20px;
+  }
 }
 
 #request-publishing .request-block-container .request-content {
   width: 75%;
   display: flex;
   align-items: flex-start;
+  @media ( max-width: 992px ){
+    width: 100%;
+    flex-direction: column;
+  }
 }
 
 #request-publishing .request-block-container .request-content .logo {
@@ -339,12 +355,19 @@
   font-size: 14px;
   padding-right: 72px;
   width: 100%;
+  @media ( max-width: 992px ){
+    padding-right: 0;
+    margin-top: 10px;
+  }
 }
 
 #request-publishing .request-block-container .request-body .subtitle {
   font-weight: 700;
   line-height: 18px;
   color: #000000;
+  @media ( max-width: 992px ){
+    text-align: center;
+  }
 }
 
 #request-publishing .request-block-container .request-body .salary {
@@ -357,6 +380,9 @@
   padding: 4px 10px;
   color: #fff;
   font-size: 13px;
+  @media ( max-width: 992px ){
+    transform: translateY(-120%);
+  }
 }
 
 #request-publishing .request-block-container .request-body p {
@@ -371,6 +397,12 @@
   width: 25%;
   border-left: 1px solid #e1e1e1;
   padding-left: 35px;
+  @media ( max-width: 992px ){
+    width: 100%;
+    padding-left: 0;
+    border-left: none;
+    text-align: center;
+  }
 }
 
 #request-publishing .request-block-container .sidebar .contact-person {
@@ -393,6 +425,9 @@
 #request-publishing .request-block-container .sidebar .peoples-need {
   margin-top: 60px;
   width: 112px;
+  @media ( max-width: 992px ){
+    margin: 10px auto 0
+  }
 }
 
 #request-publishing .request-block-container .sidebar .peoples-need .title {
@@ -401,6 +436,9 @@
   line-height: 16px;
   font-weight: bold;
   margin: 0 0 20px 0;
+  @media ( max-width: 992px ){
+    margin-bottom: 10px
+  }
 }
 
 #request-publishing .request-block-container .sidebar .peoples-need .count {
@@ -423,6 +461,10 @@
   padding-bottom: 30px;
   border-bottom: 1px solid #e1e1e1;
   margin-top: 38px;
+  @media ( max-width: 992px ){
+    margin-top: 10px;
+    padding-bottom: 10px;
+  }
 }
 
 #request-publishing .request-block-container .sidebar .to-pay .title {
@@ -433,6 +475,9 @@
 #request-publishing .request-block-container .sidebar .balance {
   margin: 25px 0 50px;
   font-size: 14px;
+  @media ( max-width: 992px ){
+    margin: 15px 0 0
+  }
 }
 
 #request-publishing .request-block-container .sidebar .balance .title {
@@ -444,6 +489,9 @@
   display: flex;
   justify-content: center;
   margin-top: 48px;
+  @media ( max-width: 992px ){
+    margin-top: 10px;
+  }
 }
 
 #request-publishing .request-block .buttons .public {
