@@ -17,7 +17,7 @@ ruby:
               url: registration_path(resource_name),
               html: { method: :put, class: 'profile-settings' }, remote: true do |f|
         .form-item
-          = f.label :full_name, f.object.decorate.label_full_name, class: 'title'
+          = f.label :full_name, f.object.decorate.label_full_name, class: 'title name'
           .d-flex.flex-column.user-full-name-container
             = f.text_field :full_name
             .invalid-feedback
@@ -42,17 +42,17 @@ ruby:
                 .invalid-feedback
         = f.fields_for :profile do |ff|
           .form-item
-            label.title Логотип компании
+            label.title.logo Логотип компании
             .choosing-logo
               = image_tag(current_profile.image_url, class: 'logo')
               div
-                span.file-btn
+                label.file-btn for='user_profile_attributes_photo'
                   | Выберите файл
                   = ff.file_field :photo
 
           - if current_profile.customer? && current_profile.updated_by_self_at.present?
             .form-item
               = ff.fields_for :company do |fc|
-                label.title Описание компании
+                label.title.description Описание компании
                 = fc.text_area :description, class: 'custom-scroll'
         = f.submit 'Сохранить', class: ' submit'

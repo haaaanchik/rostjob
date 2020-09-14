@@ -14,6 +14,6 @@ module UsersHelper
   def link_to_show_password_block(user)
     return unless user.password_changed_at.present? 
 
-    link_to 'Ввести пароль', '#', class: 'submit mb-3 mt-1', id: 'show_password_block'
+    link_to 'Ввести пароль', '#', class: 'password-btn', id: 'show_password_block'
   end
 end
