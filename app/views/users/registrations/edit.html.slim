@@ -21,7 +21,8 @@ ruby:
           .d-flex.flex-column.user-full-name-container
             = f.text_field :full_name
             .invalid-feedback
-        = link_to_show_password_block(resource)
+        .form-item.show-password-block
+          = link_to_show_password_block(resource)
         #password_block class=("#{'d-none' if (f.object.password_changed_at.present? && current_password.nil?)}")
           .form-item
             = f.label :password, class: 'title'
