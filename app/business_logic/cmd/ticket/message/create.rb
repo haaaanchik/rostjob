@@ -26,7 +26,7 @@ module Cmd
 
         def can_notify_user?
           user.is_a?(Staffer) &&
-            ticket.is_a?(Appeal)
+            ticket.appeal?
         end
 
         def message_params
