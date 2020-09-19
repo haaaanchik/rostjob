@@ -3,6 +3,8 @@ module Cmd
     class Copy
       include Interactor
 
+      delegate :order_template, to: :context
+
       def call
         attributes = order_template.attributes
         @order_template = profile.order_templates.create(attributes.merge('id' => nil, 'name' => new_name))
@@ -16,10 +18,6 @@ module Cmd
 
       def new_name
         "Копия #{order_template.name}"
-      end
-
-      def order_template
-        context.order_template
       end
 
       def profile

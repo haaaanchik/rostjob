@@ -231,6 +231,7 @@ Rails.application.routes.draw do
           end
           collection do
             post :add_position
+            delete :destroy
           end
           scope module: :orders do
             resources :candidates, only: %i[show update destroy] do

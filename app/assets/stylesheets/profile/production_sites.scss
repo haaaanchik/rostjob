@@ -538,7 +538,7 @@ $phone: "max-width: 768px";
   align-items: center;
 }
 
-#copy, #delete{
+.copy_button, .delete_button {
   width: 116px;
   height: 30px;
   border-radius: 4px;
@@ -548,12 +548,12 @@ $phone: "max-width: 768px";
   margin: 0 0  0 15px;
 }
 
-#copy:hover, #delete:hover{
+.copy_button:hover, .delete_button:hover{
   background-color: #e6e6e6;
   cursor: pointer;
 }
 
-#copy span, #delete span{
+.copy_button span, .delete_button span{
   margin-left: 10px;
   color: #000000;
   font-family: $primaryFont;

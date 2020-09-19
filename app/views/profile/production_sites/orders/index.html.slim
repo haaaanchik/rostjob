@@ -28,11 +28,11 @@
         .orders-list__header
           .activities
             input type="checkbox" id="check_all"
-              #delete
+              .delete_button
                 = image_tag('/img/new/delete.png')
                 span Удалить
 
-              #copy
+              .copy_button
                 = image_tag('/img/new/copy.png')
                 span Копировать
 
@@ -41,7 +41,7 @@
               span Опубликовать заявку
         .orders-list__body-scrolling
           - order_templates.each do |order_t|
-            .order
+            .order data-order-id=order_t.id
               input type="checkbox" value=order_t.id
               .content.content__template
                 .order__number №#{ order_t.id }
@@ -58,12 +58,18 @@
       .order-list__body data-tab="pending_payments"
         .orders-list__header
           .activities
+            input type="checkbox" id="check_all"
+              .delete_button
+                = image_tag('/img/new/delete.png')
+                span Удалить
+
           .publish id="#{'active-content-tab' if params[:tab_state] == 'pending_payments' }"
             = link_to new_profile_production_site_order_template_path do
               span Опубликовать заявку
         .orders-list__body-scrolling
           - waiting_pay_orders.each do |order|
-            .order
+            .order data-order-id=order.id
+              input type="checkbox" value=order.id
               .content.content__pending_payment
                 .order__number №#{ order.id }
                 .order__description

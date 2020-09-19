@@ -86,6 +86,16 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     redirect_to profile_production_site_order_path(production_site, order)
   end
 
+  def destroy
+    result = Cmd::Order::Destroy.call(orders_ids: params[:order_ids],
+                                      profile: current_profile)
+    if result.success?
+      render json: :no_content, status: :accepted
+    else
+      render json: :no_context, status: :expectation_failed
+    end
+  end
+
   private
 
   def dst_production_site_id
