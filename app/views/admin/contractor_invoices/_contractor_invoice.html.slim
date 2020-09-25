@@ -7,7 +7,7 @@ tr
   td
     = link_to admin_contractor_invoice_path(contractor_invoice, format: :pdf),
       data: { toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF' },
-      class: 'ml-1' do
+      target: :_blank, class: 'ml-1' do
       i.far.fa-file-pdf.fa-2x.mr-2
 
     / - unless contractor_invoice.paid?

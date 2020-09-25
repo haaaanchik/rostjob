@@ -13,8 +13,13 @@ class Admin::OrdersController < Admin::ApplicationController
   end
 
   def reject
-    order.to_rejected(params[:reason])
-    redirect_to admin_orders_path
+    if params[:reason].empty?
+      flash[:alert] = 'Не указана причина отказа'
+      redirect_to admin_order_path(order)
+    else
+      order.to_rejected(params[:reason])
+      redirect_to admin_orders_path
+    end
   end
 
   def update
