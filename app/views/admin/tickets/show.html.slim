@@ -8,8 +8,10 @@
           .form-inline.w-100.p-2.border
             = form_with model: Message.new, url: admin_ticket_messages_path(@ticket), class: 'd-flex flex-fill',
               id: 'ticket_message_form' do |f|
-              = f.text_field :text, class: 'form-control flex-fill align-self-center w-75', placeholder: 'Наберите текст сообщения'
-              = f.button 'Отправить', type: 'submit', class: 'btn btn-success'
+              = f.text_field :text,
+                             class: 'form-control align-self-center w-100',
+                             placeholder: 'Наберите текст сообщения'
+              = f.submit 'Отправить', class: 'btn btn-success'
       .col-3.h-100.pt-3.border
         = @ticket.header
         hr
