@@ -23,23 +23,24 @@ ruby:
             .invalid-feedback
         = link_to_show_password_block(resource)
         #password_block class=("#{'d-none' if (f.object.password_changed_at.present? && current_password.nil?)}")
-          .form-item
-            = f.label :current_password,  class: 'title'
-            .d-flex.flex-column
-              = f.password_field :current_password, autocomplete: 'off'
-              .invalid-feedback
+          - if f.object.password_changed_at.present?
+            .form-item
+              = f.label :current_password,  class: 'title'
+              .d-flex.flex-column
+                = f.password_field :current_password, autocomplete: 'off'
+                .invalid-feedback
 
           .form-item
             = f.label :password, class: 'title'
             .d-flex.flex-column
               = f.password_field :password, autocomplete: 'off'
               .invalid-feedback
-          - unless f.object.password_changed_at.nil?
-            .form-item
-              = f.label :password_confirmation, class: 'title'
-              .d-flex.flex-column
-                = f.password_field :password_confirmation, autocomplete: 'off'
-                .invalid-feedback
+
+          .form-item
+            = f.label :password_confirmation, class: 'title'
+            .d-flex.flex-column
+              = f.password_field :password_confirmation, autocomplete: 'off'
+              .invalid-feedback
         = f.fields_for :profile do |ff|
           .form-item
             label.title Логотип компании
