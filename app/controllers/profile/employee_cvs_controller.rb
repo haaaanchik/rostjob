@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::EmployeeCvsController < ApplicationController
   before_action :employee_cvs, only: :index
   before_action :employee_cv_order, only: :create_for_send
@@ -5,6 +7,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def index
     @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
     @active_item = term
+    @crm_columns = current_user.crm_columns.includes(:employee_cvs)
     @proposal_employee = ProposalEmployee.find_by(id: params[:proposal_employee_id])
     @param_employee_cv = EmployeeCv.find_by(id: params[:employee_cv_id], profile_id: current_profile.id)
   end
@@ -104,7 +107,8 @@ class Profile::EmployeeCvsController < ApplicationController
   def employee_cvs_params
     params.require(:employee_cv)
           .permit(:email, :phone_number, :proposal_id, :order_id, :name, :gender, :mark_ready,
-                  :photo, :document, :remark, :education, :experience, :reminder, :comment)
+                  :photo, :document, :remark, :education, :experience, :reminder, :comment,
+                  crm_columns_employee_cv_attributes: [:crm_column_id])
   end
 
   def term
@@ -112,8 +116,12 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def employee_cvs
-    @q = EmployeeCv.where(profile_id: current_profile.id, state: %w(ready deleted)).ransack(params[:q])
-    @paginated_employee_cvs = @q.result
+    @q = EmployeeCv
+           .where(profile_id: current_profile.id, state: :ready)
+           .where('id NOT IN (SELECT employee_cv_id FROM crm_columns_employee_cvs)')
+           .ransack(params[:q])
+
+    @paginated_employee_cvs = @q.result(distinct: true)
   end
 
   def order

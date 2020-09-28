@@ -28,7 +28,10 @@ class RostJob.ProfileEmployeeCvsIndex
     $('.chosen .card-scroll-window .card').on 'dragenter', @openCardBody
     $('.chosen .card-scroll-window .card').on 'dragleave', @closeCardBody
     $('body').on 'click', '#order_page .js-vacancy', @orderBlockToggleClass
-
+    $('#add #add_column').on 'click', @addNewCrmColumn
+    $('.crm-list').on 'click', '.card-title.js-title', @changeCrmColumnName
+    $('.crm-list').on 'keypress', '.js-clicked-input', @saveCrmColumnName
+    $('.crm-list').on 'click', '.remove_column_button', @removeColumn
 
   @proposalSelectEmployeeCv: (event) ->
     empl = $(this).val()
@@ -92,23 +95,30 @@ class RostJob.ProfileEmployeeCvsIndex
     while i < arrEl.length
       elem = arrEl[i]
       try
-        Sortable.create elem,
-          group: name: 'sorting'
-          onChoose: (e) ->
-            $choosen = true
-          onRemove: (evt) ->
-            removeAndAddStyle(evt)
-          onEnd: (evt) ->
-            $counter = 0
-            currentState = $(evt.to).data('state')
-            prevState = $(evt.from).data('state')
-            return if currentState == prevState
-            changeState(evt, currentState, prevState)
-            return
-          animation: 100
+        sortableCreate(elem)
       catch e
         console.log 'не вышло создание движущихся элементов'
       i++
+
+  sortableCreate = (elem) ->
+    Sortable.create elem,
+      group: name: 'sorting'
+      onChoose: (e) ->
+        $choosen = true
+      onRemove: (evt) ->
+        removeAndAddStyle(evt)
+      onEnd: (evt) ->
+        $counter = 0
+        currentState = $(evt.to).data('state')
+        prevState = $(evt.from).data('state')
+        currentColumn = $(evt.to).parents().data('crm-column-id')
+        prevColumn = $(evt.from).parents().data('crm-column-id')
+        return if (currentState != 'crm_column' && currentState == prevState) ||
+          (currentState == 'crm_column' && currentColumn == prevColumn)
+
+        changeState(evt, currentState, prevState, currentColumn)
+        return
+      animation: 100
 
   @reminderChangeDate: ->
     date = $(this).datepicker('getFormattedDate')
@@ -209,7 +219,7 @@ class RostJob.ProfileEmployeeCvsIndex
         $currentComment.parent().find('span').remove()
         $currentComment.parent().append(data.reminder_date)
         $currentComment = null
-        toastr.success('Напоминание успешно доабвлено')
+        toastr.success('Напоминание успешно добавлено')
         Turbolinks.visit(window.location.href)
       error: (msg) ->
         toastrMessages(false)
@@ -260,10 +270,11 @@ class RostJob.ProfileEmployeeCvsIndex
     if prevState == 'favorite'
       currentEl =  $(evt.from)
 
-  changeState = (evt, currentState, prevState) ->
+  changeState = (evt, currentState, prevState, currentColumn) ->
     itemEl = evt.item
     $(itemEl).find('.card-tools').fadeIn 500
     empCvId = $(itemEl).data('emp-cv-id')
+
     if currentState == 'favorite'
       $orderId = $(evt.to).parents('.moveable').data('order-id')
       $employeeCvId = empCvId
@@ -273,32 +284,48 @@ class RostJob.ProfileEmployeeCvsIndex
       $(itemEl).find('i.fas.fa-bookmark.right-top').css('color', '#ffd800')
       return
 
-    if currentState == 'reminder'
-      $currentComment = $(itemEl).find('#comment')
-      $currentComment.click()
-      toastr.info('Пожалуйста установите дату, время и комментарий')
-      return if prevState != 'favorite'
-
     if prevState == 'favorite'
       prEmpId = $(itemEl).data('proposal-emp-id')
       url = '/profile/proposal_employees/' + prEmpId + '/revoke'
       $(itemEl).find('i.fas.fa-bookmark.right-top').css('color', '#9046ff')
       $(itemEl).find('.card-tools').removeClass('d-none')
-      draggable = true
+      return unless sendAjaxRequest(url, prevState)
 
-    if currentState == 'ready' && prevState != 'favorite'
-      url = '/profile/employee_cvs/' + empCvId + '/to_ready'
-      draggable =  if prevState == 'reminder' then true else false
+    if currentState == 'crm_column' && prevState == 'crm_column'
+      url = '/crm_columns/' + currentColumn + '/update_employee_cv'
+      method = 'put'
 
-    sendAjaxRequest(url, draggable)
+    if currentState == 'default' && prevState == 'crm_column'
+      url = '/crm_columns/destroy_employee_cv'
+      method = 'delete'
 
-  sendAjaxRequest= (url, draggable) ->
+    if currentState == 'crm_column' && ( prevState == 'default' || prevState == 'favorite' )
+      url = '/crm_columns/' + currentColumn + '/add_employee_cv'
+      method = 'post'
+
+    addEmployeeCvToCrmColumn(url, empCvId, method)
+
+  sendAjaxRequest= (url, prevState) ->
     $.ajax
       method: 'put'
       url: url
       dataType: 'json'
       data:
-        draggable: draggable
+        draggable: true
+      success: (data) ->
+        return true
+      error: (msg) ->
+        toastrMessages(false)
+        return false
+
+  addEmployeeCvToCrmColumn = (url, empCvId, method) ->
+    $.ajax
+      url: url
+      method: method
+      dataType: 'json'
+      data:
+        crm_column:
+          employee_cv_id: empCvId
       success: (data) ->
         toastrMessages(true)
       error: (msg) ->
@@ -312,3 +339,79 @@ class RostJob.ProfileEmployeeCvsIndex
 
   @orderBlockToggleClass: ->
     $(this).next('.details').toggleClass('opened')
+
+  @addNewCrmColumn: ->
+    position = $(this)
+    $.ajax
+      url: '/crm_columns'
+      method: 'post'
+      dataType: 'json'
+      data:
+        crm_column:
+          name: 'Новая колонка'
+      success: (data) ->
+        position.parents('#add').after(crmColumnHtml(data.id))
+        sortableCreate($('.js-custom-column-body')[0])
+      error: (msg) ->
+        toastr.error('Не удалось добавить колонку.')
+
+  crmColumnHtml = (id) ->
+    '<div class="card card-primary custom-column mb-2 mb-sm-0 p-1" data-crm-column-id='+id+'>\
+      <div class="card-header mb-2">\
+        <h3 class="card-title js-title crm-column-name mb-0">Новая колонка</h3>\
+        <input class="js-clicked-input" type="text" value="Новая колонка">\
+        <i class="fas fa-times remove_column_button"></i>\
+      </div>\
+      <a class="btn btn-block add-card m-auto" data-remote="true" href="/profile/employee_cvs/new?crm_column_id='+id+'">\
+        <i class="fas fa-plus mr-1"></i>\
+        Добавить анкету
+      </a>\
+      <div class="card-body js-custom-column-body card-scroll-window" data-state="crm_column"></div>\
+    </div>'
+
+
+  @changeCrmColumnName: ->
+    $title = $(this)
+    $input = $title.next('input.js-clicked-input')
+    $title.hide()
+    $input.show()
+    $input.focus()
+
+  @saveCrmColumnName: ->
+    key = event.which || event.keyCode
+    if (key == 13)
+      $input_field = $(this)
+      columnId = $input_field.parents('.card').data('crm-column-id')
+      title =  $(".card[data-crm-column-id='"+columnId+"']").find('.card-title.js-title')
+      new_text = $input_field.val()
+      console.log(columnId)
+      $.ajax
+        url: '/crm_columns/'+columnId
+        method: 'put'
+        dataType: 'json'
+        data:
+          crm_column:
+            name: new_text
+        success: (data) ->
+          title.text(new_text)
+          $input_field.hide()
+          title.show()
+          $input_field.removeClass('input-error')
+        error: (msg) ->
+          $input_field.addClass('input-error')
+          toastr.error(msg.responseJSON.errors)
+
+  @removeColumn: ->
+    $position = $(this)
+    columnId =  $position.parents('.card').data('crm-column-id')
+
+    if confirm('Удалить колонку?')
+      $.ajax
+        url: '/crm_columns/'+columnId
+        method: 'DELETE'
+        dataType: 'json'
+        success: ->
+          $position.parents('.card').fadeOut 'slow', ->
+            $(this).remove()
+        error: ->
+          toastr.error('Пожалуйста перенесите все карточки перед удалением колонки!')

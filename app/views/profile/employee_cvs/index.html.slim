@@ -2,6 +2,7 @@
   = link_to '', profile_proposal_employee_path(@proposal_employee), class: 'd-none', id: 'proposal_employee_link', remote: true
 - if @param_employee_cv.present?
   = link_to '', edit_profile_employee_cv_path(@param_employee_cv), class: 'd-none', id: 'employee_cv_link', remote: true
+
 .crm-list
   .grey.lighten-4.text-center.main-workspace
     .row.ml-0.mr-0#main_row
@@ -32,32 +33,32 @@
               i.fas.fa-plus.mr-1
               | Добавить колонку
 
-      // Готовые
-      .card.card-primary.custom-column.mb-2.mb-sm-0.p-1
-        .card-header.mb-2
-          h3.card-title.js-title.mb-0 Готовые
-          input.js-clicked-input type='text' value=''
-
-        = link_to new_profile_employee_cv_path,
+      //Crm Columns
+      - @crm_columns.each do |crm_column|
+        .card.card-primary.custom-column.crm-column-name.mb-2.mb-sm-0.p-1 data-crm-column-id=crm_column.id
+          .card-header.mb-2
+            h3.card-title.js-title.mb-0
+              = crm_column.name
+            input.js-clicked-input type="text" value=crm_column.name
+            i.fas.fa-times.remove_column_button
+          = link_to new_profile_employee_cv_path(crm_column_id: crm_column.id),
                   class: 'btn btn-block add-card m-auto',
                   remote: true do
-          i.fas.fa-plus.mr-1
-          | Добавить анкету
-        = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.ready.without_reminders,
-                                                   state:        'ready' }
+            i.fas.fa-plus.mr-1
+            | Добавить анкету
+          = render partial: 'employee_cv', locals: { employee_cvs: crm_column.employee_cvs.ready,
+                                                     state: 'crm_column' }
 
-      // С напоминанием
+      // Черновики
       .card.card-primary.custom-column.mb-2.mb-sm-0.p-1
         .card-header.mb-2
-          h3.card-title.js-title.mb-0 C напоминанием
-          input.js-clicked-input type="text" value=""
+          h3.card-title.js-title.mb-0 Черновики
         = link_to new_profile_employee_cv_path,
                 class: 'btn btn-block add-card m-auto',
                 remote: true do
-          i.fas.fa-plus.mr-1
+          i.fas.fa-plus.mr-1.has-error
           | Добавить анкету
-        = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs.with_reminders,
-                                                   state:        'reminder' }
+        = render partial: 'employee_cv', locals: { employee_cvs: @paginated_employee_cvs, state: 'default' }
 
     // Избранные
     .card.card-primary.custom-column.chosen
@@ -120,7 +121,7 @@
                           .dropdown-divider
                           = link_to 'Удалить',
                                     profile_employee_cv_path(employee_cv),
-                                    data: {confirm: 'Удалить анкету?'},
+                                    data: { confirm: 'Удалить анкету?' },
                                     class: 'dropdown-item',
                                     method: :delete,
                                     remote: true

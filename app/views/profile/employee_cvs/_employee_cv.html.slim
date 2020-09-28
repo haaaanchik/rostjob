@@ -1,4 +1,4 @@
-.card-body.js-custom-column-body.card-scroll-window data-state="#{state}"
+.card-body.js-custom-column-body.card-scroll-window data-state=state
   - employee_cvs.decorate.each do |emp_cv|
     - pe_form = "#{render partial: 'interview_date'}"
     .moveable.card.card-success data-emp-cv-id="#{emp_cv.id}"

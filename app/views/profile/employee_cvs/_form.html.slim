@@ -12,6 +12,8 @@
         .modal-body
           = f.hidden_field :order_id, value: @order&.id
           = hidden_field_tag :state, params[:state]
+          - if params[:crm_column_id]
+            = hidden_field_tag 'employee_cv[crm_columns_employee_cv_attributes][crm_column_id]', params[:crm_column_id]
           .modal-ancete
             .ancete-rows.must-have
               .ancete-row

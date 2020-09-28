@@ -387,6 +387,16 @@ Rails.application.routes.draw do
       put :remove_from_favorites
     end
   end
+
+  resources :crm_columns, only: %i[create update destroy] do
+    post :add_employee_cv
+    put :update_employee_cv
+
+    collection do
+      delete :destroy_employee_cv
+    end
+  end
+
   resources :recruiters, only: %i[index show]
   resources :support_messages, only: %i[new create]
 
