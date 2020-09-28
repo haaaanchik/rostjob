@@ -280,3 +280,7 @@ body {
 .object_fit_contain{
   object-fit: cover;
 }
+
+.input-error {
+  border: 1px solid $danger-color;
+}

@@ -24,9 +24,17 @@
 
 .crm-list {
   #main_row {
-    width: calc(100% - 313px);
+    overflow-x: auto;
+    width: calc(100% - 320px);
     height: calc(100vh - 58px);
     font-family: "Open Sans", sans-serif;
+
+    .remove_column_button {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      cursor: pointer;
+    }
   }
 
   .card-scroll-window::-webkit-scrollbar-thumb, .default-scroll::-webkit-scrollbar-thumb {
@@ -60,7 +68,6 @@
   }
 
   .main-workspace {
-    overflow-x: auto;
     max-height: calc(100% - 65px); /* ? */
   }
 

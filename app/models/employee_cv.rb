@@ -4,6 +4,8 @@ class EmployeeCv < ApplicationRecord
 
   has_many :proposal_employees
   has_many :orders, through: :proposal_employees
+  has_one :crm_columns_employee_cv, dependent: :destroy
+  accepts_nested_attributes_for :crm_columns_employee_cv
 
   belongs_to :proposal, optional: true
   belongs_to :order, optional: true
@@ -11,10 +13,6 @@ class EmployeeCv < ApplicationRecord
 
   validates :name, presence: true
   validates :phone_number, phone: true, unless: :careerist_job
-  # validates :contractor_terms_of_service, acceptance: true
-  # validate :ext_data_phone
-  # validates :gender, presence: true
-  # validates :birthdate, presence: true
   validates :super_job_id, uniqueness: true, if: :super_job_id
   validates :name, uniqueness: true, if: :careerist_job
 

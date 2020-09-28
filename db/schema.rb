@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_18_013914) do
+ActiveRecord::Schema.define(version: 2020_09_02_091455) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -130,6 +130,24 @@ ActiveRecord::Schema.define(version: 2020_08_18_013914) do
     t.datetime "updated_at", null: false
     t.index ["profile_id"], name: "index_complaints_on_profile_id"
     t.index ["proposal_employee_id"], name: "index_complaints_on_proposal_employee_id"
+  end
+
+  create_table "crm_columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_crm_columns_on_user_id"
+  end
+
+  create_table "crm_columns_employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "crm_column_id"
+    t.bigint "employee_cv_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["crm_column_id", "employee_cv_id"], name: "crm_column_and_employee_cv", unique: true
+    t.index ["crm_column_id"], name: "index_crm_columns_employee_cvs_on_crm_column_id"
+    t.index ["employee_cv_id"], name: "index_crm_columns_employee_cvs_on_employee_cv_id"
   end
 
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
