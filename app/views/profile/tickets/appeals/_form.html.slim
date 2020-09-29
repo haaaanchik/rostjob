@@ -8,14 +8,14 @@
     header Новое обращение
 
     .treatment-modal_block_wrapper_input
-      = f.label :title, 'Тема', for: 'treatment-modal-theme'
-      = f.text_field :title, id: 'treatment-modal-theme', placeholder: 'Укажите тему обращения'
+      = f.label :title, 'Тема'
+      = f.text_field :title, placeholder: 'Укажите тему обращения'
       .invalid-feedback
 
-    .treatment-modal_block_wrapper_input
+    .treatment-modal_block_wrapper_input.my-2
       = f.fields_for :messages do |m|
-        = m.label :text, 'Текст', for: 'treatment-modal-text'
-        = m.text_area :text, placeholder: 'Напишите ваше обращение', id: 'treatment-modal-text'
+        = m.label :text, 'Текст'
+        = m.text_area :text, placeholder: 'Напишите ваше обращение'
         .invalid-feedback
 
     = f.submit 'Отправить', class: 'btn'

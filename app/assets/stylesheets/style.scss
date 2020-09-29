@@ -112,7 +112,8 @@ body {
 .was-validated .form-control:invalid, .form-control.is-invalid, .was-validated
 .custom-select:invalid,
 .custom-select.is-invalid,
-.form-item .is-invalid {
+.form-item .is-invalid,
+.treatment-modal_block_wrapper_input .is-invalid {
   border-color: #dc3545 !important;
 }
 
