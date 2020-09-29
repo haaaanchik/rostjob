@@ -11,7 +11,6 @@ class RostJob.PreviewImage
 
     if files && image
       reader = new FileReader
-
       reader.onload = (event) ->
         $('img#preview-logo').attr('src', event.target.result)
         return

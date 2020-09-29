@@ -1,5 +1,3 @@
-#= require components/preview_image
-
 class RostJob.UsersRegistrationsEdit
   
   @init: ->

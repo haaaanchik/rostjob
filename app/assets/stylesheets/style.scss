@@ -285,3 +285,15 @@ body {
 .input-error {
   border: 1px solid $danger-color;
 }
+
+img#preview-logo {
+  border-radius: 50%;
+  width: 78px;
+  height: 78px;
+  max-width: 78px;
+  min-width: 79px;
+  margin-right: 25px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border: 1px solid #d7d7d7;
+}
