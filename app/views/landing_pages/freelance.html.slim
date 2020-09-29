@@ -6,117 +6,114 @@
 
 #recruiters-landing
   = render 'partials/header', registration_url: new_contractor_path
-  section.landing-header
-    .header-top
-      h1
-        | Фриланс подбора персонала
-      p.subtitle
-        | Доступ к заявкам с гарантированными выплатами
-      = form_for @user,
-              method: :post,
-              url: user_registration_path,
-              html: {name: 'form-email', class: 'registration-block horizontal'} do |f|
-        .invalid-feedback = errors[:email].first
-        = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
-        = f.button 'Зарегистрироваться', name: :contractor, class: 'reg-btn'
-      = image_tag '/img/recruiters_landing/header_left.svg', class: 'header-left-img'
-      = image_tag '/img/recruiters_landing/header_right.svg', class: 'header-right-img'
-    .our-offers.container
-      p.title
-        | Что мы предлагаем?
-      .offers
-        .offer
-          p.title
-            | Надежный заработок
-          p.descr
-            | Дополнительный или основной доход
-        .offer
-          p.title
-            | Ежедневные выплаты
-          p.descr
-            | Официальные выплаты для физ. и юр. лиц
-        .offer
-          p.title
-            | Поддержка онлайн
-          p.descr
-            | По телефону и WhatsApp
-        .offer
-          p.title
-            | Постоянные заявки. Большие объемы
-          p.descr
-            | Бесплатная регистрация
+  section.header
+    h1.header__title
+      | Работа менеджером по поиску
+      br/
+      | персонала на удаленке
+    p.header__subtitle
+      | Зарабатывай до 50 000 ₽ за устроенного сотрудника не выходя из дома, подбирая персонал
+      br/
+      | для наших клиентов с помощью
+      br/
+      | платформы RostJob
+    form.header__form action="" 
+      input.email.header__email placeholder=("Введите e.mail для регистрации") type="text" /
+      button.btn-register type="button"  Зарегестрироваться
+    = image_tag '/img/recruiters_landing/loupe.png', class: 'header__loupe'
+  section.how-it-work
+    h2.title Как это работает
+    ol.how-it-work__points-container
+      li.point Регистрируешься на нашем сайте
+      li.point
+        | В личном кабинете выбираешь заявку
+        br/
+        | от заказчика на подбор персонала
+      li.point
+        | Находишь потенциального кандидата
+        br/
+        | на вакансию клиента
+      li.point Отправляешь на финальное собеседование
+      li.point
+        | Получаешь вознаграждение до 50 000 ₽
+        br/
+        | на банковскую карту за каждого
+        br/
+        | кандидата, прошедшего минимальный
+        br/
+        | испытательный срок в 10 дней
+  section.pluses
+    h2.title
+      | 8 плюсов работы
+      | с платформой RostJob
+    ol.slider-container
+      li.slide
+        | Вы можете сами выбирать
+        br/
+        | вакансии, с которыми
+        br/
+        | интересно работать
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide
+        | В личном кабинете вы можете
+        br/
+        | выбрать заявки с оплатой от 2 000 q
+        br/
+        | до 50 000 ₽ за утроенного кандидата
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide
+        | Можно работать не выходя
+        br/
+        | из дома с компьютера или
+        br/
+        | с мобильного устройства
+        span.slide__decoration.yellow-line
+          span.violent-line
+    = image_tag '/img/recruiters_landing/pluses_img.png', class: 'pluses-img'
+  section.work-results
+    h2.title.work-results__title
+      | Результаты работы
+      br/
+      | за последний
+      br/
+      | месяц
+    .rounds
+      .round.big
+        | 8 900 000 ₽
+        span
+          | Выплачено
+          br/
+          | вознаграждений
+        .round.middle
+          | 827
+          span
+            | Закрыто
             br/
-            | и бесплатный доступ
-        .offer
-          p.title
-            | Мобильная версия
-          p.descr
-            | Возможность выполнять
-            br/
-            | заявки через гаджет
-      = image_tag '/img/recruiters_landing/rectangles_header.png', class: 'rectangles-header'
-  section.information
-    .container
-      .question
-        p.title
-          | Что такое заявка на подбор персонала?
-        p.answer
-          | Кто знаком с понятием HR сами собой понимают зачем нужен подбор и, кто за него платит. Но для большинства людей будет открытием, что HR - это целое сообщество, организующее условие жизни людей.
-          br/
-          br/
-          | От малых до самых крупных предприятий требуется персонал. Поэтому они публикуют заявки на сайте, на котором Вы находитесь. Заказчик уже заплатил, чтобы Вы нашли для него может разнорабочего без опыта, специалиста или может директора. Выполнить заявку на подбор значит найти персонал на предприятие, значит помочь человеку с работой, значит заработать и вырасти профессионально.
-        = link_to 'Зарегистрироваться', new_contractor_path, class: 'reg-btn'
-      .question
-        p.title
-          | Как выполнить заявку на подбор
-          |  персонала?
-        p.answer
-          | Заявки на подбор отличаются по содержанию, но смысл у них одинаковый. Ваша задача как HR, чтобы найденный Вами персонал отработал гарантийный период. Успех зависит от Вашего навыка работы с людьми. В этой сфере лидируют честные и пунктуальные, и требующие это от тех, с кем ведут дело.
-          br/
-          br/
-          | Чтобы выполнить заявку нужно найти соискателей и для этого есть бесконечное количество возможностей. Наши рекрутеры используют расклейку, объявления в газетах, сайты поиска работы и социальные сети.
-          br/
-          br/
-          | Чтобы представленный сотрудник отработал гарантийный период он должен знать о условиях труда. Эта информация, и что нужно для выполнения Вы узнаете в тексте заявки. Более подробную информацию Вы найдете в каталоге заявок после бесплатной регистрации.
-    = image_tag '/img/recruiters_landing/rectangles_info_left_top.png', class: 'rect-info-left-top'
-    = image_tag '/img/recruiters_landing/rectangles_info_right_bottom.png', class: 'rect-info-right-bottom'
-  section.our-partner.container
-    p.title
-      | Генеральный партнер
-    .representation
-      .logo-and-descr
-        = image_tag '/img/recruiters_landing/rost-logo-new.png', class: 'company-logo'
-        p.partner-description
-          | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания, специализирующаяся на аутсорсинге основных и вспомогательных функций для крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
-      .achievements
-        .item
-          span.number
-            | 55
-          p объектов
-        .item
-          span.number
-            | 1500
-          p рабочего персонала
-        .item
-          span.number
-            | 10
-          p лет на рынке
-  section.free-registration.container
-    .img-container
-      = image_tag '/img/recruiters_landing/free_reg_img.svg', class: 'img-responsive'
-    div
-      p.title
-        span.col-purple
-          | Регистрируйтесь
-        | <br>бесплатно
-
-      = form_for @user,
-              method: :post,
-              url: user_registration_path,
-              html: {name: 'form-email', class: 'registration-block vertical'} do |f|
-        .invalid-feedback = errors[:email].first
-        = f.email_field :email, class: 'form-control', placeholder: 'Введите e.mail для регистрации'
-        = f.button 'Зарегистрироваться', name: :contractor, class: 'reg-btn'
+            | заявок
+      .round.small
+        | 37
+        span
+          | Рекрутеров
+  section.start-now
+    h2.title.start-now__title
+      | Регистрируйся и начинай зарабатывать уже сегодня!
+    .start-now__container
+      = image_tag '/img/recruiters_landing/start_now.png', class: 'start-now__img'
+      .form-container
+        p.subtitle
+          | Будут вопросы – звони, всегда
+          br/ 
+          | поможем разобраться в системе
+        form.start-now__form action="" 
+          input.email placeholder=("Введите e.mail для регистрации") type="text" /
+          button.btn-register type="button"  Зарегестрироваться
+  section.inform-banner
+    .inform-banner__container
+      p.information
+        span.text-yellow Платформа RostJob 
+        | – место, в котором встречаются компании, кому нужен персонал, и рекрутеры (менеджеры по поиску персонала), которые помогают этим компаниям найти нужного сотрудника за вознаграждение.
   footer
     .container
       span.rights-reserved © Все права защищены
