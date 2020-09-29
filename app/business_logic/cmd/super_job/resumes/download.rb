@@ -4,6 +4,8 @@ module Cmd
       class Download
         include Interactor
 
+        delegate :params, to: :context
+
         def call
           employee_cvs = ready_employee_cvs.map do |ecv|
             next if ecv.phone_number.nil?
@@ -14,10 +16,6 @@ module Cmd
         end
 
         private
-
-        def params
-          context.params
-        end
 
         def user
           ::User.find_by(email: 'bot@best-hr.pro')

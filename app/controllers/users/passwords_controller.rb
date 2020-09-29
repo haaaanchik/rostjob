@@ -11,10 +11,14 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    @user = User.find_by_email(params[:user][:email])
-    if @user
-      @user.send_reset_password_instructions
-      after_sending_reset_password_instructions_path_for(@user)
+    result = Cmd::User::ResetPassword.call(user_email: params[:user][:email])
+
+    if result.success?
+      flash[:notice] = result.message
+      after_sending_reset_password_instructions_path_for(result.user)
+    else
+      flash[:alert] = result.message
+      render :new
     end
   end
 
