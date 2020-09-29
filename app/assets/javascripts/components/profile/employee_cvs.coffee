@@ -333,7 +333,7 @@ class RostJob.ProfileEmployeeCvsIndex
 
   toastrMessages = (success) ->
     if success
-      toastr.success('Анкета успешно перенеса')
+      toastr.success('Анкета успешно перенесена')
     else
       toastr.error('Не удалось перенести анкету, пожалуйста обновите страницу и обратитесь к администратору')
 
