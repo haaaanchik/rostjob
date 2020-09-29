@@ -27,14 +27,14 @@
       .order-list__body data-tab="templates"
         .orders-list__header
           .activities
-            input type="checkbox" id="check_all"
-              .delete_button
-                = image_tag('/img/new/delete.png')
-                span Удалить
+            = check_box_tag :check_all_templates, nil, nil, class: 'check_all'
+            .delete_button
+              = image_tag('/img/new/delete.png')
+              span Удалить
 
-              .copy_button
-                = image_tag('/img/new/copy.png')
-                span Копировать
+            .copy_button
+              = image_tag('/img/new/copy.png')
+              span Копировать
 
           .publish id="#{'active-content-tab' if params[:tab_state] == 'templates' }"
             = link_to new_profile_production_site_order_template_path do
@@ -58,10 +58,10 @@
       .order-list__body data-tab="pending_payments"
         .orders-list__header
           .activities
-            input type="checkbox" id="check_all"
-              .delete_button
-                = image_tag('/img/new/delete.png')
-                span Удалить
+            = check_box_tag :check_all_orders, nil, nil, class: 'check_all'
+            .delete_button
+              = image_tag('/img/new/delete.png')
+              span Удалить
 
           .publish id="#{'active-content-tab' if params[:tab_state] == 'pending_payments' }"
             = link_to new_profile_production_site_order_template_path do

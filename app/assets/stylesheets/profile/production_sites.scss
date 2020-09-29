@@ -697,10 +697,10 @@ $phone: "max-width: 768px";
   display: none;
 }
 
-#check_all{
-  position: static;
-  opacity: 1;
-  pointer-events: auto;
+.check_all{
+  position: static !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .platforms__list .platform:last-child{

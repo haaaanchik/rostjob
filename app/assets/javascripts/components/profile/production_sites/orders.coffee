@@ -3,7 +3,7 @@ class RostJob.ProfileProductionSitesOrdersIndex
     @bind()
 
   @bind: ->
-    $('.company-page__tabs').on 'click', 'input#check_all[type=checkbox]', @clickCheckboxes
+    $('.company-page__tabs').on 'click', 'input.check_all[type=checkbox]', @clickCheckboxes
     $('.delete_button').on 'click', @destroyArray
     $('.copy_button').on 'click', @copyCollection
   
@@ -12,21 +12,17 @@ class RostJob.ProfileProductionSitesOrdersIndex
 
   @destroyArray: ->
     if $('.order-list__body.show-tab .order > input:checked').length == 0
-      toastr.error('Вам следует отметить заявку прежде чем удалять')
+      toastr.error('Пожалуйста, выберите заявку(и) из списка!')
       return
 
-    if confirm('Вы действительно хотите удалить выбранные шаблоны?')
+    if confirm('Вы действительно хотите удалить?')
       openTabs = $('.js-input-type.active').data('target')
-      url = if openTabs == 'templates'
-              '/order_templates/destroy_array'
-            else
-              '/orders'
-
+      url = if openTabs == 'templates' then '/order_templates/destroy_array' else '/orders'
       ajaxSendCopyOrDelete(url, 'DELETE')
   
   @copyCollection: ->
     if $('.order > input:checked').length == 0
-      toastr.error('Вам следует отметить заявку прежде чем копировать')
+      toastr.error('Пожалуйста, выберите шаблон(ы) из списка!')
       return
 
     if confirm('Вы действительно хотите копировать выбранные шаблоны?')
@@ -52,12 +48,7 @@ class RostJob.ProfileProductionSitesOrdersIndex
 
   notifyAfterCopyOrDelete = (method) ->
     text = 'Заявка(и) успешно '
-
-    if method == 'DELETE'
-      text += 'удалены'
-    else
-      text += 'скопированны'
-  
+    if method == 'DELETE' then text += 'удалены' else text += 'скопированны'
     toastr.success(text)
 
   actionAfterCopyOrDelete = (ids, method) ->
