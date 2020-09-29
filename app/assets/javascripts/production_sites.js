@@ -13,12 +13,6 @@ window.addEventListener('turbolinks:load', function() {
         elem.addEventListener('click', changeView );
     }
 
-    // Check all
-    let checkbox = document.getElementById('check_all');
-    if(checkbox){
-        checkbox.addEventListener('click', checkAll);
-    }
-
     // tinymce.init({
     //     selector: '.tinymce',
     //     menubar: false,

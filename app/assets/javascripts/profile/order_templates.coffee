@@ -15,37 +15,9 @@ class OrderTemplates
 
   @bind: ->
     $('#order_template_position_search').on 'focusin', @addProfessionAutocomplete
-    $('#delete').on 'click', @destroyArray
-    $('#copy').on 'click', @copyCollection
     $('#save_as_template').on 'click', @showNameInput
     $('.order-template__name').on 'focusout', @saveName
     $('.main_patternRequest').on 'keyup', '.added_data', @changeAddedData
-
-  @destroyArray: ->
-    if confirm('Вы действительно хотите удалить выбранные шаблоны?')
-      ajaxSendCopyOrDelete('/order_templates/destroy_array', 'DELETE')
-
-  @copyCollection: ->
-    if confirm('Вы действительно хотите копировать выбранные шаблоны?')
-      ajaxSendCopyOrDelete('/order_templates/copy', 'POST')
-
-  ajaxSendCopyOrDelete = (url, method) ->
-    order_template_ids = []
-    production_sites = $('.orders-list[data-production_sites-id]').data('production_sites-id')
-    $('.order > input:checked').each (index, element) ->
-      order_template_id = element.value
-      order_template_ids.push order_template_id
-
-    $.ajax
-      url: '/profile/production_sites/' + production_sites + url
-      method: method
-      dataType: 'json'
-      data:
-        order_template_ids: order_template_ids
-      success: ->
-        reloadPage = 1
-        Turbolinks.visit(window.location.href)
-    return
 
   @addProfessionAutocomplete: ->
     $this = $(this)
