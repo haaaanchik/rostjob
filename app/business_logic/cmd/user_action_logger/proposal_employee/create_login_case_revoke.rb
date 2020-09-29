@@ -34,9 +34,13 @@ module Cmd
           user.is_a?(Staffer) ? user.role_list.first : user.profile.profile_type
         end
 
+        def login
+          user.is_a?(Staffer) ? user.login : user.email
+        end
+
         def logger_params
           {
-            login: user.email,
+            login: login,
             receiver_ids: receiver_ids,
             subject_id: user.id,
             subject_type: subject_type,

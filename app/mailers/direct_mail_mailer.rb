@@ -39,4 +39,12 @@ class DirectMailMailer < ApplicationMailer
 
     mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}")
   end
+
+  def informated_about_failed_interview
+    @user = params[:user]
+    @message = params[:message]
+    @proposal_employee = params[:attrs][:proposal_employee]
+
+    mail(to: @user.email, subject: "RostJob. Кандидату было отказано")
+  end
 end

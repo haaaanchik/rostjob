@@ -3,6 +3,9 @@ module Cmd
     class Update
       include Interactor
 
+      delegate :candidate,     to: :context
+      delegate :order_profile, to: :context
+
       def call
         customer_rating = calculation_for_others(order_profile, customer_revoked_count)
         contractor_rating = calculation_contractor(pr_emlp_revoked_count(candidate_profile))
@@ -13,14 +16,6 @@ module Cmd
       end
 
       private
-
-      def order_profile
-        context.order_profile
-      end
-
-      def candidate
-        context.candidate
-      end
 
       def candidate_profile
         candidate.profile
