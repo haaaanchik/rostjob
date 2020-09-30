@@ -1,4 +1,4 @@
-- errors = @user.errors.messages
+/ - errors = @user.errors.messages
 
 - content_for :head do
   meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
@@ -17,9 +17,14 @@
       | для наших клиентов с помощью
       br/
       | платформы RostJob
-    form.header__form action="" 
-      input.email.header__email placeholder=("Введите e.mail для регистрации") type="text" /
-      button.btn-register type="button"  Зарегестрироваться
+
+    = form_for @user,
+            method: :post,
+            url: user_registration_path,
+            html: { class: 'header__form' } do |f|
+      .invalid-feedback
+      = f.email_field :email, class: 'email header__email', placeholder: 'Введите e.mail для регистрации'
+      = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'
     = image_tag '/img/recruiters_landing/loupe.png', class: 'header__loupe'
   section.how-it-work
     h2.title Как это работает
@@ -27,20 +32,20 @@
       li.point Регистрируешься на нашем сайте
       li.point
         | В личном кабинете выбираешь заявку
-        br/
+        br
         | от заказчика на подбор персонала
       li.point
         | Находишь потенциального кандидата
-        br/
+        br
         | на вакансию клиента
       li.point Отправляешь на финальное собеседование
       li.point
         | Получаешь вознаграждение до 50 000 ₽
-        br/
+        br
         | на банковскую карту за каждого
-        br/
+        br
         | кандидата, прошедшего минимальный
-        br/
+        br
         | испытательный срок в 10 дней
   section.pluses
     h2.title
@@ -49,25 +54,25 @@
     ol.slider-container
       li.slide
         | Вы можете сами выбирать
-        br/
+        br
         | вакансии, с которыми
-        br/
+        br
         | интересно работать
         span.slide__decoration.yellow-line
           span.violent-line
       li.slide
         | В личном кабинете вы можете
-        br/
+        br
         | выбрать заявки с оплатой от 2 000 q
-        br/
+        br
         | до 50 000 ₽ за утроенного кандидата
         span.slide__decoration.yellow-line
           span.violent-line
       li.slide
         | Можно работать не выходя
-        br/
+        br
         | из дома с компьютера или
-        br/
+        br
         | с мобильного устройства
         span.slide__decoration.yellow-line
           span.violent-line
@@ -75,22 +80,22 @@
   section.work-results
     h2.title.work-results__title
       | Результаты работы
-      br/
+      br
       | за последний
-      br/
+      br
       | месяц
     .rounds
       .round.big
         | 8 900 000 ₽
         span
           | Выплачено
-          br/
+          br
           | вознаграждений
         .round.middle
           | 827
           span
             | Закрыто
-            br/
+            br
             | заявок
       .round.small
         | 37
@@ -106,9 +111,13 @@
           | Будут вопросы – звони, всегда
           br/ 
           | поможем разобраться в системе
-        form.start-now__form action="" 
-          input.email placeholder=("Введите e.mail для регистрации") type="text" /
-          button.btn-register type="button"  Зарегестрироваться
+        = form_for @user,
+                method: :post,
+                url: user_registration_path,
+                html: {class: 'start-now__form'} do |f|
+          .invalid-feedback
+          = f.email_field :email, class: 'email', placeholder: 'Введите e.mail для регистрации'
+          = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'  
   section.inform-banner
     .inform-banner__container
       p.information
