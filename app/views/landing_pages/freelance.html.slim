@@ -1,31 +1,32 @@
-/ - errors = @user.errors.messages
+- errors = @user.errors.messages
 
 - content_for :head do
   meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
   title Фриланс для людей без опыта и с опытом HR – RostJob.
 
 #recruiters-landing
-  = render 'partials/header', registration_url: new_contractor_path
-  section.header
-    h1.header__title
+  = render 'shared/landing_header'
+  = render 'shared/landing_section_menu'
+  section.work-as-manager
+    h1.work-as-manager__title
       | Работа менеджером по поиску
-      br/
+      br
       | персонала на удаленке
-    p.header__subtitle
+    p.work-as-manager__subtitle
       | Зарабатывай до 50 000 ₽ за устроенного сотрудника не выходя из дома, подбирая персонал
-      br/
+      br
       | для наших клиентов с помощью
-      br/
+      br
       | платформы RostJob
 
     = form_for @user,
             method: :post,
             url: user_registration_path,
-            html: { class: 'header__form' } do |f|
+            html: { class: 'work-as-manager__form' } do |f|
       .invalid-feedback
-      = f.email_field :email, class: 'email header__email', placeholder: 'Введите e.mail для регистрации'
+      = f.email_field :email, class: 'email work-as-manager__email', placeholder: 'Введите e.mail для регистрации'
       = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'
-    = image_tag '/img/recruiters_landing/loupe.png', class: 'header__loupe'
+    = image_tag '/img/recruiters_landing/loupe.png', class: 'work-as-manager__loupe'
   section.how-it-work
     h2.title Как это работает
     ol.how-it-work__points-container
@@ -49,10 +50,9 @@
         | испытательный срок в 10 дней
   section.pluses
     h2.title
-      | 8 плюсов работы
-      | с платформой RostJob
+      | 8 плюсов работы с платформой RostJob
     ol.slider-container
-      li.slide
+      li.slide data-slide='1'
         | Вы можете сами выбирать
         br
         | вакансии, с которыми
@@ -60,15 +60,15 @@
         | интересно работать
         span.slide__decoration.yellow-line
           span.violent-line
-      li.slide
+      li.slide data-slide='2'
         | В личном кабинете вы можете
         br
-        | выбрать заявки с оплатой от 2 000 q
+        | выбрать заявки с оплатой от 2 000 ₽
         br
         | до 50 000 ₽ за утроенного кандидата
         span.slide__decoration.yellow-line
           span.violent-line
-      li.slide
+      li.slide data-slide='3'
         | Можно работать не выходя
         br
         | из дома с компьютера или
@@ -76,6 +76,55 @@
         | с мобильного устройства
         span.slide__decoration.yellow-line
           span.violent-line
+      li.slide data-slide='4'
+        | Оплата на банковскую карту приходит
+        br
+        | на в день окончания минимального
+        br
+        | испытательного срока (10 дней)
+        br
+        | сотрудника, которого вы нашли
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide data-slide='5'
+        | Возможность работать
+        br
+        | по нескольким заявкам одновременно
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide data-slide='6'
+        | Свободный график
+        br
+        | работы
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide data-slide='7'
+        | Вы работаете как самозанятый
+        br
+        | и имеете право использовать
+        br
+        | нашу платформу не только как
+        br
+        | основную  работу, но и как
+        br
+        | дополнительный доход
+        br
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide data-slide='8'
+        | Доход ограничен только
+        br
+        | вашим стремлением
+        br
+        | работать
+        span.slide__decoration.yellow-line
+          span.violent-line
+      li.slide.last
+        p
+        | Подробная иструкция
+        br
+        | появится после регистрации
+        = link_to 'Зарегестрироваться', new_contractor_path, class: 'btn-register'
     = image_tag '/img/recruiters_landing/pluses_img.png', class: 'pluses-img'
   section.work-results
     h2.title.work-results__title
@@ -109,7 +158,7 @@
       .form-container
         p.subtitle
           | Будут вопросы – звони, всегда
-          br/ 
+          br
           | поможем разобраться в системе
         = form_for @user,
                 method: :post,
@@ -117,23 +166,11 @@
                 html: {class: 'start-now__form'} do |f|
           .invalid-feedback
           = f.email_field :email, class: 'email', placeholder: 'Введите e.mail для регистрации'
-          = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'  
+          = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'
   section.inform-banner
     .inform-banner__container
       p.information
         span.text-yellow Платформа RostJob 
         | – место, в котором встречаются компании, кому нужен персонал, и рекрутеры (менеджеры по поиску персонала), которые помогают этим компаниям найти нужного сотрудника за вознаграждение.
-  footer
-    .container
-      span.rights-reserved © Все права защищены
-      .contacts
-        a.footer-tel-number href="tel:+88007006768"  8 800 700 6786
-        .footer-social
-          span.in-social Мы в соц. сетях:
-          a href='https://vk.com/rostjobcom'
-            img alt="vk" src="img/recruiters_landing/vk.png"
-          / a.insta href="#"
-          /   img alt="instagram" src="img/recruiters_landing/insta.png" /
-          / a href="#"
-          /   img alt="youtube" src="img/recruiters_landing/youtube.png" /
-      a.designed-by href="http://sitini.ru/" target="_blank"  design by: sitini.ru
+  = render 'footer'
+  = render 'request_call_modal'

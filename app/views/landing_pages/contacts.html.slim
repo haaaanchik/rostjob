@@ -1,7 +1,7 @@
 #contacts-landing
-  = render 'header'
+  = render 'shared/landing_header'
   main
-    = render 'section_menu'
+    = render 'shared/landing_section_menu'
     .landing-header-bg
       = render 'section_breadcrumbs', name: 'Контакты'
       section.landing-header.container
@@ -74,22 +74,3 @@
 
   = render 'footer'
   = render 'request_call_modal'
-
-javascript:
-  // Modal
-  $('.js-call-modal').on('click', openModal);
-
-  function openModal() {
-    $('#modal').addClass('open');
-  }
-
-  $('#overlay').on('click', closeModal);
-  $('.js-close-modal').on('click', closeModal);
-
-  function closeModal() {
-    $('#modal').removeClass('open');
-  }
-
-  $('#overlay .form').on('click', function (e) {
-    e.stopPropagation();
-  })

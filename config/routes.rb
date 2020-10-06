@@ -25,9 +25,13 @@ Rails.application.routes.draw do
     get :industrial
     get :freelance
     get :industry
-    get :about_company
+    %w(freelance industrial).each do |space|
+      scope space do
+        get :about_company
+        get :contacts
+      end
+    end
     get :professions
-    get :contacts
     post :request_call
     get :services
   end

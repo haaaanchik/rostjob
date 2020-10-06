@@ -2,7 +2,7 @@
   .block
     a.land-logo href='/'
       = image_tag('/img/rostjob-logo.svg')
-      - if Rails.env.development?
+      - if Rails.env.staging?
         span.counter
           b stage
     .land-social

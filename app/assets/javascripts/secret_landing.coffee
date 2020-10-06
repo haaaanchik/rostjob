@@ -2,6 +2,7 @@
 #= require rails-ujs
 #= require navbar
 #= require toastr
+#= require app
 
 valid = (form_submit) ->
   email = $("input[name='user[email]']")
