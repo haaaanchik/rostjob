@@ -65,7 +65,7 @@
             td.state-col = order.count_pr_employees_state('interview')
             td.state-col = order.count_pr_employees_state('hired')
             td.state-col = order.count_pr_employees_state('disputed')
-            td.state-col = order.count_pr_employees_state('rejected')
+            td.state-col = order.count_pr_employees_state('revoked')
             td.state-col = order_pr_paid_count
             td = order.difference_volum_and_paided(order_pr_paid_count)
             td = order.count_hired_in_percent(order_pr_paid_count).to_s + ' %'
