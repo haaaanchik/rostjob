@@ -87,10 +87,9 @@
             .js-minus.minus-container
               span.minus
 
-            /= f.number_field :number_additional_employees, in: 1..1000, step: 1, placeholder: 'Введите количество добавляемых сотрудников',
-              class: 'form-control', value: ( @order.number_additional_employees || 1 ), required: true
-            / клик подвязан на id инпута
-            input type="number" value='1' class="form-control" id='personalNumber'
+            = f.number_field :number_additional_employees, value: ( @order.number_additional_employees || 1 ), 
+                                                           in: 1..1000, step: 1, class: 'form-control',
+                                                           id: 'personalNumber'
 
             .js-plus.plus-container
               span.plus

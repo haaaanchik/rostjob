@@ -30,18 +30,3 @@ function platforms_nav(){
 $(document).ready(function(){
 	platforms_nav();
 });
-
-let minusBtn = document.querySelector('.js-minus');
-let plusBtn = document.querySelector('.js-plus');
-let input = document.getElementById('personalNumber');
-
-minusBtn.addEventListener('click', minus);
-plusBtn.addEventListener('click', plus);
-
-function minus() {
-	if(input.value > 1) input.value--;
-}
-
-function plus() {
-	input.value++;
-}
