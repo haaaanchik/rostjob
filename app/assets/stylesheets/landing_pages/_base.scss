@@ -1,3 +1,43 @@
+@font-face {
+  font-family: "Open Sans";
+  src: url(font_url("openSans/OpenSans-Light.ttf"));
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(font_url("openSans/OpenSans-Regular.ttf"));
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(font_url("openSans/OpenSans-SemiBold.ttf"));
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(font_url("openSans/OpenSans-Bold.ttf"));
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Open Sans";
+  src: url(font_url("openSans/OpenSans-ExtraBold.ttf"));
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
 header.header {
   display: flex;
   align-items: center;
@@ -206,7 +246,8 @@ header.header {
   .menu-list__link {
     color: #000000;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 600;
+    padding-bottom: 8px;
 
     &:hover {
       text-decoration: none;
@@ -689,14 +730,17 @@ footer {
   }
 
   .contract-offer-link{
-    height: 25px;
+    width: 150px;
+    height: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #fafafc;
+    background-color: rgb(149, 149, 149);
     border-radius: 4px;
     color: black;
     margin-top: 25px;
+    font-size: 13px;
+    font-weight: 600;
     &:hover{
       text-decoration: none;
       color: blue;
@@ -713,6 +757,7 @@ footer {
   >.container{
     display: flex;
     flex-wrap: wrap;
+    max-width: 1090px;
   }
 
   .land-tel-number{
@@ -823,6 +868,22 @@ footer {
     text-decoration: underline;
     @media (max-width: 400px) {
       text-align: right;
+    }
+  }
+}
+
+#recruiters-landing{
+  footer{
+    .city{
+      border-left: 2px solid $violent;
+    }
+  }
+  .menu{
+    .menu-list{
+      padding-left: 0;
+      &__link.active{
+        border-bottom: 2px solid $violent;
+      }
     }
   }
 }

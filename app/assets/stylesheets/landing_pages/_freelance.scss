@@ -125,7 +125,7 @@
     text-align: center;
     color: $main-color;
     margin: 0;
-    font-weight: bold;
+    font-weight: 700;
   
     @media (max-width: 768px) {
       font-size: 30px !important;
@@ -164,7 +164,7 @@
       position: relative;
       counter-increment: step-counter;
       font-size: 19px;
-      font-weight: bold;
+      font-weight: 600;
   
       &:first-child {
         margin-bottom: 40px;
@@ -212,6 +212,7 @@
   }
   
   .pluses {
+    position: relative;
     background-color: #fafafc;
     padding-top: 85px;
 
@@ -239,7 +240,7 @@
       position: relative;
       counter-increment: step-counter;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 600;
       padding-bottom: 20px;
       outline: none;
 
@@ -348,7 +349,7 @@
     border-radius: 50%;
     color: #ffffff;
     text-align: center;
-    font-weight: bold;
+    font-weight: 800;
   
     &.big {
       position: relative;
@@ -371,6 +372,7 @@
         font-size: 22px;
         line-height: 25px;
         margin-top: 20px;
+        font-weight: 600;
   
         @media (max-width: 550px) {
           font-size: 20px;
@@ -405,6 +407,7 @@
         color: #ffffff;
         line-height: 21px;
         margin-top: 17px;
+        font-weight: 600;
   
         @media (max-width: 550px) {
           margin-top: 0;
@@ -435,6 +438,7 @@
         color: #ffffff;
         line-height: 21px;
         margin-top: 13px;
+        font-weight: 600;
   
         @media (max-width: 550px) {
           font-size: 16px;
@@ -559,5 +563,38 @@
 
   .purple-btn--short {
     background-color: $main-color;
+  }
+
+  .slider-arrows{
+    position: absolute;
+    right: 153px;
+    bottom: 76px;
+    width: 130px;
+    display: flex;
+    align-items: center;
+    color: #9046ff;
+    font-weight: 600;
+    font-size: 18px;
+    white-space: nowrap;
+    @media (max-width: 850px) {
+      bottom: 200px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @media (max-width: 600px) {
+      position: static;
+      transform: unset;
+      margin: 20px auto 0;
+      padding-bottom: 20px;
+    }
+    &__left{
+      margin-right: 10px;
+      pointer-events: auto;
+    }
+    &__right{
+      transform: rotate(180deg);
+      margin-left: 10px;
+      pointer-events: auto;
+    }
   }
 }

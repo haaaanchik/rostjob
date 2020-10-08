@@ -26,7 +26,7 @@
       .invalid-feedback
       = f.email_field :email, class: 'email work-as-manager__email', placeholder: 'Введите e.mail для регистрации'
       = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'
-    = image_tag '/img/recruiters_landing/loupe.png', class: 'work-as-manager__loupe'
+    = image_tag '/img/recruiters_landing/loupe.png', class: 'work-as-manager__loupe animate__animated animate__rotateInDownLeft'
   section.how-it-work
     h2.title Как это работает
     ol.how-it-work__points-container
@@ -126,6 +126,13 @@
         | появится после регистрации
         = link_to 'Зарегестрироваться', new_contractor_path, class: 'btn-register'
     = image_tag '/img/recruiters_landing/pluses_img.png', class: 'pluses-img'
+    .slider-arrows
+      = image_tag '/img/recruiters_landing/slider_arrow.png', class: 'slider-arrows__left jsPrevSlide'
+      p
+        span#slideNumber 1
+        = ' из '
+        span#allSlides 3
+      = image_tag '/img/recruiters_landing/slider_arrow.png', class: 'slider-arrows__right jsNextSlide'
   section.work-results
     h2.title.work-results__title
       | Результаты работы
