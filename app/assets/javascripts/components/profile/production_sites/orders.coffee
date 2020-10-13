@@ -60,3 +60,21 @@ class RostJob.ProfileProductionSitesOrdersIndex
       reloadPage = 1
       url = window.location.href.split('?')[0]+'?tab_state='+$('.js-input-type.active').data('target')
       Turbolinks.visit(url)
+
+
+class RostJob.ProfileProductionSitesOrdersShow
+  @init: ->
+    @bind()
+
+  @bind: ->
+    $('.js-plus').on 'click', @plusProposal
+    $('.js-minus').on 'click', @minusProposal
+
+  @plusProposal: ->
+    num = Number($('#personalNumber').val()) + 1
+    $('#personalNumber').val(num)
+
+  @minusProposal: ->
+    if Number($('#personalNumber').val()) > 1
+      num = Number($('#personalNumber').val()) - 1
+      $('#personalNumber').val(num)

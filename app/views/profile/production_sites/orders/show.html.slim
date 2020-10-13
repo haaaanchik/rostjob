@@ -83,19 +83,19 @@
           button.close type="button" data-dismiss="modal" aria-label="Close"
             span aria-hidden="true" &times;
         .modal-body
+          .js-minus.minus-container
+            span.minus
 
-            .js-minus.minus-container
-              span.minus
+          = f.number_field :number_additional_employees,
+                           value: ( @order.number_additional_employees || 1 ),
+                           in: 1..1000,
+                           step: 1,
+                           class: 'form-control',
+                           id: 'personalNumber'
 
-            = f.number_field :number_additional_employees, value: ( @order.number_additional_employees || 1 ), 
-                                                           in: 1..1000, step: 1, class: 'form-control',
-                                                           id: 'personalNumber'
-
-            .js-plus.plus-container
-              span.plus
-              span.vertical
-
-            span.description Укажите количество сотрудников
-
+          .js-plus.plus-container
+            span.plus
+            span.vertical
+          span.description Укажите количество сотрудников
         .modal-footer
           = f.submit 'Добавить', class: 'add-personal-btn'
