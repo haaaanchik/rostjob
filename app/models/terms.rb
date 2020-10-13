@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Terms
   include ActiveModel::Model
 
@@ -8,5 +10,9 @@ class Terms
   def initialize(attributes = {})
     attributes = { accepted: false }.merge attributes
     super
+  end
+
+  def title(current_name)
+    "RostJob. Договор оферты #{current_name}"
   end
 end

@@ -121,8 +121,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'rubocop-rails', require: false
-  gem 'rubocop-rspec'
+  gem 'rubocop', '~> 0.78.0', require: false
   gem 'web-console', '~> 3.5', '>= 3.5.1'
   gem 'letter_opener', '~> 1.7'
 end
@@ -138,6 +137,7 @@ group :test do
   gem 'database_cleaner', '~> 1.8', '>= 1.8.3'
   gem 'launchy'
   gem 'poltergeist'
+  gem 'rubocop-rspec', '~> 1.32', require: false
   gem 'vcr', '~> 6.0'
   gem "webmock"
 end

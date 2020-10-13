@@ -142,19 +142,20 @@
       | месяц
     .rounds
       .round.big
-        | 8 900 000 ₽
+        = number_with_precision(work_results_last_month[:reward_paid], precision: 0, delimiter: ' ')
+        |  ₽
         span
           | Выплачено
           br
           | вознаграждений
         .round.middle
-          | 827
+          = work_results_last_month[:closed_orders]
           span
             | Закрыто
             br
             | заявок
       .round.small
-        | 37
+        = work_results_last_month[:reward_recruiters]
         span
           | Рекрутеров
   section.start-now
