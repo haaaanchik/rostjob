@@ -7,21 +7,23 @@ header.header.container
           b stage
   span Кадровое агентство по поиску и подбору персонала
   .block.log-in-reg
-    button.green-btn--short.js-call-modal type="button"
+    button.green-btn--short.purple-btn--short.js-call-modal type="button"
       | Заказать звонок
     = link_to '8 (800) 700-67-86', 'tel:+88007006786', class: 'land-tel-number'
   .mobile-menu
     ul
+      li
+        = link_to 'Главная', landing_main_path
+      li
+        = link_to 'О компании', landing_another_path('/about_company')
       / li
-          = link_to 'О компании', '#', class: 'disabled'
-      / li
-          = link_to 'Услуги', '#', class: 'disabled'
+          = link_to 'Услуги', landing_another_path('/services'), class: 'disabled'
       / li
           = link_to 'Цены', '#', class: 'disabled'
       / li
           = link_to 'Акции', '#', class: 'disabled'
-      / li
-          = link_to 'Контакты', '#', class: 'disabled'
+      li
+        = link_to 'Контакты', landing_another_path('/contacts')
       li
         = link_to 'Вход', login_path
       li
@@ -29,7 +31,7 @@ header.header.container
       li
         = link_to '8 (800) 700-67-86', 'tel:+88007006786'
       li
-        button.green-btn--short.js-call-modal type="button"  Заказать звонок
+        button.green-btn--short.purple-btn--short.js-call-modal type="button"  Заказать звонок
   .burger
     span
     span

@@ -1,7 +1,7 @@
-#landing-about-company
-  = render 'header'
+#landing-about-company class="landing_#{landing_main_path.gsub('/','')}"
+  = render 'shared/landing_header'
   main
-    = render 'section_menu'
+    = render 'shared/landing_section_menu'
     .landing-header-bg
       = render 'section_breadcrumbs', name: 'О компании'
       section.landing-header.container
@@ -214,60 +214,3 @@
 
   = render 'footer'
   = render 'request_call_modal'
-
-javascript:
-  $('#clients-slider').slick({
-    infinite: true,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    prevArrow: $('.clients-slider-arrow-left'),
-    nextArrow: $('.clients-slider-arrow-right'),
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          // centerPadding: '40px',
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        }
-      }
-    ]
-  });
-
-  // Modal
-  $('.js-call-modal').on('click', openModal);
-
-  if (window.location.search == '?modal=request_call') {
-    openModal()
-  }
-
-  function openModal() {
-    $('#modal').addClass('open');
-  }
-
-  $('#overlay').on('click', closeModal);
-  $('.js-close-modal').on('click', closeModal);
-
-  function closeModal() {
-    $('#modal').removeClass('open');
-  }
-
-  $('#overlay .form').on('click', function (e) {
-    e.stopPropagation();
-  })

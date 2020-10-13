@@ -1,0 +1,19 @@
+section.menu
+  .container
+    ul.menu-list
+      li.menu-list__item
+        = active_link_to 'Главная', landing_main_path, class: 'menu-list__link', active: :exact
+      li.menu-list__item
+        = active_link_to 'О компании', landing_another_path('/about_company'), class: 'menu-list__link'
+      / li.menu-list__item
+      /   = link_to 'Услуги', landing_another_path('/services'), class: 'menu-list__link'
+      / li.menu-list__item
+          = link_to 'Цены', '#', class: 'menu-list__link disabled'
+      / li.menu-list__item
+          = link_to 'Акции', '#', class: 'menu-list__link disabled'
+      li.menu-list__item
+        = active_link_to 'Контакты', landing_another_path('/contacts'), class: 'menu-list__link'
+    .log-in-or-reg
+      = link_to 'Вход', login_path, class: 'land-log-in'
+      span.slash = '/'
+      = link_to 'Регистрация', landing_registration_path, class: 'registration'

@@ -37,7 +37,7 @@ footer
           | г. Москва, Площадь Журавлева, д. 2, стр.2
     .footer-side
       = link_to '8 (800) 700-67-86', 'tel:+88007006768', class: 'land-tel-number'
-      = link_to 'Договор оферты', 'https://rostjob.com/terms/download.pdf', class: 'contract-offer-link'
+      = link_to 'Договор оферты', "#{root_url}terms#{landing_main_path}/download.pdf", class: 'contract-offer-link'
     .footer-bottom
       .info
         p.year

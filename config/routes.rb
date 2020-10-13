@@ -25,9 +25,13 @@ Rails.application.routes.draw do
     get :industrial
     get :freelance
     get :industry
-    get :about_company
+    %w(freelance industrial).each do |space|
+      scope space do
+        get :about_company
+        get :contacts
+      end
+    end
     get :professions
-    get :contacts
     post :request_call
     get :services
   end
@@ -404,9 +408,18 @@ Rails.application.routes.draw do
   resources :recruiters, only: %i[index show]
   resources :support_messages, only: %i[new create]
 
-  get :terms,          to: 'terms#index'
-  post 'terms/accept', to: 'terms#accept'
-  get 'terms/download', to: 'terms#download'
+  resources :terms, only: %i[index] do
+    collection do
+      post :accept
+      %w(freelance industrial).each do |space|
+        scope space do
+          get :download, to: "terms##{space}_download", as: "#{space}_download_terms"
+        end
+      end
+    end
+  end
+
+  get 'terms/customer/download', to: 'terms#download'
   get :calendar_events, controller: 'welcome'
   mount Thredded::Engine => '/forum'
   mount ActionCable.server => '/cable'

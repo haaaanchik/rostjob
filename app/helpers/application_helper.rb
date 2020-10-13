@@ -7,11 +7,18 @@ module ApplicationHelper
     params[:controller].split('/').push(params[:action]).join('_')
   end
 
-  def add_display_block
-    controller_list = ['profile_production_sites_orders_index',
-                       'profile_employee_cvs_index',
-                       'profile_production_sites_orders_show']
-    'display: block' if controller_list.include?(body_controller)
+  def landing_main_path
+    request.path.scan(/^\/\w+/).first
+  end
+
+  def landing_another_path(name)
+    landing_main_path << name
+  end
+
+  def landing_registration_path
+    return new_customer_path if landing_main_path == '/industrial'
+
+    new_contractor_path
   end
 
   def question_help(title)
@@ -52,5 +59,4 @@ module ApplicationHelper
   def st_submit_class(tag = 'success')
     "btn btn-#{tag} btn-sm"
   end
-
 end

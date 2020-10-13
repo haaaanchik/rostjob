@@ -13,7 +13,7 @@
           
           - unless current_profile.user.terms_of_service
             = form_for @terms,
-                    url: terms_accept_path,
+                    url: accept_terms_path,
                     html: { class: 'mt-5 text-center' } do |f|
               .form-group.mt-4
                 = f.check_box :accepted, checked: current_user.terms_of_service, class: 'form-check-input'

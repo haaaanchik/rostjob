@@ -5,9 +5,9 @@
   title  Кадровое агентство по подбору персонала.
 
 body#customer-landing
-  = render 'header'
+  = render 'shared/landing_header'
   main
-    = render 'section_menu'
+    = render 'shared/landing_section_menu'
     section.landing-header.container
       .content
         h1.title
@@ -475,109 +475,3 @@ body#customer-landing
         = f.submit 'Отправить', class: 'btn-send-form'
   = render 'footer'
   = render 'request_call_modal'
-javascript:
-    let arr = document.querySelectorAll('.js-show-more');
-    for (let i = 0; i < arr.length; i++) {
-        arr[i].addEventListener('click', openDropdown);
-    }
-
-    function openDropdown(e) {
-        $('.js-dropdown').not(e.target.nextElementSibling).removeClass('open');
-        let target = e.target;
-        if (target.classList.contains('show-more')) {
-            target.nextElementSibling.classList.toggle('open');
-        }
-    }
-
-    // Modal
-    $('.js-call-modal').on('click', openModal);
-
-    if (window.location.search == '?modal=request_call') {
-      openModal()
-    }
-
-    function openModal() {
-        $('#modal').addClass('open');
-    }
-
-    $('#overlay').on('click', closeModal);
-    $('.js-close-modal').on('click', closeModal);
-
-    function closeModal() {
-        $('#modal').removeClass('open');
-    }
-
-    $('#overlay .form').on('click', function (e) {
-        e.stopPropagation();
-    })
-
-    $('#clients-slider').slick({
-      infinite: true,
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      prevArrow: $('.clients-slider-arrow-left'),
-      nextArrow: $('.clients-slider-arrow-right'),
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            // centerPadding: '40px',
-            slidesToShow: 4,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          }
-        }
-      ]
-    });
-
-    $('#slider-reviews').slick({
-      centerMode: true,
-      centerPadding: '0',
-      slidesToShow: 3,
-      // arrows: false,
-      focusOnSelect: false,
-      prevArrow: $('.slider-reviews-prev'),
-      nextArrow: $('.slider-reviews-next'),
-      responsive: [
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          }
-        }
-      ]
-    });
-
-    $('#slider-reviews').slickLightbox();
-
-    // open/close review
-
-    $('.js-open-review').on('click', toggleReview);
-
-    function toggleReview() {
-      $(this).prev().toggleClass('review-opened');
-    }
-

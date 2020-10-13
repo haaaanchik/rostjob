@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TermsController < ApplicationController
-  skip_before_action :auth_user, only: %i[download]
+  skip_before_action :auth_user, only: %i[industrial_download freelance_download]
 
   def index
     @terms = Terms.new
@@ -23,12 +25,16 @@ class TermsController < ApplicationController
     end
   end
 
-  def download
+  def freelance_download
+    @profile_type = 'contractor'
+    @current_term = 'Исполнителя'
+    respond_to_pdf_setting
+  end
+
+  def industrial_download
     @profile_type = 'customer'
-    respond_to do |format|
-      format.html
-      format.pdf { render pdf_setting }
-    end
+    @current_term = 'Заказчика'
+    respond_to_pdf_setting
   end
 
   private
@@ -37,9 +43,17 @@ class TermsController < ApplicationController
     params.require(:terms).permit(:accepted)
   end
 
+  def respond_to_pdf_setting
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf_setting }
+    end
+  end
+
   def pdf_setting
     {
-      pdf: 'договор оферты RostJob',
+      pdf: "RostJob. Договор оферты #{Terms.new.title(@current_term)}",
+      title: Terms.new.title(@current_term),
       template: 'terms/_term_pdf.html',
       orientation: 'Portrait',
       page_size: 'A4',
