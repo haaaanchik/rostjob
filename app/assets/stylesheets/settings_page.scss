@@ -3,12 +3,15 @@
   position: relative;
   font-family: 'Open sans', sans-serif;
   width: 100%;
+  height: auto;
+  min-height: 100%;
   background-color: #f2f2f2;
   display: flex;
 
   @media (max-width: 992px) {
     display: flex;
     flex-direction: column;
+    height: auto;
   }
 }
 
@@ -26,6 +29,7 @@
   .settings {
     position: fixed;
     width: 333px;
+    height: 100%;
     background-color: #ffffff;
     @media (max-width: 992px) {
       position: static;
@@ -144,6 +148,9 @@
 #setting-page .profile-settings {
   display: flex;
   flex-direction: column;
+  @media (max-width: 992px ) {
+    align-items: center;
+  }
 }
 
 #setting-page .profile-settings {
@@ -173,7 +180,7 @@
 #setting-page .profile-settings input[type='submit'] {
   border: 0;
   color: #ffffff;
-  margin-left: 24%;
+  margin-left: calc( 23% - 30px );
   margin-top: 50px;
   width: 170px;
   font-size: 14px;
@@ -191,6 +198,12 @@
   justify-content: space-between;
   width: 70%;
   margin-bottom: 25px;
+  max-width: 700px;
+  &.show-password-block{
+    @media (min-width: 992px ){
+      justify-content: flex-end;
+    }
+  }
 }
 
 #setting-page .profile-settings .form-item > label {
@@ -202,10 +215,42 @@
   margin-bottom: 0;
 }
 
-#setting-page .profile-settings .form-item > .title {
-  font-weight: bold;
-  align-self: center;
-}
+#setting-page{
+  .profile-settings{
+
+    .form-item{
+      .title{
+        font-weight: bold;
+        &.name{
+          align-self: center;
+        }
+        &.logo{
+          @media (min-width: 992px ){
+            margin-top: 13px;
+          }
+        }
+        &.description{
+          @media (min-width: 992px ){
+            margin-top: 18px;
+          }
+        }
+      }
+    }
+
+    input[type='file']{
+      display: none;
+    }
+
+  }
+  .password-btn {
+    width: 142px;
+    height: 32px;
+    border-radius: 16px;
+    background-color: #ebebeb;
+    color: #000000;
+    margin-bottom: 54px;
+  }
+} 
 
 #setting-page .profile-settings .form-item:last-child .title {
   align-self: flex-start;
@@ -214,6 +259,10 @@
 #setting-page .profile-settings .choosing-logo {
   width: 376px;
   display: flex;
+  @media ( min-width: 992px ) and (max-width: 1100px ){
+    justify-content: flex-start;
+    width: 300px;
+  }
 }
 
 #setting-page .profile-settings .choosing-logo > div {
@@ -224,11 +273,10 @@
 
 #setting-page .profile-settings .choosing-logo .logo {
   border-radius: 50%;
-  width: 78px;
-  height: 78px;
-  max-width: 78px;
-  min-width: 79px;
-  margin-right: 25px;
+  width: 62px;
+  height: 62px;
+  max-width: 62px;
+  min-width: 62px;
   object-fit: cover;
   border: 1px solid rgb(215, 215, 215);
 }
@@ -240,10 +288,12 @@
   justify-content: center;
   width: 153px;
   height: 32px;
-  border-radius: 16px;
-  background-color: #f2f2f2;
   font-size: 14px;
-  cursor: pointer;
+  color: #1970ff;
+  text-decoration: underline;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 #setting-page .profile-settings .choosing-logo .without-logo {
@@ -382,9 +432,6 @@
     width: 300px;
   }
 
-  #setting-page .profile-settings .choosing-logo {
-    justify-content: flex-end;
-  }
 }
 
 @media (max-width: 870px) {
@@ -399,7 +446,7 @@
   }
 
   #setting-page .profile-settings .form-item > .title {
-    margin-bottom: 10px;
+    margin: 10px auto;
   }
 
   #setting-page .profile-settings .form-item:last-child > .title {
@@ -463,8 +510,17 @@
   text-align: center;
   line-height: 32px;
   margin-left: 26%;
+  
   @media (max-width: 992px){
-    margin: 0 auto;
+    margin: 0 auto 10px;
+  }
+  @media ( min-width: 992px) {
+    margin: 0 300px 0 0;
+    transform: translateX(100%);
+  }
+  @media ( min-width: 1100px) {
+    margin: 0 375px 0 0;
+    transform: translateX(100%);
   }
 }
 
@@ -472,6 +528,9 @@
   display: block;
 }
 
-#setting-page .submit-left{
-  margin: 10px auto 0;
-}
+#setting-page{
+  .submit-left{
+    margin: 10px auto 0;
+  }
+
+} 
