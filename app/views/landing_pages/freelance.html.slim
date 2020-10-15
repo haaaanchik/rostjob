@@ -26,7 +26,7 @@
       .invalid-feedback
       = f.email_field :email, class: 'email work-as-manager__email', placeholder: 'Введите e.mail для регистрации'
       = f.button 'Зарегестрироваться', name: :contractor, class: 'btn-register'
-    = image_tag '/img/recruiters_landing/loupe.png', class: 'work-as-manager__loupe animate__animated animate__rotateInDownLeft'
+    = image_tag '/img/recruiters_landing/loupe.svg', class: 'work-as-manager__loupe animate__animated animate__rotateInDownLeft'
   section.how-it-work
     h2.title Как это работает
     ol.how-it-work__points-container
@@ -125,7 +125,7 @@
         br
         | появится после регистрации
         = link_to 'Зарегестрироваться', new_contractor_path, class: 'btn-register'
-    = image_tag '/img/recruiters_landing/pluses_img.png', class: 'pluses-img'
+    = image_tag '/img/recruiters_landing/pluses_img.svg', class: 'pluses-img'
     .slider-arrows
       = image_tag '/img/recruiters_landing/slider_arrow.png', class: 'slider-arrows__left jsPrevSlide'
       p
@@ -162,7 +162,7 @@
     h2.title.start-now__title
       | Регистрируйся и начинай зарабатывать уже сегодня!
     .start-now__container
-      = image_tag '/img/recruiters_landing/start_now.png', class: 'start-now__img'
+      = image_tag '/img/recruiters_landing/start_now.svg', class: 'start-now__img'
       .form-container
         p.subtitle
           | Будут вопросы – звони, всегда

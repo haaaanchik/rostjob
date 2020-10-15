@@ -614,7 +614,7 @@
       position: absolute;
       bottom: 0;
       right: 0;
-      transform: translateX(70%);
+      transform: translateX(90%);
 
       @media (max-width: 992px) {
         display: none;
@@ -1178,12 +1178,15 @@
     display: flex;
     margin-bottom: 130px;
     margin-top: 155px;
-    max-width: 987px;
+    max-width: 1020px;
 
     .actions-container {
       display: flex;
       width: 59%;
       max-width: 570px;
+      >img{
+        width: 315px;
+      }
     }
 
     .actions {
