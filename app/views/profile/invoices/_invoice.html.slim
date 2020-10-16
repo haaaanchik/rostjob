@@ -5,8 +5,6 @@ tr
   td
     span.badge class=(invoice.created? ? 'badge-info' : 'badge-success') #{t("invoice.state.#{invoice.state}")}
   td
-    = link_to profile_invoice_path(invoice), data: { toggle: 'tooltip', placement: 'top', title: 'Ознакомиться' } do
-      i.fa.fa-print.fa-2x.mr-4
     = link_to invoice.customer_pdf_link, target: '_blank',
             data: { toggle: 'tooltip',
                     placement: 'top',
