@@ -137,7 +137,8 @@
 
   .worksheets__body{
     background-color: #fff;
-    height: calc(100% - 38px);
+    height: auto;
+    max-height: calc(100% - 38px);
     overflow: auto;
   }
 
