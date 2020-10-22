@@ -50,8 +50,42 @@
   }
 }
 
+@mixin customScroll{
+  &::-webkit-scrollbar {
+    width: 6px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-track {
+    border-radius: 6px;
+    background: rgba(183, 183, 183, 0.3);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(183, 183, 183, 0.6);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b7b7b7;
+  }
+  &::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(left, #22ADD4, #1E98BA);
+  }
+}
+
 body{
   height: 100vh;
+
+  &[data-page='PricesShow']{
+    @include customScroll;
+    #common-landing{
+      .common-landing__header{
+        position: relative;
+      }
+      .choose-container{
+        height: auto;
+      }
+    }
+  }
+
 }
 
 .content-wrapper{
