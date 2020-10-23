@@ -51,7 +51,7 @@ class ProposalEmployee < ApplicationRecord
     end
 
     event :to_rejected do
-      transitions from: :nbox, to: :rejected
+      transitions from: :inbox, to: :rejected
     end
 
     event :to_approved do
