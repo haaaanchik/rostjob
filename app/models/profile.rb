@@ -38,7 +38,7 @@ class Profile < ApplicationRecord
   end
 
   ransack_alias :all_fields, :user_full_name
-  ransack_alias :title_fields, :orders_title
+  ransack_alias :title_fields, :orders_position_title
   ransack_alias :city_fields,  :orders_city
 
   scope :executors, -> { where profile_type: %w[agency recruiter] }

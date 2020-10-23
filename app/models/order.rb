@@ -29,7 +29,7 @@ class Order < ApplicationRecord
 
   ransack_alias :all_fields, :id_or_position_title_or_description_or_city_or_place_of_work_or_salary_from_or_salary_to
   ransack_alias :candidate_fields, :id_or_title_or_place_of_work_or_employee_cv_name
-  ransack_alias :title_fields, :title
+  ransack_alias :title_fields, :position_title
   ransack_alias :city_fields, :city
   ransack_alias :analytics_fields, :user_full_name_or_position_title_or_production_site_title
 

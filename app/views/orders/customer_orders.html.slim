@@ -87,4 +87,4 @@ ruby:
 
 
       .requests-page-filters
-        = render partial: 'orders/search_contractor_filters', locals: {orders: @order_filters, url: orders_by_customer_path(@customer)}
+        = render partial: 'orders/search_contractor_filters', locals: {orders: @order_filters, search_field_pl: 'Поиск по заявкам', url: orders_by_customer_path(@customer)}
