@@ -160,5 +160,6 @@ $(document).ready ->
 
   $(document).on "turbolinks:load", ->
     $('input[type=tel]').inputmask("+*(999)-999-99-99")
-
+    $('input[id=profile_company_attributes_inn]').inputmask("9999999999")
+    
   $('[data-toggle="popover"]').popover('enable')
