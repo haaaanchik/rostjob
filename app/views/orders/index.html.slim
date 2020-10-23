@@ -20,4 +20,4 @@
             = link_to 'Перейти к заявкам', orders_by_customer_path(customer), class: 'item-btn'
     = paginate @customer_list
   .requests-page-filters.custom-scroll
-    = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, url: orders_path}
+    = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, search_field_pl: 'Поиск по исполнителям', url: orders_path}
