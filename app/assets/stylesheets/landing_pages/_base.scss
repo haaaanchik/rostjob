@@ -739,9 +739,10 @@ footer {
     margin-top: 25px;
     font-size: 13px;
     font-weight: 600;
+    transition: color .3s ease-in-out;
     &:hover{
       text-decoration: none;
-      color: blue;
+      color: white;
     }
     @media ( max-width: 992px) {
       margin-top: 10px;
@@ -766,7 +767,10 @@ footer {
     transition: .3s linear;
     &:hover{
       text-decoration: none;
-      color: blue;
+      color: rgb(125, 125,125);
+    }
+    @media (min-width: 992px) {
+      text-align: center;
     }
   }
 
@@ -800,7 +804,7 @@ footer {
     align-items: flex-start;
     margin-bottom: 60px;
     @media (max-width: 992px) {
-      width: calc(100% - 130px);
+      width: calc(100% - 150px);
     }
     @media (max-width: 640px) {
       width: 100%;
@@ -814,7 +818,7 @@ footer {
     border-left: 2px solid #1970ff;
     @media (min-width: 1200px) {
       &:first-child{
-        width: 20%;
+        width: auto;
         margin: 0;
       }
     }
@@ -864,6 +868,9 @@ footer {
     font-size: 14px;
     font-weight: bold;
     text-decoration: underline;
+    &:hover{
+      cursor: pointer;
+    }
     @media (max-width: 400px) {
       text-align: right;
     }
@@ -980,6 +987,8 @@ footer {
   footer {
     .city {
       padding-left: 10px;
+      width: auto;
+      max-width: calc(100% / 3);
     }
   }
 }
@@ -1113,6 +1122,7 @@ footer {
   footer {
     .city {
       width: 50%;
+      max-width: 49%;
     }
 
     .footer-bottom {
