@@ -13,12 +13,12 @@ ruby:
     .col-lg-4.text-center
       = link_to 'Показать все', price_path,  class: 'btn btn-primary btn-rounded'
 
-  table.table
+  table.table.price-table
     thead
       tr
-        th Наименование
-        th Цена
-        th.text-center Гарантийный период
+        th.name Наименование
+        th.price Цена
+        th.text-center.guarantee Гарантийный период
     tbody
       - @paginated_price_items.each do |position|
         tr

@@ -84,6 +84,20 @@ body{
         height: auto;
       }
     }
+    .price-table{
+      thead{
+        th.price{
+          @media (min-width: 768px) {
+            width: 100px;
+          }
+        }
+        th.guarantee{
+          @media (min-width: 768px) {
+            width: 200px;
+          }
+        }
+      }
+    }
   }
 
 }
