@@ -95,7 +95,8 @@ class Profile::ProposalEmployeesController < ApplicationController
 
   def proposal_employees
     @q = ProposalEmployee.where(profile_id: current_profile.id)
-                         .where.not(state: 'revoked').order(id: :desc).ransack(params[:q])
+           .where.not(state: 'revoked')
+           .order("proposal_employees.state = 'disputed' desc, id desc").ransack(params[:q])
     @proposal_employees ||= @q.result
   end
 end

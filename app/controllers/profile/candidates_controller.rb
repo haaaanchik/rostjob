@@ -55,7 +55,12 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def paginated_candidates
-    @paginated_candidates ||= candidates.page(params[:page]).per(10).includes(order: :production_site).decorate
+    @paginated_candidates ||= candidates
+                                .order("proposal_employees.state = 'disputed' desc")
+                                .page(params[:page])
+                                .per(10)
+                                .includes(order: :production_site)
+                                .decorate
   end
 
   def candidates

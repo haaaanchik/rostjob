@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cmd
   module EmployeeCv
     class Send
@@ -7,8 +9,7 @@ module Cmd
                Cmd::EmployeeCv::ToReady,
                Cmd::Order::AddToFavorites,
                Cmd::ProposalEmployee::ToCreate,
-               Cmd::EmployeeCv::ToSent,
-               Cmd::NotifyMail::ProposalEmployee::Inbox
+               Cmd::EmployeeCv::ToSent
 
       around do |interactor|
         ActiveRecord::Base.transaction do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cmd
   module ProposalEmployee
     class ToCreate
@@ -9,8 +11,10 @@ module Cmd
       def call
         @proposal_employee = profile.proposal_employees.create(employee_cv_id: employee_cv_id,
                                                                interview_date: interview_date,
-                                                               order_id: order_id)
+                                                               order_id: order_id,
+                                                               state: :interview)
         context.proposal_employee = @proposal_employee
+        context.candidate = @proposal_employee
         context.fail! unless @proposal_employee.persisted?
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end

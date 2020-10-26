@@ -1,3 +1,9 @@
+check_interview_deadline:
+  cron: '00 10 * * *'
+  class: 'CheckInterviewDeadlineJob'
+  queue: critical
+  description: 'Creates jobs for check interview deadline'
+
 warranty_period_processing:
   cron: "*/5 * * * *"
   class: "CreateWarrantyPeriodProcessingJob"
