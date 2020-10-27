@@ -9,7 +9,7 @@ ruby:
 .ready-text-examples
   = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
     span Кандидат не явился на собеседование, я хочу вернуть анкету
-  .text-example data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
+  .text-example data-toggle='popover' title='Дата собеседования' data-placement='top' data-html='true' data-content=pe_form
     span Кандидат не явился на собеседование, я хочу изменить дату собеседования
   = link_to profile_tickets_incident_path(@ticket, waiting_field.merge(message: message)),
           method: :put,

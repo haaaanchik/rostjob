@@ -12,9 +12,9 @@ javascript:
       todayHighlight: false
     });
 
-    $('#candidate_form_datepicker').on('changeDate', function() {
+    $('.candidate_form_datepicker').on('changeDate', function() {
       $('#hiring_date, #interview_date, #interview_date').val(
-          $('#candidate_form_datepicker').datepicker('getFormattedDate')
+          $('.candidate_form_datepicker').datepicker('getFormattedDate')
       );
     });
   }
