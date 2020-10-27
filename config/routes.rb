@@ -268,6 +268,7 @@ Rails.application.routes.draw do
           put :revoke
           put :inbox
           put :interview
+          put :failed_interview
         end
       end
     end

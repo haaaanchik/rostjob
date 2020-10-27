@@ -22,7 +22,7 @@ class Profile::Tickets::IncidentsController < ApplicationController
     ticket_waiting = incident.waiting
     result = Cmd::Ticket::Incident::Update.call(incident: incident,
                                                 ticket: incident,
-                                                message_params: { text: params[:message] },
+                                                message_params: { text: message_text },
                                                 incident_params: incident_params,
                                                 user: current_user,
                                                 params: params)
@@ -43,16 +43,12 @@ class Profile::Tickets::IncidentsController < ApplicationController
                                               user: current_user,
                                               log: true)
 
-    if result.success?
-      redirect_to profile_ticket_path(incident)
-    else
-      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
-    end
+    do_after_action(result)
   end
 
   def revoke
     result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: incident.proposal_employee, 
-                                                message_params: { text: 'Для анкеты назначена дата найма.' },
+                                                message_params: { text: 'Анкеты была отозвона' },
                                                 incident: incident,
                                                 ticket: incident,
                                                 user: current_user)
@@ -69,24 +65,25 @@ class Profile::Tickets::IncidentsController < ApplicationController
                                                 user: current_user,
                                                 log: true)
 
-    if result.success?
-      redirect_to profile_ticket_path(incident)
-    else
-      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
-    end
+    do_after_action(result)
   end
 
   def interview
     result = Cmd::Ticket::Incident::Interview.call(candidate: incident.proposal_employee, user: current_user,
-                                                    message_params: { text: 'Для анкеты назвачена дата собеседования.' },
+                                                    message_params: { text: 'Для анкеты назначена дата собеседования.' },
                                                     ticket: incident, interview_date: params[:interview_date],
                                                     incident: incident)
 
-    if result.success?
-      redirect_to profile_ticket_path(incident)
-    else
-      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
-    end
+    do_after_action(result)
+  end
+
+  def failed_interview
+    result = Cmd::Ticket::Incident::FailedInterview.call(message_params: { text: params[:incident][:messages_attributes]['0']['text'] },
+                                                         proposal_employee: incident.proposal_employee,
+                                                         user: current_user,
+                                                         incident: incident,
+                                                         ticket: incident)
+    do_after_action(result)
   end
 
   private
@@ -120,5 +117,17 @@ class Profile::Tickets::IncidentsController < ApplicationController
     else
       redirect_to profile_tickets_path(q: { state_waiting_fields_eq: 'contractor' })
     end
+  end
+
+  def do_after_action(result)
+    if result.success?
+      redirect_to profile_ticket_path(incident)
+    else
+      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
+    end
+  end
+
+  def message_text
+    params[:message] || params[:incident][:messages_attributes]['0']['text']
   end
 end
