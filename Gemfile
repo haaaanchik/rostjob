@@ -142,6 +142,9 @@ group :test do
   gem "webmock"
 end
 
+group :staging, :production do
+  gem 'newrelic_rpm'
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'premailer-rails', '~> 1.10', '>= 1.10.3'
@@ -154,6 +157,5 @@ gem 'toastr-rails'
 gem 'pundit'
 # gem 'thredded', path: '/Users/exe/rails_projects/rostjob_forum'
 gem 'thredded', git: 'git@bitbucket.org:Factory-Rushers/rostjob_forum.git'
-gem 'newrelic_rpm'
 gem 'reform'
 gem 'reform-rails'

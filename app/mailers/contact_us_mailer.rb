@@ -16,15 +16,15 @@ class ContactUsMailer < ApplicationMailer
 
   def admin_dispute_notification
     @message = params[:message]
-    @incident = params[:incident]
+    @incident = params[:attrs][:incident]
 
-    mail(to: 'manager@rostjob.com', subject: 'Спор')
+    mail(to: 'manager@rostjob.com', subject: 'RostJob. Спор')
   end
 
   def request_call
     @username = params[:username]
     @phone_number = params[:phone_number]
 
-    mail(to: ['manager@rostjob.com', 'msk@rostjob.com', 'spb@rostjob.com'], subject: 'Заявка на бесплатную консультацию')
+    mail(to: ['manager@rostjob.com', 'msk@rostjob.com', 'spb@rostjob.com'], subject: 'RostJob. Заявка на бесплатную консультацию')
   end
 end

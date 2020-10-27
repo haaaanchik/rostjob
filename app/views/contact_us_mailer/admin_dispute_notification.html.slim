@@ -1,5 +1,4 @@
-span Вы получили новое сообщение:
+p Вы получили новое сообщение:
+p = "#{@message} . "
 p
-  | #{ @message }
-p
-  | для того, чтобы просмотреть пройтиде по ссылке  #{ link_to t("enumerize.incident.reason.#{@incident.title}"), profile_ticket_url(@incident) }
+  |  Для того, чтобы посмотреть пройдите по ссылке  #{ link_to t("enumerize.incident.reason.#{@incident.title}"), profile_ticket_url(@incident) }

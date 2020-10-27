@@ -24,8 +24,9 @@
 
 
 [data-page="ProfileTicketsShow"] {
-  .popover{
+  .popover {
     left: unset !important;
+    max-width: unset;
   }
 
   .btn-rounded {
@@ -38,9 +39,11 @@
     border: none !important;
     font-weight: 600 !important;
   }
+
   input.btn:hover {
     box-shadow: none !important;
   }
+
 }
 
 .crm-list {
