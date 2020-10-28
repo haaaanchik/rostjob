@@ -1,8 +1,8 @@
 module EmailHelper
   def logo_image
-    attachments.inline['rost_job_logo.png'] = File.read("#{Rails.root}/app/assets/images/rost_job_logo.png")
+    attachments.inline['logo_rost_job_final.png'] = File.read("#{Rails.root}/app/assets/images/logo_rost_job_final.png")
     link_to root_url do
-      image_tag(attachments['rost_job_logo.png'].url)
+      image_tag(attachments['logo_rost_job_final.png'].url)
     end
   end
 
