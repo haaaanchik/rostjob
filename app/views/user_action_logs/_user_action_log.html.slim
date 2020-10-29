@@ -1,6 +1,6 @@
 tr
   td = user_action_log.login
-  td = user_action_log.subject&.full_name
+  td = user_action_log.user_name
   td = t("user_action_log.role.#{user_action_log.role}") if user_action_log.role
   td = user_action_log.order_id
   td = user_action_log.action
