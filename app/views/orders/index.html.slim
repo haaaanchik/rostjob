@@ -1,23 +1,219 @@
-#catalog
-  .catalog.custom-scroll
-    - @customer_list.each do |customer|
-      .catalog-item
-        p.info-title = link_to customer.user.full_name, orders_by_customer_path(customer)
-        .catalog-item-container
-          .item-info
-            = image_tag customer.image_url, class: 'logo'
-            .rating
-              p
-                | Рейтинг:
-                span.col-green
-                  |  #{ customer.display_rating }
-          .item-description
-            p.description = customer.company.description
-            hr/
-            p.details
-              | #{ customer.order_cities }
-              | , #{ customer.order_titles }
-            = link_to 'Перейти к заявкам', orders_by_customer_path(customer), class: 'item-btn'
-    = paginate @customer_list
-  .requests-page-filters.custom-scroll
-    = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, search_field_pl: 'Поиск по исполнителям', url: orders_path}
+.ordersCatalog
+  .ordersCatalog__filters
+    .searchByName
+      input.searchByName__input placeholder=("Поиск анкет") type="text" /
+      = image_tag('/img/reusable_images/search.png', class:"searchByName__img")
+    .filters-container
+      p.filterBy
+        | Фильтровать по:
+      .select.city
+        p.select__title.js-select-title
+          | Выберите город
+          = image_tag('/img/reusable_images/arrow.png', class:"select__arrow arrow js-arrow")
+        form.cities-container.hide
+          .select__options.cities.custom-scroll
+            p.option
+              input#city-1.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-1"  Москва
+            p.option
+              input#city-2.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-2"  Санкт-Петербург
+            p.option
+              input#city-3.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-3"  Новосибирск
+            p.option
+              input#city-4.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-4"  Ростов-на-Дону
+            p.option
+              input#city-5.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-5"  Набережные Челны
+            p.option
+              input#city-6.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-6"  Нижний Новгород
+            p.option
+              input#city-7.custom-checkbox.js-checkbox-city type="checkbox" /
+              label for="city-7"  Екатеринбург
+          .select__buttons
+            button.btn-short.checkAll.js-checkAll type="button"  Выбрать все
+            button.btn-short.clearAll.js-clearAll type="button"  Очистить все
+            button.btn-long.js-btn-long type="button"  Применить
+      .select.profession
+        p.select__title.js-select-title
+          | Выберете профессию
+          = image_tag('/img/reusable_images/arrow.png', class:"select__arrow arrow js-arrow")
+        form.professions-container.hide
+          .select__options.cities.custom-scroll
+            p.option
+              input#profession-1.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-1"  Профессия профессия профессия
+            p.option
+              input#profession-2.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-2"  Профессия
+            p.option
+              input#profession-3.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-3"  Профессия
+            p.option
+              input#profession-4.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-4"  Профессия
+            p.option
+              input#profession-5.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-5"  Профессия
+            p.option
+              input#profession-6.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-6"  Профессия
+            p.option
+              input#profession-7.custom-checkbox.js-checkbox-profession type="checkbox" /
+              label for="profession-7"  Профессия
+          .select__buttons
+            button.btn-short.checkAll.js-checkAll type="button"  Выбрать все
+            button.btn-short.clearAll.js-clearAll type="button"  Очистить все
+            button.btn-long.js-btn-long type="button"  Применить
+  .orders-container
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          | Рейтинг:
+          span.order__rating--color.green-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          | Рейтинг:
+          span.order__rating--color.green-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          = "Рейтинг: "
+          span.order__rating--color.orange-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          = "Рейтинг: "
+          span.order__rating--color.red-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          = "Рейтинг: "
+          span.order__rating--color.green-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          = "Рейтинг: "
+          span.order__rating--color.green-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+    .order
+      .order__header
+        p.order__title
+          | ИП Вороновский Сергей
+          | Анатольевич
+        p.order__rating
+          = "Рейтинг: "
+          span.order__rating--color.green-color 7,5/10
+        = image_tag('/img/reusable_images/logo.png', class:"order__img")
+      p.order-hide-description.js-hide-description.hide
+        | Сегодня Группа компаний РОСТ - крупнейшая в Республике Татарстан компания,
+        | специализирующаяся на аутсорсинге основных и вспомогательных функций для
+        | крупных корпоративных Клиентов. С 2016 года ГК РОСТ ведет экспансию за пределами Республики.
+      p.order-description
+        | г. Ростов-на-Дону, г. Набережные Челны, г. Москва, Токарь, Слесарь, Оператор ЧПУ,
+        | Менеджер по продажам, Транспортировщик в литейном производстве, Электрогазовщик
+      .order__footer
+        a.order__link href="#"  Перейти к заявкам
+        span.moreDetails.js-moreDetails
+          = image_tag('/img/reusable_images/post_arrow.png', class:"arrow js-arrow")
+          span.moreDetails__text Подробнее
+
