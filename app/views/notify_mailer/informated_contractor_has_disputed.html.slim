@@ -1,4 +1,4 @@
-= "Уважаемый, #{@incident.proposal_employee.profile.user.full_name}."
+= "Уважаемый #{@incident.proposal_employee.profile.user.full_name}."
 - if @incidents.size > 1
   p
     = 'У вас есть не разрещённые споры. Их можно посмотреть по ссылке'
@@ -9,7 +9,11 @@
     = "На Анкету №#{@incident.proposal_employee.employee_cv.id} #{@incident.proposal_employee.employee_cv.name} открыт спор."
   p
     | По причине:
-    = " #{@incident.title_text}. Заказчик комментирует: #{@incident.messages.last.text}. "
+    = " #{@incident.title_text}. "
+    br
+    |Заказчик комментирует:
+    = "#{@incident.messages.last.text}. "
+    br
     | Пожалуйста пройдите по ссылке и выберите вариант решения конфликта.
   p Спасибо!
   p
