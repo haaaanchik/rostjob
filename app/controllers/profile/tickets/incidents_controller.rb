@@ -20,7 +20,8 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def update
     ticket_waiting = incident.waiting
-    result = Cmd::Ticket::Incident::Update.call(incident: incident,
+    result = Cmd::Ticket::Incident::Update.call(send_message_admin: params[:send_message_admin],
+                                                incident: incident,
                                                 ticket: incident,
                                                 message_params: { text: message_text },
                                                 incident_params: incident_params,
@@ -69,8 +70,9 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def interview
+    message_text = current_profile.contractor? ? 'Для анкеты назначена дата приезда' : 'Для анкеты назначена дата собеседования.'
     result = Cmd::Ticket::Incident::Interview.call(candidate: incident.proposal_employee, user: current_user,
-                                                    message_params: { text: 'Для анкеты назначена дата собеседования.' },
+                                                    message_params: { text: message_text },
                                                     ticket: incident, interview_date: params[:interview_date],
                                                     incident: incident)
 

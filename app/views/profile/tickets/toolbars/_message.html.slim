@@ -1,14 +1,19 @@
-= form_with scope: :incident, url: failed_interview_profile_tickets_incident_path(@ticket), method: :put do |f|
+= form_with scope: :incident, url: failed_interview_profile_tickets_incident_path(@ticket), id: 'rejected_form', method: :put do |f|
   = f.hidden_field :title, value: :fail_interview
   = f.hidden_field :sender_name, name: 'incident[messages_attributes][0][sender_name]', value: current_user.full_name
   = f.hidden_field :sender_id, name: 'incident[messages_attributes][0][sender_id]', value: current_user.id
   .col-auto
     .form-group
-      = f.text_field :text,
+      = f.text_area :text,
               name: 'incident[messages_attributes][0][text]',
               id: 'incident_messages_attributes_0_text',
               class: 'form-control',
-              placeholder: 'Введите текст'
+              placeholder: 'Введите текст',
+              rows: 4
       .invalid-feedback
   .col-auto.text-center
-    = submit_tag 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2'
+    = submit_tag 'Отказать', class: 'btn button-hr btn-rounded btn-sm waves-effect text-center'
+
+javascript:
+  let widthButton = $('.text-example#to_revoked').width()
+  $('#rejected_form').css('width', widthButton)
