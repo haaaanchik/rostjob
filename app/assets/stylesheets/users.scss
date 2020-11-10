@@ -89,14 +89,15 @@
   }
 }
 
-.container{
-  max-width: 785px;
-  height: min-content;
-  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
-  border-radius: 4px;
-  background-color: #ffffff;
-  margin-top: 20px;
-}
+// Если все нормально, то строки ниже можно удалить
+//.container{
+//  max-width: 785px;
+//  height: min-content;
+//  box-shadow: 0 0 15px rgba(77, 77, 77, 0.15);
+//  border-radius: 4px;
+//  background-color: #ffffff;
+//  margin-top: 20px;
+//}
 
 .submit{
   display: block;
@@ -113,15 +114,16 @@
   cursor: pointer;
 }
 
-.users-edit-title{
-  color: #000000;
-  font-size: 17px;
-  font-weight: 700;
-  margin-left: 8.333333%;
-  margin-bottom: 60px;
-  margin-top: 30px;
-  font-family: "Open Sans", sans-serif;
-}
+// Если все нормально, то строки ниже можно удалить
+//.users-edit-title{
+//  color: #000000;
+//  font-size: 17px;
+//  font-weight: 700;
+//  margin-left: 8.333333%;
+//  margin-bottom: 60px;
+//  margin-top: 30px;
+//  font-family: "Open Sans", sans-serif;
+//}
 
 #radio-for-logo{
   opacity: 1;
