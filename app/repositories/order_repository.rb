@@ -18,11 +18,6 @@ module OrderRepository
         .joins('left join (select order_id, count(*) as unviewed_pe_count from proposal_employees where marks ->"$.viewed_by_customer" = false group by order_id) upe on upe.order_id = orders.id')
     }
 
-    scope :with_unviewed_pe_count, -> {
-      select('orders.*, unviewed_pe_count')
-        .joins('join (select order_id, count(*) as unviewed_pe_count from proposal_employees where state = "inbox" group by order_id) upe on upe.order_id = orders.id')
-    }
-
     scope :with_disputed_employee_cvs, -> {
       select('orders.*, proposal_employees.id as employee_cv_id, employee_cvs.name as employee_cv_name')
         .joins(:proposal_employees)
