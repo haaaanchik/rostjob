@@ -7,13 +7,19 @@ module UsersHelper
     end
   end
 
-  def roles_for_selector
-    [['Все', ''], ['Исполнитель', 'contractor'], ['Заказчик', 'customer']]
+  def navside_logo
+    contractor? ?  'navside/user-logo.png' : 'navside/user-avatar.png'
   end
 
-  def link_to_show_password_block(user)
-    return unless user.password_changed_at.present? 
+  def navbar_ronded
+    contractor? ?  'navbar/Rounded_Rectangle_blue.png' : 'navbar/Rounded_Rectangle_purple.png'
+  end
 
-    link_to 'Ввести пароль', '#', class: 'password-btn', id: 'show_password_block'
+  def dispute
+    contractor? ?  '/img/new/smile-sow.png' : 'smile_sow.png'
+  end
+
+  def roles_for_selector
+    [['Все', ''], ['Исполнитель', 'contractor'], ['Заказчик', 'customer']]
   end
 end

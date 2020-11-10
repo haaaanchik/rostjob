@@ -1,5 +1,6 @@
 $secondaryColor: #fff;
 $secondaryColorDark: #b7b7b7;
+$purple: #9046ff;
 
 .form-group.position-relative input {
   padding-right: 32px;
@@ -380,7 +381,7 @@ $secondaryColorDark: #b7b7b7;
 
   #requests-page .platform .details .sidebar .copy p {
     margin: 0;
-    color: #1970ff;
+    color: $purple;
     font-size: 13px;
   }
 
@@ -395,13 +396,13 @@ $secondaryColorDark: #b7b7b7;
 
   #requests-page .platform .details .buttons .add-to-favourite {
     border-radius: 14px;
-    border: 1px solid #1970ff;
+    border: 1px solid $purple;
     justify-content: center;
     height: 27px;
     display: flex;
     margin-top: 18px;
     align-items: center;
-    color: #1970ff;
+    color: $purple;
     font-size: 13px;
   }
 
@@ -430,7 +431,7 @@ $secondaryColorDark: #b7b7b7;
     align-items: center;
     color: #fff;
     font-size: 13px;
-    background-image: linear-gradient(to top, #1d72ff 0%, #66a1ff 100%);
+    background-image: linear-gradient(to top, $purple 0%, $purple 100%);
   }
 
   #requests-page .platform .details .buttons .send:hover {
@@ -1256,6 +1257,191 @@ $secondaryColorDark: #b7b7b7;
   }
 }
 
+#catalog {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background-color: #f2f2f2;
+  padding: 15px;
+  font-family: "Open-sans", sans-serif;
+
+  .requests-page-filters {
+    overflow: auto;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .catalog {
+    width: 70%;
+    height: max-content;
+    overflow: auto;
+    padding-right: 20px;
+    max-height: 100%;
+  }
+
+  .catalog-item {
+    padding: 20px 45px 15px 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(113, 113, 113, 0.2);
+    border-radius: 4px;
+    margin-bottom: 18px;
+  }
+
+  .catalog-item-container {
+    display: flex;
+  }
+
+  .item-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+  }
+
+  .info-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 34px;
+    line-height: 13px;
+
+    a {
+      color: $purple;
+    }
+  }
+
+  .logo {
+    max-width: 61px;
+  }
+
+  .rating {
+    margin-top: 18px;
+    font-size: 14px;
+    line-height: 12px;
+  }
+
+  .item-description {
+    width: 100%;
+  }
+
+  .description {
+    margin: 0 23px 0 15px;
+    font-size: 13px;
+  }
+
+  hr {
+    margin-top: 30px;
+  }
+
+  .details {
+    margin: 0 6px 0 14px;
+    color: $purple;
+    font-size: 13px;
+  }
+
+  .item-btn {
+    display: flex;
+    margin-left: auto;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    width: 166px;
+    height: 27px;
+    border-radius: 14px;
+    border: 1px solid $purple;
+    font-size: 13px;
+    color: $purple;
+  }
+
+  .input-container {
+    position: relative;
+    display: inline;
+    width: 100%;
+  }
+
+  .col-green {
+    color: #02da35;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 1000px) {
+  #catalog {
+    .catalog-item {
+      padding: 20px;
+    }
+
+    .item-info {
+      min-width: 100px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #catalog {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+    height: max-content;
+
+    .catalog {
+      width: 100%;
+      padding-right: 0;
+    }
+
+    .filter-item {
+      margin-bottom: 5px;
+    }
+
+    .description, .details {
+      margin-right: 0;
+    }
+
+    .filters-header {
+      width: 100%;
+    }
+
+    .cities, .professions {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  #catalog {
+    .cities, .professions {
+      width: 100%;
+    }
+
+    .catalog-item {
+      padding: 10px;
+    }
+
+    .info-title {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .catalog-item-container {
+      flex-direction: column;
+    }
+
+    .rating {
+      margin-top: 10px;
+    }
+
+    .item-info {
+      margin-bottom: 15px;
+    }
+
+    .description, .details {
+      margin-left: 0;
+    }
+  }
+}
+
 @media (max-width: 1200px) {
 
     #order_page #requests-page{
@@ -1446,5 +1632,4 @@ $secondaryColorDark: #b7b7b7;
   #myTab{
     justify-content: center;
   }
-
 }

@@ -27,11 +27,11 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
 
     = link_to profile_tickets_path, class: 'icon-link ' do
       = image_tag asset_path('navbar/communications.png')
-      = image_tag asset_path('navbar/Rounded_Rectangle_blue.png'), class: 'number-of-messages-bg'
+      = image_tag asset_path(navbar_ronded), class: 'number-of-messages-bg'
       span.number-of-messages = @opened_tickets_count
 
     = link_to page_path('all_manuals') do
-      i.fas.fa-question
+      i.fas.fa-question.recruiter-clr-purple
 
     = link_to logout_path, class: 'icon-link logout', method: :delete do
       = image_tag asset_path('navbar/exit.png')

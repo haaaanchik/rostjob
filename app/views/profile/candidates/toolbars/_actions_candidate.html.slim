@@ -7,12 +7,12 @@ ruby:
     i.far.fa-save.mr-1.mb-1
     | Скачать
 - if candidate.revoke_action_enabled?(current_profile)
-  = link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, remote: true do
+  = link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, class: 'recruiter-clr-purple', remote: true do
     i.fas.fa-undo.fa-sm.mr-2
     | Отозвать
 - if candidate.disput_action_enabled?(current_profile)
-  = link_to new_profile_tickets_incident_path(candidate_id: candidate.id), remote: true do
-    = image_tag '/img/new/smile-sow.png'
+  = link_to new_profile_tickets_incident_path(candidate_id: candidate.id), class: 'recruiter-clr-purple', remote: true do
+    = image_tag (dispute)
     | Спор
 - if candidate.to_inbox_action_enabled?(current_profile)
     = render partial: "profile/candidates/toolbars/to_inbox", locals: { candidate: candidate }

@@ -89,8 +89,8 @@
           hr
         .text-center.p-2
           - if @order
-            = f.submit 'Отправить', class: 'btn btn-sm btn-primary btn-rounded', name: :save_as_sent
+            = f.submit 'Отправить', class: 'btn btn-sm btn-primary recruiter-bg-purple btn-rounded', name: :save_as_sent
           - else
-            = f.submit 'Сохранить', class: 'btn btn-sm btn-primary btn-rounded', name: :save
+            = f.submit 'Сохранить', class: 'btn btn-sm btn-primary recruiter-bg-purple btn-rounded', name: :save
 
 = render partial: 'calendar'

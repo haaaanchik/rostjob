@@ -1,7 +1,51 @@
-// Place all the styles related to the recruiters controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .table-fixed {
     table-layout: fixed;
     overflow: hidden;
+}
+
+#recruter-page {
+  --purple: #9046ff;
+
+  .recruiter-clr-purple {
+    color: var(--purple) !important;
+  }
+
+  .recruiter-bg-purple {
+    background: var(--purple) !important;
+  }
+
+  .recruter-btn-gradient {
+    background-image: linear-gradient(to top, var(--purple) 0%, var(--purple) 100%) !important;
+  }
+
+  #setting-page .settings-list > li {
+    a {
+      &.active-link, &:hover {
+        color: var(--purple) !important;
+      }
+    }
+  }
+
+  #setting-page .password-btn {
+    color: #ffffff !important;
+  }
+
+  #main_treatment .btn-empty{
+    border: 1px solid var(--purple);
+  }
+
+  //ASAP refactoring
+  .form-check-input[type="checkbox"]:checked + label:before,
+  label.btn input[type="checkbox"]:checked + label:before {
+    border-right: 2px solid var(--purple);
+    border-bottom: 2px solid var(--purple);
+  }
+
+  .navside_recruiter{
+    background-image: linear-gradient(to top, #69a2ff 0%, var(--purple) 100%) !important;
+  }
+
+  //#setting-page .copy{
+  //  color: #9046ff;
+  //}
 }
