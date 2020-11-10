@@ -80,6 +80,7 @@ body {
 
 #recruter-main .events{
   grid-column: 1;
+  grid-row: unset;
 }
 
 #recruter-main .calendar{
