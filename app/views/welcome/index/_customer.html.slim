@@ -23,13 +23,8 @@ main
           = link_to profile_invoices_path, class: 'text-white' do
             | Пополнить
 
-  section.profiles
-    = render partial: 'welcome/orders/with_new_employee_cvs', locals: { profile: profile, orders: @orders_with_unviewed_pe_count }
-
   section.events
     = render partial: 'welcome/user_action_log', locals: { profile: @profile }
 
   section.seekers
-    = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: profile, orders: @orders_with_interviewed_candidates }
-
-
+    = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: @profile, orders: @orders_with_interviewed_candidates }

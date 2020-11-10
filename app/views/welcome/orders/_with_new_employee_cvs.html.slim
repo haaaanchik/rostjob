@@ -1,9 +1,0 @@
-h3.title Анкеты ждущие назначения собеседования
-.profiles_list id="scroll"
-  - orders.each do |order|
-    .profiles_list_elem
-      span Поступило #{order.unviewed_pe_count} анкет(ы) в заявку
-      = link_to order.title, profile_production_site_order_path(order.production_site, order)
-  - unless orders.present?
-    p
-      span.empty У вас нет анкет ждущих назначения собеседования

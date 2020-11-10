@@ -34,16 +34,10 @@ class WelcomeController < ApplicationController
   end
 
   def prepare_data
-    orders_with_unviewed_pe_count
-    orders_with_interviewed_candidates
-  end
-
-  def orders_with_interviewed_candidates
-    @orders_with_interviewed_candidates = current_profile.orders.with_interviewed_candidates.order('interview_date')
-  end
-
-  def orders_with_unviewed_pe_count
-    @orders_with_unviewed_pe_count ||= current_profile.orders.with_unviewed_pe_count
+    @orders_with_interviewed_candidates = current_profile
+                                            .orders
+                                            .with_interviewed_candidates
+                                            .order('interview_date')
   end
 
   def orders_with_disputed_employee_cvs
