@@ -1,4 +1,6 @@
 class Profile::BalancesController < ApplicationController
+  before_action :set_authorize
+
   def show
     balance
   end
@@ -51,5 +53,9 @@ class Profile::BalancesController < ApplicationController
   def balance_params
     params.permit(:value, :amount, :withdrawal_method_id)
     # params.require(:balance).permit(:value, :withdrawal_method_id)
+  end
+
+  def set_authorize
+    authorize [:profile, :balance]
   end
 end

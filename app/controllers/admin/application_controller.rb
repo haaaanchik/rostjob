@@ -1,6 +1,5 @@
 class Admin::ApplicationController < BaseController
   include Admin::SessionsHelper
-  include Pundit
 
   protect_from_forgery prepend: true
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

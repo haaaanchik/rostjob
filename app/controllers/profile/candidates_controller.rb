@@ -1,4 +1,6 @@
 class Profile::CandidatesController < ApplicationController
+  before_action :set_authorize
+
   def index
     paginated_candidates
     @active_item = :candidates
@@ -10,7 +12,7 @@ class Profile::CandidatesController < ApplicationController
     respond_to do |format|
       format.html
       format.js
-      format.pdf { render pdf_setting  }
+      format.pdf { render pdf_setting }
     end
   end
 
@@ -78,5 +80,9 @@ class Profile::CandidatesController < ApplicationController
       dpi: 300,
       encoding: 'utf-8'
     }
+  end
+
+  def set_authorize
+    authorize :candidate
   end
 end

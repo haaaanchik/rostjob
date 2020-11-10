@@ -1,4 +1,6 @@
 class Profile::ProductionSitesController < ApplicationController
+  before_action :set_authorize
+
   def index
     @active_item = :production_sites
     production_sites
@@ -45,5 +47,9 @@ class Profile::ProductionSitesController < ApplicationController
 
   def production_sites
     @production_sites ||= current_profile.production_sites
+  end
+
+  def set_authorize
+    authorize [:profile, :production_site]
   end
 end

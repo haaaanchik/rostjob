@@ -2,6 +2,9 @@ class ApplicationController < BaseController
   include SessionsHelper
   include WordsHelper
 
+  rescue_from Pundit::NotAuthorizedError, with: :redirect_back_with_message
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_back_with_message
+
   protect_from_forgery prepend: true
   # before_action :set_raven_context
   # before_action :authenticate_user!
@@ -92,5 +95,10 @@ class ApplicationController < BaseController
 
   def left_menu_items
     @left_menu_items ||= Company.where.not(label: nil).pluck(:label).map(&:to_sym)
+  end
+
+  def redirect_back_with_message
+    flash[:alert] = 'Эта страница была не доступна для вас'
+    redirect_back(fallback_location: root_path)
   end
 end

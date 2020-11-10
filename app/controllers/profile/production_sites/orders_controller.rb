@@ -1,4 +1,5 @@
 class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
+  before_action :set_authorize, except: %i[index]
   expose :order_templates,    -> { production_site.order_templates.order(id: :desc) }
   expose :production_sites,   -> { current_profile.production_sites }
   expose :waiting_pay_orders, -> { fetch_waiting_pay_orders }
@@ -7,6 +8,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   expose :published_orders,   -> { fetch_published_orders }
 
   def index
+    authorize [:profile, :order], :index?
     orders
     @active_item = :production_sites
   end
@@ -159,5 +161,9 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
                      .with_pe_counts
                      .order(urgency_level: :desc, created_at: :desc)
                      .includes(profile: :company)
+  end
+
+  def set_authorize
+    authorize [:profile, order]
   end
 end

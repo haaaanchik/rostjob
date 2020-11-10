@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
+  before_action :set_authorize
   before_action :order, except: %i[index customer_orders info]
   before_action :redirect_to_disputes, only: :index
 
   def index
     @active_item = :orders
     @customer_list = Kaminari.paginate_array(search_customer.decorate.uniq).page(params[:page])
-
   end
 
   def customer_orders
@@ -61,5 +61,9 @@ class OrdersController < ApplicationController
       flash[:notice] = 'У вас есть анкета с открытым спором, пожалуйста просмотрите его!'
       redirect_to profile_ticket_path(@opened_tickets.first)
     end
+  end
+
+  def set_authorize
+    authorize Order
   end
 end
