@@ -241,7 +241,7 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   def link_to_candidate(user)
     return link_to_candidate_or_ticket if user.profile.customer?
 
-    h.profile_employee_cvs_path(proposal_employee_id: id)
+    disputed? ? h.profile_ticket_path(incidents.opened.last) : h.profile_employee_cvs_path(proposal_employee_id: id)
   end
 
   def display_candidate_date_for_customer(user)
