@@ -49,6 +49,9 @@ ruby:
     = render partial: 'orders/order', collection: @orders, locals: { order_id: 'order_id_' }
   - else
     #requests-page
+      .ordersCatalog
+        = render partial: 'orders/search_contractor_filters', locals: {orders: @order_filters, search_field_pl: 'Поиск по заявкам', url: orders_by_customer_path(@customer)}
+
       .requests-page-container
         - @orders.group_by(&:customer_name).each do |customer_name, items|
           - production_sites = items.group_by{ |it| it.production_site.title }
@@ -84,7 +87,3 @@ ruby:
                   .tab-pane.fade aria-labelledby="contact-tab" role="tabpanel" id="contact-#{iteration}"
                     = items.first.production_site.phones
             - iteration +=1
-
-
-      .requests-page-filters
-        = render partial: 'orders/search_contractor_filters', locals: {orders: @order_filters, search_field_pl: 'Поиск по заявкам', url: orders_by_customer_path(@customer)}

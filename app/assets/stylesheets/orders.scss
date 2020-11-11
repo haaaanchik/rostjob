@@ -55,7 +55,7 @@ $secondaryColorDark: #b7b7b7;
 #order_page {
   min-height: 100%;
   #requests-page {
-    background-color: #f2f2f2;
+    background-color: #ffffff;
     font-family: "Open sans", sans-serif;
     height: auto;
     min-height: 100%;
@@ -65,7 +65,7 @@ $secondaryColorDark: #b7b7b7;
     flex-wrap: wrap;
 
     .requests-page-container {
-      width: 75.5%;
+      width: 100%;
     }
 
     .order_row:nth-child(2n) {
@@ -541,6 +541,7 @@ $secondaryColorDark: #b7b7b7;
     align-items: flex-start;
     user-select: none;
     font-size: 14px;
+    cursor: pointer;
   }
 
   /* создание в label псевдоэлемента before со следующими стилями */
@@ -601,10 +602,15 @@ $secondaryColorDark: #b7b7b7;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    position: fixed;
+    top: 59px;
+    background-color: #ffffff;
+    z-index: 99;
 
     @media (max-width: 992px) {
       flex-direction: column;
       align-items: flex-start;
+      position: sticky;
     }
   }
 
@@ -756,6 +762,7 @@ $secondaryColorDark: #b7b7b7;
         height: 28px;
         font-size: 13px;
         font-weight: 600;
+        cursor: pointer;
       }
 
       .btn-long {
@@ -768,6 +775,7 @@ $secondaryColorDark: #b7b7b7;
         font-size: 13px;
         font-weight: 600;
         margin-top: 15px;
+        cursor: pointer;
       }
     }
   }
@@ -819,6 +827,7 @@ $secondaryColorDark: #b7b7b7;
     background-color: #ffffff;
     padding: 25px;
     margin-bottom: 20px;
+    width: 100%;
     @media (max-width: 768px) {
       padding: 15px;
     }
@@ -829,6 +838,16 @@ $secondaryColorDark: #b7b7b7;
     }
 
     &__title {
+      width: calc(100% - 60px);
+      height: 32px;
+      line-height: 16px;
+      color: #9561f8;
+      font-size: 16px;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    &__title a {
       width: calc(100% - 60px);
       height: 32px;
       line-height: 16px;

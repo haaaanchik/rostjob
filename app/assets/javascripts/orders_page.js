@@ -24,8 +24,14 @@ $(document).ready(function(){
 	let selectTitlesArr = document.querySelectorAll('.js-select-title');
 	if(selectTitlesArr.length > 0) selectTitlesArr.forEach(el => el.addEventListener('click', toggleHideSelects));
 
-	const selectTitlesButtons = document.querySelectorAll('.js-btn-long');
-	if(selectTitlesButtons.length > 0) selectTitlesButtons.forEach(el => el.addEventListener('click', toggleHideSelectsFromButtons));
+  (function() {
+    $(document).on('click', '.js-btn-long', function() {
+      var form;
+      form = $('#profession-city-form');
+      return form.submit();
+    });
+
+  }).call(this);
 
 	function toggleHideSelectsFromButtons(e) {
 		const button = e.target;
@@ -36,8 +42,20 @@ $(document).ready(function(){
 		arrow.classList.toggle('rotate');
 	}
 
+  let citiesContainer = document.querySelector('.cities-container');
+  let profContainer = document.querySelector('.professions-container');
+
 	function toggleHideSelects(e){
 		// Скрываю или отображаю
+    const container = e.target.nextElementSibling;
+    if(container === profContainer && !citiesContainer.classList.contains('hide')){
+      citiesContainer.classList.add('hide');
+      citiesContainer.previousElementSibling.querySelector('.js-arrow').classList.remove('rotate');
+    }
+    if(container === citiesContainer &&  !profContainer.classList.contains('hide')){
+      profContainer.classList.add('hide');
+      profContainer.previousElementSibling.querySelector('.js-arrow').classList.remove('rotate');
+    }
 		e.target.nextElementSibling.classList.toggle('hide');
 		const arrow = e.target.querySelector('.js-arrow');
 		// Вращаю стрелку
