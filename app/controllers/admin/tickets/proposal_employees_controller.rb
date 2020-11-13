@@ -1,7 +1,8 @@
 class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationController
   def revoke
     result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee,
-                                                user: current_staffer)
+                                                user: current_staffer,
+                                                incident: ticket)
     redirect_to admin_tickets_path if result.success?
   end
 
