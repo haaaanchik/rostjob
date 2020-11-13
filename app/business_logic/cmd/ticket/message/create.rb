@@ -34,7 +34,9 @@ module Cmd
         end
 
         def sender_name
-          user.decorate.full_name
+          return user.full_name if user.is_a?(User)
+
+          user.name
         end
       end
     end

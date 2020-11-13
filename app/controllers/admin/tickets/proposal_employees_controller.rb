@@ -9,25 +9,26 @@ class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationC
   end
 
   def hire
-    result = Cmd::ProposalEmployee::Hire.call(candidate: proposal_employee,
-                                              hiring_date: candidate_params[:hiring_date])
-    if result.success?
-      ticket.to_closed!
-      redirect_to admin_tickets_path
-    else
-      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
-    end
+    result = Cmd::Ticket::Incident::Hire.call(message_params: { text: 'Для анкеты назначена дата найма, администратором' },
+                                              hiring_date: candidate_params[:hiring_date],
+                                              candidate: proposal_employee,
+                                              user: current_staffer,
+                                              incident: ticket,
+                                              ticket: ticket)
+
+    redirect_to admin_tickets_path if result.success?
   end
 
-  def to_inbox
-    result = Cmd::ProposalEmployee::ToInbox.call(candidate: proposal_employee,
-                                                 interview_date: candidate_params[:interview_date])
-    if result.success?
-      ticket.to_closed!
-      redirect_to admin_tickets_path
-    else
-      render json: { validate: true, data: errors_data(result.candidate) }, status: 422
-    end
+  def to_interview
+    result = Cmd::Ticket::Incident::Interview.call(message_params: { text: 'Для анкеты назначена дата приезда, администратором' },
+                                                  interview_date: candidate_params[:interview_date],
+                                                  proposal_employee: proposal_employee,
+                                                  candidate: proposal_employee,
+                                                  user: current_staffer,
+                                                  incident: ticket,
+                                                  ticket: ticket)
+
+    redirect_to admin_tickets_path if result.success?
   end
 
   private

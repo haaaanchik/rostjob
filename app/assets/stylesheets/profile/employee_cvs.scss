@@ -22,6 +22,11 @@
   left: -290px !important;
 }
 
+[data-page="AdminTicketsShow"] {
+  .popover {
+    left: unset !important;
+  }
+}
 
 [data-page="ProfileTicketsShow"] {
   .popover {

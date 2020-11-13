@@ -10,6 +10,8 @@ module Cmd
         context.fail! unless candidate.update(interview_date: interview_date)
         context.fail! unless candidate.to_interview!
 
+        return if context.incident || context.ticket
+
         Cmd::UserActionLogger::Log.call(params: logger_params)
 
         notify_mail_for_contractor

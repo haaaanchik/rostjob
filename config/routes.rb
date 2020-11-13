@@ -108,7 +108,7 @@ Rails.application.routes.draw do
         resources :proposal_employees, only: %i[] do
           member do
             put :revoke
-            patch :to_inbox
+            patch :to_interview
             patch :hire
           end
         end
