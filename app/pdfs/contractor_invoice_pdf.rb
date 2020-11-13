@@ -33,12 +33,12 @@ class ContractorInvoicePdf < Prawn::Document
 
   def receiver_requisites
     move_down 2.mm
-    text "Исполнитель: #{@seller['short_name']}", size: 12
+    text "Исполнитель: #{@invoice.profile.user.email}", size: 12
     move_down 5.mm
     receiver = make_table([
-                            ["#{@seller['short_name'] ? @seller['short_name'] : @seller['name']}"],
-                            ['Получатель']
-                          ], cell_style: { font: 'Arial', size: 10, borders: [] })
+                            ['Получатель', @invoice.profile.user.full_name]
+                          ], cell_style: { font: 'Arial', size: 10, borders: [] },
+                             column_widths: [25.mm, 60.mm])
     receiver_bank = make_table([
                                  ["#{@seller['account']['bank']}"],
                                  ['Банк получателя']
