@@ -46,7 +46,7 @@ class Profile::EmployeeCvsController < ApplicationController
   def update
     result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
     if result.success?
-      redirect_to profile_proposal_employees_path, notice: 'Анкета обнавлена', format: 'js' if params[:employee_cv][:redirected]
+      redirect_to profile_proposal_employees_path, notice: 'Анкета обновлена', format: 'js' if params[:employee_cv][:redirected]
       @status = 'success'
       render json: { reminder_date: result.employee_cv.decorate.display_reminders } if params[:draggable]
     else
