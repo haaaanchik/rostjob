@@ -15,6 +15,10 @@ class OrderPolicy < ApplicationPolicy
     contractor?
   end
 
+  def info?
+    contractor?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
