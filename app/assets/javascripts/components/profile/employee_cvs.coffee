@@ -32,6 +32,7 @@ class RostJob.ProfileEmployeeCvsIndex
     $('.crm-list').on 'click', '.card-title.js-title', @changeCrmColumnName
     $('.crm-list').on 'keypress', '.js-clicked-input', @saveCrmColumnName
     $('.crm-list').on 'click', '.remove_column_button', @removeColumn
+    $("[data-page='ProfileEmployeeCvsIndex']").on 'click', '#edit_employee_cv', @clickSubmitForm
 
   @proposalSelectEmployeeCv: (event) ->
     empl = $(this).val()
@@ -415,3 +416,6 @@ class RostJob.ProfileEmployeeCvsIndex
             $(this).remove()
         error: ->
           toastr.error('Пожалуйста перенесите все карточки перед удалением колонки!')
+
+  @clickSubmitForm: ->
+    $('.new-employee_cv-form').submit()

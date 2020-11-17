@@ -3,21 +3,15 @@ module Cmd
     class CorrectInterviewDate
       include Interactor
 
+      delegate :interview_date, to: :context
+      delegate :proposal_employee, to: :context
+
       def call
         context.fail! unless proposal_employee.update(interview_date: interview_date)
-        proposal_employee.to_inbox! if proposal_employee.interview? && profile.contractor?
         Cmd::UserActionLogger::Log.call(params: logger_params) unless context.log == false
       end
 
       private
-
-      def interview_date
-        context.interview_date
-      end
-
-      def proposal_employee
-        context.proposal_employee
-      end
 
       def profile
         proposal_employee.profile
