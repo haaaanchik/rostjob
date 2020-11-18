@@ -1,0 +1,37 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Что такое статус анкет?
+    .content.d-flex.flex-column
+      p
+        | После создания анкеты, ей присваивается статус. Чтобы узнать статус анкеты, необходимо раскрыть Фильтры,
+        | там анкеты отмечены разноцветными флажками. Если поставить галочку напротив желтого флажка "В очереди" -
+        | откроется список с анкетами, которые отправлены в очередь и находятся на рассмотрении.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_1.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_1.png', width: 800, height: 500
+      p
+        | Анкеты, которые помечены оранжевым флажком "Собеседование" - это те анкеты, которые
+        |  ждут собеседования.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_2.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_2.png', width: 800, height: 500
+      p
+        | Зеленый флажок статус "Нанят", означает, что у анкеты идет гарантийный период.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_3.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_3.png', width: 800, height: 500
+      p
+        | При нажатии на красный флажок, откроется список с анкетами, которым присвоен статус "Спор",
+        | там находятся анкеты, которые вызвали спорные вопросы.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_4.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_4.png', width: 800, height: 500
+      p
+        | Фиолетовый флажок со статусом "Оплачен" - означает, что анкета находится у рекрутера.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_5.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_5.png', width: 800, height: 500
+      p
+        | Голубой флажок со статусом "Перенос" - означает, что анкета перенесена.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_6.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_6.png', width: 800, height: 500
+      p
+        | При выборе серого флажка, где статус "Ждет акта", открывается список анкет, которые
+        | в ожидании подписания акта.
+        = link_to image_path('/img/manuals/manual_what_is_the_status_of_profiles/image_7.png'), data: {lightbox: "images"}, class: 'text-center my-3 rounded mx-auto z-depth-2' do
+          = image_tag '/img/manuals/manual_what_is_the_status_of_profiles/image_7.png', width: 800, height: 500
