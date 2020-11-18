@@ -12,6 +12,7 @@ class CheckInterviewDeadlineJob < ApplicationJob
   private
 
   def check_expiration_five_days(candidate)
-    (Date.current - 5.days) > candidate.interview_date
+    five_working_days = Holiday.plus_five_working_days(candidate.interview_date.to_date)
+    Date.current >= five_working_days
   end
 end
