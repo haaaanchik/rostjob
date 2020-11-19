@@ -6,35 +6,46 @@ ruby:
   val = params[:q] ? params[:q][:all_fields_cont] : nil
 
 = search_form_for @q, url: url, id: 'profession-city-form'  do |f|
-  .filters-header
-    h2.title Фильтры
-    .filters-search
-      = f.search_field :all_fields_cont, placeholder: search_field_pl, id: 'search', value: val
-      = image_tag('/img/new/search.png')
-  .cities
-    p.subtitle Города
-    - cities.each_with_index do |city, i|
-      .filter-item
-        = check_box_tag 'q[city_fields_in][]',
+  .ordersCatalog__filters
+    .searchByName
+      = f.search_field :all_fields_cont, placeholder: search_field_pl, class: 'searchByName__input', value: val
+      = image_tag('/img/reusable_images/search.png', class: 'searchByName__img')
+    .filters-container
+      p.filterBy
+        | Фильтровать по:
+      .select.city
+        p.select__title.js-select-title
+          | Выберите город
+          = image_tag('/img/reusable_images/arrow.png', class: 'select__arrow arrow js-arrow')
+        .cities-container.hide
+          .select__options.cities.custom-scroll
+            - cities.each_with_index do |city, i|
+              p.option
+                = check_box_tag 'q[city_fields_in][]',
                         city,
                         cities_val&.include?(city),
-                        class: 'checkbox',
-                        id:    "city_filter_#{i}"
-        = label :city_fields, nil, class: 'form-check-label', for: "city_filter_#{i}" do
-          p.rounded.m-0.truncate
-            i.mr-2
-            span.mr-2 = city
-  .professions
-    p.subtitle
-      | Профессии
-    - titles.each_with_index do |title, i|
-      .filter-item
-        = check_box_tag 'q[title_fields_in][]',
+                        class: 'custom-checkbox js-checkbox-city',
+                        id: "city-#{i}"
+                = label :city_fields, city, for: "city-#{i}"
+          .select__buttons
+            button.btn-short.checkAll.js-checkAll type='button'  Выбрать все
+            button.btn-short.clearAll.js-clearAll type='button'  Очистить все
+            = f.submit 'Применить', class: 'btn-long'
+      .select.profession
+        p.select__title.js-select-title
+          | Выберете профессию
+          = image_tag('/img/reusable_images/arrow.png', class: 'select__arrow arrow js-arrow')
+        .professions-container.hide
+          .select__options.cities.custom-scroll
+            - titles.each_with_index do |title, i|
+              p.option
+                = check_box_tag 'q[title_fields_in][]',
                         title,
                         titles_val&.include?(title),
-                        class: 'checkbox',
-                        id:     "title_filter_#{i}"
-        = label :title_fields, nil, class: 'form-check-label w-100', for: "title_filter_#{i}" do
-          p.rounded.m-0.truncate.w-100
-            i.mr-2
-            span.mr-2 = title
+                        class: 'custom-checkbox js-checkbox-profession',
+                        id: "profession-#{i}"
+                = label :title_fields, title, for: "profession-#{i}"
+          .select__buttons
+            button.btn-short.checkAll.js-checkAll type='button'  Выбрать все
+            button.btn-short.clearAll.js-clearAll type='button'  Очистить все
+            = f.submit 'Применить', tupe: 'button',  class: 'btn-long'
