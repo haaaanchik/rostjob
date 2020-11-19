@@ -19,7 +19,6 @@
 #= require select2
 #= require select2_locale_ru
 #= require order
-#= require orders_page
 #= require production_sites
 # require jquery.inputmask.extensions
 # require jquery.inputmask.numeric.extensions

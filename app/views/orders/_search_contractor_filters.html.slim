@@ -30,7 +30,7 @@ ruby:
           .select__buttons
             button.btn-short.checkAll.js-checkAll type='button'  Выбрать все
             button.btn-short.clearAll.js-clearAll type='button'  Очистить все
-            button.btn-long.js-btn-long type='button'  Применить
+            = f.submit 'Применить', class: 'btn-long'
       .select.profession
         p.select__title.js-select-title
           | Выберете профессию
@@ -48,4 +48,4 @@ ruby:
           .select__buttons
             button.btn-short.checkAll.js-checkAll type='button'  Выбрать все
             button.btn-short.clearAll.js-clearAll type='button'  Очистить все
-            button.btn-long.js-btn-long type='button'  Применить
+            = f.submit 'Применить', tupe: 'button',  class: 'btn-long'
