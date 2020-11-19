@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
     @q = Profile.joins(:orders)
              .where('orders.state': 'published')
              .customers.includes(:user, :company)
-             .order(rating: :desc).ransack(params[:q])
+             .order(deal_counter: :desc).ransack(params[:q])
     @q.result
   end
 
