@@ -87,3 +87,22 @@ ruby:
                   .tab-pane.fade aria-labelledby="contact-tab" role="tabpanel" id="contact-#{iteration}"
                     = items.first.production_site.phones
             - iteration +=1
+      .single-order
+        .order
+          .order__header
+            p.order__title
+              = link_to 'Менеджер РОСТ', '#'
+            p.order__rating
+              | Рейтинг:
+              span.order__rating--color.green-color
+                |  Нет данных
+            = image_tag('/img/new/no-avatar.png', class: 'order__img')
+          p.order-hide-description.js-hide-description.hide
+            = 'hide description'
+          p.order-description
+            | Ростов-на-Дону, Москва, Набережные Челны, Токарь, Сверловщик, Оператор ЧПУ, Электрогазосварщик, Маляр по металлу (Автомаляр), Шлифовщик, Облицовщик-плиточник, Транспортировщик в литейном производстве, Стерженщик ручной формовки, Сварщик на машинах контактной (прессовой) сварки, Слесарь механосборочных работ
+          .order__footer
+            a.order__link href="#"  Перейти к заявкам
+            span.moreDetails.js-moreDetails
+              = image_tag('/img/reusable_images/post_arrow.png', class: 'arrow js-arrow')
+              span.moreDetails__text Подробнее
