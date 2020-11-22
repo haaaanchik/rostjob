@@ -9,8 +9,10 @@ p
 p
   | Контакты:
   ul
+    li
+      | Заказчик - #{pr_emp.order.profile.company.short_name}, тел: #{pr_emp.order.profile.company.phone}
     li 
-      | Контактное лицо от заказчика - #{pr_emp.order.contact_person['name']} тел:  #{pr_emp.order.contact_person['phone']}
+      | Контактное лицо от заказчика - #{pr_emp.order.contact_person['name']}, тел: #{pr_emp.order.contact_person['phone']}
     li
       | Рекрутёр - #{pr_emp.profile.user.full_name} тел: #{pr_emp.profile.phone}, электронная почта: #{pr_emp.profile.user.email}
     li
