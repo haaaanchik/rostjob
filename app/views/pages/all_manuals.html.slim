@@ -15,5 +15,5 @@
       li = link_to 'Как подтвердить Акт?', page_path('manual_how_to_approved_act')
     - if (user_signed_in? && current_user.profile.contractor?) || !user_signed_in?
       li =  link_to 'Как отправить анкету?', page_path('manual_how_send_emp')
-      li = link_to 'Как изменить дату прибытия соискателя?', page_path('manual_correct_date_arrive')
+      li = link_to 'Как изменить дату прибытия соискателя?', page_path('manual_correct_date_interview')
       li = link_to 'Как получить вознаграждение?', page_path('manual_how_get_money')
