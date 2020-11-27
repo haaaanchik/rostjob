@@ -12,7 +12,7 @@ class Profile::OrderTemplatePolicy < ApplicationPolicy
   end
 
   def destroy?
-    custromer?
+    customer?
   end
 
   def destroy_array?
