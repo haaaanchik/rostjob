@@ -3,18 +3,12 @@ module Cmd
     class ToInterview
       include Interactor
 
-      delegate :candidate, to: :context
+      delegate :proposal_employee, to: :context
       delegate :log, to: :context
 
       def call
-        context.fail! unless candidate.update(interview_date: interview_date)
-        context.fail! unless candidate.to_interview!
-
-        return if context.incident || context.ticket
-
-        Cmd::UserActionLogger::Log.call(params: logger_params)
-
-        notify_mail_for_contractor
+        context.fail! unless proposal_employee.update(interview_date: interview_date)
+        context.fail! unless proposal_employee.to_interview!
       end
 
       private
@@ -24,15 +18,11 @@ module Cmd
       end
 
       def current_user
-        candidate.order.profile.user
-      end
-
-      def notify_mail_for_contractor
-        Cmd::NotifyMail::ProposalEmployee::Interview.call(proposal_employee: candidate)
+        proposal_employee.order.profile.user
       end
 
       def receiver_ids
-        [current_user.id, candidate.profile.user.id]
+        [current_user.id, proposal_employee.profile.user.id]
       end
 
       def logger_params
@@ -42,11 +32,11 @@ module Cmd
           subject_id: current_user.id,
           subject_type: 'User',
           subject_role: current_user.profile.profile_type,
-          action: "Кандидату #{candidate.employee_cv.name} с анкетой №#{candidate.employee_cv.id} назначена дата собеседования #{candidate.interview_date.strftime('%d.%m.%Y')}",
-          object_id: candidate.employee_cv.id,
+          action: "Кандидату #{proposal_employee.employee_cv.name} с анкетой №#{proposal_employee.employee_cv.id} назначена дата собеседования #{proposal_employee.interview_date.strftime('%d.%m.%Y')}",
+          object_id: proposal_employee.employee_cv.id,
           object_type: 'EmployeeCv',
-          order_id: candidate.order_id,
-          employee_cv_id: candidate.employee_cv_id
+          order_id: proposal_employee.order_id,
+          employee_cv_id: proposal_employee.employee_cv_id
         }
       end
     end

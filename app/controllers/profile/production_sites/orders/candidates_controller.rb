@@ -61,7 +61,7 @@ class Profile::ProductionSites::Orders::CandidatesController < Profile::Producti
   def to_interview
     render(plain: 'order completed', status: 422) and return if order.completed?
 
-    result = Cmd::ProposalEmployee::ToInterview.call(candidate: candidate,
+    result = Cmd::ProposalEmployee::ToInterview.call(proposal_employee: candidate,
                                                      interview_date: candidate_params[:interview_date])
     if result.success?
       flash[:redirection] = 'to_interview'

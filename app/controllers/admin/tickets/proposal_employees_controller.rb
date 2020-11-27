@@ -23,7 +23,6 @@ class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationC
     result = Cmd::Ticket::Incident::Interview.call(message_params: { text: 'Для анкеты назначена дата приезда, администратором' },
                                                   interview_date: candidate_params[:interview_date],
                                                   proposal_employee: proposal_employee,
-                                                  candidate: proposal_employee,
                                                   user: current_staffer,
                                                   incident: ticket,
                                                   ticket: ticket)

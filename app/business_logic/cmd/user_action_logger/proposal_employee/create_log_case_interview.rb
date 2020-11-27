@@ -4,8 +4,8 @@ module Cmd
       class CreateLogCaseInterview
         include Interactor
 
-        delegate :user,      to: :context
-        delegate :candidate, to: :context
+        delegate :user,              to: :context
+        delegate :proposal_employee, to: :context
 
         def call
           Cmd::UserActionLogger::Log.call(params: logger_params)
@@ -22,7 +22,7 @@ module Cmd
         end
 
         def receiver_ids
-          [user.id, candidate.profile.user.id]
+          [user.id, proposal_employee.profile.user.id]
         end
 
         def subject_role
@@ -42,11 +42,11 @@ module Cmd
             subject_id: user.id,
             subject_type: user.class.name,
             subject_role: subject_role,
-            action: "Кандидату #{candidate.employee_cv.name} с анкетой №#{candidate.employee_cv.id} назначена дата собеседования #{candidate.interview_date.strftime('%d.%m.%Y')} #{action_by}",
-            object_id: candidate.employee_cv.id,
+            action: "Кандидату #{proposal_employee.employee_cv.name} с анкетой №#{proposal_employee.employee_cv.id} назначена дата собеседования #{proposal_employee.interview_date.strftime('%d.%m.%Y')} #{action_by}",
+            object_id: proposal_employee.employee_cv.id,
             object_type: 'EmployeeCv',
-            order_id: candidate.order_id,
-            employee_cv_id: candidate.employee_cv_id
+            order_id: proposal_employee.order_id,
+            employee_cv_id: proposal_employee.employee_cv_id
           }
         end
       end

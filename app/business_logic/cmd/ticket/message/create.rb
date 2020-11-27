@@ -6,7 +6,6 @@ module Cmd
 
         delegate :user, to: :context
         delegate :ticket, to: :context
-        delegate :message, to: :context
 
         def call
           return unless context.message_params
