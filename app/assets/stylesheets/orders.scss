@@ -957,19 +957,21 @@ $secondaryColorDark: #b7b7b7;
       column-count: 1;
     }
   }
-
-
-}
-
-.single-order{
-  width: 420px;
-  margin-left: 10px;
-  @media (max-width: 1200px) {
-    display: none;
-  }
 }
 
 #requests-page {
+  .single-order{
+    width: 420px;
+    margin-left: 10px;
+    @media (max-width: 1200px) {
+      display: none;
+    }
+
+    .order {
+      position: fixed;
+      width: 430px;
+    }
+  }
 
   .order {
     display: inline-block;
