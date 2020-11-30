@@ -20,22 +20,15 @@ module Cmd
         private
 
         def notify_user
-          ::TicketMailer.notify_user(message).deliver_now
+          ::TicketMailer.notify_user(context.message).deliver_now
         end
 
         def can_notify_user?
-          user.is_a?(Staffer) &&
-            ticket.appeal?
+          user.is_a?(Staffer) && ticket.appeal?
         end
 
         def message_params
-          context.message_params.merge(sender_name: sender_name, sender_id: user.id)
-        end
-
-        def sender_name
-          return user.full_name if user.is_a?(User)
-
-          user.name
+          context.message_params.merge(sender_name: user.full_name, sender_id: user.id)
         end
       end
     end

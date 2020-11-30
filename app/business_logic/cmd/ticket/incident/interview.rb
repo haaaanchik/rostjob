@@ -7,7 +7,7 @@ module Cmd
         organize Cmd::ProposalEmployee::ToInterview,
                  Cmd::Ticket::Message::Create,
                  Cmd::Ticket::Incident::Close,
-                 Cmd::UserActionLogger::ProposalEmployee::CreateLogCaseInterview,
+                 Cmd::UserActionLogger::ProposalEmployee::Interview::ByUser,
                  Cmd::NotifyMail::ProposalEmployee::Interview
 
         around do |interactor|

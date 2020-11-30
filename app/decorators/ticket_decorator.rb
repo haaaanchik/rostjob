@@ -23,6 +23,10 @@ class TicketDecorator < ApplicationDecorator
     false
   end
 
+  def to_interview_action_enabled?(_subject)
+    false
+  end
+
   def close_action_enabled?(_subject)
     false
   end

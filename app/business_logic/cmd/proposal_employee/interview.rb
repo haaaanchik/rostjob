@@ -4,7 +4,7 @@ module Cmd
       include Interactor::Organizer
 
       organize Cmd::ProposalEmployee::ToInterview,
-               Cmd::UserActionLogger::ProposalEmployee::CreateLogCaseInterview,
+               Cmd::UserActionLogger::ProposalEmployee::Interview::ByUser,
                Cmd::NotifyMail::ProposalEmployee::Interview
 
       around do |interactor|

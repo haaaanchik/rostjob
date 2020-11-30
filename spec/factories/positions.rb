@@ -3,11 +3,14 @@ FactoryBot.define do
     sequence :title do |n|
       "Position #{n}"
     end
-    sequence :slug do |n|
-      "position-slug-#{n}"
+
+    sequence :landing_title do |n|
+      "landing_title#{n}"
     end
 
-    landing_title { 'Test Landing Title' }
+    sequence :slug do |n|
+      "slug#{n}"
+    end
 
     # after(:create) do |pos|
     #   price_group = create(:price_group)
