@@ -13,6 +13,7 @@
       li = link_to 'Статусы анкет', page_path('manual_set_status_proposal_employee')
       li = link_to 'Шаблоны', page_path('manual_patterns')
       li = link_to 'Как подтвердить Акт?', page_path('manual_how_to_approved_act')
+      li = link_to 'Как осуществить поиск анкеты?', page_path('manual_how_to_search_for_a_profile_customer')
     - if (user_signed_in? && current_user.profile.contractor?) || !user_signed_in?
       li =  link_to 'Как отправить анкету?', page_path('manual_how_send_emp')
       li = link_to 'Как изменить дату прибытия соискателя?', page_path('manual_correct_date_interview')
@@ -20,3 +21,4 @@
       li = link_to 'Как вывести средства исполнителя?', page_path('manual_how_to_withdraw_funds_contractor')
       / li = link_to 'Список анкет', page_path('manual_for_crm')
       li = link_to 'Что такое статус анкет?', page_path('manual_what_is_the_status_of_proposed_employees')
+      li = link_to 'Как осуществить поиск анкеты?', page_path('manual_how_to_search_for_a_profile_recruter')
