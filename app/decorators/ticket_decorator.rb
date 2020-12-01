@@ -1,4 +1,6 @@
 class TicketDecorator < ApplicationDecorator
+  # frozen_string_literal: true
+
   delegate_all
 
   def header
@@ -26,9 +28,25 @@ class TicketDecorator < ApplicationDecorator
   end
 
   def user_full_name
-    full_name = object.user_id == h.current_user.id ? proposal_employee_user_name :
-                                                      subject_name
-    h.content_tag(:td) { full_name }
+    return if object.proposal_employee.nil?
+    object.proposal_employee.profile.user.full_name
+  end
+
+  def display_appeal_and_incident
+    return h.content_tag(:i, '', class: 'i fas fa-file-alt', title: 'Обращение') if ticket.appeal?
+    return h.content_tag(:i, '', class: 'i fas fa-angry', title: 'Спор') if ticket.incident?
+  end
+
+  def display_order_title
+    return if appeal?
+
+    "№#{proposal_employee.order.id} #{proposal_employee.order.title}"
+  end
+
+  def display_proposal_employee_name
+    return if appeal?
+
+    proposal_employee.employee_cv.name
   end
 
   def display_candidate_price(user)
@@ -46,10 +64,4 @@ class TicketDecorator < ApplicationDecorator
               class: 'black-text'
   end
 
-  private
-
-  def proposal_employee_user_name
-    return if object.proposal_employee.nil?
-    object.proposal_employee.profile.user.full_name
-  end
 end

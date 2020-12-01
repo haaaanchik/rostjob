@@ -1,11 +1,9 @@
 tr.clickable-row data-href=profile_ticket_path(ticket)
   td = ticket.id
-  td
-    - if ticket.appeal?
-      i.fas.fa-file-alt title='Обращение'
-    - elsif ticket.incident?
-      i.fas.fa-angry title='Спор'
-  = ticket.user_full_name
+  td = ticket.display_appeal_and_incident
+  td = ticket.user_full_name
+  td = ticket.display_order_title
+  td = ticket.display_proposal_employee_name
   td = ticket.created_at
   td = ticket.incident? ? t("enumerize.incident.reason.#{ticket.title}") : ticket.title
   td
