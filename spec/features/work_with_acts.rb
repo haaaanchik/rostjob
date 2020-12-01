@@ -12,7 +12,6 @@ RSpec.feature 'Work with acts', type: :feature do
     before(:each) { sign_in(candidate.order.profile.user) }
 
     scenario 'to paid one act', js: true do
-      find('.enjoyhint_skip_btn').click
       click_on('Акты', match: :first)
 
       expect(page).to have_content(candidate.employee_cv.name)

@@ -5,6 +5,7 @@ module Cmd
 
       def call
         context.fail! unless employee_cv.to_disputed!
+
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 

@@ -1,8 +1,10 @@
 class Admin::Tickets::ProposalEmployeesController < Admin::Tickets::ApplicationController
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: proposal_employee,
+    result =  Cmd::Ticket::Inciden::Revoke.call(proposal_employee: proposal_employee,
+                                                message_params: { text: 'Анкеты была отозвона, администрацией' },                                       
                                                 user: current_staffer,
-                                                incident: ticket)
+                                                incident: ticket,
+                                                ticket: ticket)
     redirect_to admin_tickets_path if result.success?
   end
 

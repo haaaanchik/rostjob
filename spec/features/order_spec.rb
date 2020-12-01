@@ -31,8 +31,8 @@ RSpec.feature 'Order', type: :feature do
       click_button('Далее')
       sleep(1)
 
-      fill_in 'contact-face', with: order[:contact_person][:name]
-      fill_in 'contact-face-number', with: order[:contact_person][:phone]
+      fill_in 'order_template_contact_person_name', with: order[:contact_person][:name]
+      fill_in 'order_template_contact_person_phone', with: order[:contact_person][:phone]
 
       page.execute_script("tinyMCE.get('order_template_other_info_remark').setContent('TEXT')")
       find_by_id('send').click
@@ -59,7 +59,7 @@ RSpec.feature 'Order', type: :feature do
 
       click_button('Далее')
 
-      fill_in 'contact-face', with: new_contact
+      fill_in 'order_contact_person_name', with: new_contact
 
       click_button('Сохранить')
 
@@ -111,7 +111,6 @@ RSpec.feature 'Order', type: :feature do
 
       click_link(order.title)
       sleep(1)
-
       find('.enjoyhint_skip_btn').click
       find('.add-personal').click
       sleep(1)
@@ -121,7 +120,6 @@ RSpec.feature 'Order', type: :feature do
       click_button('Добавить')
 
       sleep(1)
-
       find('.enjoyhint_skip_btn').click
       click_on('Оплатить')
       sleep(1)
@@ -137,7 +135,6 @@ RSpec.feature 'Order', type: :feature do
 
       click_link(order.title)
       sleep(1)
-
       find('.enjoyhint_skip_btn').click
       find('.add-personal').click
       sleep(1)
@@ -148,7 +145,6 @@ RSpec.feature 'Order', type: :feature do
 
       sleep(1)
 
-      find('.enjoyhint_skip_btn').click
       expect(page).to have_link('Пополнить баланс')
       count_order = Order.last.customer_price * 999
       expect(count_order).to be > Balance.last.amount
@@ -162,29 +158,86 @@ RSpec.feature 'Order', type: :feature do
       sign_in(order.profile.user)
       find('#production-site-list').click
       find('#first_pr_site').click
+
       sleep(1)
       find('.enjoyhint_skip_btn').click
-      sleep(1)
-
       find("div[data-target='finished']").click
       sleep(1)
 
       click_link(order.title)
       sleep(1)
       find('.enjoyhint_skip_btn').click
-
       find('.add-personal').click
       sleep(1)
 
       page.execute_script("$('#order_number_additional_employees').val('1')")
       click_button('Добавить')
       sleep(1)
-
       find('.enjoyhint_skip_btn').click
       click_on('Оплатить')
       sleep(1)
 
       expect(Order.last.state).to eq('published')
+    end
+  end
+
+  context 'destroy order' do
+    let!(:order) { create(:order, :waiting_for_payment) }
+
+    before(:each) do
+      sign_in(order.profile.user)
+      visit profile_production_site_orders_path(order.production_site.id)
+      find('.pending_payment').click
+    end
+
+    scenario 'destroy order', js: true do
+      find('.show-tab #check_all_orders').click
+
+      accept_confirm do
+        find('.show-tab .delete_button').click
+      end
+
+      sleep(1)
+      expect(Order.count).to eq(0)
+      expect(page).to have_no_content(order.title)
+    end
+
+    scenario 'dont destroy order without select', js: true do
+      find('.show-tab .delete_button').click
+
+      sleep(1)
+      expect(Order.count).to eq(1)
+      expect(page).to have_content('Пожалуйста, выберите заявку(и) из списка!')
+    end
+  end
+
+  context 'copy order_template' do
+    let!(:order_template) { create(:order_template) }
+    let(:copy_title) { 'Копия '+order_template.name }
+
+    before(:each) do
+      sign_in(order_template.profile.user)
+      visit profile_production_site_orders_path(order_template.production_site.id)
+      find('span', text: 'Шаблоны').click
+    end
+
+    scenario 'copy ord_temp', js: true do
+      find('.show-tab #check_all_templates').click
+
+      accept_confirm do
+        find('.show-tab .copy_button').click
+      end
+
+      sleep(1)
+      expect(page).to have_content(copy_title)
+      expect(OrderTemplate.count).to eq(2)
+    end
+
+    scenario 'expect show error without selected order', js: true do
+      find('.show-tab .copy_button').click
+
+      expect(page).to have_content('Пожалуйста, выберите шаблон(ы) из списка!')
+      expect(OrderTemplate.count).to eq(1)
     end
   end
 end

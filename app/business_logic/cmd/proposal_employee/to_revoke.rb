@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 module Cmd
   module ProposalEmployee
     class ToRevoke
       include Interactor
 
-      delegate :user, to: :context
+      delegate :user,              to: :context
       delegate :proposal_employee, to: :context
 
       def call
@@ -15,9 +17,9 @@ module Cmd
       private
 
       def set_contexts
-        context.employee_cv = context.proposal_employee.employee_cv
-        context.order_profile = context.proposal_employee.order.profile
-        context.candidate = context.proposal_employee
+        context.employee_cv = proposal_employee.employee_cv
+        context.order_profile = proposal_employee.order.profile
+        context.candidate = proposal_employee
       end
     end
   end

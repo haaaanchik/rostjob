@@ -6,9 +6,7 @@ RSpec.feature 'Users', type: :feature do
       expect(Profile.count).to eq(0)
       visit new_customer_path
 
-      within('#new_user') do
-        fill_in 'E-Mail', with: 'test@mail.com'
-      end
+      fill_in 'E-Mail', with: 'test@mail.com'
 
       click_button 'Нанять персонал'
       expect(page).to have_content 'Cпасибо за регистрацию.'
@@ -23,9 +21,7 @@ RSpec.feature 'Users', type: :feature do
     scenario 'registration new contractor' do
       visit new_contractor_path
 
-      within('#new_user') do
-        fill_in 'E-Mail', with: 'test@mail.com'
-      end
+      fill_in 'E-Mail', with: 'test@mail.com'
 
       click_button 'Регистрироваться как фрилансер'
       expect(page).to have_content 'Cпасибо за регистрацию.'

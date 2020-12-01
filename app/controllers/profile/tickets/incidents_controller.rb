@@ -8,11 +8,11 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def create
-    result = Cmd::Ticket::Incident::Create.call(user: current_user, incident_params: incident_params.except(:candidate_id))
+    result = Cmd::Ticket::Incident::Create.call(user: current_user,
+                                                incident_params: incident_params.except(:candidate_id))
+
     if result.success?
-      candidate = result.incident.proposal_employee
-      candidate.to_disputed! if candidate.may_to_disputed?
-      redirect_to_after_create(candidate)
+      redirect_to_after_create(result.incident.proposal_employee)
     else
       render json: { validate: true, data: errors_data(result.incident) }, status: 422
     end
@@ -48,11 +48,11 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def revoke
-    result = Cmd::ProposalEmployee::Revoke.call(proposal_employee: incident.proposal_employee, 
-                                                message_params: { text: 'Анкеты была отозвона' },
-                                                incident: incident,
-                                                ticket: incident,
-                                                user: current_user)
+    result = Cmd::Ticket::Inciden::Revoke.call(proposal_employee: incident.proposal_employee, 
+                                               message_params: { text: 'Анкеты была отозвона' },
+                                               incident: incident,
+                                               ticket: incident,
+                                               user: current_user)
 
     result.success? ? (redirect_to profile_ticket_path(incident)) : @status = 'error'
   end

@@ -1,9 +1,7 @@
 FactoryBot.define do
   factory :order do
-    title { "Title order" }
     city { Faker::Address.city }
     description { "tetx description" }
-    commission { "MyString" }
     state { 'published' }
     skill { 'master' }
     contact_person { { name: Faker::Name.name, phone: '+79788888888' } }
@@ -13,6 +11,10 @@ FactoryBot.define do
 
     trait :compleated do
       state { 'completed' }
+    end
+
+    trait :waiting_for_payment do
+      state { 'waiting_for_payment' }
     end
 
     before(:create) do |order|

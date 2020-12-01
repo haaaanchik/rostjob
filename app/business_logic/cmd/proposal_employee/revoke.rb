@@ -6,9 +6,7 @@ module Cmd
       organize Cmd::ProposalEmployee::ToRevoke,
                Cmd::EmployeeCv::ToReady,
                Cmd::Rating::Update,
-               Cmd::Ticket::Incident::Close,
                Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
-               Cmd::Ticket::Message::Create,
                Cmd::NotifyMail::ProposalEmployee::Revoke
 
       around do |interactor|
