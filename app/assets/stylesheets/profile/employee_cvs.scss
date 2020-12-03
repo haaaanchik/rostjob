@@ -345,6 +345,10 @@
   .dropdown-item {
     color: black !important;
   }
+  .dropdown-item:active{
+    text-decoration: none;
+    background-color: #9046ff;
+  }
 
   .btn-info {
     background-color: transparent !important;
