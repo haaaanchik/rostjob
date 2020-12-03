@@ -301,6 +301,6 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   def url_to_show(user)
     return h.profile_candidate_path(model) if user.profile.customer?
 
-    h.profile_proposal_employee_path(model)
+    h.profile_proposal_employee_path(model, redirect: 'to_incident')
   end
 end

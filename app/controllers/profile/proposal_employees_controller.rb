@@ -11,6 +11,7 @@ class Profile::ProposalEmployeesController < ApplicationController
     proposal_employee
     @remained_warranty_days = Holiday.remained_warranty_days(@proposal_employee.hiring_date,
                                                              @proposal_employee.warranty_date)
+    @redirect = params[:redirect] || 'to_profile_proposal_employees'
   end
 
   def new

@@ -15,7 +15,7 @@
         hr
       .modal-body.mb-2
         = form_with model: [:profile, employee_cv], class: 'new-employee_cv-form w-75' do |f|
-          = f.hidden_field :redirected, value: 'true'
+          = f.hidden_field :redirected, value: redirect_to
           .modal-ancete.w-100
             h4.modal-ancete__title Анкета
             .ancete-rows.must-have

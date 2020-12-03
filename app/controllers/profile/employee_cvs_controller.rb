@@ -46,7 +46,8 @@ class Profile::EmployeeCvsController < ApplicationController
   def update
     result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
     if result.success?
-      redirect_to profile_proposal_employees_path, notice: 'Анкета обновлена', format: 'js' if params[:employee_cv][:redirected]
+      redirect_after_update
+
       @status = 'success'
       render json: { reminder_date: result.employee_cv.decorate.display_reminders } if params[:draggable]
     else
@@ -133,5 +134,16 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def set_authorize
     authorize [:profile, :employee_cv]
+  end
+
+  def redirect_after_update
+    return unless params[:employee_cv][:redirected]
+
+    case params[:employee_cv][:redirected]
+    when 'to_profile_proposal_employees'
+      redirect_to profile_proposal_employees_path, notice: 'Анкета обновлена', format: 'js'
+    when 'to_incident'
+      redirect_back(fallback_location: profile_tickets_path)
+    end
   end
 end
