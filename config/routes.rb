@@ -163,7 +163,7 @@ Rails.application.routes.draw do
     get :payment_orders, to: 'payment_orders#index'
 
     resources :contractor_invoices, only: %i[index show]
-    resources :invoices, only: :index do
+    resources :invoices, only: %i[index destroy] do
       member do
         put :pay
       end
@@ -377,7 +377,7 @@ Rails.application.routes.draw do
       # end
     end
     post 'proposals/:id', to: 'proposals#send_message'
-    resource :balance, only: :show do
+    resource :balance, only: %i[show destroy] do
       resources :withdrawal_methods, except: %i[show new create destroy]
       member do
         get :withdrawal, to: 'balances#withdrawal_methods'

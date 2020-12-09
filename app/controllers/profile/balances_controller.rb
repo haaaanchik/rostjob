@@ -28,7 +28,6 @@ class Profile::BalancesController < ApplicationController
   end
 
   def contractor_invoice
-    invoice = Invoice.find(params[:id])
     respond_to do |format|
       format.html
       format.pdf do
@@ -38,6 +37,17 @@ class Profile::BalancesController < ApplicationController
                   disposition: 'inline'
       end
     end
+  end
+
+  def destroy
+    bill_trans = profile.balance.bill_transactions.find(params[:id])
+    if bill_trans.destroy
+      flash[:notice] = 'Запись успешно удалена'
+    else
+      flash[:alert] = 'Ошибка, обратитесь к администрации'
+    end
+
+    redirect_to profile_balance_path
   end
 
   private
@@ -53,6 +63,10 @@ class Profile::BalancesController < ApplicationController
   def balance_params
     params.permit(:value, :amount, :withdrawal_method_id)
     # params.require(:balance).permit(:value, :withdrawal_method_id)
+  end
+
+  def invoice
+    Invoice.find(params[:id])
   end
 
   def set_authorize

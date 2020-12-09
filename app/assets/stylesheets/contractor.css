@@ -224,3 +224,9 @@ body {
     }
 
 }
+
+#recruter-main .user_info_rating {
+  .user-btn > a {
+    padding: 5px 20px;
+  }
+}
