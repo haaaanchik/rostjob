@@ -1,3 +1,18 @@
+class Positions
+  @init: ->
+    return unless $('#position_form').length
+    @bind()
+
+  @bind: ->
+    $('#position_slug').on 'keyup', @setSlug
+
+  @setSlug: ->
+    text = $(this).val().toLowerCase()
+    $(this).val(text.replace(RegExp(' ', 'g'), '-'))
+
+$(document).on 'turbolinks:load', ->
+  Positions.init()
+
 @save_current_price_group_id = (event) ->
   select = $(event.currentTarget)
   select.data('prev-id', select.val())

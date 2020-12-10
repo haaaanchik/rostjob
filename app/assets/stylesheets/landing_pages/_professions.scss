@@ -300,9 +300,13 @@
 
     .container {
       max-width: 1090px;
-      padding: 80px 130px;
+      padding: 50px 110px;
       background-color: #f0f9fe;
       border-radius: 4px;
+
+      .block-invoice {
+        margin-top: 10px;
+      }
 
       @media (max-width: 768px) {
         padding: 40px;
