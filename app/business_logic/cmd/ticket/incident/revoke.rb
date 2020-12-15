@@ -1,16 +1,16 @@
-# frozen_string_literal: true
-
 module Cmd
   module Ticket
     module Incident
-      class FailedInterview
+      class Revoke
         include Interactor::Organizer
 
         organize Cmd::ProposalEmployee::ToRevoke,
                  Cmd::EmployeeCv::ToReady,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Rating::Update,
                  Cmd::Ticket::Incident::Close,
-                 Cmd::NotifyMail::Ticket::Incident::FailedInterview
+                 Cmd::Ticket::Message::Create,
+                 Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
+                 Cmd::NotifyMail::ProposalEmployee::Revoke
 
         around do |interactor|
           ActiveRecord::Base.transaction do

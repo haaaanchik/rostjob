@@ -5,6 +5,7 @@ class OrderTemplate < ApplicationRecord
   belongs_to :profile
   belongs_to :production_site
   belongs_to :position
+  has_one :user, through: :profile
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
   enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true

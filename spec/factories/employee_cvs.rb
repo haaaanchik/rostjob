@@ -7,5 +7,9 @@ FactoryBot.define do
     experience { 'more 1 year in managment' }
     remark { 'add inforation has not got' }
     comment { 'norify message for contractor' }
+
+    trait :ready do
+      state { 'ready' }
+    end
   end
 end

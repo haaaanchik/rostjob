@@ -44,6 +44,33 @@ RSpec.feature 'ProposalEmployee', type: :feature do
 
         expect(Profile.contractors.last.favorites.count).to eq(1)
       end
+
+      scenario 'failed dublication candidate', js: true do
+        cv = create(:employee_cv, profile: contractor.profile)
+        emp_cv = ProposalEmployee.create(order: order, profile: contractor.profile, employee_cv: cv)
+
+        expect(ProposalEmployee.count).to eq(1)
+        expect(EmployeeCv.count).to eq(1)
+
+        click_link('Отправить анкету')
+        sleep(1)
+
+        within('.new-employee_cv-form') do
+          fill_in 'employee_cv_name',         with: cv.name
+          fill_in 'employee_cv_phone_number', with: '9555555555'
+          fill_in 'employee_cv_experience',   with: cv.experience
+          fill_in 'employee_cv_education',    with: cv.education
+          fill_in 'employee_cv_remark',       with: cv.remark
+
+          click_button('Отправить')
+        end
+
+        sleep(1)
+
+        expect(page).to have_content('Такая анкета уже существует')
+        expect(ProposalEmployee.count).to eq(1)
+        expect(EmployeeCv.count).to eq(1)
+      end
     end
 
     context 'working in CRM' do
@@ -154,7 +181,6 @@ RSpec.feature 'ProposalEmployee', type: :feature do
       end
 
       scenario 'revoke candidate', js: true do
-        find('.enjoyhint_close_btn').click
         click_link(order_with_candidate.employee_cv.name)
         sleep(1)
 
@@ -183,7 +209,7 @@ RSpec.feature 'ProposalEmployee', type: :feature do
 
       scenario 'hire cadidate', js: true do
         sign_in(order_with_candidate.order.profile.user)
-        find('#production-site-list').click
+        find('#production-site-list').clickcontex
         find('#first_pr_site').click
         click_link(order_with_candidate.order.title)
 

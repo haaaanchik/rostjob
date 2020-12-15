@@ -6,12 +6,4 @@ class Incident < Ticket
 
   enumerize :title, in: %i[not_come denied fail_interview didnt_work other]
   enumerize :reason, in: { other: 0, not_come: 1, fail_interview: 2 }, default: :other
-
-  after_create :mail_for_contractor_has_incident, if: -> { opened? && user.profile.notify_mails? }
-
-  private
-
-  def mail_for_contractor_has_incident
-    SendNotifyMailJob.perform_now(objects: [self], method: 'informated_contractor_has_disputed')
-  end
 end

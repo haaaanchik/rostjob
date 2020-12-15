@@ -9,6 +9,7 @@ module Cmd
       def call
         candidate.update(interview_date: interview_date)
         context.fail! unless candidate.to_inbox!
+
         Cmd::UserActionLogger::Log.call(params: logger_params) if log
         Cmd::NotifyMail::ProposalEmployee::Inbox.call(proposal_employee: candidate)
       end
