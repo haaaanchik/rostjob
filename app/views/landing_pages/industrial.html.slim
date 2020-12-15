@@ -69,7 +69,7 @@ body#customer-landing
         - @specializations.each do |specialization|
           .category-block
             p.title = specialization.title
-            hr/
+            hr
             - specialization.positions.limit(2).decorate.each do |position|
               p.subtitle = position.display_link_title
               p.price

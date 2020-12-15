@@ -19,5 +19,5 @@ class RostJob.ProfileTicketsShow
     $(this).addClass('disabled')
     e.preventDefault()
 
-  @editCandidateProfile ->
+  @editCandidateProfile: ->
     $('form.new-employee_cv-form').submit()

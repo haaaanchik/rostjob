@@ -239,7 +239,7 @@
           .img-container
             = image_tag '/img/professions-landing/clients-logo/image57.png'
           .img-container
-            = image_tag '/img/professions-landing/clients-logo/leroy_merlin.jpeg'
+            = image_tag '/img/professions-landing/clients-logo/image58.jpeg'
           .img-container
             = image_tag '/img/professions-landing/clients-logo/image59.png'
           .img-container
@@ -269,57 +269,3 @@
 
   = render 'footer'
   = render 'request_call_modal'
-javascript:
-    // Professions slider
-
-    $('#clients-slider').slick({
-      infinite: true,
-      slidesToShow: 6,
-      slidesToScroll: 1,
-      autoplay: true,
-      autoplaySpeed: 2000,
-      prevArrow: $('.clients-slider-arrow-left'),
-      nextArrow: $('.clients-slider-arrow-right'),
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            // centerPadding: '40px',
-            slidesToShow: 4,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 992,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
-          }
-        },
-        {
-          breakpoint: 768,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
-          }
-        }
-      ]
-    });
-
-    // Modal
-    $('.js-call-modal').on('click', openModal);
-
-    function openModal() {
-      $('#modal').addClass('open');
-    }
-
-    $('#overlay').on('click', closeModal);
-    $('.js-close-modal').on('click', closeModal);
-
-    function closeModal() {
-      $('#modal').removeClass('open');
-    }
-
-    $('#overlay .form').on('click', function (e) {
-      e.stopPropagation();
-    })

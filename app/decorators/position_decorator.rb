@@ -6,9 +6,9 @@ class PositionDecorator < ApplicationDecorator
   end
 
   def display_link_title
-    return title unless slug.present?
+    return title if slug.blank?
 
-    h.link_to title, h.professions_path(slug)
+    h.link_to(title, h.professions_path(slug))
   end
 
   def display_other_services
