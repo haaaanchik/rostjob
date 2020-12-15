@@ -1,6 +1,12 @@
 class UserDecorator < ApplicationDecorator
   delegate_all
 
+  def display_show_password_block
+    return if password_changed_at.blank?
+
+    h.link_to 'Ввести пароль', '#', class: 'password-btn recruter-btn-gradient', id: 'show_password_block'
+  end
+
   def disputs_count
     0
   end

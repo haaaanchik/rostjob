@@ -410,6 +410,20 @@ main{
 
 .fc-center {
   display: flex;
+
+  .fc-button-primary {
+    background-color: #9046ff;
+    border-color: #9046ff;
+
+    &:hover,
+    &:active,
+    &:focus {
+      box-shadow: none!important;
+      background-color: #47118e!important;
+      color: #fff!important;
+      border-color: #47118e!important;
+    }
+  }
 }
 
 //Landing_choice

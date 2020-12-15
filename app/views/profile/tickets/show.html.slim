@@ -35,7 +35,7 @@ ruby:
             p.order__title
               = @ticket.display_customer_order_url(order)
             .order__bottom
-              span.order__price 
+              span.order__price.recruiter-bg-purple
                 = @ticket.display_candidate_price(current_user)
                 = ' руб. / чел.'
 

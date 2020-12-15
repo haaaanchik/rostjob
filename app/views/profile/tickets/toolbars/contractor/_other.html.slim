@@ -7,13 +7,16 @@ ruby:
                                button_text: 'НАЗНАЧИТЬ'}}"
 
 .ready-text-examples
-  = link_to revoke_profile_tickets_incident_path(@ticket), method: :put, remote: true, class: 'text-example' do
+  = link_to revoke_profile_tickets_incident_path(@ticket),
+          method: :put,
+          remote: true,
+          class: 'text-example recruiter-br-clr-purple' do
     span Кандидат не явился на собеседование, я хочу вернуть анкету
-  .text-example data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
+  .text-example.recruiter-br-clr-purple data-toggle='popover' title='Дата приезда' data-placement='top' data-html='true' data-content=pe_form
     span Кандидат не явился на собеседование, я хочу изменить дату приезда
   = link_to profile_tickets_incident_path(@ticket, waiting_field.merge(message: message)),
           method: :put,
           remote: true,
           id: 'precedent_button',
-          class: "text-example #{disabled}" do
+          class: "text-example recruiter-br-clr-purple #{disabled}" do
     span = message

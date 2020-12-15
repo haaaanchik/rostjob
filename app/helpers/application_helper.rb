@@ -3,6 +3,10 @@ module ApplicationHelper
     (params[:controller].split('/') << action_name).map(&:camelize).join
   end
 
+  def class_recruiter
+    'recruter-page' if current_user && current_profile&.contractor?
+  end
+
   def body_controller
     params[:controller].split('/').push(params[:action]).join('_')
   end

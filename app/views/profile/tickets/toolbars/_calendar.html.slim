@@ -3,7 +3,8 @@
 = form_with url: url, method: :put do |f|
   = f.hidden_field field.to_sym, value: candidate.interview_date.strftime('%d.%m.%Y')
   .row.justify-content-center.mt-2
-    = f.submit button_text, class: 'btn button-hr btn-rounded btn-sm waves-effect text-center m-0'
+    = f.submit button_text,
+               class: 'btn button-hr btn-rounded btn-sm waves-effect text-center m-0 btn recruter-btn-gradient'
 
 javascript:
   function init_datepicker() {

@@ -43,10 +43,6 @@
   padding: 20px;
 }
 
-#setting-page .settings-list > li.active-link-underline{
-  border-bottom: 1px solid #1970ff;
-}
-
 #setting-page .settings-column .title {
   margin: 0 0 15px 0;
   font-size: 16px;
@@ -85,10 +81,6 @@
   border-bottom: 1px solid #e1e1e1;
   margin-bottom: 20px;
   padding: 0 0 10px 10px;
-
-  &:hover {
-    border-bottom: 1px solid #1970ff;
-  }
 
   a {
     color: #575757;

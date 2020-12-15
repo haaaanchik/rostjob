@@ -1,12 +1,11 @@
-= form_with model: @appeal, url: profile_tickets_appeals_path do |f|
-  .treatment-modal_block_wrapper
-    button class="btn-close"
-      span
-        hr
-        hr
+.treatment-modal_block_wrapper
+  button class="btn-close"
+    span
+      hr
+      hr
 
-    header Новое обращение
-
+  header Новое обращение
+  = form_with model: @appeal, url: profile_tickets_appeals_path do |f|
     .treatment-modal_block_wrapper_input
       = f.label :title, 'Тема'
       = f.text_field :title, placeholder: 'Укажите тему обращения'
@@ -18,4 +17,4 @@
         = m.text_area :text, placeholder: 'Напишите ваше обращение'
         .invalid-feedback
 
-    = f.submit 'Отправить', class: 'btn'
+    = f.submit 'Отправить', class: 'btn recruter-btn-gradient'

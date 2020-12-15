@@ -10,7 +10,7 @@ ruby:
   = render partial: 'partials/settings_menu'
   .settings-block-container
     .settings-block-user
-      .title
+      .title.recruiter-clr-purple
         | Настройки профиля
       = form_for resource,
               as: resource_name,
@@ -22,7 +22,7 @@ ruby:
             = f.text_field :full_name
             .invalid-feedback
         .form-item.show-password-block
-          = link_to_show_password_block(resource)
+          = resource.decorate.display_show_password_block
         #password_block class=("#{'d-none' if (f.object.password_changed_at.present? && current_password.nil?)}")
           - if f.object.password_changed_at.present?
             .form-item
@@ -57,4 +57,4 @@ ruby:
               = ff.fields_for :company do |fc|
                 label.title.description Описание компании
                 = fc.text_area :description, class: 'custom-scroll'
-        = f.submit 'Сохранить', class: ' submit'
+        = f.submit 'Сохранить', class: 'submit recruter-btn-gradient'

@@ -20,8 +20,9 @@ main
           span.ml-2 = @profile.balance.amount
           |  руб.
         button.user-btn
-          = link_to profile_invoices_path, class: 'text-white' do
-            | Пополнить
+          .user-contractor
+            = link_to profile_invoices_path, class: 'text-white' do
+              | Пополнить
 
   section.events
     = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: @profile, orders: @orders_with_interviewed_candidates }
