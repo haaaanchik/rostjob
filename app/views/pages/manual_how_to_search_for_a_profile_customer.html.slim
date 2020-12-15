@@ -1,0 +1,15 @@
+.d-flex.justify-content-center.w-100
+  .col-lg-8.col-sm-12
+    h1.text-center Как осуществить поиск анкеты?
+    .content.d-flex.flex-column
+      p  Для поиска анкеты необходимо в правом верхнем углу кликнуть в поле поиска
+               далее вводите название искомой анкеты и нажимаете клавишу "Enter"
+      = link_to image_path('/img/manuals/manual_how_to_search_for_a_profile_customer/img_1.png'),
+                data: { lightbox: 'images' },
+                class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_how_to_search_for_a_profile_customer/img_1_mini.png'
+      p  После нажатия клавиши «Enter» появится необходимая анкета
+      = link_to image_path('/img/manuals/manual_how_to_search_for_a_profile_customer/img_2.png'),
+                data: { lightbox: 'images' },
+                class: 'text-center my-3 rounded mx-auto z-depth-2' do
+        = image_tag '/img/manuals/manual_how_to_search_for_a_profile_customer/img_2_mini.png'
