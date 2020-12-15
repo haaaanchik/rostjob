@@ -48,11 +48,11 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def revoke
-    result = Cmd::Ticket::Inciden::Revoke.call(proposal_employee: incident.proposal_employee, 
-                                               message_params: { text: 'Анкеты была отозвона' },
-                                               incident: incident,
-                                               ticket: incident,
-                                               user: current_user)
+    result = Cmd::Ticket::Incident::Revoke.call(proposal_employee: incident.proposal_employee,
+                                                message_params: { text: 'Анкеты была отозвона' },
+                                                incident: incident,
+                                                ticket: incident,
+                                                user: current_user)
 
     result.success? ? (redirect_to profile_ticket_path(incident)) : @status = 'error'
   end
