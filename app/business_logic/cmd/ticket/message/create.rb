@@ -34,7 +34,7 @@ module Cmd
         end
 
         def sender_name
-          user.full_name
+          user.decorate.full_name
         end
       end
     end
