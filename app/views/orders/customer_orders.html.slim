@@ -63,7 +63,7 @@ ruby:
                 p = place_of_work
                 span = items.first.city
               .information
-                img.logo alt="" src="/img/no-avatar.png"
+                = image_tag(@customer.image_url, class: 'logo')
                 div
                   p.name = customer_name
                   p.characteristic
@@ -87,3 +87,16 @@ ruby:
                   .tab-pane.fade aria-labelledby="contact-tab" role="tabpanel" id="contact-#{iteration}"
                     = items.first.production_site.phones
             - iteration +=1
+
+      .single-order
+        .order
+          .order__header
+            p.order__title
+              = @customer.user.full_name
+            p.order__rating
+              | Рейтинг:
+              span.order__rating--color.green-color
+                |  #{ @customer.decorate.display_rating }
+            = image_tag(@customer.image_url, class: 'order__img')
+          p.order-hide-description.js-hide-description
+            = @customer.company.description
