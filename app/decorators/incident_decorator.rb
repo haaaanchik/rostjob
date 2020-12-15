@@ -5,7 +5,7 @@ class IncidentDecorator < TicketDecorator
     'other' => {
       'customer' => %w[],
       'contractor' => %w[],
-      'staffer' => %w[revoke to_inbox hire]
+      'staffer' => %w[revoke to_inbox hire to_interview]
     },
     'not_come' => {
       'customer' => %w[],
@@ -24,6 +24,10 @@ class IncidentDecorator < TicketDecorator
 
   def to_inbox_action_enabled?(subject)
     ACTIONS[model.reason][subject.subject_type]&.include?('to_inbox')
+  end
+
+  def to_interview_action_enabled?(subject)
+    ACTIONS[model.reason][subject.subject_type]&.include?('to_interview')
   end
 
   def header

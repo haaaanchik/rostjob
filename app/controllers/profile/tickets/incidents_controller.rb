@@ -71,10 +71,11 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def interview
     message_text = current_profile.contractor? ? 'Для анкеты назначена дата приезда' : 'Для анкеты назначена дата собеседования.'
-    result = Cmd::Ticket::Incident::Interview.call(candidate: incident.proposal_employee, user: current_user,
-                                                    message_params: { text: message_text },
-                                                    ticket: incident, interview_date: params[:interview_date],
-                                                    incident: incident)
+
+    result = Cmd::Ticket::Incident::Interview.call(proposal_employee: incident.proposal_employee, user: current_user,
+                                                   message_params: { text: message_text },
+                                                   ticket: incident, interview_date: params[:interview_date],
+                                                   incident: incident)
 
     do_after_action(result)
   end

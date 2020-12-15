@@ -8,5 +8,5 @@
   - if ticket.hire_action_enabled?(current_staffer)
     = render partial: "admin/tickets/toolbars/hire", locals: { ticket: ticket }
 
-  - if ticket.to_inbox_action_enabled?(current_staffer)
-    = render partial: "admin/tickets/toolbars/to_inbox", locals: { ticket: ticket }
+  - if ticket.to_interview_action_enabled?(current_staffer)
+    = render partial: "admin/tickets/toolbars/to_interview", locals: { ticket: ticket }
