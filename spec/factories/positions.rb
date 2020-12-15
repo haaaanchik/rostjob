@@ -4,12 +4,9 @@ FactoryBot.define do
       "Position #{n}"
     end
 
-    sequence :landing_title do |n|
-      "landing_title#{n}"
-    end
-
+    landing_title { 'Test Landing Title' }
     sequence :slug do |n|
-      "slug#{n}"
+      "position-slug-#{n}"
     end
 
     # after(:create) do |pos|
