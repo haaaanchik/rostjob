@@ -1,0 +1,11 @@
+.direct_message
+  = "Уважаемый #{@user.full_name}!"
+  p
+    | Поступило новое сообщение в 
+    = link_to "спор №#{@ticket.id}", profile_ticket_url(@ticket)
+  .message
+    .message-body
+        p.sender-name = @message.sender_name
+        p.message-content = @message.text
+    .date-and-time = @message.decorate.message_created_at
+  

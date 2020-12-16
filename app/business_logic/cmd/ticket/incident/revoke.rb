@@ -8,7 +8,7 @@ module Cmd
                  Cmd::EmployeeCv::ToReady,
                  Cmd::Rating::Update,
                  Cmd::Ticket::Incident::Close,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Ticket::Message::ToCreate,
                  Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
                  Cmd::NotifyMail::ProposalEmployee::Revoke
 

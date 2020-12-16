@@ -5,7 +5,7 @@ module Cmd
         include Interactor::Organizer
 
         organize Cmd::ProposalEmployee::ToInbox,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Ticket::Message::ToCreate,
                  Cmd::Ticket::Incident::Close
 
         around do |interactor|

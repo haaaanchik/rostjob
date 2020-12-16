@@ -5,7 +5,7 @@ module Cmd
         include Interactor::Organizer
 
         organize Cmd::Ticket::Incident::ToUpdate,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Ticket::Message::ToCreate,
                  Cmd::NotifyMail::Ticket::Incident::Precedent,
                  Cmd::NotifyMail::Ticket::Incident::NotifyAdminAboutDispute
 

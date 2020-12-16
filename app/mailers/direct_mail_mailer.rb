@@ -47,4 +47,12 @@ class DirectMailMailer < ApplicationMailer
 
     mail(to: @user.email, subject: "RostJob. Кандидату было отказано")
   end
+
+  def incident_histofy_for_admin
+    @messages = params[:attrs][:messages]
+    @ticket = params[:attrs][:ticket]
+    subject = "RostJob. Поступило новое сообщение в споре №#{@ticket.id}"
+
+    mail(to: 'manager@rostjob.com', subject: subject)
+  end
 end

@@ -5,7 +5,7 @@ module Cmd
         include Interactor::Organizer
 
         organize Cmd::ProposalEmployee::ToInterview,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Ticket::Message::ToCreate,
                  Cmd::Ticket::Incident::Close,
                  Cmd::UserActionLogger::ProposalEmployee::Interview::ByUser,
                  Cmd::NotifyMail::ProposalEmployee::Interview

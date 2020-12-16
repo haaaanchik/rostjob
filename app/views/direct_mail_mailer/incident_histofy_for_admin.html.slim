@@ -1,0 +1,11 @@
+#history_message_mail
+  = link_to "В спор №#{@ticket.id} ", admin_ticket_url(@ticket)
+  
+  |   Поступило новое сообщение:
+  p
+    - @messages.each do |message|
+      .message
+        .message-body
+          p.sender-name = message.sender_name
+          p.message-content = message.text
+        .date-and-time = message.decorate.message_created_at

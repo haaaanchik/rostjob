@@ -7,7 +7,7 @@ module Cmd
 
           organize Cmd::ProposalEmployee::ToInterview,
                    Cmd::Ticket::Incident::Close,
-                   Cmd::Ticket::Message::Create,
+                   Cmd::Ticket::Message::ToCreate,
                    Cmd::UserActionLogger::ProposalEmployee::Interview::ByStaffer,
                    Cmd::NotifyMail::ProposalEmployee::Interview
 

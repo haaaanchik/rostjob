@@ -12,9 +12,15 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :tax_office
 
   validates :legal_form, presence: true
+
   with_options on: :company do |o|
-    o.validates :short_name, :address, :mail_address, :phone,
-                :email, :ogrn, :director, :acts_on, presence: true
+    o.validates :short_name, :address, :mail_address,
+                :phone, :email, :director, :acts_on,
+                presence: true
+
+    o.validates :inn, presence: true, length: { is: 12 }
+    o.validates :kpp, presence: true, length: { is: 9 }
+    o.validates :ogrn,presence: true, length: { is: 13 }
   end
 
   scope :own, -> { where own_company: true }

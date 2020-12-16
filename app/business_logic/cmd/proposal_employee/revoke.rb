@@ -7,6 +7,7 @@ module Cmd
                Cmd::EmployeeCv::ToReady,
                Cmd::Rating::Update,
                Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
+               Cmd::Ticket::Message::ToCreate,
                Cmd::NotifyMail::ProposalEmployee::Revoke
 
       around do |interactor|
