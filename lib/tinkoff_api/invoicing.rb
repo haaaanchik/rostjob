@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TinkoffApi::Invoicing
   class << self
     include TinkoffApi::Api
@@ -13,6 +15,7 @@ class TinkoffApi::Invoicing
     def body_params
       {
         invoiceNumber: (@invoice.last_invoice_number + 1).to_s,
+        accountNumber: account_number,
         payer: {
           name: @invoice.buyer['name'],
           inn: @invoice.buyer['inn']
@@ -30,6 +33,10 @@ class TinkoffApi::Invoicing
           { email: @invoice.profile.user.email }
         ]
       }
+    end
+
+    def account_number
+      Rails.application.credentials[:tinkoff][:account_number]
     end
   end
 end
