@@ -7,6 +7,10 @@ class Profile::OrderTemplatePolicy < ApplicationPolicy
     customer?
   end
 
+  def first_step?
+    customer?
+  end
+
   def save_name?
     true
   end
