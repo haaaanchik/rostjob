@@ -9,6 +9,8 @@ class Profile::TicketsController < ApplicationController
 
   def show
     @ticket = ticket.decorate
+    @candidate = @ticket.proposal_employee&.decorate
+    @order = @candidate&.order
   end
 
   private

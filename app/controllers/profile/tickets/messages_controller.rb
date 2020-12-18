@@ -1,6 +1,6 @@
 class Profile::Tickets::MessagesController < ApplicationController
   def index
-    messages
+    messages.decorate
   end
 
   def create

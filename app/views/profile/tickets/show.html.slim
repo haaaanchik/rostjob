@@ -1,7 +1,3 @@
-ruby:
-  candidate = @ticket.proposal_employee.decorate
-  order = candidate.order
-
 #chat-room
   .chat-body
     .messages.custom-scroll
@@ -24,30 +20,30 @@ ruby:
   .chat-sidebar
     - if @ticket.is_a?(Incident)
       .chat-sidebar-header
-        = image_tag order.production_site.image.url(:thumb)
+        = image_tag @order.production_site.image.url(:thumb)
         .title-and-city-container
-          p.chat-sidebar-title.clicable #{order.production_site.title}
-          span class="chat-sidebar-header-city" г. #{order.city}
+          p.chat-sidebar-title.clicable #{@order.production_site.title}
+          span class="chat-sidebar-header-city" г. #{@order.city}
 
       .order
-        .content class="order_state__#{order.state}"
+        .content class="order_state__#{@order.state}"
           .order__description
             p.order__title
-              = @ticket.display_customer_order_url(order)
+              = @ticket.display_customer_order_url(@order)
             .order__bottom
               span.order__price.recruiter-bg-purple
                 = @ticket.display_candidate_price(current_user)
                 = ' руб. / чел.'
 
       .chat-sidebar-body.custom-scroll
-        .request data-proposal_employee_id="#{ candidate.id}"
-          i class="fa fa-bookmark flag" id="hanging-flag" style="color: #{candidate.status_color_class}"
+        .request data-proposal_employee_id="#{ @candidate.id}"
+          i class="fa fa-bookmark flag" id="hanging-flag" style="color: #{@candidate.status_color_class}"
           .card-tools
 
-          = candidate.link_to_show(current_user)
-          p class="phone-number" #{candidate.employee_cv.phone_number}
+          = @candidate.link_to_show(current_user)
+          p class="phone-number" #{@candidate.employee_cv.phone_number}
           textarea class="candidate-comment" cols="30" placeholder="Напишите комментарий" rows="4" id=(current_user.profile.customer? ? 'by_customer' : 'by_contractor')
-            = candidate.display_comment(current_user)
+            = @candidate.display_comment(current_user)
           div class="request__footer"
             = image_tag('/img//new/no-avatar.png', class: 'request-logo')
             p class="request-user-name" #{@ticket.user_full_name}

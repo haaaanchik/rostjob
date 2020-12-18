@@ -13,6 +13,10 @@ class CandidatePolicy < Struct.new(:user, :candidate)
     customer?
   end
 
+  def comment?
+    customer?
+  end
+
   def revoke?
     true
   end
