@@ -4,6 +4,7 @@
 window.RostJob = {}
 
 ready = ->
+  RostJob.SearchBase.init()
   page = $('body').data('page')
   RostJob[page].init() if (RostJob[page])
 
