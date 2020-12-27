@@ -1,7 +1,7 @@
-.col-md-9.order-1.order-sm-1.order-md-2
-  h2
-    | Вывод средств
-  p.font-weight-bold
-    | Доступно для вывода: #{@balance.amount}
-    i.fas.fa-ruble-sign.ml-1
-  = render partial: 'withdrawal_form'
+.row.justify-content-center.align-items-center.h-75
+  .col-md-9.col-sm-12.p-5
+    h2.mb-3 Вывод средств:
+    p.font-weight-bold
+      | Доступно для вывода: #{@balance.amount}
+      i.fas.fa-ruble-sign.ml-1
+    = render partial: 'withdrawal_form'

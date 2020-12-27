@@ -4,18 +4,16 @@
     = f.text_field :amount, class: 'form-control', value: @balance.amount, disabled: true
     = f.label :amount, 'Будет выведено:', class: 'active'
   .row
-    .col
-    .col-6
-      table
-        = f.collection_radio_buttons :withdrawal_method_id, @profile.withdrawal_methods, :id, :title, { checked: @profile.withdrawal_methods.first.id } do |b|
+    .col-12
+      table.mx-auto
+        - @profile.withdrawal_methods.each_with_index do |with_method, index|
+          - is_checked = index.zero?
           tr
-            td
-              = link_to b.text, edit_profile_balance_withdrawal_method_path(b.value), class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2', remote: true
+            td = link_to with_method.title, edit_profile_balance_withdrawal_method_path(with_method), class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2 action-link', remote: true
             td
               .form-check
-                = b.radio_button(class: 'form-check-input')
-                = b.label(class: 'form-check-label') do
-                  '
-      .text-center
-        = f.submit 'Вывести', class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2 mt-3'
+                = f.radio_button :withdrawal_method_id, with_method.id, checked: is_checked, class: 'form-check-input', 'data-valid' => with_method.company.valid?
+                label class='form-check-label' for="withdrawal_method_id_#{with_method.id}"
+      .mt-3.text-right.mr-5
+        = f.button 'Вывести', type: 'submit', class: 'btn btn-primary'
     .col

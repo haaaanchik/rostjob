@@ -1,4 +1,5 @@
 class Profile::WithdrawalMethodsController < ApplicationController
+
   def edit
     withdrawal_method
   end
@@ -7,7 +8,9 @@ class Profile::WithdrawalMethodsController < ApplicationController
     if withdrawal_method.update(withdrawal_method_params)
       @status = 'success'
     else
-      @text = error_msg_handler withdrawal_method
+      render json: {  validate: true,
+                      data: errors_data(withdrawal_method) },
+                      status: 422
     end
   end
 
@@ -25,14 +28,6 @@ class Profile::WithdrawalMethodsController < ApplicationController
     @profile ||= current_profile
   end
 
-  def balance
-    @balance ||= profile.balance
-  end
-
-  def balance_params
-    params.require(:balance).permit(:value, :withdrawal_method_id)
-  end
-
   def withdrawal_method_params
     p = params.permit(withdrawal_method_company_account: {}, withdrawal_method_ip_account: {}, withdrawal_method_private_person_account: {})
     if p.key? :withdrawal_method_company_account
@@ -42,17 +37,5 @@ class Profile::WithdrawalMethodsController < ApplicationController
     elsif p.key? :withdrawal_method_private_person_account
       p[:withdrawal_method_private_person_account]
     end
-    # params.require(:withdrawal_method_company_account).permit(company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
-    #                                            :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
-    #                                            accounts_attributes: %i[id account_number corr_account bic
-    #                                            bank bank_address inn kpp]])
   end
-
-  # def withdrawal_method_params
-  #   params.require(:withdrawal_method)
-  #         .permit(:title, company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
-  #                                              :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on,
-  #                                              accounts_attributes: %i[id account_number corr_account bic
-  #                                                              bank bank_address inn kpp]])
-  # end
 end
