@@ -6,6 +6,7 @@ class Profile::EmployeeCvsController < ApplicationController
 
   def index
     @favorites = current_profile.favorites.includes(:employee_cvs, :production_site).decorate
+    @candidates_in_order = OrderProfile.count_candidate_without(profile: current_profile, state: :paid)
     @active_item = term
     @crm_columns = current_user.crm_columns.includes(:employee_cvs)
     @proposal_employee = ProposalEmployee.find_by(id: params[:proposal_employee_id])

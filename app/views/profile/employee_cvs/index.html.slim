@@ -85,11 +85,8 @@
                             info_order_path(favorite),
                             remote: true,
                             class: 'dropdown-item'
-                  = link_to 'Убрать',
-                            remove_from_favorites_order_path(favorite),
-                            method: :put,
-                            remote: true,
-                            class: 'dropdown-item'
+
+                  = favorite.remove_link(candidate_countes: @candidates_in_order, favorite: favorite)
 
               = image_tag('/img/new/arrow-down.png', class: 'arrow js-arrow')
 
