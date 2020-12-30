@@ -27,3 +27,12 @@ ru:
       education: Образование
       experiense: Опыт работы
       remark: Дополнительные сведения
+  activerecord:
+    attributes:
+      employee_cv:
+        name: полного имени
+        gender: пол
+        remark: дополнительной информации
+        education: оброзования
+        experience: опыта
+        phone_number: номер телефона

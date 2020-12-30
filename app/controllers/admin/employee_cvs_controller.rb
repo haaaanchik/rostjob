@@ -7,7 +7,11 @@ class Admin::EmployeeCvsController < Admin::ApplicationController
   def edit; end
 
   def update
-    if @employee_cv.update(employee_cv_params)
+    result = Cmd::EmployeeCv::Update.call(user: current_staffer,
+                                          employee_cv: @employee_cv,
+                                          params: employee_cv_params)
+
+    if result.success?
       flash[:notice] = "Анкета #{@employee_cv.name} обновлена"
     else
       flash[:alert] = "Не удалось обновить анкету #{@employee_cv.name}"
