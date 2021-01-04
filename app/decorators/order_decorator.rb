@@ -179,6 +179,16 @@ class OrderDecorator < ApplicationDecorator
                                       name: geo['name']}}
   end
 
+  def remove_link(hash_values)
+    candidates_in_orderd = hash_values[:candidate_countes][hash_values[:favorite].id]
+    return unless candidates_in_orderd.to_i.zero?
+
+    h.link_to('Убрать', h.remove_from_favorites_order_path(hash_values[:favorite]),
+                method: :put,
+                remote: true,
+                class: 'dropdown-item')
+  end
+
   private
 
   def link_to_disputed
