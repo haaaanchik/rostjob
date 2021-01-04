@@ -27,4 +27,5 @@ class ContactUsMailer < ApplicationMailer
 
     mail(to: ['manager@rostjob.com', 'msk@rostjob.com', 'spb@rostjob.com'], subject: 'RostJob. Заявка на бесплатную консультацию')
   end
+
 end

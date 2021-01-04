@@ -7,7 +7,8 @@ module Cmd
 
       organize Cmd::Order::AddToFavorites,
                Cmd::ProposalEmployee::ToCreate,
-               Cmd::EmployeeCv::ToSent
+               Cmd::EmployeeCv::ToSent,
+               Cmd::NotifyMail::ProposalEmployee::Sended
 
       around do |interactor|
         ActiveRecord::Base.transaction do

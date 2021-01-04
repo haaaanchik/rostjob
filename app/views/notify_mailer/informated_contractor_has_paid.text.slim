@@ -1,4 +1,4 @@
-= "Уважаемый, #{@prop_emp.profile.user.full_name}."
+= "Уважаемый(ая), #{@prop_emp.profile.user.full_name}."
 = "Вы получили вознаграждение, за анкету №#{@prop_emp.employee_cv.id} в размере #{@prop_emp.order.contractor_price} руб. "
-= 'Незнаешь как получить вознаграждение, прочтите следующую инструкцию по ссылке '
+= 'Не знаешь как получить вознаграждение, прочтите следующую инструкцию по ссылке '
 = url_for page_url('manual_how_get_money')

@@ -1,7 +1,7 @@
-= "Уважаемый, #{@prop_emp.first.order.profile.user.full_name}."
+= "Уважаемый(ая), #{@prop_emp.first.order.profile.user.full_name}."
 p
   - if @prop_emp.size > 1
-    = 'У Вас есть не разрещённые споры. Их можно посмотреть по ссылке'
+    = 'У Вас есть неразрещённые споры. Их можно посмотреть по ссылке'
     p
       = link_to 'Список споров', profile_tickets_url
   - else

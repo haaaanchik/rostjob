@@ -11,7 +11,7 @@ module Cmd
         context.fail! unless candidate.to_inbox!
 
         Cmd::UserActionLogger::Log.call(params: logger_params) if log
-        Cmd::NotifyMail::ProposalEmployee::Inbox.call(proposal_employee: candidate)
+        Cmd::NotifyMail::ProposalEmployee::Sended.call(proposal_employee: candidate)
       end
 
       private

@@ -1,0 +1,18 @@
+.d-flex.align-items-center.justify-content-between
+  = link_to edit_admin_employee_cv_path(proposal_employee.employee_cv, proposal_employee_id: proposal_employee), remote: true, title: 'Редактировать анкету' do
+    i.fas.fa-edit
+
+  - unless proposal_employee.revoked? || proposal_employee.transfer? || proposal_employee.paid?
+    .dropdown
+      button#dropdownMenuButton.btn.btn-sm.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" data-trigger="focus" 
+        | Действие
+      .dropdown-menu aria-labelledby="dropdownMenuButton" 
+        - if proposal_employee.may_to_revoked?
+          = link_to 'Отозвать', revoke_admin_proposal_employee_path(proposal_employee), method: :put, remote: true, class: 'dropdown-item'
+        - if proposal_employee.may_hire?
+          - pe_form = "#{render partial: 'admin/proposal_employees/toolbars/hire_date_form', locals: { candidate: proposal_employee, url: hire_admin_proposal_employee_path(proposal_employee), method: :put, remote: true }}"
+          button type="button" class="dropdown-item" data-toggle="popover" data-placement="left" data-html='true'  data-content=pe_form Нанять
+        - if proposal_employee.may_to_approved?
+          = link_to 'Подтвердить', approve_admin_proposal_employee_path(proposal_employee), method: :put, remote: true, class: 'dropdown-item'
+        - if proposal_employee.may_to_paid?
+          = link_to 'Одобрить акт', paid_admin_proposal_employee_path(proposal_employee), method: :put, remote: true, class: 'dropdown-item'

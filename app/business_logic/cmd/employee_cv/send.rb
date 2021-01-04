@@ -7,9 +7,7 @@ module Cmd
 
       organize Cmd::EmployeeCv::Create,
                Cmd::EmployeeCv::ToReady,
-               Cmd::Order::AddToFavorites,
-               Cmd::ProposalEmployee::ToCreate,
-               Cmd::EmployeeCv::ToSent
+               Cmd::ProposalEmployee::Create
 
       around do |interactor|
         ActiveRecord::Base.transaction do

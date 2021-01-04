@@ -6,7 +6,7 @@ module Cmd
       organize Cmd::ProposalEmployee::ToRevoke,
                Cmd::EmployeeCv::ToReady,
                Cmd::Rating::Update,
-               Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
+               Cmd::UserActionLogger::ProposalEmployee::CreateLogsCaseRevoke,
                Cmd::Ticket::Message::ToCreate,
                Cmd::NotifyMail::ProposalEmployee::Revoke
 

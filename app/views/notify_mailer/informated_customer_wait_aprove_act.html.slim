@@ -1,4 +1,4 @@
-= "Уважаемый, #{@prop_emps.first.order.user.full_name}."
+= "Уважаемый(ая), #{@prop_emps.first.order.user.full_name}."
 p
   - if  @prop_emps.size > 1
     | Ваши сотрудники отработали
@@ -8,5 +8,5 @@ p
   = ' гарантийный срок. Подтвердите выполнение условия в меню Акты.'
 p = link_to 'Ссылка на акты', approval_list_profile_candidates_url
 p
-  | Чтобы узнать как подтвердить Акт прочите инструкцию.
+  | Чтобы узнать как подтвердить Акт прочтите инструкцию.
 p = link_to 'Как подтвердить Акт?', page_url('manual_how_to_approved_act')

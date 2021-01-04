@@ -5,17 +5,24 @@ module Cmd
     module Incident
       class FailedInterview
         include Interactor::Organizer
+        before :update_text
 
-        organize Cmd::ProposalEmployee::ToRevoke,
-                 Cmd::EmployeeCv::ToReady,
+        organize Cmd::Ticket::ToUpdateWaiting,
                  Cmd::Ticket::Message::ToCreate,
-                 Cmd::Ticket::Incident::Close,
-                 Cmd::NotifyMail::Ticket::Incident::FailedInterview
+                 Cmd::NotifyMail::Ticket::Incident::NotifyAdminAboutRevoke
 
         around do |interactor|
           ActiveRecord::Base.transaction do
             interactor.call
           end
+        end
+
+        private
+
+        def update_text
+          new_text = "Кандидату отказано в трудоустройстве или договор разорван на основании(ях): #{context.message_params[:text]}"
+
+          context.message_params = { text: new_text }
         end
       end
     end

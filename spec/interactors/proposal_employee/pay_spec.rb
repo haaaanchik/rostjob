@@ -8,6 +8,7 @@ RSpec.feature 'ProposalEmployee::Pay', type: :interactor do
     it { expect(result).to be_a_success }
     it { expect(result.candidate.paid?).to be(true) }
     it { expect(result.candidate.payment_date.to_date).to eq(Date.today) }
-    it { expect { result }.to change { ActionMailer::Base.deliveries.size }.by(1) }
+    it { expect(result.candidate.approved_by_admin).to be(false) }
+    it { expect { result }.to change { ActionMailer::Base.deliveries.size }.by(0) }
   end
 end

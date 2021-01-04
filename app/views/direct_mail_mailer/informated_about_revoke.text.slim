@@ -1,0 +1,9 @@
+- employee_cv = @prop_emp.employee_cv
+
+| Уважаемый(ая), #{@user.full_name}
+- if @by_admin
+  | Кандидату #{employee_cv.id} #{employee_cv.name} было отказано. С вопросами просим обращаться к администрации сайта manager@rostjob.com.
+- else
+  | Анкета №#{employee_cv.id} - #{employee_cv.name} была отозвана рекрутёром из заявки №#{@prop_emp.order.id} #{@prop_emp.order.title}.
+  | Ссылка на анкету 
+  = url_for profile_employee_cvs_url(proposal_employee_id: @prop_emp.id)

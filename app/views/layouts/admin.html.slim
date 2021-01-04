@@ -67,6 +67,7 @@ html
                       = link_to 'Профессии', admin_positions_path
                     li
                       = link_to 'Города', admin_cities_path
+                    li = link_to 'Анкеты', admin_proposal_employees_path
                     li
                       = link_to 'Ценовые группы', admin_price_groups_path
                     - if policy([:admin, :production_site]).index?

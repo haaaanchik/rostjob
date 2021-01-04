@@ -1,4 +1,4 @@
-= "Уважаемый #{@user.full_name}! "
+= "Уважаемый(ая) #{@user.full_name}! "
 | Поступило новое сообщение в спор №#{@ticket.id} ссылка на спор
 = url_for profile_ticket_url(@ticket)
 |   От #{@message.sender_name} . Текс сообщения: #{@message.text}

@@ -13,7 +13,7 @@ RSpec.feature 'Incident::Message::Create', type: :interactor do
 
     it { expect(result).to be_a_success }
     it { expect(result.ticket.waiting).to eq('customer') }
-    it { expect { result }.to change { ActionMailer::Base.deliveries.size }.by(2) }
+    it { expect { result }.to change { ActionMailer::Base.deliveries.size }.by(1) }
   end
 
   describe "test change for wait" do
@@ -27,8 +27,6 @@ RSpec.feature 'Incident::Message::Create', type: :interactor do
     end
 
     it { expect(result.ticket.waiting).to eq('contractor') }
-    #1 mail with history admin second to reponts user
-    it { expect { result }.to change { ActionMailer::Base.deliveries.size }.by(2) }
   end
 
   describe 'dont must change waiting if message sended by staffer' do

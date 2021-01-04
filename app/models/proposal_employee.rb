@@ -58,7 +58,7 @@ class ProposalEmployee < ApplicationRecord
       transitions from: :hired, to: :approved
     end
 
-    event :to_paid, after: [:set_payment_date, :mail_for_contractor_has_paid] do
+    event :to_paid, after: :set_payment_date do
       transitions from: :approved, to: :paid
     end
 
@@ -131,9 +131,5 @@ class ProposalEmployee < ApplicationRecord
                                 state: 'revoked')
     errors.add(:employee_cv_id,
                'Такая анкета уже существует.') unless uniqueness.blank?
-  end
-
-  def mail_for_contractor_has_paid
-    ProposalEmployeeMailJob.perform_now(proposal_employees: [self], method: 'informated_contractor_has_paid') if profile.notify_mails?
   end
 end

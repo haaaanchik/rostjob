@@ -152,7 +152,13 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     when 2
       redirect_to third_step_profile_production_site_order_path(production_site, order)
     else
-      redirect_to profile_production_site_order_path(production_site, order)
+      url = if order.rejected?
+              pre_publish_profile_production_site_order_path(production_site, order)
+            else
+              profile_production_site_order_path(production_site, order)
+            end
+
+      redirect_to url
     end
   end
 

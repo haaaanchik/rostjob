@@ -1,8 +1,9 @@
 ruby:
   t_form = "#{render partial: 'profile/tickets/toolbars/message'}"
+  class_revoce = revoked ? 'text-example disabled' : 'text-example'
 
 .ready-text-examples
   .text-example data-toggle='popover' title='Дата выхода на работу' data-placement='top' data-html='true' data-content=pe_form
     span Кандидат явился на собеседование, я хочу указать дату найма
-  .text-example#to_revoked data-toggle='popover' title='Введите основание отказа' data-placement='top' data-html='true' data-content=t_form
+  #to_revoked class="#{class_revoce}" data-toggle='popover' title='Введите основание отказа' data-placement='top' data-html='true' data-content=t_form
     span Кандидату отказано в трудоустройстве или договор разорван.

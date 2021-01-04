@@ -1,0 +1,9 @@
+<% proposal_employee = @result.candidate || @result.proposal_employee %>
+
+<% if @result.success? %>
+  $("#candidate_<%= proposal_employee.id %>").replaceWith("<%= escape_javascript render(partial: 'admin/proposal_employees/proposal_employee', locals: { proposal_employee: proposal_employee, method: :put }) %>");
+  toastr.info("Для <%= proposal_employee.employee_cv.name%> установлен статус <%=@action%>");
+<% else %>
+  $("#candidate_<%= proposal_employee.id %>").css('border', '1px solod red');
+  toastr.error("Для <%= proposal_employee.employee_cv.name%> не удалось установлен статус <%=@action%>");
+<% end %>

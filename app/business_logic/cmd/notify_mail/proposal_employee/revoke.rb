@@ -8,23 +8,25 @@ module Cmd
         delegate :proposal_employee, to: :context
 
         def call
-          if user.is_a?(Staffer)
-            [proposal_employee.user, proposal_employee.order.user].each do |user|
-              send_direct_mail(user)
-            end
-          else
-            send_direct_mail(send_to)
-          end
+          send_direct_mail(send_to)
         end
 
         private
 
+        def admin?
+          user.is_a?(Staffer)
+        end
+
         def send_to
-          user.profile.customer? ? proposal_employee.user : proposal_employee.order.user
+          admin? ? proposal_employee.user : proposal_employee.order.user
         end
 
         def send_direct_mail(sended_user)
-          SendDirectMailJob.perform_now(user: sended_user, attrs: { proposal_employee: proposal_employee }, method: 'informated_about_revoke_candidate' )
+          return unless sended_user.notify_mails?
+
+          SendDirectMailJob.perform_now(user: sended_user,
+                                        method: 'informated_about_revoke',
+                                        attrs: { proposal_employee: proposal_employee, by_admin: admin? })
         end
       end
     end

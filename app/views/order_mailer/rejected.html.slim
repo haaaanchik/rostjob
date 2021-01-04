@@ -1,3 +1,6 @@
-= "Уважаемый #{@order.user.full_name}, Ваша заявка №#{@order.id} не прошла модерации, вам были возращены деньги."
+| Уважаемый #{@order.user.full_name}, Ваша заявка  №#{@order.id} #{@order.title} не прошла модерации,
+| на Ваш баланс зачислена сумма стоимости неопубликованной заявки.
 p
-  = "С следующим коментарием, #{@order.comments.first.text}"
+  | Комментарий отказа: #{@order.comments.last.text}
+p
+  = link_to 'Ссылка на редактировании заявки', first_step_profile_production_site_order_url(@order.production_site, @order.id)

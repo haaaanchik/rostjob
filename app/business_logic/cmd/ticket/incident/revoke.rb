@@ -9,7 +9,7 @@ module Cmd
                  Cmd::Rating::Update,
                  Cmd::Ticket::Incident::Close,
                  Cmd::Ticket::Message::ToCreate,
-                 Cmd::UserActionLogger::ProposalEmployee::CreateLoginCaseRevoke,
+                 Cmd::UserActionLogger::ProposalEmployee::CreateLogsCaseRevoke,
                  Cmd::NotifyMail::ProposalEmployee::Revoke
 
         around do |interactor|

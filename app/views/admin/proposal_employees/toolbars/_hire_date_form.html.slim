@@ -1,0 +1,9 @@
+= form_with model: candidate, url: url, method: method, remote: remote do |f|
+  .row.align-items-center.justify-content-center
+    .col-auto
+      .form-group
+        = f.label :hiring_date, 'Дата выхода на работу'
+        = f.date_field :hiring_date, value:  Date.today, class: 'form-control'
+        .invalid-feedback
+    .col-auto
+      = f.submit 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2'

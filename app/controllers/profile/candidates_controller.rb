@@ -26,7 +26,8 @@ class Profile::CandidatesController < ApplicationController
   end
 
   def approve_act
-    @result = Cmd::ProposalEmployee::Pay.call(candidate: candidate)
+    @result = Cmd::ProposalEmployee::Pay.call(log: true,
+                                              candidate: candidate)
   end
 
   def approve_all_acts

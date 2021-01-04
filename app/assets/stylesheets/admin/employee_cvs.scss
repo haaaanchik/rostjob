@@ -1,0 +1,88 @@
+[data-page=AdminProposalEmployeesIndex] {
+
+  #worksheet_questionnaire {
+    .header_worksheet {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      .search_admin {
+        margin-right: 15px;
+        input {
+          transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+          outline: none;
+          box-shadow: none;
+          border: none;
+          border-bottom: 1px solid #ced4da;
+          border-radius: 0;
+          box-sizing: content-box;
+          background-color: transparent;
+        }
+      }
+    }
+
+    .filters-dropdown > p{
+      margin: 4px 15px;
+      display: flex;
+      white-space: nowrap;
+      align-items: center;
+      color: #000000;
+      font-family: "Open Sans", sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .filters-dropdown {
+      display: flex;
+      padding: 5px;
+
+      p {
+        i {
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+
+        label {
+          margin-bottom: 0;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .worksheets__titles {
+      display: flex;
+      padding-left: 10px;
+
+    .worksheets__title {
+      p {
+        margin: 0;
+        color: #000000;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      width: 25%;
+      padding: 10px;
+        &:first-child {
+          width: 12.5%;
+        }
+
+        &:last-child {
+          width: calc(37.5%);
+        }
+      }
+    }
+
+    .filters-dropdown input {
+      opacity: 1;
+      position: static;
+      pointer-events: auto;
+    }
+  }
+
+  .popover {
+    left: unset !important;
+    margin-bottom: unset;
+  }
+}
