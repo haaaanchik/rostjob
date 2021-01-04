@@ -14,4 +14,8 @@ class Profile::BalancePolicy < ApplicationPolicy
   def contractor_invoice?
     true
   end
+
+  def destroy?
+    true
+  end
 end
