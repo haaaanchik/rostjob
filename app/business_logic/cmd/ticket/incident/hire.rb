@@ -6,7 +6,7 @@ module Cmd
 
         organize Cmd::ProposalEmployee::Hire,
                  Cmd::Ticket::Incident::Close,
-                 Cmd::Ticket::Message::Create
+                 Cmd::Ticket::Message::ToCreate
 
         around do |interactor|
           ActiveRecord::Base.transaction do

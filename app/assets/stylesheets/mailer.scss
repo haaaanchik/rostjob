@@ -61,3 +61,39 @@
     text-decoration: none;
   }
 }
+
+#history_message_mail, .direct_message {
+  .message {
+    border-radius: 4px;
+    background-color: #fafafa;
+    min-width: 75%;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding: 10px;
+  }
+
+  .message-body {
+    width: 100%;
+    padding-left: 10px;
+  }
+  .sender-name {
+    margin: 10px 0 8px;
+    font-size: 14px;
+    color: #000;
+    font-weight: bold;
+  }
+  .date-and-time {
+    width: 100%;
+    color: #8d8d8d;
+    font-size: 13px;
+    font-weight: bold;
+    bottom: 5px;
+    left: 10px;
+    text-align: right;
+  }
+}

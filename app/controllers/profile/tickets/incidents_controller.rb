@@ -107,7 +107,7 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def create_message(message)
     text = { text: message }
-    Cmd::Ticket::Message::Create.call(user: current_user, ticket: incident, message_params: text)
+    Cmd::Ticket::Message::ToCreate.call(user: current_user, ticket: incident, message_params: text)
   end
 
   def flash_notice(ticket_waiting)

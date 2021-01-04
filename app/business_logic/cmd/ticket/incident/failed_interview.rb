@@ -8,7 +8,7 @@ module Cmd
 
         organize Cmd::ProposalEmployee::ToRevoke,
                  Cmd::EmployeeCv::ToReady,
-                 Cmd::Ticket::Message::Create,
+                 Cmd::Ticket::Message::ToCreate,
                  Cmd::Ticket::Incident::Close,
                  Cmd::NotifyMail::Ticket::Incident::FailedInterview
 

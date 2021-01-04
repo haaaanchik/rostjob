@@ -5,8 +5,9 @@ class Admin::Tickets::MessagesController < Admin::Tickets::ApplicationController
 
   def create
     result = Cmd::Ticket::Message::Create.call(user: current_staffer.decorate,
-                                               ticket: ticket,
-                                               message_params: message_params)
+                                               message_params: message_params,
+                                               ticket: ticket
+                                              )
     if result.success?
       render partial: 'admin/tickets/messages/message', object: result.message, layout: false
     else

@@ -57,4 +57,10 @@ class Ticket < ApplicationRecord
 
     { customer: customer, cntractor: cntractor }
   end
+
+  def update_waiting!
+    waiting_for = waiting == 'contractor' ? 'customer' : 'contractor'
+
+    update(waiting: waiting_for)
+  end
 end

@@ -1,0 +1,7 @@
+= "В спор №#{@ticket.id} - ccылка на спор #{url_for(admin_ticket_url(@ticket))} , "  
+|  Поступило новое сообщение: 
+
+- @messages.each do |message|
+  = "Отправитель #{message.sender_name} , текст сообщения - "
+  = message.text
+  = " . От #{ message.decorate.message_created_at }"
