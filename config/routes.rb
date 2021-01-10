@@ -308,7 +308,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :invoices, only: %i[index show create] do
+    resources :invoices, only: %i[index show create destroy] do
       member do
         get :check_invoice_tinkoff
       end
