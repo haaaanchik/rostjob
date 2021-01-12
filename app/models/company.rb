@@ -18,7 +18,7 @@ class Company < ApplicationRecord
                 :phone, :email, :director, :acts_on,
                 presence: true
 
-    o.validates :inn, presence: true, length: { is: 12 }
+    o.validates :inn, presence: true, length: { is: 10 }
     o.validates :kpp, presence: true, length: { is: 9 }
     o.validates :ogrn,presence: true, length: { is: 13 }
   end
