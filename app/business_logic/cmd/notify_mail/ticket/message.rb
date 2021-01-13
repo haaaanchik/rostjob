@@ -11,6 +11,18 @@ module Cmd
         delegate :message, to: :context
 
         def call
+          ticket.appeal? ? appeal_action : incident_action
+        end
+
+        private
+
+        def appeal_action
+          return unless user.is_a?(Staffer)
+
+          notify_user
+        end
+
+        def incident_action
           if user.is_a?(Staffer)
             send_message(customer)
             send_message(contractor)
@@ -20,7 +32,9 @@ module Cmd
           end
         end
 
-        private
+        def notify_user
+          ::TicketMailer.notify_user(message).deliver_now
+        end
 
         def send_message(sended_user)
           TicketMailer.with(user: sended_user, ticket: ticket, message: message).new_message.deliver_now

@@ -3,7 +3,7 @@ class TicketMailer < ApplicationMailer
     @message = message
     email = message.ticket.user.email
 
-    mail(to: email, subject: "RostJob. Ответ на обращение ##{message.ticket_id}")
+    mail(to: email, subject: "RostJob. Ответ на обращение ##{message.ticket_id}.")
   end
 
   def new_message
