@@ -6,8 +6,7 @@ module Cmd
 
         organize Cmd::Ticket::ToUpdateWaiting,
                  Cmd::Ticket::Message::ToCreate,
-                 Cmd::NotifyMail::Ticket::Message,
-                 Cmd::NotifyMail::Ticket::Incident::SendHistoryAdmin
+                 Cmd::NotifyMail::Ticket::Message
 
         around do |interactor|
           ActiveRecord::Base.transaction do
