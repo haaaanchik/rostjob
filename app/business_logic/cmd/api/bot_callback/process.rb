@@ -1,12 +1,12 @@
+# frozen_string_literal: true
+
 module Cmd
   module Api
     module BotCallback
       class Process
         include Interactor::Organizer
 
-        organize Cmd::Api::AuthenticateUser,
-                 Cmd::Api::BotCallback::ValidateRequest,
-                 Cmd::Api::BotCallback::Create,
+        organize Cmd::Api::BotCallback::Create,
                  Cmd::Api::BotCallback::PushToChannel
 
         around do |interactor|

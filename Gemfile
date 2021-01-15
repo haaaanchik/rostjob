@@ -160,3 +160,14 @@ gem 'thredded', git: 'git@bitbucket.org:Factory-Rushers/rostjob_forum.git'
 gem 'reform'
 gem 'reform-rails'
 gem 'rspec_junit_formatter'
+
+gem 'grape'
+
+# Grape extensions
+gem 'api-pagination'
+gem 'grape-swagger'
+gem 'grape-entity'
+gem 'grape-swagger-entity'
+# Swagger UI
+gem 'grape-swagger-rails'
+gem 'rack-cors', require: 'rack/cors'

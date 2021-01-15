@@ -60,5 +60,12 @@ module RostJob
     config.to_prepare do
       Devise::Mailer.layout "mailer" # email.haml or email.erb
     end
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '/api/*', headers: :any
+      end
+    end
   end
 end

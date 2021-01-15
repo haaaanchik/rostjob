@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 module Cmd
   module Api
     module BotCallback
       class PushToChannel
         include Interactor
 
+        delegate :name, to: :context
+        delegate :phone, to: :context
         delegate :profile_id, to: :context
-        delegate :input_params, to: :context
 
         def call
           ActionCable.server.broadcast("bot_channel_#{profile_id}",
@@ -15,10 +18,8 @@ module Cmd
         private
 
         def new_empl_cv_url
-          '/profile/employee_cvs?modal=new_empl&name='+
-            input_params[:name]+
-            '&phone_number='+
-            input_params[:phone]
+          '/profile/employee_cvs?modal=new_empl&name='+name+
+            '&phone_number='+phone
         end
       end
     end

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount Api::Base => '/api'
+  mount GrapeSwaggerRails::Engine => '/apidoc'
+
   mount Resque::Server.new, at: '/resque_web'
   get "/pages/*id" => 'pages#show', as: :page, format: false
 
@@ -42,13 +45,6 @@ Rails.application.routes.draw do
 
   namespace :profile do
     resources :settings, only: %i[index update]
-  end
-
-  namespace :api do
-    namespace :v1 do
-      resource :free_manager, only: :show
-      resources :candidates, only: :new
-    end
   end
 
   namespace :admin do

@@ -2,7 +2,7 @@ ruby:
   titles = orders.map(&:title).uniq
   cities = orders.map(&:city).uniq
   titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
-  cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
+  cities_val = params[:q] ? params[:q][:city_in] : %w[]
   val = params[:q] ? params[:q][:all_fields_cont] : nil
 
 = search_form_for @q, url: url, id: 'profession-city-form'  do |f|
@@ -21,12 +21,12 @@ ruby:
           .select__options.cities.custom-scroll
             - cities.each_with_index do |city, i|
               p.option
-                = check_box_tag 'q[city_fields_in][]',
+                = check_box_tag 'q[city_in][]',
                         city,
                         cities_val&.include?(city),
                         class: 'custom-checkbox js-checkbox-city',
                         id: "city-#{i}"
-                = label :city_fields, city, for: "city-#{i}"
+                = label :city, city, for: "city-#{i}"
           .select__buttons
             button.btn-short.checkAll.js-checkAll type='button'  Выбрать все
             button.btn-short.clearAll.js-clearAll type='button'  Очистить все
