@@ -10,7 +10,8 @@ module Cmd
 
         def call
           incident = ::Incident.new(incident_params)
-          context.incident = incident
+          context.incident = incident.decorate
+          context.proposal_employee = proposal_employee
           context.fail! unless context.incident.save
           context.incident.to_contractor! if user.profile.contractor?
           Cmd::UserActionLogger::Log.call(params: logger_params)
@@ -34,13 +35,12 @@ module Cmd
         end
 
         def proposal_employee
-          @proposal_employee = context.proposal_employee = ::ProposalEmployee.find(incident_params[:proposal_employee_id])
+          @proposal_employee ||= ::ProposalEmployee.find(incident_params[:proposal_employee_id])
         end
 
         def employee_cv
           @employee_cv = context.employee_cv = proposal_employee.employee_cv
         end
-
 
         def logger_params
           {

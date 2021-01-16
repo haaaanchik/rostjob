@@ -7,6 +7,7 @@ module Cmd
         include Interactor::Organizer
 
         organize Cmd::Ticket::Incident::ToCreate,
+                 Cmd::Ticket::Incident::RefundOrOpenOrder,
                  Cmd::ProposalEmployee::ToDisput,
                  Cmd::NotifyMail::Ticket::Incident::Create
 
