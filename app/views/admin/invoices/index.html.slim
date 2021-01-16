@@ -7,6 +7,7 @@ table.table
     th Контрагент
     th Статус
     th Действия
-  = render @paginated_invoices
+    th PDF
+  = render @paginated_invoices.decorate
 = paginate @paginated_invoices
 
