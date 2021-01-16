@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Order < ApplicationRecord
   include AASM
   include OrderRepository
@@ -21,11 +23,11 @@ class Order < ApplicationRecord
   has_one  :user, through: :profile
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
-            presence: true, numericality: {greater_than_or_equal_to: 0}
-  validates :number_of_employees, presence: true, numericality: {only_integer: true}
+            presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :number_of_employees, presence: true, numericality: { only_integer: true }
 
   has_attached_file :document
-  validates_attachment_content_type :document, content_type: /.*\/.*\z/
+  validates_attachment_content_type :document, content_type: %r{.*\/.*\z}
 
   ransack_alias :all_fields, :id_or_position_title_or_description_or_city_or_place_of_work_or_salary_from_or_salary_to
   ransack_alias :candidate_fields, :id_or_title_or_place_of_work_or_employee_cv_name
@@ -94,6 +96,7 @@ class Order < ApplicationRecord
 
   def employees_can_be_paid?
     return false if number_additional_employees.nil?
+
     balance.amount >= (number_additional_employees * customer_price)
   end
 
@@ -103,8 +106,10 @@ class Order < ApplicationRecord
 
   def to_draft
     return unless may_cancel?
+
     if moderation?
-      balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. Причина: публикация отменена пользователем.")
+      balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. "\
+                                      'Причина: публикация отменена пользователем.')
     end
     cancel!
   end
@@ -115,12 +120,14 @@ class Order < ApplicationRecord
 
   def to_moderation
     return unless balance.withdraw(customer_total, "Публикация заявки #{id}")
+
     moderate! if may_moderate?
   end
 
   # TODO: refactoring code
   def to_published
     return unless may_publish?
+
     publish!
     update(published_at: Date.today)
     comments.create(text: 'Заявка допущена к публикации')
@@ -128,6 +135,7 @@ class Order < ApplicationRecord
 
   def to_rejected(reason)
     return unless may_reject?
+
     reject!
     comments.create(text: reason)
     balance.deposit(customer_total, "Возврат оплаты за публикацию заявки №#{id}. Причина: заявка не прошла модерацию.")
@@ -169,7 +177,10 @@ class Order < ApplicationRecord
   def refund_amount
     remaining_places = number_free_places
     return if remaining_places <= 0
-    Cmd::Order::Refund.call(remaining_places: remaining_places, order: self)
+
+    Cmd::Order::Refund.call(order: self,
+                            remaining_places: remaining_places,
+                            cause: "заявка закрыта, количество оставшихся мест #{remaining_places}")
   end
 
   def count_only_included_candidate
@@ -178,6 +189,7 @@ class Order < ApplicationRecord
 
   def to_close?
     return if number_free_places > 0
+
     to_completed
     Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} завершена"))
     OrderMailJob.perform_later(order: self, method: 'completed')
@@ -185,6 +197,7 @@ class Order < ApplicationRecord
 
   def to_open?
     return if number_free_places <= 0
+
     to_published
     Cmd::UserActionLogger::Log.call(params: logger_params("Заявка №#{id} #{title} опубликована"))
     OrderMailJob.perform_later(order: self, method: 'published')
@@ -219,7 +232,9 @@ class Order < ApplicationRecord
   end
 
   def send_mail_order_wait_for_payment
-    SendNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment') if (!can_be_paid? && profile.notify_mails?)
+    return if can_be_paid? && !profile.notify_mails?
+
+    SendNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment')
   end
 
   def mail_customer_order_is_rejected

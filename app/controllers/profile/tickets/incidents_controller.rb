@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::Tickets::IncidentsController < ApplicationController
   def new
     new_incident
@@ -9,7 +11,8 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def create
     result = Cmd::Ticket::Incident::Create.call(user: current_user,
-                                                incident_params: incident_params.except(:candidate_id))
+                                                incident_params: incident_params.except(:candidate_id),
+                                                order_action: params[:order_action])
 
     if result.success?
       redirect_to_after_create(result.incident.proposal_employee)
@@ -59,18 +62,22 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def inbox
     result = Cmd::Ticket::Incident::Inbox.call(candidate: incident.proposal_employee,
-                                                message_params: { text: 'Анкета переведена в очередь.' },
-                                                interview_date: params[:interview_date],
-                                                incident: incident,
-                                                ticket: incident,
-                                                user: current_user,
-                                                log: true)
+                                               message_params: { text: 'Анкета переведена в очередь.' },
+                                               interview_date: params[:interview_date],
+                                               incident: incident,
+                                               ticket: incident,
+                                               user: current_user,
+                                               log: true)
 
     do_after_action(result)
   end
 
   def interview
-    message_text = current_profile.contractor? ? 'Для анкеты назначена дата приезда' : 'Для анкеты назначена дата собеседования.'
+    message_text = if current_profile.contractor?
+                     'Для анкеты назначена дата приезда'
+                   else
+                     'Для анкеты назначена дата собеседования.'
+                   end
 
     result = Cmd::Ticket::Incident::Interview.call(proposal_employee: incident.proposal_employee, user: current_user,
                                                    message_params: { text: message_text },
@@ -81,7 +88,11 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def failed_interview
-    result = Cmd::Ticket::Incident::FailedInterview.call(message_params: { text: params[:incident][:messages_attributes]['0']['text'] },
+    result = Cmd::Ticket::Incident::FailedInterview.call(message_params:
+                                                           {
+                                                             text: params[:incident][:messages_attributes]['0']['text']
+                                                           },
+                                                         proposal_employee: incident.proposal_employee,
                                                          user: current_user,
                                                          incident: incident,
                                                          ticket: incident)
@@ -95,13 +106,13 @@ class Profile::Tickets::IncidentsController < ApplicationController
   end
 
   def new_incident
-    @new_incident ||= Incident.new(proposal_employee_id: params[:candidate_id])
+    @new_incident ||= Incident.new(proposal_employee_id: params[:candidate_id]).decorate
     @new_incident.messages.build
   end
 
   def incident_params
     params.require(:incident).permit(:title, :candidate_id, :proposal_employee_id, :waiting,
-                                     messages_attributes: [:id, :text, :sender_name, :sender_id])
+                                     messages_attributes: %i[id text sender_name sender_id])
   end
 
   def create_message(message)

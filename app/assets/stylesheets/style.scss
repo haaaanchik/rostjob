@@ -117,6 +117,14 @@ body {
   border-color: #dc3545 !important;
 }
 
+#incident_decorator_title.is-invalid {
+  color: #dc3545;
+}
+
+#incident_decorator_title.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
 .popover-header {
     text-align: center;
 }

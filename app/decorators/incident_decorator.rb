@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IncidentDecorator < TicketDecorator
   delegate_all
 
@@ -13,6 +15,8 @@ class IncidentDecorator < TicketDecorator
       'staffer' => %w[]
     }
   }.freeze
+
+  STATUS_HIRED_APRROVED = %w[hired approved].freeze
 
   def hire_action_enabled?(subject)
     ACTIONS[model.reason][subject.subject_type]&.include?('hire')
@@ -36,6 +40,12 @@ class IncidentDecorator < TicketDecorator
 
   def revoced_by_customer?
     messages.where('text like ?', '%Кандидату отказано в трудоустройстве или договор разорван на основании(ях):%').present?
+  end
+
+  def dispute_opens_in_close_order?(current_profile)
+    current_profile.customer? &&
+      proposal_employee.order.completed? &&
+      STATUS_HIRED_APRROVED.include?(proposal_employee.state)
   end
 
   private

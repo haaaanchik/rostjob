@@ -1,18 +1,28 @@
-- candidate = incident.proposal_employee
 = form_with model: incident, url: profile_tickets_incidents_path do |f|
-  = f.hidden_field :proposal_employee_id, value: candidate.id
-  h5 Анкета: #{candidate.employee_cv.name}
-  h5 Заявка: #{candidate.order.title}
-  = label_tag :title, 'Тема спора:', class: 'form-check-label', id: 'incident_title'
+  = f.hidden_field :proposal_employee_id, value: incident.proposal_employee.id
+  h5 Анкета: #{incident.proposal_employee.employee_cv.name}
+  h5 Заявка: #{incident.proposal_employee.order.title}
+
+  = label_tag :title, 'Тема спора:', class: 'form-check-label', id: 'incident_decorator_title'
   .invalid-feedback
+
   - Incident.title.values.each do |r|
     .form-check
       = radio_button_tag 'incident[title]', r, false, class: 'form-check-input'
       = label_tag "incident[title]_#{r}", t("enumerize.incident.reason.#{r}"), class: 'form-check-label'
   .form-group
+    - if incident.dispute_opens_in_close_order?(current_profile)
+      = label_tag :title, 'Выберите действие с заявкой:', class: 'form-check-label'
+      .form-check
+        = radio_button_tag 'order_action', 'refund', false, class: 'form-check-input'
+        = label_tag 'order_action_refund', 'Я хочу вернуть средства на баланс', class: 'form-check-label'
+      .form-check
+        = radio_button_tag 'order_action', 'open_order', true, class: 'form-check-input'
+        = label_tag 'order_action_open_order', 'Я хочу открыть заявку на поиск персонала', class: 'form-check-label'
+  .form-group
     = f.fields_for :messages do |m|
       = m.label :text, 'Текст спора'
-      = m.text_area :text, class: 'form-control'
+      = m.text_area :text, class: 'form-control', id: 'incident_decorator_messages_attributes_0_text'
       .invalid-feedback
   .text-center
     .row.justify-content-center
