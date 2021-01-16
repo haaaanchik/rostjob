@@ -16,7 +16,7 @@ class SendingEveryDayMailContractorJob < ApplicationJob
   end
 
   def has_disputed_contractor
-    Incident.opened.includes(:proposal_employee, user: { profile: :setting_objects }).group_by { |incident| incident.proposal_employee.profile }.each do |profile, incident|
+    Incident.opened.where(waiting: 'customer').includes(:proposal_employee, user: { profile: :setting_objects }).group_by { |incident| incident.proposal_employee.profile }.each do |profile, incident|
       SendNotifyMailJob.perform_now(objects: incident, method: 'informated_contractor_has_disputed') if profile.every_day_mailing?
     end
   end

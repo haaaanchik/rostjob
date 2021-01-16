@@ -20,6 +20,10 @@ class User < ApplicationRecord
          :validatable, :omniauthable, :confirmable, :rememberable,
          omniauth_providers: %i[vkontakte facebook]
 
+  delegate :customer?,     to: :profile
+  delegate :contractor?,   to: :profile
+  delegate :notify_mails?, to: :profile
+
   def initialize(attrs = nil)
     defaults = {
       is_active: true

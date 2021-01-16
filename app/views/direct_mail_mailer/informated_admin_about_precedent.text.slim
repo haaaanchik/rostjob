@@ -1,10 +1,2 @@
-ruby:
-  pr_emp = @incident.proposal_employee
-
-= "В споре №#{@incident.id}, ссылка на спор #{url_for admin_ticket_url(@incident)} , необходимо разбирательство администрации. "
-| Краткая информация:
-= "Кандидат - #{pr_emp.employee_cv.name}, должен был прийти на интервью #{pr_emp.interview_date.strftime('%e.%m.%Y')}, но #{pr_emp.order.contact_person['name']} (заказчик/контактное лицо) утверждает что кандидат не явился. "
-| Контакты:
-|  Контактное лицо от заказчика - #{pr_emp.order.contact_person['name']} тел:  #{pr_emp.order.contact_person['phone']}; 
-|  Рекрутёр - #{pr_emp.profile.user.full_name} тел: #{pr_emp.profile.phone}, электронная почта: #{pr_emp.profile.user.email}; 
-|  Соискатель - #{pr_emp.employee_cv.name} тел: #{pr_emp.employee_cv.phone_number} .
+- message = "Кандидат - #{pr_emp.employee_cv.name}, должен был прийти на интервью #{pr_emp.interview_date.strftime('%e.%m.%Y')}, но #{pr_emp.order.contact_person['name']} (заказчик/контактное лицо) утверждает что кандидат не явился. "
+= render  partial: "precedent", locals: { incident: @incident, precedent_text: @message }

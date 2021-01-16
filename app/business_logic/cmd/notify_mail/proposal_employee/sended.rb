@@ -1,7 +1,7 @@
 module Cmd
   module NotifyMail
     module ProposalEmployee
-      class Inbox
+      class Sended
         include Interactor
 
         delegate :proposal_employee, to: :context

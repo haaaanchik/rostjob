@@ -10,7 +10,7 @@ module Cmd
         acts = candidates.where(profile_id: profile_id)
         context.fail! if acts.blank?
         acts.each do |act|
-          pay = Cmd::ProposalEmployee::Pay.call(candidate: act)
+          pay = Cmd::ProposalEmployee::Pay.call(candidate: act, log: true)
           context.fail! if pay.failure?
         end
       end

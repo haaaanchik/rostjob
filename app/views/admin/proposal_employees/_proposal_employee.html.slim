@@ -1,5 +1,15 @@
-tr.clickable-row data-href=admin_proposal_employee_path(proposal_employee)
-  td = proposal_employee.employee_cv_id
-  td = proposal_employee.order_id
-  td = proposal_employee.date
-  td = proposal_employee.time
+- employee_cv = proposal_employee.employee_cv
+
+tr id="candidate_#{proposal_employee.id}" data-href=root_path
+  td
+    i.fa.fa-bookmark.mr-2 class="#{ proposal_employee.status_background_class + '-text' }"
+    | #{ t("proposal_employee.state.#{proposal_employee.state}") }
+    br
+    | от #{proposal_employee.created_at.strftime('%d.%m.%Y %H:%M')}
+  td
+    | ##{proposal_employee.employee_cv_id} #{employee_cv&.name}
+  td
+    | №#{proposal_employee.order_id} #{proposal_employee.title}<br>
+  td = proposal_employee.order.production_site.title
+  td
+    = render partial: 'admin/proposal_employees/toolbars/pull_action_buttons', locals: { proposal_employee: proposal_employee }

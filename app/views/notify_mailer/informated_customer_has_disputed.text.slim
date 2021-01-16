@@ -1,6 +1,6 @@
-= "Уважаемый, #{@prop_emp.first.order.profile.user.full_name}."
+= "Уважаемый(ая), #{@prop_emp.first.order.profile.user.full_name}."
 - if @prop_emp.size > 1
-  = 'У Вас есть не разрещённые споры. Их можно посмотреть по сылке. '
+  = 'У Вас есть неразрещённые споры. Их можно посмотреть по сылке. '
   = url_for profile_tickets_url
 - else
   = "На Анкету №#{@prop_emp.first.employee_cv.id} #{@prop_emp.first.employee_cv.name} открыт спор. "

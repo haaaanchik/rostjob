@@ -11,5 +11,5 @@ ruby:
                                 field: 'interview_date',
                                 button_text: 'НАЗНАЧИТЬ'}}"
 
-= render "profile/tickets/toolbars/customer/#{partial}", pe_form: pe_form, pe_interview_form: pe_interview_form
+= render "profile/tickets/toolbars/customer/#{partial}", pe_form: pe_form, pe_interview_form: pe_interview_form, revoked: @ticket.decorate.revoced_by_customer?
 

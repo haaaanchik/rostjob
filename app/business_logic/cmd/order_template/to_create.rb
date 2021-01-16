@@ -19,7 +19,7 @@ module Cmd
       private
 
       def set_name
-        "#{ params[:title] } - #{ Date.today.strftime('%d.%m.%Y') }"
+        "#{params[:title]} - #{Date.today.strftime('%d.%m.%Y')}"
       end
     end
   end

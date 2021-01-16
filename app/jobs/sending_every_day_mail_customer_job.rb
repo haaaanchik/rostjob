@@ -38,7 +38,7 @@ class SendingEveryDayMailCustomerJob < ApplicationJob
   end
 
   def has_disputed_customer
-    ProposalEmployee.disputed.includes(:order, profile: :setting_objects).group_by { |pr| pr.order.profile }.each do |profile, prop_emp|
+    ProposalEmployee.disputed.where(waiting: 'contractor').includes(:order, profile: :setting_objects).group_by { |pr| pr.order.profile }.each do |profile, prop_emp|
       ProposalEmployeeMailJob.perform_now(proposal_employees: prop_emp, method: 'informated_customer_has_disputed') if profile.every_day_mailing?
     end
   end

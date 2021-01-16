@@ -34,6 +34,10 @@ class IncidentDecorator < TicketDecorator
     "Спорная анкета №#{employee_cv.id} #{employee_cv.name}<br>Заявка №#{order.id} #{order.title}".html_safe
   end
 
+  def revoced_by_customer?
+    messages.where('text like ?', '%Кандидату отказано в трудоустройстве или договор разорван на основании(ях):%').present?
+  end
+
   private
 
   def order

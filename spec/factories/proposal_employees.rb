@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :proposal_employee do
     state { 'inbox' }
     warranty_date { (Date.today - 2.month) }
+    approved_by_admin { false }
 
     trait :interview do
       state { 'interview' }

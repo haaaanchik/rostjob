@@ -1,5 +1,5 @@
 .direct_message
-  = "Уважаемый #{@user.full_name}!"
+  = "Уважаемый(ая) #{@user.full_name}!"
   p
     | Поступило новое сообщение в 
     = link_to "спор №#{@ticket.id}", profile_ticket_url(@ticket)

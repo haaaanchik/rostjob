@@ -82,7 +82,6 @@ class Profile::Tickets::IncidentsController < ApplicationController
 
   def failed_interview
     result = Cmd::Ticket::Incident::FailedInterview.call(message_params: { text: params[:incident][:messages_attributes]['0']['text'] },
-                                                         proposal_employee: incident.proposal_employee,
                                                          user: current_user,
                                                          incident: incident,
                                                          ticket: incident)

@@ -1,7 +1,7 @@
 module Cmd
   module UserActionLogger
     module ProposalEmployee
-      class CreateLoginCaseRevoke
+      class CreateLogsCaseRevoke
         include Interactor
 
         delegate :user, to: :context

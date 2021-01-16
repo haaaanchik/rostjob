@@ -9,7 +9,7 @@ class Balance < ApplicationRecord
       bt = self.bill_transactions.build(amount: amount, description: description, transaction_type: 'deposit')
       if bt.save
         self.amount += amount.to_i
-        SendDirectMailJob.perform_now(user: profile.user, attrs: { amount: amount.to_i }, method: 'deposite_was_upped') if profile.notify_mails?
+        SendDirectMailJob.perform_now(user: profile.user, attrs: { amount: amount.to_i }, method: 'deposite_was_upped') if profile.customer? && profile.notify_mails?
       else
         promote_errors(bt.errors)
         raise StandardError.new

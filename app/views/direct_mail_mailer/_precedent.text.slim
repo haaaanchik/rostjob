@@ -1,0 +1,11 @@
+ruby:
+  pr_emp = @incident.proposal_employee
+
+= "В споре №#{@incident.id}, ссылка на спор #{url_for admin_ticket_url(@incident)} , необходимо разбирательство администрации. "
+| Краткая информация:
+= precedent_text
+| Контакты:
+|  Заказчик - #{pr_emp.order.profile.company.short_name}, тел: #{pr_emp.order.profile.company.phone}
+|  Контактное лицо от заказчика - #{pr_emp.order.contact_person['name']} тел:  #{pr_emp.order.contact_person['phone']}; 
+|  Рекрутёр - #{pr_emp.profile.user.full_name} тел: #{pr_emp.profile.phone}, электронная почта: #{pr_emp.profile.user.email}; 
+|  Соискатель - #{pr_emp.employee_cv.name} тел: #{pr_emp.employee_cv.phone_number} .

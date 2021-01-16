@@ -1,4 +1,2 @@
 = "В заявку №#{ @proposal_employee.order.id } '#{ @proposal_employee.order.title }' поступила анкета №#{ @proposal_employee.employee_cv.id }, ссылка на анкету "
 = url_for profile_production_site_order_url(@proposal_employee.order.production_site_id, @proposal_employee.order.id)
-= ' . Назначьте дату собеседования чтобы Рекрутер закрыл заявку. Если у Вас трудности с назначением собеседования посмотрите инструкцию по ссылке. '
-= url_for page_url('manual_how_to_set_date_interview')

@@ -1,9 +1,9 @@
-= "Уважаемый, #{@incident.proposal_employee.profile.user.full_name}."
+= "Уважаемый(ая), #{@incident.proposal_employee.profile.user.full_name}."
 - if @incidents.size > 1
-  = 'У вас есть не разрещённые споры. Их можно посмотреть по ссылке'
+  = 'У вас есть неразрещённые споры. Их можно посмотреть по ссылке'
   = url_for profile_tickets_url
 -else
   = "На Анкету №#{@incident.proposal_employee.employee_cv.id} #{@incident.proposal_employee.employee_cv.name} открыт спор."
   = "По причине #{@incident.title_text}. Заказчик комментирует: #{@incident.messages.last.text}. "
-  | Пожалуйста пройдите по ссылке и выберите вариант решения конфликта. Спасибо!
+  | Пожалуйста пройдите по ссылке и выберите вариант решения конфликта. Спасибо. 
   = url_for profile_ticket_url(@incident.id)

@@ -25,9 +25,9 @@ class NotifyMailer < ApplicationMailer
   def today_interview_customer
     @prop_emps = params[:proposal_employees]
     customer_email = @prop_emps.first.order.user.email
+    subject = @prop_emps.size == 1 ? 'RostJob. Собеседование сегодня' : 'RostJob. Собеседования на сегодня'
 
-    mail(to: customer_email,
-      subject: 'RostJob. Собеседования на сегодня')
+    mail(to: customer_email, subject: subject)
   end
 
   def candidates_inbox

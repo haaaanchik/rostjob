@@ -24,20 +24,21 @@ class DirectMailMailer < ApplicationMailer
     @incident = params[:attrs][:incident]
     @ticket = params[:attrs][:ticket]
 
-    mail(to: @user.email, subject: 'RostJob. Спор был закрыт')
+    mail(to: @user.email, subject: 'RostJob. Спор был закрыт.')
   end
 
-  def informated_about_revoke_candidate
+  def informated_about_revoke
     @user = params[:user]
     @prop_emp = params[:attrs][:proposal_employee]
+    @by_admin = params[:attrs][:by_admin]
 
-    mail(to: @user.email, subject: 'RostJob. Анкета кандидата была отозвана')
+    mail(to: @user.email, subject: 'RostJob. Анкета кандидата была отозвана.')
   end
 
   def informated_admin_about_precedent
     @incident = params[:attrs][:incident]
 
-    mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}")
+    mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}.")
   end
 
   def informated_about_failed_interview
@@ -45,6 +46,13 @@ class DirectMailMailer < ApplicationMailer
     @message = params[:message]
     @proposal_employee = params[:attrs][:proposal_employee]
 
-    mail(to: @user.email, subject: "RostJob. Кандидату было отказано")
+    mail(to: @user.email, subject: "RostJob. Кандидату было отказано.")
+  end
+
+  def informated_admin_about_revoke
+    @incident = params[:attrs][:incident]
+    @message  = params[:attrs][:message]
+
+    mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}.")
   end
 end

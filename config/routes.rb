@@ -116,9 +116,12 @@ Rails.application.routes.draw do
         resources :messages, only: %i[index create]
       end
     end
-    resources :proposal_employees, only: %i[index show] do
+    resources :proposal_employees, only: :index do
       member do
         put :revoke
+        put :hire
+        put :approve
+        put :paid
         put :approve_act
       end
       collection do
@@ -190,6 +193,7 @@ Rails.application.routes.draw do
     end
 
     resources :production_sites, except: %i[new create]
+    resources :employee_cvs, only: %i[edit update]
   end
 
   resource :profile, only: %i[show edit update] do
