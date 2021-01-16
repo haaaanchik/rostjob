@@ -7,4 +7,9 @@ tr
   td
     = invoice.display_customer_pdf_link
     / = invoice.link_for_check_pay
+    = link_to profile_invoice_path(invoice), method: :delete, remote: true,
+              data: { confirm: 'Вы действительно хотите удалить счёт?' },
+              class: 'ml-3 mb-2 remove_invoice',
+              title: 'Удалить счёт?' do
+      i.fas.fa-trash.red-text.fa-2x
 

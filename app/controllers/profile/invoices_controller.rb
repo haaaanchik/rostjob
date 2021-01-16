@@ -42,6 +42,14 @@ class Profile::InvoicesController < ApplicationController
     redirect_to profile_invoices_path
   end
 
+  def destroy
+    if invoice.destroy
+      render json: :no_content, status: :accepted
+    else
+      render json: :no_content, status: :not_acceptable
+    end
+  end
+
   private
 
   def amount
