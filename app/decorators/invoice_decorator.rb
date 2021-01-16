@@ -2,10 +2,16 @@ class InvoiceDecorator < ApplicationDecorator
   delegate_all
 
   # TODO: refactoring code
-  def customer_pdf_link
-    return tinkoff_pdf_url if tinkoff_pdf_url.present?
+  def display_customer_pdf_link
+    return if tinkoff_pdf_url.blank?
 
-    h.profile_invoice_path(object, format: :pdf)
+    h.link_to(tinkoff_pdf_url, target: '_blank',
+              data: { toggle: 'tooltip',
+                      placement: 'top',
+                      title: 'Скачать в формате PDF' },
+              class: 'ml-1 file-pdf') do
+      h.content_tag(:i, class: 'far fa-file-pdf fa-2x') {}
+    end
   end
 
   def link_for_check_pay

@@ -5,11 +5,6 @@ tr
   td
     span.badge class=(invoice.created? ? 'badge-info' : 'badge-success') #{t("invoice.state.#{invoice.state}")}
   td
-    = link_to invoice.customer_pdf_link, target: '_blank',
-            data: { toggle: 'tooltip',
-                    placement: 'top',
-                    title: 'Скачать в формате PDF' },
-            class: 'ml-1 file-pdf' do
-      i.far.fa-file-pdf.fa-2x
+    = invoice.display_customer_pdf_link
     / = invoice.link_for_check_pay
 
