@@ -4,7 +4,7 @@ module Api
   module V1
     class Contractors < Grape::API
 
-      desc 'Get a free manager'
+      desc 'Call candidate modal show'
       params do
         requires :guid,  type: String, desc: 'Contractor guid'
         requires :name,  type: String, desc: 'Candidate name'
@@ -20,6 +20,14 @@ module Api
                          status: 422) if result.failure?
 
         { status: :ok }
+      end
+
+
+      desc 'Get a free manager'
+      get '/free_manager' do
+        result = Cmd::FreeManager::Sample.call
+
+        { status: 200, data: result.manager || [] }
       end
     end
   end

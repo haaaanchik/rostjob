@@ -11,7 +11,6 @@ module Api
 
       include Api::V1::Auth
       mount Api::V1::Orders
-      mount Api::V1::Customers
       mount Api::V1::Contractors
 
       add_swagger_documentation(

@@ -10,7 +10,9 @@ module Api
       end
       params do
         optional :page,  type: Integer, default: 1, desc: 'Specify the page of paginated results.'
-        optional :title_fields_in,  type: String, desc: 'Specify the page of paginated results.'
+        optional :city_eq, type: String, desc: 'Order city.'
+        optional :title_fields_in, type: Array, desc: 'Order title.'
+        optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
       end
 
       get '/orders/catalog' do
