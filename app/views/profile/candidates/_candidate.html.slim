@@ -3,7 +3,7 @@
     span
       i.fa.fa-bookmark class="#{ candidate.status_background_class + '-text' }"
       | #{ t("proposal_employee.state.#{candidate.state}") } <br>
-      = candidate.display_candidate_date_for_customer(current_user)
+      span.date = candidate.display_candidate_date
 
   #setup.info
     = link_to '#', class: 'recruiter-clr-purple' do
