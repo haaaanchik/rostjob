@@ -163,7 +163,7 @@ class Order < ApplicationRecord
   end
 
   def number_free_places
-    number_of_employees - count_only_included_candidate
+    number_of_employees - proposal_employees.count_candidates_included_in_order
   end
 
   def refund_amount
@@ -173,7 +173,7 @@ class Order < ApplicationRecord
   end
 
   def count_only_included_candidate
-    proposal_employees.count_candidates_included_in_order
+    proposal_employees.count_candidates_in_hire
   end
 
   def to_close?

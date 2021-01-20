@@ -10,14 +10,14 @@
     .platforms_list_platform_top_info
       ul.fa-ul
         li
-          i.fa.fa-envelope
-          | В очереди: #{ production_site.inbox_candidate_count }
-        li
           i.fa.fa-users
           | Заявки: #{production_site.number_free_places }
         li
-          i.fa.fa-bookmark.mr-2
-          | В найме: #{ production_site.count_only_included_candidate }
+          i.fa.fa-bookmark.mr-3
+          | В найме: #{ production_site.order_candidates_in_hire }
+        li
+          i.far.fa-frown.mr-3
+          | В споре: #{ production_site.order_dispute_count }
 
   .platforms_list_platform_bottom
     .platforms_list_platform_bottom_nav
