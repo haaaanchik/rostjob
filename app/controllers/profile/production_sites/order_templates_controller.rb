@@ -9,7 +9,7 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def new
-    @order_template = OrderTemplate.new(production_site: production_site)
+    @order_template = OrderTemplate.new(production_site: production_site).decorate
   end
 
   def create

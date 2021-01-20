@@ -26,6 +26,7 @@
           = f.hidden_field :position_id
           = hidden_field_tag :creation_step, 1
           = hidden_field_tag :commit, 'далее'
+          = hidden_field_tag :redirecting_back, false
           .pattern_body_steps_form_step.show
             .pattern_body_steps_form_step_input
               = f.label :profession, 'Профессия'
@@ -33,6 +34,7 @@
                       value: f.object.title,
                       class: 'form-control',
                       placeholder: 'Начните набирать',
+                      disabled: model.disabled_profession?,
                       data: {'auto-url' => '/search_position'}
               .invalid-feedback
 
@@ -48,5 +50,9 @@
               = f.text_field :skill, class: 'form-control', placeholder: 'Укажите квалификацию'
               .invalid-feedback
 
-            footer.pattern_body_steps_form_step_next
+            
+            footer.pattern_body_steps_form_step_next.row.w-100
+              - unless is_order_template
+                = f.button id: 'save-on_current_page', class: 'mx-auto' do
+                  p Сохранить
               = next_button

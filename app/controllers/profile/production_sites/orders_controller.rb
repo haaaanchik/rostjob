@@ -22,7 +22,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     order.creation_step = params[:creation_step].to_i
     result = Cmd::Order::Update.call(order: order, params: order_params)
     if result.success?
-      redirect_to_after_update(result.order)
+      redirect_to_after_update(result.order, params[:redirecting_back])
     else
       render json: { validate: true, data: errors_data(result.order) }, status: 422
     end
@@ -147,7 +147,9 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     @model_resource = order.decorate
   end
 
-  def redirect_to_after_update(order)
+  def redirect_to_after_update(order, redirecting)
+    return redirect_back_with_save if redirecting == 'true'
+
     case order.creation_step.to_i
     when 2
       redirect_to third_step_profile_production_site_order_path(production_site, order)
@@ -167,6 +169,11 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
                      .with_pe_counts
                      .order(urgency_level: :desc, created_at: :desc)
                      .includes(profile: :company)
+  end
+
+  def redirect_back_with_save
+    redirect_back(fallback_location: profile_production_site_order_path(production_site, order))
+    flash[:notice] = 'Данные удачно сохранены.'
   end
 
   def set_authorize
