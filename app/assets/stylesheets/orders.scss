@@ -520,9 +520,14 @@ $purple: #9046ff;
 #requests-page{
   .ordersCatalog{
     position: fixed;
-    top: 45px;
+    top: 28px;
     left: 85px;
     z-index: 99;
+    width: 100%;
+  }
+
+  .ordersCatalog .ordersCatalog__filters {
+    height: 50px;
   }
 }
 

@@ -453,3 +453,53 @@
     }
   }
 }
+
+#failed_send_cv {
+  .modal-header {
+    border-bottom: unset;
+  }
+
+  .modal {
+    position: relative;
+    height: 300px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .modal__title {
+    color: #000000;
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .modal__content {
+    max-width: 390px;
+    color: #000000;
+    font-size: 15px;
+    text-align: center;
+    margin: 0;
+    line-height: 20px;
+  }
+
+  .modal__btn {
+    width: 170px;
+    height: 32px;
+    border-radius: 16px;
+    background-image: linear-gradient(to top, #1970ff 0%, #68a2ff 100%);
+    color: #ffffff;
+    border: none;
+    outline: none;
+    transition: .3s linear;
+  }
+
+  .modal__btn:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+}
