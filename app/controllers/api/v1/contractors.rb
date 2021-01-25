@@ -10,7 +10,7 @@ module Api
         requires :name,  type: String, desc: 'Candidate name'
         requires :phone, type: String, desc: 'Candidates phone number'
       end
-      get '/candidates' do
+      get '/candidates/new' do
         result = Cmd::Api::BotCallback::Process.call(guid: params[:guid],
                                                      name: params[:name],
                                                      phone: params[:phone])
@@ -25,8 +25,6 @@ module Api
 
       desc 'Get a free manager'
       get '/free_manager' do
-        p request.ip
-        p 'Request Api'
         result = Cmd::FreeManager::Sample.call
 
         { status: 200, data: result.manager }
