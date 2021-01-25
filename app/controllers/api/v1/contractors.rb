@@ -25,9 +25,11 @@ module Api
 
       desc 'Get a free manager'
       get '/free_manager' do
+        p request.ip
+        p 'Request Api'
         result = Cmd::FreeManager::Sample.call
 
-        { status: 200, data: result.manager || [] }
+        { status: 200, data: result.manager }
       end
     end
   end
