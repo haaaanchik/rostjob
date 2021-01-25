@@ -31,7 +31,7 @@ module Cmd
         end
 
         def user
-          @user ||= User.joins(:profile).find_by(guid: guid, 'profiles.profile_type': 'contractor')
+          @user ||= ::User.joins(:profile).find_by(guid: guid, 'profiles.profile_type': 'contractor')
         end
       end
     end
