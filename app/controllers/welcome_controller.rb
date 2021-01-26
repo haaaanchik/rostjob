@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WelcomeController < ApplicationController
   skip_before_action :auth_user, only: :index
 
@@ -20,12 +22,19 @@ class WelcomeController < ApplicationController
     @empl_cv_reminders = current_profile.employee_cvs.ready.range_reminders(params[:start], params[:end])
   end
 
+  def loading_candidates_interview
+    prepare_data
+
+    render layout: false
+  end
+
   private
 
   def user_action_log_records
     @user_action_log_records ||= UserActionLog.json_contain_receiver_ids(current_user)
                                               .order(id: :desc)
-                                              .page(params[:page]).per(10)
+                                              .page(params[:page])
+                                              .per(10)
                                               .decorate
   end
 
@@ -34,17 +43,16 @@ class WelcomeController < ApplicationController
   end
 
   def prepare_data
-    @orders_with_interviewed_candidates = current_profile
-                                            .orders
-                                            .with_interviewed_candidates
-                                            .order('interview_date')
+    @candidates_interview = current_profile.orders.with_interviewed_candidates.order('interview_date DESC')
+                                           .includes(:production_site)
+                                           .page(params[:page])
   end
 
   def orders_with_disputed_employee_cvs
     @orders_with_disputed_employee_cvs ||= if current_profile.customer?
-      current_profile.orders.with_disputed_employee_cvs
-    elsif current_profile.contractor?
-      current_profile.answered_orders.with_disputed_employee_cvs_contractor
+                                             current_profile.orders.with_disputed_employee_cvs
+                                           elsif current_profile.contractor?
+                                             current_profile.answered_orders.with_disputed_employee_cvs_contractor
     end
   end
 
