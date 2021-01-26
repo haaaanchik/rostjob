@@ -10,10 +10,7 @@
         = active_link_to 'Настройки профиля',
                          edit_user_registration_path,
                          class_active: 'active-link recruiter-clr-purple'
-      li
-        = active_link_to 'Карточка предприятия',
-                         edit_profile_path,
-                         class_active: 'active-link'
+      li = current_profile.decorate.active_link_edit_profile
       li
         = active_link_to 'Управление рассылками',
                          profile_settings_path,

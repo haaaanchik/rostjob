@@ -1,4 +1,1 @@
-- if @profile.contractor?
-  = render partial: 'contractor_form'
-- else
-  = render partial: 'form'
+= render "#{current_profile.profile_type}_form"

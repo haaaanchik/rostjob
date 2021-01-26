@@ -47,7 +47,7 @@ class ProfilesController < ApplicationController
           .permit(:photo, :contact_person, :phone, :company_name, :email, :profile_type, :legal_form,
                   company_attributes: [:id, :name, :short_name, :address, :mail_address, :phone,
                                        :fax, :email, :inn, :kpp, :ogrn, :director, :acts_on, :legal_form,
-                                       accounts_attributes: %i[id account_number corr_account bic
-                                                               bank bank_address inn kpp]])
+                                       accounts_attributes: %i[id account_number corr_account bic bank
+                                                               bank_address inn kpp number_contract]])
   end
 end
