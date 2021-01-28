@@ -63,8 +63,24 @@ class ContractorInvoicePdf < Prawn::Document
   end
 
   def total_by_words
+    prev_invoice = @profile.invoices.prev_invoice(@invoice.created_at).first
+    if prev_invoice.nil?
+      orders = @profile.answered_orders.where("proposal_employees.state = 'paid'")
+    else
+      current_date = @invoice.created_at
+      prev_date = prev_invoice.created_at
+      orders = @profile.orders_with_paid_employees(current_date, prev_date)
+    end
+    orders.includes(:proposal_employees).decorate.each_with_index do |order, i|
+      employees = prev_invoice.nil? ? (order.proposal_employees.paid.where('proposal_employees.profile_id = ?', @profile.id)) :
+                                      (order.proposal_employees.paid_employees_during(@profile.id, current_date, prev_date))
+      quantity = employees.count
+      total = quantity * order.contractor_price
+      @total_price += total
+    end
+
     move_down 3.mm
-    text "Сумма: #{@total} (#{RuPropisju.rublej(@total).capitalize} 00 копеек)", size: 12
+    text "Сумма: #{@total_price} (#{RuPropisju.rublej(@total_price).capitalize} 00 копеек)", size: 12
   end
 
   def proposals
@@ -90,7 +106,6 @@ class ContractorInvoicePdf < Prawn::Document
                                       (order.proposal_employees.paid_employees_during(@profile.id, current_date, prev_date))
       quantity = employees.count
       total = quantity * order.contractor_price
-      @total_price += total
 
       data << [
         { content: (i + 1).to_s }, { content: "#{ order.title_with_skill }. #{ order.production_site.title }" },
