@@ -24,6 +24,25 @@ module Api
         present :titles, published_orders.map(&:title).uniq
         present :cities, published_orders.map(&:city).uniq
       end
+
+
+      desc 'Order by id' do
+        success Entities::Order
+      end
+      params do
+        requires :id, type: Integer, desc: 'Order id'
+      end
+      get '/orders/:id' do
+        published_orders = Order.published.includes(:position, profile: :company)
+        order = published_orders.find(params[:id])
+        similar_orders = published_orders
+                           .where(city: order.city)
+                           .where.not(id: order.id)
+                           .limit(2)
+
+        present :order, order, with: Entities::Order
+        present :similar_orders, similar_orders, with: Entities::Order
+      end
     end
   end
 end

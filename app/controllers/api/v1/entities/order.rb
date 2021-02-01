@@ -4,6 +4,12 @@ module Api
   module V1
     module Entities
       class Order < Api::V1::Entities::Base
+        expose :id,
+               documentation: {
+                 desc: 'Order id.',
+                 type: Integer
+               }
+
         expose(:company_short_name,
                documentation: {
                  desc: 'Order company short name.',
@@ -11,6 +17,24 @@ module Api
                }
         ) do |order|
           order.profile.company.short_name
+        end
+
+        expose(:company_logo,
+               documentation: {
+                 desc: 'Order company logo.',
+                 type: String
+               }
+        ) do |order|
+          "https://rostjob.com#{order.profile.image_url}"
+        end
+
+        expose(:company_description,
+               documentation: {
+                 desc: 'Order company description.',
+                 type: String
+               }
+        ) do |order|
+          order.profile.company.description
         end
 
         expose :city,
@@ -43,7 +67,7 @@ module Api
                  type: String
                }
 
-        expose(:created_at,
+        expose(:published_at,
                format_with: :iso8601,
                documentation: {
                  desc: 'The datetime when order was created.',
