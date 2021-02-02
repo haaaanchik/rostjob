@@ -182,8 +182,9 @@ class ProposalEmployeeDecorator < ApplicationDecorator
   end
 
   def display_candidate_date
-    date =  hiring_date.present? ? hiring_date : interview_date
-    date.strftime('%d.%m.%Y')
+    return format_date(updated_at) if disputed?
+
+    format_date(hiring_date || interview_date)
   end
 
   def calendar_format_date
@@ -244,11 +245,6 @@ class ProposalEmployeeDecorator < ApplicationDecorator
     disputed? ? h.profile_ticket_path(incidents.opened.last) : h.profile_employee_cvs_path(proposal_employee_id: id)
   end
 
-  def display_candidate_date_for_customer(user)
-    return if user.profile.customer?
-
-    h.content_tag(:span, "с #{display_candidate_date}", class: 'date')
-  end
 
   def display_comment(user)
     return comment if user.profile.customer?
