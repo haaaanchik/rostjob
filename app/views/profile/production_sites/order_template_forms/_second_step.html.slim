@@ -29,6 +29,7 @@ ruby:
           = f.hidden_field :position_id
           = hidden_field_tag :creation_step, 2
           = hidden_field_tag :commit, 'далее'
+          = hidden_field_tag :redirecting_back, false
           .pattern_body_steps_form_step.show
             .pattern_body_steps_form_step_input
               = f.label :city, 'Город'
@@ -48,7 +49,12 @@ ruby:
                 = oi_f.text_area :terms, class: 'form-control tinymce', rows: 10
                 .invalid-feedback
 
-            footer.pattern_body_steps_form_step_next
+            footer.pattern_body_steps_form_step_next.row.w-100
+              .mx-auto
+                - unless is_order_template
+                  = f.button id: 'save-on_current_page' do
+                    p Сохранить
+
               = f.button do
                 p
                   | Далее

@@ -189,6 +189,12 @@ class OrderDecorator < ApplicationDecorator
                 class: 'dropdown-item')
   end
 
+  def disabled_profession?
+    return true if published? || completed?
+
+    false
+  end
+
   private
 
   def link_to_disputed

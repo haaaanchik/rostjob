@@ -14,4 +14,8 @@ class OrderTemplateDecorator < ApplicationDecorator
       h.content_tag(:p) { 'Далее' }
     end
   end
+
+  def disabled_profession?
+    false
+  end
 end
