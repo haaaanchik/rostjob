@@ -45,7 +45,10 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def update
-    result = Cmd::EmployeeCv::Update.call(employee_cv: employee_cv, params: employee_cvs_params)
+    result = Cmd::EmployeeCv::Update.call(user: current_user,
+                                          employee_cv: employee_cv,
+                                          params: employee_cvs_params)
+
     if result.success?
       redirect_after_update
 

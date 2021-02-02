@@ -26,16 +26,16 @@ module Cmd
           text.concat(role)
         end
 
-        def subject_type
-          user.is_a?(Staffer) ? 'Staffer' : 'User'
+        def admin?
+          @admin = user.is_a?(Staffer)
         end
 
         def subject_role
-          user.is_a?(Staffer) ? user.role_list.first : user.profile.profile_type
+          admin? ? user.role_list.first : user.profile.profile_type
         end
 
         def login
-          user.is_a?(Staffer) ? user.login : user.email
+          admin? ? user.login : user.email
         end
 
         def logger_params
@@ -43,7 +43,7 @@ module Cmd
             login: login,
             receiver_ids: receiver_ids,
             subject_id: user.id,
-            subject_type: subject_type,
+            subject_type: user.class.to_s,
             subject_role: subject_role,
             action: action,
             object_id: proposal_employee.id,
