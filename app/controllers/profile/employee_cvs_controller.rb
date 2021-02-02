@@ -41,7 +41,10 @@ class Profile::EmployeeCvsController < ApplicationController
                                         profile: current_profile,
                                         order: employee_cv_order)
 
-     @status = result.success? ? 'success' : 'fail'
+    if result.failure?
+      @user = current_user
+      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422 if !result.proposal_employee
+    end
   end
 
   def update
