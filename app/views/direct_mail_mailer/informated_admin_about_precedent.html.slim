@@ -1,2 +1,2 @@
-- message = "Кандидат - #{pr_emp.employee_cv.name}, должен был прийти на интервью #{pr_emp.interview_date.strftime('%e.%m.%Y')}, но #{pr_emp.order.contact_person['name']} (заказчик/контактное лицо) утверждает что кандидат не явился."
-= render  partial: "precedent", locals: { incident: @incident, precedent_text: message}
+- message = "Кандидат - #{@pr_emp.employee_cv.name}, должен был прийти на интервью #{@pr_emp.interview_date.strftime('%e.%m.%Y')}, но #{@pr_emp.order.contact_person['name']} (заказчик/контактное лицо) утверждает что кандидат не явился."
+= render  partial: "precedent", locals: { pr_emp: @pr_emp,incident: @incident, precedent_text: message }

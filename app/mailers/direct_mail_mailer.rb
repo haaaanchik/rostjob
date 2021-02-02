@@ -37,6 +37,7 @@ class DirectMailMailer < ApplicationMailer
 
   def informated_admin_about_precedent
     @incident = params[:attrs][:incident]
+    @pr_emp = @incident.proposal_employee
 
     mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}.")
   end
