@@ -8,7 +8,7 @@ module Cmd
       def call
         profile.assign_attributes(profile_params.except(:profile_type, :legal_form))
         if company?
-          send_welcome_message if profile.save(context: :company)
+          send_welcome_message if profile.save
         else
           profile.save
         end

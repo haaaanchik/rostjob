@@ -160,7 +160,6 @@ $(document).ready ->
 
   $(document).on "turbolinks:load", ->
     $('input[type=tel]').inputmask("+*(999)-999-99-99")
-    # $('.form-control#profile_company_attributes_inn').inputmask("999999999999")
     $('.form-control#profile_company_attributes_ogrn').inputmask("9999999999999")
     $('.form-control#profile_company_attributes_kpp').inputmask("999999999")
     
