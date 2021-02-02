@@ -1,11 +1,36 @@
 - errors = @profile.errors.messages
 
-.col-md-9.order-md-2.mt-2
-  = form_with model: @profile, url: profile_path, class: 'new-profile-form mt-3' do |f|
-    .form-group.row.private-person-field
-      = f.label :phone, t(:phone), class: 'col-3 col-form-label require_field'
-      .col-9
-        = f.text_field :phone, class: "form-control #{'is-invalid' unless errors[:phone].empty?}"
-        .invalid-feedback #{errors[:phone].first}
-    = f.submit t('buttons.save'), class: 'btn btn-success mt-5'
-
+#setting-page
+  = render partial: 'partials/settings_menu'
+  .settings-block-container
+    .company-card
+      .title.recruiter-clr-purple Данные партнера
+        
+      = form_with model: @profile, url: profile_path do |f|
+        = f.fields_for :company do |c|
+          .form-group.row 
+            = c.label :name, 'ФИО по паспорту', class: 'col-lg-4 col-12 col-sm-6'
+            .col-lg-6.col-12.col-sm-6
+              = c.text_field :name, rows: '1' , class: 'form-control'
+          .form-group.row.private-person-field
+            = c.label :phone, 'Номер телефона', class: 'col-lg-4 col-12 col-sm-6'
+            .col-lg-6.col-12.col-sm-6
+              = c.phone_field :phone, class: 'form-control'
+          .form-group.row.private-person-field
+            = c.label :email, 'Электронная почта', class: 'col-lg-4 col-12 col-sm-6'
+            .col-lg-6.col-12.col-sm-6
+              = c.email_field :email, rows: '1' , class: 'form-control'
+          .form-group.row
+            = c.label :address, 'Регион проживания', class: 'col-lg-4 col-12 col-sm-6'
+            .col-lg-6.col-12.col-sm-6
+              = c.text_area :address, rows: '1' , class: 'form-control'
+          = c.fields_for :accounts do |acc|
+            .form-group.row
+              = acc.label :account_number, 'Номер договора с банком', class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = acc.text_field :account_number, rows: '1' , class: 'form-control'
+            .form-group.row
+              = acc.label :account_number, 'Реквизиты счёта карты', class: 'col-lg-4 col-12 col-sm-6'
+              .col-lg-6.col-12.col-sm-6
+                = acc.text_field :number_contract, rows: '1' , class: 'form-control'
+        = f.submit t('buttons.save'), class: ' submit-left recruter-btn-gradient'

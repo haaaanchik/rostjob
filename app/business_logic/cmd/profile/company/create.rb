@@ -1,3 +1,5 @@
+# frozen_string_literal: true`
+
 module Cmd
   module Profile
     module Company

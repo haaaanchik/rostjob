@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_085700) do
+ActiveRecord::Schema.define(version: 2021_01_26_091852) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_085700) do
     t.string "inn"
     t.string "kpp"
     t.boolean "active"
+    t.string "number_contract"
     t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
   end
 
@@ -685,7 +686,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_085700) do
     t.integer "moderation_state", null: false
     t.integer "previous_moderation_state", null: false
     t.timestamp "created_at", null: false
-    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
+-   t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
   end
 
   create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
