@@ -25,7 +25,15 @@ main
               | Пополнить
 
   section.events
-    = render partial: 'welcome/orders/with_interviewed_candidates', locals: { profile: @profile, orders: @orders_with_interviewed_candidates }
+    h3.title.seekers__title Соискатели на собеседовании
+    .seekers_list.custom-scroll data-per=25 data-page=2 data-loading=false
+      = render partial: 'welcome/orders/candidates_interview',
+               locals: { candidates_interview: @candidates_interview }
+      .loader.small.d-none.m-auto
+
+    - if @candidates_interview.blank?
+      p.empty Список пуст
+
 
   section.seekers
     = render partial: 'welcome/user_action_log', locals: { profile: @profile }

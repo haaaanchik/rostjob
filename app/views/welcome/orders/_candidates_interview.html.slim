@@ -1,0 +1,6 @@
+- candidates_interview.each do |candidate|
+  p.seekers_list_seeker
+    span = Time.zone.parse(candidate.interview_date.to_s).strftime('%d.%m.%Y')
+    = link_to candidate.employee_cv_name, profile_production_site_order_path(candidate.production_site, candidate,
+                                                                         tab: :to_interview,
+                                                                         proposal_employee_id: candidate.pe_id)

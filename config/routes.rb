@@ -423,6 +423,7 @@ Rails.application.routes.draw do
   end
 
   get 'terms/customer/download', to: 'terms#download'
+  get 'loading_candidates_interview', controller: 'welcome'
   get :calendar_events, controller: 'welcome'
   mount Thredded::Engine => '/forum'
   mount ActionCable.server => '/cable'
