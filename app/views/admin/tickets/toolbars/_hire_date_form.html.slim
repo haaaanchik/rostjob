@@ -1,10 +1,11 @@
 - candidate = ticket.proposal_employee
-= form_with model: candidate, url: hire_admin_ticket_proposal_employee_path(ticket, candidate) do |f|
+= form_with model: candidate, url: hire_admin_ticket_proposal_employee_path(ticket, candidate), id: 'hire_form' do |f|
   .row.align-items-center.justify-content-center
     .col-auto
       .form-group
         = f.label :hiring_date, 'Дата выхода на работу'
-        = f.date_field :hiring_date, class: 'form-control'
+        = f.date_field :hiring_date, value: Date.today, class: 'form-control'
         .invalid-feedback
     .col-auto
-      = f.submit 'Отправить', class: 'btn btn-success btn-sm btn-rounded mt-2'
+      #hire_submit.btn.btn-success.btn-sm.btn-rounded.mt-2 data-order-completed="#{candidate.order.completed?}" Отправить
+

@@ -17,11 +17,20 @@ class Profile::Orders::CandidatesController < ApplicationController
   end
 
   def hire
-    render(plain: 'order completed', status: 422) and return if order.completed?
-
-    Cmd::ProposalEmployee::Hire.call(candidate: candidate, hiring_date: candidate_params[:hiring_date], log: true)
-    flash[:redirection] = 'to_hired'
-    redirect_to profile_production_site_order_path(order.production_site, order)
+    if order.number_free_places.zero? && order.completed?
+      order.update(number_additional_employees: 1)
+      redirect_to pre_publish_profile_production_site_order_path(order.production_site, order,
+                                                                  proposal_employee: { proposal_employee_id: candidate.id,
+                                                                  hiring_date: hiring_date },
+                                                                  incident: params[:incident]), method: :put
+    else
+      Cmd::ProposalEmployee::Hire.call(hiring_date: candidate_params[:hiring_date],
+                                       candidate: candidate,
+                                       order: order,
+                                       log: true)
+      flash[:redirection] = 'to_hired'
+      redirect_to profile_production_site_order_path(order.production_site, order)
+    end
   end
 
   def fire
@@ -89,6 +98,17 @@ class Profile::Orders::CandidatesController < ApplicationController
                                                      result.candidate.order)
     else
       render json: { validate: true, data: errors_data(result.candidate) }, status: 422
+    end
+  end
+
+  def hire_in_compleated_order
+    result = Cmd::ProposalEmployee::Hire.call(order: order,
+                                              dont_send: true,
+                                              candidate: candidate,
+                                              hiring_date: candidate_params[:hiring_date])
+    if result.success?
+      flash[:redirection] = 'to_hired'
+      redirect_to profile_production_site_order_path(order.production_site, order)
     end
   end
 
@@ -166,5 +186,9 @@ class Profile::Orders::CandidatesController < ApplicationController
 
   def candidates
     @candidates ||= order.proposal_employees
+  end
+
+  def hiring_date
+    params[:hiring_date] || candidate_params[:hiring_date]
   end
 end

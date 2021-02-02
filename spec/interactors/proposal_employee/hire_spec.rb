@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'ProposalEmployee::Hire', type: :interactor do
-  describe "hire candidate" do
+  describe "hire candidate in opened orders" do
     let!(:candidate) { create(:proposal_employee, :interview) }
     let(:result) do
-      Cmd::ProposalEmployee::Hire.call(candidate: candidate,
-                                       hiring_date: '1.01.2020'
-                                      )
+      Cmd::ProposalEmployee::Hire.call(order: candidate.order,
+                                       candidate: candidate,
+                                       hiring_date: '1.01.2020')
     end
 
     it { expect(result).to be_a_success }

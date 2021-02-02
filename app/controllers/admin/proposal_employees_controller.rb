@@ -28,6 +28,7 @@ class Admin::ProposalEmployeesController < Admin::ApplicationController
   def hire
     @result = Cmd::ProposalEmployee::Hire.call(candidate: proposal_employee,
                                                user: current_staffer.decorate,
+                                               order: proposal_employee.order,
                                                hiring_date: params[:proposal_employee][:hiring_date])
     @action = 'нанят'
     render_after_update

@@ -4,14 +4,13 @@ module Cmd
   module Admin
     module Ticket
       module Incident
-        class Interview
+        class Hide
           include Interactor::Organizer
 
-          organize Cmd::ProposalEmployee::ToInterview,
+          organize Cmd::Admin::Ticket::Incident::ToHire,
+                   Cmd::ProposalEmployee::Hire,
                    Cmd::Ticket::Incident::Close,
-                   Cmd::Ticket::Message::ToCreate,
-                   Cmd::UserActionLogger::ProposalEmployee::Interview::ByStaffer,
-                   Cmd::NotifyMail::ProposalEmployee::Interview
+                   Cmd::Ticket::Message::ToCreate
 
           around do |interactor|
             ActiveRecord::Base.transaction do

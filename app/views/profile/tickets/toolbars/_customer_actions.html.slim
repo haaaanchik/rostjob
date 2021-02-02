@@ -1,7 +1,13 @@
 ruby:
   partial = @ticket.title.other? ? 'other' : 'denied'
+  url_for_hire = if @ticket.proposal_employee.order.number_free_places.zero? && @ticket.proposal_employee.order.completed?
+                  hire_profile_order_candidate_path(@ticket.proposal_employee.order, @ticket.proposal_employee, incident: @ticket)
+                 else
+                  hire_profile_tickets_incident_path(@ticket)
+                 end
+
   pe_form = "#{render partial: 'profile/tickets/toolbars/calendar',
-                      locals: { url: hire_profile_tickets_incident_path(@ticket),
+                      locals: { url: url_for_hire,
                                 candidate: @ticket.proposal_employee,
                                 field: 'hiring_date',
                                 button_text: 'НАНЯТЬ' }}"
