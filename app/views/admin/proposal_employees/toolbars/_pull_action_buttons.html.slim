@@ -1,6 +1,7 @@
 .d-flex.align-items-center.justify-content-between
-  = link_to edit_admin_employee_cv_path(proposal_employee.employee_cv, proposal_employee_id: proposal_employee), remote: true, title: 'Редактировать анкету' do
-    i.fas.fa-edit
+  - if proposal_employee.employee_cv
+    = link_to edit_admin_employee_cv_path(proposal_employee.employee_cv, proposal_employee_id: proposal_employee), remote: true, title: 'Редактировать анкету' do
+      i.fas.fa-edit
 
   - unless proposal_employee.revoked? || proposal_employee.transfer? || proposal_employee.paid?
     .dropdown
