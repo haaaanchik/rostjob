@@ -475,3 +475,6 @@ body#customer-landing
         = f.submit 'Отправить', class: 'btn-send-form'
   = render 'footer'
   = render 'request_call_modal'
+= render 'landing_pages/widget_bot_chat'
+= render partial: 'landing_pages/bot_chat', locals: {data_entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', data_account_id: 'a1909eab-2ed7-88ac-48f4-1add61ff5027' }
+      / script id='pit-chat-widget' src='https://lk.vocamate.ru/chat/widget.js?entityId=f4fe8efc-324e-ba05-f9c9-9c9570c8c794&accountId=a1909eab-2ed7-88ac-48f4-1add61ff5027'
