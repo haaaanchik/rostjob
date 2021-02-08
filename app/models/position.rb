@@ -3,6 +3,7 @@ class Position < ApplicationRecord
 
   belongs_to :price_group
   has_many :orders, dependent: :restrict_with_error
+  has_and_belongs_to_many :specializations
 
   validates :title, :landing_title, :warranty_period, presence: true
   validates :slug, presence: true, uniqueness: true
