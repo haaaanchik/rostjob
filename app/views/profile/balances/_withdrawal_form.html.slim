@@ -12,7 +12,8 @@
             td = link_to with_method.title, edit_profile_balance_withdrawal_method_path(with_method), class: 'btn button-hr btn-rounded waves-effect w-100 text-center active pt-2 pb-2 action-link', remote: true
             td
               .form-check
-                = f.radio_button :withdrawal_method_id, with_method.id, checked: is_checked, class: 'form-check-input', 'data-valid' => with_method.company.valid?
+                / = f.radio_button :withdrawal_method_id, with_method.id, checked: is_checked, class: 'form-check-input', 'data-valid' => with_method.company.valid?
+                = f.radio_button :withdrawal_method_id, with_method.id, checked: is_checked, class: 'form-check-input', 'data-valid' => 'true'
                 label class='form-check-label' for="withdrawal_method_id_#{with_method.id}"
       .mt-3.text-right.mr-5
         = f.button 'Вывести', type: 'submit', class: 'btn btn-primary'
