@@ -5,13 +5,18 @@ class Profile::WithdrawalMethodsController < ApplicationController
   end
 
   def update
-    if withdrawal_method.update(withdrawal_method_params)
-      @status = 'success'
-    else
-      render json: {  validate: true,
-                      data: errors_data(withdrawal_method) },
-                      status: 422
-    end
+    # OFF VALIDATE FOR FIELDS
+    # if withdrawal_method.update(withdrawal_method_params)
+    #   @status = 'success'
+    # else
+    #   render json: {  validate: true,
+    #                   data: errors_data(withdrawal_method) },
+    #                   status: 422
+    # end
+
+    withdrawal_method.assign_attributes(withdrawal_method_params)
+    withdrawal_method.save(validate: false)
+    @status = 'success'
   end
 
   private
