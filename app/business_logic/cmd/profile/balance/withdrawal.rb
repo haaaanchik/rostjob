@@ -2,13 +2,16 @@ module Cmd
   module Profile
     module Balance
       class Withdrawal
-        include Interactor
+        include Interactor::Organizer
 
-        def call
-          amount = context.amount
-          balance_amount = context.profile.balance.amount
-          context.fail! if amount.to_i > balance_amount
-          WithdrawalJob.perform_later(context.withdrawal_method_id, amount)
+        organize Cmd::Invoice::Create,
+                 Cmd::Profile::Balance::ToWithdrawal,
+                 Cmd::ProposalEmployee::ToInvoices
+
+        around do |interactor|
+          ActiveRecord::Base.transaction do
+            interactor.call
+          end
         end
       end
     end

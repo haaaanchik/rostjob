@@ -11,12 +11,12 @@ FactoryBot.define do
       end
 
       trait :with_company do
-        after(:create) { |prof| create(:company, companyable: prof) }
+        after(:create) { |prof| create(:customer_company, companyable: prof) }
       end
 
       trait :with_profuction_site do
         after(:create) do |prof|
-          create(:company, companyable: prof)
+          create(:customer_company, companyable: prof)
           create(:production_site_without_orders, profile: prof)
         end
       end
@@ -32,8 +32,8 @@ FactoryBot.define do
 
       after(:create) do |prof|
         create(:zero_balance, profile: prof)
+        create(:withdrawal_method, :private_acc, profile: prof)
       end
     end
-
   end
 end

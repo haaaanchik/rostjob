@@ -14,7 +14,7 @@ class Admin::ProposalEmployeesController < Admin::ApplicationController
 
   def approval_list
     @approval_list = ProposalEmployee.includes(:employee_cv, order: :production_site)
-                                      .approved_by_admin
+                                      .where(state: :paid, approved_by_admin: false)
                                       .page(params[:page]).per(10)
   end
 

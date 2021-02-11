@@ -3,10 +3,9 @@ module Cmd
     class Create
       include Interactor
 
-      delegate :amount, to: :context
+      delegate :profile, to: :context
       delegate :company, to: :context
       delegate :invoice, to: :context
-      delegate :profile, to: :context
 
       def call
         invoice.assign_attributes(invoice_params)
@@ -80,6 +79,10 @@ module Cmd
           object_id: invoice.id,
           object_type: 'Invoice'
         }
+      end
+
+      def amount
+        context.amount || profile.balance.amount
       end
     end
   end
