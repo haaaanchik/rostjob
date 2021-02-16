@@ -52,7 +52,7 @@
                   .form-group.row
                     = ff.label :phone, 'Контактный номер телефона', class: 'col-lg-4 col-12 col-sm-6'
                     .col-lg-6.col-12.col-sm-6
-                      = ff.telephone_field :phone, class: 'form-control'
+                      = ff.text_field :phone, class: 'form-control'
       - if @user.profile.customer?
         .col-5.p-3.company_block
           h3.my-2 Карточка предприятия
