@@ -1,5 +1,4 @@
-/ = image_tag asset_path('/img/bot_small.svg'), class: ''
-.chat-container.help-window.js-help-window.open
+.chat-container.help-window.js-help-window
   svg class='help-window__cross js-close-help' fill="none" height="40" viewbox=("0 0 41 41") width="40" xmlns="http://www.w3.org/2000/svg"
     circle cx="20.5" cy="20.5" fill="#AEB5BF" r="14.4957" transform=("rotate(45 20.5 20.5)") /
     line stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" x1="25.3237" x2="15.885" y1="15.8848" y2="25.3235" /
@@ -8,7 +7,7 @@
   .chat-header
     .chat-header__container
       = image_tag asset_path('/img/bot_small.svg'), class: ''
-      = link_to 'tel:88007003321', class: 'chat-phone-number' do
-        | 8-800-700-33-21
+      = link_to 'tel:8-800-700-67-86', class: 'chat-phone-number recruiter-phone-number' do
+        | 8-800-700-67-86
         span бесплатно
-  .chat-body.custom-scroll data-entity-id=data_entity_id data-account-id=data_account_id data-city=@city data-utm-campaign=@utm_campaign data-channel-name="pitchat_room_channel_#{cookies[:channel_id]}"
+  .chat-body.custom-scroll data-entity-id=entity_id data-account-id=account_id data-city=@city data-utm-campaign=@utm_campaign data-channel-name="pitchat_room_channel_#{cookies[:channel_id]}"

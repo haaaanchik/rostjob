@@ -1,3 +1,3 @@
 class RostJob.LandingPagesContacts
   @init: ->
-    RostJob.LandingPages.init()
+    RostJob.LandingPagesBase.init()

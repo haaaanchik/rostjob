@@ -3,7 +3,7 @@
 #= require navbar
 #= require toastr
 #= require bot_phone
-#= require bot_chat
+#= require pit_chat_widget
 #= require app
 
 valid = (form_submit) ->

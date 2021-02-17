@@ -1,4 +1,4 @@
-class RostJob.LandingPagesProfessions extends RostJob.LandingPages
+class RostJob.LandingPagesProfessions extends RostJob.LandingPagesBase
   @init: ->
     @clientsSliderSlick()
     super

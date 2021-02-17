@@ -1,7 +1,7 @@
 class RostJob.LandingPagesFreelance
   @init: ->
     @initSlick()
-    RostJob.LandingPages.init()
+    RostJob.LandingPagesBase.init()
     @showCurrentSlide(@getCurrentSlide())
     $(window).scroll( () =>
       @scrollTracking()

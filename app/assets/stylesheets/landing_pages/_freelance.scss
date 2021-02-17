@@ -3,6 +3,14 @@
   font-family: $primary-font;
   $main-color: #9046ff;
 
+  .recruiter-clr {
+    background: var(--purple) !important;
+  }
+
+  .recruiter-phone-number {
+    color: var(--purple) !important;
+  }
+
   .work-as-manager {
     position: relative;
     max-width: 843px;
