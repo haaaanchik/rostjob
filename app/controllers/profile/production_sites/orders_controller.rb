@@ -43,7 +43,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
   end
 
   def publish
-    result = Cmd::Order::ToModeration.call(order: order, params: order_params)
+    result = Cmd::Order::Moderate.call(order: order, params: order_params)
     if result.success?
       redirect_to profile_production_site_orders_path(production_site, tab_state: 'on_moderation')
     else

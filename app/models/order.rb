@@ -66,7 +66,7 @@ class Order < ApplicationRecord
       transitions from: :draft, to: :waiting_for_payment
     end
 
-    event :moderate, after: :send_mail_order_is_moderate do
+    event :moderate do
       transitions from: %i[rejected draft waiting_for_payment], to: :moderation
     end
 
@@ -221,10 +221,6 @@ class Order < ApplicationRecord
       object_type: 'Order',
       order_id: id
     }
-  end
-
-  def send_mail_order_is_moderate
-    OrderMailJob.perform_now(order: self, method: 'moderated') if profile.notify_mails?
   end
 
   def mail_customer_order_is_published
