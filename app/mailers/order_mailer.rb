@@ -17,7 +17,8 @@ class OrderMailer < ApplicationMailer
 
   def moderated
     @order = params[:order]
-    customer_email = @order.user.email
+    @admin_email = params[:admin]
+    customer_email = @admin_email || @order.user.email
 
     mail(to: customer_email, subject: 'RostJob. Новая заявка на модерации')
   end
