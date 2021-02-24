@@ -43,6 +43,12 @@ ruby:
               = f.text_field :salary, class: 'form-control'
               .invalid-feedback
 
+            .pattern_body_steps_form_step_input
+              p Часовая ставка к зарплате в рублях
+              #hidden_block Нажмите, чтобы установить часовую ставку в рублях
+              = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                = oi_f.text_field :hourly_payment, class: 'd-none'
+
             .pattern_body_steps_form_step_input.textArea
               = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
                 p Условия работ

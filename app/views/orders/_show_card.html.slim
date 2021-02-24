@@ -20,7 +20,7 @@
     p.subtitle
       i.fas.fa-money-bill-alt.w-2.mr-2
       i.fas.fa-ruble-sign.mr-2
-      = order.salary
+      = "#{order.salary} р/м, #{order.other_info['hourly_payment']}р/ч"
     p.subtitle
       i.fas.fa-map-marker.w-2
       = "г. #{order.city}"

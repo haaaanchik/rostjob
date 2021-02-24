@@ -15,7 +15,7 @@ class OrderTemplates
 
   @bind: ->
     $('#order_template_position_search').on 'focusin', @addProfessionAutocomplete
-    $('#save_as_template').on 'click', @showNameInput
+    $('#save_as_template, #hidden_block').on 'click', @showNameInput
     $('.order-template__name').on 'focusout', @saveName
     $('.main_patternRequest').on 'keyup', '.added_data', @changeAddedData
 

@@ -207,10 +207,13 @@ input::placeholder{
             grid-gap: 15px;
             gap: 15px;
             transition-duration: 1s;
+            .textArea {
+              justify-content: space-between!important;
+            }
             &_input{
               display: flex;
               flex-direction: row;
-              justify-content: space-between;
+              justify-content: flex-start;
               flex-wrap: wrap;
               align-items: flex-start;
               p{
@@ -456,8 +459,7 @@ input::placeholder{
   }
 }
 
-#save_as_template{
-  padding-left: 30px;
+#save_as_template, #hidden_block{
   text-decoration: underline;
   color: #1970ff;
   font-family: "Open Sans";
