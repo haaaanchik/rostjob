@@ -168,6 +168,10 @@ Rails.application.routes.draw do
       member do
         put :pay
       end
+
+      collection do
+        get :invoices_by_bank
+      end
     end
 
     resources :orders do

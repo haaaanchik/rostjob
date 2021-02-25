@@ -8,7 +8,7 @@ class Staffer < ApplicationRecord
 
   has_secure_password
 
-  STAFF_ROLES = %w[admin moderator seo].freeze
+  STAFF_ROLES = %w[super_admin admin moderator seo].freeze
 
   royce_roles STAFF_ROLES
 
