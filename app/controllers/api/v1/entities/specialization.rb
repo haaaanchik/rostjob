@@ -9,6 +9,14 @@ module Api
                  desc: 'Specialization title.',
                  type: String
                }
+        expose(:image_url,
+               documentation: {
+                 desc: 'Specialization image.',
+                 type: String
+               }
+        ) do |specialization, options|
+          "#{options[:host]}#{specialization.image.url}"
+        end
 
         expose :positions,
                documentation: {
@@ -20,3 +28,7 @@ module Api
     end
   end
 end
+
+
+
+
