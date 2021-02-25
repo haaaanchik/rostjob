@@ -14,6 +14,12 @@
               { selected: f.object.position_ids },
               { multiple: 'multiple', class: 'form-control d-block' }
       .invalid-feedback
+  .row.mt-4
+    .col-lg-2.mr-2.image-file
+      = f.label :image, t('specialization.image')
+      span
+        = f.file_field :image
+
   .row
     .col-lg-4.offset-lg-3.mb-4
       = f.button t('buttons.save'), class: 'btn btn-primary mt-5'
