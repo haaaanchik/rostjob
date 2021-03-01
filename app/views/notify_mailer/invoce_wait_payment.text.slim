@@ -1,7 +1,7 @@
 == @invoices.size > 1 ? 'К сожалению, у Вас есть неоплаченные счета: ' : 'К сожалению, у Вас есть неоплаченный счет'
 - @invoices.each do |invoice|
   = "На сумму #{invoice.amount}, ссылка на счёт - "
-  = url_for profile_invoice_url(invoice.id)
+  = url_for invoice.tinkoff_pdf_url
   == @invoices.size > 1 ? '; ' : '.'
 
 | Если у Вас трудности с оплатой счёта посмотрите инструкцию по ссылке или обратитесь в саппорт.
