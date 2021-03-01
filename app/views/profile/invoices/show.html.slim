@@ -1,11 +1,5 @@
-- seller = @invoice.seller
-- buyer = @invoice.buyer
-- goods = @invoice.goods
-.d-print-none.mb-3
-  button onClick='window.print();' class='btn btn-indigo' Напечатать счёт
-  = link_to profile_invoice_path(@invoice, format: :pdf), class: 'btn btn-indigo', target: '_blank' do
-    'Скачать в формате PDF'
-    i.far.fa-file-pdf.ml-2
+h2
+  = link_to 'Посмотреть счёт', invoice.tinkoff_pdf_url, class: 'btn btn-indigo', target: '_blank'
 
 .invoice.black-text
   p.header.font-weight-normal
@@ -14,87 +8,103 @@
     'товара на складе. Товар отпускается по факту прихода денег на р/с Поставщика,
     'самовывозом, при наличии доверенности и паспорта.
 
-  table.invoice-table.details
-    tbody
-       tr
-         td colspan="2" style="border-bottom: none;" #{seller['account']['bank']}
-         td БИК
-         td style="border-bottom: none;" #{seller['account']['bic']}
-       tr
-         td colspan="2" style="border-top: none; font-size: 10px;" Банк получателя
-         td Корр. Сч. №
-         td style="border-top: none;" #{seller['account']['corr_account']}
-       tr
-         td width="25%" ИНН #{seller['inn']}
-         td width="30%" КПП #{seller['kpp']}
-         td width="10%" rowspan="3" Сч. №
-         td width="35%" rowspan="3" #{seller['account']['account_number']}
-       tr
-         td colspan="2" style="border-bottom: none;" #{seller['short_name']}
-       tr
-         td colspan="2" style="border-top: none; font-size: 10px;" Получатель
+/ - seller = @invoice.seller
+/ - buyer = @invoice.buyer
+/ - goods = @invoice.goods
+/ .d-print-none.mb-3
+/   button onClick='window.print();' class='btn btn-indigo' Напечатать счёт
+/   = link_to profile_invoice_path(@invoice, format: :pdf), class: 'btn btn-indigo', target: '_blank' do
+/     'Скачать в формате PDF'
+/     i.far.fa-file-pdf.ml-2
 
-  h1 Счет на оплату № #{@invoice.invoice_number} от #{l(@invoice.created_at, format: :short)} г.
+/ .invoice.black-text
+/   p.header.font-weight-normal
+/     'Внимание! Оплата данного счета означает согласие с условиями поставки товара.
+/     'Уведомление об оплате обязательно, в противном случае не гарантируется наличие
+/     'товара на складе. Товар отпускается по факту прихода денег на р/с Поставщика,
+/     'самовывозом, при наличии доверенности и паспорта.
 
-  table.invoice-table.contract
-    tbody
-      tr
-        td width="15%" Поставщик:
-        th width="85%"
-         |#{seller['short_name']} , ИНН #{seller['inn']}, КПП #{seller['kpp']}, #{seller['address']}
-      tr
-        td Покупатель:
-        th
-         |#{buyer['short_name']} , ИНН #{buyer['inn']}, КПП #{buyer['kpp']}, #{buyer['address']}
+/   table.invoice-table.details
+/     tbody
+/        tr
+/          td colspan="2" style="border-bottom: none;" #{seller['account']['bank']}
+/          td БИК
+/          td style="border-bottom: none;" #{seller['account']['bic']}
+/        tr
+/          td colspan="2" style="border-top: none; font-size: 10px;" Банк получателя
+/          td Корр. Сч. №
+/          td style="border-top: none;" #{seller['account']['corr_account']}
+/        tr
+/          td width="25%" ИНН #{seller['inn']}
+/          td width="30%" КПП #{seller['kpp']}
+/          td width="10%" rowspan="3" Сч. №
+/          td width="35%" rowspan="3" #{seller['account']['account_number']}
+/        tr
+/          td colspan="2" style="border-bottom: none;" #{seller['short_name']}
+/        tr
+/          td colspan="2" style="border-top: none; font-size: 10px;" Получатель
 
-  table.invoice-table.list
-    thead
-      tr
-        th width="5%" №
-        th width="54%" Наименование товара, работ, услуг
-        th width="8%" Коли-<br>чество
-        th width="5%" Ед.<br> изм.
-        th width="14%" Цена
-        th width="14%" Сумма
-    tbody
-      - total = 0
-      - goods.each_with_index do |good, index|
-        tr
-          td align="center" #{index + 1}
-          td align="left" #{good['title']}
-          td align="center" #{good['quantity']}
-          td align="center" #{good['unit']}
-          td align="right" #{good['price']}
-          - summ = good['price'] * good['quantity']
-          - total += summ.to_i
-          td align="right" #{summ}
+/   h1 Счет на оплату № #{@invoice.invoice_number} от #{l(@invoice.created_at, format: :short)} г.
 
-      tfoot
-        tr
-          th colspan="5" Итого:
-          th #{total}
-        tr
-          th colspan="5" В том числе НДС:
-          th 0
-        tr
-          th colspan="5" Всего к оплате:
-          th #{total}
+/   table.invoice-table.contract
+/     tbody
+/       tr
+/         td width="15%" Поставщик:
+/         th width="85%"
+/          |#{seller['short_name']} , ИНН #{seller['inn']}, КПП #{seller['kpp']}, #{seller['address']}
+/       tr
+/         td Покупатель:
+/         th
+/          |#{buyer['short_name']} , ИНН #{buyer['inn']}, КПП #{buyer['kpp']}, #{buyer['address']}
 
-  .total.font-weight-normal
-    p Всего наименований #{goods.count}, на сумму #{total} руб.
-    p
-      strong #{RuPropisju.rublej(total).capitalize} 00 копеек
+/   table.invoice-table.list
+/     thead
+/       tr
+/         th width="5%" №
+/         th width="54%" Наименование товара, работ, услуг
+/         th width="8%" Коли-<br>чество
+/         th width="5%" Ед.<br> изм.
+/         th width="14%" Цена
+/         th width="14%" Сумма
+/     tbody
+/       - total = 0
+/       - goods.each_with_index do |good, index|
+/         tr
+/           td align="center" #{index + 1}
+/           td align="left" #{good['title']}
+/           td align="center" #{good['quantity']}
+/           td align="center" #{good['unit']}
+/           td align="right" #{good['price']}
+/           - summ = good['price'] * good['quantity']
+/           - total += summ.to_i
+/           td align="right" #{summ}
 
-  .sign
-    / img class="sign-1" src="/img/sign1.jpg"
-    / img class="sign-2" src="/img/sign2.png"
-    / img class="printing" src="/img/stamp.jpg"
+/       tfoot
+/         tr
+/           th colspan="5" Итого:
+/           th #{total}
+/         tr
+/           th colspan="5" В том числе НДС:
+/           th 0
+/         tr
+/           th colspan="5" Всего к оплате:
+/           th #{total}
 
-    table.invoice-table
-      tbody
-        tr
-          th width="30%" Руководитель
-          td width="70%" Иванов А.А.
-        tr
-          th Бухгалтер
-          td Сидоров Б.Б.
+/   .total.font-weight-normal
+/     p Всего наименований #{goods.count}, на сумму #{total} руб.
+/     p
+/       strong #{RuPropisju.rublej(total).capitalize} 00 копеек
+
+/   .sign
+/     / img class="sign-1" src="/img/sign1.jpg"
+/     / img class="sign-2" src="/img/sign2.png"
+/     / img class="printing" src="/img/stamp.jpg"
+
+/     table.invoice-table
+/       tbody
+/         tr
+/           th width="30%" Руководитель
+/           td width="70%" Иванов А.А.
+/         tr
+/           th Бухгалтер
+/           td Сидоров Б.Б.
