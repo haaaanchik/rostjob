@@ -1,4 +1,4 @@
-class RostJob.LandingPages
+class RostJob.LandingPagesBase
   @init: ->
     @bind()
 

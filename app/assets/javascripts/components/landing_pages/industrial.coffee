@@ -3,7 +3,7 @@ class RostJob.LandingPagesIndustrial
     @bind()
     @clientsSliderSlick()
     @sliderReviewsSlick()
-    RostJob.LandingPages.init()
+    RostJob.LandingPagesBase.init()
 
   @bind: ->
     $('.js-show-more').on 'click', @openDropdown

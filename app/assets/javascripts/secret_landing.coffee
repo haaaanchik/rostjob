@@ -2,6 +2,8 @@
 #= require rails-ujs
 #= require navbar
 #= require toastr
+#= require bot_phone
+#= require pit_chat_widget
 #= require app
 
 valid = (form_submit) ->

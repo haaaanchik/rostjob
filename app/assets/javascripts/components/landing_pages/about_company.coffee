@@ -1,7 +1,7 @@
 class RostJob.LandingPagesAboutCompany
   @init: ->
     @clientsSliderSlick()
-    RostJob.LandingPages.init()
+    RostJob.LandingPagesBase.init()
 
   @clientsSliderSlick: ->
     $('#clients-slider').slick(

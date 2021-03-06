@@ -8,6 +8,8 @@
 #= require external/jquery.inputmask.bundle.min
 #= require rails-ujs
 #= require jquery.turbolinks
+#= require bot_phone
+#= require pit_chat_widget
 #= require turbolinks
 #= require external/turbolinks-compatibility
 #= require external/jquery.raty

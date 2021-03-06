@@ -6,6 +6,14 @@
 #recruter-page {
   --purple: #9046ff;
 
+  .recruiter-clr{
+    background: var(--purple) !important;
+  }
+
+  .recruiter-phone-number {
+    color: var(--purple) !important;
+  }
+
   .recruiter-clr-purple {
     color: var(--purple) !important;
   }
