@@ -37,6 +37,7 @@ module Cmd
           })
         when 3
           params[:other_info]['terms'] = order.other_info['terms']
+          params[:other_info]['hourly_payment'] = order.other_info['hourly_payment']
         else
           order
         end

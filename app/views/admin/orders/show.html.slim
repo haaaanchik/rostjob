@@ -55,6 +55,12 @@
               .col-sm-8.mb-4
                 = f.text_field :salary, class: 'form-control'
               .col-sm-4
+                b Часовая ставка к зарплате в рублях
+              .col-sm-8.mb-4
+                #hidden_block Нажмите, чтобы установить часовую ставку в рублях
+                = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
+                  = oi_f.text_field :hourly_payment, class: 'form-control d-none'
+              .col-sm-4
                 b Описание вакансии
               .col-sm-8.mb-4
                 = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
