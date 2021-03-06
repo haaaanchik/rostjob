@@ -3,7 +3,7 @@ module ProposalEmployeeRepository
 
   included do
     scope :available, ->(profile_id) { where(state: %w[applyed], profile_id: profile_id) }
-    scope :approved_by_admin, -> { where(approved_by_admin: false, state: 'paid') }
+    scope :approved_by_admin, -> { where(approved_by_admin: true, state: 'paid') }
     scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
     scope :candidates, lambda { |profile_id|
       where.not(state: 'revoked').joins(:order).joins(:employee_cv).where('orders.profile_id = ?', profile_id)
@@ -23,7 +23,7 @@ module ProposalEmployeeRepository
     scope :paid_employees_during, ->(profile_id, current_date, prev_date) { where('proposal_employees.state = ? and
                                                                                    proposal_employees.profile_id = ? and
                                                                                    proposal_employees.payment_date < ? and
-                                                                                   proposal_employees.payment_date > ? ',
+                                                                                   proposal_employees.payment_date > ?',
                                                                                   'paid', profile_id, current_date, prev_date) }
     scope :count_candidates_included_in_order, -> { where(state: ['hired', 'paid', 'approved']).count }
     scope :count_candidates_in_hire, -> { where(state: ['hired', 'interview', 'approved']).count }

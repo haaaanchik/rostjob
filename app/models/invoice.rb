@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   include AASM
 
   belongs_to :profile
+  has_many :proposal_employees
 
   validates :seller, :buyer, :goods, presence: true
   validates :amount, presence: true, numericality: { greater_than: 0, less_than: 100_000_000.00 }

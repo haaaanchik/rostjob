@@ -19,8 +19,11 @@ class Profile::BalancesController < ApplicationController
   end
 
   def withdrawal
-    result = Cmd::Profile::Balance::Withdrawal.call(profile: profile, amount: balance.amount,
-                                                    withdrawal_method_id: balance_params[:withdrawal_method_id])
+    result = Cmd::Profile::Balance::Withdrawal.call(profile: profile,
+                                                    invoice: profile.invoices.new,
+                                                    company: set_withdrawal_method.company,
+                                                    reason_text: 'Перевод вознаграждения исполнителю')
+
     if result.success?
       @status = 'success'
     else
@@ -71,5 +74,9 @@ class Profile::BalancesController < ApplicationController
 
   def set_authorize
     authorize [:profile, :balance]
+  end
+
+  def set_withdrawal_method
+    @set_withdrawal_method ||= WithdrawalMethod.find(balance_params[:withdrawal_method_id])
   end
 end

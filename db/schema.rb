@@ -492,6 +492,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_030047) do
     t.datetime "payment_date"
     t.boolean "approved_by_admin", default: false
     t.text "comment"
+    t.integer "invoice_id"
     t.index ["employee_cv_id"], name: "index_proposal_employees_on_employee_cv_id"
     t.index ["order_id"], name: "index_proposal_employees_on_order_id"
     t.index ["profile_id"], name: "index_proposal_employees_on_profile_id"
@@ -784,7 +785,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_030047) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latest_activity_at"], name: "index_thredded_user_details_on_latest_activity_at"
-    t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations", order: { moderation_state_changed_at: :desc }
+     t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations", order: { moderation_state_changed_at: :desc }
     t.index ["user_id"], name: "index_thredded_user_details_on_user_id", unique: true
   end
 

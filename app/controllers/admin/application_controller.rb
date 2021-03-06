@@ -18,7 +18,7 @@ class Admin::ApplicationController < BaseController
   end
 
   def approved_admin_count
-    @approved_admin_count = ProposalEmployee.approved_by_admin.count
+    @approved_admin_count = ProposalEmployee.where(state: :paid, approved_by_admin: false).count
   end
 
   def pundit_user

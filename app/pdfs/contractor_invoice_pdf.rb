@@ -63,18 +63,8 @@ class ContractorInvoicePdf < Prawn::Document
   end
 
   def total_by_words
-    prev_invoice = @profile.invoices.prev_invoice(@invoice.created_at).first
-    if prev_invoice.nil?
-      orders = @profile.answered_orders.where("proposal_employees.state = 'paid'")
-    else
-      current_date = @invoice.created_at
-      prev_date = prev_invoice.created_at
-      orders = @profile.orders_with_paid_employees(current_date, prev_date)
-    end
-    orders.includes(:proposal_employees).decorate.each_with_index do |order, i|
-      employees = prev_invoice.nil? ? (order.proposal_employees.paid.where('proposal_employees.profile_id = ?', @profile.id)) :
-                                      (order.proposal_employees.paid_employees_during(@profile.id, current_date, prev_date))
-      quantity = employees.count
+    @invoice.proposal_employees.includes(:employee_cv, :order).group_by(&:order).each do |order, proposal_employees|
+      quantity = proposal_employees.size
       total = quantity * order.contractor_price
       @total_price += total
     end
@@ -91,32 +81,22 @@ class ContractorInvoicePdf < Prawn::Document
   end
 
   def services
-    prev_invoice = @profile.invoices.prev_invoice(@invoice.created_at).first
-    if prev_invoice.nil?
-      orders = @profile.answered_orders.where("proposal_employees.state = 'paid'")
-    else
-      current_date = @invoice.created_at
-      prev_date = prev_invoice.created_at
-      orders = @profile.orders_with_paid_employees(current_date, prev_date)
-    end
-
     data = [table_head]
-    orders.includes(:proposal_employees).decorate.each_with_index do |order, i|
-      employees = prev_invoice.nil? ? (order.proposal_employees.paid.where('proposal_employees.profile_id = ?', @profile.id)) :
-                                      (order.proposal_employees.paid_employees_during(@profile.id, current_date, prev_date))
-      quantity = employees.count
+    @invoice.proposal_employees.includes(:employee_cv, :order).group_by(&:order).each_with_index do |(order, proposal_employees), i|
+      quantity = proposal_employees.size
       total = quantity * order.contractor_price
 
       data << [
-        { content: (i + 1).to_s }, { content: "#{ order.title_with_skill }. #{ order.production_site.title }" },
+        { content: (i + 1).to_s }, { content: "#{ order.decorate.title_with_skill }. #{ order.production_site.title }" },
         { content: quantity.to_s }, { content: 'шт' },
         { content: order.contractor_price.to_s },
         { content: total.to_s }
       ]
-      employees.includes(:employee_cv).each do |employee|
+      proposal_employees.each do |employee|
         data << [{}, { content: employee_row(employee) }, {}, {}, {}, {}]
       end
     end
+
     data << [{ content: total_text('Итого:'), colspan: 5, border_width: 0 }, { content: @total_price.to_s }]
     data << [{ content: total_text('В том числе НДС (18%)'), colspan: 5, border_width: 0 }, {}]
     data << [{ content: total_text('Всего (с учетом НДС)'), colspan: 5, border_width: 0 }, { content: @total_price.to_s }]

@@ -7,6 +7,7 @@ class ProposalEmployee < ApplicationRecord
   belongs_to :order
   belongs_to :profile
   belongs_to :employee_cv
+  belongs_to :invoice, optional: true
   has_one :user, through: :profile
   has_many :complaints, dependent: :destroy
   has_many :incidents, dependent: :destroy
