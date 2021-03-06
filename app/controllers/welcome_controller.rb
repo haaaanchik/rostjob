@@ -43,7 +43,7 @@ class WelcomeController < ApplicationController
   end
 
   def prepare_data
-    @candidates_interview = current_profile.orders.with_interviewed_candidates.order('interview_date DESC')
+    @candidates_interview = current_profile.orders.with_interviewed_candidates.order('interview_date asc')
                                            .includes(:production_site)
                                            .page(params[:page])
   end
