@@ -12,7 +12,7 @@ module Api
       get '/specializations' do
         specializations = ActiveSpecializationsSpecification.to_scope
 
-        present specializations, with: Entities::Specialization, host: request.host_with_port
+        present specializations, with: Entities::Specialization, base_url: request.base_url
       end
     end
   end
