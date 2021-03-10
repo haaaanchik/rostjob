@@ -24,8 +24,8 @@ module Api
                  desc: 'Order company logo.',
                  type: String
                }
-        ) do |order|
-          "https://rostjob.com#{order.profile.image_url}"
+        ) do |order, options|
+          "#{options[:base_url]}#{order.profile.image_url}"
         end
 
         expose(:company_description,

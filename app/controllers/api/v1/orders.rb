@@ -20,7 +20,7 @@ module Api
         orders = published_orders.ransack(params).result.page(params[:page])
 
         present :total_pages, orders.total_pages
-        present :orders, orders, with: Entities::Order
+        present :orders, orders, with: Entities::Order, base_url: request.base_url
         present :titles, published_orders.map(&:title).uniq
         present :cities, published_orders.map(&:city).uniq
       end
@@ -40,8 +40,8 @@ module Api
                            .where.not(id: order.id)
                            .limit(2)
 
-        present :order, order, with: Entities::Order
-        present :similar_orders, similar_orders, with: Entities::Order
+        present :order, order, with: Entities::Order, base_url: request.base_url
+        present :similar_orders, similar_orders, with: Entities::Order, base_url: request.base_url
       end
     end
   end
