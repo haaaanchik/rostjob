@@ -23,8 +23,10 @@ class Admin::UsersController < Admin::ApplicationController
 
   def withdrawal
     @contractor = @user.profile
-    @result = Cmd::Profile::Balance::Withdrawal.call(profile: @contractor, amount: @contractor.balance.amount,
-                                                     withdrawal_method_id: @contractor.withdrawal_methods.first.id)
+    @result = Cmd::Profile::Balance::Withdrawal.call(profile: @contractor,
+                                                     invoice: @contractor.invoices.new,
+                                                     company: @contractor.withdrawal_methods.first.company,
+                                                     reason_text: 'Перевод вознаграждения исполнителю')
   end
 
   def change_manager_status
