@@ -57,7 +57,7 @@
             td
               = order.production_site.title
               = ' <br> '.html_safe
-              b = "##{order.id} #{order.title}"
+              = link_to "##{order.id} #{order.title}", admin_order_path(order), class: 'link-admin-order'
             td = order.number_of_employees
             td.date-col = order.last_pr_empl
             td.date-col = order.formated_date(:completed_at)
