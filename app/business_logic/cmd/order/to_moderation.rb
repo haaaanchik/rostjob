@@ -5,7 +5,8 @@ module Cmd
 
       def call
         order.update_attributes(params)
-        context.fail! unless order.to_moderation
+        context.fail! unless order.employees_can_be_paid? || order.to_moderation
+
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
