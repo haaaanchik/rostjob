@@ -51,6 +51,9 @@ html
                       = link_to 'Импорт выписок', admin_account_statements_path
                     li
                       = link_to 'Экспорт платёжных поручений', admin_payment_orders_path
+                    - if policy([:admin, :invoice]).invoices_by_bank?
+                      li
+                        = link_to 'Зачисления на счёт банка', admin_tinkoff_invoices_path, class: 'dropdown-item'
 
               li.relative
                 i.fas.fa-angle-down.rotate-icon

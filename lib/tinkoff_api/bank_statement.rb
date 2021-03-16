@@ -8,6 +8,11 @@ class TinkoffApi::BankStatement
       statement_invoices('bank-statement?accountNumber=' + account_number + '&from=' + date + '&till=' + date )
     end
 
+    def invoices_between_date(from, till)
+      statement_invoices("bank-statement?accountNumber=#{account_number}&from=#{from}&till=#{till}")
+      "bank-statement?accountNumber=#{account_number}"
+    end
+
     private
 
     def account_number

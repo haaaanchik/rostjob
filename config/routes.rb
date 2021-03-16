@@ -168,11 +168,8 @@ Rails.application.routes.draw do
       member do
         put :pay
       end
-
-      collection do
-        get :invoices_by_bank
-      end
     end
+    resources :tinkoff_invoices, only: %i[index]
 
     resources :orders do
       member do
