@@ -47,6 +47,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
     if result.success?
       redirect_to profile_production_site_orders_path(production_site, tab_state: 'on_moderation')
     else
+      flash[:alert] = 'Недостаточный баланс'
       redirect_to pre_publish_profile_production_site_order_path(production_site, result.order)
     end
   end
