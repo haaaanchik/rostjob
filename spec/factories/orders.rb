@@ -9,6 +9,10 @@ FactoryBot.define do
     salary { '1222' }
     number_of_employees { '2' }
 
+    trait :draft do
+      state { 'draft' }
+    end
+
     trait :compleated do
       state { 'completed' }
     end
