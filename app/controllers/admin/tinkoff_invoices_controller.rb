@@ -1,5 +1,5 @@
 module Admin
-  class TinkoffInvoicesController < ::Admin::ApplicationController
+  class  TinkoffInvoicesController < ::Admin::ApplicationController
     before_action :set_authorize
 
     def index
