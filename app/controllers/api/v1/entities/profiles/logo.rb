@@ -5,6 +5,15 @@ module Api
     module Entities
       module Profiles
         class Logo < Api::V1::Entities::Base
+          expose(:customer_id,
+                  documentation: {
+                    desc: 'Company id.',
+                    type: Integer
+                  }
+          ) do |profile|
+            profile.id
+          end
+
           expose(:short_name,
                  documentation: {
                    desc: 'Company name.',
