@@ -43,7 +43,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def order_params
     params.require(:order)
-        .permit(:email, :phone_number, :skill, :name, :city, :salary,
+        .permit(:email, :phone_number, :skill, :name, :city, :salary, :advertising, :adv_text, :shift_method,
                 contact_person: {}, other_info: {})
   end
 

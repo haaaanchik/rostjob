@@ -54,6 +54,18 @@
                 b Зарплата
               .col-sm-8.mb-4
                 = f.text_field :salary, class: 'form-control'
+              .col-sm-4.checkbox_section
+                b Вахта
+              .col-sm-8.mb-4
+                = f.check_box :shift_method, class: 'form-control form-control-checkbox'
+              .col-sm-4.checkbox_section
+                b Реклама
+              .col-sm-8.mb-4
+                = f.check_box :advertising, class: 'form-control form-control-checkbox'
+              .col-sm-4.adv-text-label
+                b Текст рекламы
+              .col-sm-8.mb-4.adv-text-input
+                = f.text_area :adv_text, class: 'form-control', rows: 5
               .col-sm-4
                 b Часовая ставка к зарплате в рублях
               .col-sm-8.mb-4
