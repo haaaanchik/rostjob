@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_16_030047) do
+ActiveRecord::Schema.define(version: 2021_03_11_104359) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -337,6 +337,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_030047) do
     t.text "adv_text"
     t.bigint "production_site_id"
     t.boolean "template_saved", default: false
+    t.boolean "shift_method", default: false, null: false
     t.index ["production_site_id"], name: "index_order_templates_on_production_site_id"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
@@ -388,6 +389,7 @@ ActiveRecord::Schema.define(version: 2021_02_16_030047) do
     t.integer "number_additional_employees"
     t.date "published_at"
     t.date "completed_at"
+    t.boolean "shift_method", default: false, null: false
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end

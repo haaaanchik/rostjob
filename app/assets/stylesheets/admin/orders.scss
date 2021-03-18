@@ -1,3 +1,17 @@
+.card {
+  .checkbox_section {
+    margin-bottom: 1.5em;
+  }
+
+  .form-control-checkbox {
+    opacity: 1;
+    pointer-events: auto;
+    width: 1.5em;
+    left: 1.2em;
+    height: 22px;
+  }
+}
+
 .mod_order_actions .waves-input-wrapper {
   width: unset;
 }

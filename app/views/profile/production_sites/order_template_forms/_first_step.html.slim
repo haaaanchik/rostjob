@@ -50,7 +50,11 @@
               = f.text_field :skill, class: 'form-control', placeholder: 'Укажите квалификацию'
               .invalid-feedback
 
-            
+            .pattern_body_steps_form_step_input
+              = f.label 'Вахта'
+              = f.check_box :shift_method, class: 'form-control сheck_box_watch'
+
+
             footer.pattern_body_steps_form_step_next.row.w-100
               - unless is_order_template
                 = f.button id: 'save-on_current_page', class: 'mx-auto' do

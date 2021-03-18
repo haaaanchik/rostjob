@@ -97,7 +97,7 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   def order_template_params
     params.require(:order_template).permit(:name, :city, :salary, :position_id, :contractor_price,
                                            :number_of_employees, :skill, :document, :template_saved,
-                                           contact_person: {}, other_info: {})
+                                           :shift_method, contact_person: {}, other_info: {})
   end
 
   def publish_order(o_template)
