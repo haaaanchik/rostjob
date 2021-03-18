@@ -2,6 +2,24 @@ module ProposalEmployeeRepository
   extend ActiveSupport::Concern
 
   included do
+    scope :created_today, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day, Time.current.end_of_day
+    }
+    scope :created_last_2days, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 2.day, Time.current.end_of_day - 1.day
+    }
+    scope :created_last_3days, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 3.days, Time.current.end_of_day - 1.day
+    }
+    scope :created_last_7days, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 7.days, Time.current.end_of_day - 1.day
+    }
+    scope :created_last_14days, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 14.days, Time.current.end_of_day - 1.day
+    }
+    scope :created_last_1month, -> {
+      where 'created_at >= ? and created_at <= ?', Time.current.beginning_of_day - 1.month, Time.current.end_of_day - 1.day
+    }
     scope :available, ->(profile_id) { where(state: %w[applyed], profile_id: profile_id) }
     scope :approved_by_admin, -> { where(approved_by_admin: true, state: 'paid') }
     scope :available_free, ->(profile_id, proposal_id) { available(profile_id).where(proposal_id: proposal_id) }
