@@ -119,7 +119,7 @@ class Order < ApplicationRecord
   end
 
   def to_moderation
-    return unless balance.withdraw(customer_total, "Публикация заявки #{id}")
+    return false unless balance.withdraw(customer_total, "Публикация заявки #{id}")
 
     moderate! if may_moderate?
   end

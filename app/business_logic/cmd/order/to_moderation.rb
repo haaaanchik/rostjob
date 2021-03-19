@@ -3,21 +3,25 @@ module Cmd
     class ToModeration
       include Interactor
 
+      delegate :order,  to: :context
+      delegate :params, to: :context
+
       def call
-        order.update_attributes(params)
-        context.fail! unless order.employees_can_be_paid? || order.to_moderation
+        update_order
+        context.fail! unless order.to_moderation
 
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
       private
 
-      def order
-        context.order
+      def update_order
+        order.update(customer_total: count_customer_total,
+                     number_of_employees: params[:number_of_employees])
       end
 
-      def params
-        context.params
+      def count_customer_total
+        params[:number_of_employees].to_i * order.customer_price
       end
 
       def current_user
