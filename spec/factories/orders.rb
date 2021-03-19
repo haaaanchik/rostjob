@@ -8,6 +8,7 @@ FactoryBot.define do
     other_info { { remark: 'remart text', terms: 'add info' } }
     salary { '1222' }
     number_of_employees { '2' }
+    number_additional_employees { 0 }
 
     trait :draft do
       state { 'draft' }

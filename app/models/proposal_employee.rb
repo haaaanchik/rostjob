@@ -125,11 +125,14 @@ class ProposalEmployee < ApplicationRecord
   private
 
   def check_uniqueness_employee_cv
+    return if revoked?
+
     uniqueness = ProposalEmployee.joins(:employee_cv)
                      .where(order_id: order_id,
                             'employee_cvs.phone_number': employee_cv.phone_number)
                      .where.not(id: id,
                                 state: 'revoked')
+
     errors.add(:employee_cv_id,
                'Такая анкета уже существует.') unless uniqueness.blank?
   end

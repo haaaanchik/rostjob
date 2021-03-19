@@ -9,7 +9,9 @@ class RostJob.AdminTicketsShow
 
   @subnitForm: ->
     if $(this).data('order-completed')
-      return if !confirm('Заявка была закрыта, вы действительно хотите нанять?')
+      if !confirm('Заявка была закрыта, вы действительно хотите нанять?')
+        $('[data-toggle=popover]').popover('hide')
+        return
 
     $("#hire_form").submit()
 

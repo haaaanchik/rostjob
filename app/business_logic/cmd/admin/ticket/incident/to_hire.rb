@@ -10,7 +10,9 @@ module Cmd
           delegate :order, to: :context
 
           def call
-            order.update(number_additional_employees: 1) unless context.fail!
+            return if order.number_free_places >= 1
+
+            order.update(number_additional_employees: 1)
           end
         end
       end

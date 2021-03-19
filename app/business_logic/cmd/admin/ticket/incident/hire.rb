@@ -4,7 +4,7 @@ module Cmd
   module Admin
     module Ticket
       module Incident
-        class Hide
+        class Hire
           include Interactor::Organizer
 
           organize Cmd::Admin::Ticket::Incident::ToHire,

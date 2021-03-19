@@ -20,10 +20,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    result = if params.key? :customer
+    result = if params[:role] == 'customer'
       ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
-                                                     profile_params: { profile_type: 'customer', legal_form: 'company' } )
-    elsif params.key? :contractor
+                                                     profile_params: { profile_type: 'customer', legal_form: 'company' })
+    else
       ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
                                                        profile_params: { profile_type: 'contractor' })
     end
@@ -34,8 +34,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       render 'users/inform_page'
     else
       @status = false
-      render 'users/registrations/new_contractor' if params.key?(:contractor)
-      render 'users/registrations/new_customer' if params.key?(:customer)
+      render "users/registrations/new_#{params[:role]}"
     end
   end
 

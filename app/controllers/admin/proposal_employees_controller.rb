@@ -69,7 +69,7 @@ class Admin::ProposalEmployeesController < Admin::ApplicationController
 
   def render_after_update
     respond_to do |format|
-      format.js { render partial: "admin/proposal_employees/after_update.js.erb" }
+      format.js { render partial: 'admin/proposal_employees/after_update.js.erb' }
     end
   end
 
