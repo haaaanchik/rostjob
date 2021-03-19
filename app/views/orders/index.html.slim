@@ -13,6 +13,10 @@
               |  #{ customer.display_rating }
           = image_tag(customer.image_url, class: 'order__img')
         p.order-hide-description.js-hide-description.hide
+          = customer.company.name
+          br
+          = "ИНН: #{customer.company.inn}"
+          br
           = customer.company.description
         p.order-description
           | #{ customer.order_cities }
