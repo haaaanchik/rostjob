@@ -31,6 +31,7 @@ class PrePublish {
             this.sum.textContent = this.totalSum + ' руб.';
             this.setNumber();
             this.setBalanceAmount();
+            this.changeAmountInLink();
         }
     }
 
@@ -42,10 +43,18 @@ class PrePublish {
         this.sum.textContent = this.totalSum + ' руб.';
         this.setNumber();
         this.setBalanceAmount();
+        this.changeAmountInLink();
     }
 
     setNumber() {
         document.getElementById('order_number_of_employees').value = this.number.textContent;
+    }
+
+    changeAmountInLink() {
+        if($('#up_balance')) {
+            let amount = Math.abs(this.balance.dataset.balanceAmount - this.totalSum);
+            $('#up_balance').attr('href', `/profile/invoices?amount=${amount}`)
+        }
     }
 
     setBalanceAmount() {

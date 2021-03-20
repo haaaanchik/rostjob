@@ -93,6 +93,7 @@ class OrderDecorator < ApplicationDecorator
                     data: { method: :put }) { 'Оплатить' }
     when !replenish_balance?
       h.content_tag(:a,
+                    id: 'up_balance',
                     href: h.profile_invoices_path(params: { amount: total_price - balance.amount }),
                     class: 'public') { 'Пополнить баланс' }
     else
