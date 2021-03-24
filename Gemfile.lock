@@ -204,6 +204,8 @@ GEM
       addressable
     data-confirm-modal (1.6.2)
       railties (>= 3.0)
+    data_migrate (6.7.0)
+      rails (>= 5.0)
     database_cleaner (1.8.3)
     db_text_search (0.3.1)
       activerecord (>= 4.1.15, < 7.0)
@@ -777,6 +779,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   conditional_validation
   data-confirm-modal
+  data_migrate
   database_cleaner (~> 1.8, >= 1.8.3)
   decent_exposure (= 3.0.0)
   devise (~> 4.5)

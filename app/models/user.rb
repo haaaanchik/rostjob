@@ -12,6 +12,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :profile
   ransack_alias :admin_search_fields, :full_name_or_id_or_email_or_profile_phone
 
+  validates_uniqueness_of :slug, allow_nil: true
   validates :full_name, presence: true, length: { minimum: 8 }, if: -> { !skip_validation_full_name }
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, presence: true, on: :update, if: -> { !skip_validation_password }
@@ -99,6 +100,10 @@ class User < ApplicationRecord
     app_env = Rails.env.to_sym
     admins = Rails.application.credentials[app_env][:forum_admins].split(',')
     admins.include?(email)
+  end
+
+  def set_user_slug
+    self.update_attribute(:slug, SecureRandom.hex(rand(3..5)))
   end
 
   private

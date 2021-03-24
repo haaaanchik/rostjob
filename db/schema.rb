@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_11_104359) do
+ActiveRecord::Schema.define(version: 2021_03_24_033638) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -693,7 +693,7 @@ ActiveRecord::Schema.define(version: 2021_03_11_104359) do
     t.integer "moderation_state", null: false
     t.integer "previous_moderation_state", null: false
     t.timestamp "created_at", null: false
--   t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
+    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
   end
 
   create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -916,9 +916,11 @@ ActiveRecord::Schema.define(version: 2021_03_11_104359) do
     t.datetime "password_changed_at"
     t.boolean "terms_of_service", default: false
     t.boolean "first_order_template_created", default: false
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

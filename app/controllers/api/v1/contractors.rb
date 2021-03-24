@@ -14,10 +14,11 @@ module Api
         result = Cmd::Api::BotCallback::Process.call(guid: params[:guid],
                                                      name: params[:name],
                                                      phone: params[:phone])
-
-        raise Errors.new(text: result.message,
-                         code: result.code,
-                         status: 422) if result.failure?
+        if result.failure?
+          raise Errors.new(text: result.message,
+                           code: result.code,
+                           status: 422)
+        end
 
         { status: :ok }
       end
@@ -28,6 +29,20 @@ module Api
         result = Cmd::FreeManager::Sample.call
 
         { status: 200, data: result.manager }
+      end
+
+
+      desc 'Checking slug on valid'
+      get '/contractors/checking_slug/:slug' do
+        user = User.find_by(slug: params[:slug])
+
+        if user.blank? || user.customer?
+          raise Errors.new(text: 'Slug invalid',
+                           code: 403,
+                           status: 404)
+        end
+
+        { status: 200, message: 'ok' }
       end
     end
   end

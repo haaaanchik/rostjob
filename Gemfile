@@ -171,3 +171,5 @@ gem 'grape-swagger-entity'
 # Swagger UI
 gem 'grape-swagger-rails'
 gem 'rack-cors', require: 'rack/cors'
+
+gem 'data_migrate'

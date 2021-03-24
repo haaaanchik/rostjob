@@ -13,6 +13,7 @@ module Cmd
         else
           @profile.save
         end
+        user.set_user_slug
         context.profile = @profile
         context.fail!(message: 'Не удалось создать профиль') if @profile.errors.messages.any?
         Cmd::User::Registration::Update.call(user: user, params: { profile_id: @profile.id }, log: false)
