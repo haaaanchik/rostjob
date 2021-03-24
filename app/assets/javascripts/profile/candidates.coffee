@@ -7,8 +7,9 @@ class Candidates
     $('textarea.candidate-comment').on 'blur', @writeComment
     $('.clickable-candidate').on 'click', @openCandidate
     $('.js-filters').on 'click', @openFilters
-    $('[id^=candidate_filter_], .search_icon').on 'click', @sendFilterSubmit 
-   
+    $('[id^=candidate_filter_], .search_icon').on 'click', @sendFilterSubmit
+    $('.search_order').on 'change', @sendFilterSubmit
+
   @writeComment: ->
     byWho = $(this).attr('id')
     if byWho == "by_contractor"
@@ -47,7 +48,7 @@ class Candidates
     else
       $('.worksheets').css('height', '')
 
-  @sendFilterSubmit: -> 
+  @sendFilterSubmit: ->
     form = $('#proposal_employee_search')[0]
     form.submit()
     

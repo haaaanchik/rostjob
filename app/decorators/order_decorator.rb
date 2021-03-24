@@ -1,6 +1,14 @@
 class OrderDecorator < ApplicationDecorator
   delegate_all
 
+  def link_profile_list(params)
+    if count_pr_employees_state(params).zero?
+      count_pr_employees_state(params)
+    else
+      h.link_to count_pr_employees_state(params), h.admin_proposal_employees_path(q: { state_in: params })
+    end
+  end
+
   def order_id
     model.id
   end
