@@ -11,7 +11,7 @@ module Api
       params do
         optional :page,  type: Integer, default: 1, desc: 'Specify the page of paginated results.'
         optional :city_eq, type: String, desc: 'Order city.'
-        optional :title_fields_in, type: Array, desc: 'Order title.'
+        optional :category_titles_in, type: Array, desc: 'Order by specialization.'
         optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
       end
 
@@ -21,7 +21,7 @@ module Api
 
         present :total_pages, orders.total_pages
         present :orders, orders, with: Entities::Order, base_url: request.base_url
-        present :titles, published_orders.map(&:title).uniq
+        present :categories, ActiveSpecializationsSpecification.to_scope.map(&:title)
         present :cities, published_orders.map(&:city).uniq
       end
 
