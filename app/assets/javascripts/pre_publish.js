@@ -49,6 +49,17 @@ class PrePublish {
     }
 
     setBalanceAmount() {
-        this.balance.textContent = (this.balance.dataset.balanceAmount - this.totalSum) + ' руб.';
+        let countValue = (this.balance.dataset.balanceAmount - this.totalSum);
+        this.balance.textContent = countValue + ' руб.';
+
+        let addButton = null
+        if (countValue < 0) {
+            addButton = '<a href="/profile/invoices?amount='+ (-countValue) + '" class="public">Пополнить баланс</a>'
+        } else {
+            addButton = '<span id="order_publish" class="public">Опубликовать</span>'            
+        }
+
+        $('.public').remove();
+        $('.buttons').prepend(addButton);
     }
 }
