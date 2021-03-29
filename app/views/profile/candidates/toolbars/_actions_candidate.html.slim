@@ -7,7 +7,7 @@ ruby:
     i.far.fa-save.mr-1.mb-1
     | Скачать
 - if candidate.revoke_action_enabled?(current_profile)
-  = link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, class: 'recruiter-clr-purple', remote: true do
+  = link_to url, method: :put, data: { confirm: 'Отозвать анкету?' }, id: 'revoke_btn', class: 'recruiter-clr-purple', remote: true do
     i.fas.fa-undo.fa-sm.mr-2
     | Отозвать
 - if candidate.disput_action_enabled?(current_profile)

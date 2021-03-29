@@ -1,0 +1,18 @@
+= "Уважаемый(ая), #{@user.full_name}. "
+
+- if @pr_empls.size > 1
+  | У Вас есть неразрещённые споры. Их можно посмотреть по ссылке
+  = url_for profile_tickets_url
+
+- else
+  | На Анкету №#{@pr_empls.first.employee_cv.id} #{@pr_empls.first.employee_cv.name} открыт спор.
+  - if @user.contractor?
+    | По причине:
+    = " #{@pr_empls.first.incidents.last.title_text}. "
+    | Заказчик комментирует:
+    = " #{@pr_empls.first.incidents.last.messages.last.text}. "
+
+  | Пожалуйста пройдите по ссылке и выберите вариант решения конфликта. Спасибо. 
+  | Ознакомится с спором можно по ссылке  
+  
+  = url_for profile_ticket_url(@pr_empls.first.incidents.first.id)
