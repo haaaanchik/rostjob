@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def enum_i18n(class_name, enum, key, options = {})
+    I18n.t("activerecord.attributes.#{class_name.model_name.i18n_key}.#{enum.to_s.pluralize}.#{key}", options)
+  end
+
   def body_data_page
     (params[:controller].split('/') << action_name).map(&:camelize).join
   end

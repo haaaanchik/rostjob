@@ -19,112 +19,69 @@
       hr
       .row
         .col-6
-          = form_with model: [:admin, @order],url: admin_order_path(@order), class: 'new-employee_cv-form' do |f|
-            .row
+          .row
+            .col-sm-4
+              b Имя заказчкика
+            .col-sm-8.mb-4 = @order.user.full_name
+            .col-sm-4
+              b Контакты заказчика
+            .col-sm-8.mb-4
+              i.fas.fa-mobile-alt.mr-2
+              = @order.contact_person['phone']
+              br
+              i.far.fa-envelope.mr-2
+              = @order.user.email
+              hr
+            .col-sm-4
+              b Имя контактного лица
+            .col-sm-8.mb-4
+              = @order.contact_person['name']
+            .col-sm-4
+              b Контактный телефон
+            .col-sm-8.mb-4
+              = @order.contact_person['phone']
+            .col-sm-4
+              b Статус
+            .col-sm-8.mb-4 = enum_i18n(Order, :state, @order.state)
+            - if @order.shift_method
               .col-sm-4
-                b Имя заказчкика
-              .col-sm-8.mb-4 = @order.user.full_name
-              .col-sm-4
-                b Контакты заказчика
-              .col-sm-8.mb-4
-                i.fas.fa-mobile-alt.mr-2
-                = @order.profile.phone
-                br
-                i.far.fa-envelope.mr-2
-                = @order.user.email
-              .col-sm-4
-                b Имя контактного лица
-              .col-sm-8.mb-4
-                = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
-                  = cp_f.text_field :name, id: 'form-control', class: 'form-control'
-              .col-sm-4
-                b Контактный телефон
-              .col-sm-8.mb-4
-                = f.fields_for :contact_person, OpenStruct.new(f.object.contact_person) do |cp_f|
-                  = cp_f.phone_field :phone, id: 'form-control', class: 'form-control'
-              .col-sm-4
-                b Специализация
-              .col-sm-8.mb-4
-                = f.text_field :skill, class: 'form-control'
-              .col-sm-4
-                b Город
-              .col-sm-8.mb-4
-                = f.text_field :city, class: 'form-control'
-              .col-sm-4
-                b Зарплата
-              .col-sm-8.mb-4
-                = f.text_field :salary, class: 'form-control'
-              .col-sm-4.checkbox_section
                 b Вахта
               .col-sm-8.mb-4
-                = f.check_box :shift_method, class: 'form-control form-control-checkbox'
-              .col-sm-4.checkbox_section
-                b Реклама
-              .col-sm-8.mb-4
-                = f.check_box :advertising, class: 'form-control form-control-checkbox'
-              .col-sm-4.adv-text-label
-                b Текст рекламы
-              .col-sm-8.mb-4.adv-text-input
-                = f.text_area :adv_text, class: 'form-control', rows: 5
-              .col-sm-4
-                b Часовая ставка к зарплате в рублях
-              .col-sm-8.mb-4
-                #hidden_block Нажмите, чтобы установить часовую ставку в рублях
-                = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-                  = oi_f.text_field :hourly_payment, class: 'form-control d-none'
-              .col-sm-4
-                b Описание вакансии
-              .col-sm-8.mb-4
-                = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-                  = oi_f.text_area :terms, class: 'form-control tinymce', rows: 5
-            .row
+                i.fas.fa-check-square.watch_checkbox
+            .col-sm-4
+              b Специализация
+            .col-sm-8.mb-4
+              .col-sm-8.mb-4 = @order.skill
+            .col-sm-4
+              b Город
+            .col-sm-8.mb-4
+              .col-sm-8.mb-4 = @order.city
+            .col-sm-4
+              b Зарплата
+            .col-sm-8.mb-4
+              .col-sm-8.mb-4 = @order.salary
+            .col-sm-12
+              hr
+            .col-sm-4
+              b Описание вакансии
+            .col-sm-8.mb-4
+              br
+              == @order.other_info['terms']
+            .col-sm-7
               b Дополнительная информация для рекрутера
-              .row.mt-2
-                .col-sm-4
-                  | Заказчик ожидает увидеть и не видеть в заявке:
-                .col-sm-8.mb-4
-                  = f.fields_for :other_info, OpenStruct.new(f.object.other_info) do |oi_f|
-                    = oi_f.text_area :remark, class: 'form-control tinymce'
-                    - if oi_f.object['requirements']
-                      = oi_f.fields_for :requirements, OpenStruct.new(oi_f.object['requirements']) do |or_f|
-                        = or_f.fields_for :aspirant, OpenStruct.new(or_f.object['aspirant']) do |ra_f|
-                          .row.my-2
-                            .col-sm-4
-                              = ra_f.check_box :show, checked: !ra_f.object['show'].to_i.zero?,  id: 'materialUnchecked1', class: 'form-check-input'
-                              label.form-check-label for='materialUnchecked1'
-                            .col-sm-8.mb-4
-                              | Я хочу, чтобы до соискателя довели все условия, описанные в заявке.
-                              = ra_f.hidden_field :text, value: ra_f.object['text']
-                        = or_f.fields_for :customer, OpenStruct.new(or_f.object['customer']) do |rc_f|
-                          .row.my-2
-                            .col-sm-4
-                              = rc_f.check_box :show, checked: !rc_f.object['show'].to_i.zero?,  id: 'materialUnchecked2', class: 'form-check-input'
-                              label.form-check-label for='materialUnchecked2'
-                            .col-sm-8.mb-4
-                              |  Я хочу, чтобы перед отправлением соискателя согласовали с контактным лицом в заявке.
-                              = rc_f.hidden_field :text, value: rc_f.object['text']
-
-                        = or_f.fields_for :control_aspirant, OpenStruct.new(or_f.object['control_aspirant']) do |rca_f|
-                          .row.my-2
-                            .col-sm-4
-                              = rca_f.check_box :show, checked: !rca_f.object['show'].to_i.zero?,  id: 'materialUnchecked3', class: 'form-check-input'
-                              label.form-check-label for='materialUnchecked3'
-                            .col-sm-8.mb-4
-                              |  Я хочу, чтобы рекрутеры проконтролировали приезд кандидата и при необходимости скорректировали дату приезда.
-                              = rca_f.hidden_field :text, value: rca_f.object['text']
-                        = or_f.fields_for :added_data, OpenStruct.new(or_f.object['added_data']) do |rd_f|
-                          .row.my-2
-                            .col-sm-4
-                              = rd_f.check_box :show, checked: !rd_f.object['show'].to_i.zero?,  id: 'materialUnchecked4', class: 'form-check-input'
-                              label.form-check-label for='materialUnchecked4'
-                            .col-sm-8.mb-4
-                              | Я хочу, чтобы в анкету добавили данные
-                              = rd_f.text_field :text, class: 'form-control', placeholder: 'ФИО, телефон, регестрация, возраст'
-              .col-sm-12
-                .d-flex.mod_order_actions
-                  .waves-input-wrapper
-                    = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'btn btn-green',
-                        method: :put, data: {confirm: 'Вы уверены?'}
-                  = f.submit 'Сохранить', class: 'btn btn-green', widht: 0
-        .col-6
-          = render partial: 'order_reject_form', locals: {order: @order}
+            .col-sm-7.mt-3.mb-4.other_info_remark
+              | Заказчик ожидает увидеть и не видеть в заявке:
+              .col-sm-5.mb-4
+                == @order.other_info['remark']
+        .col-12
+          .section_btn
+            .d-flex.mod_order_actions
+              - if @order.state == 'moderation'
+                .col-2
+                  = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'approve_btn btn btn-green ',
+                          method: :put, data: {confirm: 'Вы уверены?'}
+              .col-3.reject_btn
+                = render partial: 'order_reject_form', locals: {order: @order}
+              - if @order.state == 'moderation'
+                .col-2
+                  = link_to 'Редактировать', edit_admin_order_path(@order), class: 'btn_edit btn btn-green'
