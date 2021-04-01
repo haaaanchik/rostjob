@@ -8,7 +8,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def disputs_count
-    0
+    customer_proposal_employees.disputed.count
   end
 
   def label_full_name

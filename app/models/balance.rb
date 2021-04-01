@@ -21,6 +21,24 @@ class Balance < ApplicationRecord
     nil
   end
 
+  def update_amount(amount)
+    ActiveRecord::Base.transaction do
+      bt = self.bill_transactions.build(amount: amount,
+                                        description: "Администратор изменил баланс с '#{self.amount}' на '#{amount.to_i}'",
+                                        transaction_type: 'deposit')
+      if bt.save
+        self.amount = amount.to_i
+      else
+        promote_errors(bt.errors)
+        raise StandardError.new
+      end
+      self.save!
+    end
+    self.amount
+  rescue => e
+    nil
+  end
+
   def withdraw(amount, description, invoice_id = nil)
     return false if self.amount < amount.to_i
 

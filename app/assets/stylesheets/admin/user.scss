@@ -13,6 +13,28 @@
 }
 
 #admin_user_edit_page form {
+  .payment-details-section {
+    position: absolute;
+    border: 1px solid silver;
+    padding-left: 1em;
+    left: 110.5%;
+    bottom: 33.5%;
+    max-width: 103%;
+  }
+
+  .information_section {
+    margin-top: 16%;
+  }
+
+  .company_block {
+    max-width: 42.5%;
+  }
+
+  .information_section .logo{
+    width: 150px;
+    height: 150px;
+  }
+
   .logo {
     width: 100px;
     height: 100px;

@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_one :balance, through: :profile
   has_many :user_action_logs, as: :subject
   has_many :crm_columns, dependent: :destroy
+  has_many :customer_proposal_employees, through: :profile
 
   accepts_nested_attributes_for :profile
   ransack_alias :admin_search_fields, :full_name_or_id_or_email_or_profile_phone
