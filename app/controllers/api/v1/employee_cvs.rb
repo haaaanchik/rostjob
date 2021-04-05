@@ -33,7 +33,7 @@ module Api
         else
           error_msg = result.employee_cv.errors.full_messages.join(', ')
           raise Errors.new(text: "Ошибка сохранения анкеты: #{error_msg}",
-                           code: nil,
+                           code: 422,
                            status: 422)
         end
       end
