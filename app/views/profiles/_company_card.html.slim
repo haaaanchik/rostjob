@@ -11,13 +11,14 @@
 = f.fields_for :company do |c|
   = c.hidden_field :legal_form, value: 'company'
   = render partial: 'companies/fields', locals: {f: c, errors: errors, profile: profile}
-  h4.h4-responsive.pt-3 Платёжные реквизиты
-  .form-group.row
-    = label :dadata, 'Поиск банка ', class: 'col-lg-4 col-12 col-sm-6 col-form-label search-bank'
-    .col-lg-6.col-12.col-sm-6
-      = text_field :dadata, :search, class: 'form-control',
-              'data-auto-select' => "profile_company_bank_dadata",
-              'data-auto-url' => "/search_bank_dadata",
-              'data-autocomplete-on' => "dadata_search",
-              placeholder: ' Введите БИК'
-  = render partial: 'accounts/fields', locals: {f: c, errors: errors, profile: profile}
+  .payment-details-section.col-12
+    h3.mt-4 Платёжные реквизиты
+    .form-group.row
+      = label :dadata, 'Поиск банка ', class: 'col-lg-4 col-12 col-sm-6 col-form-label search-bank'
+      .col-lg-6.col-12.col-sm-6
+        = text_field :dadata, :search, class: 'form-control',
+                'data-auto-select' => "profile_company_bank_dadata",
+                'data-auto-url' => "/search_bank_dadata",
+                'data-autocomplete-on' => "dadata_search",
+                placeholder: ' Введите БИК'
+    = render partial: 'accounts/fields', locals: {f: c, errors: errors, profile: profile}

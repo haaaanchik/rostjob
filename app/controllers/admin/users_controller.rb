@@ -11,7 +11,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def update
-    result = Cmd::Admin::User::Update.call(user: user, params: user_params) 
+    result = Cmd::Admin::User::Update.call(user: user, user_params: user_params, balance_amount: params[:amount])
     if result.success?
       redirect_to admin_users_path
     else
@@ -44,7 +44,7 @@ class Admin::UsersController < Admin::ApplicationController
   end
 
   def user
-    @user ||= users.find(params[:id])
+    @user ||= users.clients.find(params[:id]).decorate
   end
 
   def users
