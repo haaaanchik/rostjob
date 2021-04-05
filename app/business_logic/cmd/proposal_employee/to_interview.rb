@@ -8,7 +8,7 @@ module Cmd
 
       def call
         context.fail! unless proposal_employee.update(interview_date: interview_date)
-        context.fail! unless proposal_employee.to_interview!
+        context.fail!(errors: 'Не удалось назначить интервью') unless proposal_employee.to_interview!
       end
 
       private

@@ -9,7 +9,7 @@ module Cmd
       delegate :proposal_employee, to: :context
 
       def call
-        context.fail! unless proposal_employee.to_revoked!
+        context.fail!(errors: 'Не удалось отозвать анкету') unless proposal_employee.to_revoked!
 
         set_contexts
       end

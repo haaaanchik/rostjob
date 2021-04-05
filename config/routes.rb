@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount GrapeSwaggerRails::Engine => '/apidoc'
 
   mount Resque::Server.new, at: '/resque_web'
-  get "/pages/*id" => 'pages#show', as: :page, format: false
+  get '/pages/*id' => 'pages#show', as: :page, format: false
 
   get '/oauth/callback/superjob', to: 'oauth_callback#superjob'
   get '/oauth/callback/zarplata', to: 'oauth_callback#zarplata'
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     get :industrial
     get :freelance
     get :industry
-    %w(freelance industrial).each do |space|
+    %w[freelance industrial].each do |space|
       scope space do
         get :about_company
         get :contacts

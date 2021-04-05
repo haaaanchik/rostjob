@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Cmd
   module Ticket
     module Incident
@@ -9,7 +11,7 @@ module Cmd
         def call
           return unless incident
 
-          context.fail! unless incident.to_closed!
+          context.fail!(errors: 'Не удалось закрыть спор') unless incident.to_closed!
         end
       end
     end

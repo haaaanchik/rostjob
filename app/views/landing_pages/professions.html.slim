@@ -24,11 +24,11 @@
               | 10 дней
           = form_for @user,
                   method: :post,
-                  url: user_registration_path,
+                  url: user_registration_path(role: 'customer'),
                   html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
             .invalid-feedback = @user.errors.messages[:email].first
             = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-            = f.button t("views.modals.signin.customer"), name: :customer, class: 'hire-staff-btn'
+            = f.button t("views.modals.signin.customer"), class: 'hire-staff-btn'
         .landing-header-img
           = image_tag '/img/professions-landing/people_search.png'
     section.how-it-work.container

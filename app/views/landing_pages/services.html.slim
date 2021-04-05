@@ -12,11 +12,11 @@
             | Подбор персонала для вашей компании за 3 дня по цене от 8 000 ₽ за сотрудника с гарантией полного возврата денежных средств
           = form_for @user,
                   method: :post,
-                  url: user_registration_path,
+                  url: user_registration_path(role: 'customer'),
                   html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
             .invalid-feedback = @user.errors.messages.first
             = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-            = f.button t('views.modals.signin.submit'), name: :customer, class: 'hire-staff-btn'
+            = f.button t('views.modals.signin.submit'), class: 'hire-staff-btn'
         .landing-header-img
           = image_tag '/img/reusable_images/peoples_in_rounds.svg'
     section.advantages

@@ -22,4 +22,10 @@ module UsersHelper
   def roles_for_selector
     [['Все', ''], ['Исполнитель', 'contractor'], ['Заказчик', 'customer']]
   end
+
+  def registration_user_path
+    role = request.url.include?('freelance') ? 'contractor' : 'customer'
+
+    user_registration_path(role: role)
+  end
 end

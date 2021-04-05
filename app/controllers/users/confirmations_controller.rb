@@ -16,10 +16,15 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
-    user = User.find_by_confirmation_token params[:confirmation_token]
-    user.confirm
-    sign_in(user)
-    redirect_to edit_user_registration_path, notice: 'Электронная почта успешно подтверждена!'
+    user = User.find_by_confirmation_token(params[:confirmation_token])
+
+    if user
+      user.confirm
+      sign_in(user)
+      redirect_to edit_user_registration_path, notice: 'Электронная почта успешно подтверждена!'
+    else
+      redirect_to root_path, alert: 'Неверный токен. Попробуйте ещё раз.'
+    end
   end
 
   # protected
