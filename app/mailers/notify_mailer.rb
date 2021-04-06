@@ -53,11 +53,12 @@ class NotifyMailer < ApplicationMailer
     mail(to: contractor_email, subject: 'RostJob. Ваш кандидат нанят.')
   end
 
-  def informated_contractor_about_interview
-    @prop_emp = params[:proposal_employees].first
-    contractor_email = @prop_emp.profile.user.email
+  def informate_about_interview
+    @user = params[:user]
+    @pr_emp = params[:proposal_employees].first
 
-    mail(to: contractor_email, subject: 'RostJob. Ваш кандидат приглашен на собеседование.')
+    subject = @user.customer? ? 'RostJob. Рекрутер скорректировал дату собеседования.' : 'RostJob. Ваш кандидат приглашен на собеседование.'
+    mail(to: @user.email, subject: subject)
   end
 
   def informated_contractor_has_paid
@@ -67,23 +68,12 @@ class NotifyMailer < ApplicationMailer
     mail(to: contractor_email, subject: 'RostJob. Вы получили вознаграждение')
   end
 
-  def informated_contractor_has_disputed
-    @incidents = params[:objects]
-    @incident = @incidents.first
-    contractor_email = @incident.proposal_employee.profile.user.email
+  def informated_user_has_disputed
+    @pr_empls = params[:proposal_employees]
+    @user = params[:user]
 
-    subject = @incidents.size > 1 ? 'RostJob. Уведомление об открытых спорах' : 'RostJob. Уведомление об открытом споре'
-
-    mail(to: contractor_email, subject: subject)
-  end
-
-  def informated_customer_has_disputed
-    @prop_emp = params[:proposal_employees]
-    contractor_email = @prop_emp.first.order.profile.user.email
-
-    subject = @prop_emp.size > 1 ? 'RostJob. Уведомление об открытых спорах' : 'RostJob. Уведомление об открытом споре'
-
-    mail(to: contractor_email, subject: subject)
+    subject = @pr_empls.size > 1 ? 'RostJob. Уведомление об открытых спорах' : 'RostJob. Уведомление об открытом споре'
+    mail(to: @user.email, subject: subject)
   end
 
   def informated_customer_wait_aprove_act

@@ -2,7 +2,7 @@ class SendingEveryDayMailContractorJob < ApplicationJob
   queue_as :critical
 
   def perform
-    tomorrow_interview_contractor
+    # tomorrow_interview_contractor
     has_disputed_contractor
   end
 
@@ -16,8 +16,12 @@ class SendingEveryDayMailContractorJob < ApplicationJob
   end
 
   def has_disputed_contractor
-    Incident.opened.where(waiting: 'customer').includes(:proposal_employee, user: { profile: :setting_objects }).group_by { |incident| incident.proposal_employee.profile }.each do |profile, incident|
-      SendNotifyMailJob.perform_now(objects: incident, method: 'informated_contractor_has_disputed') if profile.every_day_mailing?
+    ProposalEmployee.disputed.joins(:incidents).where(tickets: { waiting: 'customer' }).includes(:order, profile: :setting_objects).group_by { |pr| pr.order.profile }.each do |profile, prop_emp|
+      next unless profile.every_day_mailing?
+
+      ProposalEmployeeMailJob.perform_now(user: profile.user,
+                                          proposal_employees: prop_emp,
+                                          method: 'informated_user_has_disputed')
     end
   end
 end
