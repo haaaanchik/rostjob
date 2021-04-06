@@ -51,14 +51,18 @@ html
                       = link_to 'Импорт выписок', admin_account_statements_path
                     li
                       = link_to 'Экспорт платёжных поручений', admin_payment_orders_path
+                    - if policy([:admin, :tinkoff_invoice]).show?
+                      li
+                        = link_to 'Зачисления на счёт банка', admin_tinkoff_invoices_path, class: 'dropdown-item'
 
               li.relative
                 i.fas.fa-angle-down.rotate-icon
                 = link_to 'Справочники', '#', class: 'collapsible-header js-prevent'
                 .collapsible-body
                   ul.list-unstyled
-                    li
-                      = link_to 'Сотрудники сервиса', admin_staffers_path
+                    - if policy([:admin, :staffer]).index?
+                      li
+                        = link_to 'Сотрудники сервиса', admin_staffers_path
                     li
                       = link_to 'Пользователи', admin_users_path
                     li

@@ -1,0 +1,47 @@
+.container-fluid
+  h2.text-center Зачисления на счёт банка
+
+  .row
+    = render 'form'
+    table.table.table-bordered
+      thead
+        tr
+          th Номер счёта
+          th Дата внесения
+          th Плателщик
+          th Сумма
+          th Описсание платежа
+          th Подробнее
+      tbody.justify-content-center
+        - @invoices.each do |invoice|
+          tr
+            td = invoice['id']
+            td = invoice['date']
+            td = invoice['payerName']
+            td = invoice['amount']
+            td = invoice['paymentPurpose']
+            td
+              .btn-group.dropleft
+                button.btn.btn-primary.dropdown-toggle.px-3 aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button"
+                  span.sr-only Подробная информация
+                ul.dropdown-menu
+                  li
+                    span.mr-2 ИНН Плат.:
+                    span = invoice['payerInn']
+                  li
+                    span.mr-2 Cчёт Плат.:
+                    span = invoice['payerAccount']
+                  li
+                    span.mr-2 Корр. счёт:
+                    span = invoice['payerCorrAccount']
+                  li
+                    span.mr-2 Бик номер:
+                    span = invoice['payerBic']
+                  li
+                    span.mr-2 Банк плат.:
+                    spna = invoice['payerBank']
+                / # ADD LINK TO INVOICE FOR CUSTOMERS OR CONTRACTORS
+                / li
+                /   = link_to '', root_path
+
+                button.btn.btn-primary.btn-sm type="button"  Подробная информация

@@ -1,6 +1,21 @@
+.payment_orders_form-label {
+  margin-right: 0.5em;
+}
+
+.payment_orders_form-label:nth-child(even) {
+  margin-left: 0.5em;
+}
+
 [data-page="AdminInvoicesIndex"] {
   span.action_button {
     width: 40px;
     display: inline-block;
+  }
+}
+
+[data-page="AdminTinkoffInvoicesIndex"] {
+  span.mr-2 {
+    min-width: 150px;
+    white-space: nowrap;
   }
 }

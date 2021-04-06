@@ -169,6 +169,7 @@ Rails.application.routes.draw do
         put :pay
       end
     end
+    resources :tinkoff_invoices, only: %i[index]
 
     resources :orders do
       member do

@@ -38,10 +38,13 @@
               = link_to 'Перечисления исполнителям', admin_contractor_invoices_path, class: 'dropdown-item'
               = link_to 'Импорт выписок', admin_account_statements_path, class: 'dropdown-item'
               = link_to 'Экспорт платёжных поручений', admin_payment_orders_path, class: 'dropdown-item'
+              - if policy([:admin, :tinkoff_invoice]).show?
+                = link_to 'Зачисления на счёт банка', admin_tinkoff_invoices_path, class: 'dropdown-item'
           li.nav-item.dropdown
             span.nav-link.dropdown-toggle#dropdown02 aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" Справочники
-            .dropdown-menu aria-labelledby="dropdown02" 
-              = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'dropdown-item'
+            .dropdown-menu aria-labelledby="dropdown02"
+              - if policy([:admin, :staffer]).index?
+                = link_to 'Сотрудники сервиса', admin_staffers_path, class: 'dropdown-item'
               = link_to 'Пользователи', admin_users_path, class: 'dropdown-item'
               = link_to 'Специализации', admin_specializations_path, class: 'dropdown-item'
               = link_to 'Профессии', admin_positions_path, class: 'dropdown-item'

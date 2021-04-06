@@ -8,6 +8,12 @@ class Admin::StafferPolicy < ApplicationPolicy
   private
 
   def allow_admin_and_moderator?
-    user.admin? || user.moderator?
+    return false if user.seo?
+
+    true
+  end
+
+  def super_admin?
+    user.super_admin?
   end
 end
