@@ -1,4 +1,5 @@
 class Orders
+
   @init: ->
     @tabsActive()
     @clickProposalEmployee()
@@ -18,7 +19,7 @@ class Orders
       $('#click_proposal_employee')[0].click()
 
   @bind: ->
-    $('#order_publish').on 'click', @publish
+    $('.content-wrapper').on 'click', '#order_publish', @publish
 
   @publish: ->
     $form = $(this).parent().prev().find('form.edit_order')
