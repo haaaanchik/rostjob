@@ -1,6 +1,7 @@
-= form_tag admin_tinkoff_invoices_path, method: :get, class: 'form-inline payment_orders_form' do
-  = label :date_from, 'От:', class: 'payment_orders_form-label'
-  = date_field :date_from, '', name: :date_from, class: 'form-control'
-  = label :till, 'До:', class: 'payment_orders_form-label'
-  = date_field :till, '', name: :till, class: 'form-control'
-  = submit_tag 'Найти', class: 'btn btn-indigo'
+= form_for '', url: admin_tinkoff_invoices_path, method: :get, html: { class: 'form-inline payment_orders_form' } do |f|
+  = f.label :from, 'От:', class: 'payment_orders_form-label'
+  = f.date_field :from, class: 'form-control'
+  = f.label :till, 'До:', class: 'payment_orders_form-label'
+  = f.date_field :till, class: 'form-control'
+  .d-inline
+    = f.submit 'Найти', class: 'btn btn-indigo'

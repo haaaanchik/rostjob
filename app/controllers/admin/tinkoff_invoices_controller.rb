@@ -3,7 +3,7 @@ module Admin
     before_action :set_authorize
 
     def index
-      @invoices = TinkoffApi::BankStatement.invoices_between_date(params[:date_from], params[:date_to])
+      @invoices = TinkoffApi::BankStatement.invoices_between_date(params[:from], params[:till])
     end
 
     private
