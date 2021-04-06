@@ -7,7 +7,7 @@ ru:
       published: 'опубликована'
       rejected: 'отклонена'
       completed: 'выполнена'
-    states_for_select:
+    states_for_select: &order_states
       waiting_for_payment: 'Ожидает оплаты'
       published: 'Открыта'
       rejected: 'Отклонена'
@@ -26,3 +26,7 @@ ru:
               contact_person:
                 name: 'не может быть пустым'
                 phone: 'не может быть пустым'
+    attributes:
+      order:
+        states:
+          <<: *order_states

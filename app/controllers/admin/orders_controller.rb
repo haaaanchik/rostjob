@@ -22,6 +22,10 @@ class Admin::OrdersController < Admin::ApplicationController
     end
   end
 
+  def edit
+    order
+  end
+
   def update
     result = Cmd::Order::Update.call(order: order, params: order_params)
     if result.success?
@@ -43,8 +47,8 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def order_params
     params.require(:order)
-        .permit(:email, :phone_number, :skill, :name, :city, :salary, :advertising, :adv_text, :shift_method,
-                contact_person: {}, other_info: {})
+        .permit(:email, :phone_number, :skill, :name, :state, :number_of_employees, :city, :salary, :advertising,
+                :adv_text, :shift_method, contact_person: {}, other_info: {})
   end
 
   def orders

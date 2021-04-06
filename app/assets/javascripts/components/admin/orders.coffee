@@ -8,3 +8,5 @@ class RostJob.AdminOrdersShow
 
   showAdvTextInput = ->
     $('.adv-text-label, .adv-text-input').slideToggle(700)
+
+class RostJob.AdminOrdersEdit extends RostJob.AdminOrdersShow
