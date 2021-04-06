@@ -1,5 +1,5 @@
 ruby:
-  val =  params[:q] ? params[:q][:candidate_fields] : nil
+  val =  params[:q] ? params[:q][:candidate_fields_cont] : nil
   filter = params[:q] ? params[:q][:state_in] : %w[]
 
 #worksheet_questionnaire
@@ -11,6 +11,11 @@ ruby:
       .show
         = link_to 'Показать все', admin_proposal_employees_path, class: 'btn btn-primary btn-sm btn-rounded'
     .filters-dropdown.filters-show.max-content
+      .header_worksheet
+        .search_admin
+          = f.text_field :order_title_cont, placeholder: 'Поиск по заявкам',
+                          data: {'auto-url': '/search_position', 'auto-add-text': true,
+                          'autocomplete-on': 'order_title'}, class: 'search_order'
       p
         = check_box_tag 'q[state_in][]', 'inbox', filter&.include?('inbox'), { id: 'candidate_filter_inbox' }
         i.fa.fa-bookmark.yellow-text
@@ -46,6 +51,7 @@ ruby:
         i.fa.fa-bookmark.grey-text
         = label :state, nil, for: 'candidate_filter_approved' do
           | Ждет акта
+    = f.submit '', class: 'd-none'
 
   table.table.table-bordered
     thead

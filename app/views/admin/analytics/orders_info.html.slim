@@ -61,12 +61,12 @@
             td = order.number_of_employees
             td.date-col = order.last_pr_empl
             td.date-col = order.formated_date(:completed_at)
-            td.state-col = order.count_pr_employees_state('inbox')
-            td.state-col = order.count_pr_employees_state('interview')
-            td.state-col = order.count_pr_employees_state('hired')
-            td.state-col = order.count_pr_employees_state('disputed')
+            td.state-col = order.link_profile_list('inbox')
+            td.state-col = order.link_profile_list('interview')
+            td.state-col = order.link_profile_list('hired')
+            td.state-col = order.link_profile_list('disputed')
             td.state-col = order.count_pr_employees_state('revoked')
-            td.state-col = order_pr_paid_count
+            td.state-col = order.link_profile_list('paid')
             td = order.difference_volum_and_paided(order_pr_paid_count)
             td = order.count_hired_in_percent(order_pr_paid_count).to_s + ' %'
             td = order.count_speed_hired(order_pr_paid_count)
