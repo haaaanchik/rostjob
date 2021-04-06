@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>We're sorry, but something went wrong (500)</title>
+  <meta charset="UTF-8">
+  <title>Мы извеняемся, но что-то пошло не так (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
   .rails-default-error-page {
-    background-color: #EFEFEF;
+    background-color: white;
     color: #2E2F30;
     text-align: center;
     font-family: arial, sans-serif;
@@ -15,7 +16,7 @@
   .rails-default-error-page div.dialog {
     width: 95%;
     max-width: 33em;
-    margin: 4em auto 0;
+    margin: 10em auto 0;
   }
 
   .rails-default-error-page div.dialog > div {
@@ -51,16 +52,28 @@
     color: #666;
     box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
   }
+
+  #logo {
+    width: 150px;
+    height: auto;
+    margin-top: 15px;
+    margin-left: 25px;
+  }
   </style>
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+<body>
+  <a href="/">
+    <img src="/img/rostjob-logo.svg" id="logo">
+  </a>
+  <div class="rails-default-error-page"> 
+    <div class="dialog">
+      <div>
+        <h1>Мы извиняемся, но что-то пошло не так</h1>
+      </div>
+      <p>Возможно вы сделали что-то неверно, попробуйте повторить действия в случае неудачи сообщите об ошибке админестрации
+      сайта по адресу manager@rosjob.com</p>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
   </div>
 </body>
 </html>

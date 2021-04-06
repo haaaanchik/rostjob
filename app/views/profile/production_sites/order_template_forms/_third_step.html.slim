@@ -58,7 +58,7 @@
                     .d-flex.checkbox_row.my-1
                       = rc_f.check_box :show, checked: !rc_f.object['show'].to_i.zero?,  id: 'materialUnchecked2', class: 'form-check-input'
                       label.form-check-label for='materialUnchecked2'
-                      span Я хочу, чтобы перед отправлением соискателя согласовали с контактным лицом в заявке.
+                      span Я хочу, чтобы перед отправлением анкеты соискателя, кандидата согласовали с контактным лицом в заявке.
                       = rc_f.hidden_field :text, value: rc_f.object['text']
 
                   = or_f.fields_for :control_aspirant, OpenStruct.new(or_f.object['control_aspirant']) do |rca_f|
