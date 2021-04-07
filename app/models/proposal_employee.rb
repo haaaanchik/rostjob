@@ -12,6 +12,7 @@ class ProposalEmployee < ApplicationRecord
   has_many :complaints, dependent: :destroy
   has_many :incidents, dependent: :destroy
   has_one :user, through: :profile
+  has_one :ticket
 
   validates :interview_date, :order_id, :employee_cv_id, presence: true
   validate :check_uniqueness_employee_cv
