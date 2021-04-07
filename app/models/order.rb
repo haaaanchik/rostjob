@@ -35,6 +35,7 @@ class Order < ApplicationRecord
   ransack_alias :title_or_company_fields, :position_title_or_profile_company_short_name
   ransack_alias :analytics_fields, :user_full_name_or_position_title_or_production_site_title
   ransack_alias :category_titles, :position_specializations_title
+  ransack_alias :without_experience_field, :position_price_group_customer_price
 
   ransacker :id do
     Arel.sql("CONVERT(#{table_name}.id, CHAR(8))")

@@ -8,15 +8,20 @@ module Api
         success Entities::Order
       end
       params do
+        optional :q, type: Hash do
+          optional :city_eq, type: String, desc: 'Order city.'
+          optional :category_titles_in, type: Array, desc: 'Order by specialization.'
+          optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
+        end
         optional :page, type: Integer, default: 1, desc: 'Specify the page of paginated results.'
-        optional :city_eq, type: String, desc: 'Order city.'
-        optional :category_titles_in, type: Array, desc: 'Order by specialization.'
-        optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
-        optional :profile_id_eq, type: String, desc: 'customer id'
+        optional :without_experience, type: Integer, values: [0, 1], default: 0, desc: 'Orders with a price of 8000 or less'
       end
 
       get '/orders/catalog' do
-        orders = published_orders.ransack(params).result.page(params[:page])
+        params[:q] = {} if params[:q].blank?
+        params[:q][:without_experience_field_lteq] = 8000 if params[:without_experience].positive?
+
+        orders = published_orders.ransack(params[:q]).result.page(params[:page])
 
         present :total_pages, orders.total_pages
         present :orders, orders, with: Entities::Order, base_url: request.base_url
