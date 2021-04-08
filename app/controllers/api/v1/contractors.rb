@@ -42,7 +42,7 @@ module Api
                            status: 404)
         end
 
-        { status: 200, message: 'ok' }
+        { status: 200, phone: user.profile.phone }
       end
     end
   end

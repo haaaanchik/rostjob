@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotifyMailer < ApplicationMailer
   def emp_cv_sended
     @proposal_employee = params[:objects].first
@@ -83,5 +85,15 @@ class NotifyMailer < ApplicationMailer
     subject = @prop_emps.size > 1 ? 'RostJob. Уведомление об неподтвержденных актах' : 'RostJob. Уведомление об неподтвержденном акте'
 
     mail(to: customer_email, subject: subject)
+  end
+
+  def notify_contractor_about_new_resume
+    @employee_cv = params[:employee_cv]
+    @order_city = params[:order_city]
+    @order_title = params[:order_title]
+
+    subject = 'RostJob. Отклик на вакансию'
+
+    mail(to: @employee_cv.profile.user.email, subject: subject)
   end
 end

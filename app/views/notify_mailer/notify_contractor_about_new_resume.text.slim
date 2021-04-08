@@ -1,0 +1,11 @@
+| Вакансия - #{@order_title}
+| Город - #{@order_city}
+
+| Резюме:
+| Полное имя - #{@employee_cv.name}
+| Номер телефона - #{@employee_cv.phone_number}
+| Опыт работы - #{@employee_cv.experience}
+| Образование - #{@employee_cv.education}
+| Доп. информация: #{@employee_cv.remark}
+
+| Для просмотра списка анкет перейдите по ссылке #{link_to 'Список Анкет', profile_employee_cvs_url}

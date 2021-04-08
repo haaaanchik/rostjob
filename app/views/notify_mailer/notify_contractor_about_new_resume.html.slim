@@ -1,0 +1,29 @@
+p
+  | Вакансия -
+  strong.ml-2 = @order_title
+p
+  | Город -
+  strong.ml-2 = @order_city
+
+br
+p Резюме:
+
+p
+  | Полное имя -
+  strong.ml-2 = @employee_cv.name
+p
+  | Номер телефона -
+  strong.ml-2 = @employee_cv.phone_number
+p
+  |Опыт работы -
+  strong.ml-2 = @employee_cv.experience
+p
+  | Образование -
+  strong.ml-2 = @employee_cv.education
+p
+  | Доп. информация -
+  strong.ml-2 = @employee_cv.remark
+
+br
+p
+  | Для просмотра списка анкет перейдите по ссылке #{link_to 'Список Анкет', profile_employee_cvs_url}

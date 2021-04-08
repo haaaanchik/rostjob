@@ -57,4 +57,13 @@ ruby:
               = ff.fields_for :company do |fc|
                 label.title.description Описание компании
                 = fc.text_area :description, class: 'custom-scroll'
+
+          .form-item
+            div
+              .red-text
+                | Внимание! Персональная ссылка будет актуальна 3 дня для пользователя, который перешел по вашей ссылке.
+              div
+                | Для того, чтобы перейти поссылке кликниете по
+                = link_to 'Моя персональная ссылка', "https://jobny.ru/?slug=#{f.object.slug}", target: '_blank', class: 'ml-2'
+
         = f.submit 'Сохранить', class: 'submit recruter-btn-gradient'
