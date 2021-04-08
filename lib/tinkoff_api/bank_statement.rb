@@ -9,9 +9,9 @@ class TinkoffApi::BankStatement
     end
 
     def invoices_between_date(from, till)
-      from ||= current_day
-      till ||= current_day
-      response = statement_invoices("bank-statement?accountNumber=#{account_number}&from=#{from}&till=#{till}")
+      from = date_from(from)
+      till = date_till(till)
+      response = statement_invoices("bank-statement?accountNumber=99998888777766665555#{from}#{till}")
       response['operation']
     end
 
@@ -21,12 +21,24 @@ class TinkoffApi::BankStatement
       Rails.application.credentials[:tinkoff][:account_number]
     end
 
+    def date_from(from)
+      from = last_seven_days if from.blank?
+
+      "&from=#{from}"
+    end
+
+    def date_till(till)
+      return if till.blank?
+
+      "&till=#{till}"
+    end
+
     def date
       @invoice.created_at.strftime('%Y-%m-%d')
     end
 
-    def current_day
-      DateTime.now.strftime('%Y-%m-%d')
+    def last_seven_days
+      @last_seven_days = (DateTime.now - 7.days).strftime('%Y-%m-%d')
     end
   end
 end

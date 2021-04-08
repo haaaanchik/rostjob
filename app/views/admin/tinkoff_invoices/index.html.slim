@@ -7,10 +7,11 @@
       thead
         tr
           th Номер счёта
-          th Дата внесения
-          th Плателщик
+          th.w-10 Дата внесения
+          th Плательщик
+          th Получатель
           th Сумма
-          th Описсание платежа
+          th Описание платежа
           th Подробнее
       tbody.justify-content-center
         - @invoices.each do |invoice|
@@ -18,6 +19,7 @@
             td = invoice['id']
             td = invoice['date']
             td = invoice['payerName']
+            td = invoice['recipient']
             td = invoice['amount']
             td = invoice['paymentPurpose']
             td
@@ -26,10 +28,10 @@
                   span.sr-only Подробная информация
                 ul.dropdown-menu
                   li
-                    span.mr-2 ИНН Плат.:
+                    span.mr-2 ИНН плательщика:
                     span = invoice['payerInn']
                   li
-                    span.mr-2 Cчёт Плат.:
+                    span.mr-2 Cчёт плательщика:
                     span = invoice['payerAccount']
                   li
                     span.mr-2 Корр. счёт:
@@ -38,10 +40,6 @@
                     span.mr-2 Бик номер:
                     span = invoice['payerBic']
                   li
-                    span.mr-2 Банк плат.:
+                    span.mr-2 Банк плательщика:
                     spna = invoice['payerBank']
-                / # ADD LINK TO INVOICE FOR CUSTOMERS OR CONTRACTORS
-                / li
-                /   = link_to '', root_path
-
                 button.btn.btn-primary.btn-sm type="button"  Подробная информация

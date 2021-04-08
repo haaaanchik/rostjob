@@ -1,7 +1,7 @@
 = form_for '', url: admin_tinkoff_invoices_path, method: :get, html: { class: 'form-inline payment_orders_form' } do |f|
   = f.label :from, 'От:', class: 'payment_orders_form-label'
-  = f.date_field :from, class: 'form-control'
+  = f.date_field :from, value: params[:from], class: 'form-control'
   = f.label :till, 'До:', class: 'payment_orders_form-label'
-  = f.date_field :till, class: 'form-control'
+  = f.date_field :till, value: params[:till], class: 'form-control'
   .d-inline
     = f.submit 'Найти', class: 'btn btn-indigo'
