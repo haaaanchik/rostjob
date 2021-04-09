@@ -11,7 +11,7 @@ class TinkoffApi::BankStatement
     def invoices_between_date(from, till)
       from = date_from(from)
       till = date_till(till)
-      response = statement_invoices("bank-statement?accountNumber=99998888777766665555#{from}#{till}")
+      response = statement_invoices("bank-statement?accountNumber=#{account_number}#{from}#{till}")
       response['operation']
     end
 
