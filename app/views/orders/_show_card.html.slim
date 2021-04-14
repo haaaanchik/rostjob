@@ -28,6 +28,9 @@
       i.fas.fa-users.mr-2
       = "Заявка на #{order.number_free_places} сотрудникa(ов)"
     p.subtitle
+      i.fas.fa-calendar-check.w-2
+      = "Гарантия #{order.position.warranty_period} смен"
+    p.subtitle
       i.fas.fa-bed.w-2.mr-2
       p 
         == order.other_info['terms']
@@ -58,3 +61,10 @@
       p.mt-2.subtitle
         strong Комментарий для рекрутера:
         = order.show_requirements
+    - if order.document.present?
+      p.download_document.mt-5
+        = link_to download_document_order_path(order),data: {toggle: 'tooltip',
+                                                              placement: 'top',
+                                                              title: ' Анкета для СБ'} do
+          i.fas.fa-save.pr-2
+          | Анкета для СБ

@@ -3,6 +3,10 @@ class OrderPolicy < ApplicationPolicy
     contractor?
   end
 
+  def download_document?
+    contractor?
+  end
+
   def customer_orders?
     contractor?
   end
