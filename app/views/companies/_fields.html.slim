@@ -43,7 +43,7 @@
 .form-group.row.mb-2.private-person-field
   = f.label :inn, t(:inn), class: 'col-lg-4 col-12 col-sm-6 require_field '
   .col-lg-6.col-12.col-sm-6
-    = f.text_field :inn, rows: '1' , class: "form-control #{'is-invalid' unless errors[:inn].empty?}"
+    = f.number_field :inn, class: "form-control #{'is-invalid' unless errors[:inn].empty?}"
     .invalid-feedback #{errors[:inn].first}
 .form-group.row.mb-2
   = f.label :kpp, t(:kpp), class: 'col-lg-4 col-12 col-sm-6 require_field '
