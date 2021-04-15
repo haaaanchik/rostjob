@@ -17,7 +17,8 @@ class Company < ApplicationRecord
     o.validates :short_name, :address, :mail_address, :phone,
                 :email, :ogrn, :director, :acts_on, presence: true
 
-    o.validates :inn, length: { is: 10 }, numericality: { only_integer: true }
+    o.validates :inn, numericality: { only_integer: true }
+    o.validate :check_inn_length
   end
 
   with_options if: :ip?, on: :update do |comp|
@@ -103,5 +104,13 @@ class Company < ApplicationRecord
 
   def company?
     legal_form == 'company'
+  end
+
+  private
+
+  def check_inn_length
+    return if inn.size == 10 || inn.size == 12
+
+    errors.add(:inn, 'длина должна быть равна 10 или 12')
   end
 end
