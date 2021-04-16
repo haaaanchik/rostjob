@@ -10,9 +10,17 @@ module Api
       end
 
       get '/customers/logos' do
-        customer_logos = Profile.customers.where.not(photo_file_name: nil)
+        customer_logos = Profile
+          .joins(:orders)
+          .where('orders.state': 'published')
+          .where.not(photo_file_name: nil)
+          .customers
+          .includes(:company)
+          .order(deal_counter: :desc)
+          .uniq
+          .take(3)
 
-        present customer_logos,  with: Entities::Profiles::Logo, base_url: request.base_url
+        present customer_logos, with: Entities::Profiles::Logo, base_url: request.base_url
       end
 
       desc 'Get customer by ID' do
