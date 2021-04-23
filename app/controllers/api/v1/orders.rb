@@ -12,6 +12,7 @@ module Api
           optional :city_eq, type: String, desc: 'Order city.'
           optional :category_titles_in, type: Array, desc: 'Order by specialization.'
           optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
+          optional :shift_method_eq, type: Boolean, desc: 'Order shift method'
         end
         optional :page, type: Integer, default: 1, desc: 'Specify the page of paginated results.'
         optional :without_experience, type: Integer, values: [0, 1], default: 0, desc: 'Orders with a price of 8000 or less'
