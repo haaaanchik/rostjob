@@ -41,7 +41,7 @@
           th rowspan='2' Скорость найма (за срок существования)
           th rowspan='2' Публикация на сервисе Зарплата.ру
         tr
-          th.state-col В очереди
+          th.state-col Ждет акта
           th.state-col На собес
           th.state-col В найме
           th.state-col В споре
@@ -61,7 +61,7 @@
             td = order.number_of_employees
             td.date-col = order.last_pr_empl
             td.date-col = order.formated_date(:completed_at)
-            td.state-col = order.link_profile_list('inbox')
+            td.state-col = order.link_profile_list('approved')
             td.state-col = order.link_profile_list('interview')
             td.state-col = order.link_profile_list('hired')
             td.state-col = order.link_profile_list('disputed')
