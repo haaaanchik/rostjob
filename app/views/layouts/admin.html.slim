@@ -31,7 +31,7 @@ html
           li
             div
               = link_to admin_path, class: 'admin' do
-                          strong ADMIN
+                strong ADMIN
 
           li
             ul.collapsible.collapsible-accordion
@@ -47,6 +47,8 @@ html
                       = link_to 'Выписанные счета', admin_invoices_path
                     li
                       = link_to 'Перечисления исполнителям', admin_contractor_invoices_path
+                    li
+                      = link_to 'Акты выполненных работ', admin_proposal_employee_invoices_path
                     li
                       = link_to 'Импорт выписок', admin_account_statements_path
                     li

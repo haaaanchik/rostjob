@@ -1,0 +1,11 @@
+h1 Акты выполненных работ
+table.table
+  tr
+    th id
+    th Анкета
+    th Заявка
+    th Заказчик
+    th Сумма
+    th Действия
+  = render partial: 'proposal_employee', collection: @proposal_employees
+= paginate @proposal_employees

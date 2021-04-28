@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
 class Profile < ApplicationRecord
   include AASM
   extend ConditionalValidation::ValidationFlag
+  include ProfileRepository
 
   has_one :user, dependent: :destroy
   has_many :orders, dependent: :destroy
@@ -30,8 +33,8 @@ class Profile < ApplicationRecord
 
   validates :profile_type, presence: true, inclusion: { in: PROFILE_TYPES }
 
-  has_attached_file :photo, styles: { medium: "100x100>", thumb: "50x50" }, default_url: "/img/default.png"
-  validates_attachment_content_type :photo, content_type: ["image/jpeg", "image/gif", "image/png"]
+  has_attached_file :photo, styles: { medium: '100x100>', thumb: '50x50' }, default_url: 'img/default.png'
+  validates_attachment_content_type :photo, content_type: ['image/jpeg', 'image/gif', 'image/png']
 
   has_settings do |s|
     s.key :general, defaults: { every_day_mailing: true, notify_mails: true }
@@ -40,13 +43,6 @@ class Profile < ApplicationRecord
   ransack_alias :all_fields, :user_full_name
   ransack_alias :title_fields, :orders_position_title
   ransack_alias :city_fields,  :orders_city
-
-  scope :executors, -> { where profile_type: %w[agency recruiter] }
-  scope :by_query, ->(term) { where('contact_person LIKE ? OR description LIKE ?', "%#{term}%", "%#{term}%") }
-  scope :contractors, -> { where profile_type: 'contractor' }
-  scope :contractors_companies, -> { contractors.where legal_form: 'company' }
-  scope :contractors_private_persons, -> { contractors.where legal_form: 'private_person' }
-  scope :customers, -> { where(profile_type: 'customer') }
 
   aasm column: :state do
     state :created, initial: true
@@ -110,11 +106,13 @@ class Profile < ApplicationRecord
 
   def customer_can_only_be_a_company
     return if customer? && company?
+
     errors.add(:base, 'customer can only be a company')
   end
 
   def private_person_can_only_be_a_contractor
     return if private_person? && contractor?
+
     errors.add(:base, 'private person can only be a contractor')
   end
 
