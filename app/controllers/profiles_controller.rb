@@ -9,13 +9,14 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    result = Cmd::Profile::Update.call(profile: current_profile, params: profile_params)
-    profile = result.profile
-    if result.success?
+    @result = Cmd::Profile::Update.call(profile: current_profile, params: profile_params)
+    @result.profile
+    if @result.success?
       current_profile.update_attribute(:updated_by_self_at, DateTime.now)
-      redirect_to root_path
+      redirect_to edit_profile_path, notice: 'Анкета обновлена'
     else
-      render json: { validate: true, data: errors_data(profile) }, status: 422
+      render json: { validate: true, data: errors_data(@result.profile) }, status: 422
+      redirect_to edit_profile_path, alert: 'Анкета не обновлена'
     end
   end
 
