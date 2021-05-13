@@ -67,6 +67,15 @@ module Api
                  type: String
                }
 
+        expose(:shift_method,
+               documentation: {
+                 desc: 'Order shift method',
+                 type: Integer
+               }
+        ) do |order|
+          order.shift_method ? 1:0
+        end
+
         expose(:published_at,
                format_with: :iso8601,
                documentation: {
