@@ -31,6 +31,17 @@ module Api
       end
 
 
+      desc 'Order with advertising' do
+        success Entities::Order
+      end
+      get '/orders/advertising' do
+        orders = published_orders
+                   .where(advertising: true)
+
+        present orders, with: Entities::Order, base_url: request.base_url
+      end
+
+
       desc 'Order by id' do
         success Entities::Order
       end
