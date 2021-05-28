@@ -38,7 +38,8 @@ module Api
         orders = published_orders
                    .where(advertising: true)
 
-        present orders, with: Entities::Order, base_url: request.base_url
+        present :orders, orders, with: Entities::Order, base_url: request.base_url
+        present :cities, published_orders.map(&:city).uniq
       end
 
 
