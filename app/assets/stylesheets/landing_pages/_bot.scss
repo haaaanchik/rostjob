@@ -40,8 +40,16 @@
 
 @media (max-width: 1150px) {
   .help {
-    position: static;
-    transform: unset;
+    /*position: static;
+    transform: unset;*/
+    display: flex;
+    flex-direction: column;
+    border-radius: 50%;
+    width: 130px;
+    height: 129px;
+    padding-top: 24px;
+    background-color: white;
+    margin-bottom: 212px;
   }
 }
 
@@ -57,6 +65,25 @@
   justify-content: center;
   font-size: 18px;
   font-weight: 700;
+}
+
+.help-content-adaptive {
+  display: none;
+}
+
+@media (max-width: 1150px) {
+  .help-content {
+    display: none;
+  }
+  .help-content-adaptive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #498cfc;
+  }
 }
 
 .help-content__img {
