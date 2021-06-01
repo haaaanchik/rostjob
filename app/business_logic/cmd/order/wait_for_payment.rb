@@ -7,7 +7,8 @@ module Cmd
       delegate :params, to: :context
 
       def call
-        context.fail! if order.number_additional_employees.blank? || !order.to_waiting_for_payment
+        context.fail! if order.number_additional_employees.present? || !order.to_waiting_for_payment
+
         Cmd::UserActionLogger::Log.call(params: logger_params)
       end
 
