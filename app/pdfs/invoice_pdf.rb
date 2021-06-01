@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InvoicePdf < Prawn::Document
   require 'prawn/measurement_extensions'
 
@@ -37,32 +39,33 @@ class InvoicePdf < Prawn::Document
 
   def seller_requisites
     move_down 5.mm
-    receiver = make_table([
-                            ["#{@seller['short_name']}"],
-                            ['Получатель']
-                          ], cell_style: { font: 'Arial', size: 10, borders: [] })
-    receiver_bank = make_table([
-                                 ["#{@seller['account']['bank']}"],
-                                 ['Банк получателя']
-                               ], cell_style: { font: 'Arial', size: 10, borders: [] })
-    bic_ca = make_table([
-                          ["#{@seller['account']['bic']}"],
-                          ["#{@seller['account']['corr_account']}"]
-                        ], cell_style: { font: 'Arial', size: 10, borders: [] })
-    table([
-            [{ content: receiver_bank, colspan: 2, rowspan: 2 }, 'БИК', { content: bic_ca, rowspan: 2 }],
-            ['К/с. №'],
-            ["ИНН #{@seller['inn']}", "КПП #{@seller['kpp']}", { content: 'Сч. №', rowspan: 3},
-             { content: "#{@seller['account']['account_number']}", rowspan: 3 }],
-            [{ content: receiver, colspan: 2, rowspan: 2 }]
-          ], position: :center, column_widths: [48.mm, 63.mm, 19.mm, 60.mm],
-             cell_style: { font: 'Arial', size: 10 })
+    receiver = make_table([[(@seller['short_name']).to_s], ['Получатель']], cell_style: { font: 'Arial', size: 10,
+                                                                                          borders: [] })
+
+    receiver_bank = make_table(
+      [[(@seller['account']['bank']).to_s], ['Банк получателя']], cell_style: { font: 'Arial', size: 10, borders: [] }
+    )
+
+    bic_ca = make_table(
+      [[(@seller['account']['bic']).to_s], [(@seller['account']['corr_account']).to_s]], cell_style: { font: 'Arial',
+                                                                                                       size: 10,
+                                                                                                       borders: [] }
+    )
+
+    table(
+      [[{ content: receiver_bank, colspan: 2, rowspan: 2 }, 'БИК', { content: bic_ca, rowspan: 2 }], ['К/с. №'],
+       ["ИНН #{@seller['inn']}", "КПП #{@seller['kpp']}", { content: 'Сч. №', rowspan: 3 },
+        { content: (@seller['account']['account_number']).to_s, rowspan: 3 }],
+       [{ content: receiver, colspan: 2, rowspan: 2 }]], position: :center,
+                                                         column_widths: [48.mm, 63.mm, 19.mm, 60.mm],
+                                                         cell_style: { font: 'Arial', size: 10 }
+    )
   end
 
   def invoice_number
     move_down 10.mm
     text "Счет на оплату № #{@invoice.invoice_number} от #{@view.l(@invoice.created_at, format: :short)} г.",
-      size: 16, style: :bold
+         size: 16, style: :bold
   end
 
   def contract
@@ -71,8 +74,7 @@ class InvoicePdf < Prawn::Document
       [
         ['Поставщик:', { content: "#{@seller['short_name']}, ИНН #{@seller['inn']}, КПП #{@seller['kpp']}, #{@seller['address']}" }],
         ['Покупатель:', { content: "#{@buyer['short_name']}, ИНН #{@buyer['inn']}, КПП #{@buyer['kpp']}, #{@buyer['address']}" }]
-      ], position: :center, column_widths: [25.mm, 165.mm],
-         cell_style: { font: 'Arial', size: 10, borders: [] }
+      ], position: :center, column_widths: [25.mm, 165.mm], cell_style: { font: 'Arial', size: 10, borders: [] }
     ) do
       row(0).columns(0..1).borders = [:top]
       columns(1).font_style = :bold
@@ -100,9 +102,10 @@ class InvoicePdf < Prawn::Document
             [{ content: 'Итого:' }, @total],
             [{ content: 'В том числе НДС:' }, 0],
             [{ content: 'Всего к оплате:' }, @total]
-          ], position: :center, column_widths: [165.mm, 25.mm],
-             cell_style: { font: 'Arial', size: 10, font_style: :bold, padding: [0, 5, 5, 5],
-                           borders: [], valign: :center, align: :right })
+          ], position: :center, column_widths: [165.mm, 25.mm], cell_style: { font: 'Arial', size: 10,
+                                                                              font_style: :bold,
+                                                                              padding: [0, 5, 5, 5], borders: [],
+                                                                              valign: :center, align: :right })
   end
 
   def total_by_words

@@ -164,6 +164,7 @@ Rails.application.routes.draw do
     get :payment_orders, to: 'payment_orders#index'
 
     resources :contractor_invoices, only: %i[index show]
+    resources :proposal_employee_invoices, only: %i[index show]
     resources :invoices, only: %i[index destroy] do
       member do
         put :pay
