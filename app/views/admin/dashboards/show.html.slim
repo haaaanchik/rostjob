@@ -36,7 +36,7 @@
             .dropdown-menu aria-labelledby="dropdown01" 
               = link_to 'Выписанные счета', admin_invoices_path, class: 'dropdown-item'
               = link_to 'Перечисления исполнителям', admin_contractor_invoices_path, class: 'dropdown-item'
-              = link_to 'Акты выполненных работ', admin_proposal_employee_invoices_path
+              = link_to 'Акты выполненных работ', admin_proposal_employee_invoices_path, class: 'dropdown-item'
               = link_to 'Импорт выписок', admin_account_statements_path, class: 'dropdown-item'
               = link_to 'Экспорт платёжных поручений', admin_payment_orders_path, class: 'dropdown-item'
               - if policy([:admin, :tinkoff_invoice]).show?
