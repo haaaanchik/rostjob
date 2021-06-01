@@ -385,6 +385,12 @@ $purple: #9046ff;
     font-size: 13px;
   }
 
+  .download_document a {
+    margin: 1.8em;
+    color: $purple;
+    font-size: 15px;
+  }
+
   #requests-page .platform .details .buttons {
     width: 25%;
     display: flex;

@@ -13,6 +13,11 @@ class OrdersController < ApplicationController
     orders.decorate
   end
 
+  def download_document
+    order = Order.find(params[:id])
+    send_data order.document.url, filename: order.document_file_name, type: order.document_content_type
+  end
+
   def add_to_favorites
     @employee_cv_id = params[:employee_cv_id]
     Cmd::Order::AddToFavorites.call(order: order, profile: current_profile)
