@@ -3,7 +3,7 @@ tr
   td = proposal_employee.employee_cv.name
   td ##{proposal_employee.order.id} #{proposal_employee.order.title}
   td = proposal_employee.order.profile.user.full_name
-  td = proposal_employee.order.contractor_price
+  td = proposal_employee.order.customer_price
   td
     = link_to admin_proposal_employee_invoice_path(proposal_employee, format: :pdf),
             data: {toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF'},
