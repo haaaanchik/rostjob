@@ -98,7 +98,7 @@ class ApplicationController < BaseController
   end
 
   def redirect_back_with_message
-    flash[:alert] = 'Эта страница была не доступна для вас'
+    flash[:alert] = 'Страница недоступна'
     redirect_back(fallback_location: root_path)
   end
 end
