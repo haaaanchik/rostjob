@@ -1,3 +1,7 @@
+.upheader-links
+  a.link href="https://rostjob.com/freelance" Рекрутинг
+  a.link href="https://rostjob.com/industrial" Подбор персонала
+  a.link href="http://rostjob.ru" Аутстаффинг и аутсорсинг
 header.header.container
   .block
     = link_to root_path, class: 'land-logo' do
@@ -5,7 +9,7 @@ header.header.container
       - if Rails.env.staging?
         span.counter
           b stage
-  span Кадровое агентство по поиску и подбору персонала
+  span Кадровое агентство по поиску и подбору персонала 
   .block.log-in-reg
     button.green-btn--short.purple-btn--short.js-call-modal type="button"
       | Заказать звонок
