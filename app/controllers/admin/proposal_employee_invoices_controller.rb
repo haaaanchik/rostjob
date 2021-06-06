@@ -4,7 +4,11 @@ class Admin::ProposalEmployeeInvoicesController < Admin::ApplicationController
 
   before_action :set_proposal_employee, only: %i[show]
   def index
-    @proposal_employees ||= ProposalEmployee.paid.page(params[:page])
+    @proposal_employees = ProposalEmployee
+                            .paid
+                            .order(payment_date: :desc)
+                            .includes(:employee_cv, order: [:position, profile: :user])
+                            .page(params[:page])
   end
 
   def show
