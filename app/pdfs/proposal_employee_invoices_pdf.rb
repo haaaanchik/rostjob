@@ -6,7 +6,7 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
   def initialize(proposal_employee, view)
     super(page_size: 'A4', page_layout: :portrait, margin: 10.mm)
     @proposal_employee = proposal_employee
-    @total_price = proposal_employee.order.contractor_price
+    @total_price = proposal_employee.order.customer_price
     @view = view
 
     font_families.update(
