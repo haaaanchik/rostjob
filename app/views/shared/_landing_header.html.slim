@@ -1,6 +1,6 @@
 .upheader-links
-  a.link href="https://rostjob.com/freelance" Рекрутинг
-  a.link href="https://rostjob.com/industrial" Подбор персонала
+  = link_to 'Рекрутинг', freelance_path, class: 'link' if body_data_page != 'LandingPagesFreelance'
+  = link_to 'Подбор персонала', industrial_path, class: 'link' if body_data_page != 'LandingPagesIndustrial'
   a.link href="http://rostjob.ru" Аутстаффинг и аутсорсинг
 header.header.container
   .block
