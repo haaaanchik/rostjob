@@ -49,14 +49,14 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
   def proposals
     move_down 5.mm
     order_data = services || []
-    table(order_data, position: :center, column_widths: [15.mm, 90.mm, 20.mm, 15.mm, 20.mm, 30.mm],
+    table(order_data, position: :center, column_widths: [15.mm, 90.mm, 20.mm, 25.mm, 20.mm, 20.mm],
                       cell_style: { font: 'Arial', size: 9, align: :center })
   end
 
   def table_head
     [
       { content: '№' }, { content: 'Наименование работ, услуг' },
-      { content: 'Кол-во' }, { content: 'Ед' },
+      { content: 'Кол-во' }, { content: 'Должность' },
       { content: 'Цена' }, { content: 'Сумма' }
     ]
   end
@@ -65,7 +65,7 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
     data = [table_head]
     data << [
       { content: '1'.to_s }, { content: "Оказание услуг по подбору персонала (#{@proposal_employee.employee_cv.name})" },
-      { content: '' }, { content: '' },
+      { content: '1' }, { content: @proposal_employee.order.title },
       { content: @total_price.to_s }, { content: @total_price.to_s }
     ]
     data
