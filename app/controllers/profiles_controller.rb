@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   def update
     @result = Cmd::Profile::Update.call(profile: current_profile, params: profile_params)
     @result.profile
-    if @result.success
+    if @result.success?
       current_profile.update_attribute(:updated_by_self_at, DateTime.now)
       redirect_to edit_profile_path, notice: 'Анкета обновлена'
     else
