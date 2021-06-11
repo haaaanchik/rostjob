@@ -17,8 +17,8 @@ class Company < ApplicationRecord
     o.validates :short_name, :address, :mail_address, :phone,
                 :email, :ogrn, :director, :acts_on, presence: true
 
-    o.validates :inn, numericality: { only_integer: true }
-    o.validate :check_inn_length
+    o.validates :inn, numericality: { only_integer: true }, if: -> { companyable.customer? }
+    o.validate :check_inn_length, if: -> { companyable.customer? }
   end
 
   with_options if: :ip?, on: :update do |comp|
