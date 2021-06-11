@@ -3,50 +3,30 @@
     h1.text-center Что такое статус анкет?
     .content.d-flex.flex-column
       p
-        | После создания анкеты, ей присваивается статус. Чтобы узнать статус анкеты, необходимо раскрыть Фильтры,
-        | там анкеты отмечены разноцветными флажками. Если поставить галочку напротив желтого флажка "В очереди" -
-        | откроется список с анкетами, которые отправлены в очередь и находятся на рассмотрении.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_1.png'),
-                data: { lightbox: 'images' },
-                class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_1_mini.png'
+        | Статус «
+        span.orange-text собеседование
+        | ». Оранжевый цвет. Это дата приезда кандидата на объект,
+        |  длится около трех дней (в которые кандидат трудоустраивается, заселяется, проходит
+        |  медосмотр, технику безопасности).
 
       p
-        | Статус «собеседование». Оранжевый цвет. Это дата приезда кандидата на объект, длится около трех дней (в которые кандидат трудоустраивается, заселяется, проходит медосмотр, технику безопасности).
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_2.png'),
-                data: { lightbox: 'images' },
-                class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_2_mini.png'
-
-      p Статус «нанят». Зеленый цвет. Появляется когда кандидат вышел на первую рабочую смену.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_3.png'),
-              data: { lightbox: 'images' },
-              class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_3_mini.png'
+        | Статус «
+        span.green-text нанят
+        | ». Зеленый цвет. Появляется когда кандидат вышел на первую рабочую смену.
 
       p
-        | Статус «спор». Красный цвет. Появляется в случаях если кандидат не явился на собеседование или не отработал гарантийный период по каким либо причинам, указаны в комментариях к спору.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_4.png'),
-              data: { lightbox: 'images' },
-              class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_4_mini.png'
+        | Статус «
+        span.red-text спор
+        | ». Красный цвет. Появляется в случаях, если кандидат не явился на
+        |  собеседование или не отработал гарантийный период по каким либо причинам,
+        |  указаны в комментариях к спору.
 
       p Черный флажок со статусом "Оплачен" - означает, что анкета находится у рекрутера.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_5.png'),
-              data: { lightbox: 'images' },
-              class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_5_mini.png'
+
+      p Голубой флажок со статусом "Перенос" - означает, что анкета перенесена.
 
       p
-        | Голубой флажок со статусом "Перенос" - означает, что анкета перенесена.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_6.png'),
-              data: { lightbox: 'images' },
-              class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_6_mini.png'
-
-      p
-        | Статус «ждет акта». Серый цвет. Появляется после того как кандидат отработал 10 гарантийных смен.
-      = link_to image_path('/img/manuals/manual_what_is_the_status_of_proposed_employees/image_7.png'),
-              data: { lightbox: 'images' },
-              class: 'text-center my-3 rounded mx-auto z-depth-2' do
-        = image_tag '/img/manuals/manual_what_is_the_status_of_proposed_employees/image_7_mini.png'
+        | Статус «
+        span.grey-text ждет акта
+        | ». Серый цвет. Появляется после того как кандидат отработал 10
+        |  гарантийных смен.
