@@ -22,8 +22,10 @@ module Api
         params[:q] = {} if params[:q].blank?
         params[:q][:without_experience_field_lteq] = 8000 if params[:without_experience].positive?
 
-        orders = published_orders.ransack(params[:q]).result.page(params[:page])
+        result = published_orders.ransack(params[:q]).result
+        orders = result.page(params[:page])
 
+        present :total_orders, result.count
         present :total_pages, orders.total_pages
         present :orders, orders, with: Entities::Order, base_url: request.base_url
         present :categories, ActiveSpecializationsSpecification.to_scope.map(&:title)
