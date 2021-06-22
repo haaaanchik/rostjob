@@ -7,7 +7,7 @@ main#recruter-main
         p.name = current_user.full_name
         button
           = link_to edit_user_registration_path, class: 'black-text redact' do
-            = image_tag('/img/new/pen.png', id:"pen")
+            = image_tag('/img/new/pen.png', id: 'pen')
             | Редактировать
 
       .user_info_rating
@@ -16,7 +16,7 @@ main#recruter-main
         p
           - if @current_profile.manager?
             = check_box_tag :free_manager, true, @current_profile.free_manager?, class: 'form-check-input',
-                    data: {set_free_url: set_free_profile_path, unset_free_url: unset_free_profile_path}
+                    data: { set_free_url: set_free_profile_path, unset_free_url: unset_free_profile_path }
             = label :free_manager, 'Свободен', class: 'form-check-label', for: 'free_manager'
           - else
             | Баланс:
@@ -31,5 +31,5 @@ main#recruter-main
 
   section.calendar
     #calendar
-= render 'landing_pages/widget_bot_chat'
-= render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'db93f4de-7370-8ec0-ca30-42814eb689c7' }
+/ = render 'landing_pages/widget_bot_chat'
+/ = render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'db93f4de-7370-8ec0-ca30-42814eb689c7' }

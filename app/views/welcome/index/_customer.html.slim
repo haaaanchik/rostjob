@@ -7,7 +7,7 @@ main
         p = current_user.full_name
         button
           = link_to edit_user_registration_path, class: 'black-text' do
-            = image_tag('/img/new/pen.png', id:"pen")
+            = image_tag('/img/new/pen.png', id: 'pen')
             | Редактировать
 
       .user_info_rating
@@ -34,8 +34,7 @@ main
     - if @candidates_interview.blank?
       p.empty Список пуст
 
-
   section.seekers
     = render partial: 'welcome/user_action_log', locals: { profile: @profile }
-= render 'landing_pages/widget_bot_chat'
-= render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: '807d0254-ede0-3e56-bd64-a7c97ce1a595' }
+/ = render 'landing_pages/widget_bot_chat'
+/ = render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: '807d0254-ede0-3e56-bd64-a7c97ce1a595' }
