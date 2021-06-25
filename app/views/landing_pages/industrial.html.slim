@@ -17,10 +17,10 @@ body#customer-landing
         = form_for @user,
                 method: :post,
                 url: user_registration_path(role: 'customer'),
-                html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
+                html: { name: 'form-email', class: 'hire-staff-block', novalidate: '' } do |f|
           .invalid-feedback = errors[:email].first
           = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
-          = f.button t("views.modals.signin.customer"), class: 'hire-staff-btn'
+          = f.button t('views.modals.signin.customer'), class: 'hire-staff-btn'
       .landing-header-img
         = image_tag '/img/reusable_images/header_img.svg'
       .stamp
@@ -60,8 +60,6 @@ body#customer-landing
           p.price
             | Цена от 12 000 ₽
 
-
-
     section.specializing.container
       h2.title-common.company-services__title
         | Специализируемся на вакансиях в отраслях
@@ -87,7 +85,6 @@ body#customer-landing
             | Посмотреть весь прайс
           hr/
           = link_to 'Посмотреть', price_path, class: 'green-btn'
-
 
     section.how-it-work.container
       h2.title-common Как это работает
@@ -476,5 +473,5 @@ body#customer-landing
         = f.submit 'Отправить', class: 'btn-send-form'
   = render 'footer'
   = render 'request_call_modal'
-= render 'landing_pages/widget_bot_chat'
-= render partial: 'landing_pages/bot_chat', locals: { entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'a1909eab-2ed7-88ac-48f4-1add61ff5027' }
+/ = render 'landing_pages/widget_bot_chat'
+/ = render partial: 'landing_pages/bot_chat', locals: { entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'a1909eab-2ed7-88ac-48f4-1add61ff5027' }

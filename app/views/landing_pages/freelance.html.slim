@@ -1,4 +1,4 @@
-- errors = @user.errors.messages
+/ - errors = @user.errors.messages
 
 - content_for :head do
   meta name='description' content='RostJob – это удаленная работа с подбором персонала. Стабильно большой объем и регулярные выплаты.'
@@ -171,16 +171,16 @@
         = form_for @user,
                 method: :post,
                 url: user_registration_path(role: 'contractor'),
-                html: {class: 'start-now__form'} do |f|
+                html: { class: 'start-now__form' } do |f|
           .invalid-feedback
           = f.email_field :email, class: 'email', placeholder: 'Введите e.mail для регистрации'
           = f.button 'Зарегистрироваться', class: 'btn-register'
   section.inform-banner
     .inform-banner__container
       p.information
-        span.text-yellow Платформа RostJob 
+        span.text-yellow Платформа RostJob
         | – место, в котором встречаются компании, кому нужен персонал, и рекрутеры (менеджеры по поиску персонала), которые помогают этим компаниям найти нужного сотрудника за вознаграждение.
   = render 'footer'
   = render 'request_call_modal'
-  = render 'landing_pages/widget_bot_chat'
-  = render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'fd2f046c-40e2-4e70-e906-b265c4358318' }
+  / = render 'landing_pages/widget_bot_chat'
+  / = render partial: 'landing_pages/bot_chat', locals: {entity_id: 'f4fe8efc-324e-ba05-f9c9-9c9570c8c794', account_id: 'fd2f046c-40e2-4e70-e906-b265c4358318' }
