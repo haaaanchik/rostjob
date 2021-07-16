@@ -34,8 +34,8 @@ class Company < ApplicationRecord
     pers.validates :inn, length: { is: 12 }, numericality: { only_integer: true }
   end
 
-  with_options if: :contractor_phone?, on: :update do |comp|
-    comp.validates :phone, presence: true
+  with_options if: :partner?, on: :update do |comp|
+    comp.validates :phone, format: { with: /\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}/}
   end
 
 
@@ -110,8 +110,8 @@ class Company < ApplicationRecord
     legal_form == 'company'
   end
 
-  def contractor_phone?
-    legal_form == 'contractor'
+  def partner?
+    legal_form == 'partner'
   end
 
   private
