@@ -34,6 +34,10 @@ class Company < ApplicationRecord
     pers.validates :inn, length: { is: 12 }, numericality: { only_integer: true }
   end
 
+  with_options if: :contractor_phone?, on: :update do |comp|
+    comp.validates :phone, presence: true
+  end
+
 
   scope :own, -> { where own_company: true }
   scope :clients, -> { where own_company: false }
@@ -104,6 +108,10 @@ class Company < ApplicationRecord
 
   def company?
     legal_form == 'company'
+  end
+
+  def contractor_phone?
+    legal_form == 'contractor'
   end
 
   private

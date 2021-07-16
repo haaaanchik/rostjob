@@ -5,15 +5,15 @@
   .settings-block-container
     .company-card
       .title.recruiter-clr-purple Данные партнера
-        
       = form_with model: @profile, url: profile_path do |f|
         = f.fields_for :company do |c|
+          = c.hidden_field :legal_form, value: 'contractor'
           .form-group.row 
             = c.label :name, 'ФИО по паспорту', class: 'col-lg-4 col-12 col-sm-6'
             .col-lg-6.col-12.col-sm-6
               = c.text_field :name, rows: '1' , class: 'form-control'
           .form-group.row.private-person-field
-            = c.label :phone, 'Номер телефона', class: 'col-lg-4 col-12 col-sm-6'
+            = c.label :phone, 'Номер телефона *', class: 'col-lg-4 col-12 col-sm-6', required: true
             .col-lg-6.col-12.col-sm-6
               = c.phone_field :phone, class: 'form-control'
           .form-group.row.private-person-field

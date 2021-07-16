@@ -51,7 +51,7 @@ class ApplicationController < BaseController
   end
 
   def ensure_profile_changed
-    if current_profile.customer? && current_profile.updated_by_self_at.nil? && not_profile_edit_action?
+    if current_profile.updated_by_self_at.nil? && not_profile_edit_action?
       flash[:alert] = 'Пожалуйста заполните следующую информацию'
       redirect_to edit_profile_path
     end
