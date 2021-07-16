@@ -76,6 +76,16 @@ module Api
           order.shift_method ? 1:0
         end
 
+        expose(:without_experience,
+               documentation: {
+                   desc: 'Order without experience',
+                   type: Integer
+               }
+        ) do |order|
+          order.customer_price <= 8000
+        end
+
+
         expose(:published_at,
                format_with: :iso8601,
                documentation: {
