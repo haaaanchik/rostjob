@@ -36,7 +36,7 @@ footer
         p.description
           | г. Москва, Площадь Журавлева, д. 2, стр.2
     .footer-side
-      = link_to '8 (800) 700-67-86', 'tel:8 (800) 700-67-86', class: 'land-tel-number'
+      = link_to display_phone_number, "tel:#{display_phone_number}", class: 'land-tel-number'
       = link_to 'Договор оферты', "#{root_url}terms#{landing_main_path}/download.pdf", class: 'contract-offer-link'
     .footer-bottom
       .info

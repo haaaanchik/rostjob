@@ -7,26 +7,8 @@ module ApplicationHelper
     (params[:controller].split('/') << action_name).map(&:camelize).join
   end
 
-  def class_recruiter
-    'recruter-page' if current_user && current_profile&.contractor?
-  end
-
   def body_controller
     params[:controller].split('/').push(params[:action]).join('_')
-  end
-
-  def landing_main_path
-    request.path.scan(/^\/\w+/).first
-  end
-
-  def landing_another_path(name)
-    landing_main_path << name
-  end
-
-  def landing_registration_path
-    return new_customer_path if landing_main_path == '/industrial'
-
-    new_contractor_path
   end
 
   def question_help(title)

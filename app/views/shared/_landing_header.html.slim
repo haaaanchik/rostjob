@@ -14,7 +14,7 @@ header.header.container
   .block.log-in-reg
     button.green-btn--short.purple-btn--short.js-call-modal type="button"
       | Заказать звонок
-    = link_to '8 (800) 700-67-86', 'tel:8 (800) 700-67-86', class: 'land-tel-number'
+    = link_to display_phone_number, "tel:#{display_phone_number}", class: 'land-tel-number'
   .mobile-menu
     ul
       li
@@ -34,7 +34,7 @@ header.header.container
       li
         = link_to 'Регистрация', new_customer_path
       li
-        = link_to '8 (800) 700-67-86', 'tel:8 (800) 700-67-86'
+        = link_to display_phone_number, "tel:#{display_phone_number}"
       li
         button.green-btn--short.purple-btn--short.js-call-modal type="button"  Заказать звонок
   .burger
