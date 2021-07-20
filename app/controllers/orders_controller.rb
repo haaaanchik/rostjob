@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
 
   def index
     @active_item = :orders
-    @customer_list = Kaminari.paginate_array(search_customer.decorate.uniq).page(params[:page])
+    @customer_list = search_customer.decorate.uniq
   end
 
   def customer_orders
