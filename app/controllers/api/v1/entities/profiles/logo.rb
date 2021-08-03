@@ -29,7 +29,7 @@ module Api
                    type: String
                  }
           ) do |profile, options|
-            "#{options[:base_url]}#{profile.photo.url}"
+            "#{options[:base_url]}#{profile.photo.url(:medium)}"
           end
         end
       end
