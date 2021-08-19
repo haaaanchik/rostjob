@@ -13,11 +13,6 @@
             .col-lg-6.col-12.col-sm-6
               = c.text_field :name, rows: '1' , class: 'form-control'
           .form-group.row.private-person-field
-            = c.label :phone, 'Номер телефона *', class: 'col-lg-4 col-12 col-sm-6', required: true
-            .col-lg-6.col-12.col-sm-6
-              = c.phone_field :phone, class: 'form-control'
-              .invalid-feedback
-          .form-group.row.private-person-field
             = c.label :email, 'Электронная почта', class: 'col-lg-4 col-12 col-sm-6'
             .col-lg-6.col-12.col-sm-6
               = c.email_field :email, rows: '1' , class: 'form-control'

@@ -2,7 +2,7 @@ tr
   td = user.id
   td = user.email
   td = link_to user.full_name, edit_admin_user_path(user)
-  td = user.profile.phone
+  td = user.profile.company.phone || user.profile.phone
   td = user.profile.decorate.role_in_budge
   td = user.balance.amount
   td = user.count_orders_or_employees

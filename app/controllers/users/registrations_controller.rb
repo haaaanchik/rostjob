@@ -85,7 +85,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         .permit(:account_update,
                 keys: [:full_name,
                        profile_attributes: [:id, :photo,
-                                            company_attributes: [:id, :description]]])
+                                            company_attributes: [:id, :phone, :description]]])
   end
 
   # The path used after sign up.

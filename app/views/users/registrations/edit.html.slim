@@ -16,33 +16,40 @@ ruby:
               as: resource_name,
               url: registration_path(resource_name),
               html: { method: :put, class: 'profile-settings' }, remote: true do |f|
-        .form-item
-          = f.label :full_name, f.object.decorate.label_full_name, class: 'title name'
-          .d-flex.flex-column.user-full-name-container
-            = f.text_field :full_name
-            .invalid-feedback
-        .form-item.show-password-block
-          = resource.decorate.display_show_password_block
-        #password_block class=("#{'d-none' if (f.object.password_changed_at.present? && current_password.nil?)}")
-          - if f.object.password_changed_at.present?
+        = f.fields_for :profile do |ff|
+          .form-item
+            = f.label :full_name, f.object.decorate.label_full_name, class: 'title name'
+            .d-flex.flex-column.user-full-name-container
+              = f.text_field :full_name
+              .invalid-feedback
+          - if current_profile.contractor?
+            = ff.fields_for :company do |fc|
+              .form-item
+                = fc.label :phone, 'Номер телефона *', class: 'title', required: true
+                .d-flex.flex-column
+                  = fc.phone_field :phone, class: 'form-control'
+                  .invalid-feedback
+          .form-item.show-password-block
+            = resource.decorate.display_show_password_block
+          #password_block class=("#{'d-none' if (f.object.password_changed_at.present? && current_password.nil?)}")
+            - if f.object.password_changed_at.present?
+              .form-item
+                = f.label :current_password,  class: 'title'
+                .d-flex.flex-column
+                  = f.password_field :current_password, autocomplete: 'off'
+                  .invalid-feedback
+
             .form-item
-              = f.label :current_password,  class: 'title'
+              = f.label :password, class: 'title'
               .d-flex.flex-column
-                = f.password_field :current_password, autocomplete: 'off'
+                = f.password_field :password, autocomplete: 'off'
                 .invalid-feedback
 
-          .form-item
-            = f.label :password, class: 'title'
-            .d-flex.flex-column
-              = f.password_field :password, autocomplete: 'off'
-              .invalid-feedback
-
-          .form-item
-            = f.label :password_confirmation, class: 'title'
-            .d-flex.flex-column
-              = f.password_field :password_confirmation, autocomplete: 'off'
-              .invalid-feedback
-        = f.fields_for :profile do |ff|
+            .form-item
+              = f.label :password_confirmation, class: 'title'
+              .d-flex.flex-column
+                = f.password_field :password_confirmation, autocomplete: 'off'
+                .invalid-feedback
           .form-item
             label.title.logo Логотип компании
             .choosing-logo
@@ -57,13 +64,5 @@ ruby:
               = ff.fields_for :company do |fc|
                 label.title.description Описание компании
                 = fc.text_area :description, class: 'custom-scroll'
-
-          / .form-item
-            div
-              .red-text
-                | Внимание! Персональная ссылка будет актуальна 3 дня для пользователя, который перешел по вашей ссылке.
-              div
-                | Для того, чтобы перейти поссылке кликниете по
-                = link_to 'Моя персональная ссылка', "https://jobny.ru/?slug=#{f.object.slug}", target: '_blank', class: 'ml-2'
 
         = f.submit 'Сохранить', class: 'submit recruter-btn-gradient'

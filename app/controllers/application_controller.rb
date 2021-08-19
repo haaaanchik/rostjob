@@ -44,7 +44,7 @@ class ApplicationController < BaseController
 
   def ensure_password_changed
     if current_user.password_changed_at.nil? && not_password_edit_action?
-      flash[:alert] = 'Пожалуйста установите имя и пароль'
+      flash[:alert] = 'Пожалуйста установите имя, номер телефона и пароль'
       redirect_to edit_user_registration_path
     end
     current_user.password_changed_at
