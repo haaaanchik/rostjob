@@ -15,7 +15,7 @@ module Api
                  type: String
                }
         ) do |specialization, options|
-          "#{options[:base_url]}#{specialization.image.url(:thumb)}"
+          "#{options[:base_url]}#{specialization.image.url}"
         end
 
         expose :positions,
