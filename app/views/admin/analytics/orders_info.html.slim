@@ -2,7 +2,7 @@
 - search_input = params[:q] && params[:q][:analytics_fields_cont] ?  params[:q][:analytics_fields_cont] : nil
 
 .container-fluid.mt-2#orders_info_page
-  h2.text-center Список заказов
+  h2.text-center Список заявок
   = search_form_for [:admin, @q], url: admin_analytics_orders_info_path, id: 'orders_info_search', class: 'd-flex justify-content-between align-items-end' do |f|
     = f.select :state_eq, options_for_select(orders_state_attributtes_for_select,
             selected_state), {}, { class: 'mdb-select md-form mb-0' }
