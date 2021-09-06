@@ -18,5 +18,7 @@ tr id="candidate_#{proposal_employee.id}" data-href=root_path
   td
     | №#{proposal_employee.order_id} #{proposal_employee.title}<br>
   td = proposal_employee.order.production_site.title
+  td = employee_cv.profile.user.full_name
   td
-    = render partial: 'admin/proposal_employees/toolbars/pull_action_buttons', locals: { proposal_employee: proposal_employee }
+    = render partial: 'admin/proposal_employees/toolbars/pull_action_buttons',
+             locals: { proposal_employee: proposal_employee }
