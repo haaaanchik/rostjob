@@ -1,5 +1,5 @@
 .ordersCatalog
-  = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, search_field_pl: 'Поиск по исполнителям', url: orders_path}
+  = render partial: 'orders/search_contractor_filters', locals: {orders: @orders, search_field_pl: 'Поиск по контенту', url: orders_path}
 
   .orders-container
     - @customer_list.each do |customer|
