@@ -37,11 +37,14 @@ module Api
           order.profile.company.description
         end
 
-        expose :city,
+        expose(:city,
                documentation: {
                  desc: 'Order city.',
                  type: String
                }
+        ) do |order|
+          order.city&.name
+        end
 
         expose :title,
                documentation: {

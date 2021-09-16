@@ -4,7 +4,7 @@ module Api
   module Helpers
     module OrdersHelpers
       def published_orders
-        Order.published.includes(:position, profile: :company)
+        Order.published.includes(:city, :position, profile: :company)
       end
     end
   end

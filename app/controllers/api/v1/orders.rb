@@ -9,7 +9,6 @@ module Api
       end
       params do
         optional :q, type: Hash do
-          optional :city_eq, type: String, desc: 'Order city.'
           optional :category_titles_in, type: Array, desc: 'Order by specialization.'
           optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
           optional :shift_method_eq, type: Boolean, desc: 'Order shift method'
@@ -29,7 +28,7 @@ module Api
         present :total_pages, orders.total_pages
         present :orders, orders, with: Entities::Order, base_url: request.base_url
         present :categories, ActiveSpecializationsSpecification.to_scope.map(&:title)
-        present :cities, published_orders.map(&:city).uniq
+        present :cities, published_orders.map { |order| order.city&.name }.reject!(&:blank?).uniq
       end
 
 
@@ -41,7 +40,7 @@ module Api
                    .where(advertising: true)
 
         present :orders, orders, with: Entities::Order, base_url: request.base_url
-        present :cities, published_orders.map(&:city).uniq
+        present :cities, published_orders.map { |order| order.city&.name }.reject!(&:blank?).uniq
       end
 
 
@@ -54,7 +53,7 @@ module Api
       get '/orders/:id' do
         order = published_orders.find(params[:id])
         similar_orders = published_orders
-                           .where(city: order.city)
+                           .where(city_id: order.city_id)
                            .where.not(id: order.id)
                            .limit(2)
 
