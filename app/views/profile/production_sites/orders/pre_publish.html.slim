@@ -7,7 +7,7 @@
     = order.publish_title
     .request-block-header
       p #{ @production_site.title }
-      span #{ @production_site.city }
+      span #{ @production_site.city.name }
     .request-block-container
       .request-content
         = image_tag order.profile.image_url, class: 'logo'
@@ -15,7 +15,7 @@
           p.subtitle
             | #{ order.title }. #{order.skill} #{ order.salary }
           p.subtitle
-            | #{ order.city }
+            | #{ order.city.name}
           == order.other_info['terms']
           span.salary #{ order.customer_price.to_i } руб / чел
           p

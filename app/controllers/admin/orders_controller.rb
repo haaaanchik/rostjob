@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::OrdersController < Admin::ApplicationController
   def index
     paginated_orders
@@ -47,7 +49,7 @@ class Admin::OrdersController < Admin::ApplicationController
 
   def order_params
     params.require(:order)
-        .permit(:email, :phone_number, :skill, :name, :state, :number_of_employees, :city, :salary, :advertising,
+        .permit(:email, :city_id, :phone_number, :skill, :name, :state, :number_of_employees, :salary, :advertising,
                 :adv_text, :shift_method, contact_person: {}, other_info: {})
   end
 

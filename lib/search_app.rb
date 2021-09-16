@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchApp
   def initialize(app)
     @app = app
@@ -8,8 +10,8 @@ class SearchApp
     params = @request.params
 
     auto_list = case env['PATH_INFO']
-                when '/search_city'
-                  City.autocomplete_search(params['term'])
+                when '/search_geo_city'
+                  Geo::City.autocomplete_search(params['term'])
                 when '/search_specialization'
                   Specialization.autocomplete_search(params['term'])
                 when '/search_admin_position'

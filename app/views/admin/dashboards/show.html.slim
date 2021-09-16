@@ -49,7 +49,7 @@
               = link_to 'Пользователи', admin_users_path, class: 'dropdown-item'
               = link_to 'Специализации', admin_specializations_path, class: 'dropdown-item'
               = link_to 'Профессии', admin_positions_path, class: 'dropdown-item'
-              = link_to 'Города', admin_cities_path, class: 'dropdown-item'
+              = link_to 'Города', admin_geo_cities_path, class: 'dropdown-item'
               = link_to 'Ценовые группы', admin_price_groups_path, class: 'dropdown-item'
               = link_to 'Анкеты', admin_proposal_employees_path, class: 'dropdown-item'
               - if policy([:admin, :production_site]).index?

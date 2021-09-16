@@ -6,11 +6,12 @@ class ProductionSite < ApplicationRecord
   has_many :order_templates, dependent: :destroy
   has_many :proposal_employees, through: :orders
   has_one :user, through: :profile
+  belongs_to :city, class_name: 'Geo::City', optional: true
 
   has_attached_file :image, styles: { thumb: '300x240' }, default_url: '/img/default_pp.png'
   validates_attachment_content_type :image, content_type: %w[image/jpeg image/gif image/png]
 
-  validates :title, :city, :info, :phones, presence: true
+  validates :title, :city_id, :info, :phones, presence: true
 
   def number_free_places
     orders.where(state: %w[published completed]).sum(:number_of_employees) - proposal_employees.count_candidates_included_in_order

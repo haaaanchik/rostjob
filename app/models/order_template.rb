@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrderTemplate < ApplicationRecord
   include Order::OrderTemplatable
   extend Enumerize
@@ -6,6 +8,7 @@ class OrderTemplate < ApplicationRecord
   belongs_to :production_site
   belongs_to :position
   has_one :user, through: :profile
+  belongs_to :city, class_name: 'Geo::City', optional: true
 
   enumerize :urgency, in: %i[low middle high], scope: true, default: :middle
   enumerize :urgency_level, in: { low: 0, middle: 1, high: 2 }, scope: true

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::ProductionSitesController < ApplicationController
   before_action :set_authorize
 
@@ -38,7 +40,7 @@ class Profile::ProductionSitesController < ApplicationController
   private
 
   def production_site_params
-    params.require(:production_site).permit(:title, :image, :city, :info, :phones)
+    params.require(:production_site).permit(:title, :image, :city_id, :info, :phones)
   end
 
   def production_site

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_033638) do
+ActiveRecord::Schema.define(version: 2021_08_21_101549) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -161,6 +161,9 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
     t.index ["employee_cv_id"], name: "index_crm_columns_employee_cvs_on_employee_cv_id"
   end
 
+  create_table "data_migrations", primary_key: "version", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  end
+
   create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "gender"
@@ -216,6 +219,35 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", length: { slug: 140 }
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "geo_cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.string "synonym"
+    t.string "fias_code"
+    t.decimal "lat", precision: 10, scale: 6
+    t.decimal "long", precision: 10, scale: 6
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "region_id"
+    t.index ["name"], name: "index_geo_cities_on_name"
+    t.index ["region_id"], name: "index_geo_cities_on_region_id"
+  end
+
+  create_table "geo_countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_geo_countries_on_name"
+  end
+
+  create_table "geo_regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "country_id"
+    t.index ["country_id"], name: "index_geo_regions_on_country_id"
+    t.index ["name"], name: "index_geo_regions_on_name"
   end
 
   create_table "holidays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -301,7 +333,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
   create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "specialization"
-    t.string "city"
+    t.string "older_city"
     t.integer "salary_from"
     t.integer "salary_to"
     t.text "description"
@@ -338,13 +370,14 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
     t.bigint "production_site_id"
     t.boolean "template_saved", default: false
     t.boolean "shift_method", default: false, null: false
+    t.integer "city_id"
     t.index ["production_site_id"], name: "index_order_templates_on_production_site_id"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
 
   create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "specialization"
-    t.string "city"
+    t.string "older_city"
     t.integer "salary_from"
     t.integer "salary_to"
     t.text "description"
@@ -390,6 +423,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
     t.date "published_at"
     t.date "completed_at"
     t.boolean "shift_method", default: false, null: false
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
@@ -442,11 +477,13 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
     t.string "image_content_type"
     t.bigint "image_file_size"
     t.datetime "image_updated_at"
-    t.string "city"
+    t.string "older_city"
     t.text "info"
     t.text "phones"
     t.decimal "rating", precision: 10, scale: 1, default: "0.0"
     t.integer "deal_counter", default: 0
+    t.integer "city_id"
+    t.index ["city_id"], name: "index_production_sites_on_city_id"
     t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
@@ -940,6 +977,8 @@ ActiveRecord::Schema.define(version: 2021_03_24_033638) do
   add_foreign_key "complaints", "profiles"
   add_foreign_key "complaints", "proposal_employees"
   add_foreign_key "employee_cvs", "proposals"
+  add_foreign_key "geo_cities", "geo_regions", column: "region_id"
+  add_foreign_key "geo_regions", "geo_countries", column: "country_id"
   add_foreign_key "invites", "orders"
   add_foreign_key "invites", "profiles"
   add_foreign_key "invoices", "profiles"

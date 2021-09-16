@@ -8,7 +8,7 @@
               |№#{order.id}
           td.text-center.align-items-center width="15%"
             p.m-0
-              | #{order.city}
+              | #{order.city.name}
           td.text-center.align-items-center width="30%"
             p.m-0
               | #{order.production_site.title}
@@ -92,7 +92,7 @@
                   strong #{order.salary}
                 p.m-0
                   i.fas.fa-map-marker.w-2
-                  strong.ml-2 #{order.city}, #{order.district}
+                  strong.ml-2 #{order.city.name}, #{order.district}
                 p.m-0
                   i.fas.fa-passport.w-2.mr-2
                   strong #{order.experience}

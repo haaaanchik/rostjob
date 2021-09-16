@@ -130,6 +130,7 @@ bootstrapClearButton()
   })
 
 $(document).ready ->
+  $('select#simple-example').select2({ width: '66%' })
   scroll_to_bottom($('.ticket-messages')[0])
   init_mdb()
   initTinymce()

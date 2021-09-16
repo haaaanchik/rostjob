@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-namespace :custom_locations_import do
-  desc 'Custom import auto Russia'
+namespace :geo_ru do
+  desc 'Import russia'
   task import: :environment do
     cities = []
     countries = {}
@@ -13,15 +13,15 @@ namespace :custom_locations_import do
         counter += 1
         next
       end
-      _geoname_id, _locale_code, _continent_code, _continent_name,
-          _country_iso_code, country_name, _subdivision_1_iso_code,
-          subdivision_1_name, _subdivision_2_iso_code, _subdivision_2_name,
-          city_name, _metro_code, _time_zone, _is_in_european_union = line.split(',')
 
-      p line.split(',')
+      _geoname_id, _locale_code, _continent_code, _continent_name,
+        _country_iso_code, country_name, _subdivision_1_iso_code,
+        subdivision_1_name, _subdivision_2_iso_code, _subdivision_2_name,
+        city_name, _metro_code, _time_zone, _is_in_european_union = line.split(',')
 
       subdivision_1_name = subdivision_1_name.strip.delete('\"')
       city_name = city_name.strip.delete('\"')
+
       next if city_name.blank?
 
       match_data = city_name.match(/(\p{Lower})(\p{Upper})/)
@@ -55,26 +55,11 @@ namespace :custom_locations_import do
     end
 
     Geo::City.import cities if cities.present?
-
-
-
-    IO.foreach(Rails.root.join('public', 'cities', 'My-City-Locations-ru.csv').to_s) do |line|
-
-      name, synonym, fias_code, lat, long, region_id, region = line.split(',')
-      cities = Geo::City.where(name: name)
-
-      cities.each do |city|
-        if cities.count > 1 && city.region.name == region.strip.delete('\"')
-          city.update(synonym: synonym, fias_code: fias_code, lat: lat, long: long)
-        else
-          cities.first.update(synonym: synonym, fias_code: fias_code, lat: lat, long: long)
-        end
-      end
-    end
   end
 
-  desc 'Import cities Russia'
-  task city_import: :environment do
+
+  desc 'Import city data'
+  task import_city_data: :environment do
     counter = 0
     IO.foreach(Rails.root.join('public', 'cities', 'My-City-Locations-ru.csv').to_s) do |line|
       if counter == 0
@@ -82,10 +67,44 @@ namespace :custom_locations_import do
         next
       end
 
-      _city_name, _city_synonym, _region_name = line.split(',')
-      region = Geo::Region.find_by(name: _region_name.strip)
+      name, synonym, fias_code, lat, long, _region_id, region = line.split(',')
+      city = Geo::City.find_by(name: name)
+      region = region.strip.delete('\"')
+      geo_region = Geo::Region.find_by(name: region)
 
-      p _region_name if region.blank?
+      if city.blank?
+        p geo_region
+        geo_region.cities.create(name: name, synonym: synonym, fias_code: fias_code, lat: lat, long: long)
+
+        next
+      end
+
+      city.update(synonym: synonym, fias_code: fias_code, lat: lat, long: long)
+    end
+  end
+
+  desc 'Update Cities for Tables'
+  task update_cities: :environment do
+    Order.find_in_batches do |batch|
+      batch.each do |order|
+        geo_city = Geo::City.where('LOWER(name) = :name', name: order.older_city).take
+        order.update(city_id: geo_city.id) if geo_city
+      end
+    end
+
+    OrderTemplate.find_in_batches do |batch|
+      batch.each do |order_tmp|
+        geo_city = Geo::City.where('LOWER(name) = :name', name: order_tmp.older_city).take
+        order_tmp.update(city_id: geo_city.id) if geo_city
+      end
+    end
+
+    ProductionSite.find_in_batches do |batch|
+      batch.each do |pr|
+        city = pr.older_city.gsub(/\s+/, '').gsub(/г./, '')
+        geo_city = Geo::City.where('LOWER(name) = :name', name: city).take
+        pr.update(city_id: geo_city.id) if geo_city
+      end
     end
   end
 end

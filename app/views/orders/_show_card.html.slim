@@ -23,7 +23,7 @@
       = "#{order.salary} р/м, #{order.other_info['hourly_payment']}р/ч"
     p.subtitle
       i.fas.fa-map-marker.w-2
-      = "г. #{order.city}"
+      = "г. #{order.city&.name}"
     .subtitle
       i.fas.fa-users.mr-2
       = "Заявка на #{order.number_free_places} сотрудникa(ов)"

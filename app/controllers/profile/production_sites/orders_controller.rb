@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::ProductionSites::OrdersController < Profile::ProductionSites::ApplicationController
   before_action :set_authorize, except: %i[index]
   expose :order_templates,    -> { production_site.order_templates.order(id: :desc) }
@@ -115,7 +117,7 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def order_params
     @order_params ||= params.require(:order)
-                            .permit(:city, :salary, :contractor_price, :skill, :shift_method,
+                            .permit(:city_id, :salary, :contractor_price, :skill, :shift_method,
                                     :number_of_employees, :document, :number_additional_employees,
                                     other_info: {}, contact_person: {})
   end

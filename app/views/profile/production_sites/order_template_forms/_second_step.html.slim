@@ -32,10 +32,10 @@ ruby:
           = hidden_field_tag :redirecting_back, false
           .pattern_body_steps_form_step.show
             .pattern_body_steps_form_step_input
-              = f.label :city, 'Город'
-              = f.text_field :city, class: 'form-control', placeholder: 'Начните набирать',
-                      data: {'auto-url' => '/search_city', 'auto-add-text' => true,
-                              'autocomplete-on' => 'order_template_city'}
+              = f.label :city_id, 'Город'
+              = f.select :city_id,
+                      options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region),
+                      {}, id: 'simple-example', class: 'form-control'
               .invalid-feedback
 
             .pattern_body_steps_form_step_input
