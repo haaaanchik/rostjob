@@ -23,7 +23,7 @@
         = image_tag @order.production_site.image.url(:thumb)
         .title-and-city-container
           p.chat-sidebar-title.clicable #{@order.production_site.title}
-          span class="chat-sidebar-header-city" г. #{@order.city}
+          span class="chat-sidebar-header-city" г. #{@order.city.name}
 
       .order
         .content class="order_state__#{@order.state}"

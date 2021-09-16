@@ -8,7 +8,7 @@ class Order
       attr_accessor :creation_step
 
       validates :position_id, :title, presence: true, if: -> { creation_step == 1 }
-      validates :city, :salary, presence: true, if: -> { creation_step == 2 }
+      validates :city_id, :salary, presence: true, if: -> { creation_step == 2 }
       validate  :check_for_emptiness
 
       ASPIRANT_TEXT = 'Рекрутируйте соискателя и доведите до него все требования и условия.'

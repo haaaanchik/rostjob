@@ -173,3 +173,4 @@ gem 'grape-swagger-rails'
 gem 'rack-cors', require: 'rack/cors'
 
 gem 'data_migrate'
+gem 'activerecord-import'

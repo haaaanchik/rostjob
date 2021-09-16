@@ -13,7 +13,9 @@
           .col-lg-4.control-label
             label Город
           .col-lg-7
-            = f.text_field :city, class: 'form-control', placeholder: 'г. Москва'
+            = f.select :city_id,
+                       options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region),
+                       {}, id: 'simple-example', class: 'form-control'
 
       .form-group
         .d-flex.align-items-center
@@ -42,4 +44,7 @@
       .form-group
         .row
           .col-12
+
             button.submit Сохранить
+javascript:
+    $('select#simple-example').select2({ width: '50%' });

@@ -1,0 +1,23 @@
+.col-6
+  h1 Справочник городов
+.col-6.text-right
+  = link_to 'Добавить город', new_admin_geo_city_path, class: 'btn btn-indigo'
+.col-9.mt-3
+  = text_field :admin_city, :search, class: "form-control",
+                placeholder: 'Начните набирать название города',
+                data: { 'auto-url' => '/search_geo_city', 'auto-select' => 'search_term',
+                        'auto-add-text' => false, 'autocomplete-on' => true }
+
+.col.mt-1
+  = link_to 'Показать все', admin_geo_cities_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Наименование
+    th Регион
+    th Синоним
+    th Код
+    th Широта
+    th Долгота
+    th Действия
+  = render partial: 'city', collection: @paginated_city
+= paginate @paginated_city

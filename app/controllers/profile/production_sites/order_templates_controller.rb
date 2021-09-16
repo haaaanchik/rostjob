@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSites::ApplicationController
   before_action :set_authorize, except: %i[index]
   before_action :set_order_template, except: %i[index new create destroy_array copy]
@@ -95,7 +97,7 @@ class Profile::ProductionSites::OrderTemplatesController < Profile::ProductionSi
   end
 
   def order_template_params
-    params.require(:order_template).permit(:name, :city, :salary, :position_id, :contractor_price,
+    params.require(:order_template).permit(:name, :city_id, :salary, :position_id, :contractor_price,
                                            :number_of_employees, :skill, :document, :template_saved,
                                            :shift_method, contact_person: {}, other_info: {})
   end

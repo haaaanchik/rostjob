@@ -144,7 +144,7 @@ Rails.application.routes.draw do
     end
     resources :specializations
     resources :positions
-    resources :cities
+    resources :geo_cities
     resources :companies do
       member do
         put :set_active

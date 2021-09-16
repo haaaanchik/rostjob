@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::ProductionSitesController < Admin::ApplicationController
   before_action :set_authorize
   before_action :set_production_site, except: :index
@@ -30,7 +32,7 @@ class Admin::ProductionSitesController < Admin::ApplicationController
   end
 
   def production_sites_params
-    params.require(:production_site).permit(:title, :info, :phones)
+    params.require(:production_site).permit(:title, :info, :phones, :city_id)
   end
 
   def set_authorize

@@ -1,0 +1,12 @@
+tr
+  td #{city.name}
+  td #{city.region_name}
+  td #{city.synonym}
+  td #{city.fias_code}
+  td #{city.lat}
+  td #{city.long}
+  td
+    = link_to edit_admin_geo_city_path(city) do
+      i.far.fa-edit
+    = link_to admin_geo_city_path(city), method: :delete, data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt

@@ -2,7 +2,7 @@
   .request-block
     .request-block-header
       p #{order.production_site.title}
-      span #{order.production_site.city}
+      span #{order.production_site.city.name}
     .request-block-container
       .request-content
         = image_tag order.profile.image_url, class: 'logo'
@@ -10,7 +10,7 @@
           p.subtitle
             | #{order.title}. #{order.skill} #{order.salary}
           p.subtitle
-            | #{order.city}
+            | #{order.city.name}
           == order.other_info['terms']
           p.subtitle
             | Заказчик ожидает увидеть и не видеть в заявке:

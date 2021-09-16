@@ -21,6 +21,7 @@ class Order < ApplicationRecord
   has_many :order_profiles, dependent: :destroy
   has_many :employee_cvs, through: :proposal_employees, source: :employee_cv
   has_one  :user, through: :profile
+  belongs_to :city, class_name: 'Geo::City', optional: true
 
   validates :customer_price, :contractor_price, :customer_total, :contractor_total,
             presence: true, numericality: { greater_than_or_equal_to: 0 }
