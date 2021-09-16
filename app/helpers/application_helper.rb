@@ -49,4 +49,11 @@ module ApplicationHelper
   def st_submit_class(tag = 'success')
     "btn btn-#{tag} btn-sm"
   end
+
+  def cities_of_orders(orders)
+    result = orders.map { |order| order.city&.name }
+    result.reject!(&:blank?) if result.include?(nil)
+
+    result.uniq
+  end
 end

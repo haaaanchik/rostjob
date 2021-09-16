@@ -61,7 +61,7 @@ ruby:
             .platform
               .header
                 p = place_of_work
-                span = items.first.city
+                span = items.first.city.name
               .information
                 = image_tag(@customer.image_url, class: 'logo')
                 div

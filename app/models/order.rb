@@ -30,7 +30,7 @@ class Order < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: %r{.*\/.*\z}
 
-  ransack_alias :all_fields, :id_or_position_title_or_description_or_city_or_place_of_work_or_salary_from_or_salary_to
+  ransack_alias :all_fields, :id_or_position_title_or_description_or_city_name_or_place_of_work_or_salary_from_or_salary_to
   ransack_alias :candidate_fields, :id_or_title_or_place_of_work_or_employee_cv_name
   ransack_alias :title_fields, :position_title
   ransack_alias :title_or_company_fields, :position_title_or_profile_company_short_name

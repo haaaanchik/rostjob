@@ -34,7 +34,7 @@ wb.add_worksheet(name: "orders") do |sheet|
       order.contractor_price,
       order.specialization,
       order.skill,
-      order.city,
+      order.city.name,
       order.district,
       order.salary_from,
       order.salary_to,

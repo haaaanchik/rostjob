@@ -1,6 +1,5 @@
 ruby:
   titles = orders.map(&:title).uniq
-  cities = orders.map(&:city).uniq
   titles_val = params[:q] ? params[:q][:title_fields_in] : %w[]
   cities_val = params[:q] ? params[:q][:city_fields_in] : %w[]
   val = params[:q] ? params[:q][:all_fields_cont] : nil
@@ -19,7 +18,7 @@ ruby:
           = image_tag('/img/reusable_images/arrow.png', class: 'select__arrow arrow js-arrow')
         .cities-container.hide
           .select__options.cities.custom-scroll
-            - cities.each_with_index do |city, i|
+            - cities_of_orders(orders).each_with_index do |city, i|
               p.option
                 = check_box_tag 'q[city_fields_in][]',
                         city,

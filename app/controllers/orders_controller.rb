@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
     @order_filters = @customer.orders
                          .published
                          .with_customer_name
-                         .includes(:production_site, profile: :company)
+                         .includes(:city, :production_site, profile: :company)
     @q = @order_filters.ransack(params[:q])
     @orders ||= @q.result
   end
@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
   def search_customer
     @orders = Order.published
                   .with_customer_name
-                  .includes(:production_site, profile: :company)
+                  .includes(:city, :production_site, profile: :company)
     @q = Profile.joins(:orders)
              .where('orders.state': 'published')
              .customers.includes(:user, :company)

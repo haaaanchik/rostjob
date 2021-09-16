@@ -19,7 +19,7 @@
           br
           = customer.company.description
         p.order-description
-          | #{ customer.order_cities }
+          | #{ cities_of_orders(customer.orders.published.includes(:city)).join(', ') }
           |, #{ customer.order_titles }
         .order__footer
           a.order__link href="#{ orders_by_customer_path(customer) }"  Перейти к заявкам

@@ -42,7 +42,7 @@ class Profile < ApplicationRecord
 
   ransack_alias :all_fields, :user_full_name_or_orders_city_or_orders_position_title_or_production_sites_title
   ransack_alias :title_fields, :orders_position_title
-  ransack_alias :city_fields,  :orders_city
+  ransack_alias :city_fields,  :orders_city_name
 
   aasm column: :state do
     state :created, initial: true
