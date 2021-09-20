@@ -28,7 +28,7 @@ module Api
         present :total_pages, orders.total_pages
         present :orders, orders, with: Entities::Order, base_url: request.base_url
         present :categories, ActiveSpecializationsSpecification.to_scope.map(&:title)
-        present :cities, published_orders.map { |order| order.city&.name }.reject!(&:blank?).uniq
+        present :cities, published_orders.map { |order| order.city&.name }.uniq
       end
 
 
@@ -40,7 +40,7 @@ module Api
                    .where(advertising: true)
 
         present :orders, orders, with: Entities::Order, base_url: request.base_url
-        present :cities, published_orders.map { |order| order.city&.name }.reject!(&:blank?).uniq
+        present :cities, published_orders.map { |order| order.city&.name }.uniq
       end
 
 
