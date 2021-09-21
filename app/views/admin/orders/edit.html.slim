@@ -9,7 +9,7 @@
             .row
               .col-sm-4
                 b Статус
-              .col-sm-8.mb-4 = f.select :state, (orders_state_attributtes_for_select), {}, { class: 'mdb-select md-form mb-0' }
+              .col-sm-8.mb-4 = f.select :state, orders_state_attributtes_for_select, {}, { class: 'mdb-select md-form mb-0' }
               .col-sm-4
                 b Количество персонала:
               .col-sm-8.mb-4 = f.number_field :number_of_employees, step: 1, class: 'form-control'
@@ -35,6 +35,10 @@
                 b Зарплата
               .col-sm-8.mb-4
                 = f.text_field :salary, class: 'form-control'
+              .col-sm-4
+                b Вознаграждение
+              .col-sm-8.mb-4
+                = f.text_field :contractor_price, class: 'form-control'
               .col-sm-4.checkbox_section
                 b Вахта
               .col-sm-8.mb-4

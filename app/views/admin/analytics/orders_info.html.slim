@@ -1,26 +1,31 @@
 - selected_state = params[:q] && params[:q][:state_eq] ? params[:q][:state_eq] : 'published'
-- search_input = params[:q] && params[:q][:analytics_fields_cont] ?  params[:q][:analytics_fields_cont] : nil
-
+- search_input = params[:q] && params[:q][:analytics_fields_cont] ? params[:q][:analytics_fields_cont] : nil
 .container-fluid.mt-2#orders_info_page
   h2.text-center Список заявок
-  = search_form_for [:admin, @q], url: admin_analytics_orders_info_path, id: 'orders_info_search', class: 'd-flex justify-content-between align-items-end' do |f|
+  = search_form_for [:admin, @q], url: admin_analytics_orders_info_path,
+                                  id: 'orders_info_search',
+                                  class: 'd-flex justify-content-between align-items-end' do |f|
     = f.select :state_eq, options_for_select(orders_state_attributtes_for_select,
             selected_state), {}, { class: 'mdb-select md-form mb-0' }
 
     .md-form.mb-0
-      = f.text_field :published_at_gteq, class: 'form-control datepicker', id: 'date-picker-date'
+      = f.text_field :published_at_gteq, class: 'form-control datepicker',
+                                         id: 'date-picker-date'
       = f.label :published_at_gteq, 'От:'
     .md-form.mb-0
-      = f.text_field :published_at_lteq, class: 'form-control datepicker', id: 'date-picker-date'
+      = f.text_field :published_at_lteq, class: 'form-control datepicker',
+                                         id: 'date-picker-date'
       = f.label :published_at_lteq, 'По:'
-  
+
     .md-form.context-filed.mb-0
-      = f.text_field :analytics_fields_cont, class: 'form-control', value: search_input
+      = f.text_field :analytics_fields_cont, class: 'form-control',
+                                             value: search_input
       = f.label :analytics_fields_cont, 'Поиск по контексту'
-    
+
     .d-flex.align-items-center
-      = link_to 'Сбросить фильтры', admin_analytics_orders_info_path, class: 'btn btn-info btn-sm mr-4 btn'
-      = link_to  '#', id: 'export_pdf', title: 'Скачать в pdf' do
+      = link_to 'Сбросить фильтры', admin_analytics_orders_info_path,
+                                    class: 'btn btn-info btn-sm mr-4 btn'
+      = link_to '#', id: 'export_pdf', title: 'Скачать в pdf' do
         i.fas.fa-save.fa-2x
 
   .row
@@ -32,6 +37,7 @@
           th rowspan='2' Название организации
           th rowspan='2' Заявка
           th rowspan='2' Объем
+          th rowspan='2' Вознаграждение
           th rowspan='2' Дата получения последней анкеты
           th rowspan='2' Дата закрытия заявки
           th colspan='5' Кандидаты
@@ -59,6 +65,7 @@
               = ' <br> '.html_safe
               = link_to "##{order.id} #{order.title}", admin_order_path(order), class: 'link-admin-order'
             td = order.number_of_employees
+            td = order.contractor_price
             td.date-col = order.last_pr_empl
             td.date-col = order.formated_date(:completed_at)
             td.state-col = order.link_profile_list('approved')

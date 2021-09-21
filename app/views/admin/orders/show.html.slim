@@ -55,13 +55,17 @@
             .col-sm-4
               b Город
             .col-sm-8.mb-4
-              .col-sm-8.mb-4 = @order.city.name
+              .col-sm-8.mb-4 = @order.city
             .col-sm-4
               b Зарплата
             .col-sm-8.mb-4
               .col-sm-8.mb-4 = @order.salary
             .col-sm-12
               hr
+            .col-sm-4
+              b Вознаграждение
+            .col-sm-8.mb-4
+              .col-sm-8.mb-4 = @order.contractor_price
             .col-sm-4
               b Описание вакансии
             .col-sm-8.mb-4
@@ -78,10 +82,12 @@
             .d-flex.mod_order_actions
               - if @order.state == 'moderation'
                 .col-2
-                  = link_to 'Одобрить заявку', accept_admin_order_path(@order), class: 'approve_btn btn btn-green ',
-                          method: :put, data: {confirm: 'Вы уверены?'}
+                  = link_to 'Одобрить заявку', accept_admin_order_path(@order),
+                                               class: 'approve_btn btn btn-green ',
+                                               method: :put,
+                                               data: { confirm: 'Вы уверены?' }
               .col-3.reject_btn
-                = render partial: 'order_reject_form', locals: {order: @order}
+                = render partial: 'order_reject_form', locals: { order: @order }
               - if @order.state == 'moderation'
                 .col-2
                   = link_to 'Редактировать', edit_admin_order_path(@order), class: 'btn_edit btn btn-green'
