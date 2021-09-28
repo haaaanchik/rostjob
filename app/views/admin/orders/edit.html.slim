@@ -30,7 +30,9 @@
               .col-sm-4
                 b Город
               .col-sm-8.mb-4
-                = f.text_field :city, class: 'form-control'
+                = f.select :city_id,
+                        options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region),
+                        {}, id: 'simple-example', class: 'form-control'
               .col-sm-4
                 b Зарплата
               .col-sm-8.mb-4
