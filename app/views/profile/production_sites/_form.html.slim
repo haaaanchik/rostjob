@@ -14,8 +14,8 @@
             label Город
           .col-lg-7
             = f.select :city_id,
-                       options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region),
-                       {}, id: 'simple-example', class: 'form-control'
+                    options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region, selected:  f.object.city_id),
+                    {include_blank: true}, id: 'simple-example', class: 'form-control'
 
       .form-group
         .d-flex.align-items-center
