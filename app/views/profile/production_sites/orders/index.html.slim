@@ -75,7 +75,7 @@
                 .order__description
                   p.order__title
                     = link_to order.title,
-                            first_step_profile_production_site_order_path(@production_site, order),
+                            pre_publish_profile_production_site_order_path(@production_site, order),
                             class: 'black-text'
                   .order__bottom
                     span.order__price #{ order.customer_price.to_i } руб. / чел.
