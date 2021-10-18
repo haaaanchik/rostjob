@@ -1,5 +1,5 @@
 = form_with model: [:profile, production_site], id: 'production_site_form', class: 'w-100' do |f|
-  .row
+  .row.modal_form
     .col-md-12.personal-info
       .form-group
         .d-flex.align-items-center
@@ -46,5 +46,8 @@
           .col-12
 
             button.submit Сохранить
+
 javascript:
-    $('select#simple-example').select2({ width: '50%' });
+    $(document).ready(function () {
+        $("select").select2({ dropdownParent: $(".modal_form"), width: '50%' });
+    });
