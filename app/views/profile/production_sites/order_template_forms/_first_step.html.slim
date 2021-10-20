@@ -51,10 +51,16 @@
               .invalid-feedback
 
             .pattern_body_steps_form_step_input
+              = f.label 'Жилье'
+              = f.check_box :housing, class: 'form-control сheck_box_watch housing'
+
+            .pattern_body_steps_form_step_input
+              = f.label 'Питание'
+              = f.check_box :food_nutrition, class: 'form-control сheck_box_watch food'
+
+            .pattern_body_steps_form_step_input
               = f.label 'Вахта'
               = f.check_box :shift_method, class: 'form-control сheck_box_watch'
-
-
             footer.pattern_body_steps_form_step_next.row.w-100
               - unless is_order_template
                 = f.button id: 'save-on_current_page', class: 'mx-auto' do

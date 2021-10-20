@@ -48,6 +48,16 @@
                 b Вахта
               .col-sm-8.mb-4
                 i.fas.fa-check-square.watch_checkbox
+            - if @order.housing
+              .col-sm-4
+                b Жилье
+              .col-sm-8.mb-4
+                i.fas.fa-check-square.watch_checkbox
+            - if @order.food_nutrition
+              .col-sm-4
+                b Питание
+              .col-sm-8.mb-4
+                i.fas.fa-check-square.watch_checkbox
             .col-sm-4
               b Специализация
             .col-sm-8.mb-4
@@ -55,7 +65,7 @@
             .col-sm-4
               b Город
             .col-sm-8.mb-4
-              .col-sm-8.mb-4 = @order.city
+              .col-sm-8.mb-4 = @order.city.name
             .col-sm-4
               b Зарплата
             .col-sm-8.mb-4
