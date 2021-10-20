@@ -1,9 +1,8 @@
-- name = contractor_invoice.seller['short_name'] ? contractor_invoice.seller['short_name'] : contractor_invoice.seller['name']
 tr
   td #{contractor_invoice.invoice_number}
   td #{l(contractor_invoice.created_at, format: :short)}
   td #{contractor_invoice.amount}
-  td = name
+  td #{contractor_invoice.profile.user.full_name}
   td
     = link_to admin_contractor_invoice_path(contractor_invoice, format: :pdf),
       data: { toggle: 'tooltip', placement: 'top', title: 'Скачать в формате PDF' },
