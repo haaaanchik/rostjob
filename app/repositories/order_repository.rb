@@ -94,7 +94,7 @@ module OrderRepository
     scope :sort_by_order_place_of_work_desc, lambda { order('orders.place_of_work desc') }
     scope :sort_by_customer_name_asc, -> { order('companies.name asc') }
     scope :sort_by_customer_name_desc, -> { order('companies.name desc') }
-    scope :for_analytics, -> { select(:id, :position_id, :number_of_employees, :published_at, :completed_at, :production_site_id,
+    scope :for_analytics, -> { select(:id, :position_id, :number_of_employees, :contractor_price, :published_at, :completed_at, :production_site_id,
                                       :profile_id, :state, :created_at, :updated_at)
                                       .joins('LEFT JOIN proposal_employees ON proposal_employees.order_id = orders.id')
                                       .group('orders.id').order('max(proposal_employees.created_at) ASC') }

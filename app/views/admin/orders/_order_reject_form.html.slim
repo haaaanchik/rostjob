@@ -4,5 +4,7 @@
     = f.label :reason, 'Причина отказа'
     = f.text_area :reason, class: 'md-textarea form-control'
 
-  .md-form.text-center
+  .md-form
     = f.submit 'Отклонить заявку', class: 'btn btn-red'
+    = link_to 'Редактировать', edit_admin_order_path(@order),
+                               class: 'btn_edit btn btn-green'
