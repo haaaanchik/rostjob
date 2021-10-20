@@ -371,6 +371,8 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.boolean "template_saved", default: false
     t.boolean "shift_method", default: false, null: false
     t.integer "city_id"
+    t.boolean "food_nutrition", default: false, null: false
+    t.boolean "housing", default: false, null: false
     t.index ["production_site_id"], name: "index_order_templates_on_production_site_id"
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
@@ -424,6 +426,8 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.date "completed_at"
     t.boolean "shift_method", default: false, null: false
     t.integer "city_id"
+    t.boolean "food_nutrition", default: false, null: false
+    t.boolean "housing", default: false, null: false
     t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"

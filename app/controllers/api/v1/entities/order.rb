@@ -79,6 +79,33 @@ module Api
           order.shift_method ? 1:0
         end
 
+        expose(:order_specializations,
+               documentation: {
+                   desc: 'Specialization title',
+                   type: String
+               }
+        ) do |order|
+          order.position.specializations.map{|k| k.title}
+        end
+
+        expose(:food_nutrition,
+               documentation: {
+                   desc: 'Order food nutrition',
+                   type: Integer
+               }
+        ) do |order|
+          order.food_nutrition ? 1 : 0
+        end
+
+        expose(:housing,
+               documentation: {
+                   desc: 'Order housing',
+                   type: Integer
+               }
+        ) do |order|
+          order.housing ? 1 : 0
+        end
+
         expose(:without_experience,
                documentation: {
                    desc: 'Order without experience',

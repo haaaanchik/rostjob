@@ -117,8 +117,8 @@ class Profile::ProductionSites::OrdersController < Profile::ProductionSites::App
 
   def order_params
     @order_params ||= params.require(:order)
-                            .permit(:city_id, :salary, :contractor_price, :skill, :shift_method,
-                                    :number_of_employees, :document, :number_additional_employees,
+                            .permit(:city_id, :salary, :contractor_price, :skill, :food_nutrition, :shift_method,
+                                    :number_of_employees, :housing, :document, :number_additional_employees,
                                     other_info: {}, contact_person: {})
   end
 

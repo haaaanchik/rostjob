@@ -42,6 +42,14 @@
               .col-sm-8.mb-4
                 = f.text_field :contractor_price, class: 'form-control'
               .col-sm-4.checkbox_section
+                b Питание
+              .col-sm-8.mb-4
+                = f.check_box :food_nutrition, class: 'form-control form-control-checkbox'
+              .col-sm-4.checkbox_section
+                b Жилье
+              .col-sm-8.mb-4
+                = f.check_box :housing, class: 'form-control form-control-checkbox'
+              .col-sm-4.checkbox_section
                 b Вахта
               .col-sm-8.mb-4
                 = f.check_box :shift_method, class: 'form-control form-control-checkbox'

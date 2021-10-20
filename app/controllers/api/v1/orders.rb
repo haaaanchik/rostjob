@@ -13,6 +13,8 @@ module Api
           optional :category_titles_in, type: Array, desc: 'Order by specialization.'
           optional :title_or_company_fields_cont, type: String, desc: 'Search by order title or company name.'
           optional :shift_method_eq, type: Boolean, desc: 'Order shift method'
+          optional :food_nutrition_eq, type: Boolean, desc: 'Order food_nutrition'
+          optional :housing_eq, type: Boolean, desc: 'Order housing'
         end
         optional :user_location, type: String, desc: 'User location'
         optional :radius_of_cities, type: String, values: %w[near next far], desc: 'Radius cities'
