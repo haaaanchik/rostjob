@@ -112,7 +112,7 @@ module Api
                    type: Integer
                }
         ) do |order|
-          order.customer_price <= 8000
+          order.customer_price <= 8000 ? 1 : 0
         end
 
 
