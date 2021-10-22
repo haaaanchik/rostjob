@@ -50,7 +50,7 @@ class Admin::OrdersController < Admin::ApplicationController
   def order_params
     params.require(:order)
       .permit(:email, :city_id, :phone_number, :skill, :name, :state, :number_of_employees, :salary, :contractor_price,
-              :advertising, :adv_text, :shift_method, contact_person: {}, other_info: {})
+              :advertising, :adv_text, :shift_method, :food_nutrition, :housing, contact_person: {}, other_info: {})
   end
 
   def orders
