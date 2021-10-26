@@ -32,12 +32,19 @@ module Api
       def search_orders_by_radius
         return published_orders if params[:radius_of_cities].blank?
 
-        city = Geo::City.find_by(name: params[:q]['city_name_eq'] || params[:user_location])
+        city = Geo::City.find_by(name: params_name)
         return published_orders if city.blank?
 
         coordinates = calculate_closer_cities(city.lat, city.long)
+        params[:q]['city_name_eq'] = nil if params[:user_location]
         closer_city_ids = Geo::City.where( lat: coordinates[:y0]..coordinates[:y1], long: coordinates[:x0]..coordinates[:x1] ).pluck(:id)
         Order.where(city_id: closer_city_ids).published
+      end
+
+      def params_name
+        return params[:user_location] if params[:q]['city_name_eq'] == ''
+
+        params[:q]['city_name_eq']
       end
 
       def published_orders
