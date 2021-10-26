@@ -18,7 +18,6 @@ module Api
           .includes(:company)
           .order(deal_counter: :desc)
           .uniq
-          .take(3)
 
         present customer_logos, with: Entities::Profiles::Logo, base_url: request.base_url
       end
