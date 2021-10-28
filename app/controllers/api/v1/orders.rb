@@ -15,6 +15,8 @@ module Api
           optional :shift_method_eq, type: Boolean, desc: 'Order shift method'
           optional :food_nutrition_eq, type: Boolean, desc: 'Order food_nutrition'
           optional :housing_eq, type: Boolean, desc: 'Order housing'
+          optional :favorites, type: String, desc: 'User favorites'
+
         end
         optional :user_location, type: String, desc: 'User location'
         optional :radius_of_cities, type: String, values: %w[near next far], desc: 'Radius cities'
@@ -43,6 +45,10 @@ module Api
         }.uniq.compact
       end
 
+      get '/orders/favorites' do
+        orders = Order.where(id: params[:rj_order_ids])
+        present :favorites, orders, with: Entities::Order, base_url: request.base_url
+      end
 
       desc 'Order with advertising' do
         success Entities::Order
