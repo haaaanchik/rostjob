@@ -43,6 +43,24 @@ module Api
       def published_orders
         Order.published.includes(:city, :position, profile: :company)
       end
+
+      def orders_sort(orders)
+        if params[:sort_salary].present?
+          sort_by_salary(orders)
+        elsif params[:sort_date].present?
+          sort_by_date(orders)
+        else
+          orders
+        end
+      end
+
+      def sort_by_salary(orders)
+        orders.order(Arel.sql("orders.salary + 0 desc"))
+      end
+
+      def sort_by_date(orders)
+        orders.order(created_at: :desc)
+      end
     end
   end
 end

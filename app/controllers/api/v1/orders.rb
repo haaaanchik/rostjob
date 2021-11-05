@@ -32,7 +32,7 @@ module Api
 
         present :total_orders, result.count
         present :total_pages, orders.total_pages
-        present :orders, orders, with: Entities::Order, base_url: request.base_url
+        present :orders, orders_sort(orders), with: Entities::Order, base_url: request.base_url
         present :categories, ActiveSpecializationsSpecification.to_scope.map(&:title)
         present :cities, published_orders.map { |order|
           {
