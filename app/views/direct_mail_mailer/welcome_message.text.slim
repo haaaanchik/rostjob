@@ -1,9 +1,4 @@
-| Спасибо за регистрацию, #{@user.full_name}!
 - if @user.profile.customer?
-  | Ваша учетная запись активна и Вы можете опубликовать заявку.
-  | Чтобы узнать как опубликовать заявку Вы можете прочитать инструкцию:
-  = url_for page_url('manual_create_order')
+    = render 'direct_mail_mailer/welcome_message_customer'
 - else
-  | Ваша учётная запись активна, и Вы можете приступить к выполнению заявок за вознаграждение. 
-  = ' Для того чтобы узнать, как получить вознаграждение прочтите инструкцию по ссылке'
-  = url_for page_url('manual_how_get_money')
+    = render 'welcome_message_contractor'
