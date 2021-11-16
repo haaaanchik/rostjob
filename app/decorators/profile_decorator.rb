@@ -17,5 +17,14 @@ class ProfileDecorator < ObjDecorator
     h.active_link_to label,
                       h.edit_profile_path,
                       class_active: 'active-link'
+    end
+
+  def active_link_term_of_uses
+    return if contractor?
+
+
+    h.content_tag :li do
+      h.link_to('Правила пользования', h.term_of_uses_path, class_active: 'active-link')
+    end
   end
 end
