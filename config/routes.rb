@@ -414,6 +414,9 @@ Rails.application.routes.draw do
 
   resources :recruiters, only: %i[index show]
   resources :support_messages, only: %i[new create]
+  resources :term_of_uses, only: %i[index] do
+    post :accept
+  end
 
   resources :terms, only: %i[index] do
     collection do
