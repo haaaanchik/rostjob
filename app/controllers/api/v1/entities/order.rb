@@ -10,6 +10,15 @@ module Api
                  type: Integer
                }
 
+        expose(:company_id,
+               documentation: {
+                   desc: 'Order company id.',
+                   type: String
+               }
+        ) do |order|
+          order.profile.id
+        end
+
         expose(:company_short_name,
                documentation: {
                  desc: 'Order company short name.',
