@@ -15,6 +15,7 @@ module Api
       mount Api::V1::Customers
       mount Api::V1::Specializations
       mount Api::V1::EmployeeCvs
+      mount Api::V1::GeoCities
 
       add_swagger_documentation(
         base_path: '/api',
