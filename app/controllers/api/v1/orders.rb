@@ -16,10 +16,10 @@ module Api
           optional :food_nutrition_eq, type: Boolean, desc: 'Order food_nutrition'
           optional :housing_eq, type: Boolean, desc: 'Order housing'
           optional :favorites, type: String, desc: 'User favorites'
+          optional :radius_of_cities, type: String, values: %w[near next far], desc: 'Radius cities'
 
         end
         optional :user_location, type: String, desc: 'User location'
-        optional :radius_of_cities, type: String, values: %w[near next far], desc: 'Radius cities'
         optional :page, type: Integer, default: 1, desc: 'Specify the page of paginated results.'
         optional :without_experience, type: Integer, values: [0, 1], default: 0, desc: 'Orders with a price of 8000 or less'
       end
