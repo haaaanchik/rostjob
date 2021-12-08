@@ -101,17 +101,17 @@ $purple: #9046ff;
         }
       }
 
+      .logo {
+        width: 69px;
+        height: 69px;
+        border-radius: 50%;
+        margin-right: 40px;
+        object-fit: cover;
+      }
+
       .information {
         display: flex;
         margin-top: -50px;
-
-        .logo {
-          width: 69px;
-          height: 69px;
-          border-radius: 50%;
-          margin-right: 40px;
-          object-fit: cover;
-        }
 
         .custom-green {
           color: #02da35;

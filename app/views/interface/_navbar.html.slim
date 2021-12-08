@@ -20,11 +20,10 @@ nav.main-header.fixed-top.navbar.navbar-expand.navbar-light
       span.number-of-messages = @opened_tickets_count
 
     - if user_signed_in?
-      // = link_to logout_path, class: 'icon-link logout', method: :delete do
-        = image_tag asset_path('/img/new/no-avatar.png'), class: 'icon_img'
-      
       #avatar_dropdown.dropdown data-toggle='dropdown'
         = image_tag asset_path('/img/new/no-avatar.png'), class: 'icon_img'
       ul.dropdown-menu.dropdown-menu-right
-        = link_to 'Инструкции', '#', class: 'dropdown-item'
-        = link_to 'Выход', '#', class: 'dropdown-item'
+        = link_to 'Инструкции', page_path('all_manuals'), class: 'dropdown-item'
+        = link_to logout_path, class: 'dropdown-item', method: :delete do
+          = 'Выход'
+          
