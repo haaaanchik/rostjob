@@ -54,6 +54,6 @@ module ApplicationHelper
     result = orders.map { |order| order.city&.name }
     result.reject!(&:blank?) if result.include?(nil)
 
-    result.uniq
+    result.uniq.sort
   end
 end

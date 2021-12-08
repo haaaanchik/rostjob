@@ -61,16 +61,9 @@ ruby:
             .platform
               .header
                 p = place_of_work
-                span = items.first.city.name
-              .information
                 = image_tag(@customer.image_url, class: 'logo')
-                div
-                  p.name = customer_name
-                  p.characteristic
-                    | Найм:
-                    span.custom-green  #{ items.first.production_site.decorate.display_rating }
-                    | Сделки:
-                    span.custom-green  #{ items.first.production_site.decorate.display_deal_counter }
+              .information.header
+                span = items.first.city.name
               .tabs
                 ul#myTab.nav role="tablist"
                   li.nav-item
@@ -93,10 +86,9 @@ ruby:
           .order__header
             p.order__title
               = @customer.user.full_name
-            p.order__rating
-              | Рейтинг:
-              span.order__rating--color.green-color
-                |  #{ @customer.decorate.display_rating }
             = image_tag(@customer.image_url, class: 'order__img')
-          p.order-hide-description.js-hide-description
+          p.order-hide-description.js-hide-description.hide
             = @customer.company.description
+          span.moreDetails.js-moreDetails
+            = image_tag('/img/reusable_images/post_arrow.png', class: 'arrow js-arrow')
+            span.moreDetails__text Подробнее

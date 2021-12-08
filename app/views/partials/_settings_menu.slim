@@ -19,3 +19,6 @@
                           terms_path,
                           class_active: 'active-link'
       = current_profile.decorate.active_link_term_of_uses
+      li = active_link_to 'Инструкция',
+                          page_path('all_manuals'),
+                          class_active: 'active-link'

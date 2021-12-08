@@ -36,7 +36,7 @@ ruby:
           = image_tag('/img/reusable_images/arrow.png', class: 'select__arrow arrow js-arrow')
         .professions-container.hide
           .select__options.cities.custom-scroll
-            - titles.each_with_index do |title, i|
+            - titles.sort.each_with_index do |title, i|
               p.option
                 = check_box_tag 'q[title_fields_in][]',
                         title,
