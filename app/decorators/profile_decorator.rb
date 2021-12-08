@@ -1,8 +1,8 @@
 class ProfileDecorator < ObjDecorator
   delegate_all
 
-  def order_titles
-    orders.published.map(&:title).uniq.join(', ')
+  def order_titles_count
+    orders.published.count
   end
 
   def role_in_budge

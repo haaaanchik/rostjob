@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   before_action :set_authorize
   before_action :order, except: %i[index customer_orders info]
@@ -41,21 +43,22 @@ class OrdersController < ApplicationController
   def orders
     @customer = Profile.find(params[:customer_id])
     @order_filters = @customer.orders
-                         .published
-                         .with_customer_name
-                         .includes(:city, :production_site, profile: :company)
+                              .published
+                              .with_customer_name
+                              .includes(:city, :production_site, profile: :company)
     @q = @order_filters.ransack(params[:q])
     @orders ||= @q.result
   end
 
   def search_customer
     @orders = Order.published
-                  .with_customer_name
-                  .includes(:city, :production_site, profile: :company)
+                   .with_customer_name
+                   .includes(:city, :production_site, profile: :company)
     @q = Profile.joins(:orders)
-             .where('orders.state': 'published')
-             .customers.includes(:user, :company)
-             .order(deal_counter: :desc).ransack(params[:q])
+                .where('orders.state': 'published')
+                .customers.includes(:user, :company)
+                .order(created_at: :desc)
+                .ransack(params[:q])
     @q.result
   end
 

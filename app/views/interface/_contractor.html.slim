@@ -5,12 +5,6 @@ ul.side-bar-ul
            class: "nav-link"
       i.fas.fa-home.svg-sidebar
       p.icon-text Главная
-    = link_to profile_employee_cvs_path,
-              id: 'employee_cvs_list',
-              title: 'Список Анкет',
-              class: "nav-link #{'nav-link__active' if active_item == :employee_lists}" do
-      i.fas.fa-address-card.svg-sidebar
-      p.icon-text Список Анкет
   li.nav-item
     = link_to profile_proposal_employees_path,
               id: 'employee_cvs_sent',
@@ -25,12 +19,25 @@ ul.side-bar-ul
             class: "nav-link #{'nav-link__active' if active_item == :orders}" do
       i.fas.fa-align-justify.svg-sidebar
       p.icon-text Каталог заявок
-  li.nav-item
-    = link_to thredded_path,
-            title: 'Форум',
-            class: 'nav-link' do
-      i.fas.fa-id-card-alt.svg-sidebar
-      p.icon-text Форум
+  = link_to profile_employee_cvs_path,
+          id: 'employee_cvs_list',
+          title: 'Мой органайзер',
+          class: "nav-link #{'nav-link__active' if active_item == :employee_lists}" do
+    i.fas.fa-id-card-alt.svg-sidebar
+    p.icon-text Мой органайзер
+
+  = link_to page_path('all_manuals'),
+            id: 'page_all_manuals',
+            title: 'Инструкция',
+            class: "nav-link #{'nav-link__active' if active_item == :all_manuals}" do
+    i.fas.fa-question.recruiter-clr-purple
+    p.icon-text Инструкция
+  / li.nav-item
+  /   = link_to thredded_path,
+  /           title: 'Форум',
+  /           class: 'nav-link' do
+  /     i.fas.fa-id-card-alt.svg-sidebar
+  /     p.icon-text Форум
   / li.nav-item
   /   = link_to profile_favorites_path,
   /             title: 'Избранные заявки',

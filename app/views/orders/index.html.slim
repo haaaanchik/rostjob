@@ -8,21 +8,12 @@
           p.order__title
             = link_to customer.user.full_name, orders_by_customer_path(customer)
           p.order__rating
-            | Рейтинг:
+            | Количество заявок:
             span.order__rating--color.green-color
-              |  #{ customer.display_rating }
+              |  #{ customer.order_titles_count }
           = image_tag(customer.image_url, class: 'order__img')
-        p.order-hide-description.js-hide-description.hide
-          = customer.company.name
-          br
-          = "ИНН: #{customer.company.inn}"
-          br
-          = customer.company.description
         p.order-description
-          | #{ cities_of_orders(customer.orders.published.includes(:city)).join(', ') }
-          |, #{ customer.order_titles }
+          = "#{ cities_of_orders(customer.orders.published.includes(:city))[0] }  ......"
+
         .order__footer
           a.order__link href="#{ orders_by_customer_path(customer) }"  Перейти к заявкам
-          span.moreDetails.js-moreDetails
-            = image_tag('/img/reusable_images/post_arrow.png', class: 'arrow js-arrow')
-            span.moreDetails__text Подробнее
