@@ -1,5 +1,5 @@
 .d-flex.flex-column.w-100.h-100
-  h1.text-center Список всех инструкции
+  h1 Инструкции:
   ul
     - if (user_signed_in? && current_user.profile.customer?) || !user_signed_in?
       li = link_to 'Как опубликовать заявку?', page_path('manual_create_order')
@@ -23,3 +23,30 @@
       li = link_to 'Что такое статус анкет?', page_path('manual_what_is_the_status_of_proposed_employees')
       li = link_to 'Как осуществить поиск анкеты?', page_path('manual_how_to_search_for_a_profile_recruter')
       li = link_to 'Как стать самозанятым?', page_path('as_an_individual')
+
+  h1 Видеоинструкции:
+  .container
+    .row
+      .col-xl-4.col-sm-12
+        iframe  {src="https://www.youtube.com/embed/0hRxtTTIEk4" frameborder="0" allow=" autoplay; encrypted-media"
+                 allowfullscreen="true" class="video-frame" height="350"}
+        p 1 Обзор сайта, ЛК РостДжоб
+      .col-xl-4.col-sm-12
+        iframe {src="https://www.youtube.com/embed/M6OcUlk7dZw" frameborder="0" allow="accelerometer; autoplay; encrypted-media"
+                allowfullscreen="true" class="video-frame" height="350"}
+        p 2 Работа с каталогом заявок
+      .col-xl-4.col-sm-12
+        iframe {src="https://www.youtube.com/embed/V9dFPe1zHBA" frameborder="0" allow="accelerometer; autoplay; encrypted-media"
+          allowfullscreen="true" class="video-frame" height="350"}
+        p 3 Создание анкеты потенциального кандидата
+      .col-xl-4.col-sm-12
+        iframe {src="https://www.youtube.com/embed/efKFYyHipG4" frameborder="0" allow="accelerometer; autoplay; encrypted-media"
+          allowfullscreen="true" class="video-frame" height="350"}
+        p 4 Как отозвать неактуальную анкету кандидата
+      .col-xl-4.col-sm-12
+        iframe {src="https://www.youtube.com/embed/261ztjiQ17o" frameborder="0" allow="accelerometer; autoplay; encrypted-media"
+          allowfullscreen="true" class="video-frame" height="350"}
+        p 5 Работа с сайтом Работа ру
+  h1 Часто задаваемые вопросы:
+  ul
+    = render 'pages/frequently_asked_questions'
