@@ -22,6 +22,7 @@ class ProposalEmployee < ApplicationRecord
   ransack_alias :candidate_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_position_title_or_order_place_of_work
   ransack_alias :pe_fields, :employee_cv_id_or_employee_cv_name_or_order_id_or_order_position_title_or_order_place_of_work
   ransack_alias :order_title, :order_position_title
+  ransack_alias :all_fields, :proposal_employee_or_employee_cv_name
 
   aasm column: :state, whiny_transitions: false do
     state :inbox, initial: true
