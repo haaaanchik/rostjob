@@ -4,12 +4,12 @@ class Admin::ProposalEmployeeInvoicesController < Admin::ApplicationController
 
   before_action :set_proposal_employee, only: %i[show]
   def index
-    @proposal_employees = ProposalEmployee
-                            .paid
-                            .order(payment_date: :desc)
-                            .includes(:employee_cv, order: [:position, profile: :user])
-                            .page(params[:page])
-  end
+  @q = ProposalEmployee.paid
+                       .order(payment_date: :desc)
+                       .includes(:employee_cv, order: [:position, profile: :user])
+                       .page(params[:page]).ransack(params[:q])
+  @proposal_employees = @q.result
+end
 
   def show
     respond_to do |format|
