@@ -4,6 +4,14 @@ class Admin::UsersController < Admin::ApplicationController
   def index
     @q = User.clients.ransack(params[:q])
     @users = paginate_array(@q.result.decorate, params[:page])
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        @q = User.all.ransack(params[:q])
+        @users = @q.result
+        render template: 'admin/users/user_email_export'
+      end
+    end
   end
 
   def edit

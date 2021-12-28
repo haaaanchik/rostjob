@@ -1,0 +1,25 @@
+wb = xlsx_package.workbook
+s = wb.styles
+
+wb.add_worksheet(name: "users") do |sheet|
+  # Create the header row
+  sheet.add_row [
+    "ID",
+    "Логин",
+    "Имя",
+    "Контакный номер",
+    "Роль",
+    "Баланс",
+  ]
+  # Create entries for each item
+  @users.each do |user|
+    sheet.add_row [
+      user.id,
+      user.email,
+      user.full_name,
+      user.profile.company.phone || user.profile.phone,
+      user.profile.customer? ? 'Заказчик' : 'Исполнитель',
+      user.balance.amount,
+    ]
+  end
+end

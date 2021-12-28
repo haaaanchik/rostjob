@@ -12,6 +12,8 @@
       .md-form.mr-3.mb-0.input_row
         = f.text_field :admin_search_fields_cont, class: 'form-control'
         = f.label :admin_search_fields_cont, 'Поиск по контексту'
+        = link_to request.params.merge( format: :xlsx),method: :get, class: 'pull-right', target: :_blank
+          | Скачать Пользователей
 
   table.table
     tr
