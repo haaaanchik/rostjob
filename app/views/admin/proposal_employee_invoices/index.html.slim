@@ -1,6 +1,11 @@
 h1 Акты выполненных работ
-= search_form_for [:admin, @q], url: admin_proposal_employee_invoices_path, id: 'logs_search' do |f|
-  = f.search_field :all_fields_cont, placeholder: 'Поиск по анкете', class: 'form-control m-2'
+.row
+  .col-8
+    = search_form_for [:admin, @q], url: admin_proposal_employee_invoices_path, id: 'logs_search' do |f|
+      = f.search_field :all_fields_cont, placeholder: 'Поиск по анкете', class: 'form-control mt-2'
+  .col-3
+    = link_to 'Сбросить все', admin_proposal_employee_invoices_path,
+        class: 'btn btn-indigo button'
 table.table
   tr
     th id
