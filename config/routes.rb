@@ -194,6 +194,8 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :setting_offers
+
     resources :production_sites, except: %i[new create]
     resources :employee_cvs, only: %i[edit update]
   end

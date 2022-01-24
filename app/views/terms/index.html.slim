@@ -9,8 +9,13 @@
           i.fas.fa-file-pdf.fa-lg.ml-2
       .row.scrollbar-near-moon.thin.mt-2
         .border#privacy_policy
-          = render 'term_pdf'
-          
+          - if current_profile.customer?
+            = @setting_offer.customer_offer.html_safe
+            = image_tag image_url("/img/signature.jpg"), id: 'signature'
+          - else
+            = @setting_offer.contractor_offer.html_safe
+            = image_tag image_url("/img/signature.jpg"), id: 'signature'
+
           - unless current_profile.user.terms_of_service
             = form_for @terms,
                     url: accept_terms_path,

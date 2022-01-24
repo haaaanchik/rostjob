@@ -1,0 +1,16 @@
+= form_for @setting_offer, url: admin_setting_offer_path(@setting_offer) do |f|
+  p.h3.text-center.mb-4 Договор оферты
+  .row
+    .col
+      .form-group
+        = f.label :customer_offer, 'Офферта заказчика'
+        = f.text_area :customer_offer, class: 'form-control tinymce', rows: 15
+        .invalid-feedback.full-name
+      .form-group
+        = f.label :contractor_offer, 'Офферта рекрутера'
+        = f.text_area :contractor_offer, class: 'form-control tinymce', rows: 15
+        .invalid-feedback.full-name
+
+  .row.mt-3
+    .col.text-center
+      = f.submit 'Сохранить', class: 'btn btn-indigo'

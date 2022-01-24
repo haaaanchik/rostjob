@@ -1,0 +1,2 @@
+class SettingOffer < ApplicationRecord
+end
