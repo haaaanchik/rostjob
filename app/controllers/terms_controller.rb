@@ -6,6 +6,7 @@ class TermsController < ApplicationController
   def index
     @terms = Terms.new
     @profile_type = current_profile.profile_type
+    @setting_offer = SettingOffer.first
     flash[:alert] = 'Вы должны принять условия оферты, прежде чем продолжить' unless current_user.terms_of_service
     respond_to do |format|
       format.html

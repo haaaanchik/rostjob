@@ -125,6 +125,13 @@ html
                       = link_to 'Написать письмо', new_admin_mail_path
                     li
                       = link_to 'Трелло', admin_trello_index_path
+              li.relative
+                i.fas.fa-angle-down.rotate-icon
+                = link_to 'Договор офферты', admin_setting_offers_path, class: 'collapsible-header js-prevent'
+                .collapsible-body
+                  ul.list-unstyled
+                    li
+                      = link_to 'Офферта заказчика и рекрутера', admin_setting_offers_path
 
           .sidenav-bg.mask-strong
 

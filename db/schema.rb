@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_21_101549) do
+ActiveRecord::Schema.define(version: 2022_01_19_235428) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -580,6 +580,13 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
+  create_table "setting_offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.text "customer_offer"
+    t.text "contractor_offer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
@@ -733,8 +740,8 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.bigint "moderator_id"
     t.integer "moderation_state", null: false
     t.integer "previous_moderation_state", null: false
-    t.timestamp "created_at", null: false
-    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
+    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display"
   end
 
   create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -811,7 +818,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.index ["hash_id"], name: "index_thredded_topics_on_hash_id"
     t.index ["last_post_at"], name: "index_thredded_topics_on_last_post_at"
     t.index ["messageboard_id"], name: "index_thredded_topics_on_messageboard_id"
-    t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display", order: { sticky: :desc, updated_at: :desc }
+    t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display"
     t.index ["slug"], name: "index_thredded_topics_on_slug", unique: true, length: 191
     t.index ["title"], name: "thredded_topics_title_fts", type: :fulltext
     t.index ["user_id"], name: "index_thredded_topics_on_user_id"
@@ -828,7 +835,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latest_activity_at"], name: "index_thredded_user_details_on_latest_activity_at"
-     t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations", order: { moderation_state_changed_at: :desc }
+    t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations"
     t.index ["user_id"], name: "index_thredded_user_details_on_user_id", unique: true
   end
 
@@ -865,7 +872,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.integer "unread_posts_count", default: 0, null: false
     t.integer "read_posts_count", default: 0, null: false
     t.integer "integer", default: 0, null: false
-    t.timestamp "read_at", null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
   end
 
@@ -884,7 +891,7 @@ ActiveRecord::Schema.define(version: 2021_08_21_101549) do
     t.integer "unread_posts_count", default: 0, null: false
     t.integer "read_posts_count", default: 0, null: false
     t.integer "integer", default: 0, null: false
-    t.timestamp "read_at", null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["messageboard_id"], name: "index_thredded_user_topic_read_states_on_messageboard_id"
     t.index ["user_id", "messageboard_id"], name: "thredded_user_topic_read_states_user_messageboard"
     t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
