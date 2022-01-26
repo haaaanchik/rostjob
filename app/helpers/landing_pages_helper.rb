@@ -36,7 +36,7 @@ module LandingPagesHelper
   private
 
   def customer_or_recruiter_number
-    return '8 (800) 700-33-21' if landing_main_path == '/freelance'
+    return '8 (800) 700 53 17' if landing_main_path == '/freelance'
 
     '8 (800) 700-67-86'
   end
