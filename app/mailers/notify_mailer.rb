@@ -67,7 +67,7 @@ class NotifyMailer < ApplicationMailer
     @prop_emp = params[:proposal_employees].first
     contractor_email = @prop_emp.profile.user.email
 
-    mail(to: contractor_email, subject: 'RostJob. Вы получили вознаграждение')
+    mail(to: contractor_email, subject: 'RostJob.')
   end
 
   def informated_user_has_disputed
