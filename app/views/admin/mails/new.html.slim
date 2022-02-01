@@ -2,15 +2,17 @@
   .d-flex.justify-content-around.mt-4
     .col-5
       h2 Написать письмо пользователям
-      = form_with scope: :mail, url: admin_mails_path, method: :post, class: 'd-flex flex-column' do |f|
+      = form_with scope: :mail, url: admin_mails_path,
+                          method: :post,
+                          class: 'd-flex flex-column' do |f|
         .md-form
           = f.label :subject, 'Тема письма'
           = f.text_field :subject, class: 'form-control'
         .form-group
-          = f.text_area :text, placeholder: 'Тест письма', class: 'form-control rounded-1', rows: 5
+          = f.text_area :text, placeholder: 'Текст письма', class: 'form-control tinymce', rows: 10
         .d-flex
           .col-6
-            = f.select :group_category, {'Все' => 'All', 'Клиенты'=> 'customer', 'Исполнители'=> 'contractor'},  {selected: 'All'}, { class: 'mdb-select md-form' }
+            = f.select :group_category, { 'Клиенты' => 'customer', 'Исполнители' => 'contractor' }, selected: 'All', class: 'mdb-select md-form'
 
           .col-6.text-right
             = f.submit 'Отправить', class: 'btn btn-success'
@@ -22,7 +24,7 @@
           .platform
             .platform__header.js-platform__header.clickable
               p.platform__title Не оплаченные заказы
-              = image_tag('/img/new/arrow-down.png', class:'js-arrow')
+              = image_tag('/img/new/arrow-down.png', class: 'js-arrow')
             .platform__body.js-platform__body style="display: none"
               - @order_wait_payment.each do |o_wait_payment|
                 .order
@@ -31,11 +33,10 @@
                     .order__description
                       p.order__title
                         = link_to o_wait_payment.title, send_mail_order_wait_payment_admin_mails_path(order_id: o_wait_payment.id)
-          
           .platform
             .platform__header.js-platform__header.clickable
               p.platform__title Не оплаченные счета
-              = image_tag('/img/new/arrow-down.png', class:'js-arrow')
+              = image_tag('/img/new/arrow-down.png', class: 'js-arrow')
             .platform__body.js-platform__body style="display: none"
               - @invoice_wait_payment.each do |i_wait_payment|
                 .order
@@ -44,11 +45,11 @@
                     .order__description
                       p.order__title
                         = link_to "Выставлен счёт #{i_wait_payment.buyer['short_name']}", send_mail_invoice_wait_payment_admin_mails_path(invoice_id: i_wait_payment.id)
-          
+
           .platform
             .platform__header.js-platform__header.clickable
               p.platform__title Назнеченные сегодня собеседования
-              = image_tag('/img/new/arrow-down.png', class:'js-arrow')
+              = image_tag('/img/new/arrow-down.png', class: 'js-arrow')
             .platform__body.js-platform__body style="display: none"
               - @today_interview.each do |interview|
                 .order
@@ -56,11 +57,11 @@
                     .order__description
                       p.order__title
                         = link_to "#{interview.employee_cv.name}", send_notify_interview_admin_mails_path(proposal_employee_id: interview.id)
-                          
+
           .platform
             .platform__header.js-platform__header.clickable
               p.platform__title Не расмотренные анкеты
-              = image_tag('/img/new/arrow-down.png', class:'js-arrow')
+              = image_tag('/img/new/arrow-down.png', class: 'js-arrow')
             .platform__body.js-platform__body style="display: none"
               - @sended_employ_cv.each do |sended_cv|
                 .order

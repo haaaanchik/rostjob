@@ -2,7 +2,7 @@ class DirectMailMailer < ApplicationMailer
   def custom_message
     @user = params[:user]
     @message = params[:message]
-    mail(to: @user.email, subject: params[:subject])
+    mail(from: check_mail(params), to: @user.email, subject: params[:subject])
   end
 
   def welcome_message
@@ -47,7 +47,7 @@ class DirectMailMailer < ApplicationMailer
     @message = params[:message]
     @proposal_employee = params[:attrs][:proposal_employee]
 
-    mail(to: @user.email, subject: "RostJob. Кандидату было отказано.")
+    mail(to: @user.email, subject: 'RostJob. Кандидату было отказано.')
   end
 
   def informated_admin_about_revoke
@@ -55,5 +55,15 @@ class DirectMailMailer < ApplicationMailer
     @message  = params[:attrs][:message]
 
     mail(to: 'manager@rostjob.com', subject: "RostJob. Нерешенный конфликт #{@incident.id}.")
+  end
+
+  private
+
+  def check_mail(params)
+    if params[:user].customer?
+      'Manager@rostjob.com'
+    else
+      'recruiter@rostjob.com'
+    end
   end
 end
