@@ -12,7 +12,7 @@
           = f.text_area :text, placeholder: 'Текст письма', class: 'form-control tinymce', rows: 10
         .d-flex
           .col-6
-            = f.select :group_category, { 'Клиенты' => 'customer', 'Исполнители' => 'contractor' }, selected: 'All', class: 'mdb-select md-form'
+            = f.select :group_category, { 'Клиенты' => 'customer', 'Исполнители' => 'contractor' }, {selected: 'All'}, class: 'mdb-select md-form'
 
           .col-6.text-right
             = f.submit 'Отправить', class: 'btn btn-success'
