@@ -136,7 +136,7 @@ Rails.application.routes.draw do
       end
     end
     resources :staffers
-    resources :users, only: %i[index edit update] do
+    resources :users, only: %i[index show edit update] do
       member do
         put :withdrawal
         put :change_manager_status

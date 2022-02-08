@@ -14,6 +14,10 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def show
+    user
+  end
+
   def edit
     user
   end

@@ -1,4 +1,5 @@
 #admin_user_edit_page
+  - user_phone = @user.profile.company.phone || @user.profile.phone
   h3.text-center.mb-3 Редактирование пользователя
   = form_with model: [:admin, @user], local: false do |f|
     .row
@@ -25,7 +26,7 @@
         .form-group.row
           = f.label :full_name, @user.decorate.label_full_name, class: 'col-lg-4 col-12 col-sm-6'
           .col-lg-6.col-12.col-sm-6
-            = f.text_field :full_name, class: "form-control "
+            = f.text_field :full_name, class: 'form-control'
         .form-group.row
           = f.label :amount, 'Баланс', class: 'col-lg-4 col-12 col-sm-6'
           .col-lg-6.col-12.col-sm-6
@@ -33,15 +34,15 @@
         .form-group.row
           = f.label :email, class: 'col-lg-4 col-12 col-sm-6'
           .col-lg-6.col-12.col-sm-6
-            = f.text_field :email, class: "form-control "
+            = f.text_field :email, class: 'form-control'
         .form-group.row
           = f.label :password, 'Новый пароль', class: 'col-lg-4 col-12 col-sm-6'
           .col-lg-6.col-12.col-sm-6
-            = f.password_field :password, class: "form-control"
+            = f.password_field :password, class: 'form-control'
         .form-group.row
           = f.label :password_confirmation, 'Подтвердить пароль', class: 'col-lg-4 col-12 col-sm-6'
           .col-lg-6.col-12.col-sm-6
-            = f.password_field :password_confirmation, class: "form-control"
+            = f.password_field :password_confirmation, class: 'form-control'
         = f.fields_for :profile, @user.profile do |ff|
           = ff.fields_for :company do |c_f|
             .form-group.row
@@ -63,7 +64,7 @@
               .form-group.row
                 = ff.label :phone, 'Контактный номер телефона', class: 'col-lg-4 col-12 col-sm-6'
                 .col-lg-6.col-12.col-sm-6
-                  = ff.text_field :phone, class: 'form-control'
+                  = ff.phone_field :phone, class: 'form-control'
     - if @user.profile.customer?
       .col-5.ml-5.mt-5.p-3.company_block
         h3.my-2 Карточка предприятия

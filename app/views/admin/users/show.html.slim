@@ -1,0 +1,142 @@
+.col
+  .card.z-depth-2
+    .card-body
+      h2 Пользователь: #{@user.full_name}
+      hr
+      .row
+        .col-6
+          .row
+            .col-sm-4
+              b
+                = @user.decorate.label_full_name
+            .col-sm-8.mb-4
+              = @user.full_name
+            .col-sm-4
+              b Баланс
+            .col-sm-8.mb-4
+              i.fas.dollar-sign.mr-2
+              = @user.balance.amount
+            .col-sm-4
+              b Электронная почта
+            .col-sm-8.mb-4
+              i.far.fa-envelope.mr-2
+              = @user.email
+              hr
+            .col-sm-4
+              b Описание компании
+            .col-sm-8.mb-4
+              = @user.profile.company.description
+            .col-sm-4
+              b Логотип компании
+            .col-sm-8.mb-4
+              = image_tag(@user.profile.image_url)
+            .col-sm-4
+              b Контактный телефон
+            .col-sm-8.mb-4
+              = @user.profile.company.phone || @user.profile.phone
+            br
+            br
+            .col-sm-4
+              b Заходил в последний раз
+            .col-sm-8.mb-4
+              = @user.profile.decorate.role_in_budge
+              br
+              br
+                = @user.last_sign_in_at&.strftime('%k:%M %e %B %Y')
+            .col-sm-4
+              b Количество заявок / анкет
+            .col-sm-8.mb-4
+              = @user.count_orders_or_employees
+            .col-sm-4
+              b Открытые споры
+            .col-sm-8.mb-4
+              = @user.disputs_count
+            .col-sm-4
+              b Выписка счетов
+            .col-sm-8.mb-4
+              = @user.withdrawal_link
+          - if @user.profile.customer?
+            .col-sm-4
+              h3.my-2 Карточка предприятия
+              hr
+            .col-sm-4
+              b Наименование
+            .col-sm-8.mb-4
+              = @user.profile.company.name
+            .col-sm-8.md-4
+              b Краткое наименование
+            .col-sm-4
+              = @user.profile.company.short_name
+            .col-sm-4
+              b Юридический адрес
+            .col-sm-8.md-4
+              = @user.profile.company.address
+            .col-sm-4
+              b Почтовый адрес
+            .col-sm-8.mb-4
+              = @user.profile.company.mail_address
+            .col-sm-4
+              b Телефон
+            .col-sm-8.mb-4
+              = @user.profile.company.phone
+            .col-sm-4
+              b Факс
+            .col-sm-8.mb-4
+              = @user.profile.company.fax
+            .col-sm-4
+              b Электронная почта
+            .col-sm-8.mb-4
+              = @user.profile.company.email
+            .col-sm-4
+              b ОГРН
+            .col-sm-8.mb-4
+              = @user.profile.company.ogrn
+            .col-sm-4
+              b ИНН
+            .col-sm-8.mb-4
+              = @user.profile.company.inn
+            .col-sm-4
+              b КПП
+            .col-sm-8.mb-4
+              = @user.profile.company.kpp
+            .col-sm-4
+              b Директор Действующий на основании
+            .col-sm-8.mb-4
+              = @user.profile.company.director
+            .col-sm-4
+              b Действующий на основании
+            .col-sm-8.mb-4
+              = @user.profile.company.acts_on
+            .col-sm-4
+              h3.mt-4 Платёжные реквизиты
+              hr
+            .col-sm-4
+              b Наименование банка
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].bank
+            .col-sm-4
+              b Адрес банка
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].bank_address
+            .col-sm-4
+              b БИК
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].bic
+            .col-sm-4
+              b ИНН банка
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].inn
+            .col-sm-4
+              b КПП банка
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].kpp
+            .col-sm-4
+              b Расчётный счёт
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].account_number
+            .col-sm-4
+              b Корреспондентский счёт
+            .col-sm-8.mb-4
+              = @user.profile.company.accounts[0].corr_account
+      .col-2
+        = link_to 'Редактировать', edit_admin_user_path(@user), class: 'btn btn-green'
