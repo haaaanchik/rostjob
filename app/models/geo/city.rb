@@ -3,6 +3,8 @@
 class Geo::City < ApplicationRecord
   include Autocompletable
 
+  has_many :orders, foreign_key: :city_id
+
   belongs_to :region
 
   delegate :name, to: :region, allow_nil: true, prefix: :region

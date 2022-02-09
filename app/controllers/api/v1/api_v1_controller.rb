@@ -2,7 +2,6 @@
 
 module Api
   module V1
-    class Orders < Grape::API
-    end
+    class ApiV1Controller < ApiController; end
   end
 end

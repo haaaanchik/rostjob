@@ -6,6 +6,7 @@ if env == 'production'
   ruby "2.5.1"
 end
 
+gem 'fast_jsonapi'
 gem "dry-validation"
 gem 'mailgun_rails', git: 'https://github.com/kosorotov/mailgun_rails.git', branch: 'master'
 gem 'mailgun-ruby', require: 'mailgun'

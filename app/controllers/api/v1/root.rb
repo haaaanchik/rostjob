@@ -10,12 +10,12 @@ module Api
       default_format :json
 
       include Api::V1::Auth
-      mount Api::V1::Orders
+      # mount Api::V1::Orders
       mount Api::V1::Contractors
-      mount Api::V1::Customers
-      mount Api::V1::Specializations
+      # mount Api::V1::Customers
+      # mount Api::V1::Specializations
       mount Api::V1::EmployeeCvs
-      mount Api::V1::GeoCities
+      # mount Api::V1::GeoCities
 
       add_swagger_documentation(
         base_path: '/api',

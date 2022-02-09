@@ -7,7 +7,7 @@ class ActiveSpecializationsSpecification
         .joins(:positions)
         .order('specializations.title')
         .includes(positions: :price_group)
-        .uniq
+        .distinct
     end
   end
 end
