@@ -23,6 +23,7 @@
       li = link_to 'Что такое статус анкет?', page_path('manual_what_is_the_status_of_proposed_employees')
       li = link_to 'Как осуществить поиск анкеты?', page_path('manual_how_to_search_for_a_profile_recruter')
       li = link_to 'Как стать самозанятым?', page_path('as_an_individual')
+      li = link_to 'Пособие по работе с мигрантами', page_path('manual_handbook_for_working_with_migrants')
 
   - if (user_signed_in? && current_user.profile.contractor?) || !user_signed_in?
     h1 Видеоинструкции:
