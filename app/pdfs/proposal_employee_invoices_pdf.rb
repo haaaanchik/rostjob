@@ -109,7 +109,7 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
     move_down 9.mm
     table([[{ content: 'Исполнитель', size: 12, font_style: :bold },
             { content: 'Заказчик', size: 12, font_style: :bold }],
-           [{ content: 'Гениральный директор ООО "РостДжоб"', size: 9 },
+           [{ content: 'Генеральный директор ООО "РостДжоб"', size: 9 },
             { content: @proposal_employee.order.profile.user.full_name, size: 9 }],
            [{}, {}],
            [{}, {}],
