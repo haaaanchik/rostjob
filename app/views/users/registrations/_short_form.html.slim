@@ -5,11 +5,12 @@
       - if status == false
         .invalid-feedback.mb-2 Такой email уже существует
 
-      = form_for :user, method: :post, url: user_registration_path(role: type), html: {class: 'text-center'} do |f|
+      = form_for :user, method: :post, url: user_registration_path(role: type), html: { class: 'text-center' } do |f|
         = f.email_field :email, id: 'defaultLoginFormEmail', class: 'form-control mb-4 placeholder', placeholder: 'E-Mail'
+        = f.text_field :full_name, class: 'form-control mb-4 placeholder', placeholder: 'Имя'
         .d-flex.justify-content-center
           = f.submit button_text, class: 'btn btn-info btn-block'
-      - t("views.modals.signin.password_confirmation")
+      - t('views.modals.signin.password_confirmation')
 
       .d-flex.justify-content-around.mt-3
         = link_to 'Восстановить пароль', new_user_password_path

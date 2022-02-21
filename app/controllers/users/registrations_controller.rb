@@ -21,12 +21,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     result = if params[:role] == 'customer'
-      ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
-                                                     profile_params: { profile_type: 'customer', legal_form: 'company' })
-    else
-      ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
-                                                       profile_params: { profile_type: 'contractor' })
-    end
+               ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
+                                                              profile_params: { profile_type: 'customer', legal_form: 'company' })
+             else
+               ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
+                                                                profile_params: { profile_type: 'contractor' })
+             end
 
     if result.success?
       @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
@@ -60,7 +60,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       set_minimum_password_length
       render json: {  validate: true,
                       data: errors_data(resource) },
-                      status: 422
+             status: 422
     end
   end
 
@@ -82,19 +82,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def configure_update_params
     devise_parameter_sanitizer
-        .permit(:account_update,
-                keys: [:full_name,
-                       profile_attributes: [:id, :photo,
-                                            company_attributes: [:id, :phone, :description]]])
+      .permit(:account_update,
+              keys: [:full_name,
+                     profile_attributes: [:id, :photo,
+                                          company_attributes: %i[id phone description]]])
   end
 
   # The path used after sign up.
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     redirect_to root_path
   end
 
   # The path used after sign up for inactive accounts.
-  def after_inactive_sign_up_path_for(resource)
+  def after_inactive_sign_up_path_for(_resource)
     render js: "toastr.error('Необходимо подтвердить электронную почту!', 'Неудача!')",
            status: 401
   end
@@ -104,7 +104,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :full_name)
   end
 
   def update_resource(resource, params)
