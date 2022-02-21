@@ -1,6 +1,7 @@
 tr
   td = user_action_log.login
-  td = user_action_log.user_name
+  td
+    = link_to user_action_log.user_name, admin_user_path(user_action_log.subject_id)
   td = t("user_action_log.role.#{user_action_log.role}") if user_action_log.role
   td = user_action_log.order_id
   td == user_action_log.action

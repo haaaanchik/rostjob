@@ -112,31 +112,32 @@
               hr
             .col-sm-4
               b Наименование банка
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].bank
-            .col-sm-4
-              b Адрес банка
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].bank_address
-            .col-sm-4
-              b БИК
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].bic
-            .col-sm-4
-              b ИНН банка
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].inn
-            .col-sm-4
-              b КПП банка
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].kpp
-            .col-sm-4
-              b Расчётный счёт
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].account_number
-            .col-sm-4
-              b Корреспондентский счёт
-            .col-sm-8.mb-4
-              = @user.profile.company.accounts[0].corr_account
+            - @user.profile.company.accounts.each do |accounts|
+              .col-sm-8.mb-4
+                = accounts.bank
+              .col-sm-4
+                b Адрес банка
+              .col-sm-8.mb-4
+                = accounts.bank_address
+              .col-sm-4
+                b БИК
+              .col-sm-8.mb-4
+                = accounts.bic
+              .col-sm-4
+                b ИНН банка
+              .col-sm-8.mb-4
+                = accounts.inn
+              .col-sm-4
+                b КПП банка
+              .col-sm-8.mb-4
+                = accounts.kpp
+              .col-sm-4
+                b Расчётный счёт
+              .col-sm-8.mb-4
+                = accounts.account_number
+              .col-sm-4
+                b Корреспондентский счёт
+              .col-sm-8.mb-4
+                = accounts.corr_account
       .col-2
         = link_to 'Редактировать', edit_admin_user_path(@user), class: 'btn btn-green'
