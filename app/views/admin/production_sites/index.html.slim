@@ -16,6 +16,7 @@
             th Названия платформы
             th Владелец
             th Заявок в платформе
+            th Открытые заявки
             th Зарегистрирована
             th Действия
         tbody
@@ -26,6 +27,9 @@
               td 
                 = link_to platform.orders.size,
                           admin_analytics_orders_info_path(q: {analytics_fields_cont: platform.title, state_eq: nil})
+              td
+                = link_to platform.orders.where(state: 'published').size,
+                        admin_analytics_orders_info_path(q: { analytics_fields_cont: platform.title, state_eq: nil })
               td = platform.created_at_str
               td
                 = link_to edit_admin_production_site_path(platform), class: 'mr-2' do
