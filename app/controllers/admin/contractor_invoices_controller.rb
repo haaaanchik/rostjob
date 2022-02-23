@@ -1,6 +1,7 @@
 class Admin::ContractorInvoicesController < Admin::ApplicationController
   def index
-    paginated_invoices
+    @q = Invoice.ransack(params[:q])
+    @paginated_invoices = @q.result(distinct: true).page(params[:page])
   end
 
   def show
@@ -17,10 +18,6 @@ class Admin::ContractorInvoicesController < Admin::ApplicationController
   end
 
   private
-
-  def paginated_invoices
-    @paginated_invoices ||= invoices.page(params[:page])
-  end
 
   def invoice
     @invoice ||= Invoice.find(params[:id])

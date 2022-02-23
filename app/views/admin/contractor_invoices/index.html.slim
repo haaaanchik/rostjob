@@ -1,4 +1,8 @@
 h1 Перечисления исполнителям
+.row
+  .col-sm-4
+    = search_form_for @q, url: "/admin/contractor_invoices", class: 'd-flex justify-content-between w-50' do |f|
+      = f.search_field :profile_user_full_name_cont, class: 'form-control mb-3 mt-2', placeholder: 'Исполнитель'
 table.table
   tr
     th Номер
