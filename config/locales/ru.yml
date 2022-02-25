@@ -51,7 +51,7 @@ ru:
   invoice:
     state:
       created: 'Выписан'
-      paid: 'Оплачен'
+      paid: 'Подтвержден'
   buttons:
     save: 'Сохранить'
     cancel: 'Отмена'

@@ -9,8 +9,8 @@ tr
     span.action_button.text-center
       - unless invoice.paid?
         = link_to pay_admin_invoice_path(invoice), method: :put,
-          data: { confirm: 'Изменить статус счета на "Оплачен"?', toggle: 'tooltip',
-          placement: 'top', title: 'Отметить как "Оплачен"' } do
+          data: { confirm: 'Изменить статус счета на "Подтвержден"?', toggle: 'tooltip',
+          placement: 'top', title: 'Отметить как "Подтвержден"' } do
           i.fa.fa-check.fa-2x.green-text
     span.action_button.text-center
       = link_to admin_invoice_path(invoice), method: :delete, class: 'remove-invoice',

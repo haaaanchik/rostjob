@@ -22,7 +22,7 @@
           - state = @pecv.state
           - case state
           - when 'paid'
-            span.text-center.text-success = 'Оплачена'
+            span.text-center.text-success = 'Подтверждена'
           - when 'viewed'
             span.text-center.text-success = t("employee_cv.state.#{state}")
           - when 'hired'

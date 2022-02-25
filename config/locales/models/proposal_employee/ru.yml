@@ -9,7 +9,7 @@ ru:
       fired: 'Уволен досрочно'
       revoked: 'Отозвана'
       rejected: 'Отклонена'
-      paid:  'Оплачена'
+      paid:  'Подтверждена'
       reserved:  'В резерве'
       interview:  'Собеседование'
       transfer:  'Перенос'

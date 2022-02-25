@@ -56,7 +56,7 @@ ruby:
                                           id: 'candidate_filter_paid'
         i.fa.fa-bookmark.dark-text
         = label :state, nil, for: 'candidate_filter_paid' do
-          | Оплачен
+          | Подтвержден
       p
         = check_box_tag 'q[state_in][]', 'transfer',
                                           filter&.include?('transfer'),

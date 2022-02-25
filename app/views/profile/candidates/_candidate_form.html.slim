@@ -128,7 +128,7 @@
                                 = label :employee_cv_passport, :code, '№ подразделения', class: 'disabled'
                             .col-4
                               .md-form.mt-2
-                                = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] && !passport['date'].empty? ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '' )
+                                = text_field :employee_cv_passport, :date, class: 'form-control disabled', value: (passport['date'] && !passport['date'].empty? ? Date.parse(passport['date']).strftime('%d.%m.%Y') : '')
                                 = label :employee_cv_passport, :date, 'Дата выдачи', class: 'disabled'
                           .row
                             .col
@@ -142,7 +142,7 @@
                         - state = candidate.state
                         - case state
                         - when 'paid'
-                          span.text-center.text-success = 'Оплачена'
+                          span.text-center.text-success = 'Подтверждена'
                         - when 'viewed'
                           span.text-center.text-success = t("employee_cv.state.#{state}")
                         - when 'hired'
@@ -155,4 +155,3 @@
                           span.text-center.text-danger = 'Спор'
                         - when 'inbox'
                           span.text-center.text-warning = 'В очереди'
-
