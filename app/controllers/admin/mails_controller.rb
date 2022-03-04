@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::MailsController < Admin::ApplicationController
   def new
     @order_wait_payment = Order.waiting_for_payment
@@ -7,8 +9,10 @@ class Admin::MailsController < Admin::ApplicationController
   end
 
   def create
-    MailsForGroupJob.perform_now(profile_type: params[:mail][:group_category], subject: params[:mail][:subject],
-      message: params[:mail][:text])
+    MailsForGroupJob.perform_now(profile_type: params[:mail][:group_category],
+                                 subject: params[:mail][:subject],
+                                 message: params[:mail][:text],
+                                 email: params[:mail][:email])
     redirect_back(fallback_location: root_path)
   end
 

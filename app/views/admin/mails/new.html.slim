@@ -6,6 +6,9 @@
                           method: :post,
                           class: 'd-flex flex-column' do |f|
         .md-form
+          = f.label :email, 'Email '
+          = f.email_field :email, class: 'form-control'
+        .md-form
           = f.label :subject, 'Тема письма'
           = f.text_field :subject, class: 'form-control'
         .form-group
