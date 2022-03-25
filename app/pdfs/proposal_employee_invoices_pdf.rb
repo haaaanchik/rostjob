@@ -28,7 +28,7 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
 
   def header
     font('Arial')
-    text "Акт #{@proposal_employee.id} от #{@view.l(@proposal_employee.created_at, format: :short)} г.", style: :bold
+    text "Акт #{@proposal_employee.id} от #{@view.l(@proposal_employee.updated_at, format: :short)} г.", style: :bold
   end
 
   def requisites_customer
