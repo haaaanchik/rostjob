@@ -34,10 +34,6 @@ class Company < ApplicationRecord
     pers.validates :inn, length: { is: 12 }, numericality: { only_integer: true }
   end
 
-  with_options if: :partner?, on: :update do |comp|
-    comp.validates :phone, format: { with: /\+7\(\d{3}\)-\d{3}-\d{2}-\d{2}/}
-  end
-
 
   scope :own, -> { where own_company: true }
   scope :clients, -> { where own_company: false }
