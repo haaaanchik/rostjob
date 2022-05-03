@@ -83,11 +83,15 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
 
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-    api_key: '11d7b7e27023d3b56880f00170e97c15-898ca80e-44046bdf',
-    domain: 'mg.rostjob.com',
-    region: 'eu'
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: 'connect.smtp.bz',
+      port: 465,
+      ssl:  true,
+      user_name: 'mailgun@rostjob.ru',
+      password: 'f2TY1eVkwJMe',
+      authentication: 'plain',
+      enable_starttls_auto: true
   }
   config.action_mailer.default_url_options = { host: 'stage.rostjob.com', protocol: 'https' }
   config.action_mailer.default_options = { from: 'noreply@rostjob.com', charset: 'utf-8' }
