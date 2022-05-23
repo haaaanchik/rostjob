@@ -24,6 +24,13 @@ class Admin::AnalyticsController < Admin::ApplicationController
     @orders = result.includes(:user).where.not(state: :draft).decorate
   end
 
+  def user_activity
+    @q = UserActionLog.ransack(params[:q])
+    @users = paginate_array(@q.result.decorate, params[:page])
+    @user_action_log_records = User.contractors.includes(:profile)
+  end
+
+
   private
 
   def date_interval

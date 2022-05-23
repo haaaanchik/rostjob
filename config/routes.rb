@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       get :export_to_excel
       get :user_action_log
       get :orders_info
+      get :user_activity
     end
 
     get 'login', to: 'sessions#new'

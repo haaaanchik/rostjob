@@ -12,4 +12,8 @@ class Admin::AnalyticPolicy < Admin::StafferPolicy
   def user_action_log?
     orders_info?
   end
+
+  def user_activity?
+    orders_info?
+  end
 end
