@@ -2,9 +2,5 @@ tr
   td = user_activity.id
   td = user_activity.email
   td = user_activity.full_name
-  td = user_activity.profile.company.phone || user_activity.profile.phone
-  td = user_activity.profile.decorate.role_in_budge
-  td = l(user_activity.profile.created_at, format: :long)
-  td = user_activity.last_sign_in_at&.strftime('%k:%M %e %B %Y')
-  / td = user_activity.date
-  / td = user_activity.time
+  td = user_activity.profile.created_at.strftime('%F %T')
+  td = user_activity.last_sign_in_at&.strftime('%F %T')

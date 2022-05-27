@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::AnalyticsController < Admin::ApplicationController
 
   def export_to_excel
@@ -15,7 +17,7 @@ class Admin::AnalyticsController < Admin::ApplicationController
   def user_action_log
     @q = UserActionLog.ransack(params[:q])
     @user_action_log_records = @q.result.includes(:subject).page(params[:page])
-                                        .per(12).decorate
+      .per(12).decorate
   end
 
   def orders_info
@@ -25,9 +27,9 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def user_activity
-    @q = UserActionLog.ransack(params[:q])
-    @users = paginate_array(@q.result.decorate, params[:page])
-    @user_action_log_records = User.contractors.includes(:profile)
+    date_interval
+    @q = User.contractors.includes(:profile).ransack(params[:q])
+    @user_action_log_records = @q.result
   end
 
 
@@ -44,6 +46,6 @@ class Admin::AnalyticsController < Admin::ApplicationController
   end
 
   def set_authorize
-    authorize [:admin, :analytic]
+    authorize %i[admin analytic]
   end
 end
