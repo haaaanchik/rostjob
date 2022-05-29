@@ -8,12 +8,16 @@
                         class: 'form-control mb-3 mt-2',
                         placeholder: 'Поиск по имени'
 
-      .md-form
-        = f.date_field :created_at_gteq_any, class: 'form-control', value: Date.current - 1.week
-        = f.label :from, 'От:', class: 'active'
-      .md-form
-        = f.date_field :created_at_lteq_all, class: 'form-control', value: Date.current
-        = f.label :to, 'До:', class: 'active'
+      .md-form.mb-1
+        = f.text_field :created_at_gteq_any,
+                       class: 'form-control datepicker fff',
+                       id: 'date-picker-date'
+        = f.label :created_at_gteq_any, 'От:'
+      .md-form.mb-1
+        = f.text_field :created_at_lteq_all,
+                       class: 'form-control datepicker',
+                       id: 'date-picker-date'
+        = f.label :created_at_lteq_all, 'До:'
       = f.submit 'Поиск', class: 'btn btn-indigo export-button'
 
   table.table
