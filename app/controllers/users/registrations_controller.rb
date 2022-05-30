@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new_customer; end
 
   def contractor_info
-    @message = 'Для регистрации или найма персонала обратитесь по адресу manager@rostjob.com или по номеру +7 960 079 06 41'
+    @message = 'Для регистрации или найма персонала обратитесь по адресу manager@rostjob.com или по номеру 8 800 700 67 86'
     render 'users/inform_page'
   end
 
