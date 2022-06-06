@@ -1,0 +1,5 @@
+h1
+  - if current_profile.customer?
+    = SettingOffer.first.customer_offer.html_safe
+  - else
+    = SettingOffer.first.contractor_offer.html_safe

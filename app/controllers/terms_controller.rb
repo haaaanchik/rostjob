@@ -55,7 +55,7 @@ class TermsController < ApplicationController
     {
       pdf: "RostJob. Договор оферты #{Terms.new.title(@current_term)}",
       title: Terms.new.title(@current_term),
-      template: 'terms/_term_pdf.html',
+      template: 'terms/_save_pdf.html.slim',
       orientation: 'Portrait',
       page_size: 'A4',
       dpi: 300,
