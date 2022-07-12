@@ -2,8 +2,7 @@ tr
   td #{staffer.name}
   td #{staffer.login}
   td
-    - unless staffer.super_admin?
-      = link_to edit_admin_staffer_path(staffer), class: 'mr-3' do
-        i.far.fa-edit
-      = link_to admin_staffer_path(staffer), method: :delete, data: { confirm: 'Вы уверены?' } do
-        i.far.fa-trash-alt
+    = link_to edit_admin_staffer_path(staffer), class: 'mr-3' do
+      i.far.fa-edit
+    = link_to admin_staffer_path(staffer), method: :delete, data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt
