@@ -16,6 +16,8 @@ section.menu
       li.menu-list__item
         - if landing_main_path == '/industrial'
           = link_to 'Договор оферты', "#{root_url}terms#{landing_main_path}/download.pdf", class: 'menu-list__link'
+          li.menu-list__item
+            = active_link_to 'Цены', price_path, class: 'menu-list__link'
     .log-in-or-reg
       = link_to 'Вход', login_path, class: 'land-log-in'
       span.slash = '/'

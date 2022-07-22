@@ -686,6 +686,9 @@ GEM
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 5.0)
+    slim_lint (0.22.1)
+      rubocop (>= 0.78.0)
+      slim (>= 3.0, < 5.0)
     sprockets (3.7.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -869,6 +872,7 @@ DEPENDENCIES
   sitemap_generator
   slim (~> 3.0, >= 3.0.9)
   slim-rails (~> 3.1, >= 3.1.3)
+  slim_lint (~> 0.22.1)
   strip_attributes (~> 1.9)
   thredded!
   tinymce-rails

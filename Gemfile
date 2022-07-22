@@ -92,6 +92,7 @@ gem 'petrovich', '~> 1.1', '>= 1.1.1'
 gem 'slim', '~> 3.0', '>= 3.0.9'
 gem 'slim-rails', '~> 3.1', '>= 3.1.3'
 gem 'html2slim'
+gem 'slim_lint', '~> 0.22.1'
 
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'jquery-turbolinks', '~> 2.1'
