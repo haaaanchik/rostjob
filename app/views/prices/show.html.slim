@@ -1,5 +1,5 @@
 ruby:
-  val = params[:q].nil? ? nil:params[:q][:title_fields_cont]
+  val = params[:q].nil? ? nil : params[:q][:title_fields_cont]
 
 .container.mt-2.mb-2.shadow-none
   h1.text-center Прайс
@@ -7,11 +7,13 @@ ruby:
     .col-lg-7
       = text_field :admin_position, :search, class: 'form-control', value: val,
                    placeholder: 'Наберите название профессии',
-                   data:      { 'auto-url' => '/search_position', 'auto-select' => 'search_ransack_title',
-                                'auto-add-text' => false , 'autocomplete-on' => 'admin_position_search' }
+                   data:      { 'auto-url' => '/search_position',
+                                'auto-select' => 'search_ransack_title',
+                                'auto-add-text' => false,
+                                'autocomplete-on' => 'admin_position_search' }
 
     .col-lg-4.text-center
-      = link_to 'Показать все', price_path,  class: 'btn btn-primary btn-rounded'
+      = link_to 'Показать все', price_path, class: 'btn btn-primary btn-rounded'
 
   table.table.price-table
     thead
@@ -24,7 +26,7 @@ ruby:
         tr
           td #{position.title}
           td = position.price_group.customer_price
-          td.text-center 10 дней
+          td.text-center = position.warranty_period
   = paginate @paginated_price_items
 
 scss:
