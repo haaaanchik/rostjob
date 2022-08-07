@@ -230,6 +230,6 @@ class OrderDecorator < ApplicationDecorator
     start_periond = published_at || created_at
     end_perion = completed_at || Date.today
 
-    ((end_perion - start_periond).to_f / 365 * 12).round
+    ((end_perion.to_date - start_periond.to_date).to_f / 365 * 12).round
   end
 end
