@@ -27,4 +27,11 @@ class ProfileDecorator < ObjDecorator
       h.link_to('Правила пользования', h.term_of_uses_path, class_active: 'active-link')
     end
   end
+
+  def display_text_new_order
+    date = orders.published.maximum(:published_at)
+    return if date < Date.current.days_ago(14.days)
+
+    'Новая заявка'
+  end
 end

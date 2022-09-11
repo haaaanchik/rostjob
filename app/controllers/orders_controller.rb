@@ -42,23 +42,28 @@ class OrdersController < ApplicationController
 
   def orders
     @customer = Profile.find(params[:customer_id])
-    @order_filters = @customer.orders
-                              .published
-                              .with_customer_name
-                              .includes(:city, :production_site, profile: :company)
+    @order_filters = @customer
+                       .orders
+                       .published
+                       .with_customer_name
+                       .includes(:city, :production_site, profile: :company)
     @q = @order_filters.ransack(params[:q])
     @orders ||= @q.result
   end
 
   def search_customer
-    @orders = Order.published
-                   .with_customer_name
-                   .includes(:city, :production_site, profile: :company)
-    @q = Profile.joins(:orders)
-                .where('orders.state': 'published')
-                .customers.includes(:user, :company)
-                .order(created_at: :desc)
-                .ransack(params[:q])
+    @orders = Order
+                .published
+                .with_customer_name
+                .includes(:city, :production_site, profile: :company)
+    @q = Profile
+           .joins(:orders)
+           .where('orders.state': 'published')
+           .customers
+           .includes(:user, :company)
+           .order('COUNT(orders.id) DESC')
+           .group('id')
+           .ransack(params[:q])
     @q.result
   end
 
