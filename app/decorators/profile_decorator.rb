@@ -29,8 +29,8 @@ class ProfileDecorator < ObjDecorator
   end
 
   def display_text_new_order
-    # date = orders.published.maximum(:published_at)
-    return if orders.published.maximum(:published_at) <= Date.current.days_ago(14.days)
+    date = orders.published.maximum(:published_at)
+    return if (date <= Date.current.days_ago(14.days))
 
     'Новая заявка'
   end
