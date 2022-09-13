@@ -7,8 +7,8 @@
         .order__header
           p.order__title
             = link_to customer.user.full_name, orders_by_customer_path(customer)
-          / p.order__title
-          /   | #{customer.display_text_new_order}
+          p.order__title
+            | #{customer.display_text_new_order}
           p.order__rating
             | Количество заявок:
             span.order__rating--color.green-color
