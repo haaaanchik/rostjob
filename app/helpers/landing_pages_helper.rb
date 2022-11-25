@@ -5,6 +5,12 @@ module LandingPagesHelper
     request.path.scan(/^\/\w+/).first
   end
 
+  def landing_terms_for_industrial?
+    words = request.path.split('/')
+    words[1] == 'terms' &&
+      words[2] == 'industrial'
+  end
+
   def landing_another_path(name)
     landing_main_path << name
   end
