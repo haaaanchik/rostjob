@@ -4,9 +4,14 @@
     .contract-offer
       .title.recruiter-clr-purple Договор оферты
       .text-center
-        = link_to terms_path(format: 'pdf'), class: 'recruiter-clr-purple' do
-          | Скачать договор
-          i.fas.fa-file-pdf.fa-lg.ml-2
+        - if current_profile.customer?
+          = link_to industrial_download_terms_terms_path(format: 'pdf'), class: 'recruiter-clr-purple' do
+            | Скачать договор
+            i.fas.fa-file-pdf.fa-lg.ml-2
+        - if current_profile.contractor?
+          = link_to freelance_download_terms_terms_path(format: 'pdf'), class: 'recruiter-clr-purple' do
+            | Скачать договор
+            i.fas.fa-file-pdf.fa-lg.ml-2
       .row.scrollbar-near-moon.thin.mt-2
         .border#privacy_policy
           - if current_profile.customer?
