@@ -14,6 +14,11 @@ class Admin::OrdersController < Admin::ApplicationController
     redirect_to admin_orders_path
   end
 
+  def refresh_new_label
+    order.refresh_new_label!
+    redirect_to admin_orders_path
+  end
+
   def reject
     if params[:reason].empty?
       flash[:alert] = 'Не указана причина отказа'

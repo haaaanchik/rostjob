@@ -191,6 +191,7 @@ Rails.application.routes.draw do
       member do
         put :accept
         put :reject
+        put :refresh_new_label
       end
     end
 

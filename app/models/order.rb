@@ -133,6 +133,7 @@ class Order < ApplicationRecord
 
     publish!
     update(published_at: Date.today)
+    update(published_at_original: Date.today) if published_at_original.nil?
     comments.create(text: 'Заявка допущена к публикации')
   end
 
@@ -208,6 +209,10 @@ class Order < ApplicationRecord
 
   def send_mail_wait_for_payment
     SendEveryDaysNotifyMailJob.perform_now(objects: [self], method: 'order_wait_for_payment') if profile.notify_mails?
+  end
+
+  def refresh_new_label!
+    update(published_at_original: Date.today)
   end
 
   private

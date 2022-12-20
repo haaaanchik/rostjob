@@ -1,6 +1,7 @@
 $secondaryColor: #fff;
 $secondaryColorDark: #b7b7b7;
 $purple: #9046ff;
+$green: #24b250;
 
 .form-group.position-relative input {
   padding-right: 32px;
@@ -244,13 +245,35 @@ $purple: #9046ff;
     font-size: 14px;
   }
 
+  #requests-page .platform .vacancy .new-label {
+    margin-left: 0px;
+    margin-right: 16px;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 4px;
+    background-color: $green;
+    line-height: 13px;
+    padding: 4px 10px;
+    white-space: nowrap;
+
+    a {
+      color: #fff;
+      display: block;
+      text-align: center;
+
+      b {
+        font-weight: 800;
+      }
+    }
+  }
+
   #requests-page .platform .vacancy .salary {
     margin-left: auto;
     margin-right: 16px;
     font-size: 13px;
     color: #fff;
     border-radius: 4px;
-    background-color: #9046ff;
+    background-color: $purple;
     line-height: 13px;
     padding: 4px 10px;
     white-space: nowrap;

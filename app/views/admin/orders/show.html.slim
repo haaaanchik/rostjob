@@ -88,6 +88,8 @@
               .col-sm-5.mb-4
                 == @order.other_info['remark']
         .col-12
+          .refresh_new_label_btn
+            = render partial: 'order_refresh_new_label_form', locals: { order: @order }
           .section_btn
             .d-flex.mod_order_actions
               - if @order.state == 'moderation'

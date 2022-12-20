@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_19_235428) do
+ActiveRecord::Schema.define(version: 2022_12_20_140532) do
 
-  create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
     t.date "date"
     t.string "sender"
@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["number", "date", "src_account"], name: "index_account_statements_on_number_and_date_and_src_account", unique: true
   end
 
-  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "accounts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "account_number"
     t.string "corr_account"
     t.string "bic"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["accountable_type", "accountable_id"], name: "index_accounts_on_accountable_type_and_accountable_id"
   end
 
-  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "api_keys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "token", null: false
     t.string "access_ips"
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["token"], name: "index_api_keys_on_token"
   end
 
-  create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "balances", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_balances_on_profile_id"
   end
 
-  create_table "bill_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "bill_transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, default: "0.0"
     t.text "description"
     t.string "transaction_type"
@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["invoice_id"], name: "index_bill_transactions_on_invoice_id"
   end
 
-  create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "bot_callbacks", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.bigint "candidate_id"
     t.string "guid"
     t.json "call_data"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "careerists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "careerists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.json "query_params"
     t.boolean "active"
@@ -90,14 +90,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_cities_on_title"
   end
 
-  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.bigint "order_id"
     t.datetime "created_at", null: false
@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["order_id"], name: "index_comments_on_order_id"
   end
 
-  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "companies", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "short_name"
     t.string "address"
@@ -132,7 +132,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_companies_on_profile_id"
   end
 
-  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "complaints", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "state"
     t.text "text"
     t.bigint "proposal_employee_id"
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["proposal_employee_id"], name: "index_complaints_on_proposal_employee_id"
   end
 
-  create_table "crm_columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "crm_columns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id"], name: "index_crm_columns_on_user_id"
   end
 
-  create_table "crm_columns_employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "crm_columns_employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "crm_column_id"
     t.bigint "employee_cv_id"
     t.datetime "created_at", null: false
@@ -161,14 +161,17 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["employee_cv_id"], name: "index_crm_columns_employee_cvs_on_employee_cv_id"
   end
 
-  create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "data_migrations", primary_key: "version", id: :string, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  end
+
+  create_table "employee_cvs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "gender"
     t.date "birthdate"
     t.bigint "proposal_id"
     t.string "file_file_name"
     t.string "file_content_type"
-    t.bigint "file_file_size"
+    t.integer "file_file_size"
     t.datetime "file_updated_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -198,7 +201,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["proposal_id"], name: "index_employee_cvs_on_proposal_id"
   end
 
-  create_table "external_auths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "external_auths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "code"
     t.string "provider"
     t.json "values"
@@ -206,7 +209,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "friendly_id_slugs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -218,7 +221,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "geo_cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "geo_cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "synonym"
     t.string "fias_code"
@@ -231,14 +234,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["region_id"], name: "index_geo_cities_on_region_id"
   end
 
-  create_table "geo_countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "geo_countries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_geo_countries_on_name"
   end
 
-  create_table "geo_regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "geo_regions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -247,13 +250,13 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["name"], name: "index_geo_regions_on_name"
   end
 
-  create_table "holidays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "holidays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "invites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "description"
     t.string "state"
@@ -265,11 +268,11 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_invites_on_profile_id"
   end
 
-  create_table "invoice_number_seqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "invoice_number_seqs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "invoice_number"
   end
 
-  create_table "invoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "invoices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "invoice_number"
     t.decimal "amount", precision: 10, scale: 2
     t.json "seller"
@@ -285,7 +288,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_invoices_on_profile_id"
   end
 
-  create_table "message_to_supports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "message_to_supports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "sender_name"
     t.string "email_address"
     t.text "text"
@@ -293,7 +296,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "text"
     t.boolean "income"
     t.datetime "created_at", null: false
@@ -304,7 +307,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["ticket_id"], name: "index_messages_on_ticket_id"
   end
 
-  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "oauths", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "type"
     t.string "code"
     t.string "access_token"
@@ -318,7 +321,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.bigint "contractor_id"
   end
 
-  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "order_profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
@@ -327,7 +330,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_order_profiles_on_profile_id"
   end
 
-  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "order_templates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.text "specialization"
     t.string "older_city"
@@ -374,7 +377,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_order_templates_on_profile_id"
   end
 
-  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "specialization"
     t.string "older_city"
     t.integer "salary_from"
@@ -425,12 +428,13 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.integer "city_id"
     t.boolean "food_nutrition", default: false, null: false
     t.boolean "housing", default: false, null: false
+    t.date "published_at_original"
     t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"
   end
 
-  create_table "payment_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "payment_orders", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.json "data"
     t.string "state"
     t.datetime "created_at", null: false
@@ -439,29 +443,29 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["company_id"], name: "index_payment_orders_on_company_id"
   end
 
-  create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "positions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "duties"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "price_group_id"
+    t.integer "warranty_period", default: 10
     t.text "description"
     t.string "landing_title"
     t.string "slug"
-    t.integer "warranty_period", default: 10
     t.index ["price_group_id"], name: "index_positions_on_price_group_id"
     t.index ["slug"], name: "index_positions_on_slug", unique: true
     t.index ["title"], name: "index_positions_on_title"
   end
 
-  create_table "positions_specializations", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "positions_specializations", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "specialization_id", null: false
     t.bigint "position_id", null: false
     t.index ["position_id"], name: "index_positions_specializations_on_position_id"
     t.index ["specialization_id"], name: "index_positions_specializations_on_specialization_id"
   end
 
-  create_table "price_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "price_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -469,7 +473,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.decimal "contractor_price", precision: 10, scale: 2
   end
 
-  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "title"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
@@ -488,21 +492,21 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_production_sites_on_profile_id"
   end
 
-  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "profiles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "phone"
     t.string "email"
     t.string "contact_person"
     t.string "company_name"
     t.string "profile_type"
+    t.text "description"
     t.string "city"
     t.decimal "rating", precision: 10, scale: 1, default: "0.0"
     t.timestamp "last_seen"
     t.string "state"
     t.string "photo_file_name"
     t.string "photo_content_type"
-    t.bigint "photo_file_size"
+    t.integer "photo_file_size"
     t.datetime "photo_updated_at"
-    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "legal_form"
@@ -511,7 +515,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.integer "deal_counter", default: 0
   end
 
-  create_table "proposal_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "proposal_employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "proposal_id"
     t.bigint "order_id"
     t.bigint "profile_id"
@@ -539,19 +543,19 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["proposal_id"], name: "index_proposal_employees_on_proposal_id"
   end
 
-  create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "proposals", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "description"
     t.string "state"
-    t.boolean "accepted"
     t.bigint "order_id"
     t.bigint "profile_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "accepted"
     t.index ["order_id"], name: "index_proposals_on_order_id"
     t.index ["profile_id"], name: "index_proposals_on_profile_id"
   end
 
-  create_table "royce_connector", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "royce_connector", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "roleable_type", null: false
     t.bigint "roleable_id", null: false
     t.bigint "role_id", null: false
@@ -561,14 +565,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["roleable_type", "roleable_id"], name: "index_royce_connector_on_roleable_type_and_roleable_id"
   end
 
-  create_table "royce_role", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "royce_role", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_royce_role_on_name"
   end
 
-  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "sessions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "session_id", null: false
     t.text "data"
     t.datetime "created_at", null: false
@@ -577,14 +581,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["updated_at"], name: "index_sessions_on_updated_at"
   end
 
-  create_table "setting_offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "setting_offers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "customer_offer"
     t.text "contractor_offer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "settings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.string "target_type", null: false
@@ -595,7 +599,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["target_type", "target_id"], name: "index_settings_on_target_type_and_target_id"
   end
 
-  create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "specializations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -606,7 +610,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["title"], name: "index_specializations_on_title"
   end
 
-  create_table "staffers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "staffers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "login"
     t.string "password_digest"
@@ -615,7 +619,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "super_job_configs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "code"
     t.string "access_token"
     t.string "refresh_token"
@@ -628,7 +632,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.json "references"
   end
 
-  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "super_job_queries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.string "title"
     t.json "query_params"
     t.boolean "active"
@@ -638,7 +642,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["config_id"], name: "index_super_job_queries_on_config_id"
   end
 
-  create_table "tax_calculations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "tax_calculations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.decimal "tax_base", precision: 10, scale: 2
     t.decimal "tax_amount", precision: 10, scale: 2
     t.bigint "profile_id"
@@ -647,7 +651,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["profile_id"], name: "index_tax_calculations_on_profile_id"
   end
 
-  create_table "tax_offices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "tax_offices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "code"
     t.string "payment_name"
     t.string "inn"
@@ -662,7 +666,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["company_id"], name: "index_tax_offices_on_company_id"
   end
 
-  create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "messageboard_id", null: false
     t.text "name", null: false
     t.text "description"
@@ -674,14 +678,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["name"], name: "thredded_categories_name_ci", length: 191
   end
 
-  create_table "thredded_messageboard_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_messageboard_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "thredded_messageboard_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_messageboard_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "messageboard_id", null: false
     t.string "notifier_key", limit: 90, null: false
@@ -689,7 +693,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id", "messageboard_id", "notifier_key"], name: "thredded_messageboard_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_messageboard_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_messageboard_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "thredded_user_detail_id", null: false
     t.bigint "thredded_messageboard_id", null: false
     t.datetime "last_seen_at", null: false
@@ -698,7 +702,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["thredded_user_detail_id"], name: "fk_rails_06e42c62f5"
   end
 
-  create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_messageboards", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.text "name", null: false
     t.text "slug"
     t.text "description"
@@ -714,21 +718,21 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["slug"], name: "index_thredded_messageboards_on_slug", unique: true, length: 191
   end
 
-  create_table "thredded_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_notifications_for_followed_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_followed_topics_unique", unique: true
   end
 
-  create_table "thredded_notifications_for_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_notifications_for_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "notifier_key", limit: 90, null: false
     t.boolean "enabled", default: true, null: false
     t.index ["user_id", "notifier_key"], name: "thredded_notifications_for_private_topics_unique", unique: true
   end
 
-  create_table "thredded_post_moderation_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_post_moderation_records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "post_id"
     t.bigint "messageboard_id"
     t.text "post_content"
@@ -737,11 +741,11 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.bigint "moderator_id"
     t.integer "moderation_state", null: false
     t.integer "previous_moderation_state", null: false
-    t.timestamp "created_at", null: false
-    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display", order: { created_at: :desc }
+    t.timestamp "created_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
+    t.index ["messageboard_id", "created_at"], name: "index_thredded_moderation_records_for_display"
   end
 
-  create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content"
     t.string "source", limit: 191, default: "web"
@@ -758,7 +762,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id"], name: "index_thredded_posts_on_user_id"
   end
 
-  create_table "thredded_private_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_private_posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.text "content"
     t.bigint "postable_id", null: false
@@ -767,7 +771,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["postable_id", "created_at"], name: "index_thredded_private_posts_on_postable_id_and_created_at"
   end
 
-  create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_private_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
     t.text "title", null: false
@@ -782,7 +786,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["slug"], name: "index_thredded_private_topics_on_slug", unique: true, length: 191
   end
 
-  create_table "thredded_private_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_private_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "private_topic_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -791,14 +795,14 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id"], name: "index_thredded_private_users_on_user_id"
   end
 
-  create_table "thredded_topic_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_topic_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "topic_id", null: false
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_thredded_topic_categories_on_category_id"
     t.index ["topic_id"], name: "index_thredded_topic_categories_on_topic_id"
   end
 
-  create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_topics", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "last_user_id"
     t.text "title", null: false
@@ -815,13 +819,13 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["hash_id"], name: "index_thredded_topics_on_hash_id"
     t.index ["last_post_at"], name: "index_thredded_topics_on_last_post_at"
     t.index ["messageboard_id"], name: "index_thredded_topics_on_messageboard_id"
-    t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display", order: { sticky: :desc, updated_at: :desc }
+    t.index ["moderation_state", "sticky", "updated_at"], name: "index_thredded_topics_for_display"
     t.index ["slug"], name: "index_thredded_topics_on_slug", unique: true, length: 191
     t.index ["title"], name: "thredded_topics_title_fts", type: :fulltext
     t.index ["user_id"], name: "index_thredded_topics_on_user_id"
   end
 
-  create_table "thredded_user_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "latest_activity_at"
     t.integer "posts_count", default: 0
@@ -832,11 +836,11 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["latest_activity_at"], name: "index_thredded_user_details_on_latest_activity_at"
-    t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations", order: { moderation_state_changed_at: :desc }
+    t.index ["moderation_state", "moderation_state_changed_at"], name: "index_thredded_user_details_for_moderations"
     t.index ["user_id"], name: "index_thredded_user_details_on_user_id", unique: true
   end
 
-  create_table "thredded_user_messageboard_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_messageboard_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "messageboard_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
@@ -846,7 +850,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id", "messageboard_id"], name: "thredded_user_messageboard_preferences_user_id_messageboard_id", unique: true
   end
 
-  create_table "thredded_user_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_post_notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "post_id", null: false
     t.datetime "notified_at", null: false
@@ -854,7 +858,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id", "post_id"], name: "index_thredded_user_post_notifications_on_user_id_and_post_id", unique: true
   end
 
-  create_table "thredded_user_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_preferences", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.boolean "follow_topics_on_mention", default: true, null: false
     t.boolean "auto_follow_topics", default: false, null: false
@@ -863,17 +867,17 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id"], name: "index_thredded_user_preferences_on_user_id", unique: true
   end
 
-  create_table "thredded_user_private_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_private_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "postable_id", null: false
     t.integer "unread_posts_count", default: 0, null: false
     t.integer "read_posts_count", default: 0, null: false
     t.integer "integer", default: 0, null: false
-    t.timestamp "read_at", null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["user_id", "postable_id"], name: "thredded_user_private_topic_read_states_user_postable", unique: true
   end
 
-  create_table "thredded_user_topic_follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_topic_follows", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "topic_id", null: false
     t.datetime "created_at", null: false
@@ -881,20 +885,20 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id", "topic_id"], name: "thredded_user_topic_follows_user_topic", unique: true
   end
 
-  create_table "thredded_user_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "thredded_user_topic_read_states", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "messageboard_id", null: false
     t.bigint "user_id", null: false
     t.bigint "postable_id", null: false
     t.integer "unread_posts_count", default: 0, null: false
     t.integer "read_posts_count", default: 0, null: false
     t.integer "integer", default: 0, null: false
-    t.timestamp "read_at", null: false
+    t.timestamp "read_at", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["messageboard_id"], name: "index_thredded_user_topic_read_states_on_messageboard_id"
     t.index ["user_id", "messageboard_id"], name: "thredded_user_topic_read_states_user_messageboard"
     t.index ["user_id", "postable_id"], name: "thredded_user_topic_read_states_user_postable", unique: true
   end
 
-  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "tickets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.bigint "user_id"
     t.string "type"
     t.string "state"
@@ -907,7 +911,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
-  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "towns", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin", force: :cascade do |t|
     t.integer "id_region"
     t.integer "id_country"
     t.string "title"
@@ -917,7 +921,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "user_action_logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "receiver_id"
     t.integer "subject_id"
     t.string "subject_type"
@@ -933,7 +937,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.integer "employee_cv_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -968,7 +972,7 @@ ActiveRecord::Schema.define(version: 2022_01_19_235428) do
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
-  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+  create_table "withdrawal_methods", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "type"
     t.bigint "profile_id"
     t.string "title"

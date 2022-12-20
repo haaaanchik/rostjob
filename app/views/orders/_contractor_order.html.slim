@@ -8,6 +8,9 @@
           = link_to '&#9734'.html_safe, remove_from_favorites_order_path(order), class: 'pseudo-star pseudo-star-selected', method: :put, remote: true
 
     p.number = "№#{order.id}"
+    - if order.decorate.should_have_new_label?
+      p.new-label
+        | Новая заявка
     p.description 
       = "#{order.title}. #{order.skill} #{order.salary}"
     p.salary

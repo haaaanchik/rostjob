@@ -216,6 +216,11 @@ class OrderDecorator < ApplicationDecorator
     false
   end
 
+  def should_have_new_label?
+    return false if published_at_original.nil?
+    published_at_original > Date.today - 1.week
+  end
+
   private
 
   def link_to_disputed
