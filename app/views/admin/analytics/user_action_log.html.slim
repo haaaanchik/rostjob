@@ -1,6 +1,7 @@
 ruby:
   selected_role = params[:q] && params[:q][:subject_role_eq] ? params[:q][:subject_role_eq] : nil
   val = params[:q] && params[:q][:main_logs_fields_cont] ? params[:q][:main_logs_fields_cont] : nil
+  val2 = params[:q] && params[:q][:order_id_eq] ? params[:q][:order_id_eq] : nil
 
 .container-fluid.mt-2
   h2.text-center Журнал событий
@@ -12,6 +13,9 @@ ruby:
         .md-form
           = f.text_field :main_logs_fields_cont, class: 'form-control', value: val
           = f.label :main_logs_fields_cont, 'Поиск по контексту'
+        .md-form
+          = f.text_field :order_id_eq, class: 'form-control', value: val2
+          = f.label :order_id_eq, 'Поиск по номеру заявки'
         = f.select :subject_role_eq, options_for_select([['Исполнитель', 'contractor'], ['Заказчик', 'customer']], 
           selected_role), { prompt: 'По роли' }, { class: 'mdb-select md-form' }
         .d-flex

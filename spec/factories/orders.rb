@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :order do
-    city { Faker::Address.city }
+    association :city, factory: :geo_city
     description { "tetx description" }
     state { 'published' }
     skill { 'master' }

@@ -7,7 +7,7 @@
     = order.publish_title
     .request-block-header
       p #{ @production_site.title }
-      span #{ @production_site.city.name }
+      span #{ @production_site.city&.name }
     .request-block-container
       .request-content
         = image_tag order.profile.image_url, class: 'logo'
