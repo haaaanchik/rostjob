@@ -30,6 +30,8 @@ class Order < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: %r{.*\/.*\z}
 
+  scope :with_new_label, -> { where("published_at_original > ?", Date.today - 1.week) }
+
   ransack_alias :all_fields, :id_or_position_title_or_description_or_city_name_or_place_of_work_or_salary_from_or_salary_to
   ransack_alias :candidate_fields, :id_or_title_or_place_of_work_or_employee_cv_name
   ransack_alias :title_fields, :position_title

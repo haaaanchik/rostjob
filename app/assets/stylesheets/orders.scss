@@ -54,6 +54,28 @@ $green: #24b250;
   }
 }
 
+.orders-new-label {
+  margin-left: 16px;
+  margin-right: 16px;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 4px;
+  background-color: $green;
+  line-height: 13px;
+  padding: 4px 10px;
+  white-space: nowrap;
+
+  a {
+    color: #fff;
+    display: block;
+    text-align: center;
+
+    b {
+      font-weight: 800;
+    }
+  }
+}
+
 #order_page {
   min-height: 100%;
   #requests-page {

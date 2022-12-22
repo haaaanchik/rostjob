@@ -3,6 +3,7 @@
 
   .orders-container
     - @customer_list.each do |customer|
+      - new_orders_count = customer.orders.with_new_label.count
       .order
         .order__header
           p.order__title
@@ -13,6 +14,10 @@
             | Количество заявок:
             span.order__rating--color.green-color
               |  #{ customer.order_titles_count }
+            - if new_orders_count > 0
+              span.orders-new-label
+                | Новых заявок: 
+                |  #{ new_orders_count }
           = image_tag(customer.image_url, class: 'order__img')
         p.order-description
           = "#{ cities_of_orders(customer.orders.published.includes(:city))[0] }  ......"
