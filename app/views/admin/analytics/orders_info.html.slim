@@ -1,4 +1,5 @@
 - selected_state = params[:q] && params[:q][:state_eq] ? params[:q][:state_eq] : 'published'
+- selected_city = params[:q] && params[:q][:city_id_eq] ? params[:q][:city_id_eq] : ''
 - search_input = params[:q] && params[:q][:analytics_fields_cont] ? params[:q][:analytics_fields_cont] : nil
 .container-fluid.mt-2#orders_info_page
   h2.text-center Список заявок
@@ -21,6 +22,10 @@
       = f.text_field :analytics_fields_cont, class: 'form-control',
                                              value: search_input
       = f.label :analytics_fields_cont, 'Поиск по контексту'
+
+    = f.label :city_id_eq, 'Город'
+    = f.select :city_id_eq, options_for_select(orders_cities_for_select,
+            selected_city), {}, { class: 'mdb-select md-form mb-0' }
 
     .d-flex.align-items-center
       = link_to 'Сбросить фильтры', admin_analytics_orders_info_path,
