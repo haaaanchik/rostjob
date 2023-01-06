@@ -9,7 +9,7 @@
         = f.fields_for :company do |c|
           = c.hidden_field :legal_form, value: 'partner'
           .form-group.row
-            = c.label :name, 'ФИО по паспорту', class: 'col-lg-4 col-12 col-sm-6'
+            = c.label :name, 'Ваше ФИО по паспорту', class: 'col-lg-4 col-12 col-sm-6'
             .col-lg-6.col-12.col-sm-6
               = c.text_field :name, rows: '1' , class: 'form-control'
           .form-group.row.private-person-field
