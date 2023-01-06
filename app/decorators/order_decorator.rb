@@ -13,6 +13,10 @@ class OrderDecorator < ApplicationDecorator
     model.id
   end
 
+  def city_name
+    model&.city&.name
+  end
+
   def display_info_price
     return customer_price.to_i if h.current_profile.customer?
 
