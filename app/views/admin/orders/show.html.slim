@@ -43,6 +43,13 @@
             .col-sm-4
               b Статус
             .col-sm-8.mb-4 = enum_i18n(Order, :state, @order.state)
+            .col-sm-4
+              b Актуальность
+            .col-sm-8.mb-4
+              - if @order.actual
+                i.fas.fa-check-square.watch_checkbox
+              - else
+                i.fas.fa-square.checkbox.watch_checkbox
             - if @order.shift_method
               .col-sm-4
                 b Вахта

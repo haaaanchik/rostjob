@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_12_22_121811) do
+ActiveRecord::Schema.define(version: 2023_01_29_194955) do
 
   create_table "account_statements", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "src_account"
@@ -429,6 +429,7 @@ ActiveRecord::Schema.define(version: 2022_12_22_121811) do
     t.boolean "food_nutrition", default: false, null: false
     t.boolean "housing", default: false, null: false
     t.date "published_at_original"
+    t.boolean "actual", default: true
     t.index ["city_id"], name: "index_orders_on_city_id"
     t.index ["production_site_id"], name: "index_orders_on_production_site_id"
     t.index ["profile_id"], name: "index_orders_on_profile_id"

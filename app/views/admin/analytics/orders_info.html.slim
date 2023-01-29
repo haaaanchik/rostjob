@@ -38,6 +38,7 @@
       thead
         tr
           th rowspan='2' Статус
+          th rowspan='2' Актуальность
           th rowspan='2' Дата публикации
           th rowspan='2' Город
           th rowspan='2' Название организации
@@ -64,6 +65,7 @@
 
           tr
             td = order.state_for_analytics
+            td = order.actuality_for_analytics
             td.date-col = order.formated_date(:published_at)
             td = order.city_name
             td = order.profile.user.full_name

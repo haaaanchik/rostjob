@@ -169,6 +169,10 @@ class OrderDecorator < ApplicationDecorator
     I18n.t("order.states_for_select.#{model.state}")
   end
 
+  def actuality_for_analytics
+    I18n.t("order.actuality.#{model.actual.to_s}")
+  end
+
   def count_pr_employees_state(state)
     count_states ||= proposal_employees.group(:state).count
     count_states[state] || 0

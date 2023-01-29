@@ -7,6 +7,9 @@ ru:
       published: 'опубликована'
       rejected: 'отклонена'
       completed: 'выполнена'
+    actuality:
+      "true": 'Актуально'
+      "false": 'Неактуально'
     states_for_select: &order_states
       waiting_for_payment: 'Ожидает оплаты'
       published: 'Открыта'
