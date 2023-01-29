@@ -2,6 +2,7 @@ $secondaryColor: #fff;
 $secondaryColorDark: #b7b7b7;
 $purple: #9046ff;
 $green: #24b250;
+$yellow: #FDDA0D;
 
 .form-group.position-relative input {
   padding-right: 32px;
@@ -274,6 +275,28 @@ $green: #24b250;
     color: #fff;
     border-radius: 4px;
     background-color: $green;
+    line-height: 13px;
+    padding: 4px 10px;
+    white-space: nowrap;
+
+    a {
+      color: #fff;
+      display: block;
+      text-align: center;
+
+      b {
+        font-weight: 800;
+      }
+    }
+  }
+
+  #requests-page .platform .vacancy .unactual-label {
+    margin-left: 0px;
+    margin-right: 16px;
+    font-size: 13px;
+    color: #000;
+    border-radius: 4px;
+    background-color: $yellow;
     line-height: 13px;
     padding: 4px 10px;
     white-space: nowrap;

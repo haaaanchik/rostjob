@@ -11,6 +11,9 @@
     - if order.decorate.should_have_new_label?
       p.new-label
         | Новая заявка
+    - unless order.actual
+      p.unactual-label
+        | Неактуальная
     p.description 
       = "#{order.title}. #{order.skill} #{order.salary}"
     p.salary
