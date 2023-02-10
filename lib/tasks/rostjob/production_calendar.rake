@@ -83,10 +83,10 @@ namespace :rostjob do
       data.each_with_index do |month, index|
         year_month = "#{year}-#{(index + 1).to_s.rjust(2, '0')}-"
         month.each do |day|
-          holidays.push(date: Date.strptime(year_month + day.rjust(2, '0')))
+          date = Date.strptime(year_month + day.rjust(2, '0'))
+          Holiday.find_or_create_by(date: date)
         end
       end
-      Holiday.create!(holidays)
     end
   end
 end
