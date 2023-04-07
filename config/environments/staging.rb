@@ -85,11 +85,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'smtp.go2.unisender.ru',
+      address: 'connect.smtp.bz',
       port: 465,
       ssl:  true,
-      user_name: '5525937',
-      password: '6peu7abnwgkzmt5mejhqscfz8dwczxmrj5tcmq5a',
+      user_name: 'mailgun@rostjob.ru',
+      password: 'f2TY1eVkwJMe',
       authentication: 'plain',
       enable_starttls_auto: true
   }
