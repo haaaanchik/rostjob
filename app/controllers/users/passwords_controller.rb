@@ -11,13 +11,20 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    result = Cmd::User::ResetPassword.call(user_email: params[:user][:email])
+    rnd = params["random"]
+    captcha_resp = params["captcha"]["captcha"]
+    if Captcha.check(captcha_resp, rnd)
+      result = Cmd::User::ResetPassword.call(user_email: params[:user][:email])
 
-    if result.success?
-      flash[:notice] = result.message
-      after_sending_reset_password_instructions_path_for(result.user)
+      if result.success?
+        flash[:notice] = result.message
+        after_sending_reset_password_instructions_path_for(result.user)
+      else
+        flash[:alert] = result.message
+        render :new
+      end
     else
-      flash[:alert] = result.message
+      flash[:alert] = "Неверный код с картинки"
       render :new
     end
   end

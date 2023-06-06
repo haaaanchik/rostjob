@@ -20,20 +20,29 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    result = if params[:role] == 'customer'
-               ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
-                                                              profile_params: { profile_type: 'customer', legal_form: 'company' })
-             else
-               ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
-                                                                profile_params: { profile_type: 'contractor' })
-             end
+    rnd = params["random"]
+    captcha_resp = params["captcha"]["captcha"]
+    if Captcha.check(captcha_resp, rnd)
+      result = if params[:role] == 'customer'
+                 ::Cmd::User::Registration::CreateCustomer.call(user_params: user_params,
+                                                                profile_params: { profile_type: 'customer', legal_form: 'company' })
+               else
+                 ::Cmd::User::Registration::CreateContractor.call(user_params: user_params,
+                                                                  profile_params: { profile_type: 'contractor' })
+               end
 
-    if result.success?
-      @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
-        для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
-      render 'users/inform_page'
+      if result.success?
+        @message = 'Cпасибо за регистрацию. На указанный вами адрес электронной почты направлена ссылка
+          для активации учетной записи. Если письмо долго не приходит, проверьте папку "СПАМ" вашей почты.'
+        render 'users/inform_page'
+      else
+        @reg_error = true
+        @wrong_captcha = false
+        render "users/registrations/new_#{params[:role]}"
+      end
     else
-      @status = false
+      @reg_error = false
+      @wrong_captcha = true
       render "users/registrations/new_#{params[:role]}"
     end
   end

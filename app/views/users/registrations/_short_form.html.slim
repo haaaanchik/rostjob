@@ -2,12 +2,18 @@
   .d-flex.flex-column.justify-content-center.align-items-center.h-100
     .text-center
       p.h4.mb-4 #{title}
-      - if status == false
+      - if @reg_error == true
         .invalid-feedback.mb-2 Такой email уже существует
+      - if @wrong_captcha == true
+        .invalid-feedback.mb-2 Неверный код с картинки
 
+      - rnd = Captcha.get_random
       = form_for :user, method: :post, url: user_registration_path(role: type), html: { class: 'text-center' } do |f|
         = f.email_field :email, id: 'defaultLoginFormEmail', class: 'form-control mb-4 placeholder', placeholder: 'E-Mail'
         = f.text_field :full_name, class: 'form-control mb-4 placeholder', placeholder: 'Имя'
+        = text_field :captcha, :captcha, class: 'form-control mb-4 placeholder', placeholder: 'Код с картинки'
+        = image_tag "http://image.captchas.net/?client=for_captcha&random=#{rnd}"
+        = hidden_field_tag :random, rnd
         .d-flex.justify-content-center
           = f.submit button_text, class: 'btn btn-info btn-block'
       - t('views.modals.signin.password_confirmation')

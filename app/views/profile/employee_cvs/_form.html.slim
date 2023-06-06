@@ -53,6 +53,16 @@
                 p.ancete-row__title Доп. информация
                 .ancete-row__content
                   = f.text_area :remark, cols: 30,  rows: 5
+              - rnd = Captcha.get_random
+              .ancete-row.must-have
+                p.ancete-row__title Код с картинки
+                .ancete-row__content
+                  = text_field :captcha, :captcha, placeholder: 'Код с картинки', cols: 30, class: 'form-control'
+                  .invalid-feedback
+                  = image_tag "http://image.captchas.net/?client=for_captcha&random=#{rnd}"
+                  = hidden_field_tag :random, rnd
+          br
+          
 
           .modal-ancete__sidebar
             - if @order.blank?

@@ -36,14 +36,21 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def create_for_send
-    result = Cmd::EmployeeCv::Send.call(employee_cvs_params: employee_cvs_params,
-                                        interview_date: params[:interview_date],
-                                        profile: current_profile,
-                                        order: employee_cv_order)
+    rnd = params["random"]
+    captcha_resp = params["captcha"]["captcha"]
+    if Captcha.check(captcha_resp, rnd)
+      result = Cmd::EmployeeCv::Send.call(employee_cvs_params: employee_cvs_params,
+                                          interview_date: params[:interview_date],
+                                          profile: current_profile,
+                                          order: employee_cv_order)
 
-    if result.failure?
+      if result.failure?
+        @user = current_user
+        render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422 if !result.proposal_employee
+      end
+    else
       @user = current_user
-      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422 if !result.proposal_employee
+      render json: { validate: true, data: {"captcha_captcha":"Неверный код с картинки"} }, status: 422
     end
   end
 
