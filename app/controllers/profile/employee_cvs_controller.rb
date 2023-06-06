@@ -24,14 +24,21 @@ class Profile::EmployeeCvsController < ApplicationController
   end
 
   def create_as_ready
-    result = Cmd::EmployeeCv::CreateAsReady.call(profile: current_profile,
-                                                 employee_cvs_params: employee_cvs_params)
-    if result.success?
-      @status = 'success'
-      redirect_to profile_employee_cvs_path
+    rnd = params["random"]
+    captcha_resp = params["captcha"]["captcha"]
+    if Captcha.check(captcha_resp, rnd)
+      result = Cmd::EmployeeCv::CreateAsReady.call(profile: current_profile,
+                                                   employee_cvs_params: employee_cvs_params)
+      if result.success?
+        @status = 'success'
+        redirect_to profile_employee_cvs_path
+      else
+        @status = 'error'
+        render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
+      end
     else
-      @status = 'error'
-      render json: { validate: true, data: errors_data(result.employee_cv) }, status: 422
+      @user = current_user
+      render json: { validate: true, data: {"captcha_captcha":"Неверный код с картинки"} }, status: 422
     end
   end
 
