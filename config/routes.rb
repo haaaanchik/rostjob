@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get '/oauth/callback/superjob', to: 'oauth_callback#superjob'
   get '/oauth/callback/zarplata', to: 'oauth_callback#zarplata'
 
+  get '/users', to: 'welcome#index'
+
   devise_scope :user do
     get 'login', to: 'users/sessions#new'
     get :contractor_info, to: 'users/registrations#contractor_info'
