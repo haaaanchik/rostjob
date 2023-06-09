@@ -15,11 +15,10 @@ body#customer-landing
         h2.subtitle
           | Подбор персонала для вашей компании за 3 дня по цене от 8 000 рублей за сотрудника с гарантией полного возврата денежных средств
         = form_for @user,
-                method: :post,
-                url: user_registration_path(role: 'customer'),
+                method: :get,
+                url: new_customer_path,
                 html: { name: 'form-email', class: 'hire-staff-block', novalidate: '' } do |f|
           .invalid-feedback = errors[:email].first
-          = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
           = f.button t('views.modals.signin.customer'), class: 'hire-staff-btn'
       .landing-header-img
         = image_tag '/img/reusable_images/header_img.svg'
