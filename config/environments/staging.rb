@@ -85,14 +85,15 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      address: 'connect.smtp.bz',
+    address: 'smtp-pulse.com',
       port: 465,
       ssl:  true,
-      user_name: 'mailgun@rostjob.ru',
-      password: 'f2TY1eVkwJMe',
+      user_name: 'manager@rostjob.com',
+      password: 'KrQ8ciB3ndoG6AN',
       authentication: 'plain',
       enable_starttls_auto: true
   }
+
   config.action_mailer.default_url_options = { host: 'stage.rostjob.com', protocol: 'https' }
   config.action_mailer.default_options = { from: 'noreply@rostjob.com', charset: 'utf-8' }
   # Ignore bad email addresses and do not raise email delivery errors.
