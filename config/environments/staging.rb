@@ -95,7 +95,7 @@ Rails.application.configure do
   }
 
   config.action_mailer.default_url_options = { host: 'stage.rostjob.com', protocol: 'https' }
-  config.action_mailer.default_options = { from: 'noreply@rostjob.com', charset: 'utf-8' }
+  config.action_mailer.default_options = { from: 'manager@rostjob.com', charset: 'utf-8' }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
