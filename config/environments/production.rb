@@ -87,7 +87,7 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = { host: 'stage.rostjob.com', protocol: 'https' }
+  config.action_mailer.default_url_options = { host: 'rostjob.com', protocol: 'https' }
   config.action_mailer.default_options = { from: 'manager@rostjob.com', charset: 'utf-8' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
