@@ -3,8 +3,12 @@
     = form_for '', url: request_call_path, method: :post, html: { class: 'form' } do |f|
       = image_tag '/img/customer-landing/modal-man.png'
       .inputs-container
-        = f.text_field :username, class: 'name', placeholder: 'Ваше имя', required: :required
+        = f.text_field :username, class: 'name', style: 'margin-top: 0px', placeholder: 'Ваше имя', required: :required
         = f.phone_field :phone_number, class: 'phone', placeholder: 'Телефон', required: :required
+        - rnd = Captcha.get_random
+        = text_field :captcha, :captcha, style: 'margin-top: 14px; margin-bottom: 14px', placeholder: 'Код с картинки'
+        = image_tag "http://image.captchas.net/?client=for_captcha&random=#{rnd}"
+        = hidden_field_tag :random, rnd
         button.green-btn.purple-btn type='submit'  Отправить
       .js-close-modal.close-modal
         = image_tag '/img/customer-landing/close_modal.png'

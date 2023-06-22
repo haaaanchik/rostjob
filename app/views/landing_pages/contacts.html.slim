@@ -59,7 +59,11 @@
         p.title
           | Хотите узнать стоимость
         = f.text_field :username, class: 'input name', placeholder: 'Ваше имя'
-        = f.phone_field :phone_number, class: 'input phone', placeholder: 'Телефон'
+        = f.phone_field :phone_number, class: 'input phone', style: 'margin-bottom: 14px', placeholder: 'Телефон'
+        - rnd = Captcha.get_random
+        = text_field :captcha, :captcha, class: 'form-control mb-4 placeholder', style: 'margin-bottom: 14px', placeholder: 'Код с картинки'
+        = image_tag "http://image.captchas.net/?client=for_captcha&random=#{rnd}", style: 'margin-bottom: 14px'
+        = hidden_field_tag :random, rnd 
         = f.submit 'Отправить', class: 'btn-send-form'
 
   = render 'footer'

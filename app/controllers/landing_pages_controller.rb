@@ -21,12 +21,18 @@ class LandingPagesController < ActionController::Base
   def contacts; end
 
   def request_call
-    ContactUsMailer
-      .with(username: params[:username], phone_number: params[:phone_number])
-      .request_call
-      .deliver_now
+    rnd = params["random"]
+    captcha_resp = params["captcha"]["captcha"]
+    if Captcha.check(captcha_resp, rnd)
+      ContactUsMailer
+        .with(username: params[:username], phone_number: params[:phone_number])
+        .request_call
+        .deliver_now
 
-    redirect_to industrial_path, notice: 'Спасибо за заявку! Наш менеджер в ближайшее время свяжется с вами.'
+      redirect_to industrial_path, notice: 'Спасибо за заявку! Наш менеджер в ближайшее время свяжется с вами.'
+    else
+      redirect_to industrial_path, alert: 'Вы указали неверный код с картинки! Попробуйте снова.'
+    end
   end
 
   private
