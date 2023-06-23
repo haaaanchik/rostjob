@@ -7,7 +7,7 @@
       section.landing-header.container
         .content
           h1.title
-            | Единичный и массовый подбор #{@profession.landing_title}
+            | Единичный и массовый подбор линейного персонала
           h2.subtitle
             | с помощью платформы по поиску персонала от RostJob
           .info
@@ -21,7 +21,7 @@
             span.slash |
             span
               b = 'Гарантия: '
-              | 10 дней
+              | 5 дней
           = form_for @user,
                   method: :get,
                   url: new_customer_path,
