@@ -41,7 +41,7 @@ class OrderSerializer < ApplicationSerializer
   end
 
   attribute :without_experience do |object|
-    object.customer_price <= 8000 ? 1 : 0
+    object.customer_price <= 9000 ? 1 : 0
   end
 
   attribute :published_at do |object|

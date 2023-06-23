@@ -28,7 +28,7 @@ module Orders
       elsif sort_date.present?
         search_orders.order(created_at: :desc)
       elsif without_experience
-        search_orders.where('customer_price <= 8000')
+        search_orders.where('customer_price <= 9000')
       else
         search_orders
       end
