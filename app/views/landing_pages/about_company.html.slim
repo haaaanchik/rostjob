@@ -11,7 +11,7 @@
           h2.subtitle
             | №1 по соотношению цена/качество в России
           = form_for @user,
-                  method: :post,
+                  method: :get,
                   url: registration_user_path,
                   html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
             .invalid-feedback = @user.errors.messages[:email].first

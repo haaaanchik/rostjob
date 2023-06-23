@@ -9,7 +9,7 @@
           h1.title
             | Получи предложение по найму персонала за 7 минут
           = form_for @user,
-                  method: :post,
+                  method: :get,
                   url: registration_user_path,
                   html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
             .invalid-feedback = @user.errors.messages[:email].first

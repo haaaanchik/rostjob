@@ -24,8 +24,12 @@ module UsersHelper
   end
 
   def registration_user_path
-    role = request.url.include?('freelance') ? 'contractor' : 'customer'
-
-    user_registration_path(role: role)
+    #role = request.url.include?('freelance') ? 'contractor' : 'customer'
+    #user_registration_path(role: role)
+    if request.url.include?('freelance')
+      new_contractor_path
+    else
+      new_customer_path
+    end
   end
 end

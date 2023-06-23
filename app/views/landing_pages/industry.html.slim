@@ -11,8 +11,8 @@
           h2.subtitle
             | Строительный персонал от 8 000 ₽ за 5 дней в вашу компанию с помощью платформы от RostJob
           = form_for @user,
-                  method: :post,
-                  url: user_registration_path(role: 'customer'),
+                  method: :get,
+                  url: new_customer_path,
                   html: {name: 'form-email', class: 'hire-staff-block', novalidate: ''} do |f|
             .invalid-feedback = @user.errors.messages[:email].first
             = f.email_field :email, class: 'form-control', placeholder: 'Введите email для регистрации'
