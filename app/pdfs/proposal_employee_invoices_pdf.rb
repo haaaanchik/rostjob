@@ -101,7 +101,7 @@ class ProposalEmployeeInvoicesPdf < Prawn::Document
 
   def goods
     move_down 5.mm
-    table([[{ content: 'Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензии и объему, качеству и срокам оказания услуг не имеет' }]],
+    table([[{ content: 'Вышеперечисленные услуги выполнены полностью и в срок. Заказчик претензии к объему, качеству и срокам оказания услуг не имеет' }]],
           column_widths: [165.mm, 25.mm], cell_style: { font: 'Arial', size: 11, borders: [:bottom] })
   end
 
