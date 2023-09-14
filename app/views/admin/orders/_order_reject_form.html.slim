@@ -1,10 +1,8 @@
 = form_with url: reject_admin_order_path(order), local: true, method: :put,
   data: { confirm: 'Вы уверены?' } do |f|
-  .md-form
+  .md-form.ml-2
     = f.label :reason, 'Причина отказа'
     = f.text_area :reason, class: 'md-textarea form-control'
 
-  .md-form
+  .md-form.text-center
     = f.submit 'Отклонить заявку', class: 'btn btn-red'
-    = link_to 'Редактировать', edit_admin_order_path(@order),
-                               class: 'btn_edit btn btn-green'

@@ -21,7 +21,7 @@
         .col-6
           .row
             .col-sm-4
-              b Имя заказчкика
+              b Имя заказчика
             .col-sm-8.mb-4 = @order.user.full_name
             .col-sm-4
               b Контакты заказчика
@@ -86,27 +86,28 @@
             .col-sm-4
               b Описание вакансии
             .col-sm-8.mb-4
-              br
               == @order.other_info['terms']
-            .col-sm-7
+            .col-sm-4
               b Дополнительная информация для рекрутера
-            .col-sm-7.mt-3.mb-4.other_info_remark
+            .col-sm-8.mb-4
               | Заказчик ожидает увидеть и не видеть в заявке:
-              .col-sm-5.mb-4
+              div
                 == @order.other_info['remark']
-        .col-12
-          .refresh_new_label_btn
-            = render partial: 'order_refresh_new_label_form', locals: { order: @order }
-          .section_btn
-            .d-flex.mod_order_actions
-              - if @order.state == 'moderation'
-                .col-2
-                  = link_to 'Одобрить заявку', accept_admin_order_path(@order),
-                                               class: 'approve_btn btn btn-green ',
-                                               method: :put,
-                                               data: { confirm: 'Вы уверены?' }
-              .col-3.reject_btn
-                = render partial: 'order_reject_form', locals: { order: @order }
-              - if @order.state == 'moderation'
-                .col-2
-                  = link_to 'Редактировать', edit_admin_order_path(@order), class: 'btn_edit btn btn-green'
+      .row
+        .col-sm-3
+          = link_to 'Обновить статус новой',
+                    refresh_new_label_admin_order_path(@order),
+                    class: 'btn btn-blue',
+                    data: { method: :put, confirm: 'Вы уверены?' }
+        .col-sm-3
+          - if @order.state == 'moderation'
+            = link_to 'Одобрить заявку', accept_admin_order_path(@order),
+                                         class: 'btn btn-green',
+                                         method: :put,
+                                         data: { confirm: 'Вы уверены?' }
+        .col-sm-3
+          = link_to 'Редактировать', edit_admin_order_path(@order), class: 'btn btn-green'
+
+      .row
+        .col-sm-5
+          = render partial: 'order_reject_form', locals: { order: @order }
