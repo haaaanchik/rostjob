@@ -473,6 +473,7 @@ ActiveRecord::Schema.define(version: 2023_01_29_194955) do
     t.datetime "updated_at", null: false
     t.decimal "customer_price", precision: 10, scale: 2
     t.decimal "contractor_price", precision: 10, scale: 2
+    t.integer "warranty_period", default: 10
   end
 
   create_table "production_sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

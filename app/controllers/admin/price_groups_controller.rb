@@ -41,7 +41,7 @@ class Admin::PriceGroupsController < Admin::ApplicationController
   private
 
   def price_group_params
-    params.require(:price_group).permit(:title, :customer_price, :contractor_price)
+    params.require(:price_group).permit(:title, :customer_price, :contractor_price, :warranty_period)
   end
 
   def price_group

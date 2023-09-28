@@ -11,3 +11,4 @@ ru:
     title: 'Наименование ценовой группы'
     customer_price: 'Цена для заказчика'
     contractor_price: 'Цена для исполнителя'
+    warranty_period: 'Гарантийный период'

@@ -14,5 +14,9 @@
         = f.label :contractor_price, t('price_group.contractor_price')
         = f.text_field :contractor_price, class: 'form-control'
         .invalid-feedback
+      .col.mb-2
+        = f.label :warranty_period, t('price_group.warranty_period')
+        = f.text_field :warranty_period, class: 'form-control'
+        .invalid-feedback
       = f.submit 'Сохранить', class: 'btn btn-indigo mt-5'
       = link_to t('buttons.cancel'), admin_price_groups_path, class: 'btn btn-indigo mt-5'
