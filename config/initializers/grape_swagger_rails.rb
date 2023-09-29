@@ -5,6 +5,6 @@ GrapeSwaggerRails.options.app_name = 'RostJob'
 GrapeSwaggerRails.options.app_url  = '/'
 
 # Authorization
-GrapeSwaggerRails.options.api_auth     = 'basic'
+GrapeSwaggerRails.options.api_auth     = 'bearer'
 GrapeSwaggerRails.options.api_key_name = 'Authorization'
 GrapeSwaggerRails.options.api_key_type = 'header'

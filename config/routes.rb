@@ -1,18 +1,4 @@
 Rails.application.routes.draw do
-
-  namespace 'api' do
-    namespace 'v1' do
-      resources :orders, only: %i[index show] do
-        collection do
-          get :favorites
-        end
-      end
-      resources :geo_cities, only: %i[index]
-      resources :specializations, only: %i[index]
-      resources :customers, only: %i[index show ]
-    end
-  end
-
   mount Api::Base => '/api'
   mount GrapeSwaggerRails::Engine => '/apidoc'
 

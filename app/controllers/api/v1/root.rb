@@ -9,13 +9,13 @@ module Api
 
       default_format :json
 
-      include Api::V1::Auth
-      # mount Api::V1::Orders
-      mount Api::V1::Contractors
-      # mount Api::V1::Customers
-      # mount Api::V1::Specializations
-      mount Api::V1::EmployeeCvs
-      # mount Api::V1::GeoCities
+      helpers Api::V1::Auth
+
+      rescue_from(ActiveRecord::RecordNotFound) { |_e| error!({ errors: 'Record Not Found' }, 404) }
+
+      mount Api::V1::Geo::Countries
+      mount Api::V1::Geo::Regions
+      mount Api::V1::Geo::Cities
 
       add_swagger_documentation(
         base_path: '/api',
