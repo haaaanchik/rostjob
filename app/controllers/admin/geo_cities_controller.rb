@@ -46,7 +46,7 @@ class Admin::GeoCitiesController < Admin::ApplicationController
   end
 
   def set_city
-    Geo::City.find(params[:id])
+    @city = Geo::City.find(params[:id])
   end
 
   def paginated_city
