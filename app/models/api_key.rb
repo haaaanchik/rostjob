@@ -12,7 +12,9 @@ class ApiKey < ApplicationRecord
     state :active
   end
 
+  private
+
   def generate_token
-    self.token = name.downcase + '_' + SecureRandom.urlsafe_base64(60)
+    self.token = name.gsub(' ', '').underscore + '_' + SecureRandom.urlsafe_base64(60)
   end
 end
