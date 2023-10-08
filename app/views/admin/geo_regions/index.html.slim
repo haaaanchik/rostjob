@@ -1,0 +1,17 @@
+.col-6
+  h1 Справочник регионов
+.col-6.text-right
+  = link_to 'Добавить регион', new_admin_geo_region_path, class: 'btn btn-indigo'
+
+.col-9.mt-3
+  = text_field :admin_region, :search, class: "form-control",
+          placeholder: 'Поиск региона',
+          data: { 'auto-url' => '/search_geo_city', 'auto-select' => 'search_term',
+                  'auto-add-text' => false, 'autocomplete-on' => true }
+  = link_to 'Показать все', admin_geo_regions_path, class: 'btn btn-indigo'
+table.table
+  tr
+    th Регион
+    th Действия
+  = render partial: 'region', collection: @paginated_region
+= paginate @paginated_region

@@ -1,0 +1,7 @@
+tr
+  td #{region.name}
+  td
+    = link_to edit_admin_geo_region_path(region) do
+      i.far.fa-edit
+    = link_to admin_geo_region_path(region), method: :delete, data: { confirm: 'Вы уверены?' } do
+      i.far.fa-trash-alt

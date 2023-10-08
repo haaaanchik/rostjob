@@ -1,0 +1,10 @@
+.card
+  .card-body
+    h3 #{@region.persisted? ? 'Редактировать регион' : 'Новый регион'}
+    = form_with model: [:admin, @region] do |f|
+      .form-group
+        = f.label :name, 'Название'
+        = f.collection_select :region_id, Geo::Region.all, :id, :name, {}, class: 'custom-select'
+        .invalid-feedback
+      = f.submit t('buttons.save'), class: 'btn btn-indigo mt-5'
+      = link_to t('buttons.cancel'), admin_geo_regions_path, class: 'btn btn-indigo mt-5'

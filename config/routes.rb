@@ -162,6 +162,7 @@ Rails.application.routes.draw do
     resources :specializations
     resources :positions
     resources :geo_cities
+    resources :geo_regions
     resources :companies do
       member do
         put :set_active
