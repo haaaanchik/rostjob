@@ -16,6 +16,9 @@ module Api
       mount Api::V1::Geo::Countries
       mount Api::V1::Geo::Regions
       mount Api::V1::Geo::Cities
+      mount Api::V1::Positions
+      mount Api::V1::PriceGroups
+      mount Api::V1::Specializations
 
       add_swagger_documentation(
         base_path: '/api',
