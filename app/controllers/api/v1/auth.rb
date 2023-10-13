@@ -27,7 +27,7 @@ module Api
       end
 
       def token
-        @token ||= headers['Authorization'].gsub(/Bearer /,'') rescue nil
+        @token ||= headers['Authorization'].gsub(/Bearer /, '') rescue nil
       end
     end
   end

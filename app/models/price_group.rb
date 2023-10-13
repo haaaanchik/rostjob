@@ -3,5 +3,5 @@ class PriceGroup < ApplicationRecord
 
   validates :title, presence: true
   validates :customer_price, :contractor_price,
-            presence: true, numericality: { only_integer: true }
+            presence: true
 end

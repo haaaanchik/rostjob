@@ -4,19 +4,22 @@ module Api
   module V1
     module Geo
       class Cities < Grape::API
+        helpers Api::V1::NamedParams
+
         before { user_authenticated! }
 
         namespace :geo do
-          desc 'All cities',
+          desc 'List of cities',
                tags: ['geo'],
                is_array: true,
                success: Entities::Geo::City
           params do
-            optional :per, type: Integer, default: 25, desc: 'Per number (defaults to 25)'
-            optional :page, type: Integer, default: 1, desc: 'Page number (defaults to 1)'
+            optional :search, type: String, desc: 'Search by name'
+            use :pagination_filters
           end
           get '/cities' do
-            cities = ::Geo::City.order('name ASC').page(params[:page]).per(params[:per])
+            q = ::Geo::City.ransack(name_cont: params[:search])
+            cities = q.result.order('name ASC').page(params[:page]).per(params[:per])
 
             present :cities, cities, with: Entities::Geo::City
             present :page, cities.current_page
@@ -24,7 +27,20 @@ module Api
           end
 
 
-          desc 'Create new city', tags: ['geo']
+          desc 'Show city',
+               tags: ['geo'],
+               success: Entities::Geo::City
+          params do
+            requires :id, type: Integer, desc: 'City ID'
+          end
+          get '/cities/:id' do
+            present ::Geo::City.find(params[:id]), with: Entities::Geo::City
+          end
+
+
+          desc 'Create new cities',
+               tags: ['geo'],
+               success: Entities::Geo::City
           params do
             requires :name, type: String, desc: 'City name'
             optional :synonym, type: String, desc: 'City synonym'
@@ -35,9 +51,29 @@ module Api
           end
           post '/cities' do
             city = ::Geo::City.create(name: params[:name], synonym: params[:synonym], fias_code: params[:fias_code],
-                                   lat: params[:lat], long: params[:long], region_id: params[:region_id])
+                                      lat: params[:lat], long: params[:long], region_id: params[:region_id])
 
-            present city
+            present city, with: Entities::Geo::City
+          end
+
+
+          desc 'Update city details',
+               tags: ['geo'],
+               success: Entities::Geo::City
+          params do
+            requires :id, type: Integer, desc: 'City ID'
+            optional :name, type: String, desc: 'City name'
+            optional :synonym, type: String, desc: 'City synonym'
+            optional :fias_code, type: String, desc: 'City fias_code'
+            optional :lat, type: BigDecimal, desc: 'City latitude'
+            optional :long, type: BigDecimal, desc: 'City longitude'
+            requires :region_id, type: Integer, desc: 'Region for city'
+          end
+          put '/cities/:id' do
+            city = ::Geo::City.find(params[:id])
+            city.update(params.slice('name', 'synonym', 'fias_code', 'lat', 'long', 'region_id'))
+
+            present city, with: Entities::Geo::City
           end
         end
       end

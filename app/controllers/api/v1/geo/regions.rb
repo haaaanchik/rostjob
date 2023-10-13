@@ -4,20 +4,37 @@ module Api
   module V1
     module Geo
       class Regions < Grape::API
+        helpers Api::V1::NamedParams
+
         before { user_authenticated! }
 
         namespace :geo do
-          desc 'All regions', tags: ['geo']
+          desc 'List of regions',
+               tags: ['geo'],
+               is_array: true,
+               success: Entities::Geo::Region
           params do
-            optional :per, type: Integer, default: 25, desc: 'Per number (defaults to 25)'
-            optional :page, type: Integer, default: 1, desc: 'Page number (defaults to 1)'
+            optional :search, type: String, desc: 'Search by name'
+            use :pagination_filters
           end
           get '/regions' do
-            regions = ::Geo::Region.order('name ASC').page(params[:page]).per(params[:per])
+            q = ::Geo::Region.ransack(name_cont: params[:search])
+            regions = q.result.order('name ASC').page(params[:page]).per(params[:per])
 
             present :regions, regions, with: Entities::Geo::Region
             present :page, regions.current_page
             present :total_pages, regions.total_pages
+          end
+
+
+          desc 'Show region',
+               tags: ['geo'],
+               success: Entities::Geo::Region
+          params do
+            requires :id, type: Integer, desc: 'Region ID'
+          end
+          get '/cities/:id' do
+            present ::Geo::Region.find(params[:id]), with: Entities::Geo::Region
           end
 
 
@@ -30,6 +47,22 @@ module Api
             region = ::Geo::Region.create(name: params[:name], country_id: params[:country_id])
 
             present region
+          end
+
+
+          desc 'Update region details',
+               tags: ['geo'],
+               success: Entities::Geo::Region
+          params do
+            requires :id, type: Integer, desc: 'Region ID'
+            optional :name, type: String, desc: 'Region name'
+            optional :country_id, type: Integer, desc: 'Country for region'
+          end
+          put '/regions/:id' do
+            region = ::Geo::Region.find(params[:id])
+            region.update(params.slice('name', 'country_id'))
+
+            present region, with: Entities::Geo::Region
           end
         end
       end
