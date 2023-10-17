@@ -44,12 +44,13 @@ module Api
         optional :description, type: String, desc: 'Description'
         requires :price_group_id, type: Integer, desc: 'Price group'
         requires :slug, type: String, desc: 'URL'
+        optional :specialization_id, type: Integer, desc: 'Specialization id'
       end
       post '/positions' do
         position = Position.create(title: params[:title], warranty_period: params[:warranty_period],
                                    landing_title: params[:landing_title], duties: params[:duties],
                                    description: params[:description], price_group_id: params[:price_group_id],
-                                   slug: params[:slug])
+                                   slug: params[:slug], specialization_ids: params[:specialization_id])
 
         present position, with: Entities::Position
       end
