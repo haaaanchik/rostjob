@@ -59,6 +59,21 @@ module Api
 
         present specialization, with: Entities::Specialization
       end
+
+      desc 'List of positions by specialization',
+           is_array: true,
+           success: Entities::Position
+      params do
+        requires :specialization_id, type: Integer, desc: 'Specialization ID'
+      end
+      get '/specializations/:specialization_id/positions' do
+        specialization = Specialization.find(params[:specialization_id])
+        positions = specialization.positions.page(params[:page]).per(params[:per])
+
+        present :positions, positions, with: Entities::Position
+        present :page, positions.current_page
+        present :total_pages, positions.total_pages
+      end
     end
   end
 end
