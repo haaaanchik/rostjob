@@ -52,6 +52,10 @@ module Api
           type: DateTime,
           desc: 'Position update time in iso8601 format.'
         }
+        expose :specializations, using: Entities::Specialization, documentation: {
+          type: Array,
+          desc: 'List of specializations'
+        }
       end
     end
   end

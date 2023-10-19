@@ -16,7 +16,7 @@ module Api
       end
       get '/positions' do
         q = Position.ransack(title_cont: params[:search])
-        positions = q.result.page(params[:page]).per(params[:per])
+        positions = q.result.page(params[:page]).per(params[:per]).includes(:specializations)
 
         present :positions, positions, with: Entities::Position
         present :page, positions.current_page
