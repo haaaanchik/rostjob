@@ -13,6 +13,7 @@ module Api
 
       rescue_from(ActiveRecord::RecordNotFound) { |_e| error!({ errors: 'Record Not Found' }, 404) }
 
+      mount Api::V1::Companies
       mount Api::V1::Geo::Countries
       mount Api::V1::Geo::Regions
       mount Api::V1::Geo::Cities

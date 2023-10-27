@@ -13,7 +13,9 @@ module Api
                documentation: {
                  desc: 'Title.',
                  type: String
-               }
+               } do |order|
+          order&.position&.title
+        end
         expose :city_id,
                documentation: {
                  desc: 'City id.',
@@ -78,6 +80,11 @@ module Api
                documentation: {
                  desc: 'Shift method.',
                  type: Grape::API::Boolean
+               }
+        expose :state,
+               documentation: {
+                 desc: 'Order status.',
+                 type: String
                }
         expose :published_at,
                format_with: :iso8601,
