@@ -27,6 +27,16 @@ module Api
         present :page, orders.current_page
         present :total_pages, orders.total_pages
       end
+
+      
+      desc 'Show order',
+           success: Entities::Order
+      params do
+        requires :id, type: Integer, desc: 'Order ID'
+      end
+      get '/orders/:id' do
+        present Order.find(params[:id]), with: Entities::Order
+      end
     end
   end
 end
