@@ -7,11 +7,23 @@ module Api
 
       before { user_authenticated! }
 
+      desc 'Company info',
+           success: Entities::Company
+      params do
+        requires :id, type: Integer, desc: 'User ID'
+      end
+      get '/companies/:id/info' do
+        company = User.find(params[:id]).profile.company
+
+        present company, with: Entities::Company
+      end
+
+
       desc 'List of company orders',
            is_array: true,
            success: Entities::Order
       params do
-        requires :id, type: Integer, desc: 'Company ID'
+        requires :id, type: Integer, desc: 'User ID'
         use :order_filters
         optional :search, type: Hash do
           optional :state, type: String, desc: 'Search by state', values: Order.aasm.states.map(&:name).map(&:to_s)
@@ -21,7 +33,7 @@ module Api
       get '/companies/:id/orders' do
         params[:search] = {} if params[:search].blank?
 
-        company = Profile.find(params[:id])
+        company = User.find(params[:id]).profile
         q = company.orders.ransack(position_title_cont: params[:search][:title],
                                    city_name_cont: params[:search][:city_name],
                                    category_titles_cont: params[:search][:category_titles],
