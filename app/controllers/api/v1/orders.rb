@@ -35,7 +35,10 @@ module Api
         requires :id, type: Integer, desc: 'Order ID'
       end
       get '/orders/:id' do
-        present Order.find(params[:id]), with: Entities::Order
+        order = Order.find(params[:id])
+
+        present :order, order, with: Entities::Order
+        present :company, order.profile.company, with: Entities::Company
       end
     end
   end
