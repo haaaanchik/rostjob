@@ -15,8 +15,9 @@ html
       = action_cable_meta_tag if @current_profile.manager?
     - unless user_signed_in?
       = render 'partials/yandex_metrika' if Rails.env.production?
-    = render 'layouts/google_tag_manager/'
+    = render 'shared/gtm_script'
   body data-page=body_data_page id=class_recruiter
+    = render 'shared/gtm_noscript'
     #modal_append
     = render partial: user_signed_in? ? 'layouts/authorized' : 'layouts/not_authorized'
     = javascript_include_tag 'application', media: 'all',
