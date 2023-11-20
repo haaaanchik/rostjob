@@ -22,6 +22,7 @@ module Api
       mount Api::V1::Positions
       mount Api::V1::PriceGroups
       mount Api::V1::Specializations
+      mount Api::V1::ProposalEmployees
 
       add_swagger_documentation(
         base_path: '/api',
