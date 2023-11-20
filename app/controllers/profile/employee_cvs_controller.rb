@@ -46,7 +46,7 @@ class Profile::EmployeeCvsController < ApplicationController
     rnd = params["random"]
     captcha_resp = params["captcha"]["captcha"]
     if Captcha.check(captcha_resp, rnd)
-      result = Cmd::ProposalEmployeeCv::Create.call(employee_cvs_params: employee_cvs_params,
+      result = Cmd::EmployeeCv::Send.call(employee_cvs_params: employee_cvs_params,
                                           interview_date: params[:interview_date],
                                           profile: current_profile,
                                           order: employee_cv_order)
