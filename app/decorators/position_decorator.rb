@@ -16,8 +16,7 @@ class PositionDecorator < ApplicationDecorator
 
     service_list = [(h.link_to 'hh.ru', 'https://hh.ru'), (h.link_to 'superjob.ru', 'https://superjob.ru'),
                     (h.link_to 'avito.ru', 'https://avito.ru'), (h.link_to 'careerist.ru', 'https://careerist.ru'),
-                    (h.link_to 'zarplata.ru', 'https://zarplata.ru'), (h.link_to 'работа.ру', 'https://rabota.ru'),
-                    (h.link_to 'trud.com', 'https://trud.com')]
+                    (h.link_to 'zarplata.ru', 'https://zarplata.ru'), (h.link_to 'работа.ру', 'https://rabota.ru')]
     h.cookies[:other_services] = service_list.shuffle.join(', ')
   end
 end
