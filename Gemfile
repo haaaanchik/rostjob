@@ -176,3 +176,5 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'data_migrate'
 gem 'activerecord-import'
+gem 'ed25519'
+gem 'bcrypt_pbkdf'

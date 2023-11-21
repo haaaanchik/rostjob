@@ -7,6 +7,7 @@
             label Наименование производ. площадки
           .col-lg-7
             = f.text_field :title, class: 'form-control', placeholder: 'ООО «Спектр»'
+            .invalid-feedback
 
       .form-group
         .d-flex
@@ -15,14 +16,18 @@
           .col-lg-7
             = f.select :city_id,
                     options_from_collection_for_select(Geo::City.all.decorate, :id, :full_name_with_region, selected:  f.object.city_id),
-                    {include_blank: true}, id: 'simple-example', class: 'form-control'
+                    {include_blank: true}, class: 'form-control'
+            .invalid-feedback
 
       .form-group
         .d-flex.align-items-center
           .col-lg-4.control-label style="align-self: flex-start"
             label Общая информация
           .col-lg-7
-            = f.text_area :info, class: 'form-control', placeholder: '«Пискаревский молзавод» производит и продает молоко и молочные продукты оптом ...'
+            = f.text_area :info,
+                          class: 'form-control',
+                          placeholder: '«Пискаревский молзавод» производит и продает молоко и молочные продукты оптом ...'
+            .invalid-feedback
 
       .form-group
         .d-flex
@@ -30,6 +35,7 @@
             label Обратная связь
           .col-lg-7
             = f.text_area :phones, class: 'form-control', rows: 3, placeholder: '+79999999999 ...'
+            .invalid-feedback
 
       .form-group
         .row.m-0
