@@ -19,9 +19,27 @@ Bundler.require(*Rails.groups)
 
 module RostJob
   class Application < Rails::Application
+
+    class LastModifiedMiddleware
+      def initialize(app)
+        @app = app
+      end
+
+      def call(env)
+        status, headers, response = @app.call(env)
+        headers['Last-Modified'] = Time.now.httpdate
+        [status, headers, response]
+      end
+    end
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.eager_load_paths << Rails.root.join('lib')
+    config.middleware.use LastModifiedMiddleware
+    config.autoload_paths += %W(#{config.root}/lib)
+
+    config.middleware.insert_before Rack::Runtime, Rack::ETag
+    config.middleware.use LastModifiedMiddleware
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
