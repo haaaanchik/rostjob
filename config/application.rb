@@ -29,7 +29,9 @@ module RostJob
     # the framework and any gems in your application.
 
     require 'search_app'
+    require 'last_modified'
     config.middleware.use SearchApp
+    config.middleware.use LastModified
     config.time_zone = 'Moscow'
 
     config.i18n.default_locale = :ru
