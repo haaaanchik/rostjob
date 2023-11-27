@@ -16,6 +16,7 @@ html
     - unless user_signed_in?
       = render 'partials/yandex_metrika' if Rails.env.production?
     = render 'shared/gtm_script'
+    meta name = "yandex-verification" content = "b92b5dd3602eea14"
   body data-page=body_data_page id=class_recruiter
     = render 'shared/gtm_noscript'
     #modal_append
