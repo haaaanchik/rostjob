@@ -78,7 +78,7 @@ gem "active_scheduler"
 gem "recaptcha"
 gem 'active_link_to'
 
-gem "paperclip", git: "git://github.com/thoughtbot/paperclip.git"
+gem 'paperclip'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -176,3 +176,5 @@ gem 'rack-cors', require: 'rack/cors'
 
 gem 'data_migrate'
 gem 'activerecord-import'
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
