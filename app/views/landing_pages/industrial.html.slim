@@ -12,7 +12,7 @@ body#customer-landing
       .content
         h1.title
           | Агентство по подбору персонала
-        h2.subtitle
+        p.subtitle
           | Подбор персонала для вашей компании за 3 дня по цене от 18 000 рублей за сотрудника с гарантией полного возврата денежных средств
         = form_for @user,
                 method: :get,
@@ -31,28 +31,28 @@ body#customer-landing
         | Услуги рекрутинговой компании
       .container
         .block
-          p.title
+          h3.title
             | Массовый
             br/
             | подбор персонала
           p.price
             | Цена от 18 000 ₽
         .block
-          p.title
+          h3.title
             | Набор линейного
             br/
             | персонала
           p.price
             | Цена от 18 000 ₽
         .block
-          p.title
+          h3.title
             | Подбор специалистов
             br/
             | среднего звена
           p.price
             | Цена от 28 000 ₽
         .block
-          p.title
+          h3.title
             | Подбор руководителей
             br/
             | и топ-менеджеров
