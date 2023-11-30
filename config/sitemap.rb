@@ -13,6 +13,7 @@ SitemapGenerator::Sitemap.create do
   add contractor_info_path, priority: 1, changefreq: false
   add about_company_path, priority: 1, changefreq: false
   add contacts_path, priority: 1, changefreq: false
+  add price_path, priority: 1, changefreq: false
   positions.each do |position|
     add professions_path(position.slug), priority: 1, changefreq: false
   end
