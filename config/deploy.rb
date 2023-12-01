@@ -7,3 +7,4 @@ append :linked_files, 'config/master.key', 'config/database.yml', 'config/creden
 append :linked_dirs, 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
 
 set :keep_releases, 3
+after 'deploy:finished', 'sitemap:refresh'
