@@ -3,6 +3,8 @@ class PricesController < ApplicationController
   skip_before_action :auth_user
 
   def show
+    add_breadcrumb('Главная', industrial_path)
+    add_breadcrumb('Прайс', price_path)
     paginated_price_items
   end
 
